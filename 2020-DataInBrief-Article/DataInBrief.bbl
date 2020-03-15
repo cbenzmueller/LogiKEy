@@ -1,0 +1,164 @@
+\begin{thebibliography}{10}
+
+\bibitem{J41}
+C.~Benzm{\"u}ller.
+\newblock Universal (meta-)logical reasoning: Recent successes.
+\newblock {\em Science of Computer Programming}, 172:48--62, 2019.
+
+\bibitem{J43}
+C.~Benzm\"uller and P.~Andrews.
+\newblock Church's type theory.
+\newblock In E.~N. Zalta, editor, {\em The Stanford Encyclopedia of
+  Philosophy}, pages 1--62 (in pdf version). Metaphysics Research Lab, Stanford
+  University, summer 2019 edition, 2019.
+
+\bibitem{J46}
+C.~Benzm{\"u}ller, A.~Farjami, P.~Meder, and X.~Parent.
+\newblock {I/O} logic in {HOL}.
+\newblock {\em Journal of Applied Logics -- IfCoLoG Journal of Logics and their
+  Applications (Special Issue on Reasoning for Legal AI)}, 6(5):715--732, 2019.
+
+\bibitem{C71}
+C.~Benzm{\"u}ller, A.~Farjami, and X.~Parent.
+\newblock A dyadic deontic logic in {HOL}.
+\newblock In J.~Broersen, C.~Condoravdi, S.~Nair, and G.~Pigozzi, editors, {\em
+  {Deontic Logic and Normative Systems -- 14th International Conference, DEON
+  2018, Utrecht, The Netherlands, 3-6 July, 2018}}, pages 33--50. College
+  Publications, 2018.
+
+\bibitem{R63}
+C.~Benzm{\"u}ller, A.~Farjami, and X.~Parent.
+\newblock Faithful semantical embedding of a dyadic deontic logic in {HOL}.
+\newblock Technical report, CoRR, 2018.
+\newblock \url{https://arxiv.org/abs/1802.08454}.
+
+\bibitem{J45}
+C.~Benzm{\"u}ller, A.~Farjami, and X.~Parent.
+\newblock {{\AA}qvist's} dyadic deontic logic {E} in {HOL}.
+\newblock {\em Journal of Applied Logics -- IfCoLoG Journal of Logics and their
+  Applications (Special Issue on Reasoning for Legal AI)}, 6(5):733--755, 2019.
+
+\bibitem{J48}
+C.~Benzm{\"u}ller, X.~Parent, and L.~van~der Torre.
+\newblock Designing normative theories of ethical reasoning: {LogiKEy} formal
+  framework, methodology, and tool support.
+\newblock {\em Artificial Intelligence (to appear)}, pages 1--50, 2020.
+\newblock Preprint: \url{https://arxiv.org/abs/1903.10187}.
+
+\bibitem{J23}
+C.~Benzm{\"u}ller and L.~C. Paulson.
+\newblock Quantified multimodal logics in simple type theory.
+\newblock {\em Logica Universalis (Special Issue on Multimodal Logics)},
+  7(1):7--20, 2013.
+
+\bibitem{Carmo2002}
+J.~Carmo and A.~J.~I. Jones.
+\newblock Deontic logic and contrary-to-duties.
+\newblock In D.~M. Gabbay and F.~Guenthner, editors, {\em Handbook of
+  Philosophical Logic: Volume 8}, pages 265--343. Springer Netherlands,
+  Dordrecht, 2002.
+
+\bibitem{CJ13}
+J.~Carmo and A.~J.~I. Jones.
+\newblock Completeness and decidability results for a logic of contrary-to-duty
+  conditionals.
+\newblock {\em Journal~of Logic and Computation}, 23(3):585--626, 2013.
+
+\bibitem{ddl:C80}
+B.~Chellas.
+\newblock {\em Modal Logic}.
+\newblock Cambridge University Press, Cambridge, 1980.
+
+\bibitem{c63}
+R.~Chisholm.
+\newblock Contrary-to-duty imperatives and deontic logic.
+\newblock {\em Analysis}, 24:33--36, 1963.
+
+\bibitem{C76}
+D.~Fuenmayor and C.~Benzm{\"u}ller.
+\newblock Harnessing higher-order (meta-)logic to represent and reason with
+  complex ethical theories.
+\newblock In {\em PRICAI 2019: Trends in Artificial Intelligence}, Lecture
+  Notes in Artificial Intelligence, pages 1--14. Springer International
+  Publishing, 2019.
+\newblock In print, preprint \url{http://arxiv.org/abs/1903.09818}.
+
+\bibitem{C77}
+D.~Fuenmayor and C.~Benzm{\"u}ller.
+\newblock Mechanised assessment of complex natural-language arguments using
+  expressive logic combinations.
+\newblock In {\em Frontiers of Combining Systems, 12th International Symposium,
+  FroCoS 2019, London, September 4-6}, Lecture Notes in Artificial
+  Intelligence, pages 1--17. Springer, 2019.
+\newblock In print, preprint
+  \url{http://doi.org/10.13140/RG.2.2.20803.45608/1}.
+
+\bibitem{C82}
+D.~Fuenmayor and C.~Benzm{\"u}ller.
+\newblock Computer-supported analysis of arguments in climate engineering.
+\newblock In M.~Dastani, H.~Dong, and L.~van~der Torre, editors, {\em {CLAR}
+  2020 -- 3rd International Conference on Logic and Argumentation}, Logic in
+  Asia: Studia Logica Library, pages 108--116. Springer Nature Switzerland AG,
+  2020.
+\newblock To appear.
+
+\bibitem{Jones1992-JONDLI}
+A.~J.~I. Jones and M.~Sergot.
+\newblock Deontic logic in the representation of law: Towards a methodology.
+\newblock {\em Artificial Intelligence and Law}, 1(1):45--64, 1992.
+
+\bibitem{Kaplan1979}
+D.~Kaplan.
+\newblock On the logic of demonstratives.
+\newblock {\em Journal of Philosophical Logic}, 8(1):81--98, 1979.
+
+\bibitem{Kaplan1989}
+D.~Kaplan.
+\newblock Afterthoughts.
+\newblock In J.~Almog, J.~Perry, and H.~Wettstein, editors, {\em Themes from
+  Kaplan}, pages 565--614. Oxford University Press, 1989.
+
+\bibitem{J47}
+D.~Kirchner, C.~Benzm{\"u}ller, and E.~N. Zalta.
+\newblock Computer science and metaphysics: A cross-fertilization.
+\newblock {\em Open Philosophy}, 2:230--251, 2019.
+
+\bibitem{ddl:L73}
+D.~Lewis.
+\newblock {\em Counterfactuals}.
+\newblock Blackwell, Oxford, 1973.
+
+\bibitem{DBLP:journals/jphil/MakinsonT00}
+D.~Makinson and L.~W.~N. van~der Torre.
+\newblock Input/output logics.
+\newblock {\em Journal of Philosophical Logic}, 29(4):383--408, 2000.
+
+\bibitem{Isabelle}
+T.~Nipkow, L.~Paulson, and M.~Wenzel.
+\newblock {\em {{Isabelle/HOL}: A Proof Assistant for Higher-Order Logic}},
+  volume 2283 of {\em Lecture Notes in Computer Science}.
+\newblock Springer, 2002.
+
+\bibitem{textbook18}
+X.~Parent and L.~van~der Torre.
+\newblock {\em Introduction to Deontic Logic and Normative Systems}.
+\newblock College Publications, London, UK, 2018.
+
+\bibitem{DBLP:journals/aim/Sutcliffe16}
+G.~Sutcliffe.
+\newblock The {CADE} {ATP} system competition - {CASC}.
+\newblock {\em {AI} Magazine}, 37(2):99--101, 2016.
+
+\bibitem{J22}
+G.~Sutcliffe and C.~Benzm{\"u}ller.
+\newblock Automated reasoning in higher-order logic using the {TPTP THF}
+  infrastructure.
+\newblock {\em Journal of Formalized Reasoning}, 3(1):1--27, 2010.
+\newblock Preprint: \url{http://christoph-benzmueller.de/papers/J22.pdf}.
+
+\bibitem{zahoransky19}
+V.~Zahoransky.
+\newblock Modelling the {US} constitution in {HOL}.
+\newblock {BSc} thesis, Freie Universität Berlin, 2019.
+
+\end{thebibliography}
