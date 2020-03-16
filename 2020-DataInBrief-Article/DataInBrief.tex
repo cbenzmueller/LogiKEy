@@ -352,7 +352,7 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 (possibilist notion of quantification). This is verified by proving
                                 the Barcan formula and its converse. \\
   \midrule
-  \textsf{\small DDL.thy} 
+  \textsf{\small CJ-DDL.thy} 
        & \textsf{\small Main.thy} 
                     & \cite{C71}  
                               &  Provides a consistent SSE of a dyadic deontic
@@ -387,13 +387,13 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 % quantifiers are added (lines
                                 % 40-43).\\
   \midrule
-  \textsf{\small \detokenize{DDL_Tests.thy}}
-       & \textsf{\small DDL.thy} 
+  \textsf{\small \detokenize{CJ-DDL_Tests.thy}}
+       & \textsf{\small CJ-DDL.thy} 
                     & \cite{C71}  
                               & Contains
                                 soundness and proof automation tests for the
                                 embedding of DDL in HOL given in
-                                \textsf{\small DDL.thy}. For example,
+                                \textsf{\small CJ-DDL.thy}. For example,
                                 the monadic modal operators $\Box$,
                                 $\Box_p$ and $\Box_a$ are  identified
                                 as S5, KT and KD modalities,
@@ -403,7 +403,7 @@ associated tests, of various deontic logics in meta-logic HOL.
                                % This file, see Fig.~\ref{fig:DDL_Tests}, contains
                                 % soundness and proof automation tests for the
                                 % embedding of DDL in HOL given in
-                                %  \textsf{\small DDL.thy}. For example,
+                                %  \textsf{\small CJ-DDL.thy}. For example,
                                 %   the monadic modal operators $\Box$,
                                 % $\Box_p$ and $\Box_a$ are  identified
                                 % in lines 11--25
@@ -425,7 +425,7 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 Aqvist's System E in HOL. The file also
                                 runs a number of reasoning tasks (validity checking, refutation, correspondance theory).\\
   \midrule
-  \textsf{\small \detokenize{Lewis.thy}}
+  \textsf{\small \detokenize{Lewis-DDL.thy}}
        & \textsf{\small Main.thy} 
                     & \cite{ddl:L73}  
                               & Provides a consistent SSE of Lewis's DDL.
@@ -439,11 +439,11 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 IO logic (out2) \cite{DBLP:journals/jphil/MakinsonT00,textbook18} and elements of STIT logics \cite{stit} in HOL. The file also
                                 contains proof automation tests and soundness checks.\\
   \midrule
-  \textsf{\small \detokenize{CJDDLplus.thy}}
+  \textsf{\small \detokenize{CJ-DDLplus.thy}}
        & \textsf{\small  Main.thy} 
                     & \cite{C76,C77}
                               & A modification of the SSE developed in
-                                file \textsf{\small DDL.thy} is
+                                file \textsf{\small CJ-DDL.thy} is
                                 presented; see
                                 Figs.~\ref{fig:CJDDLplus1}
                                 and~\ref{fig:CJDDLplus2}. This theory provides the starting point
@@ -454,15 +454,15 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 for his logic of demonstratives
                                 \cite{Kaplan1979,Kaplan1989}. The logic extension is
                                 completed in file \textsf{\small
-                                \detokenize{ExtendedDDL.thy}}. The
+                                \detokenize{ExtendedCJ-DDL.thy}}. The
                                 displayed lines in Fig.~\ref{fig:CJDDLplus2} show
                                 automations of various lemmata
                                 from the original paper of Carmo
                                 and Jones \cite{CJ13}, where they were
                                 proved manually with pen and paper. \\
   \midrule
-  \textsf{\small \detokenize{ExtendedDDL.thy}}
-       & \textsf{\small \detokenize{CJDDLplus.thy}}
+  \textsf{\small \detokenize{ExtendedCJ-DDL.thy}}
+       & \textsf{\small \detokenize{CJ-DDLplus.thy}}
                     & \cite{C76,C77}
                               & Contains a further extension and
                                 combination of the
@@ -498,7 +498,7 @@ Table~\ref{table:Paradoxes}. They study paradoxes and smaller examples of normat
 
 % \begin{figure}[ht!]
 %  \includegraphics[width=\textwidth]{DDL_Tests.png}
-% \caption{Data file \textsf{\small \detokenize{DDL_Tests.thy} \label{fig:DDL_Tests}}}
+% \caption{Data file \textsf{\small \detokenize{CJ-DDL_Tests.thy} \label{fig:DDL_Tests}}}
 % \end{figure}
 
 \begin{table}[ht!]
@@ -515,22 +515,22 @@ File & Dependency & Reading & Description \\
   wide and narrow scoping options that arise in the axiomatization of
   the paradox; see Fig.~\ref{fig:Chisholm_SDL}. \\
 \midrule
-\textsf{\small \detokenize{Chisholm_DDL_Monadic.thy}}
-& \textsf{\small DDL.thy} 
+\textsf{\small \detokenize{Chisholm_CJ-DDL_Monadic.thy}}
+& \textsf{\small CJ-DDL.thy} 
 &  --
 &  Contains a study analogous to \textsf{\small
   \detokenize{Chisholm_SDL.thy}} for 
   monadic obligation in DDL. \\
 \midrule
-\textsf{\small \detokenize{Chisholm_DDL_Dyadic.thy}}
-& \textsf{\small DDL.thy} 
+\textsf{\small \detokenize{Chisholm_CJ-DDL_Dyadic.thy}}
+& \textsf{\small CJ-DDL.thy} 
 & --
 &  Contains a study analogous to \textsf{\small
   \detokenize{Chisholm_SDL.thy}} for 
    dyadic  obligation in DDL. \\
 \midrule
 \textsf{\small \detokenize{Chisholm_E.thy}}
-& \textsf{\small DDL.thy} 
+& \textsf{\small CJ-DDL.thy} 
 & --
 &  Contains a study analogous to \textsf{\small
   \detokenize{Chisholm_SDL.thy}} for 
@@ -580,8 +580,8 @@ included in our data set.
                                 SDL. It is demonstrated  that this modeling leads to
                                 contrary-to-duty issues, i.e. inconsistency and explosion.\\
   \midrule
-  \textsf{\small \detokenize{GDPR_DDL.thy}}
-       & \textsf{\small DDL.thy} 
+  \textsf{\small \detokenize{GDPR_CJ-DDL.thy}}
+       & \textsf{\small CJ-DDL.thy} 
                     &  todo
                               &  Contains a modeling of selected statements from the GDPR in
                                 DDL. It is demonstrated  that this modeling is stable against the 
@@ -599,7 +599,7 @@ included in our data set.
                                 avoided and inferences are supported as expected. \\
   \midrule
   \textsf{\small \detokenize{GewirthArgument.thy}}
-       & \textsf{\small \detokenize{ExtendedDDL.thy}}.
+       & \textsf{\small \detokenize{ExtendedCJ-DDL.thy}}.
                     & \cite{C77,C76},\cite[Fig. 10]{J48}
                               & Contains a formalization and partial automation of Gewirth's
                                 supporting argument for his \textit{Principle of Generic
@@ -636,9 +636,9 @@ description of the LogiKEy framework, methodology and tool support see
 the related research article~\cite{J48}.
 
 \begin{description}
-\item{Layer L1 example development (files \textsf{\small \detokenize{DDL.thy}} and
-    \textsf{\small \detokenize{DDL_Tests.thy}}):} 
-  File \textsf{\small \detokenize{DDL.thy}} contains the encoding (of a quantified extension) of the dyadic
+\item{Layer L1 example development (files \textsf{\small \detokenize{CJ-DDL.thy}} and
+    \textsf{\small \detokenize{CJ-DDL_Tests.thy}}):} 
+  File \textsf{\small \detokenize{CJ-DDL.thy}} contains the encoding (of a quantified extension) of the dyadic
   deontic logic of Carmo and Jones in HOL. This encoding of DDL in HOL
   is exemplary for a \textit{Layer L1} development in the LogiKEy
   methodology. First, the desired object \textit{logic} was selected
@@ -656,7 +656,7 @@ the related research article~\cite{J48}.
   was studied and proved; this proof has been published
   \cite{C71,R63}. Furthermore, \textit{implications} of the embedding
   of DDL in HOL were studied (Step 5); see for example the additional
-  theorems in file \textsf{\small \detokenize{DDL_Tests.thy}}
+  theorems in file \textsf{\small \detokenize{CJ-DDL_Tests.thy}}
   and the contrary-to-duty studies conducted with this DDL logic in
   files \textsf{\small \detokenize{Chisholm_DDL_Monadic.thy}} and
   \textsf{\small \detokenize{Chisholm_DDL_Dyadic.thy}}. Since the DDL
@@ -671,8 +671,8 @@ the related research article~\cite{J48}.
   world-championship competitions \cite{DBLP:journals/aim/Sutcliffe16}.
 
 \item{Layer L2 example development (file \textsf{\small
-      \detokenize{GDPR_DDL.thy}}):} In file \textsf{\small
-    \detokenize{GDPR_DDL.thy}} we \textit{selected} (Step 1) two
+      \detokenize{GDPR_CJ-DDL.thy}}):} In file \textsf{\small
+    \detokenize{GDPR_CJ-DDL.thy}} we \textit{selected} (Step 1) two
   statements from the General Data Protection Regulation (GDPR) for
   formalisation. The \textit{analysis} (Step 2) of these statements of
   the GDPR revealed that obligation aspects in the context of data
@@ -685,9 +685,9 @@ the related research article~\cite{J48}.
   deontic logic DDL, needed to be \textit{combined with}, respectively
   extended by, a notion of quantification, which led to the addition of
   quantifiers to the file \textsf{\small
-    \detokenize{DDL.thy}}. Subsequently the two GDPR articles were
+    \detokenize{CJ-DDL.thy}}. Subsequently the two GDPR articles were
   \textit{formalized} (Step 4) using logical connectives as provided in the imported file \textsf{\small
-    \detokenize{DDL.thy}}, and then some \textit{exploration} (Step 5)
+    \detokenize{CJ-DDL.thy}}, and then some \textit{exploration} (Step 5)
   and assessment studies were conducted. This included the
   contrary-to-duty studies as reported in related research articles
   \cite{J48,C71}. With our data set we \textit{contribute} (Step 6)
