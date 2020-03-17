@@ -1,4 +1,4 @@
-theory DDL_Tests imports DDL        (* Ali Farjami, Christoph Benzmüller, Xavier Parent, 2020  *)
+theory CJ_DDL_Tests imports CJ_DDL        (* Ali Farjami, Christoph Benzmüller, Xavier Parent, 2020  *)
 
 begin (* Some Tests on the Meta-Theory of DDL*)
 lemma True nitpick [satisfy,user_axioms,expect=genuine] oops  (* Consistency confirmed by Nitpick *)  

@@ -1,4 +1,4 @@
-theory Chisholm_DDL_Monadic imports DDL           (*Christoph Benzmüller & Xavier Parent, 2019*)
+theory Chisholm_CJ_DDL_Monadic imports CJ_DDL           (*Christoph Benzmüller & Xavier Parent, 2019*)
 
 begin (* Chisholm Example *)
 consts go::\<sigma> tell::\<sigma> kill::\<sigma>

@@ -1,5 +1,5 @@
-theory ExtendedDDL                    (*David Fuenmayor and C. Benzmüller, 2019*)
-  imports CJDDLplus
+theory Extended_CJ_DDL                    (*David Fuenmayor and C. Benzmüller, 2019*)
+  imports CJ_DDLplus
 begin
 nitpick_params[user_axioms=true, show_all, expect=genuine, format = 3]
 

@@ -356,7 +356,7 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 (possibilist notion of quantification). This is verified by proving
                                 the Barcan formula and its converse. \\
   \midrule
-  \textsf{\small CJ-DDL.thy} 
+  \textsf{\small \detokenize{CJ_DDL.thy}}
        & \textsf{\small Main.thy} 
                     & \cite{C71}  
                               &  Provides a consistent SSE of a dyadic deontic
@@ -391,8 +391,8 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 % quantifiers are added (lines
                                 % 40-43).\\
   \midrule
-  \textsf{\small \detokenize{CJ-DDL_Tests.thy}}
-       & \textsf{\small CJ-DDL.thy} 
+  \textsf{\small \detokenize{CJ_DDL_Tests.thy}}
+       & \textsf{\small \detokenize{CJ_DDL.thy}}
                     & \cite{C71}  
                               & Contains
                                 soundness and proof automation tests for the
@@ -429,7 +429,7 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 Aqvist's System E in HOL. The file also
                                 runs a number of reasoning tasks (validity checking, refutation, correspondance theory).\\
   \midrule
-  \textsf{\small \detokenize{Lewis-DDL.thy}}
+  \textsf{\small \detokenize{Lewis_DDL.thy}}
        & \textsf{\small Main.thy} 
                     & \cite{ddl:L73}  
                               & Provides a consistent SSE of Lewis's DDL.
@@ -443,7 +443,7 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 IO logic (out2) \cite{DBLP:journals/jphil/MakinsonT00,textbook18} and elements of STIT logics \cite{stit} in HOL. The file also
                                 contains proof automation tests and soundness checks.\\
   \midrule
-  \textsf{\small \detokenize{CJ-DDLplus.thy}}
+  \textsf{\small \detokenize{CJ_DDLplus.thy}}
        & \textsf{\small  Main.thy} 
                     & \cite{C76,C77}
                               & A modification of the SSE developed in
@@ -458,14 +458,14 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 for his logic of demonstratives
                                 \cite{Kaplan1979,Kaplan1989}. The logic extension is
                                 completed in file \textsf{\small
-                                \detokenize{ExtendedCJ-DDL.thy}}. The
+                                \detokenize{Extended_CJ_DDL.thy}}. The
                                 displayed lines in Fig.~\ref{fig:CJDDLplus2} show
                                 automations of various lemmata
                                 from the original paper of Carmo
                                 and Jones \cite{CJ13}, where they were
                                 proved manually with pen and paper. \\
   \midrule
-  \textsf{\small \detokenize{ExtendedCJ-DDL.thy}}
+  \textsf{\small \detokenize{Extended_CJ_DDL.thy}}
        & \textsf{\small \detokenize{CJ-DDLplus.thy}}
                     & \cite{C76,C77}
                               & Contains a further extension and
@@ -563,23 +563,31 @@ legal and ethical theories and arguments formalized using the deontic logics as
 provided in category I files and further examined in the category II
 files.
 
-In addition to the files listed in Tables~\ref{table:DeonticLogics}---\ref{table:Theories} our data set
-contains further material:
+In addition to the files listed in
+Tables~\ref{table:DeonticLogics}---\ref{table:Theories} the data set
+provided at \url{logikey.org} also includes the following material:
 \begin{itemize}
-\item Subdirectory \url{2020-DataInBrief-Data/CourseMaterial1} at
-  \url{logikey.org} contains Isabelle/HOL data files stemming from a
+\item Subdirectory \url{2020-DataInBrief-Data/Course-Material-1} contains Isabelle/HOL data files stemming from a
   lecture course on deontic logics at University of Luxembourg.
-\item Subdirectory \url{2020-DataInBrief-Data/ClimateEngineering} at
-  \url{logikey.org} contains Isabelle/HOL data files related to
-  formalisation of arguments in climate engineering \cite{}.
-
+\item Subdirectory \url{2020-DataInBrief-Data/Climate-Engineering} contains Isabelle/HOL data files related to the
+  formalization and assessment  \cite{C82}  of selected arguments in climate engineering.
+\item  Subdirectory \url{2020-DataInBrief-Data/US-Constitution-Loophole} contains Isabelle/HOL data files related to a 
+  formalization and assessment  \cite{zahoransky19} of Kurt Gödel's claim that the US Constitution contains a
+  loophole for establishing a dictatorship.
+\item who else? Maja?
 \end{itemize}
 
-There are related works in normative reasoning (see
-e.g.~\cite{zahoransky19,C82,Maja?,}) and in computational metaphysic
-(see e.g.~\cite{J47} and the references therein) that have 
-employed the LogiKEy methodology, but which, for various reasons, are not
-included in our data set.
+Moreover, it is envisioned to add further, indirectly related works to
+  the \url{logikey.org} repository in the future, including,
+  for example, 
+  selected formalisations in computational metaphysics (see
+  e.g.~\cite{J47,J41} and the references therein). 
+
+% There are related works in normative reasoning (see
+% e.g.~Maja?,}) and in computational metaphysic
+% (see e.g.~\cite{J47} and the references therein) that have 
+% employed the LogiKEy methodology, but which, for various reasons, are not
+% included in our data set.
 
   
 \begin{table}[ht!]
