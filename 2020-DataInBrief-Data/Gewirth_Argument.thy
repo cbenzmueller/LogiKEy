@@ -1,5 +1,5 @@
-theory GewirthArgument                              (* by David Fuenmayor and C. Benzmüller, 2019 *)
-  imports ExtendedDDL
+theory GewirthArgument     imports Extended_CJ_DDL                         (* by David Fuenmayor and C. Benzmüller, 2019 *)
+  
 begin
 nitpick_params[user_axioms=true, show_all, expect=genuine, format = 3] 
 
