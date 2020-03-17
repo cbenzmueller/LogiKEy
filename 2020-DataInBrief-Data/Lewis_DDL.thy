@@ -5,7 +5,7 @@ relationship with the Aqvist-Hansson DDL  *)
 (*This uses material from my chapter for the second volume of the
 handbook of deontic logic  *)
 
-theory Lewis_DDL  imports Main  "HOL-Library.Rewrite"
+theory Lewis_DDL  imports Main  
 begin       
 typedecl i \<comment>\<open>type for possible worlds\<close>  
 type_synonym \<tau> = "(i\<Rightarrow>bool)" 
