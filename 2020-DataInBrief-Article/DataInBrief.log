@@ -1,14 +1,12 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.8.13)  16 MAR 2020 12:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/MacPorts 2018.47642_2) (preloaded format=pdflatex 2018.7.24)  17 MAR 2020 15:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**DataInBrief.tex
-(./DataInBrief.tex
-LaTeX2e <2018-12-01>
-(c:/texlive/2019/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
-(c:/texlive/2019/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
+**\input DataInBrief.tex
+(./DataInBrief.tex (/opt/local/share/texmf-texlive/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/opt/local/share/texmf-texlive/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 )
 \c@part=\count80
 \c@section=\count81
@@ -22,60 +20,60 @@ File: size10.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
 )
-(c:/texlive/2019/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2018/08/11 v2.0j Standard LaTeX package
+(/opt/local/share/texmf-texlive/tex/latex/base/fontenc.sty
+Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
 
-(c:/texlive/2019/texmf-dist/tex/latex/base/t1enc.def
-File: t1enc.def 2018/08/11 v2.0j Standard LaTeX file
+(/opt/local/share/texmf-texlive/tex/latex/base/t1enc.def
+File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
 ))
-(c:/texlive/2019/texmf-dist/tex/latex/url/url.sty
+(/opt/local/share/texmf-texlive/tex/latex/url/url.sty
 \Urlmuskip=\muskip10
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-(c:/texlive/2019/texmf-dist/tex/latex/graphics/color.sty
+(/opt/local/share/texmf-texlive/tex/latex/graphics/color.sty
 Package: color 2016/07/10 v1.1e Standard LaTeX Color (DPC)
 
-(c:/texlive/2019/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(/opt/local/share/texmf-texlive/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package color Info: Driver file: pdftex.def on input line 147.
 
-(c:/texlive/2019/texmf-dist/tex/latex/graphics-def/pdftex.def
+(/opt/local/share/texmf-texlive/tex/latex/graphics-def/pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
-(c:/texlive/2019/texmf-dist/tex/latex/tools/longtable.sty
-Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)+ FMi change
+(/opt/local/share/texmf-texlive/tex/latex/tools/longtable.sty
+Package: longtable 2014/10/28 v4.11 Multi-page Table package (DPC)
 \LTleft=\skip43
 \LTright=\skip44
 \LTpre=\skip45
 \LTpost=\skip46
 \LTchunksize=\count88
 \LTcapwidth=\dimen103
-\LT@head=\box27
-\LT@firsthead=\box28
-\LT@foot=\box29
-\LT@lastfoot=\box30
+\LT@head=\box26
+\LT@firsthead=\box27
+\LT@foot=\box28
+\LT@lastfoot=\box29
 \LT@cols=\count89
 \LT@rows=\count90
 \c@LT@tables=\count91
 \c@LT@chunks=\count92
 \LT@p@ftn=\toks14
 )
-(c:/texlive/2019/texmf-dist/tex/latex/graphics/graphicx.sty
+(/opt/local/share/texmf-texlive/tex/latex/graphics/graphicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
 
-(c:/texlive/2019/texmf-dist/tex/latex/graphics/keyval.sty
+(/opt/local/share/texmf-texlive/tex/latex/graphics/keyval.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks15
 )
-(c:/texlive/2019/texmf-dist/tex/latex/graphics/graphics.sty
+(/opt/local/share/texmf-texlive/tex/latex/graphics/graphics.sty
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
 
-(c:/texlive/2019/texmf-dist/tex/latex/graphics/trig.sty
+(/opt/local/share/texmf-texlive/tex/latex/graphics/trig.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 )
-(c:/texlive/2019/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+(/opt/local/share/texmf-texlive/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
@@ -83,16 +81,16 @@ Package graphics Info: Driver file: pdftex.def on input line 99.
 \Gin@req@height=\dimen104
 \Gin@req@width=\dimen105
 )
-(c:/texlive/2019/texmf-dist/tex/latex/base/latexsym.sty
+(/opt/local/share/texmf-texlive/tex/latex/base/latexsym.sty
 Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
 \symlasy=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
 (Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
 )
-(c:/texlive/2019/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/opt/local/share/texmf-texlive/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
 
-(c:/texlive/2019/texmf-dist/tex/latex/graphics-cfg/color.cfg
+(/opt/local/share/texmf-texlive/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 225.
@@ -107,17 +105,17 @@ Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
 Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
 )
-(c:/texlive/2019/texmf-dist/tex/latex/geometry/geometry.sty
-Package: geometry 2018/04/16 v5.8 Page Geometry
+(/opt/local/share/texmf-texlive/tex/latex/geometry/geometry.sty
+Package: geometry 2018/03/24 v5.7 Page Geometry
 
-(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
 )
-(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-(c:/texlive/2019/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+(/opt/local/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 )
 \Gm@cnth=\count93
@@ -133,7 +131,7 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen113
 \Gm@dimlist=\toks16
 )
-(c:/texlive/2019/texmf-dist/tex/latex/booktabs/booktabs.sty
+(/opt/local/share/texmf-texlive/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \heavyrulewidth=\dimen114
 \lightrulewidth=\dimen115
@@ -153,18 +151,18 @@ Package: booktabs 2016/04/27 v1.618033 publication quality tables
 \@lastruleclass=\count99
 \@thisrulewidth=\dimen126
 )
-(c:/texlive/2019/texmf-dist/tex/latex/tools/tabularx.sty
+(/opt/local/share/texmf-texlive/tex/latex/tools/tabularx.sty
 Package: tabularx 2016/02/03 v2.11b `tabularx' package (DPC)
 
-(c:/texlive/2019/texmf-dist/tex/latex/tools/array.sty
-Package: array 2018/12/30 v2.4k Tabular extension package (FMi)
+(/opt/local/share/texmf-texlive/tex/latex/tools/array.sty
+Package: array 2018/04/07 v2.4g Tabular extension package (FMi)
 \col@sep=\dimen127
-\ar@mcellbox=\box31
+\ar@mcellbox=\box30
 \extrarowheight=\dimen128
 \NC@list=\toks17
 \extratabsurround=\skip47
 \backup@length=\skip48
-\ar@cellbox=\box32
+\ar@cellbox=\box31
 )
 \TX@col@width=\dimen129
 \TX@old@table=\dimen130
@@ -188,12 +186,11 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
 LaTeX Font Info:    ... okay on input line 35.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
 LaTeX Font Info:    ... okay on input line 35.
-
-(c:/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+(/opt/local/share/texmf-texlive/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count101
 \scratchdimen=\dimen134
-\scratchbox=\box33
+\scratchbox=\box32
 \nofMPsegments=\count102
 \nofMParguments=\count103
 \everyMPshowfont=\toks19
@@ -202,36 +199,41 @@ LaTeX Font Info:    ... okay on input line 35.
 \MPnumerator=\count105
 \makeMPintoPDFobject=\count106
 \everyMPtoPDFconversion=\toks20
-) (c:/texlive/2019/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+) (/opt/local/share/texmf-texlive/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
-(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
 )
-(c:/texlive/2019/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/opt/local/share/texmf-texlive/tex/latex/oberdiek/grfext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 
-(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/kvdefinekeys.sty
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
 
-(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2016/05/16 v1.23 LaTeX kernel commands for general use (HO)
 )))
-(c:/texlive/2019/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/opt/local/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 
-(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 
-(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
 Package: etexcmds 2016/05/16 v1.6 Avoid name clashes with e-TeX commands (HO)
 
-(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
 Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
-))))
-(c:/texlive/2019/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+(/opt/local/share/texmf-texlive/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2018/01/30 v0.27 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -245,7 +247,7 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
 
-(c:/texlive/2019/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+(/opt/local/share/texmf-texlive/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
@@ -288,65 +290,65 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 40.
 LaTeX Font Info:    Try loading font information for U+lasy on input line 40.
-(c:/texlive/2019/texmf-dist/tex/latex/base/ulasy.fd
+(/opt/local/share/texmf-texlive/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
 LaTeX Font Info:    Try loading font information for T1+cmtt on input line 48.
 
-(c:/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
+(/opt/local/share/texmf-texlive/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 
-LaTeX Warning: Citation `WhoElse?' on page 1 undefined on input line 228.
+LaTeX Warning: Citation `WhoElse?' on page 1 undefined on input line 232.
 
 
-Underfull \vbox (badness 10000) detected at line 229
+Underfull \vbox (badness 10000) detected at line 233
  []
 
 [1
 
-{c:/texlive/2019/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 234.
+{/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 238.
 
 
-(c:/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
+(/opt/local/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 234.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 238.
  [2]
-(c:/texlive/2019/texmf-dist/tex/latex/base/t1cmss.fd)
+(/opt/local/share/texmf-texlive/tex/latex/base/t1cmss.fd)
 
-LaTeX Warning: Citation `stit' on page 3 undefined on input line 476.
+LaTeX Warning: Citation `stit' on page 3 undefined on input line 480.
 
 <CJDDLplus1.png, id=16, 656.4525pt x 795.97375pt>
 File: CJDDLplus1.png Graphic file (type png)
 <use CJDDLplus1.png>
-Package pdftex.def Info: CJDDLplus1.png  used on input line 482.
+Package pdftex.def Info: CJDDLplus1.png  used on input line 486.
 (pdftex.def)             Requested size: 483.69687pt x 586.50938pt.
 <CJDDLplus2.png, id=18, 653.44125pt x 729.72626pt>
 File: CJDDLplus2.png Graphic file (type png)
 <use CJDDLplus2.png>
-Package pdftex.def Info: CJDDLplus2.png  used on input line 488.
+Package pdftex.def Info: CJDDLplus2.png  used on input line 492.
 (pdftex.def)             Requested size: 483.69687pt x 540.156pt.
 <Chisholm_SDL.png, id=19, 654.445pt x 839.135pt>
 File: Chisholm_SDL.png Graphic file (type png)
 <use Chisholm_SDL.png>
-Package pdftex.def Info: Chisholm_SDL.png  used on input line 549.
+Package pdftex.def Info: Chisholm_SDL.png  used on input line 553.
 (pdftex.def)             Requested size: 483.69687pt x 620.19472pt.
 
-LaTeX Warning: Citation `Maja?' on page 3 undefined on input line 563.
+LaTeX Warning: Citation `Maja?' on page 3 undefined on input line 573.
 
 
-LaTeX Warning: Citation `' on page 3 undefined on input line 563.
+LaTeX Warning: Citation `' on page 3 undefined on input line 573.
 
-[3] [4]
-<LogiKEy-methodology.png, id=29, 799.98875pt x 556.0775pt>
+[3] [4] [5 <./CJDDLplus1.png>]
+<LogiKEy-methodology.png, id=33, 799.98875pt x 556.0775pt>
 File: LogiKEy-methodology.png Graphic file (type png)
 <use LogiKEy-methodology.png>
-Package pdftex.def Info: LogiKEy-methodology.png  used on input line 712.
+Package pdftex.def Info: LogiKEy-methodology.png  used on input line 722.
 (pdftex.def)             Requested size: 483.69687pt x 336.22005pt.
- [5 <./CJDDLplus1.png>] (./DataInBrief.bbl [6 <./CJDDLplus2.png>]
+ [6 <./CJDDLplus2.png>] (./DataInBrief.bbl
 [7] [8 <./Chisholm_SDL.png>] [9 <./LogiKEy-methodology.png>]) [10]
 (./DataInBrief.aux)
 
@@ -354,25 +356,26 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3047 strings out of 494490
- 41202 string characters out of 6175368
- 127408 words of memory out of 5000000
- 6668 multiletter control sequences out of 15000+600000
+ 3046 strings out of 492649
+ 41543 string characters out of 6131477
+ 131077 words of memory out of 5000000
+ 6871 multiletter control sequences out of 15000+600000
  10345 words of font info for 26 fonts, out of 8000000 for 9000
- 36 hyphenation exceptions out of 8191
- 41i,11n,35p,685b,326s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<c:/texl
-ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><c:/texlive/2019/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><c:/texlive/2019/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2019/texmf-dist/fonts/type
-1/public/amsfonts/latxfont/lasy10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/p
-ublic/cm-super/sfbx0900.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-s
-uper/sfbx1000.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfbx1
-440.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c
-:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb><c:/texlive/
-2019/texmf-dist/fonts/type1/public/cm-super/sfti1000.pfb><c:/texlive/2019/texmf
--dist/fonts/type1/public/cm-super/sftt1000.pfb>
-Output written on DataInBrief.pdf (10 pages, 1523191 bytes).
+ 1141 hyphenation exceptions out of 8191
+ 41i,11n,35p,668b,324s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/opt/local/share/texmf-texlive/fonts/enc/dvips/cm-super/cm-super-t1.enc}</op
+t/local/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></opt/loca
+l/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></opt/local/share
+/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></opt/local/share/texm
+f-texlive/fonts/type1/public/amsfonts/latxfont/lasy10.pfb></opt/local/share/tex
+mf-texlive/fonts/type1/public/cm-super/sfbx0900.pfb></opt/local/share/texmf-tex
+live/fonts/type1/public/cm-super/sfbx1000.pfb></opt/local/share/texmf-texlive/f
+onts/type1/public/cm-super/sfbx1440.pfb></opt/local/share/texmf-texlive/fonts/t
+ype1/public/cm-super/sfrm1000.pfb></opt/local/share/texmf-texlive/fonts/type1/p
+ublic/cm-super/sfss0900.pfb></opt/local/share/texmf-texlive/fonts/type1/public/
+cm-super/sfti1000.pfb></opt/local/share/texmf-texlive/fonts/type1/public/cm-sup
+er/sftt1000.pfb>
+Output written on DataInBrief.pdf (10 pages, 1524580 bytes).
 PDF statistics:
  91 PDF objects out of 1000 (max. 8388607)
  59 compressed objects within 1 object stream
