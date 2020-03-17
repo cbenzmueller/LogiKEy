@@ -1,5 +1,5 @@
-theory GDPR_DDL           (*GDPR CTD Example. C. Benzmüller & Xavier Parent, 2019*)
-imports DDL
+theory GDPR_CJ_DDL           (*GDPR CTD Example. C. Benzmüller & Xavier Parent, 2019*)
+imports CJ_DDL
 begin
 (*Unimportant.*) sledgehammer_params [max_facts=20,timeout=20] 
 (*Unimportant.*) nitpick_params [user_axioms,expect=genuine,show_all,dont_box] 

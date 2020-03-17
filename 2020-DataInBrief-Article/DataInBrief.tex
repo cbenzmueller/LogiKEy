@@ -397,7 +397,7 @@ associated tests, of various deontic logics in meta-logic HOL.
                               & Contains
                                 soundness and proof automation tests for the
                                 embedding of DDL in HOL given in
-                                \textsf{\small CJ-DDL.thy}. For example,
+                                \textsf{\small \detokenize{CJ_DDL.thy}}. For example,
                                 the monadic modal operators $\Box$,
                                 $\Box_p$ and $\Box_a$ are  identified
                                 as S5, KT and KD modalities,
@@ -407,7 +407,7 @@ associated tests, of various deontic logics in meta-logic HOL.
                                % This file, see Fig.~\ref{fig:DDL_Tests}, contains
                                 % soundness and proof automation tests for the
                                 % embedding of DDL in HOL given in
-                                %  \textsf{\small CJ-DDL.thy}. For example,
+                                %  \textsf{\small CJ_DDL.thy}. For example,
                                 %   the monadic modal operators $\Box$,
                                 % $\Box_p$ and $\Box_a$ are  identified
                                 % in lines 11--25
@@ -447,7 +447,7 @@ associated tests, of various deontic logics in meta-logic HOL.
        & \textsf{\small  Main.thy} 
                     & \cite{C76,C77}
                               & A modification of the SSE developed in
-                                file \textsf{\small CJ-DDL.thy} is
+                                file \textsf{\small \detokenize{CJ_DDL.thy}} is
                                 presented; see
                                 Figs.~\ref{fig:CJDDLplus1}
                                 and~\ref{fig:CJDDLplus2}. This theory provides the starting point
@@ -466,7 +466,7 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 proved manually with pen and paper. \\
   \midrule
   \textsf{\small \detokenize{Extended_CJ_DDL.thy}}
-       & \textsf{\small \detokenize{CJ-DDLplus.thy}}
+       & \textsf{\small \detokenize{CJ_DDLplus.thy}}
                     & \cite{C76,C77}
                               & Contains a further extension and
                                 combination of the
@@ -502,7 +502,7 @@ Table~\ref{table:Paradoxes}. They study paradoxes and smaller examples of normat
 
 % \begin{figure}[ht!]
 %  \includegraphics[width=\textwidth]{DDL_Tests.png}
-% \caption{Data file \textsf{\small \detokenize{CJ-DDL_Tests.thy} \label{fig:DDL_Tests}}}
+% \caption{Data file \textsf{\small \detokenize{CJ_DDL_Tests.thy} \label{fig:DDL_Tests}}}
 % \end{figure}
 
 \begin{table}[ht!]
@@ -519,22 +519,22 @@ File & Dependency & Reading & Description \\
   wide and narrow scoping options that arise in the axiomatization of
   the paradox; see Fig.~\ref{fig:Chisholm_SDL}. \\
 \midrule
-\textsf{\small \detokenize{Chisholm_CJ-DDL_Monadic.thy}}
-& \textsf{\small CJ-DDL.thy} 
+\textsf{\small \detokenize{Chisholm_CJ_DDL_Monadic.thy}}
+& \textsf{\small \detokenize{CJ_DDL.thy}} 
 &  --
 &  Contains a study analogous to \textsf{\small
   \detokenize{Chisholm_SDL.thy}} for 
   monadic obligation in DDL. \\
 \midrule
-\textsf{\small \detokenize{Chisholm_CJ-DDL_Dyadic.thy}}
-& \textsf{\small CJ-DDL.thy} 
+\textsf{\small \detokenize{Chisholm_CJ_DDL_Dyadic.thy}}
+& \textsf{\small \detokenize{CJ_DDL.thy}}
 & --
 &  Contains a study analogous to \textsf{\small
   \detokenize{Chisholm_SDL.thy}} for 
    dyadic  obligation in DDL. \\
 \midrule
 \textsf{\small \detokenize{Chisholm_E.thy}}
-& \textsf{\small CJ-DDL.thy} 
+& \textsf{\small \detokenize{CJ_DDL.thy}}
 & --
 &  Contains a study analogous to \textsf{\small
   \detokenize{Chisholm_SDL.thy}} for 
@@ -604,8 +604,8 @@ Moreover, it is envisioned to add further, indirectly related works to
                                 SDL. It is demonstrated  that this modeling leads to
                                 contrary-to-duty issues, i.e. inconsistency and explosion.\\
   \midrule
-  \textsf{\small \detokenize{GDPR_CJ-DDL.thy}}
-       & \textsf{\small CJ-DDL.thy} 
+  \textsf{\small \detokenize{GDPR_CJ_DDL.thy}}
+       & \textsf{\small \detokenize{CJ_DDL.thy}} 
                     &  todo
                               &  Contains a modeling of selected statements from the GDPR in
                                 DDL. It is demonstrated  that this modeling is stable against the 
@@ -623,7 +623,7 @@ Moreover, it is envisioned to add further, indirectly related works to
                                 avoided and inferences are supported as expected. \\
   \midrule
   \textsf{\small \detokenize{GewirthArgument.thy}}
-       & \textsf{\small \detokenize{ExtendedCJ-DDL.thy}}.
+       & \textsf{\small \detokenize{ExtendedCJ_DDL.thy}}.
                     & \cite{C77,C76},\cite[Fig. 10]{J48}
                               & Contains a formalization and partial automation of Gewirth's
                                 supporting argument for his \textit{Principle of Generic
@@ -660,7 +660,7 @@ description of the LogiKEy framework, methodology and tool support see
 the related research article~\cite{J48}.
 
 \begin{description}
-\item{Layer L1 example development (files \textsf{\small \detokenize{CJ-DDL.thy}} and
+\item{Layer L1 example development (files \textsf{\small \detokenize{CJ_DDL.thy}} and
     \textsf{\small \detokenize{CJ-DDL_Tests.thy}}):} 
   File \textsf{\small \detokenize{CJ-DDL.thy}} contains the encoding (of a quantified extension) of the dyadic
   deontic logic of Carmo and Jones in HOL. This encoding of DDL in HOL

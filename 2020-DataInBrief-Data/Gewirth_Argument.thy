@@ -1,5 +1,5 @@
-theory GewirthArgument     imports Extended_CJ_DDL                         (* by David Fuenmayor and C. Benzmüller, 2019 *)
-  
+theory Gewirth_Argument                    (* by David Fuenmayor and C. Benzmüller, 2019 *)
+   imports Extended_CJ_DDL     
 begin
 nitpick_params[user_axioms=true, show_all, expect=genuine, format = 3] 
 
@@ -126,6 +126,5 @@ lemma AgentY_NonInterference_X_FWB: "\<lfloor>\<^bold>O\<^sub>i(\<^bold>\<forall
 
 (**Axiom consistency checked: Nitpick finds a two-world model (card w=2).*)
 lemma True nitpick[satisfy, card c = 1, card e = 1, card w = 2] oops
-
 
 end
