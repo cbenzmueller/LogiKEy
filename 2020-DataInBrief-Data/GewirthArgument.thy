@@ -14,8 +14,8 @@ consts ActsOnPurpose::"e\<Rightarrow>m\<Rightarrow>m"
 consts NeedsForPurpose::"e\<Rightarrow>p\<Rightarrow>m\<Rightarrow>m"
 
 definition PPA:: "p" where "PPA a \<equiv> \<^bold>\<exists>E. ActsOnPurpose a E" (** Definition of PPA*)
-axiomatization where essentialPPA: "\<lfloor>\<^bold>\<forall>a. PPA a \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>D(PPA a)\<rfloor>\<^sup>D" (**PPA is an essential property*)
-lemma recognizeOtherPPA: "\<forall>c d. \<lfloor>PPA (Agent d)\<rfloor>\<^sub>d \<longrightarrow> \<lfloor>PPA (Agent d)\<rfloor>\<^sub>c" using essentialPPA by blast
+axiomatization where essentialPPA: "\<lfloor>\<^bold>\<forall>a.(PPA a \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>D(PPA a))\<rfloor>\<^sup>D" (**PPA is an essential property*)
+lemma recognizeOtherPPA: "\<forall>c d. (\<lfloor>PPA (Agent d)\<rfloor>\<^sub>d) \<longrightarrow> \<lfloor>PPA (Agent d)\<rfloor>\<^sub>c" using essentialPPA by blast
 
 consts Good::"e\<Rightarrow>m\<Rightarrow>m"
 axiomatization where explGoodness1: "\<lfloor>\<^bold>\<forall>a P. ActsOnPurpose a P \<^bold>\<rightarrow> Good a P\<rfloor>\<^sup>D"
@@ -52,6 +52,7 @@ section \<open>Gewirth's Argument for the PGC\<close>
 (**(5) I have (maybe nobody else does) a claim right to my FWB.*)
 (**(13) Every PPA has a claim right to their FWB.*)
 
+
 (**The following is a formalized proof for the main conclusion of Gewirth's argument, which 
 asserts that the following sentence is valid from every PPA's standpoint: "Every PPA has a 
 claim right to its freedom and well-being (FWB)" *)
@@ -74,9 +75,9 @@ proof -
            (**(4) FWB is an (a priori) necessary good for me:*)
         hence C4: "\<lfloor>\<^bold>\<box>\<^sup>D(Good I (FWB I))\<rfloor>\<^sub>C" by simp  
          (**I ought to pursue my FWB on the condition that I consider it a necessary good:*)
-        have "\<lfloor>\<^bold>O\<langle>FWB I | \<^bold>\<box>\<^sup>D(Good I) (FWB I)\<rangle>\<rfloor>\<^sub>C" using explGoodness3 explicationFWB2 by blast       
+        have "\<lfloor>\<^bold>O\<langle>FWB I | \<^bold>\<box>\<^sup>D(Good I) (FWB I)\<rangle>\<rfloor>\<^sub>C" using explGoodness3 explicationFWB2 by blast
            (**There is an (other-directed) obligation to my FWB:*)
-        hence "\<lfloor>\<^bold>O\<^sub>i(FWB I)\<rfloor>\<^sub>C" using explicationFWB2 explicationFWB3 C4 CJ_14p by fastforce        
+        hence "\<lfloor>\<^bold>O\<^sub>i(FWB I)\<rfloor>\<^sub>C" using explicationFWB2 explicationFWB3 C4 CJ_14p by fastforce 
            (**It must therefore be the case that my FWB is possible:*)
         hence "\<lfloor>\<^bold>O\<^sub>i(\<^bold>\<diamond>\<^sub>a(FWB I))\<rfloor>\<^sub>C" using OIOAC by simp       
            (**There is an obligation for others not to interfere with my FWB:*)

@@ -43,3 +43,4 @@ lemma assumes "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not
       shows "\<forall>x y z. x R y \<and> y R z \<longrightarrow> x R z" 
   nitpick [show_all,format=2] oops (*Countermodel presented by Nitpick.*)
 end
+
