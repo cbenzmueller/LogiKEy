@@ -401,7 +401,7 @@ We could determine them as follows:
 \item After @{text "move(cup,position)"} the cup is full, if it was full before the move and empty otherwise.\\
 Here we assume that @{text "move(cup,position)"} will not result in spilled tea.
 \end{enumerate}
-These additional assumptions would allow for only one state after conducting  @{text "fill(cup)"} and @{text "move(cup,y)"}
+These additional assumptions would allow for only one state after conducting  @{text "fill(cup)"} and @{text "move(cup,y)"}.
 It is the expected ``@{text "full"} and @{text "y"}".
 
 Stating all effects and non-effects requires many statements.

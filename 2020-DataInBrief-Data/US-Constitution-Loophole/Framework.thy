@@ -67,7 +67,7 @@ and @{text "coffee"} iff the temperature is @{text ">20"}\<close>
 text\<open>\noindent %
  \textbf{2. State all assumptions in the form of axioms.}
 
-\noindent Note that we introduce a contradiction with @{text "teaHot"} and @{text "tempOf tea = 10"}
+\noindent Note that we introduce a contradiction with the two axioms @{text "teaHot tea"} and @{text "tempOf tea = 10"}
 \<close>
 
 axiomatization where

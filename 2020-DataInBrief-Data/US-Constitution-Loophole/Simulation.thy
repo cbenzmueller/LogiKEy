@@ -60,7 +60,7 @@ definition Dictatorship::"\<sigma>"
 
 text\<open>\noindent %
 Below follow some predicates for formulas @{text "\<phi>::\<sigma>"}. Based on these we also define predicates that are only dependant on time, and thus
-are either valid on not valid for a certain instance of time. These will serve as properties of the Constitution at different points in time.
+are either valid or not valid for a certain instance of time. These will serve as properties of the Constitution at different points in time.
 \<close>
 
 consts  (*predicates for branches of government *)
