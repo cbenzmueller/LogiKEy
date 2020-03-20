@@ -580,7 +580,7 @@ files.
 
 In addition to the files listed in
 Tables~\ref{table:DeonticLogics}---\ref{table:Theories} the data set
-provided at \url{logikey.org} also includes the following material:
+provided at \url{logikey.org} also includes the following:
 \begin{itemize}
 \item Subdirectory \url{2020-DataInBrief-Data/Course-Material-1} contains Isabelle/HOL data files stemming from a
   lecture course on deontic logic at University of Luxembourg based on \cite{textbook18}.
@@ -598,7 +598,7 @@ provided at \url{logikey.org} also includes the following material:
 
 Further related data sets, including
   selected formalisations in computational metaphysics
-  (cf.~\cite{J47,J41} and the references therein), will be added to 
+  (cf.~\cite{J41,J47} and the references therein), will be added to 
    \url{logikey.org} as useful and appropriate.
 
 % There are related works in normative reasoning (see
@@ -667,27 +667,29 @@ Further related data sets, including
 
 \subsubsection*{Experimental Design, Materials, and Methods}
 
-The data was acquired through manual encoding of the problem in the
+The data was acquired through manual encodings of logics, theories and
+arguments in the
 Isabelle/HOL \cite{Isabelle} proof assistant system. The modeling
 process was following the LogiKEy methodology depicted in
 Fig.~\ref{fig:LogiKEy}. This methodology supports formalization
 projects in the area of ethical and legal reasoning at different
-layers of abstraction. This methodology is explained here at hand of
-selected examples from our contributed data set, and we address all three
-different layers. For a general
+layers of abstraction. This methodology is briefly explained below at hand of
+selected examples from our contributed data set; we address all three
+different layers and discuss examples. For a general
 description of the LogiKEy framework, methodology and tool support see
 the related research article~\cite{J48}.
 
 \begin{description}
-\item{Layer L1 example development (files \textsf{\small \detokenize{CJ_DDL.thy}} and
-    \textsf{\small \detokenize{CJ_DDL_Tests.thy}}):} 
-  File \textsf{\small \detokenize{CJ_DDL.thy}} contains the encoding (of a quantified extension) of the dyadic
-  deontic logic of Carmo and Jones in HOL. This encoding of DDL in HOL
-  is exemplary for a \textit{Layer L1} development in the LogiKEy
-  methodology. First, the desired object \textit{logic} was selected
-  (Step 1); DDL in the given case. A \textit{semantics} (Step 2) for
-  this object logic was sought and found in the original papers by
-  Carmo and Jones \cite{Carmo2002,CJ13}; such a mathematical
+\item{Layer L1 example development (files \textsf{\small
+      \detokenize{CJ_DDL.thy}} and \textsf{\small
+      \detokenize{CJ_DDL_Tests.thy}}):} File \textsf{\small
+    \detokenize{CJ_DDL.thy}} contains the encoding (of a quantified
+  extension) of the dyadic deontic logic of Carmo and Jones in
+  HOL. This encoding of DDL in HOL is exemplary for \textit{Layer L1}
+  developments in LogiKEy. First, the desired object \textit{logic}
+  was selected (Step 1); DDL in the given case. A \textit{semantics}
+  (Step 2) for this object logic was sought and found in the original
+  papers by Carmo and Jones \cite{Carmo2002,CJ13}; such a mathematical
   description of a semantics, a neighborhood semantics in the given
   case, constitutes the ideal starting point for the definition of a
   SSE of the object logic in HOL, which in turn enables its
@@ -699,52 +701,54 @@ the related research article~\cite{J48}.
   was studied and proved; this proof has been published
   \cite{C71,R63}. Furthermore, \textit{implications} of the embedding
   of DDL in HOL were studied (Step 5); see for example the additional
-  theorems in file \textsf{\small \detokenize{CJ_DDL_Tests.thy}}
-  and the contrary-to-duty studies conducted with this DDL logic in
-  files \textsf{\small \detokenize{Chisholm_DDL_Monadic.thy}} and
+  theorems in file \textsf{\small \detokenize{CJ_DDL_Tests.thy}} and
+  the contrary-to-duty studies conducted in files
+  \textsf{\small \detokenize{Chisholm_DDL_Monadic.thy}} and
   \textsf{\small \detokenize{Chisholm_DDL_Dyadic.thy}}. Since the DDL
   of Carmo and Jones has not been automated before with other systems
   or approaches, there are no \textit{benchmarks} (Step 7) available
-  that we could use to properly assess and compare the
-  competitiveness of our solution. The publication of this data set
-  can be seen as first step towards the built-up and \textit{contribution} (Step 8)
+  that we could use to properly assess and compare the competitiveness
+  of our solution. The publication of this data set can be seen as
+  first step towards the built-up and \textit{contribution} (Step 8)
   of such a benchmark suite to the community; future work includes the
   conversion of our Isabelle/HOL encodings into TPTP THF format
-  \cite{J22} so that they can be used as benchmarks in the yearly CASC
-  world-championship competitions \cite{DBLP:journals/aim/Sutcliffe16}.
+  \cite{J22} so that they can be used as challenge problems in the yearly CASC
+  world-championship competitions
+  \cite{DBLP:journals/aim/Sutcliffe16}.
 
 \item{Layer L2 example development (file \textsf{\small
       \detokenize{GDPR_CJ_DDL.thy}}):} In file \textsf{\small
-    \detokenize{GDPR_CJ_DDL.thy}} we \textit{selected} (Step 1) two
+    \detokenize{GDPR_CJ_DDL.thy}} we \textit{selected} (Step 1)
   statements from the General Data Protection Regulation (GDPR) for
-  formalisation. The \textit{analysis} (Step 2) of these statements of
-  the GDPR revealed that obligation aspects in the context of data
-  processing needed to be adressed and that natural language phrases
-  in the studied parts of the GDPR indeed contains challenge deontic
+  formalisation. The \textit{analysis} (Step 2) of these statements
+  revealed that obligation aspects in the context of data processing
+  needed to be adressed and that natural language phrases in the
+  studied parts of the GDPR indeed contains challenge deontic
   modalities. This motivated the choice of a suitable deontic
   \textit{logic} (Step 3), such as DDL, for the formal encoding of
   these challenges aspects. In the given case it became apparent that
-  a propositional encoding would hardly suffice in practical applications, so the selected
-  deontic logic DDL, needed to be \textit{combined with}, respectively
-  extended by, a notion of quantification, which led to the addition of
-  quantifiers to the file \textsf{\small
-    \detokenize{CJ_DDL.thy}}. Subsequently the two GDPR articles were
-  \textit{formalized} (Step 4) using logical connectives as provided in the imported file \textsf{\small
-    \detokenize{CJ_DDL.thy}}, and then some \textit{exploration} (Step 5)
-  and assessment studies were conducted. This included the
+  a propositional encoding would hardly suffice in practical
+  applications, so the selected deontic logic DDL, needed to be
+  \textit{combined with}, respectively extended by, a notion of
+  quantification, which led to the addition of quantifiers to the file
+  \textsf{\small \detokenize{CJ_DDL.thy}}. Subsequently the two GDPR
+  articles were \textit{formalized} (Step 4) using logical connectives
+  as provided in the imported file \textsf{\small
+    \detokenize{CJ_DDL.thy}}, and then some \textit{exploration} (Step
+  5) and assessment studies were conducted. This included the
   contrary-to-duty studies as reported in related research articles
   \cite{J48,C71}. With our data set we \textit{contribute} (Step 6)
-  this work to the wider research community and enable its reuse. 
+  this work to the wider research community and enable its reuse.
 
 \item{Layer L3 example development:}  Layer L3 example developments
   have just started. The idea is to populate regulatory governor
   architectures \cite{J48}
-  with Layer L2 ethical and legal theories, so that reasoning with the
+  with ethical and legal theories from Layer L2, so that reasoning with the
   theories can be utilized to explain and control the behaviour of
   (autonomous) AI systems. To realize such applications it is required
   to \textit{select} (Step 1) some ethical and/or legal  theory from
   Layer L2, to
-  devise and implement a respective \textit{governor architecture}
+  devise and implement (or reuse) a respective \textit{governor architecture}
   (Step 2), to \textit{populate} (Step 3) this governor system with
   the selected ethical and/or legal   theory, and to \textit{assess} (Step 4) the
   well-functioning of this system in empirical studies.
