@@ -29,9 +29,10 @@ axiomatization where
  lemma False sledgehammer nitpick oops (*Nitpick presents countermodel; provers timeout.*)
 
 (*Should the data be erased? — Yes, proof found by ATPs*)
- lemma "\<lfloor>\<^bold>\<circle><erase d1>\<rfloor>\<^sub>l" using A0 F1 A1 A2 Implicit Situation unfolding DDLdefs sledgehammer by blast 
-(*Should the data be kept? — Yes, proof found by ATPs*)
- lemma "\<lfloor>\<^bold>\<circle><\<^bold>\<not>erase d1>\<rfloor>\<^sub>l" sledgehammer nitpick oops
-(*Should Mary be killed? — Yes, proof found by ATPs*)
- lemma "\<lfloor>\<^bold>\<circle><kill Mary>\<rfloor>\<^sub>l" sledgehammer nitpick oops     
+ lemma "\<lfloor>\<^bold>\<circle><erase d1>\<rfloor>\<^sub>l" using A0 F1 A1 A2 Implicit Situation by blast 
+(*Should the data be kept? — No, countermodel by Nitpick*)
+ lemma "\<lfloor>\<^bold>\<circle><\<^bold>\<not>erase d1>\<rfloor>\<^sub>l" nitpick oops
+(*Should Mary be killed? — No, countermodel by Nitpick*)
+ lemma "\<lfloor>\<^bold>\<circle><kill Mary>\<rfloor>\<^sub>l" nitpick oops     
 end
+

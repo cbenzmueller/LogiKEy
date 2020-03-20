@@ -59,3 +59,4 @@ begin     (*Unimportant*) nitpick_params [user_axioms,expect=genuine,show_all,fo
  lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3w)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><kill>\<rfloor>\<^sub>l"  nitpick oops (*Should James kill? No*)
 end 
 
+

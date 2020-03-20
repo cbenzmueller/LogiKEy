@@ -1,14 +1,11 @@
 theory IO_Experiments imports IO_out2_STIT             (*Paul Meder, 2018*)
 begin
 (* Xin Paper - Example proof theory *)
-
 consts e::e f::e
-(* G = (a \<or> b, [a1 cstit e]) *)
-(* [a1 cstit (e \<or> f)] \<in> out1(G, {a2 cstit b } *)
+(* G = (a \<or> b, [a1 cstit e]) *)     (* [a1 cstit (e \<or> f)] \<in> out1(G, {a2 cstit b } *)
 lemma "out1 (\<lambda>X. X=(a \<^bold>\<or> b, (a1 cstit e))) (a2 cstit b) (a1 cstit (e \<^bold>\<or> f))" nitpick[user_axioms,show_all] oops
 
-(* [a1 cstit (e \<or> f)] \<in> out2(G, {a2 cstit b } *)
-(* [a1 cstit (e \<or> f)] \<in> Cn(G(L))  *)
+(* [a1 cstit (e \<or> f)] \<in> out2(G, {a2 cstit b } *) (* [a1 cstit (e \<or> f)] \<in> Cn(G(L))  *)
 (* old version - times out *)
 lemma " out2 (\<lambda>X. X=(a \<^bold>\<or> b, (a1 cstit e))) (a1 cstit (e \<^bold>\<or> f)) " oops
 (* new version - finds proof *)
@@ -20,7 +17,6 @@ lemma "\<lfloor> (((a \<^bold>\<or> b) \<^bold>\<supset> \<^bold>\<box>\<^sub>l(
   by (simp add: ax_refl_a2 k45box_def kand_def kcstit_def kimp_def kor_def kvalid_def)
 
 (* together *)
-
 lemma "\<lfloor> (((a \<^bold>\<or> b) \<^bold>\<supset> \<^bold>\<box>\<^sub>l(a1 cstit e)) \<^bold>\<and> (a2 cstit b)) \<^bold>\<supset> \<^bold>\<box>\<^sub>l(a1 cstit (e \<^bold>\<or> f)) \<rfloor> \<and>
        \<lfloor>(a1 cstit e)\<^bold>\<supset>(a1 cstit (e \<^bold>\<or> f)) \<rfloor> " unfolding Defs 
   using ax_refl_a2 by blast
@@ -36,7 +32,6 @@ lemma "\<lfloor> (\<^bold>\<top> \<^bold>\<supset> \<^bold>\<box>\<^sub>l(a1 dst
 lemma "out1 (\<lambda>X. X=(\<^bold>\<top>, (a1 cstit e))) \<^bold>\<top>  (a1 cstit (e \<^bold>\<or> f))" nitpick[user_axioms,show_all] oops
 lemma "\<lfloor> (\<^bold>\<top> \<^bold>\<supset> \<^bold>\<box>\<^sub>l(a1 cstit e)) \<^bold>\<supset> \<^bold>\<box>\<^sub>l(a1 cstit (e \<^bold>\<or> f))  \<rfloor> "
   by (simp add: k45box_def kcstit_def kimp_def kor_def ktrue_def kvalid_def)
-
 
 (* out2 *)
 (* G = {(a,[a1 cstit e]), (a,[a2 cstit f]),(b,e \<and> f)} *)
@@ -81,3 +76,4 @@ lemma "\<lfloor> ((\<^bold>\<top> \<^bold>\<supset> \<^bold>\<box>\<^sub>l(\<^bo
          )) \<^bold>\<supset> \<^bold>\<box>\<^sub>l(\<^bold>\<not>Kill \<^bold>\<and> \<^bold>\<not>Hurt)\<rfloor>" 
   by (simp add: kand_def kimp_def ktrue_def kvalid_def)
 end
+
