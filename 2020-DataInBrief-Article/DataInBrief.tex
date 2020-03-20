@@ -60,9 +60,9 @@ Xavier Parent (\url{x.parent.xaviert@gmail.com})
 \subsubsection*{Abstract}
 The LogiKEy workbench for 
 %normative 
-legal and ethical reasoning is presented. This workbench
+ethical and legal reasoning is presented. This workbench
 simultaneously supports development, experimentation, assessment and
-deployment of formal logics and legal and ethical theories at
+deployment of formal logics and ethical and legal theories at
 different conceptual layers. 
 More concretely, it comprises, in form of a data set (Isabelle/HOL theory
 files), formal encodings of multiple deontic logics, logic
@@ -74,7 +74,7 @@ different application scenarios, and which is not tied to specific
 logics or specific logic combinations.  Our workbench consolidates
 related research contributions of the authors and it may serve as a
 starting point for further studies and experiments in flexible and
-expressive legal and ethical reasoning. It may also support hand-on
+expressive ethical and legal reasoning. It may also support hand-on
 teaching of non-trivial logic formalisms in lecture courses and
 tutorials.
 
@@ -167,7 +167,7 @@ Filtered
   capabilities of Isabelle/HOL and its integrated tools in normative reasoning when utilising
   the LogiKEy methodology and the SSE
   approach. Another objective was to provide a reusable foundation for
-  further experiments in expressive legal and ethical reasoning.}	
+  further experiments in expressive ethical nd legal reasoning.}	
 {	
 [Provide a brief description of which conditions were considered for data collection. Max 400 characters]}
 
@@ -206,7 +206,7 @@ Latitude and longitude (and GPS coordinates) for collected samples/data:]}
 
 \tableentry
 {Data accessibility}
-{The data is accessible via  \url{https://logikey.org} which redirects to
+{The data is accessible via  \url{logikey.org} which redirects to
   the repository \url{https://github.com/cbenzmueller/LogiKEy} on
   \url{github.com}, where the data is hosted and maintained. The two
   subdirectories \texttt{2020-DataInBrief-Article} and
@@ -226,7 +226,7 @@ Direct URL to data: [e.g. https://www.data.edu.com]
 \tableentry
 {Related research article}
 {C. Benzmüller, X. Parent, and L. van der Torre. Designing normative
-  theories of legal and ethical reasoning: LogiKEy framework, methodology, and tool support. Artificial Intelligence (to appear), 2020. Preprint: \url{https://arxiv.org/abs/1903.10187}.\\[.5em]
+  theories of ethical and legal reasoning: LogiKEy framework, methodology, and tool support. Artificial Intelligence (to appear), 2020. Preprint: \url{https://arxiv.org/abs/1903.10187}.\\[.5em]
 Further related research articles include: \cite{J46,C71,J45,C76,C77,C82}
 % \\[.5em]
 % $\bullet$ C. Benzmüller, A. Farjami, P. Meder, X. Parent, I/O Logic in HOL, Journal of Applied Logics -- IfCoLoG Journal of Logics and their Applications (Special Issue on Reasoning for Legal AI) 6 (5) 715-732, 2019. \\
@@ -245,14 +245,14 @@ If your data article is not related to a research article, please delete this la
 \begin{itemize}
 \item The provided data can be reused, independent of the related
   research article(s), as a starting point for further studies and
-  experiments in flexible and expressive legal and ethical
+  experiments in expressive ethical and legal
   reasoning. Moreover, it can be reused, extended and adapted to
   support also other various other application directions, including
-  e.g.~deontic modality and quantifiers in linguistics.
+  e.g.~the study of deontic modality and quantifiers in linguistics.
 
 \item The data collection is beneficial for research and application
   in a range of areas, including but not limited to: machine ethics
-  (ethico-legal governor systems), explainably and trustworthy AI,
+  (ethico-legal governor systems), explainable and trustworthy AI,
   regulatory technologies. To that end the data includes reusable SSEs
   of a portfolio of deontic logics, logic combinations, paradoxes in
   normative reasoning and ethical theories in classical higher-order
@@ -264,7 +264,7 @@ If your data article is not related to a research article, please delete this la
 \item To reuse the data interested researchers, 
   students and practitioners only 
   need to download the provided data files, include them in their
-  formalization projects and suitable extend or adapt them. For
+  formalization projects and suitably extend or adapt them. For
   example, the contributed data includes a sample encoding of selected
   statements from the GDPR (General Data Protection Regulation) and an
   encoding of Gewirth’s ethical argument and principle, known as the
@@ -316,11 +316,8 @@ If your data article is not related to a research article, please delete this la
 
 \subsubsection*{Data Description}
 The data is provided in form of Isabelle/HOL source files, which are
-bundled together in a single zip-file. This zip-file is comprised of
-the following individual files, which belong to different
-categories. An example file is displayed in Fig.~\ref{fig:CJ_DDLplus1}; this
-file contains (an extension of) the SSE of 
- dyadic deontic logic (DDL) by Carmo and Jones \cite{CJ13} in HOL. 
+hosted at \url{logikey.org}. The individual data files belong to different
+categories. 
 
 
 % \begin{figure}[t]
@@ -331,7 +328,27 @@ file contains (an extension of) the SSE of
 
 Contributed data files in category I are listed in
 Table~\ref{table:DeonticLogics}. They provide encodings of SSEs, and
-associated tests, of various deontic logics in meta-logic HOL.
+associated tests, of various deontic logics in meta-logic HOL.  A category I 
+example file is displayed in Figs.~\ref{fig:CJ_DDLplus1}--\ref{fig:CJ_DDLplus2}; this
+data file contains (an extension of) the SSE of 
+ dyadic deontic logic (DDL) by Carmo and Jones \cite{CJ13} in HOL and
+ studies, resp.~verifies, its properties.
+
+\begin{figure}[ht!]
+ \includegraphics[width=\textwidth]{CJ_DDLplus1.png}
+\caption{Data file \textsf{\small \detokenize{CJ_DDLplus.thy}; in
+    lines 29--85 the SSE of the DDL by  Carmo and Jones \cite{CJ13} in HOL is presented \label{fig:CJ_DDLplus1}}}
+\end{figure}
+
+
+
+\begin{figure}[ht!]
+ \includegraphics[width=\textwidth]{CJ_DDLplus2.png}
+\caption{Data file \textsf{\small \detokenize{CJ_DDLplus.thy}; in
+    lines 87--137 lemmata from Carmo and Jones paper \cite{CJ13} are
+    proved \label{fig:CJ_DDLplus2}}}
+\end{figure}
+
 
 \setcounter{table}{0}
 \begin{table}[ht!]
@@ -354,7 +371,8 @@ associated tests, of various deontic logics in meta-logic HOL.
                                 % (possibilist notion of quantification). This is verified by proving
                                 % the Barcan formula and its
                                 % converse. \\
-                                Provides a consistent SSE of SDL in
+                                Provides a consistent SSE of standard
+  deontic logic (SDL) in
                                 HOL. An unary deontic operator is
                                 defined.
                                 The D axiom is postulated and correspondence to seriality of the
@@ -490,22 +508,11 @@ associated tests, of various deontic logics in meta-logic HOL.
 
 
 
-\begin{figure}[ht!]
- \includegraphics[width=\textwidth]{CJ_DDLplus1.png}
-\caption{Data file \textsf{\small \detokenize{CJ_DDLplus.thy}; in
-    lines 29--85 the SSE of DDL in HOL is presented \label{fig:CJ_DDLplus1}}}
-\end{figure}
-
-\begin{figure}[ht!]
- \includegraphics[width=\textwidth]{CJ_DDLplus2.png}
-\caption{Data file \textsf{\small \detokenize{CJ_DDLplus.thy}; in
-    lines 87--137 lemmata from Carmo and Jones paper \cite{CJ13} are
-    proved \label{fig:CJ_DDLplus2}}}
-\end{figure}
-
 Contributed data files in category II are listed in
-Table~\ref{table:Paradoxes}. They study paradoxes and smaller examples of normative reasoning.
-
+Table~\ref{table:Paradoxes}. They study paradoxes and smaller examples
+of normative reasoning. An example in displayed in
+Fig.~\ref{fig:Chisholm_SDL}, which presents an analysis of Chisholm's
+paradox in standard deontic logic SDL.
 
 
 % \begin{figure}[ht!]
@@ -584,16 +591,15 @@ provided at \url{logikey.org} also includes the following material:
   loophole for establishing a dictatorship.
 \item  Subdirectory \url{2020-DataInBrief-Data/WiseMenPuzzle} contains Isabelle/HOL data files related to a 
   formalization and study \cite{J41} of the well known Wise Men
-  Puzzle; his data set, which has been published before~\cite{J44}, is
-  included here to make it better available in the wider
-  \url{logikey.org} developments.
+  Puzzle; this data set, which has been published before~\cite{J44}, is
+  included here to make it better available for 
+  \url{logikey.org} users.
 \end{itemize}
 
-Moreover, it is envisioned to add further, indirectly related works to
-  the \url{logikey.org} repository in the future, including,
-  for example, 
-  selected formalisations in computational metaphysics (see
-  e.g.~\cite{J47,J41} and the references therein). 
+Further related data sets, including
+  selected formalisations in computational metaphysics
+  (cf.~\cite{J47,J41} and the references therein), will be added to 
+   \url{logikey.org} as useful and appropriate.
 
 % There are related works in normative reasoning (see
 % e.g.~Maja?,}) and in computational metaphysic
@@ -665,7 +671,7 @@ The data was acquired through manual encoding of the problem in the
 Isabelle/HOL \cite{Isabelle} proof assistant system. The modeling
 process was following the LogiKEy methodology depicted in
 Fig.~\ref{fig:LogiKEy}. This methodology supports formalization
-projects in the area of legal and ethical reasoning at different
+projects in the area of ethical and legal reasoning at different
 layers of abstraction. This methodology is explained here at hand of
 selected examples from our contributed data set, and we address all three
 different layers. For a general
@@ -731,16 +737,16 @@ the related research article~\cite{J48}.
   this work to the wider research community and enable its reuse. 
 
 \item{Layer L3 example development:}  Layer L3 example developments
-  have just started. The idea is to populate ethico-legal governor
+  have just started. The idea is to populate regulatory governor
   architectures \cite{J48}
-  with Layer L2 legal and ethical theories, so that reasoning with the
+  with Layer L2 ethical and legal theories, so that reasoning with the
   theories can be utilized to explain and control the behaviour of
   (autonomous) AI systems. To realize such applications it is required
-  to \textit{select} (Step 1) some legal and/or ethical theory from
+  to \textit{select} (Step 1) some ethical and/or legal  theory from
   Layer L2, to
   devise and implement a respective \textit{governor architecture}
   (Step 2), to \textit{populate} (Step 3) this governor system with
-  the selected ethico-legal theory, and to \textit{assess} (Step 4) the
+  the selected ethical and/or legal   theory, and to \textit{assess} (Step 4) the
   well-functioning of this system in empirical studies.
 \end{description} 
 
