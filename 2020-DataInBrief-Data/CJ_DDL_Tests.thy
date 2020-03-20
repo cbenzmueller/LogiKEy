@@ -1,5 +1,5 @@
-theory CJ_DDL_Tests imports CJ_DDL        (* Ali Farjami, Christoph Benzmüller, Xavier Parent, 2020  *)
 
+theory CJ_DDL_Tests imports CJ_DDL        (* Ali Farjami, Christoph Benzmüller, Xavier Parent, 2020  *)
 begin (* Some Tests on the Meta-Theory of DDL*)
 lemma True nitpick [satisfy,user_axioms,expect=genuine] oops  (* Consistency confirmed by Nitpick *)  
  
@@ -30,7 +30,7 @@ lemma C_12: "\<lfloor>\<^bold>\<box>\<^sub>pA \<^bold>\<rightarrow> \<^bold>\<bo
 
 (* Characterisation of "\<^bold>O" *)
 lemma C_2: "\<lfloor>\<^bold>O\<^bold>\<langle>A\<^bold>|B\<^bold>\<rangle> \<^bold>\<rightarrow> \<^bold>\<diamond>(B \<^bold>\<and> A)\<rfloor>"  by (metis ax_5a ax_5b)  
-lemma C_3: "\<lfloor>(\<^bold>\<diamond>(A \<^bold>\<and> B \<^bold>\<and> C) \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>O\<^bold>\<langle>C\<^bold>|A\<^bold>\<rangle> ) \<^bold>\<rightarrow> \<^bold>O\<^bold>\<langle>(B \<^bold>\<and> C)\<^bold>|A\<^bold>\<rangle>\<rfloor>" by (simp add: ax_5c) (*longer proof*)
+lemma C_3: "\<lfloor>(\<^bold>\<diamond>(A \<^bold>\<and> B \<^bold>\<and> C) \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>O\<^bold>\<langle>C\<^bold>|A\<^bold>\<rangle> ) \<^bold>\<rightarrow> \<^bold>O\<^bold>\<langle>(B \<^bold>\<and> C)\<^bold>|A\<^bold>\<rangle>\<rfloor>" sledgehammer sorry (*longer proof*)
 lemma C_4: "\<lfloor>(\<^bold>\<box>(A \<^bold>\<rightarrow> B) \<^bold>\<and> (\<^bold>\<diamond>(A \<^bold>\<and> C)) \<^bold>\<and> \<^bold>O\<^bold>\<langle>C\<^bold>|B\<^bold>\<rangle>) \<^bold>\<rightarrow> \<^bold>O\<^bold>\<langle>C\<^bold>|A\<^bold>\<rangle>\<rfloor>"   using ax_5e by blast
 lemma C_5: "\<lfloor>\<^bold>\<box>(A \<^bold>\<leftrightarrow> B) \<^bold>\<rightarrow> (\<^bold>O\<^bold>\<langle>C\<^bold>|A\<^bold>\<rangle> \<^bold>\<leftrightarrow> \<^bold>O\<^bold>\<langle>C\<^bold>|B\<^bold>\<rangle>)\<rfloor>"  by presburger 
 lemma C_6: "\<lfloor>\<^bold>\<box>(C \<^bold>\<rightarrow> (A \<^bold>\<leftrightarrow> B)) \<^bold>\<rightarrow> (\<^bold>O\<^bold>\<langle>A\<^bold>|C\<^bold>\<rangle> \<^bold>\<leftrightarrow> \<^bold>O\<^bold>\<langle>B\<^bold>|C\<^bold>\<rangle>)\<rfloor>"  by (smt ax_5b) 
@@ -60,7 +60,8 @@ lemma II_3_1: "((\<lfloor>\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle>
      fix w::i
      from L1 have L3: "(\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle>)(w)"  by auto
      from L1 L3 have L4: "(\<exists>x. A x \<and> B x) \<and> (\<forall>X. (\<forall>y. X y \<longrightarrow> A y) \<and> (\<exists>z. X z \<and> B z) \<longrightarrow> ob X B)" using ax_5e by metis 
-     from L4 have L5: "(\<exists>x. A x \<and> B x) \<and> ((\<forall>y. (\<lambda>z. A z \<and> Z z) y \<longrightarrow> A y) \<and> (\<exists>z. (\<lambda>z. A z \<and> Z z) z \<and> B z) \<longrightarrow> ob (\<lambda>z. A z \<and> Z z) B)" by auto
+     from L4 
+       have L5: "(\<exists>x. A x \<and> B x) \<and> ((\<forall>y. (\<lambda>z. A z \<and> Z z) y \<longrightarrow> A y) \<and> (\<exists>z. (\<lambda>z. A z \<and> Z z) z \<and> B z) \<longrightarrow> ob (\<lambda>z. A z \<and> Z z) B)" by auto
      from L1 L5 have L6: "ob (\<lambda>z. A z \<and> Z z) B" by blast
      have L7: "ob (\<lambda>z. A z \<and> Z z) B \<longleftrightarrow> ob (\<lambda>z. A z \<and> Z z) (\<lambda>z. (\<lambda>z. A z \<and> Z z) z \<and> B z)" using ax_5b' by blast
      from L7 have L8: "ob (\<lambda>z. A z \<and> Z z) B \<longleftrightarrow> ob (\<lambda>z. A z \<and> Z z) (\<lambda>z. A z \<and> Z z \<and> B z)" by simp 
@@ -70,7 +71,8 @@ lemma II_3_1: "((\<lfloor>\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle>
      from L9 have L12: "ob (\<lambda>z. Z z \<and> A z) (\<lambda>z. Z z \<and> A z \<and> B z)" by (simp add:L10 L11)
      have L13: "(\<forall>z. (Z z \<and> A z \<and> B z) \<longrightarrow> (Z z \<and> A z))" by auto 
      have L14: "(\<forall>z. (Z z \<and> A z) \<longrightarrow> Z z)" by auto 
-     from L12 have L15: "(\<forall>z. (Z z \<and> A z \<and> B z) \<longrightarrow> (Z z \<and> A z)) \<and> ob (\<lambda>z. Z z \<and> A z) (\<lambda>z. Z z \<and> A z \<and> B z)  \<and> (\<forall>z. (Z z \<and> A z) \<longrightarrow> Z z)" by (simp add: L12) 
+     from L12 have L15: "(\<forall>z. (Z z \<and> A z \<and> B z) \<longrightarrow> (Z z \<and> A z)) \<and>
+                           ob (\<lambda>z. Z z \<and> A z) (\<lambda>z. Z z \<and> A z \<and> B z)  \<and> (\<forall>z. (Z z \<and> A z) \<longrightarrow> Z z)" by (simp add: L12) 
      have L16: "((\<forall>z. (Z z \<and> A z \<and> B z) \<longrightarrow> (Z z \<and> A z)) \<and> ob (\<lambda>z. Z z \<and> A z) (\<lambda>z. Z z \<and> A z \<and> B z)  \<and> (\<forall>z. (Z z \<and> A z) \<longrightarrow> Z z))
                    \<longrightarrow> ob Z (\<lambda>w. (Z w \<and> \<not>(Z w \<and> A w)) \<or> (Z w \<and> A w \<and> B w))" by (metis (mono_tags) ax_5d) 
      from L15 L16 have L17: "ob Z (\<lambda>w. (Z w \<and> \<not>(Z w \<and> A w)) \<or> (Z w \<and> A w \<and> B w))" by blast  
@@ -108,5 +110,5 @@ lemma obs_II_4_2_6: "\<lfloor>(\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<ra
 
 lemma a_DD: "\<lfloor>(\<^bold>O\<^sub>aA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>a(A \<^bold>\<and> B)\<rfloor>" sledgehammer oops (* longer proof *)
 lemma p_DD: "\<lfloor>(\<^bold>O\<^sub>pA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>p(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>p(A \<^bold>\<and> B)\<rfloor>" sledgehammer oops (* longer proof *)
-
 end
+

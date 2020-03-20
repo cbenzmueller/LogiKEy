@@ -39,9 +39,6 @@ begin
     where "P \<phi> \<equiv> \<^bold>\<not> H \<^bold>\<not> \<phi>"
   definition kdstit :: "(i\<Rightarrow>i\<Rightarrow>bool)\<Rightarrow>e\<Rightarrow>e" ("_ dstit _") where "r dstit \<phi> \<equiv> (r cstit \<phi>)  \<^bold>\<and> \<^bold>\<not> \<^bold>\<box> \<phi>"
 
-
-
-
   definition union_set :: "(e\<Rightarrow>bool)\<Rightarrow>(e\<Rightarrow>bool)\<Rightarrow>(e\<Rightarrow>bool)"  ("_ \<^bold>\<union> _")
   where "A \<^bold>\<union> B \<equiv> \<lambda>w. (A w) \<or> (B w)"
 
@@ -144,7 +141,6 @@ axiomatization where
 
 lemma True nitpick [satisfy,user_axioms,show_all] oops
 
-
 axiomatization where
   ax_C4 : "\<forall>w. \<forall>v. \<forall>u. ((w rG u) \<and> (w rG v))
            \<longrightarrow> ((u rG v) \<or> (v rG u) \<or> (u=v))" 
@@ -188,7 +184,6 @@ lemma "\<lfloor>((a \<^bold>\<supset> \<^bold>\<box>\<^sub>l(a1 cstit (x)))\<^bo
 (* [a1 cstit x] \<in> out2(K,{a\<and>b}) *)
 lemma "\<lfloor> ((a \<^bold>\<supset> \<^bold>\<box>\<^sub>l(a1 cstit x)) \<^bold>\<and> (a \<^bold>\<and> b)) \<^bold>\<supset> \<^bold>\<box>\<^sub>l(a1 cstit x) \<rfloor> \<and> \<lfloor>(a1 cstit x)\<^bold>\<supset> (a1 cstit x) \<rfloor>" 
   by (simp add: kand_def kimp_def kvalid_def)
-
 
 definition "G \<equiv> (\<lambda>X. X=(a, (a1 cstit x)))" declare G_def[Defs]
 definition "A \<equiv>(\<lambda>X. X=a)" declare A_def[Defs]
@@ -334,7 +329,6 @@ lemma "out1 W (a) ((a1 cstit z) \<^bold>\<and> (a2 cstit z))" nitpick[user_axiom
 lemma "\<lfloor> ((a \<^bold>\<supset> \<^bold>\<box>\<^sub>l(gstit (z)))\<^bold>\<and>(a)) \<^bold>\<supset> \<^bold>\<box>\<^sub>l((a1 cstit z)\<^bold>\<and>(a2 cstit z)) \<rfloor>
          \<and> \<lfloor>(gstit z) \<^bold>\<supset> ((a1 cstit z) \<^bold>\<and> (a2 cstit z)) \<rfloor>" unfolding Defs nitpick[user_axioms,show_all] oops 
 
-
 definition "L \<equiv> (\<lambda>X. X= (a, (a1 cstit x)) \<or> X=(a, (a2 cstit x))) " declare L_def[Defs] 
 (* [gstit x] \<in> out2(L,a) *)
 lemma "\<lfloor> ((a \<^bold>\<supset> \<^bold>\<box>\<^sub>l(a1 cstit (x) )) \<^bold>\<and> (a \<^bold>\<supset> \<^bold>\<box>\<^sub>l(a2 cstit (x) )) \<^bold>\<and>(a)) \<^bold>\<supset> \<^bold>\<box>\<^sub>l(gstit x) \<rfloor>
@@ -391,6 +385,4 @@ lemma "\<lfloor> ((a \<^bold>\<supset> \<^bold>\<box>\<^sub>l(\<^bold>\<box> x))
   by (simp add: axC1_a2 axC3_a1_a2 k45box_def kand_def kbox_def kgstit_def kimp_def kvalid_def)
 lemma "\<lfloor> (\<^bold>\<box> x)\<^bold>\<supset> (gstit x) \<rfloor>"
   by (simp add: axC1_a1 axC3_a1_a2 kbox_def kgstit_def kimp_def kvalid_def)
-
-
 end
