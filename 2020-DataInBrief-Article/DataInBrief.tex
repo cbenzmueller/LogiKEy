@@ -79,7 +79,7 @@ teaching of non-trivial logic formalisms in lecture courses and
 tutorials.
 
 \comment{
-[The Abstract should describe the data collection process, the analysis performed, the data, and their reuse potential. It should not provide conclusions or interpretive insights. If your article is being submitted via another Elsevier journal as a co-submission, please cite this research article in the abstract (title, or doi, and reference number only, e.g. “Title” [1]), and point the reader there for interpretation. \\
+[The Abstract should describe the data collection process, the analysis performed, the data, and their reuse potential. It should not provide conclusions or interpretive insights. If your article is being submitted via another Elsevier journal as a co-submission, please cite this research article in the abstract (title, or doi, and reference number only, e.g., “Title” [1]), and point the reader there for interpretation. \\
 Min 100 words - Max 500 words] 
 }
 
@@ -150,7 +150,10 @@ Model and make of the instruments used:]}
 
 \tableentry
 {Data format}
-{Raw, processed, analyzed and cleaned data. The data is provided in the syntax  format of the Isabelle/HOL proof assistant, which has been used to process, analyze and verify it; Isabelle/HOL is freely available at \url{https://isabelle.in.tum.de}}	
+{Raw, processed, analyzed and cleaned data. The data is provided in
+  the syntax format of the Isabelle/HOL proof assistant, which has
+  been used to process, analyze and verify it; the data files were
+  also annotated by hand. Isabelle/HOL is freely available: \url{https://isabelle.in.tum.de}}	
 {
 [List your data format(s). Note, your manuscript will not be considered for publication unless you provide access to your raw data (either with article or linked to in a repository).] 
 Raw
@@ -167,7 +170,7 @@ Filtered
   capabilities of Isabelle/HOL and its integrated tools in normative reasoning when utilising
   the LogiKEy methodology and the SSE
   approach. Another objective was to provide a reusable foundation for
-  further experiments in expressive ethical nd legal reasoning.}	
+  further experiments in expressive ethical and legal reasoning.}	
 {	
 [Provide a brief description of which conditions were considered for data collection. Max 400 characters]}
 
@@ -206,7 +209,7 @@ Latitude and longitude (and GPS coordinates) for collected samples/data:]}
 
 \tableentry
 {Data accessibility}
-{The data is accessible via  \url{logikey.org} which redirects to
+{The data is accessible via  \url{logikey.org}, which redirects to
   the repository \url{https://github.com/cbenzmueller/LogiKEy} on
   \url{github.com}, where the data is hosted and maintained. The two
   subdirectories \texttt{2020-DataInBrief-Article} and
@@ -247,19 +250,19 @@ If your data article is not related to a research article, please delete this la
   research article(s), as a starting point for further studies and
   experiments in expressive ethical and legal
   reasoning. Moreover, it can be reused, extended and adapted to
-  support also other various other application directions, including
-  e.g.~the study of deontic modality and quantifiers in linguistics.
+  support also other various other application directions, including, e.g.,~the study of deontic modality and quantifiers in linguistics.
 
 \item The data collection is beneficial for research and application
   in a range of areas, including but not limited to: machine ethics
   (ethico-legal governor systems), explainable and trustworthy AI,
-  regulatory technologies. To that end the data includes reusable SSEs
+  regulatory technologies, argumentation, natural language semantics. To that end the data includes reusable SSEs
   of a portfolio of deontic logics, logic combinations, paradoxes in
   normative reasoning and ethical theories in classical higher-order
   logic (HOL), aka Church's type theory \cite{J43}, interpretable in
   the Isabelle/HOL proof assistant system \cite{Isabelle}. The data
-  set may also be used to support the teaching of non-trivial logic
-  formalisms in lecture courses.
+  set may also be used to support the teaching of expressive,
+  classical and non-classical logic
+  formalisms and their combinations in lecture courses and tutorials.
 
 \item To reuse the data interested researchers, 
   students and practitioners only 
@@ -268,7 +271,7 @@ If your data article is not related to a research article, please delete this la
   example, the contributed data includes a sample encoding of selected
   statements from the GDPR (General Data Protection Regulation) and an
   encoding of Gewirth’s ethical argument and principle, known as the
-  Principle of Generic Consistency (PGC), in a suitable extension of
+  Principle of Generic Consistency (PGC) \cite{GewirthRM}, in a suitable extension of
   higher-order deontic logic. These are two examples in the area of
   knowledge representation and reasoning with an emphasis on
   regulatory and ethical aspects. They can be reused as a starting
@@ -305,7 +308,7 @@ If your data article is not related to a research article, please delete this la
 \end{itemize}
 
 \comment{
-[Provide 3-6 bullet points explaining why these data are of value to the scientific community. Bullet points 1-3 must specifically answer the question in red next to the bullet point, but do not include the question itself in your answer (i.e. for the first bullet, you should explain why these data are useful but delete the “Why are these data useful?” question text itself). You may provide up to 3 additional bullet points to outline the value of these data. Please keep points brief.
+[Provide 3-6 bullet points explaining why these data are of value to the scientific community. Bullet points 1-3 must specifically answer the question in red next to the bullet point, but do not include the question itself in your answer (i.e.,for the first bullet, you should explain why these data are useful but delete the “Why are these data useful?” question text itself). You may provide up to 3 additional bullet points to outline the value of these data. Please keep points brief.
 ·	Why are these data useful?
 ·	Who can benefit from these data?
 ·	How can these data be used for further insights and development of experiments?
@@ -480,9 +483,8 @@ data file contains (an extension of) the SSE of
                                 for an extension of a higher-order
                                 variant of DDL into a
                                 two-dimensional semantics as
-                                originally presented by David Kaplan
-                                for his logic of demonstratives
-                                \cite{Kaplan1979,Kaplan1989}. The logic extension is
+                                originally presented by Kaplan
+                                for his logic of demonstratives~\cite{Kaplan1979,Kaplan1989}. The logic extension is
                                 completed in file \textsf{\small
                                 \detokenize{Extended_CJ_DDL.thy}}. The
                                 displayed lines in Fig.~\ref{fig:CJ_DDLplus2} show
@@ -510,9 +512,9 @@ data file contains (an extension of) the SSE of
 
 Contributed data files in category II are listed in
 Table~\ref{table:Paradoxes}. They study paradoxes and smaller examples
-of normative reasoning. An example in displayed in
+of normative reasoning. An example is displayed in
 Fig.~\ref{fig:Chisholm_SDL}, which presents an analysis of Chisholm's
-paradox in standard deontic logic SDL.
+paradox \cite{c63} in standard deontic logic SDL.
 
 
 % \begin{figure}[ht!]
@@ -578,7 +580,7 @@ legal and ethical theories and arguments formalized using the deontic logics as
 provided in category I files and further examined in the category II
 files.
 
-In addition to the files listed in
+In addition to data listed in
 Tables~\ref{table:DeonticLogics}---\ref{table:Theories} the data set
 provided at \url{logikey.org} also includes the following:
 \begin{itemize}
@@ -620,7 +622,7 @@ Further related data sets, including
                     & \cite[Fig. 7]{J48}
                               &  Contains a modeling of selected statements from the GDPR in
                                 SDL. It is demonstrated  that this modeling leads to
-                                contrary-to-duty issues, i.e. inconsistency and explosion.\\
+                                contrary-to-duty issues, i.e., inconsistency and explosion.\\
   \midrule
   \textsf{\small \detokenize{GDPR_CJ_DDL.thy}}
        & \textsf{\small \detokenize{CJ_DDL.thy}} 
@@ -628,7 +630,7 @@ Further related data sets, including
                               &  Contains a modeling of selected statements from the GDPR in
                                 DDL. It is demonstrated  that this modeling is stable against the 
                                 contrary-to-duty issues identified in \textsf{\small
-                                \detokenize{GDPR_SDL.thy}}, i.e. inconsistency and explosion is
+                                \detokenize{GDPR_SDL.thy}}, i.e., inconsistency and explosion is
                                 avoided and inferences are supported as expected. \\
   \midrule
   \textsf{\small \detokenize{GDPR_E.thy}}
@@ -637,7 +639,7 @@ Further related data sets, including
                               &  Contains a modeling of selected statements from the GDPR in
                                 logic E. It is demonstrated  that this modeling is stable against the 
                                 contrary-to-duty issues identified in \textsf{\small
-                                \detokenize{GDPR_SDL.thy}}, i.e. inconsistency and explosion is
+                                \detokenize{GDPR_SDL.thy}}, i.e., inconsistency and explosion is
                                 avoided and inferences are supported as expected. \\
   \midrule
   \textsf{\small \detokenize{GewirthArgument.thy}}
@@ -662,7 +664,7 @@ Further related data sets, including
 
 
 \comment{
-[Describe your data and remember to refer to each data file (i.e. figure 1, figure 2, table 1, dataset, raw data, supplemental data, etc.) that are included in this article. Please provide a clear description of each file – do not simply list them. No insight, interpretation, background or conclusions should be included in this section. Min word 150, no maximum]
+[Describe your data and remember to refer to each data file (i.e., figure 1, figure 2, table 1, dataset, raw data, supplemental data, etc.) that are included in this article. Please provide a clear description of each file – do not simply list them. No insight, interpretation, background or conclusions should be included in this section. Min word 150, no maximum]
 }
 
 \subsubsection*{Experimental Design, Materials, and Methods}
@@ -675,19 +677,19 @@ Fig.~\ref{fig:LogiKEy}. This methodology supports formalization
 projects in the area of ethical and legal reasoning at different
 layers of abstraction. This methodology is briefly explained below at hand of
 selected examples from our contributed data set; we address all three
-different layers and discuss examples. For a general
+different layers and discuss examples.\footnote{For a general
 description of the LogiKEy framework, methodology and tool support see
-the related research article~\cite{J48}.
+the related research article~\cite{J48}.}
 
 \begin{description}
 \item{Layer L1 example development (files \textsf{\small
       \detokenize{CJ_DDL.thy}} and \textsf{\small
       \detokenize{CJ_DDL_Tests.thy}}):} File \textsf{\small
     \detokenize{CJ_DDL.thy}} contains the encoding (of a quantified
-  extension) of the dyadic deontic logic of Carmo and Jones in
+  extension) of the DDL of Carmo and Jones in
   HOL. This encoding of DDL in HOL is exemplary for \textit{Layer L1}
   developments in LogiKEy. First, the desired object \textit{logic}
-  was selected (Step 1); DDL in the given case. A \textit{semantics}
+  was selected (Step 1); Carmo and Jones's DDL in the given case. A \textit{semantics}
   (Step 2) for this object logic was sought and found in the original
   papers by Carmo and Jones \cite{Carmo2002,CJ13}; such a mathematical
   description of a semantics, a neighborhood semantics in the given
@@ -712,7 +714,7 @@ the related research article~\cite{J48}.
   first step towards the built-up and \textit{contribution} (Step 8)
   of such a benchmark suite to the community; future work includes the
   conversion of our Isabelle/HOL encodings into TPTP THF format
-  \cite{J22} so that they can be used as challenge problems in the yearly CASC
+  \cite{J22}, so that they can be used as challenge problems in the yearly CASC
   world-championship competitions
   \cite{DBLP:journals/aim/Sutcliffe16}.
 
