@@ -177,7 +177,7 @@ Filtered
 
   \tableentry
   {Description of data collection}
-  {The data was written by hand. As part of the data
+  {The data were written by hand. As part of the data
   collection process it has been demonstrated
   that non-trivial, normative reasoning is
   supported in the provided framework. This in particular included
@@ -299,7 +299,7 @@ If your data article is not related to a research article, please delete this la
   to be the case and what is the case. Furthermore, the adequate
   handling of the deontic paradoxes (like in particular Chisholm's paradox of contrary-to-duty obligation)
   has posed a core challenge for knowledge representation
-  frameworks. This problem motivated the design of deontic logics (and logic combinations) more sophisticated than the traditional ones, like modal logic. These frameworks are automatized for the first time. 
+  frameworks. This problem motivated the design of deontic logics (and logic combinations) more sophisticated and finer-grained than the traditional ones, like modal logic. These frameworks are automatized for the first time. 
 
 %The work of those interested in automated reasoning for
 %  normative reasoning usually goes on as if the intricacies of
@@ -431,7 +431,7 @@ data file contains (an extension of) the SSE of
                                 $\Box_p$ and $\Box_a$ are  identified
                                 as S5, KT and KD modalities,
                                 respectively. Relevant lemmata from the original work
-                                of Carmo and Jones \cite{CJ13} are
+                                of Carmo and Jones are
                                 automated. \\
                                % This file, see Fig.~\ref{fig:DDL_Tests}, contains
                                 % soundness and proof automation tests for the
@@ -454,32 +454,32 @@ data file contains (an extension of) the SSE of
   \textsf{\small E.thy} 
        & \textsf{\small Main.thy} 
                     & \cite{J45},\cite[Fig.6]{J48}  
-                              & Provides a consistent SSE of a quantified extension of
+                              & Provides a SSE of a quantified extension of
                                 Aqvist's System E in HOL. The file also
-                                runs a number of reasoning tasks (validity checking, refutation, correspondance theory).\\
+                                runs a number of reasoning tasks (validity checking, refutation, correspondence theory).\\
   \midrule
   \textsf{\small \detokenize{Lewis_DDL.thy}}
        & \textsf{\small Main.thy} 
                     & \cite{ddl:L73}  
-                              & Provides a consistent SSE of Lewis's DDL.
-                                The file also
+                              & Provides a SSE of Lewis's DDL.
+                                The file
                                 runs a number of reasoning tasks
                                 (validity checking, refutation,
-                                correspondance theory). The
+                                correspondence theory). The
                                 relationship with \AA qvist's dyadic
                                 deontic operator is also studied.\\
  \midrule
   \textsf{\small \detokenize{IOL_out2.thy}}
        & \textsf{\small Main.thy} 
                     & \cite{J46}  
-                              & Provides a consistent SSE of a quantified extension of
+                              & Provides a SSE of a quantified extension of
                                 IO logic (out$_2$) \cite{DBLP:journals/jphil/MakinsonT00,textbook18}. The file also
-                                contains a small (drunk and drive) example. \\
+                                contains an analysis of a benchmark example discussed in the literature on moral luck. \\
   \midrule
   \textsf{\small \detokenize{IO_out2_STIT.thy}}
        & \textsf{\small Main.thy} 
                     & \cite{J46,MederMasters}  
-                              & Provides a consistent SSE of a quantified extension of
+                              & Provides a SSE of a quantified extension of
                                 IO logic (out$_2$) \cite{DBLP:journals/jphil/MakinsonT00,textbook18} and elements of STIT logics \cite{horty} in HOL. The file also
                                 contains proof automation tests and
                                 soundness checks. \\
@@ -588,7 +588,7 @@ paradox of contrary-to-duty obligation \cite{c63} in Standard Deontic Logic (SDL
 \end{figure}
 
 Contributed data files in category III are listed in
-Table~\ref{table:Theories}. They provide encodings of (excerpts of)
+Table~\ref{table:Theories}. They provide an encoding of (excerpt of)
 legal and ethical theories and arguments formalized using the deontic logics as
 provided in category I files and further examined in the category II
 files.
@@ -634,26 +634,25 @@ Further related data sets, including
        & \textsf{\small SDL.thy} 
                     & \cite[Fig. 7]{J48}
                               &  Contains a modeling of selected statements from the GDPR in
-                                SDL. It is demonstrated  that this modeling leads to
-                                contrary-to-duty issues, i.e., inconsistency and explosion.\\
+                                SDL. It is confirmed by automated means that SDL cannot handle  
+                                contrary-to-duty scenarios.\\
   \midrule
   \textsf{\small \detokenize{GDPR_CJ_DDL.thy}}
        & \textsf{\small \detokenize{CJ_DDL.thy}} 
                     &  ---
                               &  Contains a modeling of selected statements from the GDPR in
-                                DDL. It is demonstrated  that this modeling is stable against the 
-                                contrary-to-duty issues identified in \textsf{\small
-                                \detokenize{GDPR_SDL.thy}}, i.e., inconsistency and explosion is
-                                avoided and inferences are supported as expected. \\
+                                DDL. It is confirmed by automated means that the logic can handle  
+                                contrary-to-duty scenarios. The problems identified in \textsf{\small
+                                \detokenize{GDPR_SDL.thy}}, i.e., inconsistency and explosion, are
+                                avoided. The reasoner return ``intuitive'' answers to queries. \\
   \midrule
   \textsf{\small \detokenize{GDPR_E.thy}}
        & \textsf{\small E.thy} 
                     & \cite[Fig. 8]{J48}
                               &  Contains a modeling of selected statements from the GDPR in
-                                logic E. It is demonstrated  that this modeling is stable against the 
-                                contrary-to-duty issues identified in \textsf{\small
-                                \detokenize{GDPR_SDL.thy}}, i.e., inconsistency and explosion is
-                                avoided and inferences are supported as expected. \\
+                                logic E. It is confirmed by automated means that the logic can handle  
+                                contrary-to-duty scenarios, and does not face the problems  identified in \textsf{\small
+                                \detokenize{GDPR_SDL.thy}}, i.e., inconsistency and explosion. \\
   \midrule
   \textsf{\small \detokenize{GewirthArgument.thy}}
        & \textsf{\small \detokenize{Extended_CJ_DDL.thy}}.
@@ -702,9 +701,9 @@ the related research article~\cite{J48}.}
   extension) of the DDL of Carmo and Jones in
   HOL. This encoding of DDL in HOL is exemplary for \textit{Layer L1}
   developments in LogiKEy. First, the desired object \textit{logic}
-  was selected (Step 1); Carmo and Jones's DDL in the given case. A \textit{semantics}
+  was selected (Step~1); Carmo and Jones's DDL in the given case. A \textit{semantics}
   (Step 2) for this object logic was sought and found in the original
-  papers by Carmo and Jones \cite{Carmo2002,CJ13}; such a mathematical
+  papers by Carmo and Jones \cite{Carmo2002}; such a mathematical
   description of a semantics, a neighborhood semantics in the given
   case, constitutes the ideal starting point for the definition of a
   SSE of the object logic in HOL, which in turn enables its
@@ -717,17 +716,17 @@ the related research article~\cite{J48}.}
   \cite{C71,R63}. Furthermore, \textit{implications} of the embedding
   of DDL in HOL were studied (Step 5); see for example the additional
   theorems in file \textsf{\small \detokenize{CJ_DDL_Tests.thy}} and
-  the contrary-to-duty studies conducted in files
+  the analysis of contrary-to-duty scenarios conducted in files
   \textsf{\small \detokenize{Chisholm_DDL_Monadic.thy}} and
   \textsf{\small \detokenize{Chisholm_DDL_Dyadic.thy}}. Since the DDL
   of Carmo and Jones has not been automated before with other systems
   or approaches, there are no \textit{benchmarks} (Step 7) available
   that we could use to properly assess and compare the competitiveness
-  of our solution. The publication of this data set can be seen as
+  of our solution. The publication of this data set can be seen as a
   first step towards the built-up and \textit{contribution} (Step 8)
   of such a benchmark suite to the community; future work includes the
   conversion of our Isabelle/HOL encodings into TPTP THF format
-  \cite{J22}, so that they can be used as challenge problems in the yearly CASC
+  \cite{J22}, so that they can be used as benchmark problems in the yearly CASC
   world-championship competitions
   \cite{DBLP:journals/aim/Sutcliffe16}.
 
@@ -737,21 +736,21 @@ the related research article~\cite{J48}.}
   statements from the General Data Protection Regulation (GDPR) for
   formalisation. The \textit{analysis} (Step 2) of these statements
   revealed that obligation aspects in the context of data processing
-  needed to be adressed and that natural language phrases in the
-  studied parts of the GDPR indeed contains challenge deontic
+  needed to be addressed. Natural language phrases in the
+  studied parts of the GDPR indeed contains occurrences of the deontic
   modalities. This motivated the choice of a suitable deontic
   \textit{logic} (Step 3), such as DDL, for the formal encoding of
-  these challenges aspects. In the given case it became apparent that
+  these challenging aspects. In the given case it also  became apparent that
   a propositional encoding would hardly suffice in practical
-  applications, so the selected deontic logic DDL, needed to be
+  applications, so the selected deontic logic DDL needed to be
   \textit{combined with}, respectively extended by, a notion of
   quantification, which led to the addition of quantifiers to the file
   \textsf{\small \detokenize{CJ_DDL.thy}}. Subsequently the two GDPR
   articles were \textit{formalized} (Step 4) using logical connectives
   as provided in the imported file \textsf{\small
     \detokenize{CJ_DDL.thy}}, and then some \textit{exploration} (Step
-  5) and assessment studies were conducted. This included the
-  contrary-to-duty studies as reported in related research articles
+  5) and assessment studies were conducted. This included the analysis of the 
+  contrary-to-duty scenario as reported in related research articles
   \cite{J48,C71}. With our data set we \textit{contribute} (Step 6)
   this work to the wider research community and enable its reuse.
 
