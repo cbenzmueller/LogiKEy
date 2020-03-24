@@ -63,12 +63,6 @@ J.~Carmo and A.~J.~I. Jones.
   Philosophical Logic: Volume 8}, pages 265--343. Springer Netherlands,
   Dordrecht, 2002.
 
-\bibitem{CJ13}
-J.~Carmo and A.~J.~I. Jones.
-\newblock Completeness and decidability results for a logic of contrary-to-duty
-  conditionals.
-\newblock {\em Journal~of Logic and Computation}, 23(3):585--626, 2013.
-
 \bibitem{ddl:C80}
 B.~Chellas.
 \newblock {\em Modal Logic}.
@@ -106,6 +100,11 @@ D.~Fuenmayor and C.~Benzm{\"u}ller.
   Asia: Studia Logica Library, pages 108--116. Springer Nature Switzerland AG,
   2020.
 \newblock To appear.
+
+\bibitem{gabbay2013}
+D.~Gabbay, J.~Horty, X.~Parent, R.~van~der Meyden, and L.~van~der Torre.
+\newblock {\em {Handbook of Deontic Logic and Normative Systems}}, volume~1.
+\newblock College Publications, UK, 2013.
 
 \bibitem{GewirthRM}
 A.~Gewirth.
