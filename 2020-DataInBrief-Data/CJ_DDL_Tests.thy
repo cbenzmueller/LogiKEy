@@ -29,13 +29,26 @@ lemma C_11: "\<lfloor>\<^bold>\<box>A \<^bold>\<rightarrow> \<^bold>\<box>\<^sub
 lemma C_12: "\<lfloor>\<^bold>\<box>\<^sub>pA \<^bold>\<rightarrow> \<^bold>\<box>\<^sub>aA\<rfloor>"  using ax_4a by auto
 
 (* Characterisation of "\<^bold>O" *)
-lemma C_2: "\<lfloor>\<^bold>O\<^bold>\<langle>A\<^bold>|B\<^bold>\<rangle> \<^bold>\<rightarrow> \<^bold>\<diamond>(B \<^bold>\<and> A)\<rfloor>"  by (metis ax_5a ax_5b)  
-lemma C_3: "\<lfloor>(\<^bold>\<diamond>(A \<^bold>\<and> B \<^bold>\<and> C) \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>O\<^bold>\<langle>C\<^bold>|A\<^bold>\<rangle> ) \<^bold>\<rightarrow> \<^bold>O\<^bold>\<langle>(B \<^bold>\<and> C)\<^bold>|A\<^bold>\<rangle>\<rfloor>" sledgehammer sorry (*longer proof*)
+lemma C_2: "\<lfloor>\<^bold>O\<^bold>\<langle>A\<^bold>|B\<^bold>\<rangle> \<^bold>\<rightarrow> \<^bold>\<diamond>(B\<^bold>\<and> A)\<rfloor>"  by (metis ax_5a ax_5b)  
+lemma C_3: "\<lfloor>(\<^bold>\<diamond>(A \<^bold>\<and> B \<^bold>\<and> C) \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>O\<^bold>\<langle>C\<^bold>|A\<^bold>\<rangle> ) \<^bold>\<rightarrow> \<^bold>O\<^bold>\<langle>(B \<^bold>\<and> C)\<^bold>|A\<^bold>\<rangle>\<rfloor>" using ax_5c by auto 
 lemma C_4: "\<lfloor>(\<^bold>\<box>(A \<^bold>\<rightarrow> B) \<^bold>\<and> (\<^bold>\<diamond>(A \<^bold>\<and> C)) \<^bold>\<and> \<^bold>O\<^bold>\<langle>C\<^bold>|B\<^bold>\<rangle>) \<^bold>\<rightarrow> \<^bold>O\<^bold>\<langle>C\<^bold>|A\<^bold>\<rangle>\<rfloor>"   using ax_5e by blast
 lemma C_5: "\<lfloor>\<^bold>\<box>(A \<^bold>\<leftrightarrow> B) \<^bold>\<rightarrow> (\<^bold>O\<^bold>\<langle>C\<^bold>|A\<^bold>\<rangle> \<^bold>\<leftrightarrow> \<^bold>O\<^bold>\<langle>C\<^bold>|B\<^bold>\<rangle>)\<rfloor>"  by presburger 
 lemma C_6: "\<lfloor>\<^bold>\<box>(C \<^bold>\<rightarrow> (A \<^bold>\<leftrightarrow> B)) \<^bold>\<rightarrow> (\<^bold>O\<^bold>\<langle>A\<^bold>|C\<^bold>\<rangle> \<^bold>\<leftrightarrow> \<^bold>O\<^bold>\<langle>B\<^bold>|C\<^bold>\<rangle>)\<rfloor>"  by (smt ax_5b) 
 lemma C_7: "\<lfloor>\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<rightarrow> \<^bold>\<box>(\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle>)\<rfloor>"  by blast 
-lemma C_8: "\<lfloor>\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<rightarrow> \<^bold>O\<^bold>\<langle>(A \<^bold>\<rightarrow> B)\<^bold>|\<^bold>\<top>\<^bold>\<rangle>\<rfloor>" sledgehammer sorry (*longer proof*)
+lemma C_8: "\<lfloor>\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<rightarrow> \<^bold>O\<^bold>\<langle>(A \<^bold>\<rightarrow> B)\<^bold>|\<^bold>\<top>\<^bold>\<rangle>\<rfloor>" 
+proof -   (* Sledgehammer performs very poor on the examples below *)
+  have 1: "\<forall>X Y Z. (\<forall>w. ((Y(w) \<and> X(w)) \<longrightarrow> (Z(w) \<and> X(w))) \<and> ((Z(w) \<and> X(w)) \<longrightarrow> ((Y(w) \<and> X(w)))))  \<longrightarrow> (ob(X)(Y) \<longrightarrow> ob(X)(Z))" 
+    by (metis ax_5b)
+  have 2: "\<forall>X Y Z. (\<forall>w. ((Y(w) \<and> X(w)) \<longrightarrow> (Z(w) \<and> X(w))) \<and> ((Z(w) \<and> X(w)) \<longrightarrow> ((Y(w) \<and> X(w)))))  \<longrightarrow> (ob(X)(Z) \<longrightarrow> ob(X)(Y))" 
+    by (metis ax_5b)
+  have 3: "\<forall>X Y. ob(X)(Y) \<longrightarrow> ob(X)(\<lambda>w. Y(w) \<and> X(w))"  by (metis (no_types, lifting) ax_5b)
+  have 4: "\<forall>X Y. ob(X)(\<lambda>w. Y(w) \<and> X(w)) \<longrightarrow> ob(X)(Y)"  by (metis (no_types, lifting) ax_5b)
+  have 5: "\<forall>X Y. ob X Y \<longrightarrow> (\<exists>w. X(w) \<and> Y(w))"  using C_2 by blast
+  have 6: "\<forall>X Y Z. ((\<forall>w. Y w  \<longrightarrow> X w) \<and> ob X Y \<and> (\<forall>w. X w  \<longrightarrow> Z w)) \<longrightarrow> ob Z (\<lambda>w. \<not>X w \<or> Y w)"  by (smt ax_5d 1) 
+  have 7:  "\<forall>X Y Z. (ob X Y \<and> (\<forall>w. X w  \<longrightarrow> Z w)) \<longrightarrow> ob Z (\<lambda>w. (Z w \<and> \<not>X w) \<or> Y w)" by  (smt ax_5d 1 3)
+  have 8:  "\<forall>X Y Z. (ob X Y \<and> (\<forall>w. X w  \<longrightarrow> Z w)) \<longrightarrow> ob Z (\<lambda>w. \<not>X w \<or> Y w)"  by (smt 1 7) 
+  have 9: "\<forall>X Y Z. (ob X Y \<and> (\<forall>w. X w  \<longrightarrow> Z w)) \<longrightarrow> ob Z (\<lambda>w. \<not>X w \<or> (X w \<and>  Y w))"   using 8 by auto
+  thus ?thesis  by presburger qed
 
 (* Relationship between "\<^bold>O\<^sub>a,\<^bold>O\<^sub>p,\<^bold>\<box>\<^sub>a,\<^bold>\<box>\<^sub>p" *)
 lemma C_13_a: "\<lfloor>\<^bold>\<box>\<^sub>aA \<^bold>\<rightarrow> (\<^bold>\<not>\<^bold>O\<^sub>aA \<^bold>\<and> \<^bold>\<not>\<^bold>O\<^sub>a(\<^bold>\<not>A))\<rfloor>"  by (metis (full_types) ax_5a ax_5b)
