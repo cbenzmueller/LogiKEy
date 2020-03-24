@@ -463,23 +463,26 @@ data file contains (an extension of) the SSE of
                     & \cite{ddl:L73}  
                               & Provides a consistent SSE of Lewis's DDL.
                                 The file also
-                                runs a number of reasoning tasks (validity checking, refutation, correspondance theory). The relationship with \AA qvist's dyadic deontic operator is also studied.\\
+                                runs a number of reasoning tasks
+                                (validity checking, refutation,
+                                correspondance theory). The
+                                relationship with \AA qvist's dyadic
+                                deontic operator is also studied.\\
+ \midrule
+  \textsf{\small \detokenize{IOL_out2.thy}}
+       & \textsf{\small Main.thy} 
+                    & \cite{J46}  
+                              & Provides a consistent SSE of a quantified extension of
+                                IO logic (out$_2$) \cite{DBLP:journals/jphil/MakinsonT00,textbook18}. The file also
+                                contains a small (drunk and drive) example. \\
   \midrule
   \textsf{\small \detokenize{IO_out2_STIT.thy}}
        & \textsf{\small Main.thy} 
-<<<<<<< HEAD
-                    & \cite{J46}  
-                              & This file, which is related to \cite{MederMasters},
-                                provides a SSE of a quantified extension of
-                                an IO logic (out$_2$) \cite{DBLP:journals/jphil/MakinsonT00,textbook18} and elements of STIT logics \cite{horty} in HOL. The file also
-                                contains proof automation tests and soundness checks.\\
-=======
                     & \cite{J46,MederMasters}  
                               & Provides a consistent SSE of a quantified extension of
-                                IO logic (out2) \cite{DBLP:journals/jphil/MakinsonT00,textbook18} and elements of STIT logics \cite{horty} in HOL. The file also
+                                IO logic (out$_2$) \cite{DBLP:journals/jphil/MakinsonT00,textbook18} and elements of STIT logics \cite{horty} in HOL. The file also
                                 contains proof automation tests and
                                 soundness checks. \\
->>>>>>> 42d4e439161c02582914fc9709103bdd46fb5023
   \midrule
   \textsf{\small \detokenize{CJ_DDLplus.thy}}
        & \textsf{\small  Main.thy} 
@@ -534,46 +537,6 @@ paradox of contrary-to-duty obligation \cite{c63} in Standard Deontic Logic (SDL
 \begin{table}[ht!]
 \caption{Category II data files: paradoxes and examples of normative reasoning \label{table:Paradoxes}}
 \begin{tabularx}{\textwidth}{ccc*{1}{>{\raggedright\arraybackslash}X}}
-<<<<<<< HEAD
-\toprule
-File & Dependency & Reading & Description \\
-\midrule
-\textsf{\small \detokenize{Chisholm_SDL.thy}}
-& \textsf{\small SDL.thy} 
-& --
-&  Contains a detailed analysis of Chisholm's paradox of contrary-to-duty obligation \cite{c63}
-  in SDL, including an independence analysis for all 
-  wide and narrow scope g options that arise in the formalization of
-  the paradox; see Fig.~\ref{fig:Chisholm_SDL}. \\
-\midrule
-\textsf{\small \detokenize{Chisholm_CJ_DDL_Monadic.thy}}
-& \textsf{\small \detokenize{CJ_DDL.thy}} 
-&  --
-&  Contains a study analogous to \textsf{\small
-  \detokenize{Chisholm_SDL.thy}} for 
-  monadic obligation in DDL. \\
-\midrule
-\textsf{\small \detokenize{Chisholm_CJ_DDL_Dyadic.thy}}
-& \textsf{\small \detokenize{CJ_DDL.thy}}
-& --
-&  Contains a study analogous to \textsf{\small
-  \detokenize{Chisholm_SDL.thy}} for 
-   dyadic  obligation in DDL. \\
-\midrule
-\textsf{\small \detokenize{Chisholm_E.thy}}
-& \textsf{\small \detokenize{CJ_DDL.thy}}
-& --
-&  Contains a study analogous to \textsf{\small
-  \detokenize{Chisholm_SDL.thy}} for 
-  deontic logic E. \\
-\midrule
-\textsf{\small \detokenize{IO_Experiments}}
-& \textsf{\small \detokenize{IO_out2_STIT}}
-& --
-&  This file, which is related to \cite{MederMasters}, contains a study of different paradoxes from the literature in IO
-  logic (out2). \\
-\bottomrule
-=======
   \toprule
   File & Dependency & Reading & Description \\
   \midrule
@@ -610,10 +573,9 @@ File & Dependency & Reading & Description \\
        & \textsf{\small \detokenize{IO_out2_STIT}}
                     & \cite{MederMasters} 
                               &  Contains a study of different paradoxes from the literature in IO
-                                logic (out2); the file 
+                                logic (out$_2$); the file 
                                 imports \textsf{\small \detokenize{IO_out2_STIT}}.\\
   \bottomrule
->>>>>>> 42d4e439161c02582914fc9709103bdd46fb5023
 \end{tabularx}
 \end{table}
 
