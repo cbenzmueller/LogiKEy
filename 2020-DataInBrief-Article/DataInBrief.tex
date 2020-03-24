@@ -40,12 +40,12 @@ Ethical and Legal Reasoning (Isabelle/HOL Dataset)
 \subsubsection*{Authors}
 Christoph Benzm\"uller$^{2,1}$, Ali Farjami$^{1}$, David
 Fuenmayor$^{2}$, Paul Meder$^{1}$, Xavier Parent$^{1}$, Alexander
-Steen$^{1}$, Leon van der Torre$^{1,3}$, Valeria Zahoransky$^{4}$
+Steen$^{1}$, Leendert van der Torre$^{1,3}$, Valeria Zahoransky$^{4}$
 
 \subsubsection*{Affiliations}
 $^{1}$University of Luxembourg, Esch sur Alzette, Luxembourg\\
 $^{2}$Freie Universit\"at Berlin, Berlin, Germany \\
-$^{3}$Freie Zhejiang University, Hangzhou, China \\
+$^{3}$Zhejiang University, Hangzhou, China \\
 $^{4}$University of Oxford, Oxford, UK\\
 
 \subsubsection*{Corresponding author(s)}
@@ -88,7 +88,7 @@ Min 100 words - Max 500 words]
 \subsubsection*{Keywords}
 Trustworthy and responsible AI; Knowledge representation and
 reasoning; Automated theorem proving; Model finding; Normative
-reasoning; Normative systems; Philosophical and ethical issues;
+reasoning; Normative systems; %Philosophical and ethical issues;
 Semantical embedding; Higher-order logic
 
 \comment{
@@ -354,7 +354,7 @@ data file contains (an extension of) the SSE of
 
 
 \setcounter{table}{0}
-\begin{table}[ht!]
+\begin{table}[htp!]
 \caption{Category I data files --- deontic logics, extensions of
   deontic logics and logic combinations \label{table:DeonticLogics}}
 \begin{tabularx}{\textwidth}{ccc*{1}{>{\raggedright\arraybackslash}X}}
@@ -468,7 +468,8 @@ data file contains (an extension of) the SSE of
   \textsf{\small \detokenize{IO_out2_STIT.thy}}
        & \textsf{\small Main.thy} 
                     & \cite{J46}  
-                              & Provides a consistent SSE of a quantified extension of
+                              & This file, which is related to \cite{MederMasters,Sun15},
+                                provides a consistent SSE of a quantified extension of
                                 IO logic (out2) \cite{DBLP:journals/jphil/MakinsonT00,textbook18} and elements of STIT logics \cite{horty} in HOL. The file also
                                 contains proof automation tests and soundness checks.\\
   \midrule
@@ -560,7 +561,7 @@ File & Dependency & Reading & Description \\
 \textsf{\small \detokenize{IO_Experiments}}
 & \textsf{\small \detokenize{IO_out2_STIT}}
 & --
-&  Contains a study of different paradoxes from the literature in IO
+&  This file, which is related to \cite{MederMasters,Sun15}, contains a study of different paradoxes from the literature in IO
   logic (out2). \\
 \bottomrule
 \end{tabularx}
