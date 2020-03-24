@@ -148,6 +148,12 @@ D.~Makinson and L.~W.~N. van~der Torre.
 \newblock Input/output logics.
 \newblock {\em Journal of Philosophical Logic}, 29(4):383--408, 2000.
 
+\bibitem{MederMasters}
+P.~Meder.
+\newblock Deontic {A}gency and {M}oral {L}uck.
+\newblock Master's thesis, Faculty of Science, Technology and Communication,
+  University of Luxembourg, 2018.
+
 \bibitem{Isabelle}
 T.~Nipkow, L.~Paulson, and M.~Wenzel.
 \newblock {\em {{Isabelle/HOL}: A Proof Assistant for Higher-Order Logic}},
@@ -158,6 +164,15 @@ T.~Nipkow, L.~Paulson, and M.~Wenzel.
 X.~Parent and L.~van~der Torre.
 \newblock {\em Introduction to Deontic Logic and Normative Systems}.
 \newblock College Publications, London, UK, 2018.
+
+\bibitem{Sun15}
+X.~Sun.
+\newblock Input/output {STIT} logic for normative systems.
+\newblock In N.~Bassiliades, G.~Gottlob, F.~Sadri, A.~Paschke, and D.~Roman,
+  editors, {\em Rule Technologies: Foundations, Tools, and Applications - 9th
+  International Symposium, RuleML 2015, Berlin, Germany, August 2-5, 2015,
+  Proceedings}, volume 9202 of {\em Lecture Notes in Computer Science}, pages
+  347--359. Springer, 2015.
 
 \bibitem{DBLP:journals/aim/Sutcliffe16}
 G.~Sutcliffe.
