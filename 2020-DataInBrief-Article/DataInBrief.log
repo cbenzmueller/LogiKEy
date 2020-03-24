@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.8.13)  24 MAR 2020 15:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.8.13)  24 MAR 2020 16:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -348,10 +348,7 @@ LaTeX Warning: Citation `CJ13' on page 3 undefined on input line 352.
 LaTeX Warning: Citation `CJ13' on page 3 undefined on input line 520.
 
 
-LaTeX Warning: Citation `CJ13' on page 3 undefined on input line 520.
-
-
-LaTeX Warning: Float too large for page by 11.8907pt on input line 521.
+LaTeX Warning: Float too large for page by 23.8907pt on input line 521.
 
 <Chisholm_SDL.png, id=19, 653.44125pt x 820.06375pt>
 File: Chisholm_SDL.png Graphic file (type png)
@@ -359,18 +356,15 @@ File: Chisholm_SDL.png Graphic file (type png)
 Package pdftex.def Info: Chisholm_SDL.png  used on input line 583.
 (pdftex.def)             Requested size: 483.69687pt x 607.02538pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 695.
+(Font)              <8> on input line 694.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 695.
-
-LaTeX Warning: Citation `CJ13' on page 3 undefined on input line 707.
-
+(Font)              <6> on input line 694.
 [3] [4] [5 <./CJ_DDLplus1.png>] [6 <./CJ_DDLplus2.png>] [7] [8 <./Chisholm_SDL.
 png>]
 <LogiKEy-methodology.png, id=48, 799.98875pt x 556.0775pt>
 File: LogiKEy-methodology.png Graphic file (type png)
 <use LogiKEy-methodology.png>
-Package pdftex.def Info: LogiKEy-methodology.png  used on input line 774.
+Package pdftex.def Info: LogiKEy-methodology.png  used on input line 773.
 (pdftex.def)             Requested size: 483.69687pt x 336.22005pt.
  (./DataInBrief.bbl [9 <./LogiKEy-methodology.png>] [10]) [11]
 (./DataInBrief.aux)
@@ -381,7 +375,7 @@ LaTeX Warning: There were undefined references.
 Here is how much of TeX's memory you used:
  3077 strings out of 494490
  41509 string characters out of 6175368
- 134471 words of memory out of 5000000
+ 134437 words of memory out of 5000000
  6686 multiletter control sequences out of 15000+600000
  15443 words of font info for 38 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
@@ -400,7 +394,7 @@ uper/sfbx1000.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfbx1
 s/type1/public/cm-super/sfss0900.pfb><c:/texlive/2019/texmf-dist/fonts/type1/pu
 blic/cm-super/sfti1000.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-su
 per/sftt1000.pfb>
-Output written on DataInBrief.pdf (11 pages, 1563694 bytes).
+Output written on DataInBrief.pdf (11 pages, 1564240 bytes).
 PDF statistics:
  106 PDF objects out of 1000 (max. 8388607)
  70 compressed objects within 1 object stream
