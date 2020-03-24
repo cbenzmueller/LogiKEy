@@ -67,11 +67,11 @@ different conceptual layers.
 More concretely, it comprises, in form of a data set (Isabelle/HOL theory
 files), formal encodings of multiple deontic logics, logic
 combinations, deontic paradoxes and normative theories in the
-higher-order proof assistent system Isabelle/HOL.  The data was
+higher-order proof assistant system Isabelle/HOL.  The data was
 acquired through application of the LogiKEy methodology, which
 supports experimentation with different normative theories, in
 different application scenarios, and which is not tied to specific
-logics or specific logic combinations.  Our workbench consolidates
+logics or logic combinations.  Our workbench consolidates
 related research contributions of the authors and it may serve as a
 starting point for further studies and experiments in flexible and
 expressive ethical and legal reasoning. It may also support hand-on
@@ -133,7 +133,7 @@ Figure
 
 
 \tableentry
-{How data were acquired}
+{How data was acquired}
 {The data was acquired through manual encoding of various deontic
   logics, logic combinations, examples of contrary-to-duty paradoxes, 
   excerpts of legal texts and exemplary ethical theories utilizing the
@@ -141,7 +141,7 @@ Figure
   embeddings (SSEs) \cite{J41} of logics and theories in classical higher-order
   logic. The concrete encodings were conducted in the higher-order proof
   assistant system Isabelle/HOL \cite{Isabelle}; however, they are conceptually transferable to
-  many other expressive reasoning systems.}	
+  other expressive reasoning systems.}	
 {
 [State how the data were acquired: E.g. Microscope, survey, SEM, NMR, mass spectrometry, etc. 
 Instruments: E.g. hardware, software, program
@@ -166,8 +166,8 @@ Filtered
 \tableentry
 {Parameters for data collection}
 {One objective was to
-  empirically assess the expressivity and proof automation
-  capabilities of Isabelle/HOL and its integrated tools in normative reasoning when utilising
+  empirically assess the expressiveness  and proof automation
+  capabilities of Isabelle/HOL and its integrated tools in normative reasoning when utilizing
   the LogiKEy methodology and the SSE
   approach. Another objective was to provide a reusable foundation for
   further experiments in expressive ethical and legal reasoning.}	
@@ -177,7 +177,7 @@ Filtered
 
   \tableentry
   {Description of data collection}
-  {The data was manually constructed and curated. As part of the data
+  {The data was written by hand. As part of the data
   collection process it has been demonstrated
   that non-trivial, normative reasoning is
   supported in the provided framework. This in particular included
@@ -297,9 +297,9 @@ If your data article is not related to a research article, please delete this la
   Sergot \cite{Jones1992-JONDLI} that deontic logic is needed when it is necessary to make
   explicit, and then reason about, the distinction between what ought
   to be the case and what is the case. Furthermore, the adequate
-  handling of norm violation (also called contrary-to-duty situations)
+  handling of the deontic paradoxes (like in particular Chisholm's paradox of contrary-to-duty obligation)
   has posed a core challenge for knowledge representation
-  frameworks. This problem motivated the design of deontic logics (and logic combinations) more sophisticated than traditional ones, like modal logic. These frameworks are automatized for the first time. 
+  frameworks. This problem motivated the design of deontic logics (and logic combinations) more sophisticated than the traditional ones, like modal logic. These frameworks are automatized for the first time. 
 
 %The work of those interested in automated reasoning for
 %  normative reasoning usually goes on as if the intricacies of
@@ -468,9 +468,9 @@ data file contains (an extension of) the SSE of
   \textsf{\small \detokenize{IO_out2_STIT.thy}}
        & \textsf{\small Main.thy} 
                     & \cite{J46}  
-                              & This file, which is related to \cite{MederMasters,Sun15},
-                                provides a consistent SSE of a quantified extension of
-                                IO logic (out2) \cite{DBLP:journals/jphil/MakinsonT00,textbook18} and elements of STIT logics \cite{horty} in HOL. The file also
+                              & This file, which is related to \cite{MederMasters},
+                                provides a SSE of a quantified extension of
+                                an IO logic (out$_2$) \cite{DBLP:journals/jphil/MakinsonT00,textbook18} and elements of STIT logics \cite{horty} in HOL. The file also
                                 contains proof automation tests and soundness checks.\\
   \midrule
   \textsf{\small \detokenize{CJ_DDLplus.thy}}
@@ -515,7 +515,7 @@ Contributed data files in category II are listed in
 Table~\ref{table:Paradoxes}. They study paradoxes and smaller examples
 of normative reasoning. An example is displayed in
 Fig.~\ref{fig:Chisholm_SDL}, which presents an analysis of Chisholm's
-paradox \cite{c63} in standard deontic logic SDL.
+paradox of contrary-to-duty obligation \cite{c63} in Standard Deontic Logic (SDL).
 
 
 % \begin{figure}[ht!]
@@ -532,9 +532,9 @@ File & Dependency & Reading & Description \\
 \textsf{\small \detokenize{Chisholm_SDL.thy}}
 & \textsf{\small SDL.thy} 
 & --
-&  Contains a detailed analysis of Chisholm's contrary-to-duty paradox \cite{c63}
+&  Contains a detailed analysis of Chisholm's paradox of contrary-to-duty obligation \cite{c63}
   in SDL, including an independence analysis for all 
-  wide and narrow scoping options that arise in the axiomatization of
+  wide and narrow scope g options that arise in the formalization of
   the paradox; see Fig.~\ref{fig:Chisholm_SDL}. \\
 \midrule
 \textsf{\small \detokenize{Chisholm_CJ_DDL_Monadic.thy}}
@@ -561,7 +561,7 @@ File & Dependency & Reading & Description \\
 \textsf{\small \detokenize{IO_Experiments}}
 & \textsf{\small \detokenize{IO_out2_STIT}}
 & --
-&  This file, which is related to \cite{MederMasters,Sun15}, contains a study of different paradoxes from the literature in IO
+&  This file, which is related to \cite{MederMasters}, contains a study of different paradoxes from the literature in IO
   logic (out2). \\
 \bottomrule
 \end{tabularx}
@@ -602,7 +602,7 @@ provided at \url{logikey.org} also includes the following:
 Further related data sets, including
   selected formalisations in computational metaphysics
   (cf.~\cite{J41,J47} and the references therein), will be added to 
-   \url{logikey.org} as useful and appropriate.
+   \url{logikey.org} as we think fit.
 
 % There are related works in normative reasoning (see
 % e.g.~Maja?,}) and in computational metaphysic
