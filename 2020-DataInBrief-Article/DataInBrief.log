@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.8.13)  24 MAR 2020 16:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.8.13)  24 MAR 2020 17:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -343,18 +343,18 @@ LaTeX Warning: Float too large for page by 23.8907pt on input line 521.
 <Chisholm_SDL.png, id=19, 653.44125pt x 820.06375pt>
 File: Chisholm_SDL.png Graphic file (type png)
 <use Chisholm_SDL.png>
-Package pdftex.def Info: Chisholm_SDL.png  used on input line 583.
+Package pdftex.def Info: Chisholm_SDL.png  used on input line 581.
 (pdftex.def)             Requested size: 483.69687pt x 607.02538pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 694.
+(Font)              <8> on input line 692.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 694.
+(Font)              <6> on input line 692.
 [3] [4] [5 <./CJ_DDLplus1.png>] [6 <./CJ_DDLplus2.png>] [7] [8 <./Chisholm_SDL.
 png>]
 <LogiKEy-methodology.png, id=48, 799.98875pt x 556.0775pt>
 File: LogiKEy-methodology.png Graphic file (type png)
 <use LogiKEy-methodology.png>
-Package pdftex.def Info: LogiKEy-methodology.png  used on input line 773.
+Package pdftex.def Info: LogiKEy-methodology.png  used on input line 771.
 (pdftex.def)             Requested size: 483.69687pt x 336.22005pt.
  (./DataInBrief.bbl [9 <./LogiKEy-methodology.png>] [10]) [11]
 (./DataInBrief.aux) ) 
@@ -380,7 +380,7 @@ per/sfrm0600.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm07
 019/texmf-dist/fonts/type1/public/cm-super/sfss0900.pfb><c:/texlive/2019/texmf-
 dist/fonts/type1/public/cm-super/sfti1000.pfb><c:/texlive/2019/texmf-dist/fonts
 /type1/public/cm-super/sftt1000.pfb>
-Output written on DataInBrief.pdf (11 pages, 1564097 bytes).
+Output written on DataInBrief.pdf (11 pages, 1564284 bytes).
 PDF statistics:
  106 PDF objects out of 1000 (max. 8388607)
  70 compressed objects within 1 object stream
