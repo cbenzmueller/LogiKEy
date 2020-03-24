@@ -12,7 +12,7 @@ begin     (*Unimportant*) nitpick_params [user_axioms,expect=genuine,show_all,fo
 
 (*** Chisholm_A: All-wide scoping is leading to an inadequate, dependent set of the axioms.***)
  lemma "\<lfloor>(D1  \<^bold>\<and> D2w \<^bold>\<and> D3w) \<^bold>\<rightarrow> D4\<rfloor>"  nitpick oops (*countermodel*)
- lemma "\<lfloor>(D1  \<^bold>\<and> D2w \<^bold>\<and> D4)  \<^bold>\<rightarrow> D3w\<rfloor>"  sledgehammer by blast  (*proof*)
+ lemma "\<lfloor>(D1  \<^bold>\<and> D2w \<^bold>\<and> D4)  \<^bold>\<rightarrow> D3w\<rfloor>"  by blast  (*proof*)
  lemma "\<lfloor>(D1  \<^bold>\<and> D3w \<^bold>\<and> D4)  \<^bold>\<rightarrow> D2w\<rfloor>"  nitpick oops (*countermodel*)
  lemma "\<lfloor>(D2w \<^bold>\<and> D3w \<^bold>\<and> D4)  \<^bold>\<rightarrow> D1\<rfloor>"  nitpick oops (*countermodel*)
  (* Consistency *)
@@ -25,7 +25,7 @@ begin     (*Unimportant*) nitpick_params [user_axioms,expect=genuine,show_all,fo
 (*** Chisholm_B: All-narrow scoping is leading to a inadequate, dependent set of the axioms.*)
  lemma "\<lfloor>(D1  \<^bold>\<and> D2n \<^bold>\<and> D3n) \<^bold>\<rightarrow> D4\<rfloor>"   nitpick oops (*countermodel*)
  lemma "\<lfloor>(D1  \<^bold>\<and> D2n \<^bold>\<and> D4)  \<^bold>\<rightarrow> D3n\<rfloor>"  nitpick oops  (*countermodel*)
- lemma "\<lfloor>(D1  \<^bold>\<and> D3n \<^bold>\<and> D4)  \<^bold>\<rightarrow> D2n\<rfloor>"  sledgehammer by blast  (*proof*)
+ lemma "\<lfloor>(D1  \<^bold>\<and> D3n \<^bold>\<and> D4)  \<^bold>\<rightarrow> D2n\<rfloor>"  by blast  (*proof*)
  lemma "\<lfloor>(D2n \<^bold>\<and> D3n \<^bold>\<and> D4)  \<^bold>\<rightarrow> D1\<rfloor>"   nitpick oops (*countermodel*)
  (* Consistency *)
  lemma "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" nitpick [satisfy] oops (*Consistent? Yes*) 
