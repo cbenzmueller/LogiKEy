@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/W32TeX)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: DataInBrief.aux
+The style file: abbrv.bst
+Database file #1: Bibliography.bib
+Warning--I didn't find a database entry for "Sun15"
+You've used 30 entries,
+            2118 wiz_defined-function locations,
+            713 strings with 8685 characters,
+and the built_in function-call counts, 9988 in all, are:
+= -- 1006
+> -- 406
+< -- 9
++ -- 157
+- -- 125
+* -- 650
+:= -- 1665
+add.period$ -- 103
+call.type$ -- 30
+change.case$ -- 143
+chr.to.int$ -- 0
+cite$ -- 30
+duplicate$ -- 406
+empty$ -- 826
+format.name$ -- 125
+if$ -- 2147
+int.to.chr$ -- 0
+int.to.str$ -- 30
+missing$ -- 33
+newline$ -- 159
+num.names$ -- 70
+pop$ -- 140
+preamble$ -- 1
+purify$ -- 116
+quote$ -- 0
+skip$ -- 279
+stack$ -- 0
+substring$ -- 636
+swap$ -- 87
+text.length$ -- 9
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 108
+warning$ -- 0
+while$ -- 105
+width$ -- 32
+write$ -- 355
+(There was 1 warning)
