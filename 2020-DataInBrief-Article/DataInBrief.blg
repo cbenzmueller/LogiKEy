@@ -3,46 +3,44 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: DataInBrief.aux
 The style file: abbrv.bst
 Database file #1: Bibliography.bib
-Warning--I didn't find a database entry for "CJ13"
-You've used 30 entries,
+You've used 31 entries,
             2118 wiz_defined-function locations,
-            711 strings with 8692 characters,
-and the built_in function-call counts, 10024 in all, are:
-= -- 1004
-> -- 421
+            716 strings with 8840 characters,
+and the built_in function-call counts, 10347 in all, are:
+= -- 1036
+> -- 434
 < -- 10
-+ -- 163
-- -- 131
-* -- 654
-:= -- 1675
-add.period$ -- 103
-call.type$ -- 30
-change.case$ -- 145
++ -- 168
+- -- 135
+* -- 679
+:= -- 1729
+add.period$ -- 106
+call.type$ -- 31
+change.case$ -- 150
 chr.to.int$ -- 0
-cite$ -- 30
-duplicate$ -- 407
-empty$ -- 821
-format.name$ -- 131
-if$ -- 2150
+cite$ -- 31
+duplicate$ -- 418
+empty$ -- 848
+format.name$ -- 135
+if$ -- 2218
 int.to.chr$ -- 0
-int.to.str$ -- 30
-missing$ -- 34
-newline$ -- 159
-num.names$ -- 70
-pop$ -- 147
+int.to.str$ -- 31
+missing$ -- 35
+newline$ -- 164
+num.names$ -- 72
+pop$ -- 150
 preamble$ -- 1
-purify$ -- 119
+purify$ -- 123
 quote$ -- 0
-skip$ -- 278
+skip$ -- 286
 stack$ -- 0
-substring$ -- 615
-swap$ -- 88
+substring$ -- 641
+swap$ -- 89
 text.length$ -- 10
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 106
+type$ -- 110
 warning$ -- 0
-while$ -- 104
-width$ -- 32
-write$ -- 356
-(There was 1 warning)
+while$ -- 107
+width$ -- 33
+write$ -- 367
