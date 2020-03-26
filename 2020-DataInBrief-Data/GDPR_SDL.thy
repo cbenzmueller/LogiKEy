@@ -1,7 +1,7 @@
 theory GDPR_SDL  imports SDL  (*GDPR CTD Example. Benzmüller & Parent, 2019*)
 begin
 (*Unimportant.*) sledgehammer_params [max_facts=20,timeout=20,verbose] 
-(*Unimportant.*) nitpick_params [user_axioms,expect=genuine,show_all,dont_box] 
+(*Unimportant.*) nitpick_params [user_axioms,show_all,dont_box] 
 
 datatype data = d1 | d2  (*We exemplarily introduce concrete data objects d1 and d2.*)
 datatype indiv = Mary | Peter  (*We exemplarily introduce individuals Mary and Peter.*)
