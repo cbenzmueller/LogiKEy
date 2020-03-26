@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/MacPorts 2018.47642_2) (preloaded format=pdflatex 2018.7.24)  26 MAR 2020 08:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/MacPorts 2018.47642_2) (preloaded format=pdflatex 2018.7.24)  26 MAR 2020 18:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -301,33 +301,33 @@ LaTeX Font Info:    Try loading font information for T1+cmtt on input line 52.
 (/opt/local/share/texmf-texlive/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 1248) in paragraph at lines 226--226
+Underfull \hbox (badness 1248) in paragraph at lines 211--211
 \T1/cmr/m/n/10 i-tory $\T1/cmtt/m/n/10 https : / / github . com / cbenzmueller 
 / LogiKEy$ \T1/cmr/m/n/10 on $\T1/cmtt/m/n/10 github . com$\T1/cmr/m/n/10 ,
  []
 
 
-Underfull \vbox (badness 10000) detected at line 244
+Underfull \vbox (badness 10000) detected at line 229
  []
 
 [1
 
 {/opt/local/var/db/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 249.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 234.
 
 
 (/opt/local/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 249.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 234.
  [2]
 <CJ_DDLplus1.png, id=16, 650.43pt x 807.015pt>
 File: CJ_DDLplus1.png Graphic file (type png)
 <use CJ_DDLplus1.png>
-Package pdftex.def Info: CJ_DDLplus1.png  used on input line 341.
+Package pdftex.def Info: CJ_DDLplus1.png  used on input line 317.
 (pdftex.def)             Requested size: 483.69687pt x 600.16176pt.
-LaTeX Font Info:    Try loading font information for T1+cmss on input line 343.
+LaTeX Font Info:    Try loading font information for T1+cmss on input line 319.
 
 
 (/opt/local/share/texmf-texlive/tex/latex/base/t1cmss.fd
@@ -336,21 +336,21 @@ File: t1cmss.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 <CJ_DDLplus2.png, id=18, 650.43pt x 729.72626pt>
 File: CJ_DDLplus2.png Graphic file (type png)
 <use CJ_DDLplus2.png>
-Package pdftex.def Info: CJ_DDLplus2.png  used on input line 349.
+Package pdftex.def Info: CJ_DDLplus2.png  used on input line 325.
 (pdftex.def)             Requested size: 483.69687pt x 542.6836pt.
 
 
-LaTeX Warning: Float too large for page by 23.8907pt on input line 521.
+LaTeX Warning: Float too large for page by 23.8907pt on input line 497.
 
 <Chisholm_SDL.png, id=19, 653.44125pt x 820.06375pt>
 File: Chisholm_SDL.png Graphic file (type png)
 <use Chisholm_SDL.png>
-Package pdftex.def Info: Chisholm_SDL.png  used on input line 582.
+Package pdftex.def Info: Chisholm_SDL.png  used on input line 558.
 (pdftex.def)             Requested size: 483.69687pt x 607.02538pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 694.
+(Font)              <8> on input line 668.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 694.
+(Font)              <6> on input line 668.
 [3] [4] [5 <./CJ_DDLplus1.png>] [6 <./CJ_DDLplus2.png>]
 
 LaTeX Warning: Text page 7 contains only floats.
@@ -359,7 +359,7 @@ LaTeX Warning: Text page 7 contains only floats.
 <LogiKEy-methodology.png, id=48, 799.98875pt x 556.0775pt>
 File: LogiKEy-methodology.png Graphic file (type png)
 <use LogiKEy-methodology.png>
-Package pdftex.def Info: LogiKEy-methodology.png  used on input line 773.
+Package pdftex.def Info: LogiKEy-methodology.png  used on input line 747.
 (pdftex.def)             Requested size: 483.69687pt x 336.22005pt.
  (./DataInBrief.bbl [9 <./LogiKEy-methodology.png>] [10]) [11] (./DataInBrief.a
 ux) ) 
