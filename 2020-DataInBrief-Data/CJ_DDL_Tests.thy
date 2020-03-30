@@ -120,8 +120,9 @@ lemma obs_II_4_2_4: "\<lfloor>\<^bold>\<box>\<^sub>a\<^bold>\<top>\<rfloor>"  by
 lemma obs_II_4_2_5: "\<lfloor>(\<^bold>O\<^bold>\<langle>(A \<^bold>\<rightarrow> B)\<^bold>|\<^bold>\<top>\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<rightarrow> B) \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(\<^bold>\<not>(A \<^bold>\<rightarrow> B))) \<^bold>\<rightarrow> \<^bold>O\<^sub>a(A \<^bold>\<rightarrow> B)\<rfloor>"  by (smt ax_5e)
 lemma obs_II_4_2_6: "\<lfloor>(\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B) \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> \<^bold>\<not>B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>a(A \<^bold>\<rightarrow> B)\<rfloor>"   by (simp add: II_3_1)  
 
+lemma Oa_C: "\<lfloor>\<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B) \<^bold>\<and> \<^bold>O\<^sub>aA  \<^bold>\<and>  \<^bold>O\<^sub>aB \<^bold>\<rightarrow>  \<^bold>O\<^sub>a(A \<^bold>\<and> B)\<rfloor>" using ax_5c by auto
 
-lemma a_DD: "\<lfloor>(\<^bold>O\<^sub>aA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>a(A \<^bold>\<and> B)\<rfloor>" sledgehammer oops (* longer proof *)
-lemma p_DD: "\<lfloor>(\<^bold>O\<^sub>pA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>p(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>p(A \<^bold>\<and> B)\<rfloor>" sledgehammer oops (* longer proof *)
+lemma Oa_DD: "\<lfloor>(\<^bold>O\<^sub>aA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>a(A \<^bold>\<and> B)\<rfloor>" sledgehammer oops (* longer proof *)
+lemma Op_DD: "\<lfloor>(\<^bold>O\<^sub>pA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>p(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>p(A \<^bold>\<and> B)\<rfloor>" sledgehammer oops (* longer proof *)
 end
 
