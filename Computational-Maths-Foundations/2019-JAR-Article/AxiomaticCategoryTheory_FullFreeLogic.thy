@@ -1,4 +1,4 @@
-(* Note: Same as AxiomaticCategoryTheory2018 except that full free logic is employed here (i.e.
+(* Note: Same as AxiomaticCategoryTheory except that full free logic is employed here (i.e.
 with * and definite description) and that the model consisting of only one existing object that 
 was previously constructed by nitpick for the axiom system FS-I (resp. FS-II) by Freyd Scedrov can 
 obviously no longer be obtained. This is because * has now been axiomatized as a 
