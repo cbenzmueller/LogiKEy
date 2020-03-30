@@ -1,5 +1,6 @@
-# Maths-Foundations
+# Computational-Metaphysics
+
 
 This subdirectory contains datasets for the following articles and papers:
 
-- 2020-JAR: Automating Free Logic in HOL, with an Experimental Application in Category Theory (Christoph Benzmüller, Dana S. Scott), In Journal of Automated Reasoning, Springer Netherlands, volume 64, number 1, pp. 53--72, 2020. ([Preprint](http://doi.org/10.13140/RG.2.2.11432.83202))
+- 2016-IJCAI: The Inconsistency in Gödel's Ontological Argument: A Success Story for AI in Metaphysics (Christoph Benzmüller, Bruno Woltzenlogel Paleo), In IJCAI 2016 (Subbarao Kambhampati, ed.), AAAI Press, volume 1-3, pp. 936-942, 2016. (poster, proceedings-version) [[Url](http://www.ijcai.org/Proceedings/16/Papers/137.pdf)] 
