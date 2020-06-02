@@ -28,8 +28,8 @@ consts go::\<sigma> tell::\<sigma> kill::\<sigma>
  lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2 \<^bold>\<and> D3)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows False nitpick oops (*Inconsistent? No*)
  (* Queries *)
  lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2 \<^bold>\<and> D3)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>O\<^bold>\<langle>\<^bold>\<not>tell\<^bold>|\<^bold>\<top>\<^bold>\<rangle>\<rfloor>\<^sub>l" nitpick oops (*Should James not tell? No*) 
- lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2 \<^bold>\<and> D3)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>O\<^bold>\<langle>tell\<^bold>|\<^bold>\<top>\<^bold>\<rangle>\<rfloor>\<^sub>l"   
-     sledgehammer nitpick oops (*Should James tell? Timeout*)
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2 \<^bold>\<and> D3)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>O\<^bold>\<langle>tell\<^bold>|\<^bold>\<top>\<^bold>\<rangle>\<rfloor>\<^sub>l"
+   sledgehammer nitpick oops (*Should James tell? Timeout*)
  lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2 \<^bold>\<and> D3)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>O\<^bold>\<langle>kill\<^bold>|\<^bold>\<top>\<^bold>\<rangle>\<rfloor>\<^sub>l"  nitpick oops (*Should James kill? No*)
 
 end 
