@@ -29,7 +29,7 @@ lemma C_11: "\<lfloor>\<^bold>\<box>A \<^bold>\<rightarrow> \<^bold>\<box>\<^sub
 lemma C_12: "\<lfloor>\<^bold>\<box>\<^sub>pA \<^bold>\<rightarrow> \<^bold>\<box>\<^sub>aA\<rfloor>"  using ax_4a by auto
 
 (* Characterisation of "\<^bold>O" *)
-lemma C_2: "\<lfloor>\<^bold>O\<^bold>\<langle>A\<^bold>|B\<^bold>\<rangle> \<^bold>\<rightarrow> \<^bold>\<diamond>(B\<^bold>\<and> A)\<rfloor>"  by (metis ax_5a ax_5b)  
+lemma C_2: "\<lfloor>\<^bold>O\<^bold>\<langle>A\<^bold>|B\<^bold>\<rangle> \<^bold>\<rightarrow> \<^bold>\<diamond>(B \<^bold>\<and> A)\<rfloor>"  by (metis ax_5a ax_5b)  
 lemma C_3: "\<lfloor>(\<^bold>\<diamond>(A \<^bold>\<and> B \<^bold>\<and> C) \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>O\<^bold>\<langle>C\<^bold>|A\<^bold>\<rangle> ) \<^bold>\<rightarrow> \<^bold>O\<^bold>\<langle>(B \<^bold>\<and> C)\<^bold>|A\<^bold>\<rangle>\<rfloor>" using ax_5c by auto 
 lemma C_4: "\<lfloor>(\<^bold>\<box>(A \<^bold>\<rightarrow> B) \<^bold>\<and> (\<^bold>\<diamond>(A \<^bold>\<and> C)) \<^bold>\<and> \<^bold>O\<^bold>\<langle>C\<^bold>|B\<^bold>\<rangle>) \<^bold>\<rightarrow> \<^bold>O\<^bold>\<langle>C\<^bold>|A\<^bold>\<rangle>\<rfloor>"   using ax_5e by blast
 lemma C_5: "\<lfloor>\<^bold>\<box>(A \<^bold>\<leftrightarrow> B) \<^bold>\<rightarrow> (\<^bold>O\<^bold>\<langle>C\<^bold>|A\<^bold>\<rangle> \<^bold>\<leftrightarrow> \<^bold>O\<^bold>\<langle>C\<^bold>|B\<^bold>\<rangle>)\<rfloor>"  by presburger 
@@ -119,10 +119,12 @@ lemma obs_II_4_2_3: "\<lfloor>(\<^bold>O\<^bold>\<langle>(A \<^bold>\<rightarrow
 lemma obs_II_4_2_4: "\<lfloor>\<^bold>\<box>\<^sub>a\<^bold>\<top>\<rfloor>"  by simp
 lemma obs_II_4_2_5: "\<lfloor>(\<^bold>O\<^bold>\<langle>(A \<^bold>\<rightarrow> B)\<^bold>|\<^bold>\<top>\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<rightarrow> B) \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(\<^bold>\<not>(A \<^bold>\<rightarrow> B))) \<^bold>\<rightarrow> \<^bold>O\<^sub>a(A \<^bold>\<rightarrow> B)\<rfloor>"  by (smt ax_5e)
 lemma obs_II_4_2_6: "\<lfloor>(\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B) \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> \<^bold>\<not>B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>a(A \<^bold>\<rightarrow> B)\<rfloor>"   by (simp add: II_3_1)  
+lemma obs_II_4_2_6_p: "\<lfloor>(\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>p(A \<^bold>\<and> B) \<^bold>\<and> \<^bold>\<diamond>\<^sub>p(A \<^bold>\<and> \<^bold>\<not>B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>p(A \<^bold>\<rightarrow> B)\<rfloor>"   by (simp add: II_3_1)  
 
-lemma Oa_C: "\<lfloor>\<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B) \<^bold>\<and> \<^bold>O\<^sub>aA  \<^bold>\<and>  \<^bold>O\<^sub>aB \<^bold>\<rightarrow>  \<^bold>O\<^sub>a(A \<^bold>\<and> B)\<rfloor>" using ax_5c by auto
+lemma Oa_C: "\<lfloor>\<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B) \<^bold>\<and> \<^bold>O\<^sub>aA \<^bold>\<and> \<^bold>O\<^sub>aB \<^bold>\<rightarrow>  \<^bold>O\<^sub>a(A \<^bold>\<and> B)\<rfloor>" using ax_5c by auto
+lemma Op_C: "\<lfloor>\<^bold>\<diamond>\<^sub>p(A \<^bold>\<and> B) \<^bold>\<and> \<^bold>O\<^sub>pA \<^bold>\<and> \<^bold>O\<^sub>pB \<^bold>\<rightarrow>  \<^bold>O\<^sub>p(A \<^bold>\<and> B)\<rfloor>" using ax_5c by auto
 
-lemma Oa_DD: "\<lfloor>(\<^bold>O\<^sub>aA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>a(A \<^bold>\<and> B)\<rfloor>" sledgehammer oops (* longer proof *)
-lemma Op_DD: "\<lfloor>(\<^bold>O\<^sub>pA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>p(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>p(A \<^bold>\<and> B)\<rfloor>" sledgehammer oops (* longer proof *)
+lemma Oa_DD: "\<lfloor>(\<^bold>O\<^sub>aA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>a(A \<^bold>\<and> B)\<rfloor>" using ax_5b ax_5c obs_II_4_2_6 by smt 
+lemma Op_DD: "\<lfloor>(\<^bold>O\<^sub>pA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>p(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>p(A \<^bold>\<and> B)\<rfloor>" using ax_5b ax_5c obs_II_4_2_6_p by smt 
 end
 
