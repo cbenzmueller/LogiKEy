@@ -1,5 +1,8 @@
 theory PreferenceLogicTests imports PreferenceLogicBasics              
 begin 
+(*some conceptually unimportant declarations of defaults for tools*) 
+   nitpick_params[assms=true,user_axioms=true,expect=genuine,format=3] 
+   declare [["syntax_ambiguity_warning" = false]]
 (*Fact 1: definability of the four principal operators and verification*)
 lemma Fact1_9: "(\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>) u \<longleftrightarrow> (\<phi> \<preceq>\<^sub>E\<^sub>E \<psi>) u" by smt
 lemma Fact1_10: "(\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E \<psi>) u \<longleftrightarrow> (\<phi> \<preceq>\<^sub>A\<^sub>E \<psi>) u" by smt
@@ -65,7 +68,8 @@ lemma "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>) \<^bold>\<lef
 (*Lemma 2*)
 lemma lemma2_1: "(\<^bold>\<diamond>\<^sup>\<preceq>\<phi>) w \<longleftrightarrow> (\<^bold>\<langle>\<^bold>\<emptyset>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) w" by auto
 lemma lemma2_2: "(\<^bold>\<diamond>\<^sup>\<prec>\<phi>) w \<longleftrightarrow> (\<^bold>\<langle>\<^bold>\<emptyset>\<^bold>\<rangle>\<^sup>\<prec>\<phi>) w" by auto  
-lemma lemma2_3: "(\<^bold>E\<phi>) w \<longleftrightarrow> (\<^bold>\<langle>\<^bold>\<emptyset>\<^bold>\<rangle>\<phi>) w" by auto
+lemma lemma2_3a: "(\<^bold>E\<phi>) w \<longleftrightarrow> (\<^bold>\<langle>\<^bold>\<emptyset>\<^bold>\<rangle>\<phi>) w" by auto
+lemma lemma2_3b: "(\<^bold>A\<phi>) w \<longleftrightarrow> ([\<^bold>\<emptyset>]\<phi>) w" by auto
 (**Axiomatization:**)
 (*inclusion and interaction axioms *)
 lemma Inc1: "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)\<rfloor>" by auto
@@ -95,6 +99,27 @@ lemma Lemma4: "(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>
 lemma Corollary1: "(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>) w \<longrightarrow> (\<exists>v. (w \<^bold>\<equiv>\<^sub>\<Gamma> v) \<and> (\<phi> v))"  by simp 
 (*Lemma 5*)
 lemma Lemma5: "(w \<^bold>\<unlhd>\<^sub>\<Gamma> v) \<longleftrightarrow> ((w \<preceq> v) \<and> (w \<^bold>\<equiv>\<^sub>\<Gamma> v))" by auto  
+
+(**** Section 6: Ceteris Paribus Counterparts of Binary Preference Statements ****)
+
+(*AA-variant (drawing upon von Wright's)*)
+lemma leAA_cp_pref:    "(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u  \<longleftrightarrow> (\<phi> \<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u"  nitpick oops (*Countermodel*)
+lemma leAA_cp_pref_lr: "(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<longrightarrow> (\<phi> \<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u" nitpick oops (*Countermodel*)
+lemma leAA_cp_pref_rl: "(\<phi> \<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<longrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u" by auto
+lemma leAA_cp_pref: assumes 1:"total SBR"  shows  "(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u"  by (smt 1)
+lemma leqAA_cp_pref:    "(\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u  \<longleftrightarrow> (\<phi> \<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u"  nitpick oops (*Countermodel*)
+lemma leqAA_cp_pref_lr: "(\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<longrightarrow> (\<phi> \<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u" nitpick oops (*Countermodel*)
+lemma leqAA_cp_pref_rl: "(\<phi> \<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<longrightarrow> (\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u" nitpick oops (*Countermodel*)
+lemma leqAA_cp_pref: assumes 1:"total SBR"  shows  "(\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u"  by (smt 1)
+
+(*AE-variant*)
+lemma leAE_cp__pref: "(\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u" by auto
+lemma leqAE_cp__pref: "(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u" by auto
+
+(*TODO how to employ bold symbols as part of \<Gamma>?*)
+(* lemma  "\<Gamma> = \<^bold>\<emptyset> \<Longrightarrow> (\<phi> \<^bold>\<prec>\<^sup>A\<^sup>A\<^sub>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>) u" *) (*TODO: makes Isabelle crash*)
+(* lemma  "\<Gamma> = \<^bold>{\<^bold>\<bottom>\<^bold>} \<Longrightarrow> (\<phi> \<^bold>\<prec>\<^sup>A\<^sup>A\<^sub>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>) u" by simp *) (*TODO: makes Isabelle crash*)
+
 end
 
 
