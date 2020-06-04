@@ -72,7 +72,9 @@ abbreviation elem::"\<sigma>\<Rightarrow>\<pi>\<Rightarrow>bool" ("_\<^bold>\<in
 abbreviation subseteq::"\<pi>\<Rightarrow>\<pi>\<Rightarrow>bool" ("_\<^bold>\<subseteq>_")  where  "\<Gamma> \<^bold>\<subseteq> \<Gamma>' \<equiv> \<forall>\<phi>. (\<phi> \<^bold>\<in> \<Gamma>) \<longrightarrow> (\<phi> \<^bold>\<in> \<Gamma>')" 
 abbreviation union::"\<pi>\<Rightarrow>\<pi>\<Rightarrow>\<pi>" ("_\<^bold>\<union>_")  where  "\<Gamma> \<^bold>\<union> \<Gamma>' \<equiv> \<lambda>\<phi>. (\<phi> \<^bold>\<in> \<Gamma>) \<or> (\<phi> \<^bold>\<in> \<Gamma>')" 
 abbreviation intersec::"\<pi>\<Rightarrow>\<pi>\<Rightarrow>\<pi>" ("_\<^bold>\<inter>_")  where  "\<Gamma> \<^bold>\<inter> \<Gamma>' \<equiv> \<lambda>\<phi>. (\<phi> \<^bold>\<in> \<Gamma>) \<and> (\<phi> \<^bold>\<in> \<Gamma>')" 
-abbreviation mkSet::"\<sigma>\<Rightarrow>\<pi>" ("\<^bold>{_\<^bold>}")  where  "\<^bold>{\<phi>\<^bold>} \<equiv> \<lambda>x. x=\<phi>" 
+abbreviation mkSet1::"\<sigma>\<Rightarrow>\<pi>" ("\<^bold>{_\<^bold>}")  where  "\<^bold>{\<phi>\<^bold>} \<equiv> \<lambda>x. x=\<phi>" 
+abbreviation mkSet2::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<pi>" ("\<^bold>{_,_\<^bold>}")  where  "\<^bold>{\<alpha>,\<beta>\<^bold>} \<equiv> \<lambda>x. x=\<alpha> \<or> x=\<beta>" 
+abbreviation mkSet3::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<pi>" ("\<^bold>{_,_,_\<^bold>}")  where  "\<^bold>{\<alpha>,\<beta>,\<gamma>\<^bold>} \<equiv> \<lambda>x. x=\<alpha> \<or> x=\<beta> \<or> x=\<gamma>" 
 abbreviation emptySet ("\<^bold>\<emptyset>") where "\<^bold>\<emptyset> \<equiv> (\<lambda> \<psi>. False)"
 abbreviation univSet ("\<^bold>\<U>") where "\<^bold>\<U> \<equiv> (\<lambda> \<psi>. True)"
 
