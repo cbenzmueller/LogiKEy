@@ -71,8 +71,10 @@ abbreviation leAE'::\<nu>    ("_\<^bold>\<prec>\<^sub>A\<^sub>E_")  where  "\<ph
 abbreviation elem::"\<sigma>\<Rightarrow>\<pi>\<Rightarrow>bool" ("_\<^bold>\<in>_")  where  "\<phi> \<^bold>\<in> \<Gamma> \<equiv> \<Gamma> \<phi>" 
 abbreviation subseteq::"\<pi>\<Rightarrow>\<pi>\<Rightarrow>bool" ("_\<^bold>\<subseteq>_")  where  "\<Gamma> \<^bold>\<subseteq> \<Gamma>' \<equiv> \<forall>\<phi>. (\<phi> \<^bold>\<in> \<Gamma>) \<longrightarrow> (\<phi> \<^bold>\<in> \<Gamma>')" 
 abbreviation union::"\<pi>\<Rightarrow>\<pi>\<Rightarrow>\<pi>" ("_\<^bold>\<union>_")  where  "\<Gamma> \<^bold>\<union> \<Gamma>' \<equiv> \<lambda>\<phi>. (\<phi> \<^bold>\<in> \<Gamma>) \<or> (\<phi> \<^bold>\<in> \<Gamma>')" 
+abbreviation intersec::"\<pi>\<Rightarrow>\<pi>\<Rightarrow>\<pi>" ("_\<^bold>\<inter>_")  where  "\<Gamma> \<^bold>\<inter> \<Gamma>' \<equiv> \<lambda>\<phi>. (\<phi> \<^bold>\<in> \<Gamma>) \<and> (\<phi> \<^bold>\<in> \<Gamma>')" 
 abbreviation mkSet::"\<sigma>\<Rightarrow>\<pi>" ("\<^bold>{_\<^bold>}")  where  "\<^bold>{\<phi>\<^bold>} \<equiv> \<lambda>x. x=\<phi>" 
 abbreviation emptySet ("\<^bold>\<emptyset>") where "\<^bold>\<emptyset> \<equiv> (\<lambda> \<psi>. False)"
+abbreviation univSet ("\<^bold>\<U>") where "\<^bold>\<U> \<equiv> (\<lambda> \<psi>. True)"
 
 abbreviation c14::"i\<Rightarrow>\<pi>\<Rightarrow>i\<Rightarrow>bool" ("_ \<^bold>\<equiv>\<^sub>_ _") where "w \<^bold>\<equiv>\<^sub>\<Gamma> v \<equiv> \<forall>\<phi>. (\<phi> \<^bold>\<in> \<Gamma>) \<longrightarrow> ((\<phi> w) \<longleftrightarrow> (\<phi> v))"
 abbreviation c15::"i\<Rightarrow>\<pi>\<Rightarrow>i\<Rightarrow>bool" ("_ \<^bold>\<unlhd>\<^sub>_ _") where "w \<^bold>\<unlhd>\<^sub>\<Gamma> v \<equiv>  (w \<preceq> v) \<and> (w \<^bold>\<equiv>\<^sub>\<Gamma> v)"
@@ -83,6 +85,26 @@ abbreviation c19::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<
 abbreviation c20::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("[_]\<^sup>\<prec>_") where "[\<Gamma>]\<^sup>\<prec>\<phi> \<equiv> \<lambda>w.\<forall>v. (w \<^bold>\<lhd>\<^sub>\<Gamma> v) \<longrightarrow> (\<phi> v)"
 abbreviation c21::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<langle>_\<^bold>\<rangle>_") where "\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi> \<equiv> \<lambda>w.\<exists>v. (w \<^bold>\<equiv>\<^sub>\<Gamma> v) \<and> (\<phi> v)"
 abbreviation c22::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("[_]_") where "[\<Gamma>]\<phi> \<equiv> \<lambda>w.\<forall>v. (w \<^bold>\<equiv>\<^sub>\<Gamma> v) \<longrightarrow> (\<phi> v)"
+
+(**** Section 6: Ceteris Paribus Counterparts of Binary Preference Statements ****)
+(*Note: the operators below are not defined in the paper (their existence is tacitly suggested).
+Only the operator \<prec>\<^sup>\<Gamma> is defined in the paper, it aims at modelling von Wright's notion of
+ceteris paribus ("all other things being equal") preferences (w.r.t. a set of formulas \<Gamma>).
+That variant corresponds to \<prec>\<^sub>A\<^sub>A\<^sup>\<Sigma> below, where \<Sigma>=cp(\<Gamma>), i.e., \<Sigma> are the propositional atoms
+independent from (not occurring in) \<Gamma>, they are to be elicited by extra-logical means.
+Our variants below can thus be understood as "these (given) things being equal"-preferences. *)
+
+(*AA-variant (drawing upon von Wright's)*)
+abbreviation leAA_cp::"\<sigma>\<Rightarrow>\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_\<prec>\<^sub>A\<^sub>A\<^sup>_ _")  where  "(\<phi> \<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s. \<forall>t. (\<phi> s) \<and> (\<psi> t) \<longrightarrow> (s \<^bold>\<lhd>\<^sub>\<Gamma> t)"
+abbreviation leAA_cp'::"\<sigma>\<Rightarrow>\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("_\<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>_ _")  where  "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<psi> \<^bold>\<rightarrow> [\<Gamma>]\<^sup>\<preceq>\<^bold>\<not>\<phi>)" 
+abbreviation leqAA_cp::"\<sigma>\<Rightarrow>\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"   ("_\<preceq>\<^sub>A\<^sub>A\<^sup>_ _")  where  "(\<phi> \<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s. \<forall>t. (\<phi> s) \<and> (\<psi> t) \<longrightarrow> (s \<^bold>\<unlhd>\<^sub>\<Gamma> t)" 
+abbreviation leqAA_cp'::"\<sigma>\<Rightarrow>\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_\<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>_ _")  where  "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<and> [\<Gamma>]\<^sup>\<prec>\<^bold>\<not>\<psi>)"
+
+(*AE-variant *)
+abbreviation leAE_cp::"\<sigma>\<Rightarrow>\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("_\<prec>\<^sub>A\<^sub>E\<^sup>_ _") where "(\<phi> \<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s. \<exists>t. (\<phi> s) \<longrightarrow> (\<psi> t) \<and> (s \<^bold>\<lhd>\<^sub>\<Gamma> t)" 
+abbreviation leAE_cp'::"\<sigma>\<Rightarrow>\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("_\<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>_ _")  where  "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<psi>)" 
+abbreviation leqAE_cp::"\<sigma>\<Rightarrow>\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("_\<preceq>\<^sub>A\<^sub>E\<^sup>_ _") where "(\<phi> \<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s. \<exists>t. (\<phi> s) \<longrightarrow> (\<psi> t) \<and> (s \<^bold>\<unlhd>\<^sub>\<Gamma> t)" 
+abbreviation leqAE_cp'::"\<sigma>\<Rightarrow>\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("_\<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>_ _") where "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<psi>)"
 
 (*Consistency confirmed by nitpick (trivial since only abbreviations were introduced)*)
 lemma True nitpick[satisfy,user_axioms] oops
