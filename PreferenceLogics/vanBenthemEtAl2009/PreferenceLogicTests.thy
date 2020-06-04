@@ -1,8 +1,8 @@
 theory PreferenceLogicTests imports PreferenceLogicBasics              
 begin 
 (*some conceptually unimportant declarations of defaults for tools*) 
-   nitpick_params[assms=true,user_axioms=true,expect=genuine,format=3] 
-   declare [["syntax_ambiguity_warning" = false]]
+nitpick_params[assms=true,user_axioms=true,expect=genuine,format=3] 
+
 (*Fact 1: definability of the four principal operators and verification*)
 lemma Fact1_9: "(\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>) u \<longleftrightarrow> (\<phi> \<preceq>\<^sub>E\<^sub>E \<psi>) u" by smt
 lemma Fact1_10: "(\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E \<psi>) u \<longleftrightarrow> (\<phi> \<preceq>\<^sub>A\<^sub>E \<psi>) u" by smt
@@ -113,12 +113,24 @@ lemma leqAA_cp_pref_rl: "(\<phi> \<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>
 lemma leqAA_cp_pref: assumes 1:"total SBR"  shows  "(\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u"  by (smt 1)
 
 (*AE-variant*)
-lemma leAE_cp__pref: "(\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u" by auto
-lemma leqAE_cp__pref: "(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u" by auto
+lemma leAE_cp_pref: "(\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u" by auto
+lemma leqAE_cp_pref: "(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u" by auto
 
-(*TODO how to employ bold symbols as part of \<Gamma>?*)
-(* lemma  "\<Gamma> = \<^bold>\<emptyset> \<Longrightarrow> (\<phi> \<^bold>\<prec>\<^sup>A\<^sup>A\<^sub>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>) u" *) (*TODO: makes Isabelle crash*)
-(* lemma  "\<Gamma> = \<^bold>{\<^bold>\<bottom>\<^bold>} \<Longrightarrow> (\<phi> \<^bold>\<prec>\<^sup>A\<^sup>A\<^sub>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>) u" by simp *) (*TODO: makes Isabelle crash*)
+(*miscelaneous tests*)
+lemma  "let \<Gamma> = \<^bold>\<emptyset> in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>)\<rfloor>" by simp
+lemma  "let \<Gamma> = \<^bold>{\<^bold>\<bottom>\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>)\<rfloor>" by simp  
+lemma  "let \<Gamma> = \<^bold>{\<^bold>\<bottom>,A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>)\<rfloor>" nitpick oops (*Countermodel*)
+
+lemma  "let \<Gamma> = \<^bold>{A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) \<^bold>\<rightarrow> (A \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>))\<rfloor>" nitpick oops (*Countermodel*)
+lemma  "let \<Gamma> = \<^bold>{A\<^bold>} in \<lfloor>(A \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>)) \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>)\<rfloor>" nitpick oops (*Countermodel*)
+
+lemma  "let \<Gamma> = \<^bold>\<emptyset> in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>)\<rfloor>" by simp
+lemma  "let \<Gamma> = \<^bold>{\<^bold>\<bottom>\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>)\<rfloor>" by simp  
+lemma  "let \<Gamma> = \<^bold>{\<^bold>\<bottom>,A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>)\<rfloor>" nitpick oops (*Countermodel*)
+
+lemma  "let \<Gamma> = \<^bold>{A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<rightarrow> (A \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>))\<rfloor>" by auto
+lemma  "let \<Gamma> = \<^bold>{A,B\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<rightarrow> ((A \<^bold>\<and> B) \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>))\<rfloor>" by auto
+lemma  "let \<Gamma> = \<^bold>{A\<^bold>} in \<lfloor>(A \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>)) \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>)\<rfloor>" nitpick oops (*Countermodel*)
 
 end
 
