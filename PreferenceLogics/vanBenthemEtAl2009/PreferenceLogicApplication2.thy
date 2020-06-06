@@ -40,6 +40,12 @@ axiomatization where
 
 
 lemma True nitpick[satisfy] oops
+lemma "\<exists>x. \<lfloor>((SV x GAIN) \<^bold>\<and> ((SV x STAB) \<^bold>\<and> (SV x WILL)))\<rfloor>" nitpick[satisfy] oops
+lemma "\<not>(\<exists>x. \<lfloor>((SV x GAIN) \<^bold>\<and> ((SV x STAB) \<^bold>\<and> (SV x WILL)))\<rfloor>)" using V1 V3 V5 by blast
+lemma "\<exists>x. \<lfloor>((SV x RESP) \<^bold>\<and> ((SV x GAIN) \<^bold>\<and> (SV x WILL)))\<rfloor>" nitpick[satisfy] oops
+lemma "\<exists>x. \<lfloor>((SV x RESP) \<^bold>\<and> ((SV x GAIN) \<^bold>\<and> \<^bold>\<not>(SV x WILL)))\<rfloor>" nitpick[satisfy] oops
+
+
 
 (*kinds of situations*)
 consts Animals :: "p\<Rightarrow>\<sigma>"  (*appropriation of animals in general*)
@@ -81,7 +87,7 @@ The situational facts (here summarized as "FoxHunting") may entail one of the an
 in the conditional preferences which constitute our background legal knowledge (here: "WildAnimals").
 *)
 
-lemma "\<lfloor>FoxHunting x \<^bold>\<rightarrow> ((SV x WILL) \<^bold>\<preceq>\<^sub>A\<^sub>E (SV x  STAB))\<rfloor>" using S2 W3 by blast 
+lemma "\<lfloor>FoxHunting x \<^bold>\<rightarrow> ((SV x WILL) \<^bold>\<preceq>\<^sub>A\<^sub>E (SV x  STAB))\<rfloor>" sledgehammer using S2 W3 by blast 
 lemma "\<lfloor>Animals x \<^bold>\<rightarrow> ((SV x WILL) \<^bold>\<preceq>\<^sub>A\<^sub>E ((SV x RELI) \<^bold>\<and> (SV x GAIN)))\<rfloor>" sledgehammer nitpick[satisfy] nitpick oops
 
 lemma "\<lfloor>FoxHunting \<alpha> \<^bold>\<and> DomesticAnimals \<beta>\<rfloor>" sledgehammer nitpick[satisfy] nitpick oops
