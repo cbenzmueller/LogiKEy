@@ -81,15 +81,15 @@ abbreviation c22::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("[_]_")   w
 (*Note: operators below are not defined in the paper; their existence is tacitly suggested.*)
 (*AA-variant (drawing upon von Wright's)*)
 type_synonym \<epsilon> = "\<sigma>\<Rightarrow>\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"
-abbreviation leAA_cp::\<epsilon>  ("_\<prec>\<^sub>A\<^sub>A\<^sup>_ _") where "(\<phi> \<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<forall>t. (\<phi> s)\<and>(\<psi> t) \<longrightarrow> (s \<^bold>\<lhd>\<^sub>\<Gamma> t)"
-abbreviation leAA_cp'::\<epsilon> ("_\<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>_ _") where "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<psi> \<^bold>\<rightarrow> [\<Gamma>]\<^sup>\<preceq>\<^bold>\<not>\<phi>)" 
-abbreviation leqAA_cp::\<epsilon> ("_\<preceq>\<^sub>A\<^sub>A\<^sup>_ _") where "(\<phi> \<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<forall>t. (\<phi> s)\<and>(\<psi> t) \<longrightarrow> (s \<^bold>\<unlhd>\<^sub>\<Gamma> t)" 
-abbreviation leqAA_cp'::\<epsilon> ("_\<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>_ _") where "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<and> [\<Gamma>]\<^sup>\<prec>\<^bold>\<not>\<psi>)"
+abbreviation leAA_cp::\<epsilon>  ("_\<prec>\<^sub>A\<^sub>A\<^sup>__") where "(\<phi> \<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<forall>t. (\<phi> s)\<and>(\<psi> t) \<longrightarrow> (s \<^bold>\<lhd>\<^sub>\<Gamma> t)"
+abbreviation leAA_cp'::\<epsilon> ("_\<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>__") where "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<psi> \<^bold>\<rightarrow> [\<Gamma>]\<^sup>\<preceq>\<^bold>\<not>\<phi>)" 
+abbreviation leqAA_cp::\<epsilon> ("_\<preceq>\<^sub>A\<^sub>A\<^sup>__") where "(\<phi> \<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<forall>t. (\<phi> s)\<and>(\<psi> t) \<longrightarrow> (s \<^bold>\<unlhd>\<^sub>\<Gamma> t)" 
+abbreviation leqAA_cp'::\<epsilon> ("_\<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>__") where "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<and> [\<Gamma>]\<^sup>\<prec>\<^bold>\<not>\<psi>)"
 (*AE-variant *)
-abbreviation leAE_cp::\<epsilon> ("_\<prec>\<^sub>A\<^sub>E\<^sup>_ _")  where "(\<phi> \<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<exists>t. (\<phi> s) \<longrightarrow> (\<psi> t)\<and>(s \<^bold>\<lhd>\<^sub>\<Gamma> t)" 
-abbreviation leAE_cp'::\<epsilon> ("_\<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>_ _") where "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<psi>)" 
-abbreviation leqAE_cp::\<epsilon> ("_\<preceq>\<^sub>A\<^sub>E\<^sup>_ _") where "(\<phi> \<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<exists>t. (\<phi> s) \<longrightarrow> (\<psi> t)\<and>(s \<^bold>\<unlhd>\<^sub>\<Gamma> t)" 
-abbreviation leqAE_cp'::\<epsilon> ("_\<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>_ _") where "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<psi>)"
+abbreviation leAE_cp::\<epsilon> ("_\<prec>\<^sub>A\<^sub>E\<^sup>__")  where "(\<phi> \<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<exists>t. (\<phi> s) \<longrightarrow> (\<psi> t)\<and>(s \<^bold>\<lhd>\<^sub>\<Gamma> t)" 
+abbreviation leAE_cp'::\<epsilon> ("_\<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>__") where "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<psi>)" 
+abbreviation leqAE_cp::\<epsilon> ("_\<preceq>\<^sub>A\<^sub>E\<^sup>__") where "(\<phi> \<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<exists>t. (\<phi> s) \<longrightarrow> (\<psi> t)\<and>(s \<^bold>\<unlhd>\<^sub>\<Gamma> t)" 
+abbreviation leqAE_cp'::\<epsilon> ("_\<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>__") where "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<psi>)"
 
 (*Consistency confirmed by nitpick (trivial: essentially only abbreviations are introduced)*)
 lemma True nitpick[satisfy,user_axioms] oops
