@@ -6,7 +6,7 @@ begin (*SSE of the preference logic by van Benthem, Girard and Roy, JPL 2009, in
 (**** Embedding of "a basic modal preference language" in HOL ****)
 (*Preliminaries*)
 typedecl i (*Poss. worlds*) typedecl e (*Individuals*)      
-type_synonym \<sigma> = "i\<Rightarrow>bool"  type_synonym \<gamma> = "i\<Rightarrow>i\<Rightarrow>bool" (*Propositions & Preference relations*) (*World-lifted propositions*)
+type_synonym \<sigma> = "i\<Rightarrow>bool"  type_synonym \<gamma> = "i\<Rightarrow>i\<Rightarrow>bool" (*Propositions & Preference relations*)
 type_synonym \<mu> = "\<sigma>\<Rightarrow>\<sigma>"     type_synonym \<nu> = "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  (*Unary & Binary modal connectives*)
 type_synonym \<pi> = "\<sigma>\<Rightarrow>bool" (*Sets of world-lifted propositions*)
 
