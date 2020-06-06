@@ -88,9 +88,10 @@ in the conditional preferences which constitute our background legal knowledge (
 *)
 
 lemma "\<lfloor>FoxHunting x \<^bold>\<rightarrow> ((SV x WILL) \<^bold>\<preceq>\<^sub>A\<^sub>E (SV x  STAB))\<rfloor>" sledgehammer using S2 W3 by blast 
-lemma "\<lfloor>Animals x \<^bold>\<rightarrow> ((SV x WILL) \<^bold>\<preceq>\<^sub>A\<^sub>E ((SV x RELI) \<^bold>\<and> (SV x GAIN)))\<rfloor>" sledgehammer nitpick[satisfy] nitpick oops
+lemma "\<lfloor>DomesticAnimals x \<^bold>\<rightarrow> ((SV x WILL) \<^bold>\<preceq>\<^sub>A\<^sub>E (SV x  STAB))\<rfloor>"  nitpick[satisfy] nitpick oops
+lemma "\<lfloor>Animals x \<^bold>\<rightarrow> ((SV x WILL) \<^bold>\<preceq>\<^sub>A\<^sub>E ((SV x RELI) \<^bold>\<and> (SV x GAIN)))\<rfloor>"  nitpick[satisfy] nitpick oops
 
-lemma "\<lfloor>FoxHunting \<alpha> \<^bold>\<and> DomesticAnimals \<beta>\<rfloor>" sledgehammer nitpick[satisfy] nitpick oops
+(* lemma "\<lfloor>FoxHunting \<alpha> \<^bold>\<and> DomesticAnimals \<beta>\<rfloor>" nitpick[satisfy] nitpick oops *)
 
 
 end
