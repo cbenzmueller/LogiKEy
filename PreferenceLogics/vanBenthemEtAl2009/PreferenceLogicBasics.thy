@@ -12,9 +12,9 @@ type_synonym \<pi>="\<sigma>\<Rightarrow>bool"                              (*Se
 
 consts BR::\<gamma> ("_\<preceq>_") (*Betterness relation*)
 abbreviation SBR::\<gamma> ("_\<prec>_") where "v\<prec>w \<equiv> (v\<preceq>w) \<and> \<not>(w\<preceq>v)" (*Strict Betterness relation*)
-
 abbreviation "reflexive Rel \<equiv> \<forall>x. Rel x x"
 abbreviation "transitive Rel \<equiv> \<forall>x y z. Rel x y \<and> Rel y z \<longrightarrow> Rel x z"
+abbreviation "is_total Rel \<equiv> \<forall>x y. Rel x y \<or> Rel y x"
 axiomatization where reflBR: "reflexive BR"  and  transBR: "transitive BR"
 
 (*Modal logic connectives (operating on truth-sets)*)
