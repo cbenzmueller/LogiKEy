@@ -61,8 +61,8 @@ consts Land::"c\<Rightarrow>\<sigma>"   (*party was on its own land (related to 
 consts Poss::"c\<Rightarrow>\<sigma>"   (*party was in possession of the animal (related to STAB)*)
 
 axiomatization where (*world knowledge: meaning postulates for situational factors*)
-W4: "\<not>(y=x) \<longrightarrow> \<lfloor>Land x \<^bold>\<rightarrow> (\<^bold>\<not>Land y)\<rfloor>" and
-W5: "\<not>(y=x) \<longrightarrow> \<lfloor>Poss x \<^bold>\<rightarrow> (\<^bold>\<not>Poss y)\<rfloor>"
+W4: "\<lfloor>Land x \<^bold>\<rightarrow> (\<^bold>\<not>Land x\<inverse>)\<rfloor>" and
+W5: "\<lfloor>Poss x \<^bold>\<rightarrow> (\<^bold>\<not>Poss x\<inverse>)\<rfloor>"
 
 axiomatization where (* relate factors to values*)
 R1: "\<lfloor>(Intent x \<^bold>\<and> For x) \<^bold>\<rightarrow> \<^bold>\<box>(V x WILL)\<rfloor>" and  (*finding for x given Intent promotes WILL*)
