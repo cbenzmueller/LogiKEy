@@ -4,6 +4,7 @@ begin (***** proof of concept: ethical value ontology and wild animal cases ****
 (*auxiliary definitions*)
 abbreviation pref::\<nu>            ("_\<^bold>\<prec>_")   where  "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A \<psi>" 
 abbreviation subs::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>bool" ("_\<subseteq>_")   where  "\<alpha>\<subseteq>\<beta> \<equiv> \<forall>w.(\<alpha> w)\<longrightarrow>(\<beta> w)" 
+abbreviation boxg::\<mu> ("\<^bold>\<box>_") where "\<^bold>\<box>\<phi> \<equiv> \<^bold>\<box>\<^sup>\<prec>\<phi>"
 
 (*ethico-legal values*)
 datatype UVAL = SECURITY | LIBERTY | EQUALITY | UTILITY
@@ -11,6 +12,8 @@ datatype VAL = WILL | RELI | RESP | EQUI | FAIR | EFFI | STAB | GAIN
 
 (*contenders have values*)
 datatype c = p | d      (*parties/contenders: plaintiff, defendant*)  
+fun other::"c\<Rightarrow>c" ("_\<inverse>") where "p\<inverse> = d" | "d\<inverse>= p"
+
 consts UV::"c\<Rightarrow>UVAL\<Rightarrow>\<sigma>" (*upper values*)
 consts V::"c\<Rightarrow>VAL\<Rightarrow>\<sigma>"   (*values*)
 
@@ -39,16 +42,16 @@ W2: "FoxHunting \<subseteq> WildAnimals" and
 W3: "DomesticAnimals \<subseteq> Animals"
 
 axiomatization where (*example legal corpus*)
-S1: "\<lfloor>Animals         \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> ((V x STAB) \<^bold>\<and> (V x GAIN)))\<rfloor>" and (*general*)
-S2: "\<lfloor>WildAnimals     \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> (V x STAB))\<rfloor>" and             (*specialization*)
-S3: "\<lfloor>DomesticAnimals \<^bold>\<rightarrow> ((V x STAB) \<^bold>\<prec> ((V x RELI) \<^bold>\<and> (V x WILL)))\<rfloor>"  (*specialization*)
+(* S1: "\<lfloor>Animals         \<^bold>\<rightarrow> ((V x\<inverse> WILL) \<^bold>\<prec> ((V x STAB) \<^bold>\<and> (V x GAIN)))\<rfloor>" and (*general*) *)
+S2: "\<lfloor>WildAnimals     \<^bold>\<rightarrow> ((V x\<inverse> WILL) \<^bold>\<prec> (V x STAB))\<rfloor>" and             (*specialization*)
+S3: "\<lfloor>DomesticAnimals \<^bold>\<rightarrow> ((V x\<inverse> STAB) \<^bold>\<prec> ((V x RELI) \<^bold>\<and> (V x WILL)))\<rfloor>"  (*specialization*)
 
 lemma True nitpick[satisfy] oops (*axioms consistent*)
 
+
 (*explore implicit legal knowledge*)
-lemma "\<lfloor>FoxHunting \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> (V x  STAB))\<rfloor>" using S2 W2 by blast
-lemma "\<lfloor>DomesticAnimals \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> (V x  STAB))\<rfloor>" using S1 V1 V3 V5 W3 by blast 
-lemma "\<lfloor>Animals \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> ((V x RELI) \<^bold>\<and> (V x GAIN)))\<rfloor>" using S1 V1 V3 V5 by blast (*interesting...*)
+lemma "\<lfloor>FoxHunting \<^bold>\<rightarrow> ((V x\<inverse> WILL) \<^bold>\<prec> (V x  STAB))\<rfloor>" using S2 W2 by blast
+lemma "\<lfloor>DomesticAnimals \<^bold>\<rightarrow> ((V x\<inverse> WILL) \<^bold>\<prec> (V x  STAB))\<rfloor>" nitpick oops
 
 (*situational factors*)
 consts For::"c\<Rightarrow>\<sigma>"    (*decision: find/rule for party*)
@@ -62,26 +65,30 @@ W4: "\<not>(y=x) \<longrightarrow> \<lfloor>Land x \<^bold>\<rightarrow> (\<^bol
 W5: "\<not>(y=x) \<longrightarrow> \<lfloor>Poss x \<^bold>\<rightarrow> (\<^bold>\<not>Poss y)\<rfloor>"
 
 axiomatization where (* relate factors to values*)
- (*R1: finding for x given Intent promotes WILL*)
-R1: "\<lfloor>(Intent x \<^bold>\<rightarrow> For x) \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<preceq>(V x WILL)\<rfloor>" and 
-R2: "\<lfloor>(Liv x \<^bold>\<rightarrow> For x) \<^bold>\<rightarrow>  \<^bold>\<box>\<^sup>\<preceq>(V x GAIN)\<rfloor>" and
-R3: "\<lfloor>(Land x  \<^bold>\<rightarrow> For x) \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<preceq>(V x RELI)\<rfloor>" and
-R4: "\<lfloor>(Poss x \<^bold>\<rightarrow> For x) \<^bold>\<rightarrow>  \<^bold>\<box>\<^sup>\<preceq>(V x STAB)\<rfloor>"
+R1: "\<lfloor>(Intent x \<^bold>\<and> For x) \<^bold>\<rightarrow> \<^bold>\<box>(V x WILL)\<rfloor>" and  (*finding for x given Intent promotes WILL*)
+R2: "\<lfloor>(Liv x \<^bold>\<and> For x) \<^bold>\<rightarrow>  \<^bold>\<box>(V x GAIN)\<rfloor>" and 
+R3: "\<lfloor>(Land x \<^bold>\<and> For x) \<^bold>\<rightarrow> \<^bold>\<box>(V x RELI)\<rfloor>" and
+R4: "\<lfloor>(Poss x \<^bold>\<and> For x) \<^bold>\<rightarrow>  \<^bold>\<box>(V x STAB)\<rfloor>"
+
+lemma True nitpick[satisfy] oops (*axioms are consistent*)
+(*sanity checks: *)
+lemma "(\<exists>w. (WildAnimals) w)" nitpick[satisfy] oops
+lemma "(\<exists>w. (DomesticAnimals) w)" nitpick[satisfy] oops 
+lemma "(\<exists>w. (Animals) w)" nitpick[satisfy] oops
 
 (*Pierson v. Post*)         
-lemma "\<not>(\<exists>w. (FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) w)" sledgehammer
-  by (meson R4 S2 V1 V3 V5 W2 W5 c.distinct(1) reflBR)
-lemma "\<exists>w. (FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) w" nitpick[satisfy] oops
-lemma "\<lfloor>(FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) \<^bold>\<rightarrow> For d\<rfloor>" 
-  by (meson R4 S2 V1 V3 V5 W2 W5 c.distinct(1) reflBR) 
+lemma "\<exists>w. (FoxHunting \<^bold>\<and> (Intent p  \<^bold>\<and> Poss d)) w" nitpick[satisfy] oops 
+lemma "\<lfloor>(FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) \<^bold>\<rightarrow> For d\<rfloor>" nitpick[satisfy] nitpick oops
+
 (*Keeble v. Hickergill*)
 lemma "\<lfloor>(WildAnimals \<^bold>\<and> (Liv p \<^bold>\<and> Land p))\<rfloor>" nitpick[satisfy] oops
 lemma "\<lfloor>(WildAnimals \<^bold>\<and> (Liv p \<^bold>\<and> Land p)) \<^bold>\<rightarrow> For p\<rfloor>"
-  by (meson R3 S2 V1 V3 V5 W4 c.distinct(1) reflBR)  
+  nitpick[satisfy] nitpick oops
+
 (*Young v. Hitchens*)
 lemma "\<lfloor>(WildAnimals \<^bold>\<and> (Liv p \<^bold>\<and> (Land p \<^bold>\<and> (Liv d \<^bold>\<and> Poss d))))\<rfloor>" nitpick[satisfy] oops
 lemma "\<lfloor>(WildAnimals \<^bold>\<and> (Liv p \<^bold>\<and> (Land p \<^bold>\<and> (Liv d \<^bold>\<and> Poss d)))) \<^bold>\<rightarrow> For p\<rfloor>"
-  by (meson R3 S2 V1 V3 V5 W4 c.distinct(1) reflBR)  (*Young v. Hitchens*)
+   nitpick[satisfy] nitpick oops 
 end
 
 (* Suppose that 'p' represents Post and 'd' Pierson.
@@ -101,4 +108,5 @@ The situational factors (here summarized as "FoxHunting") indeed entail one of t
 in the conditional preferences which constitute our background legal knowledge (here: "WildAnimals").
 *)
 
+end
 
