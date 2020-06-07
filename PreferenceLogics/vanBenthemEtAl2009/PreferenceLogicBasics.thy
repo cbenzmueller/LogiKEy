@@ -67,15 +67,15 @@ abbreviation mkSet3::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>\<Righta
 abbreviation emptyS::"\<sigma>\<Rightarrow>bool"    ("\<^bold>\<emptyset>")       where "\<^bold>\<emptyset> \<equiv> (\<lambda> \<psi>. False)"
 abbreviation univS::"\<sigma>\<Rightarrow>bool"     ("\<^bold>\<U>")       where "\<^bold>\<U> \<equiv> (\<lambda> \<psi>. True)"
 
-abbreviation c14::"i\<Rightarrow>\<pi>\<Rightarrow>\<sigma>" ("_ \<^bold>\<equiv>\<^sub>_ _") where "w \<^bold>\<equiv>\<^sub>\<Gamma> v \<equiv> \<forall>\<phi>. (\<phi> \<^bold>\<in> \<Gamma>) \<longrightarrow> ((\<phi> w) \<longleftrightarrow> (\<phi> v))"
-abbreviation c15::"i\<Rightarrow>\<pi>\<Rightarrow>\<sigma>" ("_ \<^bold>\<unlhd>\<^sub>_ _") where "w \<^bold>\<unlhd>\<^sub>\<Gamma> v \<equiv> (w \<preceq> v) \<and> (w \<^bold>\<equiv>\<^sub>\<Gamma> v)"
-abbreviation c16::"i\<Rightarrow>\<pi>\<Rightarrow>\<sigma>" ("_ \<^bold>\<lhd>\<^sub>_ _") where "w \<^bold>\<lhd>\<^sub>\<Gamma> v \<equiv> (w \<prec> v) \<and> (w \<^bold>\<equiv>\<^sub>\<Gamma> v)"
-abbreviation c17::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<langle>_\<^bold>\<rangle>\<^sup>\<preceq>_")   where "\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi> \<equiv> \<lambda>w.\<exists>v. (w \<^bold>\<unlhd>\<^sub>\<Gamma> v) \<and> (\<phi> v)"
-abbreviation c18::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("[_]\<^sup>\<preceq>_")  where "[\<Gamma>]\<^sup>\<preceq>\<phi> \<equiv> \<lambda>w.\<forall>v. (w \<^bold>\<unlhd>\<^sub>\<Gamma> v) \<longrightarrow> (\<phi> v)"
-abbreviation c19::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<langle>_\<^bold>\<rangle>\<^sup>\<prec>_")  where "\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi> \<equiv> \<lambda>w.\<exists>v. (w \<^bold>\<lhd>\<^sub>\<Gamma> v) \<and> (\<phi> v)"
-abbreviation c20::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("[_]\<^sup>\<prec>_")  where "[\<Gamma>]\<^sup>\<prec>\<phi> \<equiv> \<lambda>w.\<forall>v. (w \<^bold>\<lhd>\<^sub>\<Gamma> v) \<longrightarrow> (\<phi> v)"
-abbreviation c21::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<langle>_\<^bold>\<rangle>_")   where "\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi> \<equiv> \<lambda>w.\<exists>v. (w \<^bold>\<equiv>\<^sub>\<Gamma> v) \<and> (\<phi> v)"
-abbreviation c22::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("[_]_")   where "[\<Gamma>]\<phi> \<equiv> \<lambda>w.\<forall>v. (w \<^bold>\<equiv>\<^sub>\<Gamma> v) \<longrightarrow> (\<phi> v)"
+abbreviation c14::"i\<Rightarrow>\<pi>\<Rightarrow>\<sigma>" ("_\<^bold>\<equiv>\<^sub>__") where "w \<^bold>\<equiv>\<^sub>\<Gamma> v \<equiv> \<forall>\<phi>. (\<phi> \<^bold>\<in> \<Gamma>) \<longrightarrow> ((\<phi> w) \<longleftrightarrow> (\<phi> v))"
+abbreviation c15::"i\<Rightarrow>\<pi>\<Rightarrow>\<sigma>" ("_\<^bold>\<unlhd>\<^sub>__") where "w \<^bold>\<unlhd>\<^sub>\<Gamma> v \<equiv> (w \<preceq> v) \<and> (w \<^bold>\<equiv>\<^sub>\<Gamma> v)"
+abbreviation c16::"i\<Rightarrow>\<pi>\<Rightarrow>\<sigma>" ("_\<^bold>\<lhd>\<^sub>__") where "w \<^bold>\<lhd>\<^sub>\<Gamma> v \<equiv> (w \<prec> v) \<and> (w \<^bold>\<equiv>\<^sub>\<Gamma> v)"
+abbreviation c17::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<langle>_\<^bold>\<rangle>\<^sup>\<preceq>_") where "\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi> \<equiv> \<lambda>w.\<exists>v. (w \<^bold>\<unlhd>\<^sub>\<Gamma> v) \<and> (\<phi> v)"
+abbreviation c18::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("[_]\<^sup>\<preceq>_") where "[\<Gamma>]\<^sup>\<preceq>\<phi> \<equiv> \<lambda>w.\<forall>v. (w \<^bold>\<unlhd>\<^sub>\<Gamma> v) \<longrightarrow> (\<phi> v)"
+abbreviation c19::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<langle>_\<^bold>\<rangle>\<^sup>\<prec>_") where "\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi> \<equiv> \<lambda>w.\<exists>v. (w \<^bold>\<lhd>\<^sub>\<Gamma> v) \<and> (\<phi> v)"
+abbreviation c20::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("[_]\<^sup>\<prec>_") where "[\<Gamma>]\<^sup>\<prec>\<phi> \<equiv> \<lambda>w.\<forall>v. (w \<^bold>\<lhd>\<^sub>\<Gamma> v) \<longrightarrow> (\<phi> v)"
+abbreviation c21::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<langle>_\<^bold>\<rangle>_")  where "\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi> \<equiv> \<lambda>w.\<exists>v. (w \<^bold>\<equiv>\<^sub>\<Gamma> v) \<and> (\<phi> v)"
+abbreviation c22::"\<pi>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("[_]_")  where "[\<Gamma>]\<phi> \<equiv> \<lambda>w.\<forall>v. (w \<^bold>\<equiv>\<^sub>\<Gamma> v) \<longrightarrow> (\<phi> v)"
 
 (**** Section 6: Ceteris Paribus Counterparts of Binary Preference Statements ****)
 (*Note: operators below are not defined in the paper; their existence is tacitly suggested.*)
