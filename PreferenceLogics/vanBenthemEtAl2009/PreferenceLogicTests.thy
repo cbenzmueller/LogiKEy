@@ -1,4 +1,4 @@
-theory PreferenceLogicTests imports PreferenceLogicBasics (* Benzmüller & Fuenmayor, 2020 *)            
+theory PreferenceLogicTests imports PreferenceLogicBasics (*Benzmüller&Fuenmayor, 2020*)            
 begin (*Tests for the SSE of van Benthem, Girard and Roy, JPL 2009, in HOL*)
 (*Fact 1: definability of the four principal operators and verification*)
 lemma Fact1_9:  "(\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>) u \<longleftrightarrow> (\<phi> \<preceq>\<^sub>E\<^sub>E \<psi>) u" by smt
@@ -37,16 +37,18 @@ lemma reducibility:  "\<lfloor>(((\<phi> \<preceq>\<^sub>E\<^sub>E \<psi>) \<^bo
 lemma reflexivity:   "\<lfloor>\<phi> \<^bold>\<rightarrow> (\<phi> \<preceq>\<^sub>E\<^sub>E \<phi>)\<rfloor>" using reflBR by blast
 (* The condition below is supposed to enforce totality of the preference relation.
    However there are countermodels. See p.98? *)
-lemma tot_v1: "is_total SBR \<longrightarrow> \<lfloor>((\<phi> \<preceq>\<^sub>E\<^sub>E \<phi>)\<^bold>\<and>(\<psi> \<preceq>\<^sub>E\<^sub>E \<psi>)) \<^bold>\<rightarrow> ((\<phi> \<preceq>\<^sub>E\<^sub>E \<psi>)\<^bold>\<or>(\<psi> \<preceq>\<^sub>E\<^sub>E \<phi>))\<rfloor>" by auto
+lemma "is_total SBR \<longrightarrow> \<lfloor>((\<phi> \<preceq>\<^sub>E\<^sub>E \<phi>)\<^bold>\<and>(\<psi> \<preceq>\<^sub>E\<^sub>E \<psi>)) \<^bold>\<rightarrow> ((\<phi> \<preceq>\<^sub>E\<^sub>E \<psi>)\<^bold>\<or>(\<psi> \<preceq>\<^sub>E\<^sub>E \<phi>))\<rfloor>"  by auto
 lemma "\<lfloor>((\<phi> \<preceq>\<^sub>E\<^sub>E \<phi>) \<^bold>\<and> (\<psi> \<preceq>\<^sub>E\<^sub>E \<psi>)) \<^bold>\<rightarrow> ((\<phi> \<preceq>\<^sub>E\<^sub>E \<psi>) \<^bold>\<or> (\<psi> \<preceq>\<^sub>E\<^sub>E \<phi>))\<rfloor> \<longrightarrow> is_total SBR" 
           nitpick oops (*countermodel -- possible error in paper?*)
-lemma tot_v2: "is_total SBR \<longrightarrow> \<lfloor>((\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<phi>)\<^bold>\<and>(\<psi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>)) \<^bold>\<rightarrow> ((\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>)\<^bold>\<or>(\<psi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<phi>))\<rfloor>" by auto
+lemma "is_total SBR \<longrightarrow> \<lfloor>((\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<phi>)\<^bold>\<and>(\<psi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>)) \<^bold>\<rightarrow> ((\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>)\<^bold>\<or>(\<psi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<phi>))\<rfloor>" by auto
 lemma "\<lfloor>((\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<phi>) \<^bold>\<and> (\<psi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>)) \<^bold>\<rightarrow> ((\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>) \<^bold>\<or> (\<psi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<phi>))\<rfloor> \<longrightarrow> is_total SBR"
           nitpick oops (*countermodel -- possible error in paper?*)
 
 (**** Section 5: Equality-based Ceteris Paribus Preference Logic ****)
 (*Some tests: dualities*)
-lemma "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) \<^bold>\<leftrightarrow> \<^bold>\<not>([\<Gamma>]\<^sup>\<preceq>\<^bold>\<not>\<phi>)\<rfloor> \<and> \<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>) \<^bold>\<leftrightarrow> \<^bold>\<not>([\<Gamma>]\<^sup>\<prec>\<^bold>\<not>\<phi>)\<rfloor> \<and> \<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>) \<^bold>\<leftrightarrow> \<^bold>\<not>([\<Gamma>]\<^bold>\<not>\<phi>)\<rfloor>"  by auto
+lemma "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) \<^bold>\<leftrightarrow> \<^bold>\<not>([\<Gamma>]\<^sup>\<preceq>\<^bold>\<not>\<phi>)\<rfloor>"  by auto
+lemma "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>) \<^bold>\<leftrightarrow> \<^bold>\<not>([\<Gamma>]\<^sup>\<prec>\<^bold>\<not>\<phi>)\<rfloor>"  by auto
+lemma "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>)  \<^bold>\<leftrightarrow> \<^bold>\<not>([\<Gamma>]\<^bold>\<not>\<phi>)\<rfloor>"    by auto
 (*Lemma 2*)
 lemma lemma2_1: "(\<^bold>\<diamond>\<^sup>\<preceq>\<phi>) w \<longleftrightarrow> (\<^bold>\<langle>\<^bold>\<emptyset>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) w" by auto
 lemma lemma2_2: "(\<^bold>\<diamond>\<^sup>\<prec>\<phi>) w \<longleftrightarrow> (\<^bold>\<langle>\<^bold>\<emptyset>\<^bold>\<rangle>\<^sup>\<prec>\<phi>) w" by auto  
@@ -57,14 +59,14 @@ lemma Inc1:  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>
 lemma Inc2:  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>)\<rfloor>"  by auto
 lemma Int3:  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)\<rfloor>"  by (meson transBR) 
 lemma Int4:  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<rfloor>"  by (metis transBR)
-lemma Int5:  "\<lfloor>(\<psi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow> ((\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<^bold>\<or>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>(\<phi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>))))\<rfloor>"  using reflBR by fastforce
+lemma Int5:  "\<lfloor>(\<psi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow> ((\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<^bold>\<or>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>(\<phi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>))))\<rfloor>" using reflBR by force
 (*ceteris paribus reflexivity*)
-lemma CetPar6:   assumes 1:"\<phi> \<^bold>\<in> \<Gamma>"   shows  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>) \<^bold>\<rightarrow> \<phi>\<rfloor>"     using 1 by blast 
-lemma CetPar7:   assumes 1:"\<phi> \<^bold>\<in> \<Gamma>"   shows  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^bold>\<not>\<phi>) \<^bold>\<rightarrow> \<^bold>\<not>\<phi>\<rfloor>"  using 1 by blast 
+lemma CetPar6:  assumes 1:"\<phi> \<^bold>\<in> \<Gamma>"  shows  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>) \<^bold>\<rightarrow> \<phi>\<rfloor>"     using 1 by blast 
+lemma CetPar7:  assumes 1:"\<phi> \<^bold>\<in> \<Gamma>"  shows  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^bold>\<not>\<phi>) \<^bold>\<rightarrow> \<^bold>\<not>\<phi>\<rfloor>"  using 1 by blast 
 (*monotonicity*)
-lemma CetPar8:   assumes 1:"\<Gamma> \<^bold>\<subseteq> \<Gamma>' " shows  "\<lfloor>(\<^bold>\<langle>\<Gamma>'\<^bold>\<rangle>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>)\<rfloor>"    using 1 by auto
-lemma CetPar9:   assumes 1:"\<Gamma> \<^bold>\<subseteq> \<Gamma>' " shows  "\<lfloor>(\<^bold>\<langle>\<Gamma>'\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)\<rfloor>"  using 1 by auto
-lemma CetPar10:  assumes 1:"\<Gamma> \<^bold>\<subseteq> \<Gamma>' " shows  "\<lfloor>(\<^bold>\<langle>\<Gamma>'\<^bold>\<rangle>\<^sup>\<prec>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<rfloor>"  using 1 by auto
+lemma CetPar8:  assumes 1:"\<Gamma> \<^bold>\<subseteq> \<Gamma>' " shows  "\<lfloor>(\<^bold>\<langle>\<Gamma>'\<^bold>\<rangle>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>)\<rfloor>"    using 1 by auto
+lemma CetPar9:  assumes 1:"\<Gamma> \<^bold>\<subseteq> \<Gamma>' " shows  "\<lfloor>(\<^bold>\<langle>\<Gamma>'\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)\<rfloor>"  using 1 by auto
+lemma CetPar10: assumes 1:"\<Gamma> \<^bold>\<subseteq> \<Gamma>' " shows  "\<lfloor>(\<^bold>\<langle>\<Gamma>'\<^bold>\<rangle>\<^sup>\<prec>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<rfloor>"  using 1 by auto
 (*increase (decrease) of ceteris paribus sets*)
 lemma CetPar11a: "\<lfloor>(\<phi> \<^bold>\<and> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>(\<alpha> \<^bold>\<and> \<phi>) )) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<union>\<^bold>{\<phi>\<^bold>}\<^bold>\<rangle>\<alpha>)\<rfloor>" by auto 
 lemma CetPar11b: "\<lfloor>((\<^bold>\<not>\<phi>) \<^bold>\<and> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>(\<alpha> \<^bold>\<and> \<^bold>\<not>\<phi>))) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<union>\<^bold>{\<phi>\<^bold>}\<^bold>\<rangle>\<alpha>)\<rfloor>" by auto 
@@ -92,15 +94,15 @@ lemma leqAA_cp_pref:    "is_total SBR \<longrightarrow> (\<phi> \<^bold>\<preceq
 lemma leAE_cp_pref: "(\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u" by auto
 lemma leqAE_cp_pref: "(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u" by auto
 (*miscelaneous tests*)
-lemma  "let \<Gamma> = \<^bold>\<emptyset> in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>)\<rfloor>" by simp
+lemma  "let \<Gamma> = \<^bold>\<emptyset> in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>)\<rfloor>"    by simp
 lemma  "let \<Gamma> = \<^bold>{\<^bold>\<bottom>\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>)\<rfloor>" by simp  
-lemma  "let \<Gamma> = \<^bold>{\<^bold>\<bottom>,A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>)\<rfloor>" nitpick oops (*Countermodel*)
+lemma  "let \<Gamma> = \<^bold>{\<^bold>\<bottom>,A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>)\<rfloor>"     nitpick oops (*Countermodel*)
 lemma  "let \<Gamma> = \<^bold>{A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) \<^bold>\<rightarrow> (A \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>))\<rfloor>" nitpick oops (*Countermodel*)
 lemma  "let \<Gamma> = \<^bold>{A\<^bold>} in \<lfloor>(A \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>)) \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>)\<rfloor>" nitpick oops (*Countermodel*)
-lemma  "let \<Gamma> = \<^bold>\<emptyset> in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>)\<rfloor>" by simp
+lemma  "let \<Gamma> = \<^bold>\<emptyset> in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>)\<rfloor>"    by simp
 lemma  "let \<Gamma> = \<^bold>{\<^bold>\<bottom>\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>)\<rfloor>" by simp  
-lemma  "let \<Gamma> = \<^bold>{\<^bold>\<bottom>,A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>)\<rfloor>" nitpick oops (*Countermodel*)
-lemma  "let \<Gamma> = \<^bold>{A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<rightarrow> (A \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>))\<rfloor>" by auto
+lemma  "let \<Gamma> = \<^bold>{\<^bold>\<bottom>,A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>)\<rfloor>"     nitpick oops (*Countermodel*)
+lemma  "let \<Gamma> = \<^bold>{A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<rightarrow> (A \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>))\<rfloor>"         by auto
 lemma  "let \<Gamma> = \<^bold>{A,B\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<rightarrow> ((A \<^bold>\<and> B) \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>))\<rfloor>" by auto
 lemma  "let \<Gamma> = \<^bold>{A\<^bold>} in \<lfloor>(A \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>)) \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>)\<rfloor>" nitpick oops (*Countermodel*)
 end
