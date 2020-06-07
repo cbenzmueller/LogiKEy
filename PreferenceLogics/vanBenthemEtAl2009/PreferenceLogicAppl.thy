@@ -17,10 +17,10 @@ consts V::"c\<Rightarrow>VAL\<Rightarrow>\<sigma>"   (*values*)
 axiomatization where (*axiomatization of the ethico-legal value ontology*)
  V1:"\<lfloor>(UV x SECURITY) \<^bold>\<leftrightarrow> \<^bold>\<not>(UV x LIBERTY)\<rfloor>" and
  V2:"\<lfloor>(UV x EQUALITY) \<^bold>\<leftrightarrow> \<^bold>\<not>(UV x UTILITY)\<rfloor>" and
- V3:"\<lfloor>(UV x SECURITY) \<^bold>\<leftrightarrow> ((V x RELI) \<^bold>\<or> (V x STAB))\<rfloor>" and
- V4:"\<lfloor>(UV x EQUALITY) \<^bold>\<leftrightarrow> ((V x EQUI) \<^bold>\<or> (V x FAIR))\<rfloor>" and
- V5:"\<lfloor>(UV x LIBERTY)  \<^bold>\<leftrightarrow> ((V x RESP) \<^bold>\<or> (V x WILL))\<rfloor>" and
- V6:"\<lfloor>(UV x UTILITY)  \<^bold>\<leftrightarrow> ((V x GAIN) \<^bold>\<or> (V x EFFI))\<rfloor>" 
+ V3:"\<lfloor>((V x RELI) \<^bold>\<or> (V x STAB)) \<^bold>\<leftrightarrow> (UV x SECURITY)\<rfloor>" and
+ V4:"\<lfloor>((V x EQUI) \<^bold>\<or> (V x FAIR)) \<^bold>\<leftrightarrow> (UV x EQUALITY)\<rfloor>" and
+ V5:"\<lfloor>((V x RESP) \<^bold>\<or> (V x WILL)) \<^bold>\<leftrightarrow> (UV x LIBERTY)\<rfloor>" and
+ V6:"\<lfloor>((V x GAIN) \<^bold>\<or> (V x EFFI)) \<^bold>\<leftrightarrow> (UV x UTILITY)\<rfloor>" 
 
 (*exploring & assessing the ontology with reasoning tools*)
 lemma "True" nitpick[satisfy,max_genuine=10,eval=UV V p d] oops (*show diff. models*)
@@ -28,27 +28,27 @@ lemma "\<exists>x.\<lfloor>((V x STAB) \<^bold>\<and> V x WILL)\<rfloor>" nitpic
 lemma "\<not>(\<exists>x. \<lfloor>((V x GAIN) \<^bold>\<and> ((V x STAB) \<^bold>\<and> (V x WILL)))\<rfloor>)" using V1 V3 V5 by blast
 
 (*kinds of situations*)
-consts Animals :: "c\<Rightarrow>\<sigma>"  (*appropriation of animals in general*)
-consts WildAnimals :: "c\<Rightarrow>\<sigma>"  (*appropriation of wild animals*)
-consts DomesticAnimals :: "c\<Rightarrow>\<sigma>" (*appropriation of domestic animals*)
-consts FoxHunting :: "c\<Rightarrow>\<sigma>" (*hunting (appropriation) of foxes*)
+consts Animals :: "\<sigma>"  (*appropriation of animals in general*)
+consts WildAnimals :: "\<sigma>"  (*appropriation of wild animals*)
+consts DomesticAnimals :: "\<sigma>" (*appropriation of domestic animals*)
+consts FoxHunting :: "\<sigma>" (*hunting (appropriation) of foxes*)
 
 axiomatization where (*world knowledge: meaning postulates for kinds of situations*)
-W1: "WildAnimals x \<subseteq> Animals x" and
-W2: "FoxHunting x \<subseteq> WildAnimals x" and
-W3: "DomesticAnimals x \<subseteq> Animals x"
+W1: "WildAnimals \<subseteq> Animals" and
+W2: "FoxHunting \<subseteq> WildAnimals" and
+W3: "DomesticAnimals \<subseteq> Animals"
 
 axiomatization where (*example legal corpus*)
-S1: "\<lfloor>Animals x        \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> ((V x STAB) \<^bold>\<and> (V x GAIN)))\<rfloor>" and (*general*)
-S2: "\<lfloor>WildAnimals x    \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> (V x STAB))\<rfloor>" and             (*specialization*)
-S3: "\<lfloor>DomesticAnimals x \<^bold>\<rightarrow> ((V x STAB) \<^bold>\<prec> ((V x RELI) \<^bold>\<and> (V x WILL)))\<rfloor>"  (*specialization*)
+S1: "\<lfloor>Animals         \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> ((V x STAB) \<^bold>\<and> (V x GAIN)))\<rfloor>" and (*general*)
+S2: "\<lfloor>WildAnimals     \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> (V x STAB))\<rfloor>" and             (*specialization*)
+S3: "\<lfloor>DomesticAnimals \<^bold>\<rightarrow> ((V x STAB) \<^bold>\<prec> ((V x RELI) \<^bold>\<and> (V x WILL)))\<rfloor>"  (*specialization*)
 
 lemma True nitpick[satisfy] oops (*axioms consistent*)
 
 (*explore implicit legal knowledge*)
-lemma "\<lfloor>FoxHunting x \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> (V x  STAB))\<rfloor>" using S2 W2 by blast
-lemma "\<lfloor>DomesticAnimals x \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> (V x  STAB))\<rfloor>" using S1 V1 V3 V5 W3 by blast 
-lemma "\<lfloor>Animals x \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> ((V x RELI) \<^bold>\<and> (V x GAIN)))\<rfloor>" using S1 V1 V3 V5 by blast (*interesting...*)
+lemma "\<lfloor>FoxHunting \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> (V x  STAB))\<rfloor>" using S2 W2 by blast
+lemma "\<lfloor>DomesticAnimals \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> (V x  STAB))\<rfloor>" using S1 V1 V3 V5 W3 by blast 
+lemma "\<lfloor>Animals \<^bold>\<rightarrow> ((V x WILL) \<^bold>\<prec> ((V x RELI) \<^bold>\<and> (V x GAIN)))\<rfloor>" using S1 V1 V3 V5 by blast (*interesting...*)
 
 (*situational factors*)
 consts For::"c\<Rightarrow>\<sigma>"    (*decision: find/rule for party*)
@@ -68,9 +68,11 @@ R2: "\<lfloor>(Liv x \<^bold>\<rightarrow> For x) \<^bold>\<rightarrow>  \<^bold
 R3: "\<lfloor>(Land x  \<^bold>\<rightarrow> For x) \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<preceq>(V x RELI)\<rfloor>" and
 R4: "\<lfloor>(Poss x \<^bold>\<rightarrow> For x) \<^bold>\<rightarrow>  \<^bold>\<box>\<^sup>\<preceq>(V x STAB)\<rfloor>"
 
-(*Pierson v. Post*)         (*** Hi David, we still have some problems ... ***)
-lemma "(\<exists>w. ((FoxHunting p \<^bold>\<and> (Intent p \<^bold>\<and> Poss d))) w)" nitpick[satisfy] 
-lemma "\<lfloor>(FoxHunting d \<^bold>\<and> (FoxHunting p \<^bold>\<and> (Intent p \<^bold>\<and> Poss d))) \<^bold>\<rightarrow> For d\<rfloor>" 
+(*Pierson v. Post*)         
+lemma "\<not>(\<exists>w. (FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) w)" sledgehammer
+  by (meson R4 S2 V1 V3 V5 W2 W5 c.distinct(1) reflBR)
+lemma "\<exists>w. (FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) w" nitpick[satisfy] oops
+lemma "\<lfloor>(FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) \<^bold>\<rightarrow> For d\<rfloor>" 
   by (meson R4 S2 V1 V3 V5 W2 W5 c.distinct(1) reflBR) 
 (*Keeble v. Hickergill*)
 lemma "\<lfloor>(WildAnimals \<^bold>\<and> (Liv p \<^bold>\<and> Land p))\<rfloor>" nitpick[satisfy] oops
