@@ -23,7 +23,12 @@ axiomatization where (*axiomatization of the ethico-legal value ontology*)
  V3:"\<lfloor>((V x RELI) \<^bold>\<or> (V x STAB)) \<^bold>\<leftrightarrow> (UV x SECURITY)\<rfloor>" and
  V4:"\<lfloor>((V x EQUI) \<^bold>\<or> (V x FAIR)) \<^bold>\<leftrightarrow> (UV x EQUALITY)\<rfloor>" and
  V5:"\<lfloor>((V x RESP) \<^bold>\<or> (V x WILL)) \<^bold>\<leftrightarrow> (UV x LIBERTY)\<rfloor>" and
- V6:"\<lfloor>((V x GAIN) \<^bold>\<or> (V x EFFI)) \<^bold>\<leftrightarrow> (UV x UTILITY)\<rfloor>" 
+ V6:"\<lfloor>((V x GAIN) \<^bold>\<or> (V x EFFI)) \<^bold>\<leftrightarrow> (UV x UTILITY)\<rfloor>" and
+ V7:"\<lfloor>((V x GAIN)\<^bold>\<or>((V x EFFI)\<^bold>\<or>((V x WILL)\<^bold>\<or>(V x STAB)))) \<^bold>\<rightarrow> \<^bold>\<not>(UV x EQUALITY)\<rfloor>" and
+ V8:"\<lfloor>((V x RESP)\<^bold>\<or>((V x WILL)\<^bold>\<or>((V x GAIN)\<^bold>\<or>(V x FAIR)))) \<^bold>\<rightarrow> \<^bold>\<not>(UV x SECURITY)\<rfloor>" and
+ V9:"\<lfloor>((V x EQUI)\<^bold>\<or>((V x FAIR)\<^bold>\<or>((V x RELI)\<^bold>\<or>(V x RESP)))) \<^bold>\<rightarrow> \<^bold>\<not>(UV x UTILITY)\<rfloor>" and
+V10:"\<lfloor>((V x RELI)\<^bold>\<or>((V x STAB)\<^bold>\<or>((V x EQUI)\<^bold>\<or>(V x EFFI)))) \<^bold>\<rightarrow> \<^bold>\<not>(UV x LIBERTY)\<rfloor>" 
+
 
 (*exploring & assessing the ontology with reasoning tools*)
 lemma "True" nitpick[satisfy,max_genuine=10,eval=UV V p d] oops (*show diff. models*)
@@ -77,18 +82,17 @@ lemma "(\<exists>w. (DomesticAnimals) w)" nitpick[satisfy] oops
 lemma "(\<exists>w. (Animals) w)" nitpick[satisfy] oops
 
 (*Pierson v. Post*)         
-lemma "\<exists>w. (FoxHunting \<^bold>\<and> (Intent p  \<^bold>\<and> Poss d)) w" nitpick[satisfy] oops 
-lemma "\<lfloor>(FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) \<^bold>\<rightarrow> For d\<rfloor>" nitpick[satisfy] nitpick oops
+lemma "\<exists>w. (FoxHunting \<^bold>\<and> (Intent p  \<^bold>\<and> Poss d)) w" nitpick[satisfy,show_all] oops 
+lemma "\<lfloor>(FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) \<^bold>\<rightarrow> For d\<rfloor>" nitpick[satisfy,show_all] nitpick oops
 
 (*Keeble v. Hickergill*)
 lemma "\<lfloor>(WildAnimals \<^bold>\<and> (Liv p \<^bold>\<and> Land p))\<rfloor>" nitpick[satisfy] oops
-lemma "\<lfloor>(WildAnimals \<^bold>\<and> (Liv p \<^bold>\<and> Land p)) \<^bold>\<rightarrow> For p\<rfloor>"
-  nitpick[satisfy] nitpick oops
+lemma "\<lfloor>(WildAnimals \<^bold>\<and> (Liv p \<^bold>\<and> Land p)) \<^bold>\<rightarrow> For p\<rfloor>" nitpick[satisfy,show_all] nitpick oops
 
 (*Young v. Hitchens*)
 lemma "\<lfloor>(WildAnimals \<^bold>\<and> (Liv p \<^bold>\<and> (Land p \<^bold>\<and> (Liv d \<^bold>\<and> Poss d))))\<rfloor>" nitpick[satisfy] oops
 lemma "\<lfloor>(WildAnimals \<^bold>\<and> (Liv p \<^bold>\<and> (Land p \<^bold>\<and> (Liv d \<^bold>\<and> Poss d)))) \<^bold>\<rightarrow> For p\<rfloor>"
-   nitpick[satisfy] nitpick oops 
+   nitpick[satisfy,show_all] nitpick oops 
 end
 
 (* Suppose that 'p' represents Post and 'd' Pierson.
