@@ -1,7 +1,7 @@
 theory PreferenceLogicBasics imports Main             (*** Benzmüller & Fuenmayor, 2020 ***)
 begin (*SSE of the preference logic by van Benthem, Girard and Roy, JPL 2009, in HOL*)
 (*some conceptually unimportant declarations of defaults for tools*)
-   nitpick_params[user_axioms,expect=genuine] declare[["syntax_ambiguity_warning" = false]]
+nitpick_params[user_axioms,expect=genuine,format=3] declare[[syntax_ambiguity_warning=false]]
    
 (**** Embedding of "a basic modal preference language" in HOL ****)
 (*Preliminaries*)
