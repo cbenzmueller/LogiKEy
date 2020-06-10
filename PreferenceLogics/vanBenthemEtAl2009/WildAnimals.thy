@@ -30,9 +30,11 @@ lemma "(\<exists>w. (DomesticAnimals) w)" nitpick[satisfy] oops
 (*Pierson v. Post*)         
 lemma "\<lfloor>(FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) \<^bold>\<and> For d\<rfloor>" 
   nitpick[satisfy,show_all]  oops (*non-trivial models exist*)
+lemma "\<lfloor>(FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) \<^bold>\<rightarrow> For p\<rfloor>" 
+  nitpick[show_all] oops (*countermodel not found*) 
 lemma "\<lfloor>(FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) \<^bold>\<rightarrow> For d\<rfloor>" 
   sledgehammer           (*proof not yet found*) 
-  nitpick[show_all] oops (*countermodel not found*) 
+  nitpick[show_all] oops (*no countermodel found*) 
 
 (*Conti v. ASPCA*)
 lemma "\<lfloor>(ParrotCapture \<^bold>\<and> (Cust p \<^bold>\<and> (Own p \<^bold>\<and> Poss d))) \<^bold>\<and> For p\<rfloor>"
