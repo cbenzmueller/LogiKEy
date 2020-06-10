@@ -1,11 +1,11 @@
 theory PreferenceLogicBasics imports Main             (*** Benzmüller & Fuenmayor, 2020 ***)
 begin (*SSE of the preference logic by van Benthem, Girard and Roy, JPL 2009, in HOL*)
-(*some conceptually unimportant declarations of defaults for tools*)
-nitpick_params[user_axioms,expect=genuine,format=3] declare[[syntax_ambiguity_warning=false]]
+declare[[syntax_ambiguity_warning=false]]               (*unimportant declaration for tool*)
+nitpick_params[user_axioms,expect=genuine,show_all,format=3] (*unimportant declaration ...*)
    
 (**** Embedding of "a basic modal preference language" in HOL ****)
 (*Preliminaries*)
-typedecl i                typedecl e                  (*Possible Worlds and Individuals*)      
+typedecl i                                            (*Possible Worlds*)      
 type_synonym \<sigma>="i\<Rightarrow>bool"  type_synonym \<gamma>="i\<Rightarrow>i\<Rightarrow>bool" (*Propositions, Preference relations*)
 type_synonym \<mu>="\<sigma>\<Rightarrow>\<sigma>"     type_synonym \<nu>="\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"    (*Unary & Binary modal connectives*)
 type_synonym \<pi>="\<sigma>\<Rightarrow>bool"                              (*Sets of world-lifted propositions*)
@@ -15,16 +15,16 @@ abbreviation SBR::\<gamma> ("_\<prec>_") where "v\<prec>w \<equiv> (v\<preceq>w)
 abbreviation "reflexive Rel \<equiv> \<forall>x. Rel x x"
 abbreviation "transitive Rel \<equiv> \<forall>x y z. Rel x y \<and> Rel y z \<longrightarrow> Rel x z"
 abbreviation "is_total Rel \<equiv> \<forall>x y. Rel x y \<or> Rel y x"
-axiomatization where reflBR: "reflexive BR"  and  transBR: "transitive BR"
+axiomatization where reflBR: "reflexive BR" and transBR: "transitive BR"
 
 (*Modal logic connectives (operating on truth-sets)*)
 abbreviation c01::\<sigma> ("\<^bold>\<bottom>")   where "\<^bold>\<bottom> \<equiv> \<lambda>w. False"
 abbreviation c02::\<sigma> ("\<^bold>\<top>")   where "\<^bold>\<top> \<equiv> \<lambda>w. True"
 abbreviation c03::\<mu> ("\<^bold>\<not>_")  where "\<^bold>\<not>\<phi> \<equiv> \<lambda>w.\<not>(\<phi> w)"
-abbreviation c04::\<nu> ("_\<^bold>\<and>_") where "\<phi>\<^bold>\<and>\<psi> \<equiv> \<lambda>w.(\<phi> w)\<and>(\<psi> w)"   
-abbreviation c05::\<nu> ("_\<^bold>\<or>_") where "\<phi>\<^bold>\<or>\<psi> \<equiv> \<lambda>w.(\<phi> w)\<or>(\<psi> w)"
-abbreviation c06::\<nu> ("_\<^bold>\<rightarrow>_") where "\<phi>\<^bold>\<rightarrow>\<psi> \<equiv> \<lambda>w.(\<phi> w)\<longrightarrow>(\<psi> w)"  
-abbreviation c07::\<nu> ("_\<^bold>\<leftrightarrow>_") where "\<phi>\<^bold>\<leftrightarrow>\<psi> \<equiv> \<lambda>w.(\<phi> w)\<longleftrightarrow>(\<psi> w)"
+abbreviation c04::\<nu> (infixl"\<^bold>\<and>"85) where "\<phi>\<^bold>\<and>\<psi> \<equiv> \<lambda>w.(\<phi> w)\<and>(\<psi> w)"   
+abbreviation c05::\<nu> (infixl"\<^bold>\<or>"83) where "\<phi>\<^bold>\<or>\<psi> \<equiv> \<lambda>w.(\<phi> w)\<or>(\<psi> w)"
+abbreviation c06::\<nu> (infixl"\<^bold>\<rightarrow>"84) where "\<phi>\<^bold>\<rightarrow>\<psi> \<equiv> \<lambda>w.(\<phi> w)\<longrightarrow>(\<psi> w)"  
+abbreviation c07::\<nu> (infixl"\<^bold>\<leftrightarrow>"84) where "\<phi>\<^bold>\<leftrightarrow>\<psi> \<equiv> \<lambda>w.(\<phi> w)\<longleftrightarrow>(\<psi> w)"
 abbreviation c08::\<mu> ("\<^bold>\<box>\<^sup>\<preceq>_") where "\<^bold>\<box>\<^sup>\<preceq>\<phi> \<equiv> \<lambda>w.\<forall>v.(w\<preceq>v)\<longrightarrow>(\<phi> v)"
 abbreviation c09::\<mu> ("\<^bold>\<diamond>\<^sup>\<preceq>_") where "\<^bold>\<diamond>\<^sup>\<preceq>\<phi> \<equiv> \<lambda>w.\<exists>v.(w\<preceq>v)\<and>(\<phi> v)"
 abbreviation c10::\<mu> ("\<^bold>\<box>\<^sup>\<prec>_") where "\<^bold>\<box>\<^sup>\<prec>\<phi> \<equiv> \<lambda>w.\<forall>v.(w\<prec>v)\<longrightarrow>(\<phi> v)"
