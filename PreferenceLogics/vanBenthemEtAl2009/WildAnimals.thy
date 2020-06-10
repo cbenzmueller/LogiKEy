@@ -1,6 +1,9 @@
-theory WildAnimals imports PreferenceLogicBasics (*Benzm., Fuenmayor & Lomfeld, 2020*)               
+theory WildAnimals              (*Benzmüller, Fuenmayor and Lomfeld, 2020*)               
+   imports PreferenceLogicBasics
 begin (***** proof of concept: ethical value ontology and wild animal cases *****)
+
 (*auxiliary definitions*)
+(* abbreviation pref::\<nu>            ("_\<^bold>\<prec>_")   where  "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<phi> \<preceq>\<^sub>A\<^sub>E \<psi>"    *)
 abbreviation pref::\<nu>            ("_\<^bold>\<prec>_")   where  "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<phi> \<prec>\<^sub>A\<^sub>E \<psi>"   
 abbreviation subs::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>bool" ("_\<subseteq>_")   where  "\<alpha>\<subseteq>\<beta> \<equiv> \<forall>w.(\<alpha> w)\<longrightarrow>(\<beta> w)" 
 abbreviation boxg::\<mu> ("\<^bold>\<box>_") where "\<^bold>\<box>\<phi> \<equiv> \<^bold>\<box>\<^sup>\<preceq>\<phi>"
@@ -16,16 +19,34 @@ fun other::"c\<Rightarrow>c" ("_\<inverse>") where "p\<inverse> = d" | "d\<inver
 consts UV::"c\<Rightarrow>UVAL\<Rightarrow>\<sigma>" (*upper values*)
 consts V::"c\<Rightarrow>VAL\<Rightarrow>\<sigma>"   (*values*)
 axiomatization where (*axiomatization of the ethico-legal value ontology*)
- V1:"\<lfloor>((UV x SECURITY) \<^bold>\<and> (UV x EQUALITY)) \<^bold>\<leftrightarrow> \<^bold>\<not>((UV x UTILITY) \<^bold>\<and> (UV x LIBERTY))\<rfloor>"  and 
- V2:"\<lfloor>((UV x SECURITY) \<^bold>\<and> (UV x UTILITY)) \<^bold>\<leftrightarrow> \<^bold>\<not>((UV x EQUALITY) \<^bold>\<and> (UV x LIBERTY))\<rfloor>"  and 
+ (* V1:"\<lfloor>(UV x SECURITY) \<^bold>\<leftrightarrow> \<^bold>\<not>(UV x LIBERTY)\<rfloor>" and *)
+ V1:"\<lfloor>((UV x SECURITY) \<^bold>\<and> (UV x EQUALITY)) \<^bold>\<rightarrow> \<^bold>\<not>((UV x UTILITY) \<^bold>\<and> (UV x LIBERTY))\<rfloor>" and 
+ (* V2:"\<lfloor>(UV x EQUALITY) \<^bold>\<leftrightarrow> \<^bold>\<not>(UV x UTILITY)\<rfloor>" and *)
+(* V2:"\<lfloor>((UV x SECURITY) \<^bold>\<and> (UV x UTILITY)) \<^bold>\<rightarrow> \<^bold>\<not>((UV x EQUALITY) \<^bold>\<and> (UV x LIBERTY))\<rfloor>" and *)
+ (* V3:"\<lfloor>((V x RELI) \<^bold>\<or> (V x STAB)) \<^bold>\<leftrightarrow> (UV x SECURITY)\<rfloor>" and *)
  V3:"\<lfloor>(((V x RELI) \<^bold>\<or> (V x EQUI)) \<^bold>\<or> ((V x STAB) \<^bold>\<or> (V x EFFI))) \<^bold>\<leftrightarrow> (UV x SECURITY)\<rfloor>" and
+ (* V4:"\<lfloor>((V x EQUI) \<^bold>\<or> (V x FAIR)) \<^bold>\<leftrightarrow> (UV x EQUALITY)\<rfloor>" and *)
  V4:"\<lfloor>(((V x FAIR) \<^bold>\<or> (V x RESP)) \<^bold>\<or> ((V x EQUI) \<^bold>\<or> (V x RELI))) \<^bold>\<leftrightarrow> (UV x EQUALITY)\<rfloor>" and
- V5:"\<lfloor>(((V x WILL) \<^bold>\<or> (V x GAIN)) \<^bold>\<or> ((V x RESP) \<^bold>\<or> (V x FAIR))) \<^bold>\<leftrightarrow> (UV x LIBERTY)\<rfloor>"  and
+ (* V5:"\<lfloor>((V x RESP) \<^bold>\<or> (V x WILL)) \<^bold>\<leftrightarrow> (UV x LIBERTY)\<rfloor>" and *)
+ V5:"\<lfloor>(((V x WILL) \<^bold>\<or> (V x GAIN)) \<^bold>\<or> ((V x RESP) \<^bold>\<or> (V x FAIR))) \<^bold>\<leftrightarrow> (UV x LIBERTY)\<rfloor>" and
+ (* V6:"\<lfloor>((V x GAIN) \<^bold>\<or> (V x EFFI)) \<^bold>\<leftrightarrow> (UV x UTILITY)\<rfloor>" and  *)
  V6:"\<lfloor>(((V x EFFI) \<^bold>\<or> (V x STAB)) \<^bold>\<or> ((V x GAIN) \<^bold>\<or> (V x WILL))) \<^bold>\<leftrightarrow> (UV x UTILITY)\<rfloor>" 
+(* and (* following conditions introduce inconsistency: *) 
+ V7:"\<lfloor>((V x GAIN)\<^bold>\<or>((V x EFFI)\<^bold>\<or>((V x WILL)\<^bold>\<or>(V x STAB)))) \<^bold>\<rightarrow> \<^bold>\<not>(UV x EQUALITY)\<rfloor>" and
+ V8:"\<lfloor>((V x RESP)\<^bold>\<or>((V x WILL)\<^bold>\<or>((V x GAIN)\<^bold>\<or>(V x FAIR)))) \<^bold>\<rightarrow> \<^bold>\<not>(UV x SECURITY)\<rfloor>" and
+ V9:"\<lfloor>((V x EQUI)\<^bold>\<or>((V x FAIR)\<^bold>\<or>((V x RELI)\<^bold>\<or>(V x RESP)))) \<^bold>\<rightarrow> \<^bold>\<not>(UV x UTILITY)\<rfloor>" and
+V10:"\<lfloor>((V x RELI)\<^bold>\<or>((V x STAB)\<^bold>\<or>((V x EQUI)\<^bold>\<or>(V x EFFI)))) \<^bold>\<rightarrow> \<^bold>\<not>(UV x LIBERTY)\<rfloor>" *)
+
+
+lemma V1':"\<lfloor>((UV x UTILITY) \<^bold>\<and> (UV x LIBERTY)) \<^bold>\<rightarrow> \<^bold>\<not>((UV x SECURITY) \<^bold>\<and> (UV x EQUALITY))\<rfloor>" using V1 by blast
+lemma V1'':"\<lfloor>((UV x UTILITY) \<^bold>\<and> (UV x LIBERTY)) \<^bold>\<leftrightarrow> \<^bold>\<not>((UV x SECURITY) \<^bold>\<and> (UV x EQUALITY))\<rfloor>" nitpick oops (*countermodel*)
+lemma V2:"\<lfloor>((UV x SECURITY) \<^bold>\<and> (UV x UTILITY)) \<^bold>\<rightarrow> \<^bold>\<not>((UV x EQUALITY) \<^bold>\<and> (UV x LIBERTY))\<rfloor>" using V1 by blast nitpick
+lemma V2':"\<lfloor>((UV x EQUALITY) \<^bold>\<and> (UV x LIBERTY)) \<^bold>\<rightarrow> \<^bold>\<not>((UV x SECURITY) \<^bold>\<and> (UV x UTILITY))\<rfloor>" using V1 by blast
+lemma V2'':"\<lfloor>((UV x EQUALITY) \<^bold>\<and> (UV x LIBERTY)) \<^bold>\<leftrightarrow> \<^bold>\<not>((UV x SECURITY) \<^bold>\<and> (UV x UTILITY))\<rfloor>" nitpick oops (*countermodel*)
 
 (*exploring & assessing the ontology with reasoning tools*)
-lemma "True" nitpick[satisfy,max_genuine=10,eval=UV V p d] oops (*shows diff. models*)
-lemma "\<exists>x.\<lfloor>((V x STAB) \<^bold>\<and> V x WILL)\<rfloor>" nitpick[satisfy]      oops (* satisfiable*)
+lemma "True" nitpick[satisfy,max_genuine=10,eval=UV V p d] oops (*show diff. models*)
+lemma "\<lfloor>(\<^bold>\<not>(UV d LIBERTY)) \<^bold>\<and> (\<^bold>\<not>(UV d EQUALITY))\<rfloor>" nitpick[satisfy,max_genuine=10,eval=UV V p d]      oops (* satisfiable*)
 lemma "(\<exists>x. \<lfloor>((V x GAIN) \<^bold>\<and> ((V x STAB) \<^bold>\<and> (V x WILL)))\<rfloor>)"   oops (* satisfiable*)
 lemma "\<not>(\<exists>x.\<lfloor>((V x RELI) \<^bold>\<and> V x WILL)\<rfloor>)" using V1 V3 V4 V5 V6 by blast (* unsatisfiable*)
 
@@ -79,22 +100,20 @@ lemma "(\<exists>w. (WildAnimals) w)" nitpick[satisfy] oops
 lemma "(\<exists>w. (DomesticAnimals) w)" nitpick[satisfy] oops 
 
 (*Pierson v. Post*)         
-lemma "\<lfloor>(FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) \<^bold>\<and> For d\<rfloor>"  
-   nitpick[satisfy,show_all] oops (*non-trivial model exists*)
+lemma "\<lfloor>(FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) \<^bold>\<and> For d\<rfloor>" 
+  nitpick[satisfy,show_all]  oops (*non-trivial models exist*)
 lemma "\<lfloor>(FoxHunting \<^bold>\<and> (Intent p \<^bold>\<and> Poss d)) \<^bold>\<rightarrow> For d\<rfloor>" 
+sledgehammer[verbose]
   (* sledgehammer[verbose] (*proof not yet found*) *)
- nitpick[show_all] oops (*no countermodel found*) 
+ nitpick[show_all] oops   (*countermodel not found*) 
 
 (*Conti v. ASPCA*)
 lemma "\<lfloor>(ParrotCapture \<^bold>\<and> (Cust p \<^bold>\<and> (Own p \<^bold>\<and> Poss d))) \<^bold>\<and> For p\<rfloor>"
   nitpick[satisfy,show_all]  oops (*non-trivial models exist*)
-lemma "\<lfloor>(ParrotCapture \<^bold>\<and> (Cust p \<^bold>\<and> (Own p \<^bold>\<and> Poss d))) \<^bold>\<rightarrow> For p\<rfloor>" sledgehammer
+lemma "\<lfloor>(ParrotCapture \<^bold>\<and> (Cust p \<^bold>\<and> (Own p \<^bold>\<and> Poss d))) \<^bold>\<rightarrow> For p\<rfloor>"
   by (metis R4 S3 V2 V3 V4 V5 V6 W4 W7 other.simps(1) reflBR) (* proof found*)
 
 end
-
-
-
 (***Text descriptions: **)
 
 (* Pierson v. Post:
