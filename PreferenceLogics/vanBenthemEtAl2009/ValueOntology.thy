@@ -29,7 +29,7 @@ lemma L3: "\<lfloor>(x\<up>EQUALITY \<^bold>\<and> x\<up>SECURITY) \<^bold>\<rig
   using V1 by blast
 
 (*exploring & assessing the ontology with reasoning tools*)
-lemma "True" nitpick[satisfy,max_genuine=80,eval=UV V p d] oops (*show models*)
+lemma "True" nitpick[satisfy,max_genuine=80,card i=1,eval=UV V p d] oops (*show models*)
 lemma "\<exists>x. \<lfloor>x\<down>GAIN \<^bold>\<and> x\<down>STAB \<^bold>\<and> x\<down>WILL\<rfloor>" nitpick[satisfy]  oops (*satisfiable*)
 lemma "\<exists>x. \<lfloor>x\<down>RELI \<^bold>\<and> x\<down>WILL\<rfloor>" nitpick[satisfy]  oops (*not satisfiable*)
 lemma "\<not>(\<exists>x. \<lfloor>x\<down>RELI \<^bold>\<and> x\<down>WILL\<rfloor>)" using L2 V2 V3 V4 V5 by blast 
