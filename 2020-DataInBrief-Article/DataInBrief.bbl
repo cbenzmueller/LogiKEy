@@ -45,10 +45,10 @@ C.~Benzm{\"u}ller, A.~Farjami, and X.~Parent.
 
 \bibitem{J48}
 C.~Benzm{\"u}ller, X.~Parent, and L.~van~der Torre.
-\newblock Designing normative theories of ethical reasoning: {LogiKEy} formal
-  framework, methodology, and tool support.
-\newblock {\em Artificial Intelligence (to appear)}, pages 1--50, 2020.
-\newblock Preprint: \url{https://arxiv.org/abs/1903.10187}.
+\newblock Designing normative theories for ethical and legal reasoning:
+  {LogiKEy} formal framework, methodology, and tool support.
+\newblock {\em Artificial Intelligence}, pages 1--50, 2020.
+\newblock In print; preprint: \url{https://arxiv.org/abs/1903.10187}.
 
 \bibitem{J23}
 C.~Benzm{\"u}ller and L.~C. Paulson.
@@ -83,29 +83,25 @@ R.~Chisholm.
 D.~Fuenmayor and C.~Benzm{\"u}ller.
 \newblock Harnessing higher-order (meta-)logic to represent and reason with
   complex ethical theories.
-\newblock In {\em PRICAI 2019: Trends in Artificial Intelligence}, Lecture
-  Notes in Artificial Intelligence, pages 1--14. Springer International
-  Publishing, 2019.
-\newblock In print, preprint \url{http://arxiv.org/abs/1903.09818}.
+\newblock In A.~Nayak and A.~Sharma, editors, {\em PRICAI 2019: Trends in
+  Artificial Intelligence}, volume 11670 of {\em Lecture Notes in Artificial
+  Intelligence}, pages 418--432. Springer, Cham, 2019.
 
 \bibitem{C77}
 D.~Fuenmayor and C.~Benzm{\"u}ller.
 \newblock Mechanised assessment of complex natural-language arguments using
   expressive logic combinations.
-\newblock In {\em Frontiers of Combining Systems, 12th International Symposium,
-  FroCoS 2019, London, September 4-6}, Lecture Notes in Artificial
-  Intelligence, pages 1--17. Springer, 2019.
-\newblock In print, preprint
-  \url{http://doi.org/10.13140/RG.2.2.20803.45608/1}.
+\newblock In A.~Herzig and AndreiPopescu, editors, {\em Frontiers of Combining
+  Systems, 12th International Symposium, FroCoS 2019, London, September 4-6},
+  volume 11715 of {\em Lecture Notes in Artificial Intelligence}, pages
+  112--128. Springer Nature Switzerland AG, 2019.
 
 \bibitem{C82}
 D.~Fuenmayor and C.~Benzm{\"u}ller.
 \newblock Computer-supported analysis of arguments in climate engineering.
-\newblock In M.~Dastani, H.~Dong, and L.~van~der Torre, editors, {\em {CLAR}
-  2020 -- 3rd International Conference on Logic and Argumentation}, Logic in
-  Asia: Studia Logica Library, pages 108--116. Springer Nature Switzerland AG,
-  2020.
-\newblock To appear.
+\newblock In M.~Dastani, H.~Dong, and L.~van~der Torre, editors, {\em Logic and
+  Argumentation. CLAR 2020.}, volume 12061 of {\em Lecture Notes in Computer
+  Science}, pages 104--115. Springer, Cham, 2020.
 
 \bibitem{gabbay2013}
 D.~Gabbay, J.~Horty, X.~Parent, R.~van~der Meyden, and L.~van~der Torre.
@@ -180,7 +176,6 @@ G.~Sutcliffe and C.~Benzm{\"u}ller.
 \newblock Automated reasoning in higher-order logic using the {TPTP THF}
   infrastructure.
 \newblock {\em Journal of Formalized Reasoning}, 3(1):1--27, 2010.
-\newblock Preprint: \url{http://christoph-benzmueller.de/papers/J22.pdf}.
 
 \bibitem{zahoransky19}
 V.~Zahoransky.
