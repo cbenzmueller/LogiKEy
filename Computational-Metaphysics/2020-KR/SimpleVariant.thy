@@ -2,24 +2,22 @@ theory SimpleVariant imports HOML MFilter BaseDefs
 begin
 (*Axiom's of new, simplified variant*) 
 axiomatization where 
-(* A1': "\<lfloor>\<^bold>\<not>(\<P>(\<lambda>x.(x\<^bold>\<noteq>x)))\<rfloor>" and *)
  A1': "\<lfloor>\<^bold>\<not>(\<P>(\<lambda>x.(x\<^bold>\<noteq>x)))\<rfloor>" and 
- A2': "\<lfloor>\<^bold>\<forall>X Y.(((\<P> X) \<^bold>\<and> ((X\<^bold>\<sqsubseteq>Y)\<^bold>\<or>(X\<Rrightarrow>Y))) \<^bold>\<rightarrow> (\<P> Y))\<rfloor>" and
+ A2': "\<lfloor>\<^bold>\<forall>X Y.(((\<P> X) \<^bold>\<and> ((X\<^bold>\<sqsubseteq>Y) \<^bold>\<or> (X\<Rrightarrow>Y))) \<^bold>\<rightarrow> (\<P> Y))\<rfloor>" and
  A3:  "\<lfloor>\<^bold>\<forall>\<Z>.((\<P>\<o>\<s> \<Z>) \<^bold>\<rightarrow> (\<^bold>\<forall>X.((X\<Sqinter>\<Z>) \<^bold>\<rightarrow> (\<P> X))))\<rfloor>" 
+
+lemma T2: "\<lfloor>\<P> \<G>\<rfloor>" by (metis A3 G_def) (*From A3*)
+lemma L1: "\<lfloor>\<P>(\<lambda>x.(x\<^bold>\<noteq>x))\<rfloor>" by (metis A2' A3) 
 
 (*Necessary existence of a Godlike entity*) 
 theorem T6: "\<lfloor>\<^bold>\<box>(\<^bold>\<exists>\<^sup>E \<G>)\<rfloor>" sledgehammer (*Proof found*)
 proof -
  have T1: "\<lfloor>\<^bold>\<forall>X.((\<P> X) \<^bold>\<rightarrow> \<^bold>\<diamond>(\<^bold>\<exists>\<^sup>E X))\<rfloor>" by (metis A1' A2') 
- have T2: "\<lfloor>\<P> \<G>\<rfloor>" by (metis A3 G_def)
  have T3: "\<lfloor>\<^bold>\<diamond>(\<^bold>\<exists>\<^sup>E \<G>)\<rfloor>" using T1 T2 by simp
  have T5: "\<lfloor>(\<^bold>\<diamond>(\<^bold>\<exists>\<^sup>E \<G>)) \<^bold>\<rightarrow> \<^bold>\<box>(\<^bold>\<exists>\<^sup>E \<G>)\<rfloor>" by (metis A1' A2' T2)
   thus ?thesis using T3 by blast qed
 
-lemma "\<lfloor>\<P>(\<lambda>x.(x\<^bold>=x))\<rfloor>" by (metis A2' A3)
-
-(*Consistency*) 
-lemma True nitpick[satisfy] oops  (*Model found*)
+lemma True nitpick[satisfy] oops (*Consistency: model found*)
 
 (*Modal collapse and monotheism: not implied*)
 lemma MC: "\<lfloor>\<^bold>\<forall>\<Phi>.(\<Phi> \<^bold>\<rightarrow> \<^bold>\<box>\<Phi>)\<rfloor>" nitpick oops (*Countermodel*)
@@ -34,7 +32,10 @@ lemma A5: "\<lfloor>\<P> \<N>\<E>\<rfloor>" nitpick oops (*Countermodel*)
 (*Checking filter and ultrafilter properties*) 
 theorem F1: "\<lfloor>Filter \<P>\<rfloor>" sledgehammer oops (*Proof found*)
 theorem U1: "\<lfloor>UFilter \<P>\<rfloor>" nitpick oops (*Countermodel*)
+end
 
+
+(*
 (*More detailed proof for T5*)
 theorem T5again: "\<lfloor>(\<^bold>\<diamond>(\<^bold>\<exists>\<^sup>E \<G>)) \<^bold>\<rightarrow> \<^bold>\<box>(\<^bold>\<exists>\<^sup>E \<G>)\<rfloor>" 
  proof -
@@ -47,6 +48,7 @@ theorem T5again: "\<lfloor>(\<^bold>\<diamond>(\<^bold>\<exists>\<^sup>E \<G>)) 
  have L4: "\<lfloor>(\<^bold>\<diamond>(\<^bold>\<exists>\<^sup>E \<G>)) \<^bold>\<rightarrow> \<^bold>\<box>(\<^bold>\<exists>\<^sup>E \<G>)\<rfloor>" using L3 by blast
    thus ?thesis by blast qed
 end 
+*)
 
 (*
 lemma T: "\<lfloor>\<^bold>\<forall>\<phi>. \<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<phi>\<rfloor>" sledgehammer nitpick oops
