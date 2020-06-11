@@ -13,9 +13,8 @@ proof -
  have T3: "\<lfloor>\<^bold>\<diamond>(\<^bold>\<exists>\<^sup>E \<G>)\<rfloor>" using T1 T2 by simp
  have T5: "\<lfloor>(\<^bold>\<diamond>(\<^bold>\<exists>\<^sup>E \<G>)) \<^bold>\<rightarrow> \<^bold>\<box>(\<^bold>\<exists>\<^sup>E \<G>)\<rfloor>" by (metis A1' A2' T2)
  thus ?thesis using T3 by blast qed
-
-(*Consistency*) 
-lemma True nitpick[satisfy] oops  (*Model found*)
+ 
+lemma True nitpick[satisfy] oops (*Consistency: model found*)
 
 (*Modal collapse and Monotheism: not implied*)
 lemma MC: "\<lfloor>\<^bold>\<forall>\<Phi>.(\<Phi> \<^bold>\<rightarrow> \<^bold>\<box>\<Phi>)\<rfloor>" nitpick oops (*Countermodel*)
