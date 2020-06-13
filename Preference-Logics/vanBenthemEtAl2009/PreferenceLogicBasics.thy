@@ -56,6 +56,12 @@ abbreviation leqAA'::\<nu> ("_\<^bold>\<preceq>\<^sub>A\<^sub>A_") where  "\<phi
 abbreviation geqEA'::\<nu> ("_\<^bold>\<succeq>\<^sub>E\<^sub>A_") where  "\<phi> \<^bold>\<succeq>\<^sub>E\<^sub>A \<psi> \<equiv> \<^bold>E(\<phi> \<^bold>\<and> \<^bold>\<box>\<^sup>\<prec>\<^bold>\<not>\<psi>)" 
 abbreviation leAE'::\<nu>  ("_\<^bold>\<prec>\<^sub>A\<^sub>E_") where  "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<diamond>\<^sup>\<prec>\<psi>)" 
 
+(* quantification for objects of arbitrary type.*)  
+abbreviation mforall ("\<^bold>\<forall>") where "\<^bold>\<forall>\<Phi> \<equiv> \<lambda>w.\<forall>x. (\<Phi> x w)"
+abbreviation mforallB (binder"\<^bold>\<forall>"[8]9) where "\<^bold>\<forall>x. \<phi>(x) \<equiv> \<^bold>\<forall>\<phi>"  
+abbreviation mexists ("\<^bold>\<exists>") where "\<^bold>\<exists>\<Phi> \<equiv> \<lambda>w.\<exists>x. (\<Phi> x w)"   
+abbreviation mexistsB (binder"\<^bold>\<exists>"[8]9) where "\<^bold>\<exists>x. \<phi>(x) \<equiv> \<^bold>\<exists>\<phi>"
+
 (*Consistency confirmed by nitpick (trivial: only abbreviations are introduced)*)
 lemma True nitpick[satisfy,user_axioms] oops
 end
