@@ -8,9 +8,9 @@ axiomatization where ForAx: "\<lfloor>For x \<^bold>\<leftrightarrow> (\<^bold>\
 datatype VAL = WILL | RELI | RESP | EQUI | FAIR | EFFI | STAB | GAIN (*ethico-legal values/principles*) 
 consts  V::"c\<Rightarrow> VAL\<Rightarrow>\<sigma>" ("_\<upharpoonleft>_") (*c\<up>UV: (a decision for) party c promotes value V*)
 
-abbreviation V_prod2::"c\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>\<sigma>" ("_\<upharpoonleft>[_\<oplus>_]") where "c\<upharpoonleft>[V1\<oplus>V2] \<equiv> (c\<upharpoonleft>V1) \<^bold>\<and> (c\<upharpoonleft>V2)"
-abbreviation V_prod3::"c\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>\<sigma>" ("_\<upharpoonleft>[_\<oplus>_\<oplus>_]") where "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3] \<equiv> (c\<upharpoonleft>V1) \<^bold>\<and> (c\<upharpoonleft>V2) \<^bold>\<and> (c\<upharpoonleft>V3)"
-abbreviation V_prod4::"c\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>\<sigma>" ("_\<upharpoonleft>[_\<oplus>_\<oplus>_\<oplus>_]") where "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3\<oplus>V4] \<equiv> (c\<upharpoonleft>V1) \<^bold>\<and> (c\<upharpoonleft>V2) \<^bold>\<and> (c\<upharpoonleft>V3) \<^bold>\<and> (c\<upharpoonleft>V4)"
+abbreviation V_aggr2::"c\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>\<sigma>" ("_\<upharpoonleft>[_\<oplus>_]") where "c\<upharpoonleft>[V1\<oplus>V2] \<equiv> (c\<upharpoonleft>V1) \<^bold>\<and> (c\<upharpoonleft>V2)"
+abbreviation V_aggr3::"c\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>\<sigma>" ("_\<upharpoonleft>[_\<oplus>_\<oplus>_]") where "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3] \<equiv> (c\<upharpoonleft>V1) \<^bold>\<and> (c\<upharpoonleft>V2) \<^bold>\<and> (c\<upharpoonleft>V3)"
+abbreviation V_aggr4::"c\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>VAL\<Rightarrow>\<sigma>" ("_\<upharpoonleft>[_\<oplus>_\<oplus>_\<oplus>_]") where "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3\<oplus>V4] \<equiv> (c\<upharpoonleft>V1) \<^bold>\<and> (c\<upharpoonleft>V2) \<^bold>\<and> (c\<upharpoonleft>V3) \<^bold>\<and> (c\<upharpoonleft>V4)"
 (* ... add more on demand*)
 
 abbreviation "SECURITY x \<equiv> (x\<upharpoonleft>RELI \<^bold>\<or> x\<upharpoonleft>EQUI \<^bold>\<or> x\<upharpoonleft>STAB \<^bold>\<or> x\<upharpoonleft>EFFI)"

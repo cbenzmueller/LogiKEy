@@ -1,4 +1,4 @@
-theory WildAnimals2 imports GeneralOntology (*Benzm.,Fuenmayor & Lomfeld, 2020*)               
+theory WildAnimals2 imports GeneralOntology2 (*Benzm.,Fuenmayor & Lomfeld, 2020*)               
 begin
 
 typedecl e  (*entities*)
@@ -39,7 +39,7 @@ lemma "\<exists>c. \<lfloor>((Fox \<alpha>) \<^bold>\<and> (Captures c \<alpha>)
 lemma "\<lfloor>appDomesticAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB)\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*) 
 lemma "\<not>\<lfloor>(Fox \<alpha>) \<^bold>\<and> (\<^bold>\<exists>c. Captures c \<alpha>) \<^bold>\<and> (Pet \<alpha>)\<rfloor>" using CW2 CW3 CW4 W2 by blast (*inconsistent SoA*) 
 
-(******** experimenting with cases ************)
+(******** TODO: experimenting with cases ************)
 (* axiomatization where CONSISTENT_p:"\<lfloor>\<^bold>\<not>INCONS p\<rfloor>" and CONSISTENT_d:"\<lfloor>\<^bold>\<not>INCONS d\<rfloor>" *)
 lemma "\<not>(\<exists>(x::i) y z. \<not>(x = y) \<and> \<not>(x = z) \<and> \<not>(y = z))" nitpick oops (*more than 2 worlds?*)
 lemma "True" nitpick[satisfy,card i=4] oops
