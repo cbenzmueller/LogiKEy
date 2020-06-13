@@ -47,5 +47,26 @@ lemma "is_total SBR \<longrightarrow>
        \<lfloor>((\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<phi>)\<^bold>\<and>(\<psi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>)) \<^bold>\<rightarrow> ((\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>)\<^bold>\<or>(\<psi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<phi>))\<rfloor>" by auto
 lemma "\<lfloor>((\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<phi>) \<^bold>\<and> (\<psi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>)) \<^bold>\<rightarrow> ((\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi>) \<^bold>\<or> (\<psi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<phi>))\<rfloor>
        \<longrightarrow> is_total SBR" nitpick oops (*countermodel -- error in paper?*)
+
+(*Application-specific tests for the value ontology*)
+lemma "\<lfloor>A \<prec>\<^sub>A\<^sub>E (A\<^bold>\<and>B)\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*) 
+lemma "\<lfloor>(A\<^bold>\<and>B) \<prec>\<^sub>A\<^sub>E A\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)
+lemma "\<lfloor>(A \<prec>\<^sub>A\<^sub>E B) \<^bold>\<rightarrow> (A \<prec>\<^sub>A\<^sub>E (C\<^bold>\<and>B))\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)
+lemma "\<lfloor>(A \<prec>\<^sub>A\<^sub>E (C\<^bold>\<and>B)) \<^bold>\<rightarrow> (A \<prec>\<^sub>A\<^sub>E B)\<rfloor>" by blast
+
+lemma "\<lfloor>A \<^bold>\<prec>\<^sub>A\<^sub>A (A\<^bold>\<and>B)\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*) 
+lemma "\<lfloor>(A\<^bold>\<and>B) \<^bold>\<prec>\<^sub>A\<^sub>A A\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)
+lemma "\<lfloor>(A \<^bold>\<prec>\<^sub>A\<^sub>A B) \<^bold>\<rightarrow> (A \<^bold>\<prec>\<^sub>A\<^sub>A (C\<^bold>\<and>B))\<rfloor>" by blast
+lemma "\<lfloor>(A \<^bold>\<prec>\<^sub>A\<^sub>A (C\<^bold>\<and>B)) \<^bold>\<rightarrow> (A \<^bold>\<prec>\<^sub>A\<^sub>A B)\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)
+
+lemma "\<lfloor>A \<prec>\<^sub>A\<^sub>A (A\<^bold>\<and>B)\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*) 
+lemma "\<lfloor>(A\<^bold>\<and>B) \<prec>\<^sub>A\<^sub>A A\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)
+lemma "\<lfloor>(A \<prec>\<^sub>A\<^sub>A B) \<^bold>\<rightarrow> (A \<prec>\<^sub>A\<^sub>A (C\<^bold>\<and>B))\<rfloor>" by blast
+lemma "\<lfloor>(A \<prec>\<^sub>A\<^sub>A (C\<^bold>\<and>B)) \<^bold>\<rightarrow> (A \<prec>\<^sub>A\<^sub>A B)\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)
+
+lemma "is_total SBR \<Longrightarrow> \<lfloor>A \<prec>\<^sub>A\<^sub>A (A\<^bold>\<and>B)\<rfloor>" by blast 
+lemma "is_total SBR \<Longrightarrow> \<lfloor>(A\<^bold>\<and>B) \<prec>\<^sub>A\<^sub>A A\<rfloor>" by blast
+lemma "is_total SBR \<Longrightarrow> \<lfloor>(A \<prec>\<^sub>A\<^sub>A B) \<^bold>\<rightarrow> (A \<prec>\<^sub>A\<^sub>A (C\<^bold>\<and>B))\<rfloor>" by blast
+lemma "is_total SBR \<Longrightarrow> \<lfloor>(A \<prec>\<^sub>A\<^sub>A (C\<^bold>\<and>B)) \<^bold>\<rightarrow> (A \<prec>\<^sub>A\<^sub>A B)\<rfloor>" by blast
 end
 
