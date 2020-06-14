@@ -57,7 +57,8 @@ lemma "True" nitpick[satisfy,card i=4] oops
 lemma "\<lfloor>Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and> Poss d \<^bold>\<and> For d\<rfloor>" 
   nitpick[satisfy,show_all,card i=4] oops (*non-trivial model*)
 
-lemma "\<lfloor>Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and> Poss d \<^bold>\<rightarrow> For d\<rfloor>" 
+lemma 
+  "\<lfloor>(Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and> Poss d) \<^bold>\<rightarrow> For d\<rfloor>" 
   nitpick[show_all,card i=2] oops (*countermodel found*)
 
 (*Conti v. ASPCA*)
@@ -66,6 +67,6 @@ lemma
   nitpick[satisfy,show_all,card i=4] oops (*non-trivial model*)
 
 lemma 
-  "\<lfloor>Parrot \<alpha> \<^bold>\<and> Captures d \<alpha> \<^bold>\<and> Mtn p \<^bold>\<and> Own p \<^bold>\<and> Poss d \<^bold>\<rightarrow> For p\<rfloor>"
+  "\<lfloor>(Parrot \<alpha> \<^bold>\<and> Captures d \<alpha> \<^bold>\<and> Mtn p \<^bold>\<and> Own p \<^bold>\<and> Poss d) \<^bold>\<rightarrow> For p\<rfloor>"
   nitpick[show_all,card i=4] oops (*countermodel found*)
 end
