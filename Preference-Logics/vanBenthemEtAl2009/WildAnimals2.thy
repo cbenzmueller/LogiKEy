@@ -1,9 +1,7 @@
 theory WildAnimals2     (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
   imports GeneralOntology2 
 begin
-
 typedecl e  (*entities*)
-
 (*case-specific 'world-vocabulary'*)
 consts Animal::"e\<Rightarrow>\<sigma>" 
 consts Domestic::"e\<Rightarrow>\<sigma>" 
@@ -16,9 +14,10 @@ consts \<alpha>::"e" (*appropriated animal (fox, parrot, whale, etc.*)
 (*meaning postulates for the case-specific notions above*)
 axiomatization where 
 CW1: "\<lfloor>\<^bold>\<forall>x. Parrot x \<^bold>\<rightarrow> Domestic x\<rfloor>" and 
-CW2: "\<lfloor>\<^bold>\<forall>x. (Fox x) \<^bold>\<and> (Pet x) \<^bold>\<rightarrow> (Domestic x)\<rfloor>" and
-CW3: "\<lfloor>(Fox \<alpha>) \<^bold>\<and> (\<^bold>\<exists>c. Captures c \<alpha>) \<^bold>\<rightarrow> appWildAnimal\<rfloor>" and
-CW4: "\<lfloor>(Domestic \<alpha>) \<^bold>\<and> (\<^bold>\<exists>c. Captures c \<alpha>) \<^bold>\<rightarrow> appDomAnimal\<rfloor>" 
+CW2: "\<lfloor>\<^bold>\<forall>x. (Fox x \<^bold>\<and> Pet x) \<^bold>\<rightarrow> Domestic x\<rfloor>" and
+CW3: "\<lfloor>\<^bold>\<forall>x. (Fox x \<^bold>\<and> \<^bold>\<not>Pet x) \<^bold>\<rightarrow> \<^bold>\<not>Domestic x\<rfloor>" and
+CW4: "\<lfloor>((\<^bold>\<not>Domestic \<alpha>) \<^bold>\<and> (\<^bold>\<exists>c. Captures c \<alpha>)) \<^bold>\<rightarrow> appWildAnimal\<rfloor>" and
+CW5: "\<lfloor>((Domestic \<alpha>) \<^bold>\<and> (\<^bold>\<exists>c. Captures c \<alpha>)) \<^bold>\<rightarrow> appDomAnimal\<rfloor>" 
 (* ... others*)
 
 lemma True nitpick[satisfy,card i=4] oops (*satisfiable*)
@@ -30,7 +29,7 @@ consts OwnLand::"c\<Rightarrow>\<sigma>"    (*event takes place on c's own land 
 
 (*meaning postulates for some legal 'factors'*)
 axiomatization where
- CW5: "\<lfloor>(Pursues x \<alpha>) \<^bold>\<rightarrow> (Intent x)\<rfloor>"
+ CW6: "\<lfloor>(Pursues x \<alpha>) \<^bold>\<rightarrow> (Intent x)\<rfloor>"
 (* ... others*)
 
 (*case-specific legal corpus, e.g. (unconditional) value 
@@ -40,26 +39,61 @@ axiomatization where
 (* ... others*)
 
 (*explore possible inferences (implicit knowledge)*)
-lemma "\<exists>c. \<lfloor>((Fox \<alpha>) \<^bold>\<and> (Captures c \<alpha>))
-            \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB)\<rfloor>" using CW3 L3 by blast
+lemma "\<lfloor>(\<^bold>\<exists>c. (Fox \<alpha>) \<^bold>\<and> (Captures c \<alpha>)) \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB)\<rfloor>" 
+  nitpick[satisfy] nitpick oops (*contingent*) 
+lemma "\<lfloor>(\<^bold>\<exists>c. (Fox \<alpha>) \<^bold>\<and> (Captures c \<alpha>) \<^bold>\<and> Pet \<alpha>) \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB)\<rfloor>" 
+  nitpick[satisfy] nitpick oops (*contingent*) 
 lemma "\<lfloor>appDomAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB)\<rfloor>" 
   nitpick[satisfy] nitpick oops (*contingent*) 
 lemma "\<not>\<lfloor>(Fox \<alpha>) \<^bold>\<and> (\<^bold>\<exists>c. Captures c \<alpha>) \<^bold>\<and> (Pet \<alpha>)\<rfloor>" 
-  using CW2 CW3 CW4 W2 by blast (*inconsistent SoA*) 
+  nitpick[satisfy] nitpick oops (*contingent*) 
+  (* using CW2 CW3 CW4 W2 by blast (*inconsistent SoA*) *)
 
 (******** TODO: experimenting with cases ************)
-(* axiomatization where CONSISTENT_p:"\<lfloor>\<^bold>\<not>INCONS p\<rfloor>" and CONSISTENT_d:"\<lfloor>\<^bold>\<not>INCONS d\<rfloor>" *)
+axiomatization where 
+  CONS_p:"\<lfloor>\<^bold>\<not>INCONS p\<rfloor>" and 
+  CON_d:"\<lfloor>\<^bold>\<not>INCONS d\<rfloor>" 
+
+
+(*Pierson v. Post*)  
+abbreviation "Situation1 \<equiv> Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and> Poss d"
+abbreviation "Situation2 \<equiv> Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and>
+   Captures d \<alpha> \<^bold>\<and> (\<^bold>\<not>Captures p \<alpha>) \<^bold>\<and> Poss d \<^bold>\<and> (\<^bold>\<not>Poss p) \<^bold>\<and> (\<^bold>\<not>Pet \<alpha>) \<^bold>\<and>
+   (\<^bold>\<exists>v. (V d v))" 
+
+lemma "\<lfloor>Situation1 \<^bold>\<and> For d\<rfloor>" 
+  nitpick[satisfy,show_all,card i=1] (*non-trivial model*)
+  nitpick[show_all,card i=1] 
+  oops  
+
+lemma "\<lfloor>Situation1 \<^bold>\<rightarrow> For d\<rfloor>" 
+  nitpick[satisfy,show_all,card i=1] (*non-trivial model*)
+  nitpick[show_all,card i=1] 
+  oops   
+
+lemma "\<lfloor>Situation2 \<^bold>\<rightarrow> For d\<rfloor>" 
+  nitpick[satisfy,show_all,card i=1] (*non-trivial model*)
+  nitpick[show_all,card i=1] 
+  oops   
+
+lemma "\<lfloor>Situation2 \<^bold>\<and> For d\<rfloor>" 
+  nitpick[satisfy,show_all,card i=1] (*non-trivial model*)
+  nitpick[show_all,card i=1] 
+  oops   
+
 lemma "\<not>(\<exists>(x::i) y z. x \<noteq> y \<and> x \<noteq> z \<and> y \<noteq> z)" 
   nitpick oops (*more than 2 worlds?*)
 lemma "True" nitpick[satisfy,card i=4] oops
 
 (*Pierson v. Post*)         
 lemma "\<lfloor>Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and> Poss d \<^bold>\<and> For d\<rfloor>" 
-  nitpick[satisfy,show_all,card i=4] oops (*non-trivial model*)
+  nitpick[satisfy,show_all,card i=1] (*non-trivial model*)
+  nitpick[show_all,card i=1] 
+  oops 
 
 lemma 
   "\<lfloor>(Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and> Poss d) \<^bold>\<rightarrow> For d\<rfloor>" 
-  nitpick[show_all,card i=2] oops (*countermodel found*)
+  nitpick[show_all,card i=1] oops (*countermodel found*)
 
 (*Conti v. ASPCA*)
 lemma 
@@ -68,5 +102,7 @@ lemma
 
 lemma 
   "\<lfloor>(Parrot \<alpha> \<^bold>\<and> Captures d \<alpha> \<^bold>\<and> Mtn p \<^bold>\<and> Own p \<^bold>\<and> Poss d) \<^bold>\<rightarrow> For p\<rfloor>"
-  nitpick[show_all,card i=4] oops (*countermodel found*)
+  nitpick[show_all,card i=1] oops (*countermodel found*)
 end
+
+
