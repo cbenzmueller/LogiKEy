@@ -1,5 +1,5 @@
-theory GeneralOntology2  (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
-  imports ValueOntology2 
+theory GeneralKnowledge  (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
+  imports ValueOntology 
 begin 
 (**General World/Legal Knowledge**)
 abbreviation pref::\<nu>  ("_\<^bold>\<prec>_")  where  "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>"  
