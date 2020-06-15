@@ -1,17 +1,15 @@
 theory GeneralKnowledge  (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
   imports ValueOntology 
-begin 
-(**General World/Legal Knowledge**)
-abbreviation pref::\<nu>  ("_\<^bold>\<prec>_")  where  "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi>"  
+begin (*** General Legal and World Knowledge (LWK) ***)
 
-(*legal/world knowledge (LWK): kinds of situations*)
+(*LWK: kinds of situations addressed*)
 consts appObject::"\<sigma>"      (*appropriation of objects in general*)
 consts appAnimal::"\<sigma>"      (*appropriation of animals in general*)
 consts appWildAnimal::"\<sigma>"  (*appropriation of wild animals*)
 consts appDomAnimal::"\<sigma>"   (*appropriation of domestic animals*)
 
 (*LWK: meaning postulates for kinds of situations*)
-axiomatization where (*implic. quantified: all situations/worlds*)
+axiomatization where (*implicitly quantified for all situations*)
 W1: "\<lfloor>(appWildAnimal \<^bold>\<or> appDomAnimal) \<^bold>\<leftrightarrow> appAnimal\<rfloor>" and 
 W2: "\<lfloor>appWildAnimal \<^bold>\<leftrightarrow> \<^bold>\<not>appDomAnimal\<rfloor>" and 
 W3: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> appAnimal\<rfloor>"  and
@@ -22,10 +20,10 @@ W5: "\<lfloor>appAnimal \<^bold>\<rightarrow> appObject\<rfloor>"
 (*LWK: value preferences for kinds of situations*)
 axiomatization where 
 (* legal certainty always on the side of defendant*)
-L1: "\<lfloor>appObject         \<^bold>\<rightarrow> (p\<upharpoonleft>STAB \<^bold>\<prec> d\<upharpoonleft>STAB)\<rfloor>" and 
-L2: "\<lfloor>appAnimal         \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>[STAB\<oplus>GAIN])\<rfloor>" and 
-L3: "\<lfloor>appWildAnimal     \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB)\<rfloor>" and        
-L4: "\<lfloor>appDomAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<^bold>\<prec> x\<upharpoonleft>[RELI\<oplus>RESP])\<rfloor>"
+L1: "\<lfloor>appObject     \<^bold>\<rightarrow> (p\<upharpoonleft>STAB  \<^bold>\<prec>\<^sub>A\<^sub>A d\<upharpoonleft>STAB)\<rfloor>" and 
+L2: "\<lfloor>appAnimal     \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec>\<^sub>A\<^sub>A x\<upharpoonleft>[STAB\<oplus>GAIN])\<rfloor>" and 
+L3: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec>\<^sub>A\<^sub>A x\<upharpoonleft>STAB)\<rfloor>" and        
+L4: "\<lfloor>appDomAnimal  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<^bold>\<prec>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>RESP])\<rfloor>"
 (* ... others*)
 (*remark: assumes that conditions are mutually exclusive;
   we may want to add ceteris paribus or make \<^bold>\<rightarrow> non-monotonic*)
