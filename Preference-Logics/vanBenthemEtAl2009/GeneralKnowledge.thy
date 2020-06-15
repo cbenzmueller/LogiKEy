@@ -9,26 +9,23 @@ consts appWildAnimal::"\<sigma>"  (*appropriation of wild animals*)
 consts appDomAnimal::"\<sigma>"   (*appropriation of domestic animals*)
 
 (*LWK: meaning postulates for kinds of situations*)
-axiomatization where (*implicitly quantified for all situations*)
+axiomatization where 
 W1: "\<lfloor>(appWildAnimal \<^bold>\<or> appDomAnimal) \<^bold>\<leftrightarrow> appAnimal\<rfloor>" and 
 W2: "\<lfloor>appWildAnimal \<^bold>\<leftrightarrow> \<^bold>\<not>appDomAnimal\<rfloor>" and 
 W3: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> appAnimal\<rfloor>"  and
 W4: "\<lfloor>appDomAnimal \<^bold>\<rightarrow> appAnimal\<rfloor>" and
 W5: "\<lfloor>appAnimal \<^bold>\<rightarrow> appObject\<rfloor>" 
-(*... other situations regarding appropriation of objects, etc.*)
+(*\<dots>further situations regarding appropriation of objects\<dots>*)
 
 (*LWK: value preferences for kinds of situations*)
 axiomatization where 
-(* legal certainty always on the side of defendant*)
-L1: "\<lfloor>appObject     \<^bold>\<rightarrow> (p\<upharpoonleft>STAB  \<^bold>\<prec>\<^sub>A\<^sub>A d\<upharpoonleft>STAB)\<rfloor>" and 
-L2: "\<lfloor>appAnimal     \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec>\<^sub>A\<^sub>A x\<upharpoonleft>[STAB\<oplus>GAIN])\<rfloor>" and 
-L3: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec>\<^sub>A\<^sub>A x\<upharpoonleft>STAB)\<rfloor>" and        
-L4: "\<lfloor>appDomAnimal  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<^bold>\<prec>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>RESP])\<rfloor>"
-(* ... others*)
-(*remark: assumes that conditions are mutually exclusive;
-  we may want to add ceteris paribus or make \<^bold>\<rightarrow> non-monotonic*)
+L1: "\<lfloor>appObject     \<^bold>\<rightarrow> (p\<upharpoonleft>STAB  \<prec>\<^sub>A\<^sub>A d\<upharpoonleft>STAB)\<rfloor>" and 
+L2: "\<lfloor>appAnimal     \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<prec>\<^sub>A\<^sub>A x\<upharpoonleft>[STAB\<oplus>GAIN])\<rfloor>" and 
+L3: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<prec>\<^sub>A\<^sub>A x\<upharpoonleft>STAB)\<rfloor>" and        
+L4: "\<lfloor>appDomAnimal  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<prec>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>RESP])\<rfloor>"
+(*\<dots>further preferences\<dots>*)
 
-lemma True nitpick[satisfy] oops (*satisfiable,model found*)
+lemma True nitpick[satisfy,show_all,eval=WILL] oops (*consistency, model found*)
 
 (*LWK: general legal notions, with an existing clear definition*)
 consts Own::"c\<Rightarrow>\<sigma>"    (*object is owned by c*)
@@ -50,7 +47,7 @@ axiomatization where
 
 (*legal corpus: value prefs depend. on legal notions ('factors')*)
 axiomatization where
-L5: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>RELI \<^bold>\<prec> (x\<upharpoonleft>STAB))\<rfloor>"
+L5: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>RELI \<^bold>\<prec>\<^sub>A\<^sub>A (x\<upharpoonleft>STAB))\<rfloor>"
 (* ... others*)
 
 (*legal corpus: (unconditional) value preferences given ruling 
