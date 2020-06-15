@@ -1,6 +1,6 @@
 theory ValueOntology     (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
   imports PreferenceLogicBasics 
-begin
+begin (*** Lomfeld's value ontology is encoded ***)
 (*two legal parties (there can be more in principle)*)
 datatype c = p | d (*parties/contenders: plaintiff, defendant*)
 fun other::"c\<Rightarrow>c" ("_\<inverse>") where "p\<inverse> = d" | "d\<inverse>= p" 
