@@ -28,6 +28,7 @@ consts Pursues::"c\<Rightarrow>e\<Rightarrow>\<sigma>" (*c is pursuing an animal
 consts OwnLand::"c\<Rightarrow>\<sigma>"    (*event takes place on c's own land *)
 (*remark: Pursues will later be related to WILL, OwnLand to RELI*)
 
+
 (*meaning postulates for some legal 'factors'*)
 axiomatization where
  CW6: "\<lfloor>(Pursues x \<alpha>) \<^bold>\<rightarrow> (Intent x)\<rfloor>"
