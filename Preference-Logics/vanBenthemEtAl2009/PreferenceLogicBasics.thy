@@ -1,23 +1,25 @@
-theory PreferenceLogicBasics imports Main (*** Benzmüller & Fuenmayor, 2020 ***)
-begin (*** SSE of preference logic by van Benthem, Girard and Roy, JPL 2009 ***)
-declare[[syntax_ambiguity_warning=false]]   (*unimportant declaration for tool*)
-nitpick_params[user_axioms,expect=genuine,show_all,format=3] (*unimportant*)
-   
-(**** Embedding of "a basic modal preference language" in HOL ****)
-(*Preliminaries*)
-typedecl i  (*Possible Worlds*)      
-type_synonym \<sigma>="i\<Rightarrow>bool" type_synonym \<gamma>="i\<Rightarrow>i\<Rightarrow>bool" (*propositions, pref.rels.*)
-type_synonym \<mu>="\<sigma>\<Rightarrow>\<sigma>"    type_synonym \<nu>="\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  (*unary & binary connectives*)
-type_synonym \<pi>="\<sigma>\<Rightarrow>bool"                   (*sets of world-lifted propositions*)
+theory PreferenceLogicBasics      (*** Benzmüller & Fuenmayor, 2020 ***)
+ imports Main 
+begin (*** SSE of preference logic by van Benthem et al., JPL 2009 ***)
+(*unimportant*) declare[[syntax_ambiguity_warning=false]] 
+(*unimp.*) nitpick_params[user_axioms,expect=genuine,show_all,format=3]
 
-consts BR::\<gamma> ("_\<preceq>_") (*betterness relation*)
-abbreviation SBR::\<gamma> ("_\<prec>_") where "v\<prec>w \<equiv> (v\<preceq>w) \<and> \<not>(w\<preceq>v)" (*strict betterness*)
+typedecl i                  (*possible worlds*)      
+type_synonym \<sigma>="i\<Rightarrow>bool"    (*'world-lifted' propositions*)
+type_synonym \<gamma>="i\<Rightarrow>i\<Rightarrow>bool"  (*preference relations*)
+type_synonym \<mu>="\<sigma>\<Rightarrow>\<sigma>"       (*unary logical connectives*)
+type_synonym \<nu>="\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"    (*binary logical connectives*)
+type_synonym \<pi>="\<sigma>\<Rightarrow>bool"    (*sets of world-lifted propositions*)
+
+consts BR::\<gamma> ("_\<preceq>_") (*betterness rel. \<preceq> and strict betterness rel. \<prec>*)
+abbreviation SBR::\<gamma> ("_\<prec>_") where "v\<prec>w \<equiv> (v\<preceq>w) \<and> \<not>(w\<preceq>v)" 
+
 abbreviation "reflexive Rel \<equiv> \<forall>x. Rel x x"
 abbreviation "transitive Rel \<equiv> \<forall>x y z. Rel x y \<and> Rel y z \<longrightarrow> Rel x z"
 abbreviation "is_total Rel \<equiv> \<forall>x y. Rel x y \<or> Rel y x"
-axiomatization where reflBR: "reflexive BR" and transBR: "transitive BR"
+axiomatization where rBR: "reflexive BR" and tBR: "transitive BR"
 
-(*Modal logic connectives (operating on truth-sets)*)
+(*modal logic connectives (operating on truth-sets)*)
 abbreviation c01::\<sigma> ("\<^bold>\<bottom>")   where "\<^bold>\<bottom> \<equiv> \<lambda>w. False"
 abbreviation c02::\<sigma> ("\<^bold>\<top>")   where "\<^bold>\<top> \<equiv> \<lambda>w. True"
 abbreviation c03::\<mu> ("\<^bold>\<not>_")  where "\<^bold>\<not>\<phi> \<equiv> \<lambda>w.\<not>(\<phi> w)"
@@ -29,32 +31,33 @@ abbreviation c08::\<mu> ("\<^bold>\<box>\<^sup>\<preceq>_") where "\<^bold>\<box
 abbreviation c09::\<mu> ("\<^bold>\<diamond>\<^sup>\<preceq>_") where "\<^bold>\<diamond>\<^sup>\<preceq>\<phi> \<equiv> \<lambda>w.\<exists>v.(w\<preceq>v)\<and>(\<phi> v)"
 abbreviation c10::\<mu> ("\<^bold>\<box>\<^sup>\<prec>_") where "\<^bold>\<box>\<^sup>\<prec>\<phi> \<equiv> \<lambda>w.\<forall>v.(w\<prec>v)\<longrightarrow>(\<phi> v)"
 abbreviation c11::\<mu> ("\<^bold>\<diamond>\<^sup>\<prec>_") where "\<^bold>\<diamond>\<^sup>\<prec>\<phi> \<equiv> \<lambda>w.\<exists>v.(w\<prec>v)\<and>(\<phi> v)"
-abbreviation c12::\<mu> ("\<^bold>E_") where "\<^bold>E\<phi> \<equiv> \<lambda>w.\<exists>v.(\<phi> v)" (*global exist. modality*)
-abbreviation c13::\<mu> ("\<^bold>A_") where "\<^bold>A\<phi> \<equiv> \<lambda>w.\<forall>v.(\<phi> v)" (*Global univ. modality*)
-(*Meta-logical predicate for global and validity*)
+abbreviation c12::\<mu> ("\<^bold>E_") where "\<^bold>E\<phi> \<equiv> \<lambda>w.\<exists>v.(\<phi> v)" 
+abbreviation c13::\<mu> ("\<^bold>A_") where "\<^bold>A\<phi> \<equiv> \<lambda>w.\<forall>v.(\<phi> v)" 
+(*meta-logical predicate for global and validity*)
 abbreviation g1::\<pi> ("\<lfloor>_\<rfloor>")   where "\<lfloor>\<psi>\<rfloor> \<equiv>  \<forall>w. \<psi> w"
 
-(*Some tests: dualities*)
-lemma "\<lfloor>(\<^bold>\<diamond>\<^sup>\<preceq>\<phi>) \<^bold>\<leftrightarrow> (\<^bold>\<not>\<^bold>\<box>\<^sup>\<preceq>\<^bold>\<not>\<phi>)\<rfloor> \<and> \<lfloor>(\<^bold>\<diamond>\<^sup>\<prec>\<phi>) \<^bold>\<leftrightarrow> (\<^bold>\<not>\<^bold>\<box>\<^sup>\<prec>\<^bold>\<not>\<phi>)\<rfloor> \<and> \<lfloor>(\<^bold>A\<phi>) \<^bold>\<leftrightarrow> (\<^bold>\<not>\<^bold>E\<^bold>\<not>\<phi>)\<rfloor>" by blast
+(*some tests: dualities*)
+lemma "\<lfloor>(\<^bold>\<diamond>\<^sup>\<preceq>\<phi>) \<^bold>\<leftrightarrow> (\<^bold>\<not>\<^bold>\<box>\<^sup>\<preceq>\<^bold>\<not>\<phi>)\<rfloor> \<and> \<lfloor>(\<^bold>\<diamond>\<^sup>\<prec>\<phi>) \<^bold>\<leftrightarrow> (\<^bold>\<not>\<^bold>\<box>\<^sup>\<prec>\<^bold>\<not>\<phi>)\<rfloor> \<and> \<lfloor>(\<^bold>A\<phi>) \<^bold>\<leftrightarrow> (\<^bold>\<not>\<^bold>E\<^bold>\<not>\<phi>)\<rfloor>" 
+   by blast (*proof*)
 
 (**** Section 3: A basic modal preference language ****)
 (*Definition 5*)
-abbreviation leqEE::\<nu>  ("_\<preceq>\<^sub>E\<^sub>E_") where  "(\<phi>\<preceq>\<^sub>E\<^sub>E\<psi>) u \<equiv> \<exists>s.\<exists>t. \<phi> s \<and> \<psi> t \<and> s\<preceq>t" 
-abbreviation leqAE::\<nu>  ("_\<preceq>\<^sub>A\<^sub>E_") where  "(\<phi>\<preceq>\<^sub>A\<^sub>E\<psi>) u \<equiv> \<forall>s.\<exists>t. \<phi> s \<longrightarrow> \<psi> t \<and> s\<preceq>t" 
-abbreviation leEE::\<nu>   ("_\<prec>\<^sub>E\<^sub>E_") where  "(\<phi>\<prec>\<^sub>E\<^sub>E\<psi>) u \<equiv> \<exists>s.\<exists>t. \<phi> s \<and> \<psi> t \<and> s\<prec>t" 
-abbreviation leAE::\<nu>   ("_\<prec>\<^sub>A\<^sub>E_") where  "(\<phi>\<prec>\<^sub>A\<^sub>E\<psi>) u \<equiv> \<forall>s.\<exists>t. \<phi> s \<longrightarrow> \<psi> t \<and> s\<prec>t" 
-abbreviation leAA::\<nu>   ("_\<prec>\<^sub>A\<^sub>A_") where  "(\<phi>\<prec>\<^sub>A\<^sub>A\<psi>) u \<equiv> \<forall>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> s\<prec>t" 
-abbreviation gEA::\<nu>    ("_\<succ>\<^sub>E\<^sub>A_") where  "(\<phi>\<succ>\<^sub>E\<^sub>A\<psi>) u \<equiv> \<exists>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> t\<prec>s" 
-abbreviation leqAA::\<nu>  ("_\<preceq>\<^sub>A\<^sub>A_") where  "(\<phi>\<preceq>\<^sub>A\<^sub>A\<psi>) u \<equiv> \<forall>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> s\<preceq>t" 
-abbreviation geqEA::\<nu>  ("_\<succeq>\<^sub>E\<^sub>A_") where  "(\<phi>\<succeq>\<^sub>E\<^sub>A\<psi>) u \<equiv> \<exists>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> t\<preceq>s" 
-abbreviation leqEE'::\<nu> ("_\<^bold>\<preceq>\<^sub>E\<^sub>E_") where  "\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi> \<equiv> \<^bold>E(\<phi> \<^bold>\<and> \<^bold>\<diamond>\<^sup>\<preceq>\<psi>)"
-abbreviation leqAE'::\<nu> ("_\<^bold>\<preceq>\<^sub>A\<^sub>E_") where  "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<diamond>\<^sup>\<preceq>\<psi>)" 
-abbreviation leEE'::\<nu>  ("_\<^bold>\<prec>\<^sub>E\<^sub>E_") where  "\<phi> \<^bold>\<prec>\<^sub>E\<^sub>E \<psi> \<equiv> \<^bold>E(\<phi> \<^bold>\<and> \<^bold>\<diamond>\<^sup>\<prec>\<psi>)" 
-abbreviation leAA'::\<nu>  ("_\<^bold>\<prec>\<^sub>A\<^sub>A_") where  "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi> \<equiv> \<^bold>A(\<psi> \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<preceq>\<^bold>\<not>\<phi>)" 
-abbreviation gEA'::\<nu>   ("_\<^bold>\<succ>\<^sub>E\<^sub>A_") where  "\<phi> \<^bold>\<succ>\<^sub>E\<^sub>A \<psi> \<equiv> \<^bold>E(\<phi> \<^bold>\<and> \<^bold>\<box>\<^sup>\<preceq>\<^bold>\<not>\<psi>)" 
-abbreviation leqAA'::\<nu> ("_\<^bold>\<preceq>\<^sub>A\<^sub>A_") where  "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<and> \<^bold>\<box>\<^sup>\<prec>\<^bold>\<not>\<psi>)" 
-abbreviation geqEA'::\<nu> ("_\<^bold>\<succeq>\<^sub>E\<^sub>A_") where  "\<phi> \<^bold>\<succeq>\<^sub>E\<^sub>A \<psi> \<equiv> \<^bold>E(\<phi> \<^bold>\<and> \<^bold>\<box>\<^sup>\<prec>\<^bold>\<not>\<psi>)" 
-abbreviation leAE'::\<nu>  ("_\<^bold>\<prec>\<^sub>A\<^sub>E_") where  "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<diamond>\<^sup>\<prec>\<psi>)" 
+abbreviation p1::\<nu> ("_\<preceq>\<^sub>E\<^sub>E_") where "(\<phi>\<preceq>\<^sub>E\<^sub>E\<psi>)u \<equiv> \<exists>s.\<exists>t. \<phi> s \<and> \<psi> t \<and> s\<preceq>t" 
+abbreviation p2::\<nu> ("_\<preceq>\<^sub>A\<^sub>E_") where "(\<phi>\<preceq>\<^sub>A\<^sub>E\<psi>)u \<equiv> \<forall>s.\<exists>t. \<phi> s \<longrightarrow> \<psi> t \<and> s\<preceq>t" 
+abbreviation p3::\<nu> ("_\<prec>\<^sub>E\<^sub>E_") where "(\<phi>\<prec>\<^sub>E\<^sub>E\<psi>)u \<equiv> \<exists>s.\<exists>t. \<phi> s \<and> \<psi> t \<and> s\<prec>t" 
+abbreviation p4::\<nu> ("_\<prec>\<^sub>A\<^sub>E_") where "(\<phi>\<prec>\<^sub>A\<^sub>E\<psi>)u \<equiv> \<forall>s.\<exists>t. \<phi> s \<longrightarrow> \<psi> t \<and> s\<prec>t" 
+abbreviation p5::\<nu> ("_\<prec>\<^sub>A\<^sub>A_") where "(\<phi>\<prec>\<^sub>A\<^sub>A\<psi>)u \<equiv> \<forall>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> s\<prec>t" 
+abbreviation p6::\<nu> ("_\<succ>\<^sub>E\<^sub>A_") where "(\<phi>\<succ>\<^sub>E\<^sub>A\<psi>)u \<equiv> \<exists>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> t\<prec>s" 
+abbreviation p7::\<nu> ("_\<preceq>\<^sub>A\<^sub>A_") where "(\<phi>\<preceq>\<^sub>A\<^sub>A\<psi>)u \<equiv> \<forall>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> s\<preceq>t" 
+abbreviation p8::\<nu> ("_\<succeq>\<^sub>E\<^sub>A_") where "(\<phi>\<succeq>\<^sub>E\<^sub>A\<psi>)u \<equiv> \<exists>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> t\<preceq>s" 
+abbreviation P1::\<nu> ("_\<^bold>\<preceq>\<^sub>E\<^sub>E_") where "\<phi> \<^bold>\<preceq>\<^sub>E\<^sub>E \<psi> \<equiv> \<^bold>E(\<phi> \<^bold>\<and> \<^bold>\<diamond>\<^sup>\<preceq>\<psi>)"
+abbreviation P2::\<nu> ("_\<^bold>\<preceq>\<^sub>A\<^sub>E_") where "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<diamond>\<^sup>\<preceq>\<psi>)" 
+abbreviation P3::\<nu> ("_\<^bold>\<prec>\<^sub>E\<^sub>E_") where "\<phi> \<^bold>\<prec>\<^sub>E\<^sub>E \<psi> \<equiv> \<^bold>E(\<phi> \<^bold>\<and> \<^bold>\<diamond>\<^sup>\<prec>\<psi>)" 
+abbreviation P4::\<nu> ("_\<^bold>\<prec>\<^sub>A\<^sub>A_") where "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A \<psi> \<equiv> \<^bold>A(\<psi> \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<preceq>\<^bold>\<not>\<phi>)" 
+abbreviation P5::\<nu> ("_\<^bold>\<succ>\<^sub>E\<^sub>A_") where "\<phi> \<^bold>\<succ>\<^sub>E\<^sub>A \<psi> \<equiv> \<^bold>E(\<phi> \<^bold>\<and> \<^bold>\<box>\<^sup>\<preceq>\<^bold>\<not>\<psi>)" 
+abbreviation P6::\<nu> ("_\<^bold>\<preceq>\<^sub>A\<^sub>A_") where "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<and> \<^bold>\<box>\<^sup>\<prec>\<^bold>\<not>\<psi>)" 
+abbreviation P7::\<nu> ("_\<^bold>\<succeq>\<^sub>E\<^sub>A_") where "\<phi> \<^bold>\<succeq>\<^sub>E\<^sub>A \<psi> \<equiv> \<^bold>E(\<phi> \<^bold>\<and> \<^bold>\<box>\<^sup>\<prec>\<^bold>\<not>\<psi>)" 
+abbreviation P8::\<nu> ("_\<^bold>\<prec>\<^sub>A\<^sub>E_") where "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<diamond>\<^sup>\<prec>\<psi>)" 
 
 (* quantification for objects of arbitrary type.*)  
 abbreviation mforall ("\<^bold>\<forall>") where "\<^bold>\<forall>\<Phi> \<equiv> \<lambda>w.\<forall>x. (\<Phi> x w)"
