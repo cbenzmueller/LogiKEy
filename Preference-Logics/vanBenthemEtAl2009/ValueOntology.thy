@@ -1,38 +1,62 @@
-theory ValueOntology                 (*Benzmüller,Fuenmayor & Lomfeld, 2020*)  
+theory ValueOntology2    (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
   imports PreferenceLogicBasics 
-begin (** proof of concept: ethical value ontology and wild animal cases **)
-abbreviation pref::\<nu>            ("_\<^bold>\<prec>_")   where  "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<phi> \<prec>\<^sub>A\<^sub>E \<psi>"   
-abbreviation subs::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>bool" ("_\<subseteq>_")   where  "\<alpha>\<subseteq>\<beta> \<equiv> \<forall>w.(\<alpha> w)\<longrightarrow>(\<beta> w)" 
-abbreviation boxg::\<mu> ("\<^bold>\<box>_") where "\<^bold>\<box>\<phi> \<equiv> \<^bold>\<box>\<^sup>\<preceq>\<phi>"
+begin
+(*two legal parties (there can be more in principle)*)
+datatype c = p | d (*parties/contenders: plaintiff, defendant*)
+fun other::"c\<Rightarrow>c" ("_\<inverse>") where "p\<inverse> = d" | "d\<inverse>= p" 
+  
+consts For::"c\<Rightarrow>\<sigma>"    (*decision: find/rule for party*)
+axiomatization where ForAx: "\<lfloor>For x \<^bold>\<leftrightarrow> (\<^bold>\<not>For x\<inverse>)\<rfloor>"
 
-(*ethico-legal values*)
-datatype UVAL = SECURITY | LIBERTY | EQUALITY | UTILITY
-datatype VAL = WILL | RELI | RESP | EQUI | FAIR | EFFI | STAB | GAIN 
+(*ethico-legal values/principles*) 
+datatype 
+   VAL = WILL | RELI | RESP | EQUI | FAIR | EFFI | STAB | GAIN 
+consts V::"c\<Rightarrow> VAL\<Rightarrow>\<sigma>" ("_\<upharpoonleft>_") 
+           (*c\<up>UV: (a decision for) party c promotes value V*)
 
-(*contenders have values*)
-datatype c = p | d      (*parties/contenders: plaintiff, defendant*)  
-fun other::"c\<Rightarrow>c" ("_\<inverse>") where "p\<inverse> = d" | "d\<inverse>= p"
-consts UV::"c\<Rightarrow>UVAL\<Rightarrow>\<sigma>" ("_\<up>_") (*c\<up>UV: contenders c has upper value UV*)
-consts  V::"c\<Rightarrow> VAL\<Rightarrow>\<sigma>" ("_\<down>_") (*c\<down>V: contenders c has value V*)
+(*useful shorthand notation for aggregated values*) 
+abbreviation Agg2 ("_\<upharpoonleft>[_\<oplus>_]") where "c\<upharpoonleft>[V1\<oplus>V2] \<equiv> c\<upharpoonleft>V1 \<^bold>\<and> c\<upharpoonleft>V2"
+abbreviation Agg3 ("_\<upharpoonleft>[_\<oplus>_\<oplus>_]")
+     where    "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3] \<equiv> c\<upharpoonleft>V1 \<^bold>\<and> c\<upharpoonleft>V2 \<^bold>\<and> c\<upharpoonleft>V3"
+abbreviation Agg4 ("_\<upharpoonleft>[_\<oplus>_\<oplus>_\<oplus>_]") 
+     where "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3\<oplus>V4] \<equiv> c\<upharpoonleft>V1 \<^bold>\<and> c\<upharpoonleft>V2 \<^bold>\<and> c\<upharpoonleft>V3 \<^bold>\<and> c\<upharpoonleft>V4"
 
-axiomatization where (*axiomatization of the ethico-legal value ontology*)
-V1: "\<lfloor>(x\<up>SECURITY \<^bold>\<and> x\<up>EQUALITY) \<^bold>\<rightarrow> \<^bold>\<not>(x\<up>UTILITY \<^bold>\<and> x\<up>LIBERTY)\<rfloor>" and 
-V2: "\<lfloor>(x\<down>RELI \<^bold>\<or> x\<down>EQUI \<^bold>\<or> x\<down>STAB \<^bold>\<or> x\<down>EFFI) \<^bold>\<leftrightarrow> x\<up>SECURITY\<rfloor>" and
-V3: "\<lfloor>(x\<down>FAIR \<^bold>\<or> x\<down>RESP \<^bold>\<or> x\<down>EQUI \<^bold>\<or> x\<down>RELI) \<^bold>\<leftrightarrow> x\<up>EQUALITY\<rfloor>" and
-V4: "\<lfloor>(x\<down>WILL \<^bold>\<or> x\<down>GAIN \<^bold>\<or> x\<down>RESP \<^bold>\<or> x\<down>FAIR) \<^bold>\<leftrightarrow> x\<up>LIBERTY\<rfloor>" and
-V5: "\<lfloor>(x\<down>EFFI \<^bold>\<or> x\<down>STAB \<^bold>\<or> x\<down>GAIN \<^bold>\<or> x\<down>WILL) \<^bold>\<leftrightarrow> x\<up>UTILITY\<rfloor>" 
 
-lemma L1: "\<lfloor>(x\<up>UTILITY  \<^bold>\<and> x\<up>LIBERTY)  \<^bold>\<rightarrow> \<^bold>\<not>(x\<up>SECURITY \<^bold>\<and> x\<up>EQUALITY)\<rfloor>" 
-  using V1 by blast
-lemma L2: "\<lfloor>(x\<up>LIBERTY  \<^bold>\<and> x\<up>EQUALITY) \<^bold>\<rightarrow> \<^bold>\<not>(x\<up>SECURITY \<^bold>\<and> x\<up>UTILITY)\<rfloor>"  
-  using V1 by blast
-lemma L3: "\<lfloor>(x\<up>EQUALITY \<^bold>\<and> x\<up>SECURITY) \<^bold>\<rightarrow> \<^bold>\<not>(x\<up>UTILITY  \<^bold>\<and> x\<up>LIBERTY)\<rfloor>"  
-  using V1 by blast
+abbreviation "SECURITY x \<equiv> (x\<upharpoonleft>RELI \<^bold>\<or> x\<upharpoonleft>EQUI \<^bold>\<or> x\<upharpoonleft>STAB \<^bold>\<or> x\<upharpoonleft>EFFI)"
+abbreviation "EQUALITY x \<equiv> (x\<upharpoonleft>FAIR \<^bold>\<or> x\<upharpoonleft>RESP \<^bold>\<or> x\<upharpoonleft>EQUI \<^bold>\<or> x\<upharpoonleft>RELI)"
+abbreviation "LIBERTY x \<equiv> (x\<upharpoonleft>WILL \<^bold>\<or> x\<upharpoonleft>GAIN \<^bold>\<or> x\<upharpoonleft>RESP \<^bold>\<or> x\<upharpoonleft>FAIR)"
+abbreviation "UTILITY x \<equiv> (x\<upharpoonleft>EFFI \<^bold>\<or> x\<upharpoonleft>STAB \<^bold>\<or> x\<upharpoonleft>GAIN \<^bold>\<or> x\<upharpoonleft>WILL)"
+abbreviation "INCONS x \<equiv> 
+              (SECURITY x \<^bold>\<and> EQUALITY x \<^bold>\<and> LIBERTY x \<^bold>\<and> UTILITY x)"
 
-(*exploring & assessing the ontology with reasoning tools*)
-lemma "True" nitpick[satisfy,max_genuine=80,eval=UV V p d] oops (*show models*)
-lemma "\<exists>x. \<lfloor>x\<down>GAIN \<^bold>\<and> x\<down>STAB \<^bold>\<and> x\<down>WILL\<rfloor>" nitpick[satisfy]  oops (*satisfiable*)
-lemma "\<exists>x. \<lfloor>x\<down>RELI \<^bold>\<and> x\<down>WILL\<rfloor>" nitpick[satisfy]  oops (*not satisfiable*)
-lemma "\<not>(\<exists>x. \<lfloor>x\<down>RELI \<^bold>\<and> x\<down>WILL\<rfloor>)" using L2 V2 V3 V4 V5 by blast 
+(*some useful settings for model finder: enforce information*)
+nitpick_params [eval=INCONS SECURITY EQUALITY LIBERTY UTILITY V] 
+
+(*exploring the consistency and models of the ontology*)
+lemma "True" nitpick[satisfy,show_all,card i=1] oops
+lemma "True" nitpick[satisfy,show_all,card i=3] oops
+
+(*exploring implied knowledge*)
+lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<rightarrow> INCONS x\<rfloor>" 
+  nitpick oops (*two non-opposed quadrants \<oplus> (noq): consistent*)
+lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>GAIN\<oplus>EFFI\<oplus>STAB] \<^bold>\<rightarrow> INCONS x\<rfloor>" 
+  nitpick oops (*two noq \<oplus>: consistent*)
+lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>EFFI\<oplus>RELI] \<^bold>\<rightarrow> INCONS x\<rfloor>" 
+  by simp (*three quadrants \<oplus>: inconsistent*)
+lemma "\<lfloor>x\<upharpoonleft>[RESP\<oplus>STAB] \<^bold>\<rightarrow> INCONS x\<rfloor>" 
+  by simp (*two opposed quadrants \<oplus> (oq): inconsistent*)
+lemma "\<lfloor>x\<upharpoonleft>EQUI \<^bold>\<and> y\<upharpoonleft>EFFI \<^bold>\<rightarrow> (INCONS x \<^bold>\<or> INCONS y)\<rfloor>" 
+  nitpick oops (*two noq (different parties): consistent*)
+lemma "\<lfloor>x\<upharpoonleft>RESP \<^bold>\<and> y\<upharpoonleft>STAB \<^bold>\<rightarrow> (INCONS x \<^bold>\<or> INCONS y)\<rfloor>" 
+  nitpick oops (*two oq (different parties): consistent*)
+lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec>\<^sub>A\<^sub>A x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor>" 
+  nitpick nitpick[satisfy] oops (*contingent*)
+lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec>\<^sub>A\<^sub>A x\<upharpoonleft>STAB\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec>\<^sub>A\<^sub>A x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor>" by blast
+lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec>\<^sub>A\<^sub>A x\<upharpoonleft>STAB\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>STAB]\<rfloor>" by blast
+lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<prec>\<^sub>A\<^sub>E x\<upharpoonleft>WILL\<rfloor>" 
+  nitpick nitpick[satisfy] oops (*contingent*)
+lemma "\<lfloor>x\<upharpoonleft>WILL \<prec>\<^sub>A\<^sub>E x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<prec>\<^sub>A\<^sub>E x\<upharpoonleft>STAB\<rfloor>" by blast
+lemma "\<lfloor>x\<upharpoonleft>WILL \<prec>\<^sub>A\<^sub>E x\<upharpoonleft>[RELI\<oplus>STAB]\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<prec>\<^sub>A\<^sub>E x\<upharpoonleft>STAB\<rfloor>" by blast
+lemma "\<lfloor>x\<upharpoonleft>WILL \<prec>\<^sub>A\<^sub>E x\<upharpoonleft>[RELI\<oplus>STAB]\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<prec>\<^sub>A\<^sub>E x\<upharpoonleft>RELI\<rfloor>" by blast
 end
 
