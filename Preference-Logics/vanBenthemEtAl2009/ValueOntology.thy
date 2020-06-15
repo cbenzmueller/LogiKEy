@@ -1,4 +1,4 @@
-theory ValueOntology2    (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
+theory ValueOntology     (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
   imports PreferenceLogicBasics 
 begin
 (*two legal parties (there can be more in principle)*)
