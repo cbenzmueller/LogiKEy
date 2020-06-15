@@ -46,7 +46,6 @@ axiomatization where
 L5: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>RELI \<^bold>\<prec>\<^sub>A\<^sub>A (x\<upharpoonleft>STAB))\<rfloor>"
 (*\<dots>others\<dots>*)
 
-
 (*LWK: value preferences given certain situational factors*)
 axiomatization where 
 R1: "\<lfloor>(Intent x \<^bold>\<and> For x) \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>WILL)\<rfloor>" and  

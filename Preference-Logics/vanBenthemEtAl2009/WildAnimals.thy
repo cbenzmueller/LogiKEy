@@ -1,7 +1,8 @@
 theory WildAnimals      (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
-  imports GeneralOntology 
-begin
-typedecl e  (*entities*)
+  imports GeneralKnowledge
+begin (*** Modeling of wild animal cases from literature ***)
+typedecl e (*entities*)
+
 (*case-specific 'world-vocabulary'*)
 consts Animal::"e\<Rightarrow>\<sigma>" 
 consts Domestic::"e\<Rightarrow>\<sigma>" 
@@ -11,14 +12,14 @@ consts Parrot::"e\<Rightarrow>\<sigma>"
 consts Captures::"c\<Rightarrow>e\<Rightarrow>\<sigma>" 
 consts \<alpha>::"e" (*appropriated animal (fox, parrot, whale, etc.*)
 
-(*meaning postulates for the case-specific notions above*)
+(*case-specific taxonomic (legal domain) knowledge*)
 axiomatization where 
 CW1: "\<lfloor>\<^bold>\<forall>x. Parrot x \<^bold>\<rightarrow> Domestic x\<rfloor>" and 
 CW2: "\<lfloor>\<^bold>\<forall>x. (Fox x \<^bold>\<and> Pet x) \<^bold>\<rightarrow> Domestic x\<rfloor>" and
 CW3: "\<lfloor>\<^bold>\<forall>x. (Fox x \<^bold>\<and> \<^bold>\<not>Pet x) \<^bold>\<rightarrow> \<^bold>\<not>Domestic x\<rfloor>" and
 CW4: "\<lfloor>((\<^bold>\<not>Domestic \<alpha>) \<^bold>\<and> (\<^bold>\<exists>c. Captures c \<alpha>)) \<^bold>\<rightarrow> appWildAnimal\<rfloor>" and
 CW5: "\<lfloor>((Domestic \<alpha>) \<^bold>\<and> (\<^bold>\<exists>c. Captures c \<alpha>)) \<^bold>\<rightarrow> appDomAnimal\<rfloor>" 
-(* ... others*)
+(*\<dots>others\<dots>*)
 
 lemma True nitpick[satisfy,card i=4] oops (*satisfiable*)
 
