@@ -1,6 +1,6 @@
 theory PreferenceLogicTests2                (*Benzmüller & Fuenmayor, 2020*)  
    imports PreferenceLogicCeterisParibus
-begin (*Tests for the SSE of van Benthem, Girard and Roy, JPL 2009, in HOL*)
+begin (*** Tests for the SSE of van Benthem, Girard and Roy, JPL 2009 ***)
 (**** Section 5: Equality-based Ceteris Paribus Preference Logic ****)
 (*Some tests: dualities*)
 lemma "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) \<^bold>\<leftrightarrow> \<^bold>\<not>([\<Gamma>]\<^sup>\<preceq>\<^bold>\<not>\<phi>)\<rfloor>"  by auto
@@ -12,12 +12,11 @@ lemma lemma2_2: "(\<^bold>\<diamond>\<^sup>\<prec>\<phi>) w \<longleftrightarrow
 lemma lemma2_3: "((\<^bold>E\<phi>) w \<longleftrightarrow> (\<^bold>\<langle>\<^bold>\<emptyset>\<^bold>\<rangle>\<phi>) w) \<and> ((\<^bold>A\<phi>) w \<longleftrightarrow> ([\<^bold>\<emptyset>]\<phi>) w)" by auto
 (**Axiomatization:**)
 (*inclusion and interaction axioms *)
-lemma Inc1:  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)\<rfloor>" by auto
-lemma Inc2:  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>)\<rfloor>"  by auto
-lemma Int3:  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)\<rfloor>"  by (meson transBR) 
-lemma Int4:  "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<rfloor>"  by (metis transBR)
-lemma Int5:  "\<lfloor>(\<psi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow> ((\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<^bold>\<or>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>(\<phi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>))))\<rfloor>" 
-              using reflBR by force
+lemma Inc1: "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)\<rfloor>" by auto
+lemma Inc2: "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>)\<rfloor>"  by auto
+lemma Int3: "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)\<rfloor>"  by (meson transBR) 
+lemma Int4: "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<rfloor>"  by (metis transBR)
+lemma Int5: "\<lfloor>(\<psi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow> ((\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<^bold>\<or>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>(\<phi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>))))\<rfloor>" by (metis reflBR)
 (*ceteris paribus reflexivity*)
 lemma CetPar6: "\<phi> \<^bold>\<in> \<Gamma> \<longrightarrow> \<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>) \<^bold>\<rightarrow> \<phi>\<rfloor>"    by blast 
 lemma CetPar7: "\<phi> \<^bold>\<in> \<Gamma> \<longrightarrow> \<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^bold>\<not>\<phi>) \<^bold>\<rightarrow> \<^bold>\<not>\<phi>\<rfloor>" by blast 
@@ -37,7 +36,6 @@ lemma Ex1:    "\<lfloor>(([\<Gamma>]\<^sup>\<preceq>\<phi>) \<^bold>\<and> (\<^b
 lemma Lemma4: "(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) w \<longrightarrow> (\<exists>v. (w \<^bold>\<unlhd>\<^sub>\<Gamma> v) \<and> (\<phi> v))"  by simp 
 lemma Cor1:   "(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>)  w \<longrightarrow> (\<exists>v. (w \<^bold>\<equiv>\<^sub>\<Gamma> v) \<and> (\<phi> v))"  by simp 
 lemma Lemma5: "(w \<^bold>\<unlhd>\<^sub>\<Gamma> v) \<longleftrightarrow> ((w \<preceq> v) \<and> (w \<^bold>\<equiv>\<^sub>\<Gamma> v))"    by auto  
-
 (**** Section 6: Ceteris Paribus Counterparts ****)
 (*AA-variant (drawing upon von Wright's)*)
 lemma lAA_cp_pr:     "(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<longleftrightarrow> (\<phi> \<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u" nitpick oops (*Ctm*)

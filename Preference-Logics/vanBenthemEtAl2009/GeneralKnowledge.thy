@@ -33,7 +33,7 @@ consts Intent::"c\<Rightarrow>\<sigma>" (*party c has intention to possess objec
 
 (*LWK: other notions with some legal relevance (e.g. 'factors')*)
 consts Liv::"c\<Rightarrow>\<sigma>" (*party c is pursuing its livelihood*)
-consts Mtn::"c\<Rightarrow>\<sigma>" (*party c responsible for maintenance of object*)
+consts Mtn::"c\<Rightarrow>\<sigma>" (*party c respons. for maintenance of object*)
 
 (*LWK: meaning postulates for general notions*)
 axiomatization where
@@ -56,3 +56,5 @@ R4: "\<lfloor>(Mtn x \<^bold>\<and> For x) \<^bold>\<rightarrow> \<^bold>\<box>\
 
 lemma True nitpick[satisfy] oops (*consistency, model found*)
 end
+
+
