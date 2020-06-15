@@ -31,7 +31,7 @@ abbreviation c10::\<mu> ("\<^bold>\<box>\<^sup>\<prec>_") where "\<^bold>\<box>\
 abbreviation c11::\<mu> ("\<^bold>\<diamond>\<^sup>\<prec>_") where "\<^bold>\<diamond>\<^sup>\<prec>\<phi> \<equiv> \<lambda>w.\<exists>v.(w\<prec>v)\<and>(\<phi> v)"
 abbreviation c12::\<mu> ("\<^bold>E_") where "\<^bold>E\<phi> \<equiv> \<lambda>w.\<exists>v.(\<phi> v)" (*Global existence modality*)
 abbreviation c13::\<mu> ("\<^bold>A_") where "\<^bold>A\<phi> \<equiv> \<lambda>w.\<forall>v.(\<phi> v)" (*Global universal modality*)
-(*Meta-logical predicate for global validity*)
+(*Meta-logical predicate for global and validity*)
 abbreviation g1::\<pi> ("\<lfloor>_\<rfloor>")   where "\<lfloor>\<psi>\<rfloor> \<equiv>  \<forall>w. \<psi> w"
 
 (*Some tests: dualities*)
