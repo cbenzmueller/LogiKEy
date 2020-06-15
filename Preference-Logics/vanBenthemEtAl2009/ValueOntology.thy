@@ -22,12 +22,16 @@ abbreviation "LIBERTY x \<equiv> (x\<upharpoonleft>WILL \<^bold>\<or> x\<upharpo
 abbreviation "UTILITY x \<equiv> (x\<upharpoonleft>EFFI \<^bold>\<or> x\<upharpoonleft>STAB \<^bold>\<or> x\<upharpoonleft>GAIN \<^bold>\<or> x\<upharpoonleft>WILL)"
 abbreviation (*inconsistency of upper values*)
  "INCONS x \<equiv> (SECURITY x \<^bold>\<and> EQUALITY x \<^bold>\<and> LIBERTY x \<^bold>\<and> UTILITY x)"
+abbreviation (*Indifference*)
+ "INDIFF x \<equiv> ((\<^bold>\<not>SECURITY x)\<^bold>\<and>(\<^bold>\<not>EQUALITY x)\<^bold>\<and>(\<^bold>\<not>LIBERTY x)\<^bold>\<and>(\<^bold>\<not>UTILITY x))"
 
 (*some useful settings for model finder: enforce information*)
 nitpick_params [eval=INCONS SECURITY EQUALITY LIBERTY UTILITY V] 
 (*exploring the consistency and models of the ontology*)
 lemma "True" nitpick[satisfy,show_all,card i=1] oops
-lemma "True" nitpick[satisfy,show_all,card i=3] oops
+lemma "True" nitpick[satisfy,show_all,card i=10] oops
+lemma "\<lfloor>(\<^bold>\<not>INDIFF d) \<^bold>\<and> (\<^bold>\<not>INDIFF p) \<^bold>\<and> (\<^bold>\<not>INCONS d) \<^bold>\<and> (\<^bold>\<not>INCONS p) \<^bold>\<and>
+        d\<upharpoonleft>RELI \<^bold>\<and> p\<upharpoonleft>WILL\<rfloor>"  nitpick[satisfy,max_genuine=10,show_all] oops
 
 (*useful shorthand notation for aggregated values*) 
 abbreviation Agg2 ("_\<upharpoonleft>[_\<oplus>_]") where "c\<upharpoonleft>[V1\<oplus>V2] \<equiv> c\<upharpoonleft>V1 \<^bold>\<and> c\<upharpoonleft>V2"
