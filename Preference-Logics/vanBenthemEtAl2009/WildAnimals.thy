@@ -41,70 +41,68 @@ axiomatization where
 (* ... others*)
 
 (*explore possible inferences (implicit knowledge)*)
-lemma "\<lfloor>(\<^bold>\<exists>c. (Fox \<alpha>) \<^bold>\<and> (Captures c \<alpha>)) \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB)\<rfloor>" 
+lemma "\<lfloor>(\<^bold>\<exists>c. (Fox \<alpha>) \<^bold>\<and> (Captures c \<alpha>)) \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>STAB)\<rfloor>" 
   nitpick[satisfy] nitpick oops (*contingent*) 
-lemma "\<lfloor>(\<^bold>\<exists>c. (Fox \<alpha>) \<^bold>\<and> (Captures c \<alpha>) \<^bold>\<and> Pet \<alpha>) \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB)\<rfloor>" 
+lemma "\<lfloor>(\<^bold>\<exists>c. (Fox \<alpha>) \<^bold>\<and> (Captures c \<alpha>) \<^bold>\<and> Pet \<alpha>) \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>STAB)\<rfloor>" 
   nitpick[satisfy] nitpick oops (*contingent*) 
-lemma "\<lfloor>appDomAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB)\<rfloor>" 
+lemma "\<lfloor>appDomAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>STAB)\<rfloor>" 
   nitpick[satisfy] nitpick oops (*contingent*) 
 lemma "\<not>\<lfloor>(Fox \<alpha>) \<^bold>\<and> (\<^bold>\<exists>c. Captures c \<alpha>) \<^bold>\<and> (Pet \<alpha>)\<rfloor>" 
   nitpick[satisfy] nitpick oops (*contingent*) 
-  (* using CW2 CW3 CW4 W2 by blast (*inconsistent SoA*) *)
-
-(******** TODO: experimenting with cases ************)
-axiomatization where 
-  CONS_p:"\<lfloor>\<^bold>\<not>INCONS p\<rfloor>" and 
-  CON_d:"\<lfloor>\<^bold>\<not>INCONS d\<rfloor>" 
 
 
-(*Pierson v. Post*)  
-abbreviation "Situation1 \<equiv> Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and> Poss d"
-abbreviation "Situation2 \<equiv> Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and>
+(******************Pierson v. Post****************)  
+abbreviation "Pierson_simple \<equiv> Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> Poss d"
+abbreviation "Pierson_complex \<equiv> Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and>
    Captures d \<alpha> \<^bold>\<and> (\<^bold>\<not>Captures p \<alpha>) \<^bold>\<and> Poss d \<^bold>\<and> (\<^bold>\<not>Poss p) \<^bold>\<and> (\<^bold>\<not>Pet \<alpha>) \<^bold>\<and>
    (\<^bold>\<exists>v. (V d v))" 
 
-lemma "\<lfloor>Situation1 \<^bold>\<and> For d\<rfloor>" 
-  nitpick[satisfy,show_all,card i=1] (*non-trivial model*)
-  nitpick[show_all,card i=1] 
-  oops  
+lemma "\<lfloor>Pierson_simple \<^bold>\<and> For d\<rfloor>" (* decision for defendant (Pierson) is compatible with premises*)
+  nitpick[satisfy,show_all,card i=3] oops (*non-trivial model*)
 
-lemma "\<lfloor>Situation1 \<^bold>\<rightarrow> For d\<rfloor>" 
-  nitpick[satisfy,show_all,card i=1] (*non-trivial model*)
-  nitpick[show_all,card i=1] 
-  oops   
+lemma "\<lfloor>Pierson_simple \<^bold>\<and> For p\<rfloor>" (* decision for plaintiff (Post) is compatible with premises*)
+  nitpick[satisfy,show_all,card i=3] oops (*non-trivial model*)
 
-lemma "\<lfloor>Situation2 \<^bold>\<rightarrow> For d\<rfloor>" 
-  nitpick[satisfy,show_all,card i=1] (*non-trivial model*)
-  nitpick[show_all,card i=1] 
-  oops   
+lemma "\<lfloor>Pierson_simple \<^bold>\<rightarrow> For d\<rfloor>" (* decision for defendant (Pierson) is contingent*) 
+  nitpick oops
 
-lemma "\<lfloor>Situation2 \<^bold>\<and> For d\<rfloor>" 
-  nitpick[satisfy,show_all,card i=1] (*non-trivial model*)
-  nitpick[show_all,card i=1] 
-  oops   
+lemma "\<lfloor>Pierson_simple \<^bold>\<rightarrow> For p\<rfloor>" (* decision for plaintiff (Post) is contingent*) 
+  nitpick oops
 
-lemma "\<not>(\<exists>(x::i) y z. x \<noteq> y \<and> x \<noteq> z \<and> y \<noteq> z)" 
-  nitpick oops (*more than 2 worlds?*)
-lemma "True" nitpick[satisfy,card i=4] oops
+lemma "\<lfloor>Pierson_complex \<^bold>\<and> For d\<rfloor>" (* decision for defendant (Pierson) is compatible with premises*)
+  nitpick[satisfy,show_all,card i=3] oops (*non-trivial model*)
 
-(*Pierson v. Post*)         
-lemma "\<lfloor>Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and> Poss d \<^bold>\<and> For d\<rfloor>" 
-  nitpick[satisfy,show_all,card i=1] (*non-trivial model*)
-  nitpick[show_all,card i=1] 
-  oops 
+lemma "\<lfloor>Pierson_complex \<^bold>\<and> For p\<rfloor>" (* decision for plaintiff (Post) is compatible with premises*) 
+  nitpick[satisfy,show_all,card i=3] oops (*non-trivial model*)
 
-lemma 
-  "\<lfloor>(Fox \<alpha> \<^bold>\<and> Pursues p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursues d \<alpha>) \<^bold>\<and> Poss d) \<^bold>\<rightarrow> For d\<rfloor>" 
-  nitpick[show_all,card i=1] oops (*countermodel found*)
 
-(*Conti v. ASPCA*)
-lemma 
-  "\<lfloor>Parrot \<alpha> \<^bold>\<and> Captures d \<alpha> \<^bold>\<and> Mtn p \<^bold>\<and> Own p \<^bold>\<and> Poss d \<^bold>\<and> For p\<rfloor>"
-  nitpick[satisfy,show_all,card i=4] oops (*non-trivial model*)
+(*************Conti v. ASPCA****************)
+abbreviation "Conti_simple \<equiv> Parrot \<alpha> \<^bold>\<and> Captures d \<alpha> \<^bold>\<and> Mtn p \<^bold>\<and> Own p \<^bold>\<and> Poss d"
 
-lemma 
-  "\<lfloor>(Parrot \<alpha> \<^bold>\<and> Captures d \<alpha> \<^bold>\<and> Mtn p \<^bold>\<and> Own p \<^bold>\<and> Poss d) \<^bold>\<rightarrow> For p\<rfloor>"
-  nitpick[show_all,card i=1] oops (*countermodel found*)
+lemma "\<lfloor>Conti_simple \<^bold>\<and> For p\<rfloor>" (* decision for plaintiff (ASPCA) is compatible with premises*)
+   nitpick[satisfy,show_all,card i=3] oops (*non-trivial model*)
+
+lemma "\<lfloor>Conti_simple \<^bold>\<and> For d\<rfloor>" (* decision for defendant (Conti) is compatible with premises*)
+  nitpick[satisfy,show_all,card i=3] oops (*non-trivial model*)
+
+lemma "\<lfloor>Conti_simple \<^bold>\<rightarrow> For p\<rfloor>" (* decision for plaintiff (ASPCA) is prima facie contingent...*)
+   nitpick oops
+
+lemma "\<lfloor>Conti_simple \<^bold>\<rightarrow> For d\<rfloor>" (* decision for defendant (Conti) is prima facie contingent...*)
+   nitpick oops
+
+lemma "\<lfloor>\<^bold>\<not>INCONS p\<rfloor> \<Longrightarrow> \<lfloor>Conti_simple \<^bold>\<rightarrow> For d\<rfloor>" (*...however, it becomes provable if its opponent is consistent*)
+  by (smt CW1 CW5 ForAx L3 R4 other.simps(2) rBR)
+
+lemma "\<lfloor>\<^bold>\<not>INCONS p\<rfloor> \<Longrightarrow> \<not>\<lfloor>Conti_simple \<^bold>\<and> For p\<rfloor>" (* decision for plaintiff (ASPCA) is incompatible with its consistency*)
+  by (smt CW1 CW5 L3 R4 other.simps(2) rBR)
+
+(* TODO: the decision for Conti (given consistency of ASPCA) is unexpected! debug: what went wrong?*)
+lemma "\<lfloor>Conti_simple \<^bold>\<rightarrow> (d\<upharpoonleft>STAB \<^bold>\<preceq>\<^sub>A\<^sub>A p\<upharpoonleft>[RELI\<oplus>RESP])\<rfloor>" (*value preferences are as expected (domestic animals)*)
+  by (metis CW1 CW5 L3 other.simps(1))
+
+lemma "\<lfloor>Conti_simple \<^bold>\<rightarrow> For p\<rfloor>" nitpick[show_all,card i=1] oops (* case should be ruled for p: debug model*)
+
 end
 
 
