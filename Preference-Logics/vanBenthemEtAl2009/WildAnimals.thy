@@ -1,5 +1,5 @@
-theory WildAnimals2     (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
-  imports GeneralOntology2 
+theory WildAnimals      (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
+  imports GeneralOntology 
 begin
 typedecl e  (*entities*)
 (*case-specific 'world-vocabulary'*)
