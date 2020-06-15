@@ -14,9 +14,9 @@ lemma lemma2_3: "((\<^bold>E\<phi>) w \<longleftrightarrow> (\<^bold>\<langle>\<
 (*inclusion and interaction axioms *)
 lemma Inc1: "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)\<rfloor>" by auto
 lemma Inc2: "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>)\<rfloor>"  by auto
-lemma Int3: "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)\<rfloor>"  by (meson transBR) 
-lemma Int4: "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<rfloor>"  by (metis transBR)
-lemma Int5: "\<lfloor>(\<psi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow> ((\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<^bold>\<or>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>(\<phi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>))))\<rfloor>" by (metis reflBR)
+lemma Int3: "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)\<rfloor>"  by (meson tBR) 
+lemma Int4: "\<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<rfloor>"  by (metis tBR)
+lemma Int5: "\<lfloor>(\<psi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>)) \<^bold>\<rightarrow> ((\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<phi>)\<^bold>\<or>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>(\<phi>\<^bold>\<and>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>))))\<rfloor>" by (metis rBR)
 (*ceteris paribus reflexivity*)
 lemma CetPar6: "\<phi> \<^bold>\<in> \<Gamma> \<longrightarrow> \<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>) \<^bold>\<rightarrow> \<phi>\<rfloor>"    by blast 
 lemma CetPar7: "\<phi> \<^bold>\<in> \<Gamma> \<longrightarrow> \<lfloor>(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^bold>\<not>\<phi>) \<^bold>\<rightarrow> \<^bold>\<not>\<phi>\<rfloor>" by blast 
@@ -32,7 +32,7 @@ lemma CetPar12b: "\<lfloor>((\<^bold>\<not>\<phi>) \<^bold>\<and> (\<^bold>\<lan
 lemma CetPar13a: "\<lfloor>(\<phi> \<^bold>\<and> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>(\<alpha> \<^bold>\<and> \<phi>) )) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<union>\<^bold>{\<phi>\<^bold>}\<^bold>\<rangle>\<^sup>\<prec>\<alpha>)\<rfloor>"     by auto 
 lemma CetPar13b: "\<lfloor>((\<^bold>\<not>\<phi>) \<^bold>\<and> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>(\<alpha> \<^bold>\<and> \<^bold>\<not>\<phi>))) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<union>\<^bold>{\<phi>\<^bold>}\<^bold>\<rangle>\<^sup>\<prec>\<alpha>)\<rfloor>" by auto 
 (*Example 1, Lemma 4, Corollary 1 and Lemma5*)
-lemma Ex1:    "\<lfloor>(([\<Gamma>]\<^sup>\<preceq>\<phi>) \<^bold>\<and> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<alpha>)) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<union>\<^bold>{\<phi>\<^bold>}\<^bold>\<rangle>\<^sup>\<preceq>\<alpha>)\<rfloor>" using reflBR by auto
+lemma Ex1:    "\<lfloor>(([\<Gamma>]\<^sup>\<preceq>\<phi>) \<^bold>\<and> (\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<alpha>)) \<^bold>\<rightarrow> (\<^bold>\<langle>\<Gamma>\<^bold>\<union>\<^bold>{\<phi>\<^bold>}\<^bold>\<rangle>\<^sup>\<preceq>\<alpha>)\<rfloor>" using rBR by auto
 lemma Lemma4: "(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<phi>) w \<longrightarrow> (\<exists>v. (w \<^bold>\<unlhd>\<^sub>\<Gamma> v) \<and> (\<phi> v))"  by simp 
 lemma Cor1:   "(\<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<phi>)  w \<longrightarrow> (\<exists>v. (w \<^bold>\<equiv>\<^sub>\<Gamma> v) \<and> (\<phi> v))"  by simp 
 lemma Lemma5: "(w \<^bold>\<unlhd>\<^sub>\<Gamma> v) \<longleftrightarrow> ((w \<preceq> v) \<and> (w \<^bold>\<equiv>\<^sub>\<Gamma> v))"    by auto  
@@ -62,5 +62,3 @@ lemma "let \<Gamma> = \<^bold>{A\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^
 lemma "let \<Gamma> = \<^bold>{A,B\<^bold>} in \<lfloor>(\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) \<^bold>\<rightarrow> ((A \<^bold>\<and> B) \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>))\<rfloor>" by auto
 lemma "let \<Gamma> = \<^bold>{A\<^bold>} in \<lfloor>(A \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E \<psi>)) \<^bold>\<rightarrow> (\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>)\<rfloor>" nitpick oops (*Ctm*)
 end
-
-
