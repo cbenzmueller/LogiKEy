@@ -19,7 +19,6 @@ W5: "\<lfloor>appAnimal \<^bold>\<rightarrow> appObject\<rfloor>"
 
 (*LWK: value preferences for kinds of situations*)
 axiomatization where 
-(* L1: "\<lfloor>appAnimal     \<^bold>\<rightarrow> (p\<upharpoonleft>STAB  \<^bold>\<preceq>\<^sub>A\<^sub>A d\<upharpoonleft>STAB)\<rfloor>" and  *)
 L2: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>STAB)\<rfloor>" and        
 L3: "\<lfloor>appDomAnimal  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>RESP])\<rfloor>"
 (*\<dots>further preferences\<dots>*)
@@ -42,8 +41,9 @@ W7: "\<lfloor>Own x \<^bold>\<rightarrow> (\<^bold>\<not>Own x\<inverse>)\<rfloo
 (*\<dots>others\<dots>*)
 
 (*LWK: conditional legal value preferences*)
-(* axiomatization where *)
-(* L5: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>RELI \<^bold>\<preceq>\<^sub>A\<^sub>A (x\<upharpoonleft>STAB))\<rfloor>" *)
+ axiomatization where 
+ L5: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>RELI \<^bold>\<preceq>\<^sub>A\<^sub>A (x\<upharpoonleft>STAB))\<rfloor>" and
+ L6: "\<lfloor>(Own x \<^bold>\<and> Intent x \<^bold>\<and> Poss x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>WILL])\<rfloor>"
 (*\<dots>others\<dots>*)
 
 (*LWK: value preferences given certain situational factors*)
