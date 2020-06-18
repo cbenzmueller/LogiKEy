@@ -18,9 +18,9 @@ W5: "\<lfloor>appAnimal \<^bold>\<rightarrow> appObject\<rfloor>"
 (*\<dots>further situations regarding appropriation of objects\<dots>*)
 
 (*LWK: value preferences for kinds of situations*)
-axiomatization where 
-L2: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>STAB)\<rfloor>" and        
-L3: "\<lfloor>appDomAnimal  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>RESP])\<rfloor>"
+ axiomatization where 
+ L2: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>STAB)\<rfloor>" and         
+ L3: "\<lfloor>appDomAnimal  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>RESP])\<rfloor>"
 (*\<dots>further preferences\<dots>*)
 
 lemma True nitpick[satisfy] oops (*consistency, model found*)
@@ -42,17 +42,17 @@ W7: "\<lfloor>Own x \<^bold>\<rightarrow> (\<^bold>\<not>Own x\<inverse>)\<rfloo
 
 (*LWK: conditional legal value preferences*)
  axiomatization where 
- L5: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>RELI \<^bold>\<preceq>\<^sub>A\<^sub>A (x\<upharpoonleft>STAB))\<rfloor>" and
- L6: "\<lfloor>(Own x \<^bold>\<and> Intent x \<^bold>\<and> Poss x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>WILL])\<rfloor>"
+L5: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>RELI \<^bold>\<preceq>\<^sub>A\<^sub>A (x\<upharpoonleft>STAB))\<rfloor>" and
+L6: "\<lfloor>(Own x \<^bold>\<and> Intent x \<^bold>\<and> Poss x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>WILL])\<rfloor>"
 (*\<dots>others\<dots>*)
 
 (*LWK: value preferences given certain situational factors*)
 axiomatization where 
-R1: "\<lfloor>(Intent x \<^bold>\<and> For x) \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>WILL)\<rfloor>" and  
-R2: "\<lfloor>(Liv x \<^bold>\<and> For x) \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>GAIN)\<rfloor>" and
-R3: "\<lfloor>(Poss x \<^bold>\<and> For x) \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>STAB)\<rfloor>" and
-R4: "\<lfloor>(Mtn x \<^bold>\<and> For x) \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>RESP)\<rfloor>" and
-R5: "\<lfloor>(Own x \<^bold>\<and> For x) \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>RELI)\<rfloor>"
+R1: "\<lfloor>For x \<^bold>\<rightarrow> (Intent x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>WILL))\<rfloor>" and  
+R2: "\<lfloor>For x \<^bold>\<rightarrow> (Liv x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>GAIN))\<rfloor>" and  
+R3: "\<lfloor>For x \<^bold>\<rightarrow> (Poss x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>STAB))\<rfloor>" and  
+R4: "\<lfloor>For x \<^bold>\<rightarrow> (Mtn x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>RESP))\<rfloor>" and  
+R5: "\<lfloor>For x \<^bold>\<rightarrow> (Own x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>RELI))\<rfloor>"
 (*\<dots>others\<dots>*)
 
 lemma True nitpick[satisfy] oops (*consistency, model found*)

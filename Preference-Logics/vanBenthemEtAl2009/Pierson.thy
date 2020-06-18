@@ -43,13 +43,11 @@ lemma "\<lfloor>Pierson_facts \<^bold>\<and> For p\<rfloor>"
   nitpick[satisfy,show_all,card i=3] oops (*non-trivial model*)
 
 (* by placing the burden of consistency on the plaintiff, 
-a decision for the defendant (Pierson) becomes provable*) 
-lemma assumes "\<lfloor>\<^bold>\<not>INCONS p\<rfloor>" shows "\<lfloor>Pierson_facts \<^bold>\<rightarrow> For d\<rfloor>" 
-  using assms by (metis CW1 CW2 CW3 CW5 CL1 ForAx L2 L5 R4 W1 other.simps(2) rBR)
+a decision for the defendant (Pierson) should become provable (TODO)*) 
+lemma assumes "\<lfloor>\<^bold>\<not>INCONS p\<rfloor>" shows "\<lfloor>Pierson_facts \<^bold>\<rightarrow> For d\<rfloor>" nitpick oops
 
-(* and a decision for the plaintiff (Post) becomes incompatible*)
-lemma assumes "\<lfloor>\<^bold>\<not>INCONS p\<rfloor>" shows "\<not>\<lfloor>Pierson_facts \<^bold>\<and> For p\<rfloor>" 
-  using assms CW1 CW2 CW3 CW4 CW5 CL1 L5 R1 R4 W3 rBR by fastforce
+(* and a decision for the plaintiff (Post) should become incompatible  (TODO)*)
+lemma assumes "\<lfloor>\<^bold>\<not>INCONS p\<rfloor>" shows "\<not>\<lfloor>Pierson_facts \<^bold>\<and> For p\<rfloor>" nitpick oops 
 
 end
 
