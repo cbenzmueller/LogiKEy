@@ -27,7 +27,7 @@ lemma True nitpick[satisfy,card i=4] oops (*satisfiable*)
 
 (*case-specific legal corpus*)
 axiomatization where 
-CL1: "\<lfloor>appAnimal \<^bold>\<rightarrow> (p\<upharpoonleft>STAB  \<^bold>\<preceq>\<^sub>A\<^sub>A d\<upharpoonleft>STAB)\<rfloor>"
+CL1: "\<lfloor>appAnimal \<^bold>\<rightarrow> (p\<upharpoonleft>STAB  \<^bold>\<prec> d\<upharpoonleft>STAB)\<rfloor>"
 (* ... others as needed*)
 
 (******************Pierson v. Post****************)  
@@ -38,16 +38,21 @@ abbreviation "Pierson_facts \<equiv> Fox \<alpha> \<^bold>\<and> (FreeRoaming \<
 lemma "\<lfloor>Pierson_facts \<^bold>\<and> For d\<rfloor>"
   nitpick[satisfy,show_all,card i=3] oops (*non-trivial model*)
 
-(* a decision for plaintiff (Post) is prima facie compatible with premises*)
-lemma "\<lfloor>Pierson_facts \<^bold>\<and> For p\<rfloor>" 
-  nitpick[satisfy,show_all,card i=3] oops (*non-trivial model*)
+(*TODO: is a decision for plaintiff (Post) prima facie compatible with premises?*)
+lemma "\<lfloor>Pierson_facts \<^bold>\<and> For p\<rfloor>"
+  nitpick[satisfy,show_all,card i=3] oops (*non-trivial model?*)
+lemma "\<not>\<lfloor>Pierson_facts \<^bold>\<and> For p\<rfloor>"
+  by (metis CW1 CW2 CW3 CW4 L2 R1 other.simps(2) rBR) (*using \<^bold>\<succ>\<^sub>E\<^sub>A variant*)
+  (* nitpick oops (* countermodel? *) *)
 
-(* by placing the burden of consistency on the plaintiff, 
-a decision for the defendant (Pierson) should become provable (TODO)*) 
-lemma assumes "\<lfloor>\<^bold>\<not>INCONS p\<rfloor>" shows "\<lfloor>Pierson_facts \<^bold>\<rightarrow> For d\<rfloor>" nitpick oops
+(* TODO: (optional: by placing the burden of consistency on the plaintiff) 
+a decision for the defendant (Pierson) should become provable*) 
+lemma (*assumes "\<lfloor>\<^bold>\<not>INCONS p\<rfloor>"*)
+      shows "\<lfloor>Pierson_facts \<^bold>\<rightarrow> For d\<rfloor>" nitpick oops (* countermodel? *)
 
-(* and a decision for the plaintiff (Post) should become incompatible  (TODO)*)
-lemma assumes "\<lfloor>\<^bold>\<not>INCONS p\<rfloor>" shows "\<not>\<lfloor>Pierson_facts \<^bold>\<and> For p\<rfloor>" nitpick oops 
+(* TODO: and a decision for the plaintiff (Post) should become incompatible*)
+lemma (*assumes "\<lfloor>\<^bold>\<not>INCONS p\<rfloor>"*)
+      shows "\<lfloor>Pierson_facts \<^bold>\<rightarrow> \<^bold>\<not>For p\<rfloor>" nitpick oops (* countermodel? *) 
 
 end
 
