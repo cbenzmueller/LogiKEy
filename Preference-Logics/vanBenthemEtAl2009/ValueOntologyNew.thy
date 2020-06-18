@@ -17,12 +17,20 @@ abbreviation vset1 ("\<lbrace>_\<rbrace>") where "\<lbrace>\<phi>\<rbrace> \<equ
 abbreviation vset2 ("\<lbrace>_,_\<rbrace>")   where "\<lbrace>\<alpha>,\<beta>\<rbrace> \<equiv> \<lambda>x::(c)VAL. x=\<alpha> \<or> x=\<beta>" 
 abbreviation vset3 ("\<lbrace>_,_,_\<rbrace>") where "\<lbrace>\<alpha>,\<beta>,\<gamma>\<rbrace> \<equiv> \<lambda>x::(c)VAL. x=\<alpha> \<or> x=\<beta> \<or> x=\<gamma>"
 
-abbreviation util::"c\<Rightarrow>v" ("UTIL\<^sup>_") where "UTIL\<^sup>x \<equiv> \<lbrace>UTILITY x\<rbrace>" 
+abbreviation util::"c\<Rightarrow>v" ("UTIL\<^sup>_") where "UTIL\<^sup>x \<equiv> \<lbrace>UTILITY  x\<rbrace>" 
+abbreviation secu::"c\<Rightarrow>v" ("SECU\<^sup>_") where "SECU\<^sup>x \<equiv> \<lbrace>SECURITY x\<rbrace>" 
 abbreviation equa::"c\<Rightarrow>v" ("EQUA\<^sup>_") where "EQUA\<^sup>x \<equiv> \<lbrace>EQUALITY x\<rbrace>" 
-abbreviation stab::"c\<Rightarrow>v" ("STAB\<^sup>_") where "STAB\<^sup>x \<equiv> \<lbrace>UTILITY x, SECURITY x\<rbrace>" 
-abbreviation will::"c\<Rightarrow>v" ("WILL\<^sup>_") where "WILL\<^sup>x \<equiv> \<lbrace>UTILITY x, LIBERTY x\<rbrace>" 
-abbreviation resp::"c\<Rightarrow>v" ("RESP\<^sup>_") where "RESP\<^sup>x \<equiv> \<lbrace>EQUALITY x, LIBERTY x\<rbrace>" 
-abbreviation reli::"c\<Rightarrow>v" ("RELI\<^sup>_") where "RELI\<^sup>x \<equiv> \<lbrace>EQUALITY x, SECURITY x\<rbrace>" 
+abbreviation libe::"c\<Rightarrow>v" ("LIBE\<^sup>_") where "LIBE\<^sup>x \<equiv> \<lbrace>LIBERTY  x\<rbrace>" 
+abbreviation stab::"c\<Rightarrow>v" ("STAB\<^sup>_") where "STAB\<^sup>x \<equiv> \<lbrace>SECURITY x, UTILITY  x\<rbrace>" 
+abbreviation reli::"c\<Rightarrow>v" ("RELI\<^sup>_") where "RELI\<^sup>x \<equiv> \<lbrace>SECURITY x, EQUALITY x\<rbrace>" 
+abbreviation equi::"c\<Rightarrow>v" ("EQUI\<^sup>_") where "EQUI\<^sup>x \<equiv> \<lbrace>EQUALITY x, SECURITY x\<rbrace>" 
+abbreviation fair::"c\<Rightarrow>v" ("FAIR\<^sup>_") where "FAIR\<^sup>x \<equiv> \<lbrace>EQUALITY x, LIBERTY  x\<rbrace>" 
+abbreviation resp::"c\<Rightarrow>v" ("RESP\<^sup>_") where "RESP\<^sup>x \<equiv> \<lbrace>LIBERTY  x, EQUALITY x\<rbrace>" 
+abbreviation will::"c\<Rightarrow>v" ("WILL\<^sup>_") where "WILL\<^sup>x \<equiv> \<lbrace>LIBERTY  x, UTILITY  x\<rbrace>" 
+abbreviation gain::"c\<Rightarrow>v" ("GAIN\<^sup>_") where "GAIN\<^sup>x \<equiv> \<lbrace>UTILITY  x, LIBERTY  x\<rbrace>" 
+abbreviation effi::"c\<Rightarrow>v" ("EFFI\<^sup>_") where "EFFI\<^sup>x \<equiv> \<lbrace>UTILITY  x, SECURITY x\<rbrace>" 
+
+
 (* TODO: add more...*)
 
 consts Vrel::"(c)VAL\<Rightarrow>i\<Rightarrow>bool" ("\<I>") (*incidence relation (between values and worlds) *)
@@ -38,20 +46,25 @@ abbreviation union (infixr "\<^bold>\<squnion>" 70) where "A\<^bold>\<squnion>B 
 abbreviation inters (infixr "\<^bold>\<sqinter>" 70) where "A\<^bold>\<sqinter>B \<equiv> \<lambda>x. A x \<and> B x"
 
 (*useful shorthand notation for aggregated values*) 
-abbreviation Vagg::"v\<Rightarrow>v\<Rightarrow>\<sigma>" (infixr "\<^bold>\<oplus>" 80) where "v\<^sub>1\<^bold>\<oplus>v\<^sub>2 \<equiv> (v\<^sub>1 \<^bold>\<sqinter> v\<^sub>2)\<down>"
+abbreviation Vagg::"v\<Rightarrow>v\<Rightarrow>\<sigma>" (infixr "\<^bold>\<oplus>" 80) where "v\<^sub>1\<^bold>\<oplus>v\<^sub>2 \<equiv> (v\<^sub>1\<^bold>\<sqinter>v\<^sub>2)\<down>"
 
-abbreviation "INCONS c \<equiv> WILL\<^sup>c \<^bold>\<oplus> RELI\<^sup>c" (*since they include all 4 upper values (at present)*)
+abbreviation  "INCONS c \<equiv> WILL\<^sup>c \<^bold>\<oplus> RELI\<^sup>c " 
+(* "INCONS c \<equiv> (SECU\<^sup>c \<^bold>\<oplus> LIBE\<^sup>c)  \<^bold>\<or>  (EQUA\<^sup>c \<^bold>\<oplus> UTIL\<^sup>c)" *)
+(*since they include all 4 upper values (at present)*)
 (* abbreviation "INDIFF c \<equiv> (\<lambda>x. False)" TODO: define - how?*)
 
 (*exploring the consistency and models of the ontology*)
 lemma "True" nitpick[satisfy,show_all,card i=1] oops
 lemma "True" nitpick[satisfy,show_all,card i=10] oops
 
+declare [[show_abbrevs=false]]
+
 lemma "\<lfloor> RELI\<^sup>d\<down> \<^bold>\<and> WILL\<^sup>p\<down>\<rfloor>" nitpick[satisfy,show_all] oops
 lemma "\<lfloor>(\<^bold>\<not>INCONS p) \<^bold>\<and> RELI\<^sup>p\<down> \<^bold>\<and> WILL\<^sup>p\<down>\<rfloor>" nitpick[satisfy,show_all] oops
 
-(*TODO: should find models:*)
-lemma "\<lfloor>(\<^bold>\<not>INCONS d) \<^bold>\<and> (\<^bold>\<not>INCONS p) \<^bold>\<and> RELI\<^sup>d\<down> \<^bold>\<and> WILL\<^sup>p\<down>\<rfloor>" nitpick[satisfy,show_all] oops
 
+(*TODO: should find models:*)
+lemma "\<lfloor>(\<^bold>\<not>INCONS d) \<^bold>\<and> (\<^bold>\<not>INCONS p) \<^bold>\<and> RELI\<^sup>d\<down> \<^bold>\<and> WILL\<^sup>p\<down>\<rfloor>" 
+   nitpick[satisfy,show_all] oops
 end
 
