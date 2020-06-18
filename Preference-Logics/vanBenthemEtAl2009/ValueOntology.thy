@@ -8,6 +8,9 @@ fun other::"c\<Rightarrow>c" ("_\<inverse>") where "p\<inverse> = d" | "d\<inver
 consts For::"c\<Rightarrow>\<sigma>"    (*decision: find/rule for party*)
 axiomatization where ForAx: "\<lfloor>For x \<^bold>\<leftrightarrow> (\<^bold>\<not>For x\<inverse>)\<rfloor>"
 
+(* abbreviation relPref::\<nu> ("_\<^bold>\<prec>_") where "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E \<psi> " *)
+abbreviation relPref::\<nu> ("_\<^bold>\<prec>_") where "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<psi> \<^bold>\<succ>\<^sub>E\<^sub>A \<phi>"
+
 datatype (*ethico-legal values/principles*) 
    VAL = WILL | RELI | RESP | EQUI | FAIR | EFFI | STAB | GAIN 
 
@@ -33,41 +36,45 @@ lemma "\<lfloor>(\<^bold>\<not>INDIFF d) \<^bold>\<and> (\<^bold>\<not>INDIFF p)
   d\<upharpoonleft>RELI \<^bold>\<and> p\<upharpoonleft>WILL\<rfloor>"  nitpick[satisfy,max_genuine=10,show_all] oops
 
 (*useful shorthand notation for aggregated values*) 
-abbreviation Agg2 ("_\<upharpoonleft>[_\<oplus>_]") where "c\<upharpoonleft>[V1\<oplus>V2] \<equiv> c\<upharpoonleft>V1 \<^bold>\<and> c\<upharpoonleft>V2"
+abbreviation agg::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("_\<^bold>\<oplus>_") where "v\<^sub>1\<^bold>\<oplus>v\<^sub>2 \<equiv> v\<^sub>1 \<^bold>\<or> v\<^sub>2"
+abbreviation Agg2 ("_\<upharpoonleft>[_\<oplus>_]") where "c\<upharpoonleft>[V1\<oplus>V2] \<equiv> c\<upharpoonleft>V1 \<^bold>\<oplus> c\<upharpoonleft>V2"
 abbreviation Agg3 ("_\<upharpoonleft>[_\<oplus>_\<oplus>_]")
-  where "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3] \<equiv> c\<upharpoonleft>V1 \<^bold>\<and> c\<upharpoonleft>V2 \<^bold>\<and> c\<upharpoonleft>V3"
+  where "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3] \<equiv> c\<upharpoonleft>V1 \<^bold>\<oplus> (c\<upharpoonleft>V2 \<^bold>\<oplus> c\<upharpoonleft>V3)"
 abbreviation Agg4 ("_\<upharpoonleft>[_\<oplus>_\<oplus>_\<oplus>_]") 
-  where "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3\<oplus>V4] \<equiv> c\<upharpoonleft>V1 \<^bold>\<and> c\<upharpoonleft>V2 \<^bold>\<and> c\<upharpoonleft>V3 \<^bold>\<and> c\<upharpoonleft>V4"
+  where "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3\<oplus>V4] \<equiv> c\<upharpoonleft>V1 \<^bold>\<oplus> (c\<upharpoonleft>V2 \<^bold>\<oplus> (c\<upharpoonleft>V3 \<^bold>\<oplus> c\<upharpoonleft>V4))"
 
 (*exploring implied knowledge*)
 lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<rightarrow> INCONS x\<rfloor>" 
   nitpick oops (*two non-opposed quadrants \<oplus> (noq): consistent*)
 lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>GAIN\<oplus>EFFI\<oplus>STAB] \<^bold>\<rightarrow> INCONS x\<rfloor>" 
   nitpick oops (*two noq \<oplus>: consistent*)
-lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>EFFI\<oplus>RELI] \<^bold>\<rightarrow> INCONS x\<rfloor>" 
+lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>EFFI\<oplus>RELI] \<^bold>\<rightarrow> INCONS x\<rfloor>" nitpick (*TODO redefine INCONS appropriately to validate this*)
   by simp (*three quadrants \<oplus>: inconsistent*)
-lemma "\<lfloor>x\<upharpoonleft>[RESP\<oplus>STAB] \<^bold>\<rightarrow> INCONS x\<rfloor>" 
+lemma "\<lfloor>x\<upharpoonleft>[RESP\<oplus>STAB] \<^bold>\<rightarrow> INCONS x\<rfloor>"  nitpick (*TODO redefine INCONS appropriately to validate this*)
   by simp (*two opposed quadrants \<oplus> (oq): inconsistent*)
 lemma "\<lfloor>x\<upharpoonleft>EQUI \<^bold>\<and> y\<upharpoonleft>EFFI \<^bold>\<rightarrow> (INCONS x \<^bold>\<or> INCONS y)\<rfloor>" 
   nitpick oops (*two noq (different parties): consistent*)
 lemma "\<lfloor>x\<upharpoonleft>RESP \<^bold>\<and> y\<upharpoonleft>STAB \<^bold>\<rightarrow> (INCONS x \<^bold>\<or> INCONS y)\<rfloor>" 
   nitpick oops (*two oq (different parties): consistent*)
 
-(*TODO fix: \<^bold>\<preceq>\<^sub>A\<^sub>A is NOT suitable for logic of value aggregation*)
-lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor>" 
+(*Important: only AE/EA preference variants are suitable for the
+logic of value aggregation (aggregating values by union/disjunction)*)
+lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor>" 
+  nitpick nitpick[satisfy] oops (*contingent --TODO: should also be countersatisfiable(?)*)
+lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor>" by blast
+lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>[RELI\<oplus>STAB]\<rfloor>" by blast
+lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB\<rfloor>" 
+  nitpick nitpick[satisfy] oops (*contingent --TODO: should also be countersatisfiable(?)*)
+lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>[RELI\<oplus>STAB]\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB\<rfloor>" 
   nitpick nitpick[satisfy] oops (*contingent*)
-lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>STAB\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor>" by blast
-lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>STAB\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>STAB]\<rfloor>" by blast
-lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>STAB\<rfloor>" by blast
-lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>[RELI\<oplus>STAB]\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>STAB\<rfloor>" 
+lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor>" 
+  nitpick nitpick[satisfy] oops (*contingent --TODO: should also be satisfiable(?)*)
+lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>STAB \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor>" by blast
+lemma "\<lfloor>x\<upharpoonleft>[RELI\<oplus>STAB] \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>STAB \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor>" by blast
+lemma "\<lfloor>x\<upharpoonleft>STAB \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor>" 
+  nitpick nitpick[satisfy] oops (*contingent --TODO: should also be countersatisfiable(?)*)
+lemma "\<lfloor>x\<upharpoonleft>STAB \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>[RELI\<oplus>STAB] \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor>" 
   nitpick nitpick[satisfy] oops (*contingent*)
-lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>WILL\<rfloor>" 
-  nitpick nitpick[satisfy] oops (*contingent*)
-lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>STAB \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>WILL\<rfloor>" by blast
-lemma "\<lfloor>x\<upharpoonleft>[RELI\<oplus>STAB] \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>STAB \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>WILL\<rfloor>" by blast
-lemma "\<lfloor>x\<upharpoonleft>STAB \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>WILL\<rfloor>" 
-  nitpick nitpick[satisfy] oops (*contingent*)
-lemma "\<lfloor>x\<upharpoonleft>STAB \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>[RELI\<oplus>STAB] \<^bold>\<preceq>\<^sub>A\<^sub>A x\<upharpoonleft>WILL\<rfloor>" 
-  nitpick nitpick[satisfy] oops (*contingent*)
+
 end
 
