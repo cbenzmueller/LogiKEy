@@ -67,6 +67,10 @@ abbreviation mforall ("\<^bold>\<forall>") where "\<^bold>\<forall>\<Phi> \<equi
 abbreviation mforallB (binder"\<^bold>\<forall>"[8]9) where "\<^bold>\<forall>x. \<phi>(x) \<equiv> \<^bold>\<forall>\<phi>"  
 abbreviation mexists ("\<^bold>\<exists>") where "\<^bold>\<exists>\<Phi> \<equiv> \<lambda>w.\<exists>x. (\<Phi> x w)"   
 abbreviation mexistsB (binder"\<^bold>\<exists>"[8]9) where "\<^bold>\<exists>x. \<phi>(x) \<equiv> \<^bold>\<exists>\<phi>"
+(*polymorph operators for sets of worlds/values*)
+abbreviation subs (infix "\<^bold>\<sqsubseteq>" 70) where "A\<^bold>\<sqsubseteq>B \<equiv> \<forall>x. A x \<longrightarrow> B x"
+abbreviation union (infixr "\<^bold>\<squnion>" 70) where "A\<^bold>\<squnion>B \<equiv> \<lambda>x. A x \<or> B x"
+abbreviation inters (infixr "\<^bold>\<sqinter>" 70) where "A\<^bold>\<sqinter>B \<equiv> \<lambda>x. A x \<and> B x"
 (*Consistency confirmed (trivial: only abbreviations introduced)*)
 lemma True nitpick[satisfy,user_axioms] oops
 end
