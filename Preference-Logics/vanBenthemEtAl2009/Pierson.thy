@@ -1,4 +1,4 @@
-theory Pierson      (*** Benzmüller, Fuenmayor & Lomfeld, 2020 ***)  
+theory Pierson    (*** Benzmüller, Fuenmayor & Lomfeld, 2020 ***)  
   imports GeneralKnowledge
 begin (*** Pierson v. Post "wild animal" case **)
 
@@ -20,40 +20,43 @@ lemma True nitpick[satisfy,card i=4] oops (*satisfiable*)
 abbreviation "Pierson_facts \<equiv> \<lfloor>Fox \<alpha> \<^bold>\<and> (FreeRoaming \<alpha>) \<^bold>\<and> 
   (\<^bold>\<not>Pet \<alpha>) \<^bold>\<and> Pursue p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursue d \<alpha>) \<^bold>\<and> Capture d \<alpha>\<rfloor>"
 
-(* a decision for defendant (Pierson) is compatible with premises*)
-lemma "Pierson_facts \<and> \<lfloor>For p \<^bold>\<prec> For d\<rfloor>"
-  nitpick[satisfy,card i=4] oops (*non-trivial model*)
+(*decision for defendant (Pierson) is compatible with premises*)
+lemma "Pierson_facts \<and> \<lfloor>\<^bold>\<not>INCONS\<^sup>d\<rfloor> \<and> \<lfloor>For p \<^bold>\<prec> For d\<rfloor>"
+  nitpick[satisfy,card i=4] oops (* (non-trivial) model found*)
 
-(* a decision for plaintiff (Post) is compatible with premises*)
-lemma "Pierson_facts \<and> \<lfloor>For d \<^bold>\<prec> For p\<rfloor>"
-  nitpick[satisfy,card i=4] oops (* non-trivial model?*)
+(*decision for plaintiff (Post) is compatible with premises*)
+lemma "Pierson_facts \<and> \<lfloor>\<^bold>\<not>INCONS\<^sup>p\<rfloor> \<and> \<lfloor>For d \<^bold>\<prec> For p\<rfloor>"
+  nitpick[satisfy,card i=4] oops (* (non-trivial) model found*)
 
-(* a decision for defendant (Pierson) is provable*)
+(*decision for defendant (Pierson) is provable*)
 lemma assumes Pierson_facts shows "\<lfloor>For p \<^bold>\<prec> For d\<rfloor>"
- using assms by (metis CW1 CW2 W6 W8 ForAx L2 R1 other.simps(2) rBR)
-(*  while a decision for the plaintiff is countersatisfiable*)
+ by (metis assms CW1 CW2 W6 W8 ForAx L2 R1 other.simps(2) rBR)
+(*while a decision for the plaintiff is not*)
 lemma assumes Pierson_facts shows "\<lfloor>For d \<^bold>\<prec> For p\<rfloor>"
- nitpick oops (*counterexample found*)
+ nitpick[card i=4] oops (*counterexample found*)
 
 (****************** pro-Post's argument ****************)
-(*theory amendment: plaintiff claims to be a professional hunter*)
-consts Prof::"c\<Rightarrow>\<sigma>"
-axiomatization where (*case-specific legal rule*)
- CL1: "\<lfloor>(Pursue x \<alpha> \<^bold>\<and> Prof x \<^bold>\<and> Poss x\<inverse>)  \<^bold>\<rightarrow> (STAB\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v EFFI\<^sup>x)\<rfloor>"
+(* Theory amendment: the animal is not free-roaming since it
+   is being chased by a professional hunter (Post) *)
+consts Hunter::"c\<Rightarrow>\<sigma>"
+axiomatization where (*case-specific legal rule for hunters*)
+ CL1: "\<lfloor>(Hunter x \<^bold>\<and> Pursue x \<alpha>)  \<^bold>\<rightarrow> (STAB\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v EFFI\<^sup>x)\<rfloor>"
 
-abbreviation "Post_facts \<equiv> \<lfloor>Fox \<alpha> \<^bold>\<and> (\<^bold>\<not>Pet \<alpha>) \<^bold>\<and> Prof p \<^bold>\<and>
-  Pursue p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursue d \<alpha>) \<^bold>\<and> Capture d \<alpha>\<rfloor>"
+abbreviation "Post_facts \<equiv> \<lfloor>Fox \<alpha> \<^bold>\<and> (\<^bold>\<not>FreeRoaming \<alpha>) \<^bold>\<and>
+   Hunter p \<^bold>\<and> Pursue p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursue d \<alpha>) \<^bold>\<and> Capture d \<alpha>\<rfloor>"
 
-(* a decision for plaintiff (Post) is compatible with premises*)
-lemma "Post_facts \<and> \<lfloor>For d \<^bold>\<prec> For p\<rfloor>"
-  nitpick[satisfy,card i=4] oops (*non-trivial model*)
+(*decision for defendant (Pierson) is compatible with premises*)
+lemma "Post_facts \<and> \<lfloor>\<^bold>\<not>INCONS\<^sup>d\<rfloor> \<and> \<lfloor>For p \<^bold>\<prec> For d\<rfloor>"
+  nitpick[satisfy,card i=4] oops (* (non-trivial) model found*)
 
-(* a decision for plaintiff (Post) becomes provable*)
+(*decision for plaintiff (Post) is compatible with premises too*)
+lemma "Post_facts \<and> \<lfloor>\<^bold>\<not>INCONS\<^sup>p\<rfloor> \<and> \<lfloor>For d \<^bold>\<prec> For p\<rfloor>"
+  nitpick[satisfy,card i=4] oops (* (non-trivial) model found*)
+
+(*indeed, a decision for plaintiff (Post) now becomes provable*)
 lemma assumes Post_facts shows "\<lfloor>For d \<^bold>\<prec> For p\<rfloor>"
   using assms by (metis CW3 ForAx CL1 R3 other.simps rBR)
-(*  while a decision for the defendant is countersatisfiable*)
+(*while a decision for the defendant is now refutable*)
 lemma assumes Post_facts shows "\<lfloor>For p \<^bold>\<prec> For d\<rfloor>" 
-  nitpick oops (* counterexample *)
+  nitpick[card i=4] oops (* counterexample found*)
 end
-
-
