@@ -1,6 +1,7 @@
-theory ValueOntology     (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
+theory ValueOntology      (*** Benzmüller, Fuenmayor & Lomfeld, 2020 ***)  
   imports PreferenceLogicBasics 
 begin (*** Lomfeld's value ontology is encoded ***)
+
 (*two legal parties (there can be more in principle)*)
 datatype c = p | d (*parties/contenders: plaintiff, defendant*)
 fun other::"c\<Rightarrow>c" ("_\<inverse>") where "p\<inverse> = d" | "d\<inverse>= p" 
@@ -8,73 +9,60 @@ fun other::"c\<Rightarrow>c" ("_\<inverse>") where "p\<inverse> = d" | "d\<inver
 consts For::"c\<Rightarrow>\<sigma>"    (*decision: find/rule for party*)
 axiomatization where ForAx: "\<lfloor>For x \<^bold>\<leftrightarrow> (\<^bold>\<not>For x\<inverse>)\<rfloor>"
 
-(* abbreviation relPref::\<nu> ("_\<^bold>\<prec>_") where "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E \<psi> " *)
-abbreviation relPref::\<nu> ("_\<^bold>\<prec>_") where "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<psi> \<^bold>\<succ>\<^sub>E\<^sub>A \<phi>"
+datatype (*ethico-legal upper values (wrt. party)*) 
+ 't VAL = LIBERTY 't | UTILITY 't | SECURITY 't | EQUALITY 't
+type_synonym v = "(c)VAL\<Rightarrow>bool" (*principles: sets of upper values*)
+type_synonym cv = "c\<Rightarrow>v"
 
-datatype (*ethico-legal values/principles*) 
-   VAL = WILL | RELI | RESP | EQUI | FAIR | EFFI | STAB | GAIN 
+abbreviation vset1 ("\<lbrace>_\<rbrace>") where "\<lbrace>\<phi>\<rbrace> \<equiv> \<lambda>x::(c)VAL. x=\<phi>" 
+abbreviation vset2 ("\<lbrace>_,_\<rbrace>")   where "\<lbrace>\<alpha>,\<beta>\<rbrace> \<equiv> \<lambda>x::(c)VAL. x=\<alpha> \<or> x=\<beta>" 
 
-(*predicate c\<up>UV: (a decision for) party c promotes value V*)
-consts V::"c\<Rightarrow>VAL\<Rightarrow>\<sigma>" ("_\<upharpoonleft>_") 
+abbreviation util::cv ("UTIL\<^sup>_") where "UTIL\<^sup>x \<equiv> \<lbrace>UTILITY  x\<rbrace>" 
+abbreviation secu::cv ("SECU\<^sup>_") where "SECU\<^sup>x \<equiv> \<lbrace>SECURITY x\<rbrace>" 
+abbreviation equa::cv ("EQUA\<^sup>_") where "EQUA\<^sup>x \<equiv> \<lbrace>EQUALITY x\<rbrace>" 
+abbreviation libe::cv ("LIBE\<^sup>_") where "LIBE\<^sup>x \<equiv> \<lbrace>LIBERTY  x\<rbrace>" 
+abbreviation stab::cv ("STAB\<^sup>_") where "STAB\<^sup>x \<equiv> \<lbrace>SECURITY x, UTILITY  x\<rbrace>" 
+abbreviation effi::cv ("EFFI\<^sup>_") where "EFFI\<^sup>x \<equiv> \<lbrace>UTILITY  x, SECURITY x\<rbrace>" 
+abbreviation gain::cv ("GAIN\<^sup>_") where "GAIN\<^sup>x \<equiv> \<lbrace>UTILITY  x, LIBERTY  x\<rbrace>" 
+abbreviation will::cv ("WILL\<^sup>_") where "WILL\<^sup>x \<equiv> \<lbrace>LIBERTY  x, UTILITY  x\<rbrace>" 
+abbreviation resp::cv ("RESP\<^sup>_") where "RESP\<^sup>x \<equiv> \<lbrace>LIBERTY  x, EQUALITY x\<rbrace>" 
+abbreviation fair::cv ("FAIR\<^sup>_") where "FAIR\<^sup>x \<equiv> \<lbrace>EQUALITY x, LIBERTY  x\<rbrace>" 
+abbreviation equi::cv ("EQUI\<^sup>_") where "EQUI\<^sup>x \<equiv> \<lbrace>EQUALITY x, SECURITY x\<rbrace>" 
+abbreviation reli::cv ("RELI\<^sup>_") where "RELI\<^sup>x \<equiv> \<lbrace>SECURITY x, EQUALITY x\<rbrace>" 
 
-(*upper values and their compliance with ethico-legal values*)
-abbreviation "SECURITY x \<equiv> (x\<upharpoonleft>RELI \<^bold>\<or> x\<upharpoonleft>EQUI \<^bold>\<or> x\<upharpoonleft>STAB \<^bold>\<or> x\<upharpoonleft>EFFI)"
-abbreviation "EQUALITY x \<equiv> (x\<upharpoonleft>FAIR \<^bold>\<or> x\<upharpoonleft>RESP \<^bold>\<or> x\<upharpoonleft>EQUI \<^bold>\<or> x\<upharpoonleft>RELI)"
-abbreviation "LIBERTY x \<equiv> (x\<upharpoonleft>WILL \<^bold>\<or> x\<upharpoonleft>GAIN \<^bold>\<or> x\<upharpoonleft>RESP \<^bold>\<or> x\<upharpoonleft>FAIR)"
-abbreviation "UTILITY x \<equiv> (x\<upharpoonleft>EFFI \<^bold>\<or> x\<upharpoonleft>STAB \<^bold>\<or> x\<upharpoonleft>GAIN \<^bold>\<or> x\<upharpoonleft>WILL)"
-abbreviation (*inconsistency of upper values*)
- "INCONS x \<equiv> (SECURITY x \<^bold>\<and> EQUALITY x \<^bold>\<and> LIBERTY x \<^bold>\<and> UTILITY x)"
-abbreviation (*Indifference*)
- "INDIFF x \<equiv> \<^bold>\<not>(SECURITY x \<^bold>\<or> EQUALITY x \<^bold>\<or> LIBERTY x \<^bold>\<or> UTILITY x)"
+(*incidence relation (between values and worlds) *)
+consts Vrel::"(c)VAL\<Rightarrow>i\<Rightarrow>bool" ("\<I>") 
 
-(*some useful settings for model finder: enforce information*)
-nitpick_params [eval=INCONS SECURITY EQUALITY LIBERTY UTILITY V] 
-(*exploring the consistency and models of the ontology*)
-lemma "True" nitpick[satisfy,show_all,card i=1] oops
-lemma "True" nitpick[satisfy,show_all,card i=10] oops
-lemma "\<lfloor>(\<^bold>\<not>INDIFF d) \<^bold>\<and> (\<^bold>\<not>INDIFF p) \<^bold>\<and> (\<^bold>\<not>INCONS d) \<^bold>\<and> (\<^bold>\<not>INCONS p) \<^bold>\<and>
-  d\<upharpoonleft>RELI \<^bold>\<and> p\<upharpoonleft>WILL\<rfloor>"  nitpick[satisfy,max_genuine=10,show_all] oops
+(*derivation operators (forming a Galois connection, cf. tests) *)
+abbreviation Vint::"\<sigma>\<Rightarrow>v" ("_\<up>") where "W\<up> \<equiv> \<lambda>v. \<forall>x. W x \<longrightarrow> \<I> v x"
+abbreviation Vext::"v\<Rightarrow>\<sigma>" ("_\<down>") where "V\<down> \<equiv> \<lambda>w. \<forall>x. V x \<longrightarrow> \<I> x w"
+abbreviation clExt::"\<sigma>\<Rightarrow>\<sigma>" ("_\<^sup>o") where "X\<^sup>o \<equiv> X\<up>\<down>"
+abbreviation clInt::"v\<Rightarrow>v" ("_\<^sup>v") where "X\<^sup>v \<equiv> X\<down>\<up>"
+abbreviation concept::"\<sigma>\<Rightarrow>v\<Rightarrow>bool" ("\<BB>") where "\<BB> A B \<equiv> A\<up>=B \<and> B\<down>=A"
 
-(*useful shorthand notation for aggregated values*) 
-abbreviation agg::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("_\<^bold>\<oplus>_") where "v\<^sub>1\<^bold>\<oplus>v\<^sub>2 \<equiv> v\<^sub>1 \<^bold>\<or> v\<^sub>2"
-abbreviation Agg2 ("_\<upharpoonleft>[_\<oplus>_]") where "c\<upharpoonleft>[V1\<oplus>V2] \<equiv> c\<upharpoonleft>V1 \<^bold>\<oplus> c\<upharpoonleft>V2"
-abbreviation Agg3 ("_\<upharpoonleft>[_\<oplus>_\<oplus>_]")
-  where "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3] \<equiv> c\<upharpoonleft>V1 \<^bold>\<oplus> (c\<upharpoonleft>V2 \<^bold>\<oplus> c\<upharpoonleft>V3)"
-abbreviation Agg4 ("_\<upharpoonleft>[_\<oplus>_\<oplus>_\<oplus>_]") 
-  where "c\<upharpoonleft>[V1\<oplus>V2\<oplus>V3\<oplus>V4] \<equiv> c\<upharpoonleft>V1 \<^bold>\<oplus> (c\<upharpoonleft>V2 \<^bold>\<oplus> (c\<upharpoonleft>V3 \<^bold>\<oplus> c\<upharpoonleft>V4))"
+abbreviation agg (infixr "\<^bold>\<oplus>"80) where "v\<^sub>1\<^bold>\<oplus>v\<^sub>2 \<equiv> v\<^sub>1 \<^bold>\<sqinter> v\<^sub>2"
+lemma "v\<^sub>1\<down> \<^bold>\<or> v\<^sub>2\<down> \<^bold>\<sqsubseteq> (v\<^sub>1\<^bold>\<oplus>v\<^sub>2)\<down>" by simp
+lemma "(v\<^sub>1\<^bold>\<oplus>v\<^sub>2)\<down> \<^bold>\<sqsubseteq> v\<^sub>1\<down> \<^bold>\<or> v\<^sub>2\<down>" nitpick oops
+lemma "(v\<^sub>1\<^bold>\<oplus>v\<^sub>2)\<down> \<equiv> (v\<^sub>1\<down> \<^bold>\<or> v\<^sub>2\<down>)\<up>\<down>" nitpick oops
 
-(*exploring implied knowledge*)
-lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<rightarrow> INCONS x\<rfloor>" 
-  nitpick oops (*two non-opposed quadrants \<oplus> (noq): consistent*)
-lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>GAIN\<oplus>EFFI\<oplus>STAB] \<^bold>\<rightarrow> INCONS x\<rfloor>" 
-  nitpick oops (*two noq \<oplus>: consistent*)
-lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>EFFI\<oplus>RELI] \<^bold>\<rightarrow> INCONS x\<rfloor>" nitpick (*TODO redefine INCONS appropriately to validate this*)
-  by simp (*three quadrants \<oplus>: inconsistent*)
-lemma "\<lfloor>x\<upharpoonleft>[RESP\<oplus>STAB] \<^bold>\<rightarrow> INCONS x\<rfloor>"  nitpick (*TODO redefine INCONS appropriately to validate this*)
-  by simp (*two opposed quadrants \<oplus> (oq): inconsistent*)
-lemma "\<lfloor>x\<upharpoonleft>EQUI \<^bold>\<and> y\<upharpoonleft>EFFI \<^bold>\<rightarrow> (INCONS x \<^bold>\<or> INCONS y)\<rfloor>" 
-  nitpick oops (*two noq (different parties): consistent*)
-lemma "\<lfloor>x\<upharpoonleft>RESP \<^bold>\<and> y\<upharpoonleft>STAB \<^bold>\<rightarrow> (INCONS x \<^bold>\<or> INCONS y)\<rfloor>" 
-  nitpick oops (*two oq (different parties): consistent*)
+(*shorthand notation for aggregated values*) 
+abbreviation agg1 ("[_]") where "[v] \<equiv> v\<down>"
+abbreviation agg2 ("[_\<oplus>_]") where "[v\<^sub>1\<oplus>v\<^sub>2] \<equiv> (v\<^sub>1\<^bold>\<oplus>v\<^sub>2)\<down>"
+abbreviation agg3 ("[_\<oplus>_\<oplus>_]") where "[v\<^sub>1\<oplus>v\<^sub>2\<oplus>v\<^sub>3] \<equiv> (v\<^sub>1\<^bold>\<oplus>v\<^sub>2\<^bold>\<oplus>v\<^sub>3)\<down>"
+abbreviation agg4 ("[_\<oplus>_\<oplus>_\<oplus>_]") where "[v\<^sub>1\<oplus>v\<^sub>2\<oplus>v\<^sub>3\<oplus>v\<^sub>4] \<equiv> (v\<^sub>1\<^bold>\<oplus>v\<^sub>2\<^bold>\<oplus>v\<^sub>3\<^bold>\<oplus>v\<^sub>4)\<down>"
 
-(*Important: only AE/EA preference variants are suitable for the
-logic of value aggregation (aggregating values by union/disjunction)*)
-lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor>" 
-  nitpick nitpick[satisfy] oops (*contingent --TODO: should also be countersatisfiable(?)*)
-lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor>" by blast
-lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>[RELI\<oplus>STAB]\<rfloor>" by blast
-lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>[WILL\<oplus>STAB]\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB\<rfloor>" 
-  nitpick nitpick[satisfy] oops (*contingent --TODO: should also be countersatisfiable(?)*)
-lemma "\<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>[RELI\<oplus>STAB]\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB\<rfloor>" 
-  nitpick nitpick[satisfy] oops (*contingent*)
-lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor>" 
-  nitpick nitpick[satisfy] oops (*contingent --TODO: should also be satisfiable(?)*)
-lemma "\<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>STAB \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor>" by blast
-lemma "\<lfloor>x\<upharpoonleft>[RELI\<oplus>STAB] \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>STAB \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor>" by blast
-lemma "\<lfloor>x\<upharpoonleft>STAB \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>[WILL\<oplus>STAB] \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor>" 
-  nitpick nitpick[satisfy] oops (*contingent --TODO: should also be countersatisfiable(?)*)
-lemma "\<lfloor>x\<upharpoonleft>STAB \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor> \<longrightarrow> \<lfloor>x\<upharpoonleft>[RELI\<oplus>STAB] \<^bold>\<prec> x\<upharpoonleft>WILL\<rfloor>" 
-  nitpick nitpick[satisfy] oops (*contingent*)
+abbreviation relPref::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_\<^bold>\<prec>_") where "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<psi> \<^bold>\<succ>\<^sub>E\<^sub>A \<phi>"  
+abbreviation relPrefv::"v\<Rightarrow>v\<Rightarrow>\<sigma>" ("_\<^bold>\<prec>\<^sub>v_") where "\<phi> \<^bold>\<prec>\<^sub>v \<psi> \<equiv> \<psi>\<down> \<^bold>\<succ>\<^sub>E\<^sub>A \<phi>\<down>"
 
+abbreviation indiff ("INDIFF\<^sup>_") 
+  where "INDIFF\<^sup>x \<equiv> (\<^bold>\<not>SECU\<^sup>x\<down>) \<^bold>\<and> (\<^bold>\<not>EQUA\<^sup>x\<down>) \<^bold>\<and> (\<^bold>\<not>LIBE\<^sup>x\<down>) \<^bold>\<and> (\<^bold>\<not>UTIL\<^sup>x\<down>)"
+abbreviation incnst1 ("INCONS\<^sup>_") 
+  where "INCONS\<^sup>x \<equiv> (SECU\<^sup>x \<^bold>\<squnion> EQUA\<^sup>x \<^bold>\<squnion> LIBE\<^sup>x \<^bold>\<squnion> UTIL\<^sup>x)\<down>"
+abbreviation incnst2 ("INCONS2\<^sup>_") 
+  where "INCONS2\<^sup>x \<equiv> SECU\<^sup>x\<down> \<^bold>\<and> EQUA\<^sup>x\<down> \<^bold>\<and> LIBE\<^sup>x\<down> \<^bold>\<and> UTIL\<^sup>x\<down>"
+
+lemma "\<lfloor>INCONS\<^sup>x \<^bold>\<leftrightarrow> INCONS2\<^sup>x\<rfloor>" by blast (*equivalent*)
+
+lemma "True" nitpick[satisfy] oops (*consistency*)
 end
 

@@ -1,5 +1,5 @@
-theory Conti      (*** Benzmüller, Fuenmayor & Lomfeld, 2020 ***)  
-  imports GeneralKnowledge
+theory Conti      (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
+  imports GeneralKnowledgeNew
 begin (*** ASPCA v. Conti "wild animal" case **)
 
 consts \<alpha>::"e" (*appropriated animal (parrot in this case) *)
@@ -23,8 +23,7 @@ lemma True nitpick[satisfy,card i=4] oops (*satisfiable*)
 abbreviation "ASPCA_facts \<equiv> \<lfloor>Parrot \<alpha> \<^bold>\<and> Pet \<alpha> \<^bold>\<and> Care p \<alpha> \<^bold>\<and> 
                      Prop p \<alpha> \<^bold>\<and> (\<^bold>\<not>Prop d \<alpha>) \<^bold>\<and> Capture d \<alpha>\<rfloor>"
 
-lemma "ASPCA_facts" nitpick[satisfy] oops 
-  (*TODO facts inconsistent - fix*)
+lemma "ASPCA_facts" nitpick[satisfy] oops (*TODO facts inconsistent - fix*)
 
 (* a decision for defendant (Conti) is compatible with premises*)
 lemma "ASPCA_facts \<and> \<lfloor>For p \<^bold>\<prec> For d\<rfloor>"
@@ -44,6 +43,7 @@ lemma assumes ASPCA_facts shows "\<lfloor>For p \<^bold>\<prec> For d\<rfloor>"
 
 (****************** pro-Conti's argument ****************)
 (*TODO ...*)
+
 end
 
 

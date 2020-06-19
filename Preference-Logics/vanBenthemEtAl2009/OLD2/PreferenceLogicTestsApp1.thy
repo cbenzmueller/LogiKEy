@@ -1,10 +1,12 @@
-theory PreferenceLogicTestsApp1     (*** Benzmüller & Fuenmayor, 2020 ***)  
+theory PreferenceLogicTestsApp1                (*Benzmüller & Fuenmayor, 2020*)  
    imports PreferenceLogicBasics 
-begin (*****Application-specific tests for the value ontology****)
+begin
+
+(*****Application-specific tests for the value ontology****)
 (* EE variant (\<and>)*)
 lemma "\<lfloor>A \<^bold>\<prec>\<^sub>E\<^sub>E (A\<^bold>\<and>B)\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*) 
 lemma "\<lfloor>(A\<^bold>\<and>B) \<^bold>\<prec>\<^sub>E\<^sub>E A\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)
-lemma "\<lfloor>(A \<^bold>\<prec>\<^sub>E\<^sub>E B) \<^bold>\<rightarrow> (A \<^bold>\<prec>\<^sub>E\<^sub>E (C\<^bold>\<and>B))\<rfloor>" nitpick[satisfy] nitpick oops (*ctg*)
+lemma "\<lfloor>(A \<^bold>\<prec>\<^sub>E\<^sub>E B) \<^bold>\<rightarrow> (A \<^bold>\<prec>\<^sub>E\<^sub>E (C\<^bold>\<and>B))\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)
 lemma "\<lfloor>(A \<^bold>\<prec>\<^sub>E\<^sub>E (C\<^bold>\<and>B)) \<^bold>\<rightarrow> (A \<^bold>\<prec>\<^sub>E\<^sub>E B)\<rfloor>" by blast
 lemma "\<lfloor>((C\<^bold>\<and>B) \<^bold>\<prec>\<^sub>E\<^sub>E A) \<^bold>\<rightarrow> (B \<^bold>\<prec>\<^sub>E\<^sub>E A)\<rfloor>" by blast
 lemma "\<lfloor>(B \<^bold>\<prec>\<^sub>E\<^sub>E A) \<^bold>\<rightarrow> ((C\<^bold>\<and>B) \<^bold>\<prec>\<^sub>E\<^sub>E A)\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)

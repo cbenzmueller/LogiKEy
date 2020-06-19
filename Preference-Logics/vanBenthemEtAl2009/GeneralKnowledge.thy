@@ -1,4 +1,4 @@
-theory GeneralKnowledge  (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
+theory GeneralKnowledge (***Benzmüller, Fuenmayor & Lomfeld, 2020***)  
   imports ValueOntology 
 begin (*** General Legal and World Knowledge (LWK) ***)
 
@@ -8,20 +8,37 @@ consts appAnimal::"\<sigma>"      (*appropriation of animals in general*)
 consts appWildAnimal::"\<sigma>"  (*appropriation of wild animals*)
 consts appDomAnimal::"\<sigma>"   (*appropriation of domestic animals*)
 
-(*LWK: meaning postulates for kinds of situations*)
+(*LWK: postulates for kinds of situations*)
 axiomatization where 
-W1: "\<lfloor>(appWildAnimal \<^bold>\<or> appDomAnimal) \<^bold>\<leftrightarrow> appAnimal\<rfloor>" and 
-W2: "\<lfloor>appWildAnimal \<^bold>\<leftrightarrow> \<^bold>\<not>appDomAnimal\<rfloor>" and 
-W3: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> appAnimal\<rfloor>"  and
-W4: "\<lfloor>appDomAnimal \<^bold>\<rightarrow> appAnimal\<rfloor>" and
-W5: "\<lfloor>appAnimal \<^bold>\<rightarrow> appObject\<rfloor>" 
-(*\<dots>further situations regarding appropriation of objects\<dots>*)
+ W1: "\<lfloor>(appWildAnimal \<^bold>\<or> appDomAnimal) \<^bold>\<leftrightarrow> appAnimal\<rfloor>" and 
+ W2: "\<lfloor>appWildAnimal \<^bold>\<leftrightarrow> \<^bold>\<not>appDomAnimal\<rfloor>" and 
+ W3: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> appAnimal\<rfloor>"  and
+ W4: "\<lfloor>appDomAnimal \<^bold>\<rightarrow> appAnimal\<rfloor>" and
+ W5: "\<lfloor>appAnimal \<^bold>\<rightarrow> appObject\<rfloor>" 
+(*\<dots>further situations regarding appropriation of objects, etc.*)
 
 (*LWK: value preferences for kinds of situations*)
- axiomatization where 
- L2: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>WILL \<^bold>\<prec> x\<upharpoonleft>STAB)\<rfloor>" and         
- L3: "\<lfloor>appDomAnimal  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<^bold>\<prec> x\<upharpoonleft>[RELI\<oplus>RESP])\<rfloor>"
+axiomatization where 
+ L1: "\<lfloor>appAnimal \<^bold>\<rightarrow> (STAB\<^sup>p \<^bold>\<prec>\<^sub>v STAB\<^sup>d)\<rfloor>" and
+ L2: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> (WILL\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v STAB\<^sup>x)\<rfloor>" and         
+ L3: "\<lfloor>appDomAnimal  \<^bold>\<rightarrow> (STAB\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v RELI\<^sup>x\<^bold>\<oplus>RESP\<^sup>x)\<rfloor>"
 (*\<dots>further preferences\<dots>*)
+
+(* LWK: 'common-sense/world' vocabulary*)
+typedecl e (* declares new type for entities*)
+consts Animal::"e\<Rightarrow>\<sigma>" 
+consts Domestic::"e\<Rightarrow>\<sigma>" 
+consts Fox::"e\<Rightarrow>\<sigma>" 
+consts Parrot::"e\<Rightarrow>\<sigma>" 
+consts Pet::"e\<Rightarrow>\<sigma>" 
+consts FreeRoaming::"e\<Rightarrow>\<sigma>" 
+
+(*LWK: taxonomic (domain) knowledge*)
+axiomatization where 
+ W6: "\<lfloor>\<^bold>\<forall>a. Fox a \<^bold>\<rightarrow> Animal a\<rfloor>" and
+ W7: "\<lfloor>\<^bold>\<forall>a. Parrot a \<^bold>\<rightarrow> Animal a\<rfloor>" and
+ W8: "\<lfloor>\<^bold>\<forall>a. (Animal a \<^bold>\<and> FreeRoaming a \<^bold>\<and> \<^bold>\<not>Pet a) \<^bold>\<rightarrow> \<^bold>\<not>Domestic a\<rfloor>"
+(*\<dots>others\<dots>*)
 
 lemma True nitpick[satisfy] oops (*consistency, model found*)
 
@@ -36,26 +53,23 @@ consts Mtn::"c\<Rightarrow>\<sigma>" (*party c respons. for maintenance of objec
 
 (*LWK: meaning postulates for general notions*)
 axiomatization where
-W6: "\<lfloor>Poss x \<^bold>\<rightarrow> (\<^bold>\<not>Poss x\<inverse>)\<rfloor>" and 
-W7: "\<lfloor>Own x \<^bold>\<rightarrow> (\<^bold>\<not>Own x\<inverse>)\<rfloor>"
-(*\<dots>others\<dots>*)
+ W9: "\<lfloor>Poss x \<^bold>\<rightarrow> (\<^bold>\<not>Poss x\<inverse>)\<rfloor>" and 
+ W10: "\<lfloor>Own x \<^bold>\<rightarrow> (\<^bold>\<not>Own x\<inverse>)\<rfloor>"
+ (*\<dots>others\<dots>*)
 
 (*LWK: conditional legal value preferences*)
- axiomatization where 
-L5: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>RELI \<^bold>\<prec> (x\<upharpoonleft>STAB))\<rfloor>" and
-L6: "\<lfloor>(Own x \<^bold>\<and> Intent x \<^bold>\<and> Poss x\<inverse>)  \<^bold>\<rightarrow> (x\<inverse>\<upharpoonleft>STAB \<^bold>\<prec> x\<upharpoonleft>[RELI\<oplus>WILL])\<rfloor>"
-(*\<dots>others\<dots>*)
-
-(*LWK: value preferences given certain situational factors*)
 axiomatization where 
-R1: "\<lfloor>For x \<^bold>\<rightarrow> (Intent x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>WILL))\<rfloor>" and  
-R2: "\<lfloor>For x \<^bold>\<rightarrow> (Liv x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>GAIN))\<rfloor>" and  
-R3: "\<lfloor>For x \<^bold>\<rightarrow> (Poss x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>STAB))\<rfloor>" and  
-R4: "\<lfloor>For x \<^bold>\<rightarrow> (Mtn x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>RESP))\<rfloor>" and  
-R5: "\<lfloor>For x \<^bold>\<rightarrow> (Own x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>(x\<upharpoonleft>RELI))\<rfloor>"
-(*\<dots>others\<dots>*)
+ L4: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (RELI\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v STAB\<^sup>x)\<rfloor>"
+ (*\<dots>others\<dots>*)
+
+(*LWK: relate value preferences with situational 'factors'*)
+axiomatization where 
+ R1: "\<lfloor>For x \<^bold>\<rightarrow> (Intent x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[WILL\<^sup>x])\<rfloor>" and  
+ R2: "\<lfloor>For x \<^bold>\<rightarrow> (Liv x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[GAIN\<^sup>x])\<rfloor>" and  
+ R3: "\<lfloor>For x \<^bold>\<rightarrow> (Poss x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[STAB\<^sup>x])\<rfloor>" and  
+ R4: "\<lfloor>For x \<^bold>\<rightarrow> (Mtn x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RESP\<^sup>x])\<rfloor>" and  
+ R5: "\<lfloor>For x \<^bold>\<rightarrow> (Own x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RELI\<^sup>x])\<rfloor>"
 
 lemma True nitpick[satisfy] oops (*consistency, model found*)
 end
-
 
