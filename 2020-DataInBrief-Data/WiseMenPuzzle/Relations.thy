@@ -27,3 +27,6 @@ begin
   lemma symm_tc: "symmetric R \<longrightarrow> symmetric (tc R)"  sledgehammer [verbose]  nitpick 
     using inverse_rel_def sub_rel_def sub_rel_tc_tc symmetric_def by auto
 end
+
+
+

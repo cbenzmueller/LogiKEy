@@ -19,8 +19,8 @@ respectively. The latter are a selection of the former but more widely available
 microfilm is available. The full collection is only available at the Princeton University Library.
 They contain personal notes amongst other documents. These might help in retracing Gödel's thoughts.
 It should be noted that fellow scientists with access to the microfilms could not find a sketch of the argument. However, the collection 
-at the Princeton University Library also contains his correspondence with Morgenstern and as we have seen in \ref{subsec:ArgGodel} Gödel would turn to Morgenstern with
-questions concerning the hearing%
+at the Princeton University Library also contains his correspondence with Morgenstern and as we have seen in \ref{subsec:ArgGodel} Gödel would turn 
+to Morgenstern with questions concerning the hearing%
 \footnote{S. \cite{morgenstern1971oskar}}.
  Since their correspondence was not published in ``Kurt Gödel - Collected Works"%
 \footnote{This is a collection of Gödel's scientific work in five volumes, the fifth containing his correspondence with persons
@@ -35,8 +35,8 @@ and problems with respect to content, for example when it comes to ensuring a ba
 be of particular interest, given that it is a widely used principal in law.
 
 With respect to the argument formalized in this work and its connection to the Frame Problem, we chose to enlist all necessary axioms
-on effects and non-effects.  Formalizing the argument with the currently available solutions for the Frame Problem\footnote{S. \cite{sep-frame-problem}, 
-``5.The Frame Problem Today"} remains to be done as it might lead to new insights.
+on effects and non-effects.  Formalizing the argument with the currently available solutions for the Frame Problem\footnote{S. 
+\cite{sep-frame-problem}, ``5.The Frame Problem Today"} remains to be done as it might lead to new insights.
 
 This work only dealt with the contents of the Constitution relevant to the argument formalized. Analysing and representing more of its contents
 will be the next step in meeting growing demands in automated legal reasoning.
@@ -75,3 +75,5 @@ and definitely learned a lot throughout the process of modelling and verifying t
 (*<*)
 end
 (*>*)
+
+

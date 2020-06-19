@@ -1,4 +1,4 @@
-theory ValueOntology      (*** Benzmüller, Fuenmayor & Lomfeld, 2020 ***)  
+theory ValueOntology     (*** Benzmüller, Fuenmayor & Lomfeld, 2020 ***)  
   imports PreferenceLogicBasics 
 begin (*** Lomfeld's value ontology is encoded ***)
 
@@ -54,12 +54,12 @@ abbreviation agg4 ("[_\<oplus>_\<oplus>_\<oplus>_]") where "[v\<^sub>1\<oplus>v\
 abbreviation relPref::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_\<^bold>\<prec>_") where "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<psi> \<^bold>\<succ>\<^sub>E\<^sub>A \<phi>"  
 abbreviation relPrefv::"v\<Rightarrow>v\<Rightarrow>\<sigma>" ("_\<^bold>\<prec>\<^sub>v_") where "\<phi> \<^bold>\<prec>\<^sub>v \<psi> \<equiv> \<psi>\<down> \<^bold>\<succ>\<^sub>E\<^sub>A \<phi>\<down>"
 
-abbreviation indiff ("INDIFF\<^sup>_") 
-  where "INDIFF\<^sup>x \<equiv> (\<^bold>\<not>SECURITY\<^sup>x\<down>)\<^bold>\<and>(\<^bold>\<not>EQUALITY\<^sup>x\<down>)\<^bold>\<and>(\<^bold>\<not>LIBERTY\<^sup>x\<down>)\<^bold>\<and>(\<^bold>\<not>UTILITY\<^sup>x\<down>)"
-abbreviation incnst1 ("INCONS\<^sup>_") 
-  where "INCONS\<^sup>x \<equiv> (SECURITY\<^sup>x \<^bold>\<squnion> EQUALITY\<^sup>x \<^bold>\<squnion> LIBERTY\<^sup>x \<^bold>\<squnion> UTILITY\<^sup>x)\<down>"
-abbreviation incnst2 ("INCONS2\<^sup>_") 
-  where "INCONS2\<^sup>x \<equiv> SECURITY\<^sup>x\<down> \<^bold>\<and> EQUALITY\<^sup>x\<down> \<^bold>\<and> LIBERTY\<^sup>x\<down> \<^bold>\<and> UTILITY\<^sup>x\<down>"
+abbreviation indiff ("INDIFF\<^sup>_") where "INDIFF\<^sup>x \<equiv> 
+  (\<^bold>\<not>SECURITY\<^sup>x\<down>)\<^bold>\<and>(\<^bold>\<not>EQUALITY\<^sup>x\<down>)\<^bold>\<and>(\<^bold>\<not>LIBERTY\<^sup>x\<down>)\<^bold>\<and>(\<^bold>\<not>UTILITY\<^sup>x\<down>)"
+abbreviation incnst1 ("INCONS\<^sup>_") where 
+ "INCONS\<^sup>x \<equiv> SECURITY\<^sup>x\<down> \<^bold>\<and> EQUALITY\<^sup>x\<down> \<^bold>\<and> LIBERTY\<^sup>x\<down> \<^bold>\<and> UTILITY\<^sup>x\<down>"
+abbreviation incnst2 ("INCONS2\<^sup>_") where "INCONS2\<^sup>x \<equiv> 
+  (SECURITY\<^sup>x \<^bold>\<squnion> EQUALITY\<^sup>x \<^bold>\<squnion> LIBERTY\<^sup>x \<^bold>\<squnion> UTILITY\<^sup>x)\<down>"
 
 lemma "\<lfloor>INCONS\<^sup>x \<^bold>\<leftrightarrow> INCONS2\<^sup>x\<rfloor>" by blast (*equivalent*)
 
