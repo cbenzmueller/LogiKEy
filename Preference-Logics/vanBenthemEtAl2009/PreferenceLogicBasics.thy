@@ -2,7 +2,7 @@ theory PreferenceLogicBasics (** Benzmüller & Fuenmayor, 2020 **)
  imports Main 
 begin (** SSE of prefer. logic by van Benthem et al., JPL 2009 **)
 (*unimportant*)declare[[syntax_ambiguity_warning=false]] 
-(*""*)nitpick_params[user_axioms,expect=genuine,show_all,format=3]
+nitpick_params[user_axioms,expect=genuine,show_all,format=3]
 (*preliminaries*)
 typedecl i                  (*possible worlds*)      
 type_synonym \<sigma>="i\<Rightarrow>bool"    (*'world-lifted' propositions*)

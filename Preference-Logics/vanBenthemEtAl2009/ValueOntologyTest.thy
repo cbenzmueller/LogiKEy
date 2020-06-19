@@ -2,8 +2,6 @@ theory ValueOntologyTest     (*Benzmüller, Fuenmayor & Lomfeld, 2020*)
   imports ValueOntologyNew 
 begin
 
-declare [[show_abbrevs=false]]
-
 (*exploring the consistency and models of the ontology*)
 lemma "True" nitpick[satisfy,show_all,card i=1] oops
 lemma "True" nitpick[satisfy,show_all,card i=10] oops
@@ -73,20 +71,20 @@ lemma "\<lfloor>[RESP\<^sup>x\<oplus>STAB\<^sup>y] \<^bold>\<rightarrow> (INCONS
 lemma "\<lfloor>RESP\<^sup>x\<down> \<^bold>\<and> STAB\<^sup>y\<down> \<^bold>\<rightarrow> (INCONS\<^sup>x \<^bold>\<or> INCONS\<^sup>y)\<rfloor>" nitpick oops (*two oq (different parties) \<and>: consistent*)
 
 (* value preferences tests*)
-lemma "\<lfloor>WILL\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x\<rfloor>" nitpick oops (*using rBR by blast*)
-lemma "\<lfloor>WILL\<^sup>x \<^bold>\<prec> STAB\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>WILL\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x\<rfloor>" by blast
-lemma "\<lfloor>WILL\<^sup>x \<^bold>\<prec> STAB\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>WILL\<^sup>x \<^bold>\<prec> RELI\<^sup>x\<^bold>\<oplus>STAB\<^sup>x\<rfloor>" by blast
-lemma "\<lfloor>WILL\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>WILL\<^sup>x \<^bold>\<prec> STAB\<^sup>x\<rfloor>"
+lemma "\<lfloor>WILL\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x\<rfloor>"
   nitpick nitpick[satisfy] oops (*contingent*)
-lemma "\<lfloor>WILL\<^sup>x \<^bold>\<prec> RELI\<^sup>x\<^bold>\<oplus>STAB\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>WILL\<^sup>x \<^bold>\<prec> STAB\<^sup>x\<rfloor>"
+lemma "\<lfloor>WILL\<^sup>x \<^bold>\<prec>\<^sub>v STAB\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>WILL\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x\<rfloor>" by blast
+lemma "\<lfloor>WILL\<^sup>x \<^bold>\<prec>\<^sub>v STAB\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>WILL\<^sup>x \<^bold>\<prec>\<^sub>v RELI\<^sup>x\<^bold>\<oplus>STAB\<^sup>x\<rfloor>" by blast
+lemma "\<lfloor>WILL\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>WILL\<^sup>x \<^bold>\<prec>\<^sub>v STAB\<^sup>x\<rfloor>"
   nitpick nitpick[satisfy] oops (*contingent*)
-lemma "\<lfloor>WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<rfloor>" 
-  nitpick nitpick[satisfy] oops (*contingent? or unsatisfiable?*)
-lemma "\<lfloor>WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>STAB\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<rfloor>" by auto
-lemma "\<lfloor>RELI\<^sup>x\<^bold>\<oplus>STAB\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>STAB\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<rfloor>" by auto
-lemma "\<lfloor>STAB\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<rfloor>" 
+lemma "\<lfloor>WILL\<^sup>x \<^bold>\<prec>\<^sub>v RELI\<^sup>x\<^bold>\<oplus>STAB\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>WILL\<^sup>x \<^bold>\<prec>\<^sub>v STAB\<^sup>x\<rfloor>"
   nitpick nitpick[satisfy] oops (*contingent*)
-lemma "\<lfloor>STAB\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>RELI\<^sup>x\<^bold>\<oplus>STAB\<^sup>x \<^bold>\<prec> WILL\<^sup>x\<rfloor>" 
+lemma "\<not>\<lfloor>WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor>" using rBR by auto
+lemma "\<lfloor>WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor>" by auto
+lemma "\<lfloor>RELI\<^sup>x\<^bold>\<oplus>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor>" by auto
+lemma "\<lfloor>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>WILL\<^sup>x\<^bold>\<oplus>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor>" 
+  nitpick nitpick[satisfy] oops (*contingent*)
+lemma "\<lfloor>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>RELI\<^sup>x\<^bold>\<oplus>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor>" 
   nitpick nitpick[satisfy] oops (*contingent*)
 
 end
