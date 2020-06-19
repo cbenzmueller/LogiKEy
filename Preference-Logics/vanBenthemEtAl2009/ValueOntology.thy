@@ -52,3 +52,4 @@ abbreviation incnst ("INCONS\<^sup>_") where (*inconsistency for value support*)
 lemma "True" nitpick[satisfy] oops (*verify consistency of this theory*)
 end
 
+

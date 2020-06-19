@@ -60,3 +60,5 @@ lemma assumes Post_facts shows "\<lfloor>For d \<^bold>\<prec> For p\<rfloor>"
 lemma assumes Post_facts shows "\<lfloor>For p \<^bold>\<prec> For d\<rfloor>" 
   nitpick[card i=4] oops (* counterexample found*)
 end
+
+
