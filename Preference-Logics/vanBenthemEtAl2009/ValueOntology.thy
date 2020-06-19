@@ -17,10 +17,10 @@ type_synonym cv = "c\<Rightarrow>v"
 abbreviation vset1 ("\<lbrace>_\<rbrace>") where "\<lbrace>\<phi>\<rbrace> \<equiv> \<lambda>x::(c)VAL. x=\<phi>" 
 abbreviation vset2 ("\<lbrace>_,_\<rbrace>")   where "\<lbrace>\<alpha>,\<beta>\<rbrace> \<equiv> \<lambda>x::(c)VAL. x=\<alpha> \<or> x=\<beta>" 
 
-abbreviation util::cv ("UTIL\<^sup>_") where "UTIL\<^sup>x \<equiv> \<lbrace>UTILITY  x\<rbrace>" 
-abbreviation secu::cv ("SECU\<^sup>_") where "SECU\<^sup>x \<equiv> \<lbrace>SECURITY x\<rbrace>" 
-abbreviation equa::cv ("EQUA\<^sup>_") where "EQUA\<^sup>x \<equiv> \<lbrace>EQUALITY x\<rbrace>" 
-abbreviation libe::cv ("LIBE\<^sup>_") where "LIBE\<^sup>x \<equiv> \<lbrace>LIBERTY  x\<rbrace>" 
+abbreviation utility::cv ("UTILITY\<^sup>_")   where "UTILITY\<^sup>x  \<equiv> \<lbrace>UTILITY  x\<rbrace>" 
+abbreviation security::cv ("SECURITY\<^sup>_") where "SECURITY\<^sup>x \<equiv> \<lbrace>SECURITY x\<rbrace>" 
+abbreviation equality::cv ("EQUALITY\<^sup>_") where "EQUALITY\<^sup>x \<equiv> \<lbrace>EQUALITY x\<rbrace>" 
+abbreviation liberety::cv ("LIBERTY\<^sup>_")  where "LIBERTY\<^sup>x  \<equiv> \<lbrace>LIBERTY  x\<rbrace>" 
 abbreviation stab::cv ("STAB\<^sup>_") where "STAB\<^sup>x \<equiv> \<lbrace>SECURITY x, UTILITY  x\<rbrace>" 
 abbreviation effi::cv ("EFFI\<^sup>_") where "EFFI\<^sup>x \<equiv> \<lbrace>UTILITY  x, SECURITY x\<rbrace>" 
 abbreviation gain::cv ("GAIN\<^sup>_") where "GAIN\<^sup>x \<equiv> \<lbrace>UTILITY  x, LIBERTY  x\<rbrace>" 
@@ -55,11 +55,11 @@ abbreviation relPref::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_\
 abbreviation relPrefv::"v\<Rightarrow>v\<Rightarrow>\<sigma>" ("_\<^bold>\<prec>\<^sub>v_") where "\<phi> \<^bold>\<prec>\<^sub>v \<psi> \<equiv> \<psi>\<down> \<^bold>\<succ>\<^sub>E\<^sub>A \<phi>\<down>"
 
 abbreviation indiff ("INDIFF\<^sup>_") 
-  where "INDIFF\<^sup>x \<equiv> (\<^bold>\<not>SECU\<^sup>x\<down>) \<^bold>\<and> (\<^bold>\<not>EQUA\<^sup>x\<down>) \<^bold>\<and> (\<^bold>\<not>LIBE\<^sup>x\<down>) \<^bold>\<and> (\<^bold>\<not>UTIL\<^sup>x\<down>)"
+  where "INDIFF\<^sup>x \<equiv> (\<^bold>\<not>SECURITY\<^sup>x\<down>)\<^bold>\<and>(\<^bold>\<not>EQUALITY\<^sup>x\<down>)\<^bold>\<and>(\<^bold>\<not>LIBERTY\<^sup>x\<down>)\<^bold>\<and>(\<^bold>\<not>UTILITY\<^sup>x\<down>)"
 abbreviation incnst1 ("INCONS\<^sup>_") 
-  where "INCONS\<^sup>x \<equiv> (SECU\<^sup>x \<^bold>\<squnion> EQUA\<^sup>x \<^bold>\<squnion> LIBE\<^sup>x \<^bold>\<squnion> UTIL\<^sup>x)\<down>"
+  where "INCONS\<^sup>x \<equiv> (SECURITY\<^sup>x \<^bold>\<squnion> EQUALITY\<^sup>x \<^bold>\<squnion> LIBERTY\<^sup>x \<^bold>\<squnion> UTILITY\<^sup>x)\<down>"
 abbreviation incnst2 ("INCONS2\<^sup>_") 
-  where "INCONS2\<^sup>x \<equiv> SECU\<^sup>x\<down> \<^bold>\<and> EQUA\<^sup>x\<down> \<^bold>\<and> LIBE\<^sup>x\<down> \<^bold>\<and> UTIL\<^sup>x\<down>"
+  where "INCONS2\<^sup>x \<equiv> SECURITY\<^sup>x\<down> \<^bold>\<and> EQUALITY\<^sup>x\<down> \<^bold>\<and> LIBERTY\<^sup>x\<down> \<^bold>\<and> UTILITY\<^sup>x\<down>"
 
 lemma "\<lfloor>INCONS\<^sup>x \<^bold>\<leftrightarrow> INCONS2\<^sup>x\<rfloor>" by blast (*equivalent*)
 
