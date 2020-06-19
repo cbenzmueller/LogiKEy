@@ -37,23 +37,24 @@ Morgenstern's account has since been published by the IAS.
 The following will recount the incident according to Morgenstern since, unlike Dawson, Morgenstern attended the hearing himself%
 \footnote{The following paragraphs on the hearing all refer to \cite{morgenstern1971oskar} unless clearly stated otherwise}.
 
-Being a very thorough person, Gödel prepared for his citizenship hearing months in advance. He studied US history and law from the first settlers and 
-Native American tribes to the exact border between Princeton Borough and Princeton Township to the US Constitution. Apparently Gödel would address
- several of his questions to Morgenstern and the two of them would discuss these matters together.
+Being a very thorough person, Gödel prepared for his citizenship hearing months in advance. He studied US history and law from the first settlers 
+and Native American tribes to the exact border between Princeton Borough and Princeton Township to the US Constitution. Apparently Gödel would 
+address several of his questions to Morgenstern and the two of them would discuss these matters together.
 
 Morgenstern also mentions conversations about these topics in his diaries from 1947%
 \footnote{S. \cite{morgenstern2016tagebuch},  \emph{Feb 26 1947},  \emph{Mar 3 1947} and  \emph{Dec 7 1947} }, 
 unfortunately without going into much
 detail. For example, in his entry from February 26 he says he would be with the Gödels the following day and that most certainly Gödel
-would have his notebook and a lot of questions waiting. The next diary entry from March 3 tells us that Morgenstern had in fact been with the Gödels twice
+would have his notebook and a lot of questions waiting. The next diary entry from March 3 tells us that Morgenstern had in fact been with the 
+Gödels twice
 but only mentions conversations about other topics, nothing about the pending hearing.
 
 Eventually Gödel seemed to have found a fault with the Constitution, a fault that would allow for the erection of a fascist regime. He was most 
 distressed and could not be calmed by either Morgenstern or Einstein. They told him that questions asked would not require an in-depth analysis 
 of the Constitution and tried to dissuade him from mentioning the matter altogether.
 
-At the hearing the judge first asked Einstein and Morgenstern whether they considered Gödel to be a good potential citizen. Being his character witnesses
-they confirmed.
+At the hearing the judge first asked Einstein and Morgenstern whether they considered Gödel to be a good potential citizen. Being his character 
+witnesses they confirmed.
 The judge then turned to Gödel and the following dialogue unfolded%
 \footnote{This direct quote from \cite{morgenstern1971oskar} contains some misspellings. For better readability they are listed here: 
 \emph{Godel}-\emph{Gödel},\emph{examinor}-\emph{examiner}}:
@@ -128,20 +129,20 @@ VII & Ratification of the Constitution
 \end{tabularx} 
 \end{center}
 
-\noindent\textbf{Articles I-III} specifiy the rights of the governmental branches, by which institutions they are represented, how elections are to be held and so 
-forth.
+\noindent\textbf{Articles I-III} specifiy the rights of the governmental branches, by which institutions they are represented, how elections are to 
+be held and so forth.
 
 \noindent\textbf{Article IV} sets up the federalistic system by which each state has legislative sovereignty over its own affairs, but also manages
 interstate relations. In this context, state is to mean a member of the United States of America.
 
-\noindent\textbf{Article V} describes the process of changing or  amending the Constitution. This article is of particular importance to the argument.
- It will therefore be considered in more detail later.
+\noindent\textbf{Article V} describes the process of changing or  amending the Constitution. This article is of particular importance to the
+ argument. It will therefore be considered in more detail later.
 
-\noindent\textbf{Article VI} determines that any state's debts are not changed by the ratification of the Constitution. Furthermore, it states that the Constitution
-shall be the ``supreme Law of the Land" and any official representative has to swear an oath of support.
+\noindent\textbf{Article VI} determines that any state's debts are not changed by the ratification of the Constitution. Furthermore, it states 
+that the Constitution shall be the ``supreme Law of the Land" and any official representative has to swear an oath of support.
 
-\noindent\textbf{Article VII} finally stipulates that the Constitution will be ratified through the ratification of nine states. The ratification by all 
-thirteen original states is not necessary for the Constitution to take effect.
+\noindent\textbf{Article VII} finally stipulates that the Constitution will be ratified through the ratification of nine states. The ratification 
+by all thirteen original states is not necessary for the Constitution to take effect.
 \\
 
 \noindent Here is the outline of the actual argument:\\
@@ -174,9 +175,9 @@ Consent, shall be deprived of its equal Suffrage in the Senate.
 of other parts of the Constitution (paragraphs 5 and 6)
 \end{itemize}
 
-\noindent An amendment may be proposed either by Congress or by a specifically held Convention. In the first case at least two thirds of both houses of
- the Congress, i.e. the House of Representatives and the Senate, need to support the proposition. In the second case, at least two thirds of all 
-states' legislatures need to request such a Convention. 
+\noindent An amendment may be proposed either by Congress or by a specifically held Convention. In the first case at least two thirds of both 
+houses of the Congress, i.e. the House of Representatives and the Senate, need to support the proposition. In the second case, at least two 
+thirds of all states' legislatures need to request such a Convention. 
 
 As to the ratification, the conditions for ratification are similar to but not quite the same as for proposition. There are two possible methods
 and Congress decides which method shall be used. Either a proposed amendment is ratified by at least three fourths of all states' legislatures or

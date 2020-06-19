@@ -31,3 +31,4 @@ begin (*An Embedding of Higher-Order Multi-Modal Logic (HOMML) in HOL.*)
   mor_def[Defs] mimp_def[Defs] mequ_def[Defs] mall_def[Defs] mallB_def[Defs] mexi_def[Defs] 
   mexiB_def[Defs] mbox_def[Defs] mdia_def[Defs] global_valid_def[Defs] local_valid_def[Defs]
 end 
+
