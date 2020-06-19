@@ -1,6 +1,8 @@
-theory PreferenceLogicTestsApp2         (*** Benzmüller & Fuenmayor, 2020 ***)  
+theory PreferenceLogicTestsApp2                (*Benzmüller & Fuenmayor, 2020*)  
    imports PreferenceLogicBasics 
-begin (*****Application-specific tests for the value ontology****)
+begin
+
+(*****Application-specific tests for the value ontology****)
 (* EE variant (\<and>)*)
 lemma "\<lfloor>A \<^bold>\<preceq>\<^sub>E\<^sub>E (A\<^bold>\<and>B)\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*) 
 lemma "\<lfloor>(A\<^bold>\<and>B) \<^bold>\<preceq>\<^sub>E\<^sub>E A\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)

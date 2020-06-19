@@ -1,17 +1,19 @@
-theory ValueOntologyTest  (*** Benzmüller, Fuenmayor & Lomfeld, 2020 ***)  
-  imports ValueOntology
+theory ValueOntologyTest     (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
+  imports ValueOntologyNew 
 begin
+
 (*exploring the consistency and models of the ontology*)
+lemma "True" nitpick[satisfy,show_all,card i=1] oops
 lemma "True" nitpick[satisfy,show_all,card i=10] oops
 
 lemma "\<lfloor>INCONS\<^sup>p\<rfloor>" nitpick[satisfy,card i=4] nitpick oops (*contingent*)
 lemma "\<lfloor>INDIFF\<^sup>p\<rfloor>" nitpick[satisfy,card i=4] nitpick oops (*contingent*)
 
-(*Ext/Int operators satisfy main properties of Galois connections*)
+(****the pair of Ext/Int operators satisfies the main properties of Galois connections ****)
 lemma G:  "B \<^bold>\<sqsubseteq> A\<up> \<longleftrightarrow> A \<^bold>\<sqsubseteq> B\<down>" by blast
 
-lemma G1:     "A \<^bold>\<sqsubseteq> A\<up>\<down>" by simp
-lemma G2:     "B \<^bold>\<sqsubseteq> B\<down>\<up>" by simp
+lemma G1:      "A \<^bold>\<sqsubseteq> A\<up>\<down>" by simp
+lemma G2:      "B \<^bold>\<sqsubseteq> B\<down>\<up>" by simp
 lemma G3:     "A\<^sub>1 \<^bold>\<sqsubseteq> A\<^sub>2 \<longrightarrow> A\<^sub>2\<up> \<^bold>\<sqsubseteq> A\<^sub>1\<up>" by simp
 lemma G4:     "B\<^sub>1 \<^bold>\<sqsubseteq> B\<^sub>2 \<longrightarrow> B\<^sub>2\<down> \<^bold>\<sqsubseteq> B\<^sub>1\<down>" by simp
 
@@ -20,8 +22,8 @@ lemma cl2:    "B\<down> = B\<down>\<up>\<down>" by blast
 lemma dual1a: "(A\<^sub>1 \<^bold>\<squnion> A\<^sub>2)\<up> = (A\<^sub>1\<up> \<^bold>\<sqinter> A\<^sub>2\<up>)" by blast
 lemma dual1b: "(B\<^sub>1 \<^bold>\<squnion> B\<^sub>2)\<down> = (B\<^sub>1\<down> \<^bold>\<sqinter> B\<^sub>2\<down>)" by blast
 
-lemma         "(A\<^sub>1 \<^bold>\<sqinter> A\<^sub>2)\<up> \<^bold>\<sqsubseteq> (A\<^sub>1\<up> \<^bold>\<squnion> A\<^sub>2\<up>)" nitpick oops
-lemma         "(B\<^sub>1 \<^bold>\<sqinter> B\<^sub>2)\<down> \<^bold>\<sqsubseteq> (B\<^sub>1\<down> \<^bold>\<squnion> B\<^sub>2\<down>)" nitpick oops
+lemma          "(A\<^sub>1 \<^bold>\<sqinter> A\<^sub>2)\<up> \<^bold>\<sqsubseteq> (A\<^sub>1\<up> \<^bold>\<squnion> A\<^sub>2\<up>)" nitpick oops
+lemma          "(B\<^sub>1 \<^bold>\<sqinter> B\<^sub>2)\<down> \<^bold>\<sqsubseteq> (B\<^sub>1\<down> \<^bold>\<squnion> B\<^sub>2\<down>)" nitpick oops
 lemma dual2a: "(A\<^sub>1\<up> \<^bold>\<squnion> A\<^sub>2\<up>) \<^bold>\<sqsubseteq>  (A\<^sub>1 \<^bold>\<sqinter> A\<^sub>2)\<up>" by blast
 lemma dual2b: "(B\<^sub>1\<down> \<^bold>\<squnion> B\<^sub>2\<down>) \<^bold>\<sqsubseteq>  (B\<^sub>1 \<^bold>\<sqinter> B\<^sub>2)\<down>" by blast
 
@@ -45,9 +47,9 @@ lemma "\<lfloor>INCONS\<^sup>p \<^bold>\<rightarrow> RELI\<^sup>p\<down> \<^bold
 lemma "\<lfloor>RELI\<^sup>p\<down> \<^bold>\<and> WILL\<^sup>p\<down>\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)
 lemma "\<lfloor>FAIR\<^sup>d\<down> \<^bold>\<and> EFFI\<^sup>d\<down>\<rfloor>" nitpick[satisfy] nitpick oops (*contingent*)
 lemma "\<lfloor>(\<^bold>\<not>INCONS\<^sup>p) \<^bold>\<and> [FAIR\<^sup>d] \<^bold>\<and> [EFFI\<^sup>d]\<rfloor>"
- nitpick[satisfy,show_all] nitpick oops (*contingent: p & d independent*)
+   nitpick[satisfy,show_all] nitpick oops (*contingent: p & d are independent*)
 lemma "\<lfloor>(\<^bold>\<not>INCONS\<^sup>d) \<^bold>\<and> (\<^bold>\<not>INCONS\<^sup>p) \<^bold>\<and> [RELI\<^sup>d] \<^bold>\<and> [WILL\<^sup>p]\<rfloor>" 
- nitpick[satisfy,show_all] nitpick oops (*contingent: p & d independent*)
+  nitpick[satisfy,show_all] nitpick oops (*contingent: p & d are independent*)
 
 (*more tests*)
 lemma "\<lfloor>[WILL\<^sup>x\<oplus>STAB\<^sup>x] \<^bold>\<rightarrow> INCONS\<^sup>x\<rfloor>" nitpick oops (*two non-opposed quadrants \<oplus> (noq): consistent*)
@@ -84,5 +86,6 @@ lemma "\<lfloor>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor> \<lon
   nitpick nitpick[satisfy] oops (*contingent*)
 lemma "\<lfloor>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor> \<longrightarrow> \<lfloor>RELI\<^sup>x\<^bold>\<oplus>STAB\<^sup>x \<^bold>\<prec>\<^sub>v WILL\<^sup>x\<rfloor>" 
   nitpick nitpick[satisfy] oops (*contingent*)
+
 end
 

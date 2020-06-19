@@ -1,6 +1,6 @@
-theory PreferenceLogicCeterisParibus (** Benzmüller & Fuenmayor, 2020 **)
+theory PreferenceLogicCeterisParibus      (*** Benzmüller & Fuenmayor, 2020 ***)
   imports PreferenceLogicBasics
-begin (** Ceteris Paribus reasoning by van Benthem et al, JPL 2009 **)
+begin (** Ceteris Paribus reasoning by van Benthem, Girard and Roy, JPL 2009 **)
 
 (*Section 5: Equality-based Ceteris Paribus Preference Logic*)
 abbreviation a1::"\<sigma>\<Rightarrow>\<pi>\<Rightarrow>bool" ("_\<^bold>\<in>_") where "\<phi> \<^bold>\<in> \<Gamma> \<equiv> \<Gamma> \<phi>" 
@@ -24,22 +24,18 @@ abbreviation c21 ("\<^bold>\<langle>_\<^bold>\<rangle>_")  where "\<^bold>\<lang
 abbreviation c22 ("[_]_")  where "[\<Gamma>]\<phi> \<equiv> \<lambda>w.\<forall>v. w \<^bold>\<equiv>\<^sub>\<Gamma> v \<longrightarrow> \<phi> v"
 
 (*Section 6: Ceteris Paribus Counterparts of Binary Pref. Statements*)
-(*operators below not defined in paper; existence is tacitly suggested.
+(*operators below are not defined in paper; existence is tacitly suggested.
   AA-variant draws upon von Wright's. AE-variant draws upon Halpern's.*)
-abbreviation C23 ("_\<prec>\<^sub>A\<^sub>A\<^sup>__") 
-  where "(\<phi> \<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> s \<^bold>\<lhd>\<^sub>\<Gamma> t"
-abbreviation c24 ("_\<preceq>\<^sub>A\<^sub>A\<^sup>__") 
-  where "(\<phi> \<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> s \<^bold>\<unlhd>\<^sub>\<Gamma> t" 
-abbreviation c25 ("_\<prec>\<^sub>A\<^sub>E\<^sup>__") 
-  where "(\<phi> \<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<exists>t. \<phi> s \<longrightarrow> \<psi> t \<and> s \<^bold>\<lhd>\<^sub>\<Gamma> t" 
-abbreviation c26 ("_\<preceq>\<^sub>A\<^sub>E\<^sup>__") 
-  where "(\<phi> \<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<exists>t. \<phi> s \<longrightarrow> \<psi> t \<and> s \<^bold>\<unlhd>\<^sub>\<Gamma> t" 
+abbreviation C23 ("_\<prec>\<^sub>A\<^sub>A\<^sup>__") where "(\<phi> \<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> s \<^bold>\<lhd>\<^sub>\<Gamma> t"
+abbreviation c24 ("_\<preceq>\<^sub>A\<^sub>A\<^sup>__") where "(\<phi> \<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<forall>t. \<phi> s \<and> \<psi> t \<longrightarrow> s \<^bold>\<unlhd>\<^sub>\<Gamma> t" 
+abbreviation c25 ("_\<prec>\<^sub>A\<^sub>E\<^sup>__") where "(\<phi> \<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<exists>t. \<phi> s \<longrightarrow> \<psi> t \<and> s \<^bold>\<lhd>\<^sub>\<Gamma> t" 
+abbreviation c26 ("_\<preceq>\<^sub>A\<^sub>E\<^sup>__") where "(\<phi> \<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi>) u \<equiv> \<forall>s.\<exists>t. \<phi> s \<longrightarrow> \<psi> t \<and> s \<^bold>\<unlhd>\<^sub>\<Gamma> t" 
 abbreviation c27 ("_\<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>__") where "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<psi> \<^bold>\<rightarrow> [\<Gamma>]\<^sup>\<preceq>\<^bold>\<not>\<phi>)"
 abbreviation c28 ("_\<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>__") where "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>A\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<psi> \<^bold>\<rightarrow> [\<Gamma>]\<^sup>\<prec>\<^bold>\<not>\<phi>)"
 abbreviation c29 ("_\<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>__") where "\<phi> \<^bold>\<prec>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<prec>\<psi>)" 
 abbreviation c30 ("_\<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>__") where "\<phi> \<^bold>\<preceq>\<^sub>A\<^sub>E\<^sup>\<Gamma> \<psi> \<equiv> \<^bold>A(\<phi> \<^bold>\<rightarrow> \<^bold>\<langle>\<Gamma>\<^bold>\<rangle>\<^sup>\<preceq>\<psi>)"
 
-(*Consistency confirmed (trivial: only abbreviations are introduced*)
+(*Consistency confirmed (trivial: essentially only abbreviations are introduced*)
 lemma True nitpick[satisfy,user_axioms] oops
 end
 
