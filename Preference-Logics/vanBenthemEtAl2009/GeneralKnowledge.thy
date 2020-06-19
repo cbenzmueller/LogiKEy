@@ -1,12 +1,12 @@
-theory GeneralKnowledge (***Benzmüller, Fuenmayor & Lomfeld, 2020***)  
+theory GeneralKnowledge (*Benzmüller, Fuenmayor & Lomfeld, 2020*)  
   imports ValueOntology 
 begin (*** General Legal and World Knowledge (LWK) ***)
 
 (*LWK: kinds of situations addressed*)
-consts appObject::"\<sigma>"      (*appropriation of objects in general*)
-consts appAnimal::"\<sigma>"      (*appropriation of animals in general*)
-consts appWildAnimal::"\<sigma>"  (*appropriation of wild animals*)
-consts appDomAnimal::"\<sigma>"   (*appropriation of domestic animals*)
+consts appObject::"\<sigma>"     (*appropriation of objects in general*)
+consts appAnimal::"\<sigma>"     (*appropriation of animals in general*)
+consts appWildAnimal::"\<sigma>" (*appropriation of wild animals*)
+consts appDomAnimal::"\<sigma>"  (*appropriation of domestic animals*)
 
 (*LWK: postulates for kinds of situations*)
 axiomatization where 
@@ -25,7 +25,7 @@ axiomatization where
 (*\<dots>further preferences\<dots>*)
 
 (* LWK: 'common-sense/world' vocabulary*)
-typedecl e (* declares new type for entities*)
+typedecl e    (*declares new type for 'entities'*)
 consts Animal::"e\<Rightarrow>\<sigma>" 
 consts Domestic::"e\<Rightarrow>\<sigma>" 
 consts Fox::"e\<Rightarrow>\<sigma>" 
@@ -39,8 +39,6 @@ axiomatization where
  W7: "\<lfloor>\<^bold>\<forall>a. Parrot a \<^bold>\<rightarrow> Animal a\<rfloor>" and
  W8: "\<lfloor>\<^bold>\<forall>a. (Animal a \<^bold>\<and> FreeRoaming a \<^bold>\<and> \<^bold>\<not>Pet a) \<^bold>\<rightarrow> \<^bold>\<not>Domestic a\<rfloor>"
 (*\<dots>others\<dots>*)
-
-lemma True nitpick[satisfy] oops (*consistency, model found*)
 
 (*LWK: general legal notions, with an existing clear definition*)
 consts Own::"c\<Rightarrow>\<sigma>"    (*object is owned by party c*)
@@ -62,7 +60,7 @@ axiomatization where
  L4: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (RELI\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v STAB\<^sup>x)\<rfloor>"
  (*\<dots>others\<dots>*)
 
-(*LWK: relate value preferences with situational 'factors'*)
+(*LWK: relate values with situational 'factors'*)
 axiomatization where 
  R1: "\<lfloor>For x \<^bold>\<rightarrow> (Intent x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[WILL\<^sup>x])\<rfloor>" and  
  R2: "\<lfloor>For x \<^bold>\<rightarrow> (Liv x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[GAIN\<^sup>x])\<rfloor>" and  
@@ -70,6 +68,7 @@ axiomatization where
  R4: "\<lfloor>For x \<^bold>\<rightarrow> (Mtn x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RESP\<^sup>x])\<rfloor>" and  
  R5: "\<lfloor>For x \<^bold>\<rightarrow> (Own x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RELI\<^sup>x])\<rfloor>"
 
-lemma True nitpick[satisfy] oops (*consistency, model found*)
+(*theory is consistent, (non-trivial) model found*)
+lemma True nitpick[satisfy,card i=10] oops
 end
 
