@@ -49,8 +49,10 @@ abbreviation Vagg2 ("[_\<oplus>_]") where "[v\<^sub>1\<oplus>v\<^sub>2] \<equiv>
 abbreviation Vagg3 ("[_\<oplus>_\<oplus>_]") where "[v\<^sub>1\<oplus>v\<^sub>2\<oplus>v\<^sub>3] \<equiv> (v\<^sub>1 \<^bold>\<oplus> v\<^sub>2 \<^bold>\<oplus> v\<^sub>3)\<down>"
 abbreviation Vagg4 ("[_\<oplus>_\<oplus>_\<oplus>_]") where "[v\<^sub>1\<oplus>v\<^sub>2\<oplus>v\<^sub>3\<oplus>v\<^sub>4] \<equiv> (v\<^sub>1 \<^bold>\<oplus> v\<^sub>2 \<^bold>\<oplus> v\<^sub>3 \<^bold>\<oplus> v\<^sub>4)\<down>"
 
- (* abbreviation relPref::"v\<Rightarrow>v\<Rightarrow>\<sigma>" ("_\<^bold>\<prec>_") where "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<phi>\<down> \<^bold>\<preceq>\<^sub>A\<^sub>E \<psi>\<down> "  *)
- abbreviation relPref::"v\<Rightarrow>v\<Rightarrow>\<sigma>" ("_\<^bold>\<prec>_") where "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<psi>\<down> \<^bold>\<succ>\<^sub>E\<^sub>A \<phi>\<down>" 
+ (* abbreviation relPref::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("_\<^bold>\<prec>_") where "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<phi> \<prec>\<^sub>A\<^sub>E \<psi> "  *)
+ (* abbreviation relPrefv::"v\<Rightarrow>v\<Rightarrow>\<sigma>" ("_\<^bold>\<prec>\<^sub>v_") where "\<phi> \<^bold>\<prec>\<^sub>v \<psi> \<equiv> \<phi>\<down> \<prec>\<^sub>A\<^sub>E \<psi>\<down> "  *)
+ abbreviation relPref::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_\<^bold>\<prec>_") where "\<phi> \<^bold>\<prec> \<psi> \<equiv> \<psi> \<^bold>\<succ>\<^sub>E\<^sub>A \<phi>"  
+ abbreviation relPrefv::"v\<Rightarrow>v\<Rightarrow>\<sigma>" ("_\<^bold>\<prec>\<^sub>v_") where "\<phi> \<^bold>\<prec>\<^sub>v \<psi> \<equiv> \<psi>\<down> \<^bold>\<succ>\<^sub>E\<^sub>A \<phi>\<down>"
 
 abbreviation indiff ("INDIFF\<^sup>_") where "INDIFF\<^sup>x \<equiv> (\<^bold>\<not>SECU\<^sup>x\<down>) \<^bold>\<and> (\<^bold>\<not>EQUA\<^sup>x\<down>) \<^bold>\<and> (\<^bold>\<not>LIBE\<^sup>x\<down>) \<^bold>\<and> (\<^bold>\<not>UTIL\<^sup>x\<down>)"
 abbreviation incnst1 ("INCONS\<^sup>_") where "INCONS\<^sup>x \<equiv> (SECU\<^sup>x \<^bold>\<squnion> EQUA\<^sup>x \<^bold>\<squnion> LIBE\<^sup>x \<^bold>\<squnion> UTIL\<^sup>x)\<down>"
