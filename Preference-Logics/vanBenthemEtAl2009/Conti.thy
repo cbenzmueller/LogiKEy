@@ -40,3 +40,4 @@ theorem assumes ASPCA_facts shows "\<lfloor>For d \<^bold>\<prec> For p\<rfloor>
 lemma assumes ASPCA_facts shows "\<lfloor>For p \<^bold>\<prec> For d\<rfloor>"
   nitpick[card i=4] oops (*(non-trivial) counterexample found*)
 end
+
