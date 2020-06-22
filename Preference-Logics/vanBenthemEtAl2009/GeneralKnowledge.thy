@@ -19,9 +19,9 @@ axiomatization where
 
 (*LWK: value preferences for kinds of situations*)
 axiomatization where 
- L1: "\<lfloor>appAnimal \<^bold>\<rightarrow> (STAB\<^sup>p \<^bold>\<prec>\<^sub>v STAB\<^sup>d)\<rfloor>" and
- L2: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> (WILL\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v STAB\<^sup>x)\<rfloor>" and         
- L3: "\<lfloor>appDomAnimal  \<^bold>\<rightarrow> (STAB\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v RELI\<^sup>x\<^bold>\<oplus>RESP\<^sup>x)\<rfloor>"
+ R1: "\<lfloor>appAnimal \<^bold>\<rightarrow> (STAB\<^sup>p \<^bold>\<prec>\<^sub>v STAB\<^sup>d)\<rfloor>" and
+ R2: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> (WILL\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v STAB\<^sup>x)\<rfloor>" and         
+ R3: "\<lfloor>appDomAnimal  \<^bold>\<rightarrow> (STAB\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v RELI\<^sup>x\<^bold>\<oplus>RESP\<^sup>x)\<rfloor>"
 (*\<dots>further preferences\<dots>*)
 
 (* LWK: 'common-sense/world' vocabulary*)
@@ -57,16 +57,16 @@ axiomatization where
 
 (*LWK: conditional legal value preferences*)
 axiomatization where 
- L4: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (RELI\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v STAB\<^sup>x)\<rfloor>"
+ R4: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (RELI\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v STAB\<^sup>x)\<rfloor>"
  (*\<dots>others\<dots>*)
 
 (*LWK: relate values with situational 'factors'*)
 axiomatization where 
- R1: "\<lfloor>For x \<^bold>\<rightarrow> (Intent x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[WILL\<^sup>x])\<rfloor>" and  
- R2: "\<lfloor>For x \<^bold>\<rightarrow> (Liv x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[GAIN\<^sup>x])\<rfloor>" and  
- R3: "\<lfloor>For x \<^bold>\<rightarrow> (Poss x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[STAB\<^sup>x])\<rfloor>" and  
- R4: "\<lfloor>For x \<^bold>\<rightarrow> (Mtn x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RESP\<^sup>x])\<rfloor>" and  
- R5: "\<lfloor>For x \<^bold>\<rightarrow> (Own x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RELI\<^sup>x])\<rfloor>"
+ R5: "\<lfloor>For x \<^bold>\<rightarrow> (Intent x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[WILL\<^sup>x])\<rfloor>" and  
+ R6: "\<lfloor>For x \<^bold>\<rightarrow> (Liv x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[GAIN\<^sup>x])\<rfloor>" and  
+ R7: "\<lfloor>For x \<^bold>\<rightarrow> (Poss x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[STAB\<^sup>x])\<rfloor>" and  
+ R8: "\<lfloor>For x \<^bold>\<rightarrow> (Mtn x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RESP\<^sup>x])\<rfloor>" and  
+ R9: "\<lfloor>For x \<^bold>\<rightarrow> (Own x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RELI\<^sup>x])\<rfloor>"
 
 (*theory is consistent, (non-trivial) model found*)
 lemma True nitpick[satisfy,card i=10] oops

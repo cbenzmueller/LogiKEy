@@ -29,7 +29,7 @@ lemma "Pierson_facts \<and> \<lfloor>\<^bold>\<not>INCONS\<^sup>p\<rfloor> \<and
 
 (*decision for defendant (Pierson) is provable*)
 theorem assumes Pierson_facts shows "\<lfloor>For p \<^bold>\<prec> For d\<rfloor>"
-  by (metis assms CW1 CW2 W6 W8 ForAx L2 R1 other.simps(2) rBR)
+  by (metis assms CW1 CW2 W6 W8 ForAx R2 R5 other.simps(2) rBR)
 
 (*while a decision for the plaintiff is not*)
 lemma assumes Pierson_facts shows "\<lfloor>For d \<^bold>\<prec> For p\<rfloor>"
@@ -54,10 +54,11 @@ lemma "Post_facts \<and> \<lfloor>\<^bold>\<not>INCONS\<^sup>p\<rfloor> \<and> \
   nitpick[satisfy,card i=4] oops (* (non-trivial) model found*)
 
 (*indeed, a decision for plaintiff (Post) now becomes provable*)
-theorem assumes Post_facts shows "\<lfloor>For d \<^bold>\<prec> For p\<rfloor>"
-  using assms by (metis CW3 ForAx CL1 R3 other.simps rBR)
+theorem assumes Post_facts shows "\<lfloor>For d \<^bold>\<prec> For p\<rfloor>" 
+  using assms by (metis CW3 ForAx CL1 R7 other.simps rBR)
 
 (*while a decision for the defendant is now refutable*)
 lemma assumes Post_facts shows "\<lfloor>For p \<^bold>\<prec> For d\<rfloor>" 
   nitpick[card i=4] oops (* counterexample found*)
 end
+
