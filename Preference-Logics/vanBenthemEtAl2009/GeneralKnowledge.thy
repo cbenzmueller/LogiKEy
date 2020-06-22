@@ -17,14 +17,14 @@ axiomatization where
  W5: "\<lfloor>appAnimal \<^bold>\<rightarrow> appObject\<rfloor>" 
 (*\<dots>further situations regarding appropriation of objects, etc.*)
 
-(*LWK: value preferences for kinds of situations*)
+(*LWK: (prima facie) value preferences for kinds of situations*)
 axiomatization where 
  R1: "\<lfloor>appAnimal \<^bold>\<rightarrow> (STAB\<^sup>p \<^bold>\<prec>\<^sub>v STAB\<^sup>d)\<rfloor>" and
  R2: "\<lfloor>appWildAnimal \<^bold>\<rightarrow> (WILL\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v STAB\<^sup>x)\<rfloor>" and         
  R3: "\<lfloor>appDomAnimal  \<^bold>\<rightarrow> (STAB\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v RELI\<^sup>x\<^bold>\<oplus>RESP\<^sup>x)\<rfloor>"
 (*\<dots>further preferences\<dots>*)
 
-(* LWK: 'common-sense/world' vocabulary*)
+(*LWK: domain vocabulary*)
 typedecl e    (*declares new type for 'entities'*)
 consts Animal::"e\<Rightarrow>\<sigma>" 
 consts Domestic::"e\<Rightarrow>\<sigma>" 
@@ -40,13 +40,11 @@ axiomatization where
  W8: "\<lfloor>\<^bold>\<forall>a. (Animal a \<^bold>\<and> FreeRoaming a \<^bold>\<and> \<^bold>\<not>Pet a) \<^bold>\<rightarrow> \<^bold>\<not>Domestic a\<rfloor>"
 (*\<dots>others\<dots>*)
 
-(*LWK: general legal notions, with an existing clear definition*)
+(*LWK: legally-relevant, situational 'factors'*)
 consts Own::"c\<Rightarrow>\<sigma>"    (*object is owned by party c*)
 consts Poss::"c\<Rightarrow>\<sigma>"   (*party c has actual possession of object*)
 consts Intent::"c\<Rightarrow>\<sigma>" (*party c has intention to possess object*)
-
-(*LWK: other notions with some legal relevance (e.g. 'factors')*)
-consts Liv::"c\<Rightarrow>\<sigma>" (*party c is pursuing its livelihood*)
+consts Mal::"c\<Rightarrow>\<sigma>" (*party c acts out of malice*)
 consts Mtn::"c\<Rightarrow>\<sigma>" (*party c respons. for maintenance of object*)
 
 (*LWK: meaning postulates for general notions*)
@@ -55,15 +53,15 @@ axiomatization where
  W10: "\<lfloor>Own x \<^bold>\<rightarrow> (\<^bold>\<not>Own x\<inverse>)\<rfloor>"
  (*\<dots>others\<dots>*)
 
-(*LWK: conditional legal value preferences*)
+(*LWK: conditional value preferences, e.g. from precedents*)
 axiomatization where 
- R4: "\<lfloor>(Poss x \<^bold>\<and> \<^bold>\<not>Mtn x\<inverse>)  \<^bold>\<rightarrow> (RELI\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v STAB\<^sup>x)\<rfloor>"
+ R4: "\<lfloor>(Mal x\<inverse> \<^bold>\<and> Own x)  \<^bold>\<rightarrow> (STAB\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v RESP\<^sup>x\<^bold>\<oplus>RELI\<^sup>x)\<rfloor>"
  (*\<dots>others\<dots>*)
 
-(*LWK: relate values with situational 'factors'*)
+(*LWK: relate values, outcomes and situational 'factors'*)
 axiomatization where 
  F1: "\<lfloor>For x \<^bold>\<rightarrow> (Intent x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[WILL\<^sup>x])\<rfloor>" and  
- F2: "\<lfloor>For x \<^bold>\<rightarrow> (Liv x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[GAIN\<^sup>x])\<rfloor>" and  
+ F2: "\<lfloor>For x \<^bold>\<rightarrow> (Mal x\<inverse> \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RESP\<^sup>x])\<rfloor>" and  
  F3: "\<lfloor>For x \<^bold>\<rightarrow> (Poss x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[STAB\<^sup>x])\<rfloor>" and  
  F4: "\<lfloor>For x \<^bold>\<rightarrow> (Mtn x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RESP\<^sup>x])\<rfloor>" and  
  F5: "\<lfloor>For x \<^bold>\<rightarrow> (Own x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RELI\<^sup>x])\<rfloor>"
