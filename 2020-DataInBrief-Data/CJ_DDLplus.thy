@@ -1,4 +1,4 @@
-theory CJ_DDLplus  imports Main                                                   (*David Fuenmayor and C. Benzmüller, 2019*)
+theory CJ_DDLplus  imports Main                                       (*David Fuenmayor and C. Benzmüller, 2019*)
 begin
 nitpick_params[user_axioms=true, show_all, expect=genuine, format = 3]
 
