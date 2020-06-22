@@ -32,9 +32,9 @@ lemma "ASPCA_facts \<and> \<lfloor>\<^bold>\<not>INCONS\<^sup>p\<rfloor> \<and> 
 
 (* decision for plaintiff (ASPCA) is provable*)
 lemma aux: assumes ASPCA_facts shows "\<lfloor>(STAB\<^sup>d \<^bold>\<prec>\<^sub>v RELI\<^sup>p\<^bold>\<oplus>RESP\<^sup>p)\<rfloor>"
-  using CW1 CW2 W7 assms L3 by fastforce
+  using CW1 CW2 W7 assms R3 by fastforce
 theorem assumes ASPCA_facts shows "\<lfloor>For d \<^bold>\<prec> For p\<rfloor>"  
-  using assms aux CW5 ForAx R3 other.simps(1) rBR by metis
+  using assms aux CW5 ForAx R7 other.simps(1) rBR by metis
 
 (* while a decision for the defendant is refutable*)
 lemma assumes ASPCA_facts shows "\<lfloor>For p \<^bold>\<prec> For d\<rfloor>"
