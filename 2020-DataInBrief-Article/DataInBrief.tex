@@ -2,7 +2,7 @@
 
 
 \usepackage[T1]{fontenc}
-\usepackage{url,color,longtable,graphicx,latexsym}
+\usepackage{url,color,longtable,graphicx,latexsym,hyperref}
 
 
 
@@ -12,30 +12,21 @@
 
 
 \usepackage[a4paper, margin=2cm]{geometry}
-\usepackage{booktabs,tabularx}
-\renewcommand{\tabularxcolumn}{m}
+\usepackage{booktabs}
 
+\usepackage{tabu}
+\tabulinesep=3pt
 
+%\usepackage{tabularx,ragged2e}
+%\newcolumntype{C}{>{\Centering}X}
+%\newcolumntype{L}{>{}X}
+%\setlength\extrarowheight{3pt}
 
 
 \newcommand{\comment}[1]{
-% \par\addvspace{1ex}  \noindent
-% \begin{minipage}{\textwidth}\textcolor{red}{\scriptsize
-%     #1} \end{minipage}
 }
 
 
-\newcommand{\tableentry}[3]{
-\begin{minipage}{5cm}
-\textbf{\small #1} 
-\end{minipage}
-&
-\begin{minipage}{11cm}
-\vskip.5em {#2} \vspace*{.5em}
-% \\[.5em] {\scriptsize \textcolor{red}{#3} \vspace*{1ex} }
-\end{minipage}
-\\ \hline
-}
 
 \begin{document}
 \subsubsection*{Article Title}
@@ -63,7 +54,7 @@ Xavier Parent (\url{x.parent.xaviert@gmail.com})
 
 
 \subsubsection*{Abstract}
-The LogiKEy workbench for 
+The LogiKEy workbench and dataset for 
 %normative 
 ethical and legal reasoning is presented. This workbench
 simultaneously supports development, experimentation, assessment and
@@ -83,10 +74,8 @@ expressive ethical and legal reasoning. It may also support hands-on
 teaching of non-trivial logic formalisms in lecture courses and
 tutorials.
 
-\comment{
-[The Abstract should describe the data collection process, the analysis performed, the data, and their reuse potential. It should not provide conclusions or interpretive insights. If your article is being submitted via another Elsevier journal as a co-submission, please cite this research article in the abstract (title, or doi, and reference number only, e.g., “Title” [1]), and point the reader there for interpretation. \\
-Min 100 words - Max 500 words] 
-}
+The LogiKEy methodology and framework is discussed in more detail in the companion research article  titled ``Designing Normative Theories for Ethical and Legal Reasoning: {LogiKEy} Formal Framework, Methodology, and Tool Support'' \cite{J48}.
+
 
 
 
@@ -104,85 +93,49 @@ Semantical embedding; Higher-order logic
 
 \subsubsection*{Specifications Table} 
 
-\comment{
-[Every section of this table is mandatory. Please enter information in the right-hand column and remove all the instructions]
-}
+\begin{tabu} to \textwidth {|l|X|} \hline
+\textbf{Subject} &
+{Computer Science} 
+\\\hline
 
+\textbf{Specific subject area} &
+{Artificial intelligence; Knowledge representation and reasoning; Normative reasoning} 
+\\\hline
 
-\begin{longtable}{|l|l|} \hline
-\tableentry
-{Subject}
-{Computer Science}
-{[Please select one CATEGORY for your manuscript from the list available at: DIB categories.]} 
-
- 
-\tableentry
-{Specific subject area}
-{Artificial intelligence; Knowledge representation and reasoning; Normative reasoning}
-{[Briefly describe the narrower subject area. Max 150 characters]} 
-
-
-\tableentry
-{Type of data}
+\textbf{Type of data} &
 {formal theories (.thy files) encoded in Isabelle/HOL syntax, readable
-  (.png or .pdf) views of this data%,
-                                %readable (pdf) views of this data
-}	
-{[List the type(s) of data this article describes. Simply delete from this list as appropriate:] 
-Table
-Image
-Chart
-Graph
-Figure
-[Any other type not listed- please specify]}
-
-
-\tableentry
-{How data was acquired}
+  (.png or .pdf) views of this data}	
+\\\hline
+  
+\textbf{How data was acquired} &
 {The data was acquired through manual encoding of various deontic
   logics, logic combinations, examples of contrary-to-duty paradoxes, 
   excerpts of legal texts and exemplary ethical theories utilizing the
-  LogiKEy methodology \cite{J48}, which is itself based on shallow semantical
-  embeddings (SSEs) \cite{J41} of logics and theories in classical higher-order
+  LogiKEy methodology \cite{J48}, which is  based on shallow semantical
+  embeddings (SSEs) of logics and theories in classical higher-order
   logic. The concrete encodings were conducted in the higher-order proof
-  assistant system Isabelle/HOL \cite{Isabelle}; however, they are conceptually transferable to
+  assistant system Isabelle/HOL (\url{https://isabelle.in.tum.de}); however, they are conceptually transferable to
   other expressive reasoning systems.}	
-{
-[State how the data were acquired: E.g. Microscope, survey, SEM, NMR, mass spectrometry, etc. 
-Instruments: E.g. hardware, software, program
-Model and make of the instruments used:]}
+\\\hline
 
-
-\tableentry
-{Data format}
+\textbf{Data format} &
 {Raw, processed, analyzed and cleaned data. The data is provided in
   the syntax format of the Isabelle/HOL proof assistant, which has
   been used to process, analyze and verify it; the data files were
   also annotated by hand. Isabelle/HOL is freely available: \url{https://isabelle.in.tum.de}}	
-{
-[List your data format(s). Note, your manuscript will not be considered for publication unless you provide access to your raw data (either with article or linked to in a repository).] 
-Raw
-[Now simply delete from this list as appropriate:] 
-Analyzed
-Filtered
-[Any other format not listed- please specify]}
+\\\hline
 
-
-\tableentry
-{Parameters for data collection}
+\textbf{Parameters for data collection} &
 {One objective was to
   empirically assess the expressiveness  and proof automation
   capabilities of Isabelle/HOL and its integrated tools in normative reasoning when utilizing
   the LogiKEy methodology and the SSE
   approach. Another objective was to provide a reusable foundation for
   further experiments in expressive ethical and legal reasoning.}	
-{	
-[Provide a brief description of which conditions were considered for data collection. Max 400 characters]}
+\\\hline
 
-
-  \tableentry
-  {Description of data collection}
-  {The data were written by hand. As part of the data
+\textbf{Description of data collection} &
+{The data were written by hand. As part of the data
   collection process it has been demonstrated
   that non-trivial, normative reasoning is
   supported in the provided framework. This in particular included
@@ -198,55 +151,28 @@ An integral aspect of the data
   be independently assessed by users in combination with the
   Isabelle/HOL system. It has also been demonstrated how deontic
   logics can be flexible combined with other logic formalisms within the LogiKEy approach.}	
-  {[Provide a brief description of how these data were collected. Max 600 characters]}
+\\\hline
 
+\textbf{Data source location} &
+{The data is hosted on \url{github.com}.}	
+\\\hline
 
-\tableentry
-{Data source location}
-{The data is hosted on \url{github.com}.
-}	
-{[Fill the available information in, and delete from this list as appropriate: 
-Institution:
-City/Town/Region:
-Country:
-Latitude and longitude (and GPS coordinates) for collected samples/data:]}
-
-
-\tableentry
-{Data accessibility}
+\textbf{Data accessibility} &
 {The data is accessible via  \url{logikey.org}, which redirects to
   the repository \url{https://github.com/cbenzmueller/LogiKEy} on
   \url{github.com}, where the data is hosted and maintained. The two
   subdirectories \texttt{2020-DataInBrief-Article} and
   \texttt{2020-DataInBrief-Data} are associated with this article; the
-  latter contains the data set.
-%Direct URL to data: \url{https://logikey.org}
+  latter contains the data set.}
+\\\hline
+
+\textbf{Related research article} &
+{C. Benzmüller, X. Parent, and L. van der Torre.  Designing normative theories for ethical and legal reasoning: Logikey framework, methodology, and tool support. Artificial Intelligence, 2020.  Doi:
+\href{https://doi.org/10.1016/j.artint.2020.103348}{10.1016/j.artint.2020.103348}. 
+(Further related research articles include: \cite{J46,C71,J45,C76,C82})
 }
-{[State here if the data are either hosted ‘With the article’ or on a public repository. The journal does not have a strict policy but in the interest of openly sharing data we recommend hosting your data in a trusted repository. Please delete or complete as appropriate, either:]
-With the article
-[Or, if in a public repository:]
-Repository name: [Name repository]
-Data identification number: [provide number]
-Direct URL to data: [e.g. https://www.data.edu.com]
-[We recommend Mendeley Data if you do not have a trusted repository.]}
-
-
-\tableentry
-{Related research article}
-{C. Benzm\"uller, X. Parent, and L. van der Torre. Designing normative
-  theories of ethical and legal reasoning: LogiKEy framework, methodology, and tool support. Artificial Intelligence (to appear), 2020. Preprint: \url{https://arxiv.org/abs/1903.10187}.\\[.5em]
-Further related research articles include: \cite{J46,C71,J45,C76,C77,C82}
-% \\[.5em]
-% $\bullet$ C. Benzm\"uller, A. Farjami, P. Meder, X. Parent, I/O Logic in HOL, Journal of Applied Logics -- IfCoLoG Journal of Logics and their Applications (Special Issue on Reasoning for Legal AI) 6 (5) 715-732, 2019. \\
-% C. Benzm\"uller, A. Farjami, X. Parent, Åqvist's Dyadic Deontic Logic E in HOL, Journal of Applied Logics -- IfCoLoG Journal of Logics and their Applications (Special Issue on Reasoning for Legal AI) 6 (5) 733-755, 2019.\\
-% $\bullet$ D. Fuenmayor, C. Benzm\"uller, Harnessing Higher-Order (Meta-)Logic to Represent and Reason with Complex Ethical Theories, in: A. Nayak, A. Sharma (Eds.), PRICAI 2019: Trends in Artificial Intelligence, Springer, Cham, Lecture Notes in Artificial Intelligence, volume 11670,  pp. 418-432, 2019.\\
-% $\bullet$ D. Fuenmayor, C. Benzm\"uller, Mechanised Assessment of Complex Natural-Language Arguments using Expressive Logic Combinations, in: A. Herzig, A. Popescu (Eds.), Frontiers of Combining Systems, 12th International Symposium, FroCoS 2019, London, September 4-6, Springer, Cham, Lecture Notes in Artificial Intelligence, volume 11715, pp. 112-128, 2019.
-}	
-{	
-[If your data article is related to a research article, please cite your associated research article here.
-Author’s name, Title, Journal, DOI/In Press 
-If your data article is not related to a research article, please delete this last row of the table]}
-\end{longtable}
+\\\hline
+\end{tabu}
 
 
 \subsubsection*{Value of the Data}
@@ -263,8 +189,8 @@ If your data article is not related to a research article, please delete this la
   regulatory technologies, argumentation, natural language semantics. To that end the data includes reusable SSEs
   of a portfolio of deontic logics, logic combinations, paradoxes in
   normative reasoning and ethical theories in classical higher-order
-  logic (HOL), aka Church's type theory \cite{J43}, interpretable in
-  the Isabelle/HOL proof assistant system \cite{Isabelle}. The data
+  logic (HOL), interpretable in
+  the Isabelle/HOL proof assistant system. The data
   set may also be used to support the teaching of expressive,
   classical and non-classical logic
   formalisms and their combinations in lecture courses and tutorials.
@@ -302,25 +228,12 @@ If your data article is not related to a research article, please delete this la
   Sergot \cite{Jones1992-JONDLI} that deontic logic is needed when it is necessary to make
   explicit, and then reason about, the distinction between what ought
   to be the case and what is the case. Furthermore, the adequate
-  handling of the deontic paradoxes (like in particular Chisholm's paradox of contrary-to-duty obligation, which deals with norm violation)
+  handling of the deontic paradoxes (like in particular Chisholm's paradox of contrary-to-duty (CTD) obligation, which deals with norm violation)
   posed a core challenge for knowledge representation
   frameworks. This problem motivated the design of deontic logics (and logic combinations) more sophisticated and finer-grained than the traditional ones, like modal logic. These frameworks are automatized for the first time.  It is demonstrated that a computer or a machine can reason about norm violation during run-time.  
 
-%The work of those interested in automated reasoning for
-%  normative reasoning usually goes on as if the intricacies of
-%  contrary-to-duty norms had never been heard of.
-
 \end{itemize}
 
-\comment{
-[Provide 3-6 bullet points explaining why these data are of value to the scientific community. Bullet points 1-3 must specifically answer the question in red next to the bullet point, but do not include the question itself in your answer (i.e.,for the first bullet, you should explain why these data are useful but delete the “Why are these data useful?” question text itself). You may provide up to 3 additional bullet points to outline the value of these data. Please keep points brief.
-·	Why are these data useful?
-·	Who can benefit from these data?
-·	How can these data be used for further insights and development of experiments?
-·	 What is the additional value of these data?
-·	…
-·	…]
-}
 
 \subsubsection*{Data Description}
 The data is provided in form of Isabelle/HOL source files, which are
@@ -328,32 +241,26 @@ hosted at \url{logikey.org}. The individual data files belong to different
 categories. 
 
 
-% \begin{figure}[t]
-%  \includegraphics[width=\textwidth]{SDL.png}
-% \caption{Data file \textsf{\small \detokenize{SDL.thy} contributes an
-%     SSE of a quantified extension of SDL in HOL \label{fig:SDL}}}
-% \end{figure}
-
 Contributed data files in category I are listed in
 Table~\ref{table:DeonticLogics}. They provide encodings of SSEs, and
 associated tests, of various deontic logics in meta-logic HOL.  A category I 
 example file is displayed in Figs.~\ref{fig:CJ_DDLplus1}--\ref{fig:CJ_DDLplus2}; this
 data file contains (an extension of) the SSE of 
- dyadic deontic logic (DDL) by Carmo and Jones \cite{CJ13} in HOL and
+ dyadic deontic logic (DDL) by Carmo and Jones \cite{Carmo2002} in HOL and
  studies, resp.~verifies, its properties.
 
-\begin{figure}[ht!]
- \includegraphics[width=\textwidth]{CJ_DDLplus1.png}
+\begin{figure}[htb!]
+ \includegraphics[height=.93\textheight,width=\textwidth]{CJ_DDLplus1.png}
 \caption{Data file \textsf{\small \detokenize{CJ_DDLplus.thy}; in
-    lines 29--85 the SSE of the DDL by  Carmo and Jones \cite{CJ13} in HOL is presented \label{fig:CJ_DDLplus1}}}
+    lines 29--85 the SSE of the DDL by  Carmo and Jones \cite{Carmo2002} in HOL is presented \label{fig:CJ_DDLplus1}}}
 \end{figure}
 
 
 
-\begin{figure}[ht!]
+\begin{figure}[htb!]
  \includegraphics[width=\textwidth]{CJ_DDLplus2.png}
 \caption{Data file \textsf{\small \detokenize{CJ_DDLplus.thy}; in
-    lines 87--137 lemmata from Carmo and Jones's paper \cite{CJ13} are
+    lines 87--137 lemmata from Carmo and Jones's paper \cite{Carmo2002} are
     proved \label{fig:CJ_DDLplus2}}}
 \end{figure}
 
@@ -362,24 +269,11 @@ data file contains (an extension of) the SSE of
 \begin{table}[htp!]
 \caption{Category I data files --- deontic logics, extensions of
   deontic logics and logic combinations \label{table:DeonticLogics}}
-\begin{tabularx}{1.05\textwidth}{ccc*{1}{>{\raggedright\arraybackslash}X}}
-  \toprule
-  File & Dependency & Reading & Description \\
-  \midrule
-  \textsf{\small SDL.thy} 
-       & \textsf{\small Main.thy} 
-                    & \cite{J23,ddl:C80}  
-                              & % Provides a consistent SSE of SDL in
-                                % HOL; see Fig.~\ref{fig:SDL}. An unary deontic operator is
-                                % defined (lines 20 and 38).
-                                % The D axiom is postulated (line 35) and correspondence to seriality of the
-                                % accessibility is proved (line 38). The added
-                                % first-order and higher-order
-                                % quantifiers (lines 30--33) are constant domain
-                                % (possibilist notion of quantification). This is verified by proving
-                                % the Barcan formula and its
-                                % converse. \\
-                                Provides a SSE of standard
+\begin{tabu} to \textwidth {X X[2]}
+ \hline
+  \textbf{File (Dependency) Reading} & \textbf{Description} \\
+ \hline
+  \textsf{\small SDL.thy} (\textsf{\small Main.thy}) \cite{ddl:C80}  & Provides a SSE of standard
   deontic logic (SDL) in
                                 HOL. An unary deontic operator is
                                 defined.
@@ -389,10 +283,8 @@ data file contains (an extension of) the SSE of
                                 quantifiers are constant domain
                                 (possibilist notion of quantification). This is verified by proving
                                 the Barcan formula and its converse. \\
-  \midrule
-  \textsf{\small \detokenize{CJ_DDL.thy}}
-       & \textsf{\small Main.thy} 
-                    & \cite{C71}  
+  \hline
+  \textsf{\small \detokenize{CJ_DDL.thy}} (\textsf{\small Main.thy}) \cite{C71}  
                               &  Provides a SSE of a dyadic deontic
                                 logic (DDL) by Carmo
                                 and Jones \cite{Carmo2002} in HOL.  Different modal
@@ -404,30 +296,8 @@ data file contains (an extension of) the SSE of
                                 and further alethic modalities.
                                 Moreover, constant domain first-order and higher-order
                                 quantifiers are added.\\
-                                % Provides a consistent SSE of a
-                                % dyadic deontic
-                                % logic (DDL) by Carmo
-                                % and Jones \cite{CJ13} in HOL; see
-                                % Fig.~\ref{fig:DDL}.  Different modal
-                                % operators are introduced: dyadic
-                                % deontic
-                                % obligation (line 33; see also line
-                                % 49), monadic deontic operator for
-                                % actual obligation (line 34), monadic
-                                % deontic operator for primary
-                                % obligation (line 35),
-                                % and further alethic modalities
-                                % (lines
-                                % 27--32).
-                                % Moreover, constant domain
-                                % first-order
-                                % and higher-order
-                                % quantifiers are added (lines
-                                % 40-43).\\
-  \midrule
-  \textsf{\small \detokenize{CJ_DDL_Tests.thy}}
-       & \textsf{\small \detokenize{CJ_DDL.thy}}
-                    & \cite{C71}  
+  \hline
+  \textsf{\small \detokenize{CJ_DDL_Tests.thy}} (\textsf{\small \detokenize{CJ_DDL.thy}}) \cite{C71}  
                               & Contains
                                 soundness and proof automation tests for the
                                 embedding of DDL in HOL given in
@@ -438,34 +308,13 @@ data file contains (an extension of) the SSE of
                                 respectively. Relevant lemmata from the original work
                                 of Carmo and Jones are
                                 automated. \\
-                               % This file, see Fig.~\ref{fig:DDL_Tests}, contains
-                                % soundness and proof automation tests for the
-                                % embedding of DDL in HOL given in
-                                %  \textsf{\small CJ_DDL.thy}. For example,
-                                %   the monadic modal operators $\Box$,
-                                % $\Box_p$ and $\Box_a$ are  identified
-                                % in lines 11--25
-                                % as S5, KT and KD modalities,
-                                % respectively. Relevant lemmata (see
-                                % the entries with name prefixes
-                                % $C\_1$--$C\_15$) from the original work
-                                % of Carmo and Jones \cite{CJ13} are
-                                % automated, except for the two lemmata
-                                % $C\_3$ and $C\_8$ which are
-                                % open benchmark problems for theorem
-                                % provers, and which so far
-                                % can only be proved interactively (not given here).\\
-  \midrule
-  \textsf{\small E.thy} 
-       & \textsf{\small Main.thy} 
-                    & \cite{J45},\cite[Fig.6]{J48}  
+  \hline
+  \textsf{\small E.thy} (\textsf{\small Main.thy}) \cite{J45},\cite[Fig.6]{J48}  
                               & Provides a SSE of a quantified extension of
                                 Aqvist's System E in HOL. The file also
                                 runs a number of reasoning tasks (validity checking, refutation, correspondence theory).\\
-  \midrule
-  \textsf{\small \detokenize{Lewis_DDL.thy}}
-       & \textsf{\small Main.thy} 
-                    & \cite{ddl:L73}  
+  \hline
+  \textsf{\small \detokenize{Lewis_DDL.thy}} (\textsf{\small Main.thy}) \cite{ddl:L73}  
                               & Provides a SSE of Lewis's DDL.
                                 The file
                                 runs a number of reasoning tasks
@@ -473,25 +322,19 @@ data file contains (an extension of) the SSE of
                                 correspondence theory). The
                                 relationship with \AA qvist's dyadic
                                 deontic operator is also studied.\\
- \midrule
-  \textsf{\small \detokenize{IOL_out2.thy}}
-       & \textsf{\small Main.thy} 
-                    & \cite{J46}  
-                              & Provides a SSE of a quantified extension of
-                                IO logic (out$_2$) \cite{DBLP:journals/jphil/MakinsonT00,textbook18}. The file also
+ \hline
+  \textsf{\small \detokenize{IOL_out2.thy}} (\textsf{\small Main.thy})\cite{J46}  
+                              & Provides a SSE of a quantified extension of Input/Output
+                                (IO) logic (out$_2$) \cite{DBLP:journals/jphil/MakinsonT00,textbook18}. The file also
                                 contains an analysis of a benchmark example discussed in the literature on moral luck. \\
-  \midrule
-  \textsf{\small \detokenize{IO_out2_STIT.thy}}
-       & \textsf{\small Main.thy} 
-                    & \cite{J46,MederMasters}  
+  \hline
+  \textsf{\small \detokenize{IO_out2_STIT.thy}} (\textsf{\small Main.thy}) \cite{J46}  
                               & Provides a SSE of a quantified extension of
-                                IO logic (out$_2$) \cite{DBLP:journals/jphil/MakinsonT00,textbook18} and elements of STIT logics \cite{horty} in HOL. The file also
+                                I/O logic (out$_2$) \cite{DBLP:journals/jphil/MakinsonT00,textbook18} and elements of STIT logics \cite{horty} in HOL. The file also
                                 contains proof automation tests and
                                 soundness checks. \\
-  \midrule
-  \textsf{\small \detokenize{CJ_DDLplus.thy}}
-       & \textsf{\small  Main.thy} 
-                    & \cite{C76,C77}
+  \hline
+  \textsf{\small \detokenize{CJ_DDLplus.thy}} (\textsf{\small  Main.thy}) \cite{C76}
                               & A modification of the SSE developed in
                                 file \textsf{\small \detokenize{CJ_DDL.thy}} is
                                 presented; see
@@ -501,18 +344,16 @@ data file contains (an extension of) the SSE of
                                 variant of DDL into a
                                 two-dimensional semantics as
                                 originally presented by Kaplan
-                                for his logic of demonstratives~\cite{Kaplan1979,Kaplan1989}. The logic extension is
+                                for his logic of demonstratives~\cite{Kaplan1979}. The logic extension is
                                 completed in file \textsf{\small
                                 \detokenize{Extended_CJ_DDL.thy}}. The
                                 displayed lines in Fig.~\ref{fig:CJ_DDLplus2} show
                                 automations of various lemmata
                                 from the original paper of Carmo
-                                and Jones \cite{CJ13}, where they were
+                                and Jones \cite{Carmo2002}, where they were
                                 proved manually with pen and paper. \\
-  \midrule
-  \textsf{\small \detokenize{Extended_CJ_DDL.thy}}
-       & \textsf{\small \detokenize{CJ_DDLplus.thy}}
-                    & \cite{C76,C77}
+  \hline
+  \textsf{\small \detokenize{Extended_CJ_DDL.thy}} (\textsf{\small \detokenize{CJ_DDLplus.thy}}) \cite{C76}
                               & Contains a further extension and
                                 combination of the
                                 higher-order DDL encoded in file
@@ -520,9 +361,9 @@ data file contains (an extension of) the SSE of
                                 \detokenize{CJ_DDLplus.thy}} with
                                 relevant parts (for the work presented
                                 in the related research article
-                                \cite{J48}) of Kaplan's logic of demonstratives (LD)~\cite{Kaplan1979,Kaplan1989}.\\
-  \bottomrule
-\end{tabularx}
+                                \cite{J48}) of Kaplan's logic of demonstratives.\\
+  \hline
+\end{tabu}
 \end{table}
 
 
@@ -531,7 +372,7 @@ Contributed data files in category II are listed in
 Table~\ref{table:Paradoxes}. They study paradoxes and smaller examples
 of normative reasoning. An example is displayed in
 Fig.~\ref{fig:Chisholm_SDL}, which presents an analysis of Chisholm's
-paradox of contrary-to-duty obligation \cite{c63} in Standard Deontic Logic (SDL). The known fact that SDL cannot handle CTD scenarios is confirmed by the computer. 
+paradox of CTD obligation \cite{c63} in Standard Deontic Logic (SDL). The known fact that SDL cannot handle CTD scenarios is confirmed by the computer. 
 
 
 % \begin{figure}[ht!]
@@ -541,45 +382,45 @@ paradox of contrary-to-duty obligation \cite{c63} in Standard Deontic Logic (SDL
 
 \begin{table}[ht!]
 \caption{Category II data files: paradoxes and examples of normative reasoning \label{table:Paradoxes}}
-\begin{tabularx}{\textwidth}{ccc*{1}{>{\raggedright\arraybackslash}X}}
+\begin{tabu} to \textwidth {X X[2]}
   \toprule
-  File & Dependency & Reading & Description \\
+  \textbf{File (Dependency) Reading} & \textbf{Description} \\
   \midrule
   \textsf{\small \detokenize{Chisholm_SDL.thy}}
-       & \textsf{\small SDL.thy} 
-                    & \cite{textbook18}
-                              &  The well-known analysis of Chisholm's contrary-to-duty paradox
-                                in SDL is automated. The formalization uses both the wide-scope interpretation of conditional ``ought" and the narrow-scope one; see Fig.~\ref{fig:Chisholm_SDL}. \\
+  (\textsf{\small SDL.thy})
+                    \cite{textbook18}
+                              &  The well-known analysis of Chisholm's CTD paradox
+                                in SDL is automated. The formalization uses both the wide-scope interpretation of conditional ``ought'' and the narrow-scope one; see Fig.~\ref{fig:Chisholm_SDL}. \\
   \midrule
   \textsf{\small \detokenize{Chisholm_CJ_DDL_Monadic.thy}}
-       & \textsf{\small \detokenize{CJ_DDL.thy}} 
-                    &  --
+       (\textsf{\small \detokenize{CJ_DDL.thy}})
+                     
                               &  Contains a study analogous to \textsf{\small
                                 \detokenize{Chisholm_SDL.thy}} for 
                                 monadic obligation in DDL. \\
   \midrule
   \textsf{\small \detokenize{Chisholm_CJ_DDL_Dyadic.thy}}
-       & \textsf{\small \detokenize{CJ_DDL.thy}}
-                    & --
+       (\textsf{\small \detokenize{CJ_DDL.thy}})
+                    
                               &  Contains a study analogous to \textsf{\small
                                 \detokenize{Chisholm_SDL.thy}} for 
                                 dyadic  obligation in DDL. \\
   \midrule
   \textsf{\small \detokenize{Chisholm_E.thy}}
-       & \textsf{\small \detokenize{CJ_DDL.thy}}
-                    & --
+       (\textsf{\small \detokenize{CJ_DDL.thy}})
+                     
                               &  Contains a study analogous to \textsf{\small
                                 \detokenize{Chisholm_SDL.thy}} for 
                                 deontic logic E. \\
   \midrule
   \textsf{\small \detokenize{IO_Experiments}}
-       & \textsf{\small \detokenize{IO_out2_STIT}}
-                    & \cite{MederMasters} 
-                              &  Contains a study of different paradoxes from the literature in IO
+       (\textsf{\small \detokenize{IO_out2_STIT}})
+                    
+                              &  Contains a study of different paradoxes from the literature in I/O
                                 logic (out$_2$); the file 
                                 imports \textsf{\small \detokenize{IO_out2_STIT}}.\\
   \bottomrule
-\end{tabularx}
+\end{tabu}
 \vskip1em
 \end{table}
 
@@ -606,18 +447,17 @@ provided at \url{logikey.org} also includes the following:
 \item Subdirectory \url{2020-DataInBrief-Data/Climate-Engineering} contains Isabelle/HOL data files related to the
   formalization and assessment  \cite{C82}  of selected arguments in climate engineering.
 \item  Subdirectory \url{2020-DataInBrief-Data/US-Constitution-Loophole} contains Isabelle/HOL data files related to a 
-  formalization and assessment  \cite{zahoransky19} of Kurt G\"odel's claim that the US Constitution contains a
+  formalization and assessment  of Kurt G\"odel's claim that the US Constitution contains a
   loophole for establishing a dictatorship.
 \item  Subdirectory \url{2020-DataInBrief-Data/WiseMenPuzzle} contains Isabelle/HOL data files related to a 
-  formalization and study \cite{J41} of the well known Wise Men
+  formalization and study of the well known Wise Men
   Puzzle; this data set, which has been published before~\cite{J44}, is
   included here to make it better available for 
   \url{logikey.org} users.
 \end{itemize}
 
 Further related data sets, including
-  selected formalisations in computational metaphysics
-  (cf.~\cite{J41,J47} and the references therein), will be added to 
+  selected formalisations in computational metaphysics, will be added to 
    \url{logikey.org} as we think fit.
 
 % There are related works in normative reasoning (see
@@ -630,38 +470,37 @@ Further related data sets, including
 \begin{table}[ht!]
 \caption{Category III data files: (excerpts of) legal and ethical
   theories and arguments \label{table:Theories}}
-\begin{tabularx}{\textwidth}{ccc*{1}{>{\raggedright\arraybackslash}X}}
+\begin{tabu} to \textwidth {X X[2]}
   \toprule
-  File & Dependency & Reading & Description \\
+  \textbf{File (Dependency) Reading} & \textbf{Description} \\
   \midrule
   \textsf{\small \detokenize{GDPR_SDL.thy}}
-       & \textsf{\small SDL.thy} 
-                    & \cite[Fig. 7]{J48}
+       (\textsf{\small SDL.thy}) 
+                     \cite[Fig. 7]{J48}
                               &  Contains a modeling of selected statements from the GDPR in
                                 first-order SDL. It is confirmed by automated means that first-order SDL cannot handle  
-                                contrary-to-duty scenarios.\\
+                                CTD scenarios.\\
   \midrule
   \textsf{\small \detokenize{GDPR_CJ_DDL.thy}}
-       & \textsf{\small \detokenize{CJ_DDL.thy}} 
-                    &  ---
+       (\textsf{\small \detokenize{CJ_DDL.thy}})
+                
                               &  Contains a modeling of selected statements from the GDPR in
                                 first-order DDL. It is confirmed by automated means that the logic can handle  
-                                contrary-to-duty scenarios. The problems identified in \textsf{\small
+                                CTD scenarios. The problems identified in \textsf{\small
                                 \detokenize{GDPR_SDL.thy}}, i.e., inconsistency and explosion, are
                                 avoided. The reasoners return ``intuitive'' answers to queries. \\
   \midrule
   \textsf{\small \detokenize{GDPR_E.thy}}
-       & \textsf{\small E.thy} 
-                    & \cite[Fig. 8]{J48}
+        (\textsf{\small E.thy}) 
+                    \cite[Fig. 8]{J48}
                               &  Contains a modeling of selected statements from the GDPR in
                                 a first-order extension of logic E. It is confirmed by automated means that the logic can handle  
-                                contrary-to-duty scenarios, and does not face the problems  identified in \textsf{\small
+                                CTD scenarios, and does not face the problems  identified in \textsf{\small
                                 \detokenize{GDPR_SDL.thy}}, i.e., inconsistency and explosion. \\
   \midrule
   \textsf{\small \detokenize{GewirthArgument.thy}}
-       & \textsf{\small \detokenize{Extended_CJ_DDL.thy}}.
-                    & \begin{minipage}{2cm} \cite{C77,C76}, \\
-                      \cite[Fig. 10]{J48} \end{minipage}
+       (\textsf{\small \detokenize{Extended_CJ_DDL.thy}}) 
+                    \mbox{\cite{C76},\cite[Fig. 10]{J48}}
                               & Contains a formalization and partial automation of Gewirth's
                                 supporting argument for his \textit{Principle of Generic
                                 Consistency}. This principle
@@ -674,7 +513,7 @@ Further related data sets, including
                                 assessed, emended (minor corrections)
                                 and verified. \\
   \bottomrule
-\end{tabularx}
+\end{tabu}
 \vskip1em
 \end{table}
 
@@ -688,7 +527,7 @@ Further related data sets, including
 
 The data was acquired through manual encodings of logics, theories and
 arguments in the
-Isabelle/HOL \cite{Isabelle} proof assistant system. The modeling
+Isabelle/HOL proof assistant system. The modeling
 process was following the LogiKEy methodology depicted in
 Fig.~\ref{fig:LogiKEy}. This methodology supports formalization
 projects in the area of ethical and legal reasoning at different
@@ -718,10 +557,10 @@ the related research article~\cite{J48}.}
   Isabelle/HOL. Then, by pen and paper means on a theoretical level,
   the \textit{faithfulness} (Step 4) of the embedding of DDL in HOL
   was studied and proved; this proof has been published
-  \cite{C71,R63}. Furthermore, \textit{implications} of the embedding
+  \cite{C71}. Furthermore, \textit{implications} of the embedding
   of DDL in HOL were studied (Step 5); see for example the additional
   theorems in file \textsf{\small \detokenize{CJ_DDL_Tests.thy}} and
-  the analysis of contrary-to-duty scenarios conducted in files
+  the analysis of CTD scenarios conducted in files
   \textsf{\small \detokenize{Chisholm_DDL_Monadic.thy}} and
   \textsf{\small \detokenize{Chisholm_DDL_Dyadic.thy}}. Since the DDL
   of Carmo and Jones has not been automated before with other systems
@@ -729,11 +568,8 @@ the related research article~\cite{J48}.}
   that we could use to properly assess and compare the competitiveness
   of our solution. The publication of this data set can be seen as a
   first step towards the built-up and \textit{contribution} (Step 8)
-  of such a benchmark suite to the community; future work includes the
-  conversion of our Isabelle/HOL encodings into TPTP THF format
-  \cite{J22}, so that they can be used as benchmark problems in the yearly CASC
-  world-championship competitions
-  \cite{DBLP:journals/aim/Sutcliffe16}.
+  of such a benchmark suite to the community.
+  %; future work includes the conversion of our Isabelle/HOL encodings into TPTP THF format  \cite{J22}, so that they can be used as benchmark problems in the yearly CASC world-championship competitions \cite{DBLP:journals/aim/Sutcliffe16}.
 
 \item{Layer L2 example development (file \textsf{\small
       \detokenize{GDPR_CJ_DDL.thy}}):} In file \textsf{\small
@@ -747,15 +583,15 @@ the related research article~\cite{J48}.}
   \textit{logic} (Step 3), such as DDL, for the formal encoding of
   these challenging aspects. In the given case it also  became apparent that
   a propositional encoding would hardly suffice in practical
-  applications, so the selected deontic logic DDL needed to be
-  \textit{combined with}, respectively extended by, a notion of
+  applications, so the selected deontic logic DDL needed to be extended by 
+  a notion of
   quantification, which led to the addition of quantifiers to the file
   \textsf{\small \detokenize{CJ_DDL.thy}}. Subsequently the two GDPR
   articles were \textit{formalized} (Step 4) using logical connectives
   as provided in the imported file \textsf{\small
     \detokenize{CJ_DDL.thy}}, and then some \textit{exploration} (Step
   5) and assessment studies were conducted. This included the analysis of the 
-  contrary-to-duty scenario as reported in related research articles
+  CTD scenario as reported in related research articles
   \cite{J48,C71}. With our data set we \textit{contribute} (Step 6)
   this work to the wider research community and enable its reuse.
 
