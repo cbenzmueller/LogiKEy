@@ -40,7 +40,7 @@ lemma assumes Pierson_facts shows "\<lfloor>For d \<^bold>\<prec> For p\<rfloor>
    is being chased by a professional hunter (Post) *)
 consts Hunter::"c\<Rightarrow>\<sigma>"
 axiomatization where (*case-specific legal rule for hunters*)
- CL1: "\<lfloor>(Hunter x \<^bold>\<and> Pursue x \<alpha>)  \<^bold>\<rightarrow> (STAB\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v EFFI\<^sup>x)\<rfloor>"
+ CR1: "\<lfloor>(Hunter x \<^bold>\<and> Pursue x \<alpha>)  \<^bold>\<rightarrow> (STAB\<^sup>x\<inverse> \<^bold>\<prec>\<^sub>v EFFI\<^sup>x)\<rfloor>"
 
 abbreviation "Post_facts \<equiv> \<lfloor>Fox \<alpha> \<^bold>\<and> (\<^bold>\<not>FreeRoaming \<alpha>) \<^bold>\<and>
    Hunter p \<^bold>\<and> Pursue p \<alpha> \<^bold>\<and> (\<^bold>\<not>Pursue d \<alpha>) \<^bold>\<and> Capture d \<alpha>\<rfloor>"
@@ -55,7 +55,7 @@ lemma "Post_facts \<and> \<lfloor>\<^bold>\<not>INCONS\<^sup>p\<rfloor> \<and> \
 
 (*indeed, a decision for plaintiff (Post) now becomes provable*)
 theorem assumes Post_facts shows "\<lfloor>For d \<^bold>\<prec> For p\<rfloor>" 
-  using assms by (metis CW3 ForAx CL1 R7 other.simps rBR)
+  using assms by (metis CW3 ForAx CR1 R7 other.simps rBR)
 
 (*while a decision for the defendant is now refutable*)
 lemma assumes Post_facts shows "\<lfloor>For p \<^bold>\<prec> For d\<rfloor>" 
