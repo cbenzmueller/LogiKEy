@@ -62,11 +62,11 @@ axiomatization where
 
 (*LWK: relate values with situational 'factors'*)
 axiomatization where 
- R5: "\<lfloor>For x \<^bold>\<rightarrow> (Intent x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[WILL\<^sup>x])\<rfloor>" and  
- R6: "\<lfloor>For x \<^bold>\<rightarrow> (Liv x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[GAIN\<^sup>x])\<rfloor>" and  
- R7: "\<lfloor>For x \<^bold>\<rightarrow> (Poss x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[STAB\<^sup>x])\<rfloor>" and  
- R8: "\<lfloor>For x \<^bold>\<rightarrow> (Mtn x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RESP\<^sup>x])\<rfloor>" and  
- R9: "\<lfloor>For x \<^bold>\<rightarrow> (Own x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RELI\<^sup>x])\<rfloor>"
+ F1: "\<lfloor>For x \<^bold>\<rightarrow> (Intent x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[WILL\<^sup>x])\<rfloor>" and  
+ F2: "\<lfloor>For x \<^bold>\<rightarrow> (Liv x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[GAIN\<^sup>x])\<rfloor>" and  
+ F3: "\<lfloor>For x \<^bold>\<rightarrow> (Poss x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[STAB\<^sup>x])\<rfloor>" and  
+ F4: "\<lfloor>For x \<^bold>\<rightarrow> (Mtn x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RESP\<^sup>x])\<rfloor>" and  
+ F5: "\<lfloor>For x \<^bold>\<rightarrow> (Own x \<^bold>\<leftrightarrow> \<^bold>\<box>\<^sup>\<preceq>[RELI\<^sup>x])\<rfloor>"
 
 (*theory is consistent, (non-trivial) model found*)
 lemma True nitpick[satisfy,card i=10] oops
