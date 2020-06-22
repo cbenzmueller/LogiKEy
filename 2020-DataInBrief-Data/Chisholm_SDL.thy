@@ -1,4 +1,4 @@
-theory Chisholm_SDL imports SDL                     (*Christoph Benzmüller & Xavier Parent, 2019*)
+theory Chisholm_SDL imports SDL                          (*Christoph Benzmüller & Xavier Parent, 2019*)
 begin     (*Unimportant*) nitpick_params [user_axioms,expect=genuine,show_all,format=2] 
 
 (*** Chisholm Example ***)
