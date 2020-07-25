@@ -1,4 +1,4 @@
-theory PAL imports Main                                            (* Sebastian Reiche and Christoph Benzmüller, 2020 *)
+theory PALandWiseMenPuzzle imports Main                                            (* Sebastian Reiche and Christoph Benzmüller, 2020 *)
 
 begin
   (* Some parameter settings for reasoning tools *)
