@@ -1,4 +1,4 @@
-theory PALandWiseMenPuzzle imports Main                                            (* Sebastian Reiche and Christoph Benzmüller, 2020 *)
+theory PALandWiseMenPuzzle imports Main        (* Sebastian Reiche and Christoph Benzmüller, 2020 *)
 
 begin
   (* Some parameter settings for reasoning tools *)
@@ -39,7 +39,7 @@ begin
   abbreviation  Agent ("\<A>") where "\<A> x \<equiv> x = a \<or> x = b \<or> x = c"
   axiomatization where group_S5: "\<forall>i. \<A> i \<longrightarrow> (reflexive i \<and> transitive i \<and> euclidean i)"
 
-  definition EVR :: "\<alpha>" ("EVR") where "EVR \<equiv> union_rel (union_rel a b) c"
+  abbreviation EVR :: "\<alpha>" ("EVR") where "EVR \<equiv> union_rel (union_rel a b) c"
   abbreviation pccmn :: "\<tau>\<Rightarrow>\<tau>\<Rightarrow>\<tau>" ("\<^bold>C\<^bold>\<lparr>_\<^bold>|_\<^bold>\<rparr>")
     where "\<^bold>C\<^bold>\<lparr>\<phi>\<^bold>|\<psi>\<^bold>\<rparr> \<equiv> \<lambda>W w. \<forall>v. (tc (intersection_rel EVR (\<lambda>u v. W v \<and> \<phi> W v)) w v \<longrightarrow> (\<psi> W v))"
 
@@ -61,7 +61,7 @@ begin
   (*Introducing "Defs" as the set of the above definitions; useful for convenient unfolding.*)
   declare reflexive_def[Defs] symmetric_def[Defs] transitive_def[Defs] euclidean_def[Defs] 
    intersection_rel_def[Defs] union_rel_def[Defs] sub_rel_def[Defs] inverse_rel_def[Defs] 
-   tc_def[Defs] EVR_def[Defs] 
+   tc_def[Defs] 
 
   (*Some useful lemmata.*) 
   lemma trans_tc: "transitive (tc R)" unfolding Defs tc_def by metis
@@ -74,7 +74,7 @@ begin
 
 
   (************************************************************************************************)
-  (*****                            Definitions and Abbreviations                             *****)
+  (*****                           Experiments and Wise Men Puzzle                            *****)
   (************************************************************************************************)
   (* System K: is implied by the semantical embedding *)
   lemma tautologies: "\<^bold>\<lfloor>\<^bold>\<top>\<^bold>\<rfloor>" by auto
@@ -106,35 +106,35 @@ begin
   lemma induction_axiom2: "\<^bold>\<lfloor>\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> \<^bold>\<rightarrow> ((\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> \<phi>)) \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi> \<^bold>\<rightarrow> (\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> \<phi>))\<^bold>\<rparr>)\<^bold>\<rfloor>"
     unfolding Defs by smt 
  
- (* Necessitation rules: implied by the semantical embedding *)
+  (* Necessitation rules: implied by the semantical embedding *)
   lemma announcement_nec: assumes 1: "\<^bold>\<lfloor>\<phi>\<^bold>\<rfloor>" shows "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<psi>\<^bold>]\<phi>\<^bold>\<rfloor>" using 1 by auto 
   lemma rkc_necessitation: assumes 1: "\<^bold>\<lfloor>\<phi>\<^bold>\<rfloor>" shows "\<^bold>\<lfloor>\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>\<^bold>\<rfloor>" 
     using 1 by (metis intersection_rel_def sub_rel_def tc_def transitive_def) 
 
- (* Further axioms: implied for atomic formulas by the semantical embedding, not implied in general *)
-  lemma "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!\<^sup>Ap\<^bold>\<rangle>\<^sup>Ap)\<^bold>\<rfloor>" unfolding Defs by blast
-  lemma "\<^bold>\<lfloor>\<phi> \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!\<phi>\<^bold>\<rangle>\<phi>)\<^bold>\<rfloor>" unfolding Defs nitpick oops (*countermodel found*)
+  (* Further axioms: implied for atomic formulas by the semantical embedding, not implied in general *)
+  lemma "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<^sup>Ap\<^bold>](\<^bold>\<not>\<^sup>Ap)\<^bold>\<rfloor>" by simp
+  lemma "\<^bold>\<lfloor>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<phi>\<^bold>](\<^bold>\<not>\<phi>)\<^bold>\<rfloor>" nitpick oops (*countermodel found*)
   
-  lemma "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!\<^sup>Ap\<^bold>\<rangle>(\<^bold>K\<^sub>a \<^sup>Ap))\<^bold>\<rfloor>" unfolding Defs by auto
-  lemma "\<^bold>\<lfloor>\<phi> \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!\<phi>\<^bold>\<rangle>(\<^bold>K\<^sub>a \<phi>))\<^bold>\<rfloor>" unfolding Defs nitpick oops (*countermodel found*)
+  lemma "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<^sup>Ap\<^bold>](\<^bold>\<not>\<^bold>K\<^sub>a \<^sup>Ap)\<^bold>\<rfloor>" by simp
+  lemma "\<^bold>\<lfloor>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<phi>\<^bold>](\<^bold>\<not>\<^bold>K\<^sub>a \<phi>)\<^bold>\<rfloor>" nitpick oops (*countermodel found*)
   
-  lemma "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!\<^sup>Ap\<^bold>\<rangle>(\<^sup>Ap \<^bold>\<rightarrow> (\<^bold>K\<^sub>a \<^sup>Ap)))\<^bold>\<rfloor>" unfolding Defs by auto
-  lemma "\<^bold>\<lfloor>\<phi> \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!\<phi>\<^bold>\<rangle>(\<phi> \<^bold>\<rightarrow> (\<^bold>K\<^sub>a \<phi>)))\<^bold>\<rfloor>" unfolding Defs nitpick oops (*countermodel found*)
+  lemma "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<^sup>Ap\<^bold>](\<^sup>Ap \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<^sup>Ap)\<^bold>\<rfloor>" by simp
+  lemma "\<^bold>\<lfloor>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<phi>\<^bold>](\<phi> \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<phi>)\<^bold>\<rfloor>" nitpick oops (*countermodel found*)
   
-  lemma "\<^bold>\<lfloor>(\<^sup>Ap \<^bold>\<and> (\<^bold>\<not>(\<^bold>K\<^sub>a \<^sup>Ap))) \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!(\<^sup>Ap \<^bold>\<and> (\<^bold>\<not>(\<^bold>K\<^sub>a \<^sup>Ap)))\<^bold>\<rangle>(\<^bold>\<not>(\<^sup>Ap \<^bold>\<and> (\<^bold>\<not>(\<^bold>K\<^sub>a \<^sup>Ap)))))\<^bold>\<rfloor>" unfolding Defs by blast
-  lemma "\<^bold>\<lfloor>(\<phi> \<^bold>\<and> (\<^bold>\<not>(\<^bold>K\<^sub>a \<phi>))) \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!(\<phi> \<^bold>\<and> (\<^bold>\<not>(\<^bold>K\<^sub>a \<phi>)))\<^bold>\<rangle>(\<^bold>\<not>(\<phi> \<^bold>\<and> (\<^bold>\<not>(\<^bold>K\<^sub>a \<phi>)))))\<^bold>\<rfloor>" unfolding Defs nitpick oops (*ctm. found*)
+  lemma "\<^bold>\<lfloor>(\<^sup>Ap \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<^sup>Ap) \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<^sup>Ap \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<^sup>Ap\<^bold>](\<^sup>Ap \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<^sup>Ap)\<^bold>\<rfloor>" by blast
+  lemma "\<^bold>\<lfloor>(\<phi> \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<phi>) \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<phi> \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<phi>\<^bold>](\<phi> \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<phi>)\<^bold>\<rfloor>" nitpick oops (*countermodel found*)
   
-  lemma "\<^bold>\<lfloor>(\<^bold>K\<^sub>a \<^sup>Ap) \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!\<^sup>Ap\<^bold>\<rangle>(\<^bold>K\<^sub>a \<^sup>Ap))\<^bold>\<rfloor>" unfolding Defs using group_S5 reflexive_def by blast
-  lemma "\<^bold>\<lfloor>(\<^bold>K\<^sub>a \<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!\<phi>\<^bold>\<rangle>(\<^bold>K\<^sub>a \<phi>))\<^bold>\<rfloor>" unfolding Defs nitpick oops (*countermodel found*)
+  lemma "\<^bold>\<lfloor>(\<^bold>K\<^sub>a \<^sup>Ap) \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<^sup>Ap\<^bold>](\<^bold>\<not>\<^bold>K\<^sub>a \<^sup>Ap)\<^bold>\<rfloor>" using group_S5 reflexive_def by auto
+  lemma "\<^bold>\<lfloor>(\<^bold>K\<^sub>a \<phi>) \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<phi>\<^bold>](\<^bold>\<not>\<^bold>K\<^sub>a \<phi>)\<^bold>\<rfloor>" nitpick oops (*countermodel found*)
   
-  lemma "\<^bold>\<lfloor>(\<^bold>K\<^sub>a \<^sup>Ap) \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!\<^sup>Ap\<^bold>\<rangle>(\<^sup>Ap \<^bold>\<rightarrow> (\<^bold>K\<^sub>a \<^sup>Ap)))\<^bold>\<rfloor>" unfolding Defs using group_S5 reflexive_def by blast
-  lemma "\<^bold>\<lfloor>(\<^bold>K\<^sub>a \<phi>) \<^bold>\<rightarrow> (\<^bold>\<langle>\<^bold>!\<phi>\<^bold>\<rangle>(\<phi> \<^bold>\<rightarrow> (\<^bold>K\<^sub>a \<phi>)))\<^bold>\<rfloor>" unfolding Defs nitpick oops (*countermodel found*)
+  lemma "\<^bold>\<lfloor>(\<^bold>K\<^sub>a \<^sup>Ap) \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<^sup>Ap\<^bold>](\<^sup>Ap \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<^sup>Ap)\<^bold>\<rfloor>" using group_S5 reflexive_def by auto
+  lemma "\<^bold>\<lfloor>(\<^bold>K\<^sub>a \<phi>) \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<phi>\<^bold>](\<phi> \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<phi>)\<^bold>\<rfloor>" nitpick oops (*countermodel found*)
 
 
   (* Consistency confirmed by Nitpick *)
   lemma True nitpick [satisfy] oops (* model found *)
 
-(*** Encoding of the wise men puzzle in PAL ***)
+  (*** Encoding of the wise men puzzle in PAL ***)
   (* Common knowledge: At least one of a, b and c has a white spot. *)
   consts ws :: "\<alpha>\<Rightarrow>\<sigma>" 
   axiomatization where WM1: "\<^bold>\<lfloor>\<^bold>C\<^sub>\<A> (\<^sup>Aws a \<^bold>\<or> \<^sup>Aws b \<^bold>\<or> \<^sup>Aws c)\<^bold>\<rfloor>" 
@@ -148,15 +148,15 @@ begin
     WM2ca: "\<^bold>\<lfloor>\<^bold>C\<^sub>\<A> (\<^bold>\<not>(\<^sup>Aws c) \<^bold>\<rightarrow> (\<^bold>K\<^sub>a (\<^bold>\<not>(\<^sup>Aws c))))\<^bold>\<rfloor>" and
     WM2cb: "\<^bold>\<lfloor>\<^bold>C\<^sub>\<A> (\<^bold>\<not>(\<^sup>Aws c) \<^bold>\<rightarrow> (\<^bold>K\<^sub>b (\<^bold>\<not>(\<^sup>Aws c))))\<^bold>\<rfloor>" 
 
-  declare [[smt_solver=cvc4,smt_oracle]]  (* Choose CVC4 as smt solver *)
+  declare [[smt_solver=cvc4,smt_oracle]] (* Choose CVC4 as smt solver *)
 
   theorem whitespot_c: 
        "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>( (\<^bold>K\<^sub>a (\<^sup>Aws a)) \<^bold>\<or> (\<^bold>K\<^sub>a (\<^bold>\<not>\<^sup>Aws a)) )\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>( (\<^bold>K\<^sub>b (\<^sup>Aws b)) \<^bold>\<or> (\<^bold>K\<^sub>b (\<^bold>\<not>\<^sup>Aws b)) )\<^bold>](\<^bold>K\<^sub>c (\<^sup>Aws c)))\<^bold>\<rfloor>" 
-    using WM1 WM2ac WM2ba WM2ca WM2cb group_S5 
-    unfolding reflexive_def intersection_rel_def union_rel_def sub_rel_def tc_def EVR_def
+    using WM1 WM2ba WM2ca WM2cb group_S5 
+    unfolding reflexive_def intersection_rel_def union_rel_def sub_rel_def tc_def 
     by smt  
 
  (* Consistency confirmed again *)
-  lemma True nitpick [satisfy] oops  (* model found *)
+  lemma True nitpick [satisfy] oops (* model found *)
 
 end
