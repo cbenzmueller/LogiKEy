@@ -6,8 +6,8 @@ begin
 
 datatype data = d1 | d2  (*We introduce concrete data objects d1 and d2.*)
 datatype indiv = Mary | Peter  (*We introduce individuals Mary and Peter.*)
-consts process_lawfully::"data\<Rightarrow>\<sigma>" erase::"data\<Rightarrow>\<sigma>" is_protected_by_GDPR::"data\<Rightarrow>\<sigma>" 
-       belongs_to::"data\<Rightarrow>indiv\<Rightarrow>\<sigma>" is_european::"indiv=>\<sigma> " kill::"indiv\<Rightarrow>\<sigma>"
+consts process_lawfully::"data\<Rightarrow>\<tau>" erase::"data\<Rightarrow>\<tau>" is_protected_by_GDPR::"data\<Rightarrow>\<tau>" 
+       belongs_to::"data\<Rightarrow>indiv\<Rightarrow>\<tau>" is_european::"indiv=>\<tau> " kill::"indiv\<Rightarrow>\<tau>"
 
 axiomatization where   
 (*Data belonging to Europeans is protected by the GDPR.*)

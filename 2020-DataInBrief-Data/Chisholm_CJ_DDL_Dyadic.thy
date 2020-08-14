@@ -1,7 +1,7 @@
 theory Chisholm_CJ_DDL_Dyadic imports CJ_DDL  CJ_DDL_Tests (*Christoph Benzmüller & Xavier Parent, 2019*)
 
 begin (* Chisholm Example *)
-consts go::\<sigma> tell::\<sigma> kill::\<sigma>
+consts go::\<tau> tell::\<tau> kill::\<tau>
 
  nitpick_params [user_axioms,show_all,format=2] (*Settings for model finder.*)
 

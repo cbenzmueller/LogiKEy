@@ -88,5 +88,6 @@ lemma obs_II_4_2_6_p: "\<lfloor>(\<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<
 lemma Oa_C: "\<lfloor>\<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B) \<^bold>\<and> \<^bold>O\<^sub>aA \<^bold>\<and> \<^bold>O\<^sub>aB \<^bold>\<rightarrow>  \<^bold>O\<^sub>a(A \<^bold>\<and> B)\<rfloor>" using ax_5c by auto
 lemma Op_C: "\<lfloor>\<^bold>\<diamond>\<^sub>p(A \<^bold>\<and> B) \<^bold>\<and> \<^bold>O\<^sub>pA \<^bold>\<and> \<^bold>O\<^sub>pB \<^bold>\<rightarrow>  \<^bold>O\<^sub>p(A \<^bold>\<and> B)\<rfloor>" using ax_5c by auto
 lemma Oa_DD: "\<lfloor>(\<^bold>O\<^sub>aA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>a(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>a(A \<^bold>\<and> B)\<rfloor>" using ax_5b ax_5c obs_II_4_2_6 by smt 
+declare [[smt_timeout=300]]
 lemma Op_DD: "\<lfloor>(\<^bold>O\<^sub>pA \<^bold>\<and> \<^bold>O\<^bold>\<langle>B\<^bold>|A\<^bold>\<rangle> \<^bold>\<and> \<^bold>\<diamond>\<^sub>p(A \<^bold>\<and> B)) \<^bold>\<rightarrow> \<^bold>O\<^sub>p(A \<^bold>\<and> B)\<rfloor>" using ax_5b ax_5c obs_II_4_2_6_p by smt
 end
