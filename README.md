@@ -9,4 +9,4 @@ The LogiKEy Workbench also maintains selected datasets in
 - [Computational Metaphics](Computational-Metaphysics) and
 - [Foundations of Maths](Maths-Foundations)
 
-All these datasets utilize the universal meta-logical reasoning approach in which various object logics (and their combinations) are shallowly embedded in classical higher-orde logic.
+All these datasets utilize the universal meta-logical reasoning approach in which various object logics (and their combinations) are shallowly embedded in classical higher-order logic.
