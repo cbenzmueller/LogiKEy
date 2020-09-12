@@ -1,5 +1,5 @@
 # LogiKEy
-LogiKEy Workbench: Flexible, Pluralistic Foundations for Legal and Ethical Reasoning, Metaphysics and Maths
+LogiKEy Workbench (dataset of formalized knowledge): Flexible, Pluralistic Foundations for Legal and Ethical Reasoning, Metaphysics and Maths
 
 For further information on LogiKEy see the 
 - related [scientific article](https://arxiv.org/abs/1903.10187) submitted to (final revision) "Artificial Intelligence", and the 
