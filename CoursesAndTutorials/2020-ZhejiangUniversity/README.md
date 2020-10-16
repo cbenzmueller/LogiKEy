@@ -11,7 +11,8 @@ The lecture course will introduce HOL and the SSE technique, provide some hands-
 - [Isabelle/HOL system](https://isabelle.in.tum.de); please install this system prior to the first course (see also this [Isabelle/HOL tutorial](https://isabelle.in.tum.de/dist/Isabelle2020/doc/tutorial.pdf) and further relevant documents at this [website](https://isabelle.in.tum.de/documentation.html))
 
 ## Data Sets
-- [LogiKEy Workbench](www.logikey.org): Deontic Logics, Logic Combinations and Expressive Ethical and Legal Reasoning (Isabelle/HOL Dataset) (Christoph Benzmüller, Ali Farjami, David Fuenmayor, Paul Meder, Xavier Parent, Alexander Steen, Leendert van der Torre, Valeria Zahoransky), In Data in brief, Elsevier, number 106409, pp. 1-15, 2020. [doi](https://www.sciencedirect.com/science/article/pii/S2352340920312919) [url]
+- [LogiKEy Workbench](www.logikey.org): Deontic Logics, Logic Combinations and Expressive Ethical and Legal Reasoning (Isabelle/HOL Dataset) (Christoph Benzmüller, Ali Farjami, David Fuenmayor, Paul Meder, Xavier Parent, Alexander Steen, Leendert van der Torre, Valeria Zahoransky), In Data in brief, Elsevier, number 106409, pp. 1-15, 2020. [doi](https://www.sciencedirect.com/science/article/pii/S2352340920312919)
+- Universal (Meta-)Logical Reasoning: The Wise Men Puzzle (Isabelle/HOL Dataset) (Christoph Benzmüller), In Data in Brief, volume 24, number 103823, pp. 1--5, 2019. [doi](https://doi.org/10.1016/j.dib.2019.103823)
 
 ## Reading Material
 
