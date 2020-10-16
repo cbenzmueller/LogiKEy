@@ -9,6 +9,7 @@ The lecture course will introduce HOL and the SSE technique, provide some hands-
 ## Course Material
 - [Presentation Slides](slides); this directory will be updated
 - [Isabelle/HOL system](https://isabelle.in.tum.de); please install this system prior to the first course (see also this [Isabelle/HOL tutorial](https://isabelle.in.tum.de/dist/Isabelle2020/doc/tutorial.pdf) and further relevant documents at this [website](https://isabelle.in.tum.de/documentation.html))
+- [LEO-III theorem prover](http://page.mi.fu-berlin.de/lex/leo3/)
 
 ## Data Sets
 - [LogiKEy Workbench](http://logikey.org): Deontic Logics, Logic Combinations and Expressive Ethical and Legal Reasoning (Isabelle/HOL Dataset) (Christoph Benzmüller, Ali Farjami, David Fuenmayor, Paul Meder, Xavier Parent, Alexander Steen, Leendert van der Torre, Valeria Zahoransky), In Data in brief, Elsevier, number 106409, pp. 1-15, 2020. [https://doi.org/10.1016/j.dib.2020.106409](https://doi.org/10.1016/j.dib.2020.106409)
