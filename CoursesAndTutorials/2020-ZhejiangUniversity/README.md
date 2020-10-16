@@ -1,4 +1,10 @@
-# LogiKEy
+# Universal Logical Reasoning
+
+This course is part of the overall lecture course "Logic in AI" at Zhejiang University, 2020; for more information see the overall lecture course [website](https://www.xixilogic.org/events/2020/08/course-logic-in-ai/).
+
+## Abstract
+
+
 LogiKEy Workbench (dataset of formalized knowledge): Flexible, Pluralistic Foundations for Legal and Ethical Reasoning, Metaphysics and Maths
 
 For further information on LogiKEy see the 
