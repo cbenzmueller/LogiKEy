@@ -11,20 +11,20 @@ lemma Question1:
    "Nilda says (Carla lives-in TruthtellersRoad)" 
    "Carla says (Nilda lives-in TruthtellersRoad)"
   shows
-   "\<exists> S1 S2. ((Nilda lives-in S1) and (Carla lives-in S2))"       
-   
+   (* "\<exists> S1 S2. ((Nilda lives-in S1) and (Carla lives-in S2))" *)
+   "\<exists> S1 S2. (((Nilda lives-in S1) and (Carla lives-in S2)) and (not (S1 = TruthtellersRoad)))" 
+  
   nitpick[satisfy] oops 
 
-  (* lemma "\<exists> S1 S2. (((Nilda lives-in S1) and (Carla lives-in S2)) and (not (S1 = TruthtellersRoad)))" *)
-
+lemma "\<exists> S1 S2. (((Nilda lives-in S1) and (Carla lives-in S2)) and (not (S1 = TruthtellersRoad)))" 
+  nitpick[satisfy] oops 
 
 lemma Question2:
   assumes
    "Nilda says (Carla lives-in LiarsStreet)"  
    "Carla says (neither Nilda nor Carla live-in LiarsStreet)"
   shows
-   "\<exists> S1 S2. ((Nilda lives-in S1) and (Carla lives-in S2))"         
-     
+   "\<exists> S1 S2. ((Nilda lives-in S1) and (Carla lives-in S2))"             
   nitpick[satisfy] oops
 
 
