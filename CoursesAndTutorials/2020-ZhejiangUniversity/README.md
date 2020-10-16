@@ -11,21 +11,10 @@ The lecture course will introduce HOL and the SSE technique, provide some hands-
 - [Isabelle/HOL system](https://isabelle.in.tum.de); please install this system prior to the first course (see also this [Isabelle/HOL tutorial](https://isabelle.in.tum.de/dist/Isabelle2020/doc/tutorial.pdf) and further relevant documents at this [website](https://isabelle.in.tum.de/documentation.html))
 
 ## Data Sets
-- [LogiKEy Workbench](www.logikey.org): Deontic Logics, Logic Combinations and Expressive Ethical and Legal Reasoning (Isabelle/HOL Dataset) (Christoph Benzmüller, Ali Farjami, David Fuenmayor, Paul Meder, Xavier Parent, Alexander Steen, Leendert van der Torre, Valeria Zahoransky), In Data in brief, Elsevier, number 106409, pp. 1-15, 2020. [doi](https://www.sciencedirect.com/science/article/pii/S2352340920312919)
-- Universal (Meta-)Logical Reasoning: The Wise Men Puzzle (Isabelle/HOL Dataset) (Christoph Benzmüller), In Data in Brief, volume 24, number 103823, pp. 1--5, 2019. [doi](https://doi.org/10.1016/j.dib.2019.103823)
+- [LogiKEy Workbench](www.logikey.org): Deontic Logics, Logic Combinations and Expressive Ethical and Legal Reasoning (Isabelle/HOL Dataset) (Christoph Benzmüller, Ali Farjami, David Fuenmayor, Paul Meder, Xavier Parent, Alexander Steen, Leendert van der Torre, Valeria Zahoransky), In Data in brief, Elsevier, number 106409, pp. 1-15, 2020. [https://doi.org/10.1016/j.dib.2020.106409](https://doi.org/10.1016/j.dib.2020.106409)
+The LogiKEy Workbench also maintains selected datasets in [Computational Metaphics](Computational-Metaphysics) and [Foundations of Maths](Maths-Foundations)
+- Universal (Meta-)Logical Reasoning: The Wise Men Puzzle (Isabelle/HOL Dataset) (Christoph Benzmüller), In Data in Brief, volume 24, number 103823, pp. 1--5, 2019. [https://doi.org/10.1016/j.dib.2019.103823](https://doi.org/10.1016/j.dib.2019.103823)
+- [Further examples](examples) for lecture course
 
 ## Reading Material
 
-### LogiKEy Workbench (dataset of formalized knowledge): 
-
-Flexible, Pluralistic Foundations for Legal and Ethical Reasoning, Metaphysics and Maths
-
-For further information on LogiKEy see the 
-- related [scientific article](https://arxiv.org/abs/1903.10187) in "Artificial Intelligence" [(doi)](https://doi.org/10.1016/j.artint.2020.103348), and the 
-- related [data article](https://www.sciencedirect.com/science/article/pii/S2352340920312919) in "Data in brief".
-
-The LogiKEy Workbench also maintains selected datasets in 
-- [Computational Metaphics](Computational-Metaphysics) and
-- [Foundations of Maths](Maths-Foundations)
-
-All these datasets utilize the universal meta-logical reasoning approach in which various object logics (and their combinations) are shallowly embedded in classical higher-order logic.
