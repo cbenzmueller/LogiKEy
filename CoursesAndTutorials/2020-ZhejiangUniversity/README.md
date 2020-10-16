@@ -11,10 +11,12 @@ The lecture course will introduce HOL and the SSE technique, provide some hands-
 - [Isabelle/HOL system](https://isabelle.in.tum.de); please install this system prior to the first course (see also this [Isabelle/HOL tutorial](https://isabelle.in.tum.de/dist/Isabelle2020/doc/tutorial.pdf) and further relevant documents at this [website](https://isabelle.in.tum.de/documentation.html))
 
 ## Data Sets
-- [LogiKEy Workbench](www.logikey.org): Deontic Logics, Logic Combinations and Expressive Ethical and Legal Reasoning (Isabelle/HOL Dataset) (Christoph Benzmüller, Ali Farjami, David Fuenmayor, Paul Meder, Xavier Parent, Alexander Steen, Leendert van der Torre, Valeria Zahoransky), In Data in brief, Elsevier, number 106409, pp. 1-15, 2020. [https://doi.org/10.1016/j.dib.2020.106409](https://doi.org/10.1016/j.dib.2020.106409)
-The LogiKEy Workbench also maintains selected datasets in [Computational Metaphics](Computational-Metaphysics) and [Foundations of Maths](Maths-Foundations)
+- [LogiKEy Workbench](http://logikey.org): Deontic Logics, Logic Combinations and Expressive Ethical and Legal Reasoning (Isabelle/HOL Dataset) (Christoph Benzmüller, Ali Farjami, David Fuenmayor, Paul Meder, Xavier Parent, Alexander Steen, Leendert van der Torre, Valeria Zahoransky), In Data in brief, Elsevier, number 106409, pp. 1-15, 2020. [https://doi.org/10.1016/j.dib.2020.106409](https://doi.org/10.1016/j.dib.2020.106409)
 - Universal (Meta-)Logical Reasoning: The Wise Men Puzzle (Isabelle/HOL Dataset) (Christoph Benzmüller), In Data in Brief, volume 24, number 103823, pp. 1--5, 2019. [https://doi.org/10.1016/j.dib.2019.103823](https://doi.org/10.1016/j.dib.2019.103823)
 - [Further examples](examples) for lecture course
 
 ## Reading Material
+- Designing Normative Theories for Ethical and Legal Reasoning: LogiKEy Framework, Methodology, and Tool Support (Christoph Benzmüller, Xavier Parent, Leendert van der Torre), In Artificial Intelligence, Elsevier, volume 287, pp. 103348, 2020. (Preprint: https://www.researchgate.net/publication/342146653 [http://dx.doi.org/10.1016/j.artint.2020.103348](http://dx.doi.org/10.1016/j.artint.2020.103348)
+- Universal (Meta-)Logical Reasoning: Recent Successes (Christoph Benzmüller), In Science of Computer Programming, volume 172, pp. 48-62, 2019. (Preprint: http://doi.org/10.13140/RG.2.2.11039.61609/2) [http://dx.doi.org/10.1016/j.scico.2018.10.008](http://dx.doi.org/10.1016/j.scico.2018.10.008)
+
 
