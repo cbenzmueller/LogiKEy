@@ -1,14 +1,13 @@
 # Universal Logical Reasoning
-
 This course is part of the overall lecture course "Logic in AI" at Zhejiang University, 2020; for more information see the overall lecture course [website](https://www.xixilogic.org/events/2020/08/course-logic-in-ai/).
 
-## Abstract
-
+### Abstract
 Knowledge representation and reasoning applications in computer science, AI, philosophy and math typically employ very different logic formalisms. Instead of a \single logic that serves it all” (as envisioned already by Leibniz) an entire \logic zoo” has been developed, in particular, during the last century. Logics in this zoo, e.g., include modal logics, conditional logics, deontic logics, multi-valued logics, temporal logics, dynamic logics, hybrid logics, etc. In this lecture course I will introduce, discuss and demonstrate a recent attempt at a meta logical approach to universal logical reasoning that addresses this logical pluralism. The core message is this: While it might not be possible to come up with a universal object logic as envisioned by Leibniz, it might in fact be possible to have a universal meta logic in which we can semantically model, analyze and apply various species from the logic zoo. I will argue and demonstrate that classical higher order logic (HOL) [3] is particularly suited to serve as such a universal meta logic, and that existing reasoning tools for HOL can fruitfully be reused and applied in this context.
 
 The lecture course will introduce HOL and the SSE technique, provide some hands-on introduction to Isabelle/HOL, study and demonstrate some concrete semantical embeddings of non-classical in HOL, and conduct practical exercises regarding the application of the SSE technique in philosophy, mathematics and artificial intelligence, including, normative reasoning and machine ethics. As far as time permits, the course will also explain and train the application of the LogiKEy methodology for designing normative theories of ethical and legal reasoning.
 
-
+### Course Material
+- [Presentation Slides](slides)
 
 
 
