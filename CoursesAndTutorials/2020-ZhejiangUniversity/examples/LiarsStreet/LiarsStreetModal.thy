@@ -1,12 +1,15 @@
-theory BaseLogicModalLogicK imports Main                      
-begin      
+theory LiarsStreetModal       (*Christoph Benzmüller, 2020*)
+  imports Main
+begin          
+(*unimportant*) nitpick_params [user_axioms,assms=true,format=2,box=false,show_all]
+(*unimportant*) declare [[show_abbrevs=false]]
+
+(*** NOTE: This is still a failing attempt to address "Says" ***)
 
 (*Type declarations and type abbreviations*)
 typedecl i (*Possible worlds*)  
-typedecl e (*Individuals*)      
 type_synonym \<sigma> = "i\<Rightarrow>bool" (*World-lifted propositions*)
 type_synonym \<tau> = "i\<Rightarrow>i\<Rightarrow>bool" (*Lifted predicates*)
-type_synonym \<gamma> = "e\<Rightarrow>\<sigma>" (*Lifted predicates*)
 type_synonym \<mu> = "\<sigma>\<Rightarrow>\<sigma>" (*Unary modal connectives*)
 type_synonym \<nu> = "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (*Binary modal connectives*)
 
@@ -33,33 +36,29 @@ abbreviation MAllPossB (binder"\<^bold>\<forall>"[8]9) where "\<^bold>\<forall>x
 abbreviation MExPoss ("\<^bold>\<exists>") where "\<^bold>\<exists>\<Phi> \<equiv> \<lambda>w.\<exists>x.(\<Phi> x w)"   
 abbreviation MExPossB (binder"\<^bold>\<exists>"[8]9) where "\<^bold>\<exists>x. \<phi>(x) \<equiv> \<^bold>\<exists>\<phi>" 
 
-(*Actualist quantification for individuals*)
-consts existsAt::\<gamma> ("_\<^bold>@_")  
-abbreviation MAllAct::"\<gamma>\<Rightarrow>\<sigma>" ("\<^bold>\<forall>\<^sup>E") where "\<^bold>\<forall>\<^sup>E\<Phi> \<equiv> \<lambda>w.\<forall>x.(x\<^bold>@w)\<longrightarrow>(\<Phi> x w)"
-abbreviation MAllActB (binder"\<^bold>\<forall>\<^sup>E"[8]9) where "\<^bold>\<forall>\<^sup>Ex. \<phi>(x) \<equiv> \<^bold>\<forall>\<^sup>E\<phi>"     
-abbreviation MExAct::"\<gamma>\<Rightarrow>\<sigma>" ("\<^bold>\<exists>\<^sup>E") where "\<^bold>\<exists>\<^sup>E\<Phi> \<equiv> \<lambda>w.\<exists>x.(x\<^bold>@w)\<and>(\<Phi> x w)"
-abbreviation MExActB (binder"\<^bold>\<exists>\<^sup>E"[8]9) where "\<^bold>\<exists>\<^sup>Ex. \<phi>(x) \<equiv> \<^bold>\<exists>\<^sup>E\<phi>"
 
 (*Meta-logical predicate for global validity*)
-abbreviation g1::"\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>") where "\<lfloor>\<psi>\<rfloor> \<equiv>  \<forall>w. \<psi> w"
+abbreviation MgValid::"\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>") where "\<lfloor>\<psi>\<rfloor> \<equiv>  \<forall>w. \<psi> w"
+(*Meta-logical predicate for local validity*)
+consts cw::i
+abbreviation MlValid::"\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>\<^sub>c\<^sub>w") where "\<lfloor>\<psi>\<rfloor>\<^sub>c\<^sub>w \<equiv>  \<psi> cw"
 
 (*Consistency, Barcan and converse Barcan formula*)
 lemma True nitpick[satisfy] oops  (*Model found by Nitpick*)
-lemma "\<lfloor>(\<^bold>\<forall>\<^sup>Ex.\<^bold>[r\<^bold>](\<phi> x)) \<^bold>\<rightarrow> \<^bold>[r\<^bold>](\<^bold>\<forall>\<^sup>Ex.(\<phi> x))\<rfloor>" nitpick oops (*Ctm*)
-lemma "\<lfloor>(\<^bold>[r\<^bold>](\<^bold>\<forall>\<^sup>Ex.(\<phi> x))) \<^bold>\<rightarrow> \<^bold>\<forall>\<^sup>Ex.\<^bold>[r\<^bold>](\<phi> x)\<rfloor>" nitpick oops (*Ctm*)
 lemma "\<lfloor>(\<^bold>\<forall>x.\<^bold>[r\<^bold>](\<phi> x)) \<^bold>\<rightarrow> \<^bold>[r\<^bold>](\<^bold>\<forall>x. \<phi> x)\<rfloor>" by simp 
 lemma "\<lfloor>(\<^bold>[r\<^bold>](\<^bold>\<forall>x.(\<phi> x))) \<^bold>\<rightarrow> \<^bold>\<forall>x.\<^bold>[r\<^bold>](\<phi> x)\<rfloor>" by simp
+
 
 (***********************************************************************************
  ******************  Some Basic Types of our Ontology ******************************
  ***********************************************************************************)
 
 (* There are some kids, could be many more *)
-datatype Entity = Nilda | Carla  
+consts Nilda::\<tau> Carla::\<tau>
+axiomatization where Different: "Carla \<noteq> Nilda"
 
 (* There are some roads, could be many more *)
 datatype Street = LiarsStreet | TruthtellersRoad  
-
 
 (***********************************************************************************
  ******************  Controlled Natural Language Library ***************************
@@ -74,16 +73,10 @@ abbreviation If_then ("If _ then _") where "If X then Y \<equiv> X \<^bold>\<rig
 
 (*** NL phrases: modal connectives; examples ***)
 
-(* Entities have different modal accessibility relations for "Says" "Knows" "Belief" "Obligation", etc.;
-    a technical  solution that is not relevant for the 'normal' reader *)
-consts SaysAccessibilityRel::"Entity\<Rightarrow>\<tau>"    KnowsAccessibilityRel::"Entity\<Rightarrow>\<tau>"
-       BeliefAccessibilityRel::"Entity\<Rightarrow>\<tau>"  ObligationAccessibilityRel::"Entity\<Rightarrow>\<tau>"
 
 (* We can introduce modal NL phrases *)
-definition  Says::"Entity\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_ says _")  where "X says \<phi> \<equiv> \<^bold>[SaysAccessibilityRel X\<^bold>] \<phi> "    
-definition  Knows::"Entity\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_ knows _") where "X knows \<phi> \<equiv> \<^bold>[KnowsAccessibilityRel X\<^bold>] \<phi> "   
-definition  Believes::"Entity\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_ believes _") where "X believes \<phi> \<equiv> \<^bold>[BeliefAccessibilityRel X\<^bold>] \<phi> "   
-definition  Obligation::"Entity\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_ must-do _") where "X must-do \<phi> \<equiv> \<^bold>[ObligationAccessibilityRel X\<^bold>] \<phi> "
+definition  Says::"\<tau>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_ says _")  where "X says \<phi> \<equiv> \<^bold>[X\<^bold>] \<phi> "    
+definition  Knows::"\<tau>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_ knows _") where "X knows \<phi> \<equiv> \<^bold>[X\<^bold>] \<phi> "   
 
 (* We can introduce some further derived modal NL phrases *)
 definition Lies ("lies _") where "lies X \<equiv> \<^bold>\<forall>Y. If (X says Y) then not Y"
@@ -92,8 +85,8 @@ definition Says_the_truth ("says-the-truth _")
 
 (* We add the above defintions to our "bag" called "Defs" — Unimportant *)
 named_theorems Defs
-declare Says_def [Defs] Knows_def [Defs] Believes_def [Defs] Obligation_def [Defs] 
- Lies_def [Defs] Says_the_truth_def [Defs] 
+declare Says_def [Defs] Knows_def [Defs] Lies_def [Defs] Says_the_truth_def [Defs] 
+
 
 (***********************************************************************************
  ****************** Controlled Natural Language Library ****************************
@@ -101,7 +94,7 @@ declare Says_def [Defs] Knows_def [Defs] Believes_def [Defs] Obligation_def [Def
  ***********************************************************************************)
 
 (* Uninterpreted predicate: Lives_in *)
-consts Lives_in::"Entity\<Rightarrow>Street\<Rightarrow>\<sigma>" ("_ lives-in _") 
+consts Lives_in::"\<tau>\<Rightarrow>Street\<Rightarrow>\<sigma>" ("_ lives-in _") 
 
 (* Further derived NL phrases that concern "Lives_in" *)
 definition Lives_not_in ("_ lives-not-in _")
@@ -113,5 +106,102 @@ definition Both_live_in ("both _ and _ live-in _")
 
 (* We add the above defintions to our "bag" called "Defs" — Unimportant *)
 declare Lives_not_in_def [Defs] Neither_nor_live_in_def [Defs] Both_live_in_def [Defs] 
+
+
+(***********************************************************************************
+ ****************** Example Queries ************************************************
+ ***********************************************************************************)
+
+
+axiomatization where
+A1:  "\<lfloor>If (X lives-in LiarsStreet) then (lies X)\<rfloor>"  and
+A2:  "\<lfloor>If (X lives-in TruthtellersRoad) then (says-the-truth X)\<rfloor>" 
+
+lemma Question1:
+  assumes
+   "\<lfloor>Nilda says (Carla lives-in TruthtellersRoad)\<rfloor>\<^sub>c\<^sub>w" 
+   "\<lfloor>Carla says (Nilda lives-in TruthtellersRoad)\<rfloor>\<^sub>c\<^sub>w"
+ shows
+   "\<lfloor>((Nilda lives-in S1) and (Carla lives-in S2))\<rfloor>\<^sub>c\<^sub>w"       
+  nitpick[satisfy] 
+  oops
+
+
+(*** Do we run into Paradoxes with the modelling of modalities? ***)
+
+consts It_holds_that_One_plus_One_Equals_Two::\<sigma> 
+       It_holds_that_Fermats_last_Theorem_is_True::\<sigma>
+
+lemma Question8:
+  assumes
+   "\<lfloor>It_holds_that_One_plus_One_Equals_Two\<rfloor>\<^sub>c\<^sub>w" 
+   "\<lfloor>It_holds_that_Fermats_last_Theorem_is_True\<rfloor>\<^sub>c\<^sub>w" 
+   "\<lfloor>Carla says It_holds_that_One_plus_One_Equals_Two\<rfloor>\<^sub>c\<^sub>w"
+  shows
+   "\<lfloor>Carla says It_holds_that_Fermats_last_Theorem_is_True\<rfloor>\<^sub>c\<^sub>w"  
+  unfolding Defs
+  sledgehammer [verbose]
+  nitpick oops
+
+lemma Question9:
+  assumes
+   "\<lfloor>It_holds_that_One_plus_One_Equals_Two\<rfloor>\<^sub>c\<^sub>w" 
+   "\<lfloor>It_holds_that_Fermats_last_Theorem_is_True\<rfloor>\<^sub>c\<^sub>w" 
+   "\<lfloor>Carla knows It_holds_that_One_plus_One_Equals_Two\<rfloor>\<^sub>c\<^sub>w"
+  shows
+   "\<lfloor>Carla knows It_holds_that_Fermats_last_Theorem_is_True\<rfloor>\<^sub>c\<^sub>w"  
+  sledgehammer [verbose](assms)
+  nitpick  oops
+
+
+(*** But! As the remainder shows this is still not a proper modeling 
+     of "Says" --- See literature on public announcement logic and our
+     recent paper at the Dali workshop ***)
+
+lemma Question2:
+  assumes
+   "\<lfloor>Nilda says (Carla lives-in LiarsStreet)\<rfloor>\<^sub>c\<^sub>w"  
+   "\<lfloor>Carla says (neither Nilda nor Carla live-in LiarsStreet)\<rfloor>\<^sub>c\<^sub>w"
+  shows
+   "\<lfloor>((Nilda lives-in S1) and (Carla lives-in S2))\<rfloor>\<^sub>c\<^sub>w"              
+  nitpick[satisfy] oops
+
+
+lemma Question3:
+  assumes
+   "\<lfloor>Nilda says (Carla lives-in LiarsStreet)\<rfloor>\<^sub>c\<^sub>w" 
+   "\<lfloor>Carla says (Carla lives-in LiarsStreet)\<rfloor>\<^sub>c\<^sub>w" 
+ shows
+   "\<lfloor>((Nilda lives-in S1) and (Carla lives-in S2))\<rfloor>\<^sub>c\<^sub>w"    
+  nitpick[satisfy,show_all] oops
+
+lemma Question4:
+  assumes
+   "\<lfloor>Nilda says (Nilda says (Nilda lives-in LiarsStreet))\<rfloor>\<^sub>c\<^sub>w" 
+ shows
+   "\<lfloor>(Nilda lives-in S1)\<rfloor>"    
+  nitpick[satisfy,show_all] oops
+
+lemma Question5:
+  assumes
+   "\<lfloor>Nilda says (Nilda says (Nilda lives-not-in LiarsStreet))\<rfloor>\<^sub>c\<^sub>w" 
+ shows
+   "\<lfloor>(Nilda lives-in S1)\<rfloor>\<^sub>c\<^sub>w"    
+  nitpick[satisfy] oops
+
+lemma Question6:
+  assumes
+   "\<lfloor>Nilda says (Nilda says ((Nilda lives-in LiarsStreet) and (Nilda lives-in TruthtellersRoad)))\<rfloor>" 
+ shows
+   "\<lfloor>(Nilda lives-in S1)\<rfloor>\<^sub>c\<^sub>w"    
+  nitpick[satisfy] oops
+
+lemma Question7:
+  assumes
+   "\<lfloor>Nilda says (Carla says ((Nilda lives-in LiarsStreet) and (Nilda lives-in TruthtellersRoad)))\<rfloor>\<^sub>c\<^sub>w" 
+ shows
+   "\<lfloor>((Nilda lives-in S1) and (Carla lives-in S2))\<rfloor>\<^sub>c\<^sub>w"    
+  nitpick[satisfy] oops
+
 
 end
