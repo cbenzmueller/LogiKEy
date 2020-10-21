@@ -4,7 +4,7 @@ begin
 (*unimportant*) nitpick_params [user_axioms,assms=true,format=2,box=false,show_all]
 (*unimportant*) declare [[show_abbrevs=false]]
 
-(*** NOTE: This is still a failing attempt to address "Says" ***)
+(*** NOTE: This is still a failing attempt to address "Says" — but lets see how far we get ***)
 
 (*Type declarations and type abbreviations*)
 typedecl i (*Possible worlds*)  

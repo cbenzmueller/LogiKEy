@@ -78,7 +78,6 @@ lemma Question1:
    "((Nilda lives-in S1) and (Carla lives-in S2))"         
   nitpick[satisfy] oops 
 
-
 lemma Question1b:
   assumes
    "Nilda says (Carla lives-in TruthtellersRoad)" 
@@ -94,7 +93,6 @@ lemma Question2:
   shows
    "((Nilda lives-in S1) and (Carla lives-in S2))"         
   nitpick[satisfy] oops
-
 
 lemma Question3:
   assumes
@@ -128,4 +126,5 @@ lemma Question9:
    "Carla knows It_holds_that_Fermats_last_Theorem_is_True"  
   sledgehammer [verbose](assms)
   nitpick oops
+
 end
