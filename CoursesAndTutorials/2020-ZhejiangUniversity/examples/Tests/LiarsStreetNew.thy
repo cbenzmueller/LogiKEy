@@ -1,71 +1,13 @@
 theory LiarsStreetNew        (*Christoph Benzmüller, 2020*)
-  imports  BaseLogicClassical
-
+  (* imports BaseKnowledgeClassical *)
+  imports BaseKnowledgeModalLogic
 begin          
-(*unimportant*) nitpick_params [user_axioms,format=2,show_all]
-
-
-(***********************************************************************************
- ******************  Controlled Natural Language Library ***************************
- ******************  PART 1: Logic and Modalities             ***************************
- ***********************************************************************************)
-
-(*** NL phrases: standard logical connectives; examples ***)
-abbreviation And ("_ and _") where "X and Y \<equiv> X \<^bold>\<and> Y"
-abbreviation Or ("_ or _") where "X or Y \<equiv> X \<^bold>\<or> Y"
-abbreviation Not ("not _") where "not X \<equiv> \<^bold>\<not>X"
-abbreviation If_then ("If _ then _") where "If X then Y \<equiv> X \<^bold>\<rightarrow> Y"
-
-abbreviation Forall (binder"Forall" [8] 9) where "Forall x. \<phi>(x) \<equiv> \<^bold>\<forall>\<phi>"  
-abbreviation Exists (binder"Exists" [8] 9) where "Exists x. \<phi>(x) \<equiv> \<^bold>\<exists>\<phi>"  
-
-(*** NL phrases: modal connectives; examples ***)
-
-(* Entities have different modal accessibility relations for "Says" "Knows" "Belief" "Obligation", etc.;
-    a technical  solution that is not relevant for the 'normal' reader *)
-consts SaysAccessibilityRel::"'a\<Rightarrow>\<tau>"
-consts KnowsAccessibilityRel::"'a\<Rightarrow>\<tau>"
-consts BeliefAccessibilityRel::"'a\<Rightarrow>\<tau>"
-consts ObligationAccessibilityRel::"'a\<Rightarrow>\<tau>"
-
-(* We can introduce modal NL phrases *)
-definition  Says::"'a\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_ says _")  where "X says \<phi> \<equiv> \<^bold>[SaysAccessibilityRel X\<^bold>] \<phi> "    
-definition  Knows::"'a\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_ knows _") where "X knows \<phi> \<equiv> \<^bold>[KnowsAccessibilityRel X\<^bold>] \<phi> "   
-definition  Beliefs::"'a\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_ believes _") where "X believes \<phi> \<equiv> \<^bold>[BeliefAccessibilityRel X\<^bold>] \<phi> "   
-definition  Obligation::"'a\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_ must-do _") where "X must-do \<phi> \<equiv> \<^bold>[ObligationAccessibilityRel X\<^bold>] \<phi> "
-
-(* We can introduce some further derived modal NL phrases *)
-definition Lies ("lies _") where "lies X \<equiv> \<^bold>\<forall>Y. If (X says Y) then not Y"
-definition Says_the_truth ("says-the-truth _") where "says-the-truth X \<equiv> \<^bold>\<forall>Y. If (X says Y) then Y" 
-
-
-(***********************************************************************************
- ******************  Controlled Natural Language Library ***************************
- ******************  PART 2: TBOX                                    ***************************
- ***********************************************************************************)
-
-(* Uninterpreted predicate: Lives_in *)
-consts Lives_in::"'a\<Rightarrow>'b\<Rightarrow>\<sigma>" ("_ lives-in _") 
-
-(* Further derived NL phrases that concern "Lives_in" *)
-definition Lives_not_in ("_ lives-not-in _")
-  where "X lives-not-in G \<equiv> not (X lives-in G)"
-definition Neither_nor_live_in ("neither _ nor _ live-in _") 
-  where "neither X nor Y live-in G \<equiv> (not (X lives-in G)) and (not (Y lives-in G))"
-definition Both_live_in ("both _ and _ live-in _") 
-  where "both X and Y live-in G \<equiv> (X lives-in G) and (Y lives-in G)"
-
-
-(* There are some kids, could be many more *)
-datatype Kids = Nilda | Carla | Chris | Max   
-
-(* There are two roads, could be many more *)
-datatype Streets = LiarsStreet | TruthtellersRoad  | Bahnhofstrasse
-   
+(*unimportant*) nitpick_params [user_axioms,assms=true,format=2,box=false,show_all]
+(*unimportant*) declare [[show_abbrevs=false]]
 
 axiomatization where
-A1:  "\<lfloor>Forall X. If (X lives-in LiarsStreet) then (lies X)\<rfloor>"  and
-A2:  "\<lfloor>Forall X. If (X lives-in TruthtellersRoad) then (says-the-truth X)\<rfloor>" 
+A1:  "\<forall>X. \<lfloor>If (X lives-in LiarsStreet) then (lies X)\<rfloor>"  and
+A2:  "\<forall>X. \<lfloor>If (X lives-in TruthtellersRoad) then (says-the-truth X)\<rfloor>" 
 
 lemma Question1:
   assumes
@@ -73,22 +15,24 @@ lemma Question1:
    "\<lfloor>Carla says (Nilda lives-in TruthtellersRoad)\<rfloor>"
  shows
    "\<lfloor>((Nilda lives-in S1) and (Carla lives-in S2))\<rfloor>"       
-  nitpick[satisfy] oops 
-
-
-lemma Question1a:
-  assumes
-   "\<lfloor>Nilda says (Carla lives-in TruthtellersRoad)\<rfloor>" 
-   "\<lfloor>Carla says (Nilda lives-in TruthtellersRoad)\<rfloor>"
- shows "\<exists> S1 S2. (((Nilda lives-in S1) and (Carla lives-in S2)) and (not (S1 = TruthtellersRoad)))" 
-  nitpick[satisfy] oops
+  nitpick[satisfy,max_genuine=10] 
+  oops
 
 lemma Question1b:
   assumes
    "\<lfloor>Nilda says (Carla lives-in TruthtellersRoad)\<rfloor>" 
    "\<lfloor>Carla says (Nilda lives-in TruthtellersRoad)\<rfloor>"
  shows  
-  "(both Nilda and Carla live-in TruthtellersRoad)"
+  "\<lfloor>(both Nilda and Carla live-in S1)\<rfloor>"
+  nitpick[satisfy, show_all] oops
+
+lemma Question1b:
+  assumes
+   "\<lfloor>Nilda says (Carla lives-in TruthtellersRoad)\<rfloor>\<^sub>c\<^sub>w" 
+   "\<lfloor>Carla says (Nilda lives-in TruthtellersRoad)\<rfloor>\<^sub>c\<^sub>w"
+ shows  
+  "\<not>\<lfloor>(both Nilda and Carla live-in LiarsStreet)\<rfloor>\<^sub>c\<^sub>w"
+  unfolding Defs sledgehammer
   nitpick[satisfy, show_all] oops
 
 
@@ -107,14 +51,14 @@ lemma Question3:
    "\<lfloor>Carla says (Carla lives-in LiarsStreet)\<rfloor>" 
  shows
    "\<lfloor>((Nilda lives-in S1) and (Carla lives-in S2))\<rfloor>"    
-  nitpick[satisfy] oops
+  nitpick[satisfy,show_all] oops
 
 lemma Question4:
   assumes
    "\<lfloor>Nilda says (Nilda says (Nilda lives-in LiarsStreet))\<rfloor>" 
  shows
    "\<lfloor>(Nilda lives-in S1)\<rfloor>"    
-  nitpick[satisfy] oops
+  nitpick[satisfy,show_all] oops
 
 lemma Question5:
   assumes
@@ -137,28 +81,29 @@ lemma Question7:
    "\<lfloor>((Nilda lives-in S1) and (Carla lives-in S2))\<rfloor>"    
   nitpick[satisfy] oops
 
-consts A::\<sigma> B::\<sigma>
-lemma Question4:
+
+(*** Do we run into Paradoxes with the modelling of modalities? ***)
+
+consts It_holds_that_One_plus_One_Equals_Two::\<sigma> 
+       It_holds_that_Fermats_last_Theorem_is_True::\<sigma>
+
+lemma Question8:
   assumes
-   "\<lfloor>A\<rfloor>" 
-   "\<lfloor>B\<rfloor>" 
-   "\<lfloor>Carla says A\<rfloor>"
+   "\<lfloor>It_holds_that_One_plus_One_Equals_Two\<rfloor>" 
+   "\<lfloor>It_holds_that_Fermats_last_Theorem_is_True\<rfloor>" 
+   "\<lfloor>Carla says It_holds_that_One_plus_One_Equals_Two\<rfloor>"
   shows
-   "\<lfloor>Carla says B\<rfloor>"  
-  sledgehammer[verbose](assms)
-  using assms(1) assms(2) assms(3) by auto
-  nitpick[card i = 6] oops
+   "\<lfloor>Carla says It_holds_that_Fermats_last_Theorem_is_True\<rfloor>"  
+  sledgehammer [verbose](assms)
+  nitpick oops
 
-
-consts Knows::"Kids\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("_ knows _") 
-
-lemma Question5:
+lemma Question9:
   assumes
-   "\<lfloor>A\<rfloor>"
-   "\<lfloor>B\<rfloor>" 
-   "\<lfloor>Carla knows A\<rfloor>"
+   "\<lfloor>It_holds_that_One_plus_One_Equals_Two\<rfloor>" 
+   "\<lfloor>It_holds_that_Fermats_last_Theorem_is_True\<rfloor>" 
+   "\<lfloor>Carla knows It_holds_that_One_plus_One_Equals_Two\<rfloor>"
   shows
-   "\<lfloor>Carla knows B\<rfloor>"  
-   sledgehammer[verbose](assms)
-  using assms(1) assms(2) assms(3) by auto
+   "\<lfloor>Carla knows It_holds_that_Fermats_last_Theorem_is_True\<rfloor>"  
+  sledgehammer [verbose](assms)
+  nitpick oops
 end
