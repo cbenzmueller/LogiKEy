@@ -9,7 +9,7 @@ begin
 (*Type declarations and type abbreviations*)
 typedecl i (*Possible worlds*)  
 type_synonym \<sigma> = "i\<Rightarrow>bool" (*World-lifted propositions*)
-type_synonym \<tau> = "i\<Rightarrow>i\<Rightarrow>bool" (*Lifted predicates*)
+type_synonym \<tau> = "i\<Rightarrow>i\<Rightarrow>bool" (*Type of accessibility relations*)
 type_synonym \<mu> = "\<sigma>\<Rightarrow>\<sigma>" (*Unary modal connectives*)
 type_synonym \<nu> = "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (*Binary modal connectives*)
 
@@ -141,7 +141,7 @@ lemma Question8:
    "\<lfloor>Carla says It_holds_that_Fermats_last_Theorem_is_True\<rfloor>\<^sub>c\<^sub>w"  
   unfolding Defs
   sledgehammer [verbose]
-  nitpick oops
+  nitpick[show_all,format=2] oops
 
 lemma Question9:
   assumes
