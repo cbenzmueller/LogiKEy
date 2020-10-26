@@ -1,4 +1,5 @@
-theory LiarsStreet imports  Main  (*Christoph Benzmüller, 2020*)
+theory LiarsStreet  (*Christoph Benzmüller, 2020*)
+  imports Main  
 begin          
 (*unimportant*) nitpick_params [user_axioms,format=2,show_all]
 (*unimportant*) declare [[show_abbrevs=false]]
@@ -76,7 +77,9 @@ lemma Question1:
    "Carla says (Nilda lives-in TruthtellersRoad)"
   shows
    "((Nilda lives-in S1) and (Carla lives-in S2))"         
-  nitpick[satisfy] oops 
+  nitpick[satisfy] oops  
+
+
 
 lemma Question1b:
   assumes
@@ -107,6 +110,8 @@ lemma Question3:
 consts It_holds_that_One_plus_One_Equals_Two::bool
        It_holds_that_Fermats_last_Theorem_is_True::bool
 
+
+
 lemma Question8:
   assumes
    "It_holds_that_One_plus_One_Equals_Two" 
@@ -114,8 +119,8 @@ lemma Question8:
    "Carla says It_holds_that_One_plus_One_Equals_Two"
   shows
    "Carla says It_holds_that_Fermats_last_Theorem_is_True"  
-  sledgehammer [verbose](assms)
-  nitpick oops
+  using assms(1) assms(2) assms(3) by auto
+
 
 lemma Question9:
   assumes
