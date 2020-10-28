@@ -30,6 +30,7 @@ The lecture course will introduce HOL and the SSE technique, provide some hands-
 ## Reading Material: Meta-Logic HOL
 - Church's Type Theory (Christoph Benzmüller, Peter Andrews), Chapter in The Stanford Encyclopedia of Philosophy (Edward N. Zalta, ed.), Metaphysics Research Lab, Stanford University, pp. 1--62 (in pdf version), 2019. https://plato.stanford.edu/entries/type-theory-church/
 - Automation of Higher-Order Logic (Christoph Benzmüller, Dale Miller), Chapter in Handbook of the History of Logic, Volume 9 --- Computational Logic (Dov M. Gabbay, Jörg H. Siekmann, John Woods, eds.), North Holland, Elsevier, pp. 215-254, 2014. http://dx.doi.org/10.1016/B978-0-444-51624-4.50005-8 (Preprint: http://christoph-benzmueller.de/papers/B5.pdf)
+- Higher-Order Semantics and Extensionality (Christoph Benzmüller, Chad Brown, Michael Kohlhase), In Journal of Symbolic Logic, volume 69, number 4, pp. 1027-1088, 2004. http://dx.doi.org/10.2178/jsl/1102022211 (Preprint: https://www.researchgate.net/publication/38338872)
 - Classical Type Theory (Peter B. Andrews), Handbook of Automated Reasoning, 2001:965-1007.
 - An Introduction to Mathematical Logic and Type Theory, To Truth Through Proof (Peter B. Andrews), Applied Logic Series, Springer Netherlands, 2nd ed., 2002. [http://dx.doi.org/10.1007/978-94-015-9934-4](http://dx.doi.org/10.1007/978-94-015-9934-4)
 
