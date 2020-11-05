@@ -1,8 +1,41 @@
 theory Cantor  imports Main 
-  
-  
+ 
 begin  
-typedecl i  
+
+declare [[show_types]]
+
+typedecl i
+
+
+(* Simple Example (Exercise 2)*)
+definition imp ::"bool\<Rightarrow>bool\<Rightarrow>bool" ("\<^bold>\<Rightarrow>") where "\<^bold>\<Rightarrow> \<equiv> \<lambda>x.\<lambda>y.((\<not>x) \<or> y)"
+definition leq ::"i\<Rightarrow>i\<Rightarrow>bool" ("\<doteq>") where "\<doteq> \<equiv> \<lambda>x.\<lambda>y.(\<forall>P. (\<^bold>\<Rightarrow> (P x) (P y)))"
+
+
+lemma "\<forall>x. \<doteq> x x" unfolding leq_def imp_def by simp 
+
+lemma "\<forall>x. ((\<lambda>x.\<lambda>y.(\<forall>P. ((\<lambda>x.\<lambda>y.((\<not>x) \<or> y))  (P x) (P y)))) x x)" by simp
+
+lemma "All (\<lambda> x. ((\<lambda>x.\<lambda>y.(\<forall>P. ((\<lambda>x.\<lambda>y.((\<not>x) \<or> y)) (P x) (P y)))) x x))" by simp
+
+
+
+(*Church Numerals (Exercise 1)*)
+type_synonym num = "(i \<Rightarrow> i) \<Rightarrow> i \<Rightarrow> i"
+
+definition one ::num   ("1") where "1 \<equiv> (\<lambda>f. \<lambda>x. f x)"
+definition two ::num   ("2") where "2 \<equiv> (\<lambda>f. \<lambda>x. f (f x))"
+definition three ::num ("3") where "3 \<equiv> (\<lambda>f. \<lambda>x. f (f (f x)))"
+definition four ::num  ("4") where "4 \<equiv> (\<lambda>f. \<lambda>x. f ( f (f (f x))))"
+definition five ::num  ("5") where "5 \<equiv> (\<lambda>f. \<lambda>x. f (f ( f (f (f x)))))"
+
+definition plus ::"num\<Rightarrow>num\<Rightarrow>num"   ("+") where "+ \<equiv> \<lambda>u.\<lambda>v.(\<lambda>f.\<lambda>y.((u f) ((v f) y)))"
+definition mult ::"num\<Rightarrow>num\<Rightarrow>num"   ("*") where "* \<equiv> \<lambda>u.\<lambda>v.(\<lambda>f.\<lambda>y.(u (v f)) y)"
+
+named_theorems Defs declare one_def two_def three_def four_def five_def plus_def mult_def
+
+lemma Homework1: "t = (+ 2 3)" unfolding two_def three_def plus_def oops
+
 
 (* Some first tests *)    
 theorem Test1: "(\<exists>x::i. \<forall>y::i. x = y) \<longrightarrow> (\<forall>x::i. \<exists>y::i. x = y) " 
