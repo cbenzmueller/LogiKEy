@@ -6,15 +6,43 @@ declare [[show_types]]
 
 typedecl i
 
+consts 
+  a::"i"     (* constant symbol of type i - denoting an object in the domain for type i*)
+  f::"i\<Rightarrow>i"  (* constant symbol of function type i\<rightarrow>i - denoting an function in the domain 
+                for type i\<rightarrow>i*)
+  p::"i\<Rightarrow>bool"  (* constant symbol of predicate type i\<rightarrow>bool - denoting an predicate/set in 
+                   the domain for type i\<rightarrow>bool*)
+ 
+lemma "(\<lambda>g. \<lambda>y. g (g y)) f a = (f (f a))" by simp
+
+lemma "(\<lambda>x. p x) a = (p a)" by simp
+
+lemma "(\<lambda>y. ((\<lambda>x. p x) y)) a = ((\<lambda>x. p x) a)" by simp
+
+lemma "(\<lambda>y. ((\<lambda>x. p x) y)) a = (p a)" by simp
+
+
+consts d::bool c::bool
+
+lemma "(d \<or> \<not>d) \<longrightarrow> d" sledgehammer nitpick[show_all] oops
+
+lemma "(d \<and> c) \<longrightarrow> (c \<longrightarrow> d)" by simp
+
+lemma "(\<forall>x. p x) \<longrightarrow> (\<exists>x. p x)" sledgehammer nitpick[show_all]  oops
+
+lemma "(\<exists>x. p x) \<longrightarrow> (\<forall>x. p x)" sledgehammer nitpick[show_all,card=2] oops
+
 
 (* Simple Example (Exercise 2)*)
-definition imp ::"bool\<Rightarrow>bool\<Rightarrow>bool" ("\<^bold>\<Rightarrow>") where "\<^bold>\<Rightarrow> \<equiv> \<lambda>x.\<lambda>y.((\<not>x) \<or> y)"
+definition imp ::"bool\<Rightarrow>bool\<Rightarrow>bool" ("\<^bold>\<Rightarrow>") where "\<^bold>\<Rightarrow> \<equiv> \<lambda>x. \<lambda>y.((\<not>x) \<or> y)"
 definition leq ::"i\<Rightarrow>i\<Rightarrow>bool" ("\<doteq>") where "\<doteq> \<equiv> \<lambda>x.\<lambda>y.(\<forall>P. (\<^bold>\<Rightarrow> (P x) (P y)))"
 
 
-lemma "\<forall>x. \<doteq> x x" unfolding leq_def imp_def by simp 
+lemma "\<forall>x. ((\<doteq> x) x)"  unfolding leq_def imp_def by simp
 
-lemma "\<forall>x. ((\<lambda>x.\<lambda>y.(\<forall>P. ((\<lambda>x.\<lambda>y.((\<not>x) \<or> y))  (P x) (P y)))) x x)" by simp
+lemma "\<forall>x. ((\<lambda>x.\<lambda>y.(\<forall>P. ((\<lambda>x.\<lambda>y.((\<not>x) \<or> y)) (P x) (P y)))) x x)"   by simp
+
+lemma "\<forall>x. \<forall>P. \<not> P x \<or> P x" by simp
 
 lemma "All (\<lambda> x. ((\<lambda>x.\<lambda>y.(\<forall>P. ((\<lambda>x.\<lambda>y.((\<not>x) \<or> y)) (P x) (P y)))) x x))" by simp
 
