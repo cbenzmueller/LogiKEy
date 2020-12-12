@@ -1,5 +1,5 @@
 theory Chisholm_SDL imports SDL                          (*Christoph Benzmüller & Xavier Parent, 2019*)
-begin     (*Unimportant*) nitpick_params [user_axioms,expect=genuine,show_all,format=2] 
+begin     (*Unimportant*) nitpick_params [user_axioms,show_all,format=2] 
 
 (*** Chisholm Example ***)
   consts go::\<sigma> tell::\<sigma> kill::\<sigma>
