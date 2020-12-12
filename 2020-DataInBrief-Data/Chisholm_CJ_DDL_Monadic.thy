@@ -1,7 +1,7 @@
 theory Chisholm_CJ_DDL_Monadic imports CJ_DDL           (*Christoph Benzmüller & Xavier Parent, 2019*)
 
 begin (* Chisholm Example *)
-consts go::\<sigma> tell::\<sigma> kill::\<sigma>
+consts go::\<tau> tell::\<tau> kill::\<tau>
 
  nitpick_params [user_axioms,show_all,format=2] (*Settings for model finder.*)
 
@@ -46,7 +46,7 @@ consts go::\<sigma> tell::\<sigma> kill::\<sigma>
  lemma "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" nitpick [satisfy] oops (*Consistent? Yes*) 
  lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows False nitpick oops (*Inconsistent? No*)
  (* Queries *)
- lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><\<^bold>\<not>tell>\<rfloor>\<^sub>l" using assms by auto (*Should James not tell? Yes*) 
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><\<^bold>\<not>tell>\<rfloor>\<^sub>l" using assms by auto  (*Should James not tell? Yes*) 
  lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><tell>\<rfloor>\<^sub>l"  using assms ax_5a ax_5b by metis (*Should James tell? Yes*)
  lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><kill>\<rfloor>\<^sub>l"  nitpick oops (*Should James kill? No*)
 
