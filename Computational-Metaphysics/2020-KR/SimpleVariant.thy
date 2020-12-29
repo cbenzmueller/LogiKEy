@@ -7,7 +7,7 @@ axiomatization where
  A3:  "\<lfloor>\<^bold>\<forall>\<Z>.((\<P>\<o>\<s> \<Z>) \<^bold>\<rightarrow> (\<^bold>\<forall>X.((X\<Sqinter>\<Z>) \<^bold>\<rightarrow> (\<P> X))))\<rfloor>" 
 
 lemma T2: "\<lfloor>\<P> \<G>\<rfloor>" by (metis A3 G_def) (*From A3*)
-lemma L1: "\<lfloor>\<P>(\<lambda>x.(x\<^bold>\<noteq>x))\<rfloor>" by (metis A2' A3) 
+lemma L1: "\<lfloor>\<P>(\<lambda>x.(x\<^bold>=x))\<rfloor>" by (metis A2' A3) 
 
 (*Necessary existence of a Godlike entity*) 
 theorem T6: "\<lfloor>\<^bold>\<box>(\<^bold>\<exists>\<^sup>E \<G>)\<rfloor>" sledgehammer (*Proof found*)
