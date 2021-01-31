@@ -3,7 +3,7 @@ LogiKEy Workbench (dataset of formalized knowledge): Flexible, Pluralistic Found
 
 For further information on LogiKEy see the 
 - related [scientific article](https://arxiv.org/abs/1903.10187) in "Artificial Intelligence" [(doi)](https://doi.org/10.1016/j.artint.2020.103348), and the 
-- related [data article](2020-DataInBrief-Article/DataInBrief.pdf) currently submitted to "Data in brief".
+- related [data article](https://doi.org/10.1016/j.dib.2020.106409) in  "Data in brief" [(doi)](https://doi.org/10.1016/j.dib.2020.106409).
 
 The LogiKEy Workbench also maintains selected datasets in 
 - [Computational Metaphics](Computational-Metaphysics) and
