@@ -4,6 +4,12 @@ begin (** SSE of prefer. logic by van Benthem et al., JPL 2009 **)
 (*unimportant*)declare[[syntax_ambiguity_warning=false]] 
 nitpick_params[user_axioms,expect=genuine,show_all,format=3]
 (*preliminaries*)
+text \<open>
+ \DefineSnippet{filter_simps}{
+    @{thm [display] filter.simps}
+    @{thm [display] (concl) filter_True}
+ }%EndSnippet
+ \<close>
 typedecl i                  (*possible worlds*)      
 type_synonym \<sigma>="i\<Rightarrow>bool"    (*'world-lifted' propositions*)
 type_synonym \<gamma>="i\<Rightarrow>i\<Rightarrow>bool" (*preference relations*)
