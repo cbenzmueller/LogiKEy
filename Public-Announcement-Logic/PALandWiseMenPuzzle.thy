@@ -156,6 +156,12 @@ begin
        "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>a (\<^sup>Aws a)) \<^bold>\<or> (\<^bold>K\<^sub>a (\<^bold>\<not>\<^sup>Aws a)))\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>b (\<^sup>Aws b)) \<^bold>\<or> (\<^bold>K\<^sub>b (\<^bold>\<not>\<^sup>Aws b)))\<^bold>](\<^bold>K\<^sub>c (\<^sup>Aws c)))\<^bold>\<rfloor>" 
     using WM1 WM2ba WM2ca WM2cb group_S5 unfolding Defs by smt 
 
+  theorem "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>a(\<^sup>Aws a)\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>b(\<^sup>Aws b)\<^bold>](\<^bold>K\<^sub>c (\<^sup>Aws c)))\<^bold>\<rfloor>" 
+    using WM1 WM2ba WM2ca WM2cb group_S5 unfolding Defs by smt
+
+  theorem "\<^bold>\<lfloor>\<^bold>[\<^bold>!(\<^bold>K\<^sub>a (\<^bold>\<not>\<^sup>Aws a))\<^bold>](\<^bold>[\<^bold>!(\<^bold>K\<^sub>a (\<^bold>\<not>\<^sup>Aws a))\<^bold>](\<^bold>K\<^sub>c (\<^sup>Aws c)))\<^bold>\<rfloor>" 
+    using WM1 WM2ba WM2ca WM2cb group_S5 unfolding Defs by smt
+
  (* Consistency confirmed again *)
   lemma True nitpick [satisfy] oops  (* model found *)
 
