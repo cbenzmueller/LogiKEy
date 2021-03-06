@@ -153,10 +153,8 @@ begin
   declare [[smt_solver=cvc4,smt_oracle]]  (* Choose CVC4 as smt solver *)
 
   theorem whitespot_c: 
-       "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>( (\<^bold>K\<^sub>a (\<^sup>Aws a)) \<^bold>\<or> (\<^bold>K\<^sub>a (\<^bold>\<not>\<^sup>Aws a)) )\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>( (\<^bold>K\<^sub>b (\<^sup>Aws b)) \<^bold>\<or> (\<^bold>K\<^sub>b (\<^bold>\<not>\<^sup>Aws b)) )\<^bold>](\<^bold>K\<^sub>c (\<^sup>Aws c)))\<^bold>\<rfloor>" 
-    using WM1 WM2ba WM2ca WM2cb group_S5 
-    unfolding reflexive_def intersection_rel_def union_rel_def sub_rel_def tc_def 
-    by smt  
+       "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>a (\<^sup>Aws a)) \<^bold>\<or> (\<^bold>K\<^sub>a (\<^bold>\<not>\<^sup>Aws a)))\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>b (\<^sup>Aws b)) \<^bold>\<or> (\<^bold>K\<^sub>b (\<^bold>\<not>\<^sup>Aws b)))\<^bold>](\<^bold>K\<^sub>c (\<^sup>Aws c)))\<^bold>\<rfloor>" 
+    using WM1 WM2ba WM2ca WM2cb group_S5 unfolding Defs by smt 
 
  (* Consistency confirmed again *)
   lemma True nitpick [satisfy] oops  (* model found *)
