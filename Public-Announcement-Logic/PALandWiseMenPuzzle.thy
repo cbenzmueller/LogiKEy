@@ -59,16 +59,15 @@ begin
   (*Some useful lemmata *) 
   lemma trans_tc: "transitive (tc R)" unfolding Defs tc_def by metis
   lemma trans_inv_tc: "transitive (inverse_rel (tc R))" unfolding Defs tc_def by metis
-  lemma sub_rel_tc: "symmetric R \<longrightarrow> (sub_rel R (inverse_rel (tc R)))" unfolding Defs tc_def by metis
+  lemma sub_rel_tc: "symmetric R \<longrightarrow> (sub_rel R (inverse_rel (tc R)))" unfolding Defs tc_def by smt
   lemma sub_rel_tc_tc: "symmetric R \<longrightarrow> (sub_rel (tc R) (inverse_rel (tc R)))" 
     using sub_rel_def sub_rel_tc tc_def trans_inv_tc by fastforce
   lemma symm_tc: "symmetric R \<longrightarrow> symmetric (tc R)"  
     using inverse_rel_def sub_rel_def sub_rel_tc_tc symmetric_def by auto
 
-
-  (************************************************************************************************)
-  (*****                           Experiments and Wise Men Puzzle                            *****)
-  (************************************************************************************************)
+  (***********************************************************************************************)
+  (*****                          Experiments and Wise Men Puzzle                            *****)
+  (***********************************************************************************************)
   (* System K: is implied by the semantical embedding *)
   lemma tautologies: "\<^bold>\<lfloor>\<^bold>\<top>\<^bold>\<rfloor>" by auto
   lemma axiom_K: "\<A> i \<Longrightarrow> \<^bold>\<lfloor>(\<^bold>K\<^sub>i (\<phi> \<^bold>\<rightarrow> \<psi>)) \<^bold>\<rightarrow> ((\<^bold>K\<^sub>i \<phi>) \<^bold>\<rightarrow> (\<^bold>K\<^sub>i \<psi>))\<^bold>\<rfloor>" by auto 
@@ -84,14 +83,11 @@ begin
   lemma part_func: "\<^bold>\<lfloor>(\<^bold>[\<^bold>!\<phi>\<^bold>]\<^bold>\<not>\<psi>) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<rightarrow> (\<^bold>\<not>\<^bold>[\<^bold>!\<phi>\<^bold>]\<psi>))\<^bold>\<rfloor>" by auto
   lemma action_knowledge: "\<A> i \<Longrightarrow> \<^bold>\<lfloor>(\<^bold>[\<^bold>!\<phi>\<^bold>](\<^bold>K\<^sub>i \<psi>)) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<rightarrow> (\<^bold>K\<^sub>i (\<phi> \<^bold>\<rightarrow> (\<^bold>[\<^bold>!\<phi>\<^bold>]\<psi>))))\<^bold>\<rfloor>" by auto
   lemma whatname: "\<^bold>\<lfloor>(\<^bold>[\<^bold>!\<phi>\<^bold>](\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<psi>\<^bold>\<rparr>)) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<rightarrow> (\<^bold>C\<^bold>\<lparr>\<phi>\<^bold>\<and>(\<^bold>[\<^bold>!\<phi>\<^bold>]\<chi>)\<^bold>|\<^bold>[\<^bold>!\<phi>\<^bold>]\<psi>\<^bold>\<rparr>))\<^bold>\<rfloor>"
-    by (smt intersection_rel_def sub_rel_def tc_def transitive_def)
+    by (smt Defs)
   (* Axiom schemes for RCK: implied by the semantical embedding *)
-  lemma \<C>_normality: "\<^bold>\<lfloor>\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rightarrow>\<psi>\<^bold>\<rparr> \<^bold>\<rightarrow>(\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> \<^bold>\<rightarrow> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<psi>\<^bold>\<rparr>)\<^bold>\<rfloor>"
-    unfolding Defs by blast
-  lemma mix_axiom1: "\<^bold>\<lfloor>\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> \<^bold>\<rightarrow> (\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> (\<phi> \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>)))\<^bold>\<rfloor>"
-    unfolding Defs by metis
-  lemma mix_axiom2: "\<^bold>\<lfloor>(\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> (\<phi> \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>))) \<^bold>\<rightarrow> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>\<^bold>\<rfloor>"
-    unfolding Defs (* timeout *) sorry
+  lemma \<C>_normality: "\<^bold>\<lfloor>\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rightarrow>\<psi>\<^bold>\<rparr> \<^bold>\<rightarrow>(\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> \<^bold>\<rightarrow> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<psi>\<^bold>\<rparr>)\<^bold>\<rfloor>" unfolding Defs by blast
+  lemma mix_axiom1: "\<^bold>\<lfloor>\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> \<^bold>\<rightarrow> (\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> (\<phi> \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>)))\<^bold>\<rfloor>" unfolding Defs by metis
+  lemma mix_axiom2: "\<^bold>\<lfloor>(\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> (\<phi> \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>))) \<^bold>\<rightarrow> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>\<^bold>\<rfloor>" unfolding Defs (* timeout *) sorry
  lemma induction_axiom1: "\<^bold>\<lfloor>((\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> \<phi>)) \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi> \<^bold>\<rightarrow> (\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> \<phi>))\<^bold>\<rparr>) \<^bold>\<rightarrow> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>\<^bold>\<rfloor>"
     unfolding Defs (* timeout *) sorry
   lemma induction_axiom2: "\<^bold>\<lfloor>\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> \<^bold>\<rightarrow> ((\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> \<phi>)) \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi> \<^bold>\<rightarrow> (\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> \<phi>))\<^bold>\<rparr>)\<^bold>\<rfloor>"
@@ -100,7 +96,7 @@ begin
   (* Necessitation rules: implied by the semantical embedding *)
   lemma announcement_nec: assumes 1: "\<^bold>\<lfloor>\<phi>\<^bold>\<rfloor>" shows "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<psi>\<^bold>]\<phi>\<^bold>\<rfloor>" using 1 by auto 
   lemma rkc_necessitation: assumes 1: "\<^bold>\<lfloor>\<phi>\<^bold>\<rfloor>" shows "\<^bold>\<lfloor>\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>\<^bold>\<rfloor>" 
-    using 1 by (metis intersection_rel_def sub_rel_def tc_def transitive_def) 
+    using 1  sledgehammer
 
   (* Further axioms: implied for atomic formulas, but not implied in general *)
   lemma "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<^sup>Ap\<^bold>](\<^bold>\<not>\<^sup>Ap)\<^bold>\<rfloor>" by simp
