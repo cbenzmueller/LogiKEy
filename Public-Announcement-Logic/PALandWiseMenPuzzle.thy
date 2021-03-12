@@ -20,7 +20,7 @@ begin
   (*In HOL the transitive closure of a relation can be defined in a single line.*)
   definition tc::"\<alpha>\<Rightarrow>\<alpha>" where "tc R \<equiv> \<lambda>x y.\<forall>Q. transitive Q \<longrightarrow> (sub_rel R Q \<longrightarrow> Q x y)"
   
-  (* Lifted HOMML connectives for PAL. *)
+  (* Lifted connectives for PAL *)
   abbreviation patom::"\<sigma>\<Rightarrow>\<tau>" ("\<^sup>A_"[79]80) where "\<^sup>Ap \<equiv> \<lambda>W w. W w \<and> p w"
   abbreviation ptop::"\<tau>" ("\<^bold>\<top>") where "\<^bold>\<top> \<equiv> \<lambda>W w. True" 
   abbreviation pneg::"\<tau>\<Rightarrow>\<tau>" ("\<^bold>\<not>_"[52]53) where "\<^bold>\<not>\<phi> \<equiv> \<lambda>W w. \<not>(\<phi> W w)" 
@@ -32,7 +32,7 @@ begin
   abbreviation ppal::"\<tau>\<Rightarrow>\<tau>\<Rightarrow>\<tau>" ("\<^bold>[\<^bold>!_\<^bold>]_") where "\<^bold>[\<^bold>!\<phi>\<^bold>]\<psi> \<equiv> \<lambda>W w. \<not>(\<phi> W w) \<or> (\<psi> (\<lambda>z. W z \<and> \<phi> W z) w)"
 
   (* Agents *)
-  consts a::"\<alpha>" b::"\<alpha>" c::"\<alpha>" (*Agents modeled as accessibility relations.*)
+  consts a::"\<alpha>" b::"\<alpha>" c::"\<alpha>" (* Agents modeled as accessibility relations *)
   abbreviation  Agent ("\<A>") where "\<A> x \<equiv> x = a \<or> x = b \<or> x = c"
   axiomatization where
     alldifferent:  "\<not>(a = b) \<and> \<not>(a = c) \<and> \<not>(b = c)" and
