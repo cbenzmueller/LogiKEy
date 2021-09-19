@@ -62,7 +62,6 @@ abbreviation ecjactual :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>\<^su
 
 lemma True nitpick [satisfy,user_axioms,expect=genuine] oops (*Consistency conf.*)
 
-lemma A1: "\<lfloor>\<circle><\<phi>\<^bold>|\<phi>>\<rfloor>" sledgehammer
 (*Correspondence theory. old stuff
 lemma assumes "\<forall>x y z. x R y \<and> y R z \<longrightarrow> x R z" 
       shows "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
