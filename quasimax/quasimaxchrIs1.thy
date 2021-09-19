@@ -1,4 +1,4 @@
-theory quasimax imports Main       (* Quasi-maximality: C. Benzmüller & X. Parent, 2020 *)
+theory quasimaxchrIs1 imports Main       (* Quasi-maximality: C. Benzmüller & X. Parent, 2020 *)
 
 (* Quasi-maximality, Deb 1977, means maximal wrt transitive closure of the betterness relation restricted to the menu *)
 (* Quasi-maximality: ideally the transitive closure should be paramatrized by a context.
@@ -62,7 +62,12 @@ abbreviation ecjactual :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>\<^su
 
 lemma True nitpick [satisfy,user_axioms,expect=genuine] oops (*Consistency conf.*)
 
-lemma A1: "\<lfloor>\<circle><\<phi>\<^bold>|\<phi>>\<rfloor>" sledgehammer
+lemma A1: "\<lfloor>\<circle><\<phi>|\<phi>>\<rfloor>" sledgehammer oops
+
+lemma RM: "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" nitpick oops
+
+lemma DR: "\<lfloor>\<circle><\<xi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarrow> (\<circle><\<xi>|\<phi>> \<^bold>\<or> \<circle><\<xi>|\<psi>>)\<rfloor>" nitpick[show_all,format=2]
+
 (*Correspondence theory. old stuff
 lemma assumes "\<forall>x y z. x R y \<and> y R z \<longrightarrow> x R z" 
       shows "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
