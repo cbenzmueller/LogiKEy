@@ -37,7 +37,7 @@ lemma True nitpick [satisfy,user_axioms,expect=genuine] oops (*Consistency conf.
 (*Correspondence theory.*)
 lemma assumes "\<forall>x y z. x R y \<and> y R z \<longrightarrow> x R z" 
       shows "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
-  using assms by blast
+  sledgehammer oops
 
 lemma assumes "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
       shows "\<forall>x y z. x R y \<and> y R z \<longrightarrow> x R z" 
