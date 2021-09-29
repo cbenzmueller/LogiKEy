@@ -63,7 +63,7 @@ assumes "limitedness"
   by (smt assms(1) assms(2))
 
 (*axioms of E holding irrespective of the properties of r*)
-lemma Abs:"\<lfloor>\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circle><\<psi>|\<phi>>\<rfloor>"  by auto
+lemma Abs:"\<lfloor>\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circle><\<psi>|\<phi>>\<rfloor>"  sledgehammer oops
 lemma Nec:"\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>>\<rfloor>" by blast 
 lemma Ext:"\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circle><\<psi>|\<phi>\<^sub>2>)\<rfloor>" by simp 
 lemma Id:"\<lfloor>\<circle><\<phi>|\<phi>>\<rfloor>" by auto 

@@ -56,12 +56,12 @@ abbreviation ddlneg::\<gamma> ("\<^bold>\<not>_"[52]53) where "\<^bold>\<not>A \
 (* Consistency *) 
 lemma True nitpick [satisfy,user_axioms,show_all] oops 
 
-lemma
-  assumes "\<exists>w. (A(w) \<and> B(w))" 
+ (* assumes "\<exists>w. (A(w) \<and> B(w))" 
   assumes "\<exists>w. (A(w) \<and> \<not>B(w))" 
   assumes "\<exists>w. (\<not>A(w) \<and> B(w))" 
-  assumes "\<exists>w. (\<not>A(w) \<and> \<not>B(w))" 
-  shows "\<lfloor>O\<langle>A|\<top>\<^bold>\<rangle> \<rightarrow> O\<langle>B|\<not>A\<rangle>\<rfloor>"  nitpick [satisfy,user_axioms,show_all]
+  assumes "\<exists>w. (\<not>A(w) \<and> \<not>B(w))" *)
+lemma explo : "((\<^bold>\<diamond>(A \<^bold>\<and>B)\<^bold>\<and> \<^bold>\<diamond>(A \<^bold>\<and>\<^bold>\<not>B) \<^bold>\<and> \<^bold>\<diamond>(\<^bold>\<not>A \<^bold>\<and> B) \<^bold>\<and> \<^bold>\<diamond>(\<^bold>\<not>A\<^bold>\<and>\<^bold>\<not>B)\<^bold>\<and> \<circle><A>\<rightarrow> O\<langle>B|\<^bold>neg
+A\<rangle>) cw" nitpick
 
 
 
