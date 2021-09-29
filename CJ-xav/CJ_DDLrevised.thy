@@ -1,4 +1,4 @@
-theory CJ_DDLrevised imports Main            (* Christoph Benzmüller & Xavier Parent & Ali Farjami, 2018  *)
+theory CJ_DDLrevised imports Main            (* Christoph Benzmüller & Xavierz Parent & Ali Farjami, 2018  *)
 
 begin (* DDL: Dyadic Deontic Logic by Carmo and Jones *)
  typedecl i (*type for possible worlds*)
