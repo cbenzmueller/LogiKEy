@@ -18,7 +18,9 @@ begin (* DDL: Dyadic Deontic Logic by Carmo and Jones *)
   ax_5c: "\<forall>X Y Z. (((\<exists>w. (X(w) \<and> Y(w) \<and> Z(w))) \<and>  ob(X)(Y)  \<and>  ob(X)(Z))  \<longrightarrow>  ob(X)(\<lambda>w. Y(w) \<and> Z(w)))" and
   ax_5d: "\<forall>X Y Z. ((\<forall>w. Y(w) \<longrightarrow> X(w)) \<and> ob(X)(Y) \<and> (\<forall>w. X(w) \<longrightarrow> Z(w)))
                    \<longrightarrow> ob(Z)(\<lambda>w. (Z(w) \<and> \<not>X(w)) \<or> Y(w))" and
-  ax_5e: "\<forall>X Y Z. ((\<forall>w. Y(w) \<longrightarrow> X(w)) \<and> ob(X)(Z) \<and> (\<exists>w. Y(w) \<and> Z(w))) \<longrightarrow> ob(Y)(Z)"
+ (* ax_5e: "\<forall>X Y Z. ((\<forall>w. Y(w) \<longrightarrow> X(w)) \<and> ob(X)(Z) \<and> (\<exists>w. Y(w) \<and> Z(w))) \<longrightarrow> ob(Y)(Z)"*)
+  ax_5g: "\<forall>X Y Z. (ob(X)(Y) \<and> ob(Y)(Z) \<and> (\<exists>w. X(w) \<and> Y(w) \<and> Z(w))) \<longrightarrow> ob(X)(Y\<inter>Z)" and
+  ax_5f: "\<forall>X Y Z. (ob(X)(Z) \<and> ob(X)(Y) \<and> (\<exists>w. Z(w) \<and> \<exists>w. Y(w))) \<longrightarrow> ob(X)(Y\<union>Z)"
 
  abbreviation ddlneg::\<gamma> ("\<^bold>\<not>_"[52]53) where "\<^bold>\<not>A \<equiv> \<lambda>w. \<not>A(w)" 
  abbreviation ddland::\<rho> (infixr"\<^bold>\<and>"51) where "A\<^bold>\<and>B \<equiv> \<lambda>w. A(w)\<and>B(w)"   

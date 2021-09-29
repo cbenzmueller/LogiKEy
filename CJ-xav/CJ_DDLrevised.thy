@@ -10,19 +10,21 @@ begin (* DDL: Dyadic Deontic Logic by Carmo and Jones *)
             cw::i (*current world*)
 
  axiomatization where
-  ax_3a: "\<forall>w.\<exists>x. av(w)(x)" and ax_4a: "\<forall>w x. av(w)(x) \<longrightarrow> pv(w)(x)" and ax_4b: "\<forall>w. pv(w)(w)" and
+  ax_3a: "\<forall>w.\<exists>x. av(w)(x)" and ax_4a: "\<forall>w x. av(w)(x) \<longrightarrow> pv(w)(x)" and 
+  ax_4b: "\<forall>w. pv(w)(w)" and
   ax_5a: "\<forall>X.\<not>ob(X)(\<lambda>x. False)" and
   ax_5b: "\<forall>X Y Z. (\<forall>w. ((Y(w) \<and> X(w)) \<longleftrightarrow> (Z(w) \<and> X(w)))) \<longrightarrow> (ob(X)(Y) \<longleftrightarrow> ob(X)(Z))" and
   ax_5ca: "\<forall>X \<beta>. ((\<forall>Z. \<beta>(Z) \<longrightarrow> ob(X)(Z)) \<and> (\<exists>Z. \<beta>(Z))) \<longrightarrow> 
       (((\<exists>y. ((\<lambda>w. \<forall>Z. (\<beta> Z) \<longrightarrow> (Z w))(y) \<and> X(y))) \<longrightarrow> ob(X)(\<lambda>w. \<forall>Z. (\<beta> Z) \<longrightarrow> (Z w))))" and
-  ax_5c: "\<forall>X Y Z. (((\<exists>w. (X(w) \<and> Y(w) \<and> Z(w))) \<and>  ob(X)(Y)  \<and>  ob(X)(Z))  \<longrightarrow>  ob(X)(\<lambda>w. Y(w) \<and> Z(w)))" and
-  ax_5d: "\<forall>X Y Z. ((\<forall>w. Y(w) \<longrightarrow> X(w)) \<and> ob(X)(Y) \<and> (\<forall>w. X(w) \<longrightarrow> Z(w)))
-                   \<longrightarrow> ob(Z)(\<lambda>w. (Z(w) \<and> \<not>X(w)) \<or> Y(w))" and
+  ax_5c: "\<forall>X Y Z. (((\<exists>w. (X(w) \<and> Y(w) \<and> Z(w))) \<and>  ob(X)(Y)  \<and>  ob(X)(Z))  \<longrightarrow>  ob(X)(\<lambda>w. Y(w) \<and> Z(w)))" and 
  (* ax_5e: "\<forall>X Y Z. ((\<forall>w. Y(w) \<longrightarrow> X(w)) \<and> ob(X)(Z) \<and> (\<exists>w. Y(w) \<and> Z(w))) \<longrightarrow> ob(Y)(Z)"*)
-  ax_5g: "\<forall>X Y Z. (ob(X)(Y) \<and> ob(Y)(Z) \<and> (\<exists>w. X(w) \<and> Y(w) \<and> Z(w))) \<longrightarrow> ob(X)(Y\<inter>Z)" and
-  ax_5f: "\<forall>X Y Z. (ob(X)(Z) \<and> ob(X)(Y) \<and> (\<exists>w. Z(w) \<and> \<exists>w. Y(w))) \<longrightarrow> ob(X)(Y\<union>Z)"
+ ax_5f: "\<forall>X Y Z. (ob(X)(Y) \<and> ob(X)(Z) \<and> (\<exists>w. Y(w) \<and> Z(w))) \<longrightarrow> ob(X)(Y\<union>Z)" and
+ ax_5g: "\<forall>X Y Z. (ob(X)(Y) \<and> ob(Y)(Z) \<and> (\<exists>w. X(w) \<and> Y(w) \<and> Z(w))) \<longrightarrow> ob(X)(Y\<inter>Z)" and
+ (* new conditions replacing 5d *)
+ax_5d: "\<forall>X Y Z. ((\<forall>w. Y(w) \<longrightarrow> X(w)) \<and> ob(X)(Y) \<and> (\<forall>w. X(w) \<longrightarrow> Z(w)))
+                   \<longrightarrow> ob(Z)(\<lambda>w. (Z(w) \<and> \<not>X(w)) \<or> Y(w))"
 
- abbreviation ddlneg::\<gamma> ("\<^bold>\<not>_"[52]53) where "\<^bold>\<not>A \<equiv> \<lambda>w. \<not>A(w)" 
+abbreviation ddlneg::\<gamma> ("\<^bold>\<not>_"[52]53) where "\<^bold>\<not>A \<equiv> \<lambda>w. \<not>A(w)"
  abbreviation ddland::\<rho> (infixr"\<^bold>\<and>"51) where "A\<^bold>\<and>B \<equiv> \<lambda>w. A(w)\<and>B(w)"   
  abbreviation ddlor::\<rho> (infixr"\<^bold>\<or>"50) where "A\<^bold>\<or>B \<equiv> \<lambda>w. A(w)\<or>B(w)"   
  abbreviation ddlimp::\<rho> (infixr"\<^bold>\<rightarrow>"49) where "A\<^bold>\<rightarrow>B \<equiv> \<lambda>w. A(w)\<longrightarrow>B(w)"  
@@ -52,7 +54,23 @@ begin (* DDL: Dyadic Deontic Logic by Carmo and Jones *)
  abbreviation ddlobl::\<gamma> ("\<^bold>\<circle><_>") where "\<^bold>\<circle><A> \<equiv>  \<^bold>O\<^bold>\<langle>A\<^bold>|\<^bold>\<top>\<^bold>\<rangle>"  (*New syntax: A is obligatory.*)
 
 (* Consistency *) 
- lemma True nitpick [satisfy,user_axioms,show_all] oops 
-end
+lemma True nitpick [satisfy,user_axioms,show_all] oops 
+
+lemma
+  assumes "\<exists>w. (A(w) \<and> B(w))" 
+  assumes "\<exists>w. (A(w) \<and> \<not>B(w))" 
+  assumes "\<exists>w. (\<not>A(w) \<and> B(w))" 
+  assumes "\<exists>w. (\<not>A(w) \<and> \<not>B(w))" 
+  shows "\<lfloor>O\<langle>A|\<top>\<^bold>\<rangle> \<rightarrow> O\<langle>B|\<not>A\<rangle>\<rfloor>"  nitpick [satisfy,user_axioms,show_all]
+
+
+
+(* *)
+lemma ax_5d: "\<forall>X Y Z. ((\<forall>w. Y(w) \<longrightarrow> X(w)) \<and> ob(X)(Y) \<and> (\<forall>w. X(w) \<longrightarrow> Z(w)))
+                   \<longrightarrow> ob(Z)(\<lambda>w. (Z(w) \<and> \<not>X(w)) \<or> Y(w))" nitpick opps
+ 
+
+
+
 
 
