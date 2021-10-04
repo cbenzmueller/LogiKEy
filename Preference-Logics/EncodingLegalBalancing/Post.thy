@@ -22,7 +22,7 @@ abbreviation "pF2 w \<equiv> Hunter p w"
 abbreviation "pF3 w \<equiv> Pursue p \<alpha> w"
 abbreviation "pF4 w \<equiv> Capture d \<alpha> w"
 abbreviation "p_facts \<equiv> pF1 \<^bold>\<and> pF2 \<^bold>\<and> pF3 \<^bold>\<and> pF4"
- (*decision for plaintiff (Post) can be proven automatically (needs approx. 20s)*)
+ (*decision for plaintiff (Post) can be proven automatically*)
 theorem Post: "p_theory \<longrightarrow> \<lfloor>p_facts \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<prec>For p\<rfloor>" 
   by (smt F1 F3 ForAx tBR SBR_def other.simps)
  (*we reconstruct the reasoning process leading to the decision for the plaintiff*)

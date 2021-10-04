@@ -1,7 +1,6 @@
 theory Cantor  imports Main 
  
 begin  
-
 declare [[show_types]]
 
 typedecl i
@@ -28,7 +27,7 @@ lemma "(d \<or> \<not>d) \<longrightarrow> d" sledgehammer nitpick[show_all] oop
 
 lemma "(d \<and> c) \<longrightarrow> (c \<longrightarrow> d)" by simp
 
-lemma "(\<forall>x. p x) \<longrightarrow> (\<exists>x. p x)" sledgehammer nitpick[show_all]  oops
+lemma "(\<forall>x. p x) \<longrightarrow> (\<exists>x. p x)" sledgehammer[remote_vampire,overlord] nitpick[show_all]  oops
 
 lemma "(\<exists>x. p x) \<longrightarrow> (\<forall>x. p x)" sledgehammer nitpick[show_all,card=2] oops
 
@@ -81,14 +80,14 @@ theorem Test2: "(\<forall>x::i. \<exists>y::i. x = y) \<longrightarrow> (\<exist
 theorem Test3: "\<exists>g::i\<Rightarrow>bool. \<forall>x::i. g(x)" 
   nitpick
   sledgehammer
-  sledgehammer [remote_leo2 remote_satallax remote_vampire]
+  sledgehammer[remote_leo2]()
   by auto
 
 (* The surjective Cantor theorem *)  
 theorem Cantor: "\<not>(\<exists>f::i\<Rightarrow>(i\<Rightarrow>bool). \<forall>g::i\<Rightarrow>bool. \<exists>x::i. f x = g)" 
   nitpick
   sledgehammer
-  sledgehammer [remote_leo2 remote_satallax]  
+  sledgehammer [remote_leo2 remote_leo3]() 
   oops  
 
 

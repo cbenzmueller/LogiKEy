@@ -19,7 +19,7 @@ abbreviation "pF4 w \<equiv> Prop p \<alpha> w"
 abbreviation "pF5 w \<equiv> Capture d \<alpha> w"
 abbreviation "p_facts \<equiv> pF1 \<^bold>\<and> pF2 \<^bold>\<and> pF3 \<^bold>\<and> pF4 \<^bold>\<and> pF5"
  (*decision for plaintiff (ASPCA) can be proven automatically*)
-theorem ASPCA: "p_theory \<longrightarrow> \<lfloor>p_facts \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<prec>For p\<rfloor>"
+theorem ASPCA: "p_theory \<longrightarrow> \<lfloor>p_facts \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<prec>For p\<rfloor>" 
   by (smt F3 F4 F5 ForAx R3 W6 W8 tBR SBR_def other.simps(1))
  (*we reconstruct the reasoning process leading to the decision for the plaintiff*)
 theorem ASPCA': assumes p_theory and "p_facts w" shows "\<^bold>\<box>\<^sup>\<prec>For p w"

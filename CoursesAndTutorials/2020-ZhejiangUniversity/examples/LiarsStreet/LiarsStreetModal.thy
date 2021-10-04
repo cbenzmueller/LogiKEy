@@ -140,8 +140,10 @@ lemma Question8:
   shows
    "\<lfloor>Carla says It_holds_that_Fermats_last_Theorem_is_True\<rfloor>\<^sub>c\<^sub>w"  
   unfolding Defs
-  sledgehammer [verbose]
+  sledgehammer [verbose,overlord]
   nitpick[show_all,format=2] oops
+
+end
 
 lemma Question9:
   assumes

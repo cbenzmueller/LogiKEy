@@ -1,6 +1,6 @@
 (*<*)
 theory Hilbert
-  imports Main "HOL-Eisbach.Eisbach"
+  imports Main (* "HOL-Eisbach.Eisbach" *)
 
 abbrevs   
  not="\<^bold>\<not>" and disj="\<^bold>\<or>" and conj="\<^bold>\<and>" and impl="\<^bold>\<rightarrow>" and equiv="\<^bold>\<leftrightarrow>"  
@@ -8,6 +8,7 @@ abbrevs
  and ob="\<^bold>\<circle>" and perm="\<^bold>P" and forb="\<^bold>F"
 
  and derivable="\<turnstile>"
+
 begin
 (*>*)
 
@@ -22,6 +23,8 @@ to write things down, e.g. if you start writing "dis..." (the abbreviation is "d
 Isabelle should suggest the autocompletion for @{text "\<^bold>\<or>"}, etc.\<close>
 
 typedecl \<sigma> \<comment> \<open>Introduce new type for syntactical formulae (propositions).\<close>
+
+declare [[show_types]]
 
 text \<open>
 For our classical propositional language, we introduce two primitive symbols:
@@ -41,8 +44,7 @@ definition PLbot :: "\<sigma>" ("\<^bold>\<bottom>") where "\<^bold>\<bottom> \<
 text \<open>Next we define the notion of syntactical derivability and consequence: \<close>
 
 consts derivable :: "\<sigma> \<Rightarrow> bool" ("\<turnstile> _" 40)
-definition consequence :: "\<sigma> \<Rightarrow> \<sigma> \<Rightarrow> bool" ("_ \<turnstile> _" 40) where
-"A \<turnstile> B \<equiv> \<turnstile> (A \<^bold>\<rightarrow> B)"
+definition consequence :: "\<sigma> \<Rightarrow> \<sigma> \<Rightarrow> bool" ("_ \<turnstile> _" 40) where "A \<turnstile> B \<equiv> \<turnstile> (A \<^bold>\<rightarrow> B)"
 
 text \<open>We can now axiomatize the derivability relation using a Hilbert-style system:\<close>
 
@@ -57,8 +59,8 @@ text \<open>Now we are ready to proof first simple theorems:\<close>
 
 lemma "\<turnstile> A \<^bold>\<rightarrow> A" 
 proof -
-  have 1: "\<turnstile> (A \<^bold>\<rightarrow> ((B \<^bold>\<rightarrow> A) \<^bold>\<rightarrow> A)) \<^bold>\<rightarrow> ((A \<^bold>\<rightarrow> (B \<^bold>\<rightarrow> A)) \<^bold>\<rightarrow> (A \<^bold>\<rightarrow> A))" by (rule A3[of _ "B \<^bold>\<rightarrow> A" "A"])
-  have 2: "\<turnstile> A \<^bold>\<rightarrow> ((B \<^bold>\<rightarrow> A) \<^bold>\<rightarrow> A)" by (rule A2[of _ "B \<^bold>\<rightarrow> A"])
+  have 1: "\<turnstile> (A \<^bold>\<rightarrow> ((B \<^bold>\<rightarrow> A) \<^bold>\<rightarrow> A)) \<^bold>\<rightarrow> ((A \<^bold>\<rightarrow> (B \<^bold>\<rightarrow> A)) \<^bold>\<rightarrow> (A \<^bold>\<rightarrow> A))" using A3 by force
+  have 2: "\<turnstile> A \<^bold>\<rightarrow> ((B \<^bold>\<rightarrow> A) \<^bold>\<rightarrow> A)" by (simp add: A2)
   from 1 2 have 3: "\<turnstile> (A \<^bold>\<rightarrow> (B \<^bold>\<rightarrow> A)) \<^bold>\<rightarrow> (A \<^bold>\<rightarrow> A)" by (rule MP)
   have 4: "\<turnstile> A \<^bold>\<rightarrow> (B \<^bold>\<rightarrow> A)" by (rule A2[of _ _])
   from 3 4 have "\<turnstile> A \<^bold>\<rightarrow> A" by (rule MP)
@@ -104,7 +106,7 @@ respective axioms for propositional logic (A2, A3, A4 and MP)\<close>
 (*<*)
 named_theorems add \<comment> \<open>Needed for technical reasons\<close>
 (*>*)
-method PL declares add = (metis A2 A3 A4 MP add)
+(* method PL declares add = (metis A2 A3 A4 MP add) *)
 
 text \<open>In the following, we can simply use @{text "by PL"} for proving propositional
 tautologies. However, as proofs can be arbitrarily complicated, this method may fail
@@ -137,7 +139,7 @@ subsection \<open>MDL Proof Examples\<close>
 
 lemma "\<turnstile> \<^bold>\<circle>(p \<^bold>\<and> q) \<^bold>\<rightarrow> \<^bold>\<circle>p"
 proof -
-  have 1: "\<turnstile> (p \<^bold>\<and> q) \<^bold>\<rightarrow> p" by (PL add: PLconj_def PLdisj_def) 
+  have 1: "\<turnstile> (p \<^bold>\<and> q) \<^bold>\<rightarrow> p" by (metis A2 A3 A4 MP PL3 PLconj_def PLdisj_def) (* by (PL add: PLconj_def PLdisj_def) *)
   from 1 have 2: "\<turnstile> \<^bold>\<circle>((p \<^bold>\<and> q) \<^bold>\<rightarrow> p)" by (rule NEC)
   have 3: "\<turnstile> \<^bold>\<circle>((p \<^bold>\<and> q) \<^bold>\<rightarrow> p) \<^bold>\<rightarrow> \<^bold>\<circle>(p \<^bold>\<and> q) \<^bold>\<rightarrow> \<^bold>\<circle>p" by (rule K)
   from 3 2 show "\<turnstile> \<^bold>\<circle>(p \<^bold>\<and> q) \<^bold>\<rightarrow> \<^bold>\<circle>p" by (rule MP)
@@ -156,13 +158,15 @@ paragraph \<open>Exercise 2.\<close>
 text \<open>Prove the following statement by giving an explicit proof within
 the given Hilbert calculus. Please make sure that every inference step in your
 proof is fine-grained and annotated with the respective calculus rule name. You may use
-the general @{method "PL"} method for inferring propositional tautologies.
+the general {method "PL"} method for inferring propositional tautologies.
 
 Hint: Reuse your proof from the previous exercise sheet and formalize it within Isabelle.\<close>
 
 text \<open>
   \<^item> @{prop "\<turnstile> \<^bold>\<not>\<^bold>\<circle>\<^bold>\<bottom>"}
 \<close>
+
+lemma "\<turnstile> \<^bold>\<not>\<^bold>\<circle>\<^bold>\<bottom>" sledgehammer oops
 
 (*<*)
 end
