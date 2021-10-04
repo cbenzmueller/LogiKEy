@@ -149,7 +149,8 @@ begin
    using WM1 WM2ba WM2ca WM2cb group_S5 unfolding Defs by smt 
 
  theorem "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>a(\<^sup>Aws a)\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>b(\<^sup>Aws b)\<^bold>](\<^bold>K\<^sub>c (\<^sup>Aws c)))\<^bold>\<rfloor>" 
-   using WM1 WM2ba WM2ca WM2cb group_S5 unfolding Defs by smt
+   using WM1 WM2ba WM2ca WM2cb group_S5 unfolding Defs 
+   by (smt (verit))
 
  (* Consistency confirmed by nitpick *)
  lemma True nitpick [satisfy] oops  (* model found *)

@@ -34,7 +34,7 @@ abbreviation c13::\<mu> ("\<^bold>A_")  where "\<^bold>A\<phi> \<equiv> \<lambda
  (*meta-logical predicate for global and validity*)
 abbreviation g1::\<pi> ("\<lfloor>_\<rfloor>")  where "\<lfloor>\<psi>\<rfloor> \<equiv>  \<forall>w. \<psi> w"
  (*some tests: dualities*)
-lemma "\<lfloor>(\<^bold>\<diamond>\<^sup>\<preceq>\<phi>)\<^bold>\<leftrightarrow>(\<^bold>\<not>\<^bold>\<box>\<^sup>\<preceq>\<^bold>\<not>\<phi>)\<rfloor> \<and> \<lfloor>(\<^bold>\<diamond>\<^sup>\<prec>\<phi>)\<^bold>\<leftrightarrow>(\<^bold>\<not>\<^bold>\<box>\<^sup>\<prec>\<^bold>\<not>\<phi>)\<rfloor> \<and> \<lfloor>(\<^bold>A\<phi>)\<^bold>\<leftrightarrow>(\<^bold>\<not>\<^bold>E\<^bold>\<not>\<phi>)\<rfloor>" by blast (*proof*)
+lemma "\<lfloor>(\<^bold>\<diamond>\<^sup>\<preceq>\<phi>)\<^bold>\<leftrightarrow>(\<^bold>\<not>\<^bold>\<box>\<^sup>\<preceq>\<^bold>\<not>\<phi>)\<rfloor> \<and> \<lfloor>(\<^bold>\<diamond>\<^sup>\<prec>\<phi>)\<^bold>\<leftrightarrow>(\<^bold>\<not>\<^bold>\<box>\<^sup>\<prec>\<^bold>\<not>\<phi>)\<rfloor> \<and> \<lfloor>(\<^bold>A\<phi>)\<^bold>\<leftrightarrow>(\<^bold>\<not>\<^bold>E\<^bold>\<not>\<phi>)\<rfloor>" by simp (*proof*)
 (**** Section 3: A basic modal preference language ****)
  (*Definition 5*)
 abbreviation pEE::\<nu>  ("_\<preceq>\<^sub>E\<^sub>E_") where "(\<phi> \<preceq>\<^sub>E\<^sub>E \<psi>) u \<equiv> \<exists>s. \<phi> s \<and> (\<exists>t. \<psi> t \<and> s\<preceq>t)" 

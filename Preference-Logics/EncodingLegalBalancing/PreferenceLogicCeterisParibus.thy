@@ -1,4 +1,4 @@
-theory PreferenceLogicCeterisParibus (** Benzmüller & Fuenmayor, 2020 **)
+theory PreferenceLogicCeterisParibus (*** Benzmüller & Fuenmayor, 2021 ***)
   imports PreferenceLogicBasics
 begin (** Ceteris Paribus reasoning by van Benthem et al, JPL 2009 **)
 (*Section 5: Equality-based Ceteris Paribus Preference Logic*)

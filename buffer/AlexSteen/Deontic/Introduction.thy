@@ -47,7 +47,7 @@ text \<open>Some examples:\<close>
 
 term "a" \<comment> \<open>atomic term as above\<close>
 term "a \<and> b" \<comment> \<open>conjunction\<close>
-term "a \<Longrightarrow> b" \<comment> \<open>material implication\<close>
+term "a \<longrightarrow> b" \<comment> \<open>material implication\<close>
 term "\<forall>x. p x" \<comment> \<open>universal quantification\<close>
 
 text \<open>In higher-order logic, formulas are just terms of a specific type,
@@ -56,7 +56,7 @@ formula:\<close>
 
 prop "a" \<comment> \<open>atomic formula\<close> 
 prop "a \<and> b" \<comment> \<open>conjunction\<close>
-prop "a \<Longrightarrow> b" \<comment> \<open>material implication\<close>
+prop "a \<longrightarrow> b" \<comment> \<open>material implication\<close>
 prop "\<forall>x. p x" \<comment> \<open>universal quantification\<close>
 text \<open>By using the @{command "prop"} command, we can tell Isabelle to interpret
 the input as a formula instead of any term. In the case of the last three terms,

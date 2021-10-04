@@ -25,13 +25,13 @@ axiomatization where
 
 (***Some Experiments***) 
  lemma True nitpick [satisfy] oops (*Consistency-check: Nitpick finds no model.*)
- lemma False by (metis A0 F1 A1 A2 A3 Situation D) (*Prove of Falsum.*)
+ lemma F: False by (metis A0 F1 A1 A2 A3 Situation D) (*Prove of Falsum.*)
 
 (*Should the data be erased? — Yes, proof found by ATPs*)
  lemma "\<lfloor>\<^bold>\<circle><erase d1>\<rfloor>\<^sub>l"  sledgehammer by (metis A0 A2 F1 Situation) 
 (*Should the data be kept? — Yes, proof found by ATPs*)
  lemma "\<lfloor>\<^bold>\<circle><\<^bold>\<not>erase d1>\<rfloor>\<^sub>l" sledgehammer by (meson A0 A1 F1 A3)
 (*Should Mary be killed? — Yes, proof found by ATPs*)
- lemma "\<lfloor>\<^bold>\<circle><kill Mary>\<rfloor>\<^sub>l" sledgehammer by (meson A0 A1 A2 F1 A3 Situation)
+lemma "\<lfloor>\<^bold>\<circle><kill Mary>\<rfloor>\<^sub>l" sledgehammer by (meson A0 A1 A2 F1 A3 Situation)
 end
 
