@@ -71,7 +71,11 @@ lemma True nitpick [satisfy,user_axioms,expect=genuine] oops (*Consistency conf.
 
 lemma CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>(\<circle><\<xi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>)\<rfloor>" nitpick  [show_all,format=2] oops
 
-lemma RM: "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" nitpick
+lemma RM: "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" nitpick oops
+
+lemma OR: "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> (\<circle><\<psi>|\<xi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>" sledgehammer oops
+
+lemma S: "\<lfloor>\<circle><\<xi>|\<phi>\<^bold>\<and>\<psi>> \<^bold>\<rightarrow> \<circle><\<psi>\<^bold>\<rightarrow>\<xi>|\<phi>>\<rfloor>" sledgehammer (* it should be invalid! *)
 
 
 
