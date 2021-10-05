@@ -52,7 +52,7 @@ abbreviation max  :: "\<sigma>\<Rightarrow>\<sigma>" ("max<_>")
 *)
 
 abbreviation qmax  :: "\<sigma>\<Rightarrow>\<sigma>" ("qmax<_>")(*quasimax, i.e. max wrt to tc(R)*)
-  where "qmax<\<phi>> \<equiv> (\<lambda>v. ((\<phi> v) \<and> (\<forall>x. ((\<phi> x) \<and> ((tc BRel) x v)  \<longrightarrow>  ((tc BRel) v x)))) )" 
+  where "qmax<\<phi>> \<equiv> (\<lambda>v. ((\<phi> v) \<and> (\<forall>x. ((\<phi> x) \<and> ((ltc BRel \<phi>) x  v)  \<longrightarrow>  ((ltc BRel \<phi>) v x)))) )" 
 
 abbreviation subset :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>bool" (infix "\<^bold>\<subseteq>" 53)
   where "\<phi> \<^bold>\<subseteq> \<psi> \<equiv> \<forall>x. \<phi> x \<longrightarrow> \<psi> x"
@@ -68,7 +68,13 @@ abbreviation ecjactual :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>\<^su
 
 lemma True nitpick [satisfy,user_axioms,expect=genuine] oops (*Consistency conf.*)
 
-(*Correspondence theory. old stuff
+
+lemma CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>(\<circle><\<xi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>)\<rfloor>" nitpick  [show_all,format=2] oops
+
+lemma RM: "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" nitpick
+
+
+
 lemma assumes "\<forall>x y z. x R y \<and> y R z \<longrightarrow> x R z" 
       shows "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
   using assms by blast
@@ -76,6 +82,6 @@ lemma assumes "\<forall>x y z. x R y \<and> y R z \<longrightarrow> x R z"
 lemma assumes "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
       shows "\<forall>x y z. x R y \<and> y R z \<longrightarrow> x R z" 
   nitpick [show_all,format=2] oops (*Countermodel presented by Nitpick.*)
-*)
+
 end
 
