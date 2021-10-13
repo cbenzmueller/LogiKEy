@@ -158,7 +158,7 @@ context Axioms_Set_II
 begin 
   lemma S\<^sub>i\<^sub>i\<^sub>iFromII: "(E(x\<cdot>y) \<^bold>\<rightarrow> (E x \<^bold>\<and> E y)) \<^bold>\<and> (E(dom x) \<^bold>\<rightarrow> E x) \<^bold>\<and> (E(cod y) \<^bold>\<rightarrow> E y)"  
     using S\<^sub>i\<^sub>i by blast
-  lemma E\<^sub>i\<^sub>i\<^sub>iFromII: "E(x\<cdot>y) \<^bold>\<leftarrow> (dom x \<cong> cod y \<^bold>\<and> (E(cod y)))" 
+  lemma E\<^sub>i\<^sub>i\<^sub>iFromII: "E(x\<cdot>y) \<^bold>\<leftarrow> (dom x \<cong> cod y \<^bold>\<and> (E(cod y)))"
     by (metis C\<^sub>i\<^sub>i D\<^sub>i\<^sub>i E\<^sub>i\<^sub>i S\<^sub>i\<^sub>i)
   lemma A\<^sub>i\<^sub>i\<^sub>iFromII: "x\<cdot>(y\<cdot>z) \<cong> (x\<cdot>y)\<cdot>z" 
     using A\<^sub>i\<^sub>i by blast
@@ -237,7 +237,7 @@ end
 
 context Axioms_Set_V
 begin
-  lemma S\<^sub>i\<^sub>vFromV: "(E(x\<cdot>y) \<^bold>\<rightarrow> (E x \<^bold>\<and> E y)) \<^bold>\<and> (E(dom x ) \<^bold>\<rightarrow> E x) \<^bold>\<and> (E(cod y) \<^bold>\<rightarrow> E y)"   
+  lemma S\<^sub>i\<^sub>vFromV: "(E(x\<cdot>y) \<^bold>\<rightarrow> (E x \<^bold>\<and> E y)) \<^bold>\<and> (E(dom x ) \<^bold>\<rightarrow> E x) \<^bold>\<and> (E(cod y) \<^bold>\<rightarrow> E y)" 
     using S1 S2 S3 by blast
   lemma E\<^sub>i\<^sub>vFromV: "E(x\<cdot>y) \<^bold>\<leftrightarrow> (dom x \<cong> cod y \<^bold>\<and> E(cod y))"  using S3 by metis
   lemma A\<^sub>i\<^sub>vFromV: "x\<cdot>(y\<cdot>z) \<cong> (x\<cdot>y)\<cdot>z"  using S4 by blast
@@ -249,7 +249,7 @@ context Axioms_Set_IV
 begin
   lemma S1FromIV:  "E(dom x) \<^bold>\<rightarrow> E x"  using S\<^sub>i\<^sub>v by blast
   lemma S2FromIV:  "E(cod y) \<^bold>\<rightarrow> E y"  using S\<^sub>i\<^sub>v by blast
-  lemma S3FromIV:  "E(x\<cdot>y) \<^bold>\<leftrightarrow> dom x \<simeq> cod y"  using E\<^sub>i\<^sub>v by metis
+  lemma S3FromIV:  "E(x\<cdot>y) \<^bold>\<leftrightarrow> dom x \<simeq> cod y" using E\<^sub>i\<^sub>v by metis
   lemma S4FromIV:  "x\<cdot>(y\<cdot>z) \<cong> (x\<cdot>y)\<cdot>z"  using A\<^sub>i\<^sub>v by blast
   lemma S5FromIV:  "x\<cdot>(dom x) \<cong> x"  using D\<^sub>i\<^sub>v by blast
   lemma S6FromIV:  "(cod y)\<cdot>y \<cong> y"  using C\<^sub>i\<^sub>v by blast
@@ -278,7 +278,7 @@ begin
     nitpick [satisfy, user_axioms, show_all, format = 2, expect = genuine] oops 
   lemma assumes "\<exists>x. \<^bold>\<not>(E x)" shows True  
     nitpick [satisfy, user_axioms, show_all, format = 2, expect = none] oops
-  lemma InconsistencyAutomatic: "(\<exists>x. \<^bold>\<not>(E x)) \<^bold>\<rightarrow> False" 
+  lemma InconsistencyAutomatic: "(\<exists>x. \<^bold>\<not>(E x)) \<^bold>\<rightarrow> False"
     by (metis A1 A2a A3a)
   lemma InconsistencyInteractive: assumes NEx: "\<exists>x. \<^bold>\<not>(E x)" shows False 
     proof -
