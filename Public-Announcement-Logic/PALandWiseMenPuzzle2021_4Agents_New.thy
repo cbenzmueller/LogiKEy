@@ -89,12 +89,13 @@ begin
    unfolding Defs
    by (smt (verit))
 
+declare [[smt_solver=cvc4]]
  theorem whitespot_c_2: 
      "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>a (\<^sup>Aws a)) \<^bold>\<or> (\<^bold>K\<^sub>a (\<^bold>\<not>\<^sup>Aws a)))\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>b (\<^sup>Aws b)) \<^bold>\<or> (\<^bold>K\<^sub>b (\<^bold>\<not>\<^sup>Aws b)))\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>c (\<^sup>Aws c)) \<^bold>\<or> (\<^bold>K\<^sub>c (\<^bold>\<not>\<^sup>Aws c)))\<^bold>](\<^bold>K\<^sub>d (\<^sup>Aws d))))\<^bold>\<rfloor>" 
    using whitespot_c_1 
-   unfolding Defs  sledgehammer[verbose]()  (* proof found *)
+   unfolding Defs  (* sledgehammer[verbose]() *) (* proof found *)
    (* reconstruction timeout *)
-   by (smt (verit)) 
+   (* by smt *)
    oops
 
 
