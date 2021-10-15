@@ -72,7 +72,6 @@ begin
  (* correctness of big union / intersection operator 
  abbreviation EVR_old::"\<alpha>" ("EVR_old") where "EVR_old \<equiv> union_rel (union_rel a b) c"
  abbreviation DIS_old::"\<alpha>" ("DIS_old") where "DIS_old \<equiv> intersection_rel (intersection_rel a b) c"
-
  lemma same_relation_evr: "EVR \<equiv> EVR_old" unfolding Defs sledgehammer nitpick oops
  -- "vampire": One-line proof reconstruction failed: by metis )
  lemma same_relation_dis: "DIS \<equiv> DIS_old" unfolding Defs sledgehammer nitpick oops
