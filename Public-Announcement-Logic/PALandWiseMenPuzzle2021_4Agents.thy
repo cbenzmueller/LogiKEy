@@ -94,7 +94,7 @@ begin
 
  (* Automated solutions of the Wise Men Puzzle with 4 Agents*)
 
- theorem "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>a(\<^sup>Aws a)\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>b(\<^sup>Aws b)\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>c(\<^sup>Aws c)\<^bold>](\<^bold>K\<^sub>d (\<^sup>Aws d))))\<^bold>\<rfloor>" 
+ theorem whitespot_c_1: "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>a(\<^sup>Aws a)\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>b(\<^sup>Aws b)\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>c(\<^sup>Aws c)\<^bold>](\<^bold>K\<^sub>d (\<^sup>Aws d))))\<^bold>\<rfloor>" 
    using WM1 WM2ba WM2ca WM2cb WM2da WM2db WM2dc
    unfolding Defs 
    by (smt (verit)) 
@@ -104,11 +104,11 @@ begin
 declare [[smt_timeout=1200]]
 
  (* This one does not work yet *)
- theorem whitespot_c: 
+ theorem whitespot_c_2: 
      "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>a (\<^sup>Aws a)) \<^bold>\<or> (\<^bold>K\<^sub>a (\<^bold>\<not>\<^sup>Aws a)))\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>b (\<^sup>Aws b)) \<^bold>\<or> (\<^bold>K\<^sub>b (\<^bold>\<not>\<^sup>Aws b)))\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>c (\<^sup>Aws c)) \<^bold>\<or> (\<^bold>K\<^sub>c (\<^bold>\<not>\<^sup>Aws c)))\<^bold>](\<^bold>K\<^sub>d (\<^sup>Aws d))))\<^bold>\<rfloor>" 
-   using WM1 WM2ba WM2ca WM2cb WM2da WM2db WM2dc
-   unfolding Defs 
-   (* sledgehammer[verbose]() *)
+   using whitespot_c_1
+   unfolding Defs sledgehammer[verbose]()
+   (* sledgehammer[verbose]() *) (* proof found *)
    (* by (smt (verit, ccfv_threshold)) *)
   oops
 
