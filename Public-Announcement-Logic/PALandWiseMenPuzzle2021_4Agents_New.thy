@@ -54,13 +54,17 @@ begin
    intersection_rel_def[Defs] union_rel_def[Defs] sub_rel_def[Defs] inverse_rel_def[Defs] 
    bigunion_rel_def[Defs] tc_def[Defs]
 
+ abbreviation "S5Agent i \<equiv> reflexive i \<and> transitive i \<and> euclidean i"
+ abbreviation "S5Agents A \<equiv> \<forall>i. (A i \<longrightarrow> S5Agent i)"
+
  (***********************************************************************************************)
- (*****                        Wise Men Puzzle with 4 Agents                                *****)
+ (*****                         Wise Men Puzzle                                             *****)
  (***********************************************************************************************)
+ (*** Encoding of the wise men puzzle in PAL ***)
  (* Agents *)
  consts a::"\<alpha>" b::"\<alpha>" c::"\<alpha>" d::"\<alpha>" (* Agents modeled as accessibility relations *)
  abbreviation  Agent::"\<alpha>\<Rightarrow>bool" ("\<A>") where "\<A> x \<equiv> x = a \<or> x = b \<or> x = c \<or> x = d"
- axiomatization where  group_S5: "\<forall>i. \<A> i \<longrightarrow> (reflexive i \<and> transitive i \<and> euclidean i)"
+ axiomatization where  group_S5: "S5Agents \<A>"
 
  (*** Encoding of the wise men puzzle in PAL ***)
  (* Common knowledge: At least one of a, b, c and d has a white spot *)
@@ -82,22 +86,17 @@ begin
    WM2db: "\<^bold>\<lfloor>\<^bold>C\<^sub>\<A> (\<^bold>\<not>(\<^sup>Aws d) \<^bold>\<rightarrow> (\<^bold>K\<^sub>b (\<^bold>\<not>(\<^sup>Aws d))))\<^bold>\<rfloor>" and
    WM2dc: "\<^bold>\<lfloor>\<^bold>C\<^sub>\<A> (\<^bold>\<not>(\<^sup>Aws d) \<^bold>\<rightarrow> (\<^bold>K\<^sub>c (\<^bold>\<not>(\<^sup>Aws d))))\<^bold>\<rfloor>" 
 
-
  (* Automated solutions of the Wise Men Puzzle with 4 Agents*)
  theorem whitespot_c_1: "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>a(\<^sup>Aws a)\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>b(\<^sup>Aws b)\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>c(\<^sup>Aws c)\<^bold>](\<^bold>K\<^sub>d (\<^sup>Aws d))))\<^bold>\<rfloor>" 
    using WM1 WM2ba WM2ca WM2cb WM2da WM2db WM2dc
-   unfolding Defs
-   by (smt (verit))
+   unfolding Defs by (smt (verit))
 
-declare [[smt_solver=cvc4]]
  theorem whitespot_c_2: 
      "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>a (\<^sup>Aws a)) \<^bold>\<or> (\<^bold>K\<^sub>a (\<^bold>\<not>\<^sup>Aws a)))\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>b (\<^sup>Aws b)) \<^bold>\<or> (\<^bold>K\<^sub>b (\<^bold>\<not>\<^sup>Aws b)))\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>c (\<^sup>Aws c)) \<^bold>\<or> (\<^bold>K\<^sub>c (\<^bold>\<not>\<^sup>Aws c)))\<^bold>](\<^bold>K\<^sub>d (\<^sup>Aws d))))\<^bold>\<rfloor>" 
    using whitespot_c_1 
-   unfolding Defs  (* sledgehammer[verbose]() *) (* proof found *)
+   unfolding Defs (* sledgehammer() finds proof *)
    (* reconstruction timeout *)
-   (* by smt *)
    oops
-
 
  (* Consistency confirmed by nitpick *)
  lemma True nitpick [satisfy] oops  (* model found *)

@@ -56,12 +56,13 @@ begin
 
 
  (***********************************************************************************************)
- (*****                        Wise Men Puzzle with 4 Agents                                *****)
- (***********************************************************************************************) 
+ (*****                         Wise Men Puzzle                                             *****)
+ (***********************************************************************************************)
+ (*** Encoding of the wise men puzzle in PAL ***)
  (* Agents *)
- consts a::"\<alpha>" b::"\<alpha>"  (* Agents modeled as accessibility relations *)
+ consts a::"\<alpha>" b::"\<alpha>" (* Agents modeled as accessibility relations *)
  abbreviation  Agent::"\<alpha>\<Rightarrow>bool" ("\<A>") where "\<A> x \<equiv> x = a \<or> x = b"
- axiomatization where  group_S5: "\<forall>i. \<A> i \<longrightarrow> (reflexive i \<and> transitive i \<and> euclidean i)"
+ axiomatization where  group_S5: "S5Agents \<A>"
 
  (*** Encoding of the wise men puzzle in PAL ***)
  (* Common knowledge: At least one of a and b has a white spot *)
@@ -81,7 +82,7 @@ begin
  (* This one does not work yet *)
  theorem whitespot_c: 
      "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>a (\<^sup>Aws a)) \<^bold>\<or> (\<^bold>K\<^sub>a (\<^bold>\<not>\<^sup>Aws a)))\<^bold>](\<^bold>K\<^sub>b (\<^sup>Aws b))\<^bold>\<rfloor>" 
-   using WM1 WM2ba unfolding Defs sledgehammer[verbose]() by (smt (verit)) 
+   using WM1 WM2ba unfolding Defs by (smt (verit)) 
 
  (* Consistency confirmed by nitpick *)
  lemma True nitpick [satisfy] oops  (* model found *)
