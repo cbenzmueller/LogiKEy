@@ -134,14 +134,14 @@ begin
  lemma "S5Agent r \<Longrightarrow> \<^bold>\<lfloor>(\<^bold>K\<^sub>r \<^sup>Ap) \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<^sup>Ap\<^bold>](\<^sup>Ap \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>r \<^sup>Ap)\<^bold>\<rfloor>" using  reflexive_def by auto
  lemma "S5Agent r \<Longrightarrow> \<^bold>\<lfloor>(\<^bold>K\<^sub>r \<phi>) \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<phi>\<^bold>](\<phi> \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>r \<phi>)\<^bold>\<rfloor>" nitpick oops (* countermodel found *)
 
- (* Further checks on the atomic versus general validity *)
+ (* Further checks on the atomic versus general validity. *)
 
  lemma "\<^bold>\<lfloor>p \<^bold>\<leftrightarrow> q\<^bold>\<rfloor> \<Longrightarrow> \<forall>W v. (p W v \<longleftrightarrow> q W v)" unfolding Defs nitpick oops (* countermodel *)
  lemma "\<forall>W v. (p W v \<longleftrightarrow> q W v) \<Longrightarrow> \<^bold>\<lfloor>p \<^bold>\<leftrightarrow> q\<^bold>\<rfloor>" unfolding Defs by simp 
  lemma "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<leftrightarrow> \<^sup>Aq\<^bold>\<rfloor> \<Longrightarrow> \<forall>v. (p v \<longleftrightarrow> q v)" unfolding Defs by simp
  lemma "\<forall>v. (p v \<longleftrightarrow> q v) \<Longrightarrow> \<^bold>\<lfloor>\<^sup>Ap \<^bold>\<leftrightarrow> \<^sup>Aq\<^bold>\<rfloor>" unfolding Defs by simp
 
- (* A check requested by a reviewer (concrete models can be defined and studied) *)
+ (* Concrete models can be defined and studied (check requested by a reviewer). *)
  
  lemma assumes "W = (\<lambda>x. x = w1 \<or> x = w2 \<or> x = w3)" "w1 \<noteq> w2" "w1 \<noteq> w3" "w2 \<noteq> w3" 
                "p W w1" "p W w2" "\<not>(p W w3)"
