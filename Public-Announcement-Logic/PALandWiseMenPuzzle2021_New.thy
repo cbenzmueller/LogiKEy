@@ -142,7 +142,7 @@ begin
  lemma assumes  "\<forall>v. (p v \<longleftrightarrow> q v)" shows "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<leftrightarrow> \<^sup>Aq\<^bold>\<rfloor>" using assms unfolding Defs by simp
 
  (* A check requested by a reviewer (concrete models can be defined and studied) *)
-
+ 
  lemma assumes "W = (\<lambda>x. x = w1 \<or> x = w2 \<or> x = w3)" "w1 \<noteq> w2" "w1 \<noteq> w3" "w2 \<noteq> w3" 
                "p W w1" "p W w2" "\<not>(p W w3)"
                "a w1 w1" "a w1 w2" "(a w2 w1)" "a w2 w2" "\<not>(a w1 w3)" "\<not>(a w3 w1)" "\<not>(a w2 w3)" "\<not>(a w3 w2)" "a w3 w3" 
@@ -151,6 +151,17 @@ begin
    unfolding Defs 
      nitpick[satisfy,atoms=w1 w2 w3] (* model *)
      using assms(1) assms(12) assms(21) assms(23) assms(5) assms(6) assms(7) assms(9) by blast (* proof *)
+
+ lemma assumes "W = (\<lambda>x. x = w1 \<or> x = w2 \<or> x = w3)" "w1 \<noteq> w2" "w1 \<noteq> w3" "w2 \<noteq> w3" 
+               "p W w1" "p W w2" "\<not>(p W w3)"
+               "a w1 w1" "a w1 w2" "(a w2 w1)" "a w2 w2" "\<not>(a w1 w3)" "\<not>(a w3 w1)" "\<not>(a w2 w3)" "\<not>(a w3 w2)" "a w3 w3" 
+               "b w1 w1" "\<not>(b w1 w2)" "\<not>(b w2 w1)" "b w2 w2" "\<not>(b w1 w3)" "\<not>(b w3 w1)" "b w2 w3" "b w3 w2" "b w3 w3" 
+               "((p \<^bold>\<and> (\<^bold>K\<^sub>a p) \<^bold>\<and> (\<^bold>K\<^sub>b p)) \<^bold>\<and> \<^bold>\<not>(\<^bold>K\<^sub>a (\<^bold>K\<^sub>b p))) W w1"
+       shows   "(\<^sup>Am \<^bold>\<leftrightarrow> \<^sup>An) W w1" (* "(\<^sup>Am W w1) W w1 \<longrightarrow> (\<^sup>An W w1) W w1" *)
+   unfolding Defs sledgehammer 
+     nitpick[atoms=w1 w2 w3] (* countermodel in which m and n are unequal *)
+     nitpick[satisfy,atoms=w1 w2 w3] (* model in which m and n are equal *)
+     oops
 
  (***********************************************************************************************)
  (*****                         Wise Men Puzzle                                             *****)
