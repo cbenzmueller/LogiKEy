@@ -136,10 +136,10 @@ begin
 
  (* Further checks on the atomic versus general validity *)
 
- lemma assumes "\<^bold>\<lfloor>p \<^bold>\<leftrightarrow> q\<^bold>\<rfloor>" shows "\<forall>W v. (p W v \<longleftrightarrow> q W v)" using assms unfolding Defs nitpick oops (* countermodel *)
- lemma assumes "\<forall>W v. (p W v \<longleftrightarrow> q W v)" shows "\<^bold>\<lfloor>p \<^bold>\<leftrightarrow> q\<^bold>\<rfloor>" using assms unfolding Defs by simp 
- lemma assumes "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<leftrightarrow> \<^sup>Aq\<^bold>\<rfloor>"  shows "\<forall>v. (p v \<longleftrightarrow> q v)" using assms unfolding Defs by simp
- lemma assumes  "\<forall>v. (p v \<longleftrightarrow> q v)" shows "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<leftrightarrow> \<^sup>Aq\<^bold>\<rfloor>" using assms unfolding Defs by simp
+ lemma "\<^bold>\<lfloor>p \<^bold>\<leftrightarrow> q\<^bold>\<rfloor> \<Longrightarrow> \<forall>W v. (p W v \<longleftrightarrow> q W v)" unfolding Defs nitpick oops (* countermodel *)
+ lemma "\<forall>W v. (p W v \<longleftrightarrow> q W v) \<Longrightarrow> \<^bold>\<lfloor>p \<^bold>\<leftrightarrow> q\<^bold>\<rfloor>" unfolding Defs by simp 
+ lemma "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<leftrightarrow> \<^sup>Aq\<^bold>\<rfloor> \<Longrightarrow> \<forall>v. (p v \<longleftrightarrow> q v)" unfolding Defs by simp
+ lemma "\<forall>v. (p v \<longleftrightarrow> q v) \<Longrightarrow> \<^bold>\<lfloor>\<^sup>Ap \<^bold>\<leftrightarrow> \<^sup>Aq\<^bold>\<rfloor>" unfolding Defs by simp
 
  (* A check requested by a reviewer (concrete models can be defined and studied) *)
  
