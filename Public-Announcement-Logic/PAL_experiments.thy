@@ -108,4 +108,17 @@ begin
      nitpick[satisfy, atoms=w1 w2 w3] (* model *)
      using assms(1) assms(5) assms(6) assms(7)
            assms(9) assms(12) assms(21) assms(23) by blast (* proof *)
+
+ (* Concrete models can be defined and studied. *)
+ lemma assumes "W = (\<lambda>x. x = w1 \<or> x = w2 \<or> x = w3)"
+               "w1 \<noteq> w2" "w1 \<noteq> w3" "w2 \<noteq> w3" 
+               "p W w1" "p W w2" "\<not>(p W w3)"
+               "a w1 w1" "a w1 w2" "a w2 w1"
+               "a w2 w2" "\<not>(a w1 w3)" "\<not>(a w3 w1)"
+               "\<not>(a w2 w3)" "\<not>(a w3 w2)" "a w3 w3" 
+               "b w1 w1" "\<not>(b w1 w2)" "\<not>(b w2 w1)"
+               "b w2 w2" "\<not>(b w1 w3)" "\<not>(b w3 w1)"
+               "b w2 w3" "b w3 w2" "b w3 w3" 
+         shows "((\<^bold>K\<^sub>a p) \<^bold>\<rightarrow> p) W w1 \<and> ((\<^bold>K\<^sub>a p) \<^bold>\<rightarrow> p) W w2 \<and> ((\<^bold>K\<^sub>a p) \<^bold>\<rightarrow> p) W w3" 
+   unfolding Defs using assms by blast
 end
