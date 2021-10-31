@@ -66,10 +66,19 @@ begin
  lemma induction_axiom_general: "\<^bold>\<lfloor>((\<^bold>E\<^sub>A(\<chi> \<^bold>\<rightarrow> \<phi>)) \<^bold>\<and> \<^bold>C\<^sub>A\<^bold>\<lparr>\<chi>\<^bold>|\<phi> \<^bold>\<rightarrow> (\<^bold>E\<^sub>A(\<chi> \<^bold>\<rightarrow> \<phi>))\<^bold>\<rparr>) \<^bold>\<rightarrow> (\<^bold>C\<^sub>A\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>)\<^bold>\<rfloor>"
    unfolding Defs (* sledgehammer and nitpick timeout *) oops
 
+ (* To ensure completeness we may also simply postulate axiom schemata in the LogiKEy approach *)
+ axiomatization where 
+  mix_axiom_general: "\<^bold>\<lfloor>\<^bold>C\<^sub>A\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> \<^bold>\<rightarrow> \<^bold>E\<^sub>A(\<chi> \<^bold>\<rightarrow> (\<phi> \<^bold>\<and> (\<^bold>C\<^sub>A\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>)))\<^bold>\<rfloor>" and
+  induction_axiom_general: "\<^bold>\<lfloor>((\<^bold>E\<^sub>A(\<chi> \<^bold>\<rightarrow> \<phi>)) \<^bold>\<and> \<^bold>C\<^sub>A\<^bold>\<lparr>\<chi>\<^bold>|\<phi> \<^bold>\<rightarrow> (\<^bold>E\<^sub>A(\<chi> \<^bold>\<rightarrow> \<phi>))\<^bold>\<rparr>) \<^bold>\<rightarrow> (\<^bold>C\<^sub>A\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>)\<^bold>\<rfloor>"
+
  (* Necessitation rules: implied by the semantical embedding *)
  lemma announcement_nec: assumes "\<^bold>\<lfloor>\<phi>\<^bold>\<rfloor>" shows "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<psi>\<^bold>]\<phi>\<^bold>\<rfloor>" by (simp add: assms)
  lemma rkc_necessitation: assumes "\<^bold>\<lfloor>\<phi>\<^bold>\<rfloor>" shows "\<^bold>\<lfloor>(\<^bold>C\<^sub>A\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>)\<^bold>\<rfloor>"
    by (smt assms intersection_rel_def sub_rel_def tc_def transitive_def)
+
+ (* Checking for consistency (again) *)
+ lemma True nitpick[satisfy,user_axioms] oops (* model found *)
+ lemma False sledgehammer oops (* provers time out, i.e. fail to prove falsity *)
 
  (* Further axioms: implied for atomic formulas, but not implied in general *)
  lemma "\<^bold>\<lfloor>\<^sup>Ap \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<^sup>Ap\<^bold>](\<^bold>\<not>\<^sup>Ap)\<^bold>\<rfloor>" by simp
@@ -97,7 +106,7 @@ begin
  lemma assumes "W = (\<lambda>x. x = w1 \<or> x = w2 \<or> x = w3)"
                "w1 \<noteq> w2" "w1 \<noteq> w3" "w2 \<noteq> w3" 
                "p W w1" "p W w2" "\<not>(p W w3)"
-               "a w1 w1" "a w1 w2" "a w2 w1"
+               "a w1 w1" "a w1 w2" "a w2 w1" 
                "a w2 w2" "\<not>(a w1 w3)" "\<not>(a w3 w1)"
                "\<not>(a w2 w3)" "\<not>(a w3 w2)" "a w3 w3" 
                "b w1 w1" "\<not>(b w1 w2)" "\<not>(b w2 w1)"
