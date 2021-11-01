@@ -3,7 +3,7 @@ theory PAL_definitions imports Main
 
 begin
  typedecl i (* Type of possible worlds *)
- type_synonym \<sigma> = "i\<Rightarrow>bool" (* \<D> *)
+ type_synonym \<sigma> = "i\<Rightarrow>bool" (*Type of world domains *)
  type_synonym \<tau> = "\<sigma>\<Rightarrow>i\<Rightarrow>bool" (* Type of world depended formulas (truth sets) *) 
  type_synonym \<alpha> = "i\<Rightarrow>i\<Rightarrow>bool" (* Type of accessibility relations between world *)
  type_synonym \<rho> = "\<alpha>\<Rightarrow>bool" (* Type of groups of agents *)
@@ -39,14 +39,14 @@ begin
  abbreviation pvalid::"\<tau> \<Rightarrow> bool" ("\<^bold>\<lfloor>_\<^bold>\<rfloor>"[7]8) where "\<^bold>\<lfloor>\<phi>\<^bold>\<rfloor> \<equiv> \<forall>W.\<forall>w. W w \<longrightarrow> \<phi> W w"
 
  (* Agent Knowledge, Mutual Knowledge, Common Knowledge *)
- abbreviation EVR::"\<rho>\<Rightarrow>\<alpha>" where "EVR A \<equiv> big_union_rel A"
- abbreviation DIS::"\<rho>\<Rightarrow>\<alpha>" where "DIS A \<equiv> big_intersection_rel A"
+ abbreviation EVR::"\<rho>\<Rightarrow>\<alpha>" where "EVR G \<equiv> big_union_rel G"
+ abbreviation DIS::"\<rho>\<Rightarrow>\<alpha>" where "DIS G \<equiv> big_intersection_rel G"
  abbreviation agttknows::"\<alpha>\<Rightarrow>\<tau>\<Rightarrow>\<tau>" ("\<^bold>K\<^sub>_ _") where "\<^bold>K\<^sub>r \<phi> \<equiv>  \<^bold>K r \<phi>" 
- abbreviation evrknows::"\<rho>\<Rightarrow>\<tau>\<Rightarrow>\<tau>" ("\<^bold>E\<^sub>_ _") where "\<^bold>E\<^sub>A \<phi> \<equiv>  \<^bold>K (EVR A) \<phi>"
+ abbreviation evrknows::"\<rho>\<Rightarrow>\<tau>\<Rightarrow>\<tau>" ("\<^bold>E\<^sub>_ _") where "\<^bold>E\<^sub>G \<phi> \<equiv>  \<^bold>K (EVR G) \<phi>"
+ abbreviation disknows :: "\<rho>\<Rightarrow>\<tau>\<Rightarrow>\<tau>" ("\<^bold>D\<^sub>_ _") where "\<^bold>D\<^sub>G \<phi> \<equiv> \<^bold>K (DIS G) \<phi>"
  abbreviation prck::"\<rho>\<Rightarrow>\<tau>\<Rightarrow>\<tau>\<Rightarrow>\<tau>" ("\<^bold>C\<^sub>_\<^bold>\<lparr>_\<^bold>|_\<^bold>\<rparr>")
-   where "\<^bold>C\<^sub>A\<^bold>\<lparr>\<phi>\<^bold>|\<psi>\<^bold>\<rparr> \<equiv> \<lambda>W w. \<forall>v. \<not>(tc (intersection_rel (EVR A) (\<lambda>u v. W v \<and> \<phi> W v)) w v) \<or> (\<psi> W v)"
- abbreviation pcmn::"\<rho>\<Rightarrow>\<tau>\<Rightarrow>\<tau>" ("\<^bold>C\<^sub>_ _") where "\<^bold>C\<^sub>A \<phi> \<equiv>  \<^bold>C\<^sub>A\<^bold>\<lparr>\<^bold>\<top>\<^bold>|\<phi>\<^bold>\<rparr>"
- abbreviation disknows :: "\<rho>\<Rightarrow>\<tau>\<Rightarrow>\<tau>" ("\<^bold>D\<^sub>_ _") where "\<^bold>D\<^sub>A \<phi> \<equiv> \<^bold>K (DIS A) \<phi>"
+   where "\<^bold>C\<^sub>G\<^bold>\<lparr>\<phi>\<^bold>|\<psi>\<^bold>\<rparr> \<equiv> \<lambda>W w. \<forall>v. (tc (intersection_rel (EVR G) (\<lambda>u v. W v \<and> \<phi> W v)) w v) \<longrightarrow> (\<psi> W v)"
+ abbreviation pcmn::"\<rho>\<Rightarrow>\<tau>\<Rightarrow>\<tau>" ("\<^bold>C\<^sub>_ _") where "\<^bold>C\<^sub>G \<phi> \<equiv>  \<^bold>C\<^sub>G\<^bold>\<lparr>\<^bold>\<top>\<^bold>|\<phi>\<^bold>\<rparr>"
 
  (* S5 principles for the agent’saccessibility relations *)
  abbreviation S5Agent::"\<alpha>\<Rightarrow>bool"
