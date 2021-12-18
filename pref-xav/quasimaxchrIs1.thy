@@ -64,7 +64,7 @@ lemma True nitpick [satisfy,user_axioms,expect=genuine] oops (*Consistency conf.
 
 lemma A1: "\<lfloor>\<circle><\<phi>|\<phi>>\<rfloor>" sledgehammer oops
 
-lemma RM: "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" nitpick oops
+lemma RM: "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" nitpick oops 
 
 lemma DR: "\<lfloor>\<circle><\<xi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarrow> (\<circle><\<xi>|\<phi>> \<^bold>\<or> \<circle><\<xi>|\<psi>>)\<rfloor>" nitpick[show_all,format=2]
 
