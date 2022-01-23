@@ -48,7 +48,7 @@ begin
    where "\<^bold>C\<^sub>G\<^bold>\<lparr>\<phi>\<^bold>|\<psi>\<^bold>\<rparr> \<equiv> \<lambda>W w. \<forall>v. (tc (intersection_rel (EVR G) (\<lambda>u v. W v \<and> \<phi> W v)) w v) \<longrightarrow> (\<psi> W v)"
  abbreviation pcmn::"\<rho>\<Rightarrow>\<tau>\<Rightarrow>\<tau>" ("\<^bold>C\<^sub>_ _") where "\<^bold>C\<^sub>G \<phi> \<equiv>  \<^bold>C\<^sub>G\<^bold>\<lparr>\<^bold>\<top>\<^bold>|\<phi>\<^bold>\<rparr>"
 
- (* S5 principles for the agent’saccessibility relations *)
+ (* S5 principles for the agent’s accessibility relations *)
  abbreviation S5Agent::"\<alpha>\<Rightarrow>bool"
    where  "S5Agent i \<equiv> reflexive i \<and> transitive i \<and> euclidean i"
  abbreviation S5Agents::"\<rho>\<Rightarrow>bool"
