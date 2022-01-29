@@ -1,4 +1,4 @@
-theory suzumura imports Main       (* Suzumura: C. Benzmüller & X. Parent, 2021 *)
+theory max imports Main       (* Suzumura: C. Benzmüller & X. Parent, 2021 *)
 
 (* The Suzumura condition is a weakening of the condition of transitivity of the betterness relation. 
 It is coined after his inventor. The condition rules out cycles with at least one strict betterness. This is 
@@ -68,19 +68,19 @@ abbreviation ecjactual :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>\<^su
 lemma True nitpick [satisfy,user_axioms,expect=genuine] oops (*Consistency conf.*)
 
 
-(* this is the def of the condition *)
+(* 
 
 text \<open>We define Suzumura consistency:\<close>
 abbreviation Suzumura
-  where "Suzumura r \<equiv> \<forall>x y. (tc r x  y \<longrightarrow> ( r y x \<rightarrow> r x y))"
+  where "Suzumura R \<equiv> \<forall>x y. (tc R x  y \<longrightarrow> ( R y x \<rightarrow> R x y))"
 
-
+this is the def of the condition *)
 
 
 
 lemma assumes "Suzumura r" 
   shows "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
-  nitpick
+  nitpick oops
   
 lemma assumes "Suzumura r" 
   shows "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> (\<circle><\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
@@ -89,12 +89,11 @@ lemma assumes "Suzumura r"
 
 (*Suzumura should validate the axiom below. The counter-example outputed by Nitpick is incorrect *)
 lemma assumes "Suzumura r" 
-  shows "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>" 
-   nitpick
+  shows "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>" nitpick
   
 
 lemma assumes "Suzumara r" 
-  shows "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> (\<circle><\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
+  shows "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> (\<circle><\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>"  nitpick 
    
 lemma CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>(\<circle><\<xi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>)\<rfloor>" nitpick  [show_all,format=2] oops
 
@@ -102,7 +101,7 @@ lemma RM: "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<
 
 lemma OR: "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> (\<circle><\<psi>|\<xi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>" sledgehammer oops
 
-lemma S: "\<lfloor>\<circle><\<xi>|\<phi>\<^bold>\<and>\<psi>> \<^bold>\<rightarrow> \<circle><\<psi>\<^bold>\<rightarrow>\<xi>|\<phi>>\<rfloor>" sledgehammer (* it should be invalid! *)
+lemma S: "\<lfloor>\<circle><\<xi>|\<phi>\<^bold>\<and>\<psi>> \<^bold>\<rightarrow> \<circle><\<psi>\<^bold>\<rightarrow>\<xi>|\<phi>>\<rfloor>" sledgehammer oops
 
 
 
