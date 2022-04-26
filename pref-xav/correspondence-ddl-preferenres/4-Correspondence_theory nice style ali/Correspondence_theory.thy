@@ -1,0 +1,28 @@
+theory  Correspondence_theory  imports DDLE 
+begin  
+abbreviation limitedness  where "limitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. opt<\<phi>>x))"
+abbreviation Dstar_valid  where "Dstar_valid \<equiv> (\<forall>\<phi> \<psi>. \<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>>  \<^bold>\<rightarrow> \<^bold>\<not>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>)"
+abbreviation transitivity where "transitivity \<equiv> (\<forall>x y z. (x r y \<and> y r z) \<longrightarrow> x r z)"
+abbreviation Sp_valid     where "Sp_valid \<equiv> (\<forall>\<phi> \<psi> \<chi>. \<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>\<psi>|\<phi>> \<^bold>\<and> \<circle><\<psi>\<^bold>\<rightarrow>\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>)"
+
+lemma "limitedness \<longleftrightarrow> Dstar_valid"
+ unfolding ddecond_def ddediomond_def ddeimp_def ddeneg_def ddevalid_def by auto    
+ 
+lemma "(limitedness \<and> transitivity) \<longrightarrow> (Sp_valid \<and> Dstar_valid)"
+ unfolding ddecond_def ddediomond_def ddeimp_def ddeneg_def ddeand_def ddevalid_def ddeopt_def
+ sledgehammer by smt (*This direction is provable*)
+
+lemma "(Sp_valid \<and> Dstar_valid) \<longrightarrow> (limitedness \<and> transitivity)"
+ unfolding ddecond_def ddediomond_def ddeimp_def ddeneg_def ddeand_def ddevalid_def ddeopt_def oops
+ (*This direction unfortunately not yet, but we also do not get a countermodel*)
+  
+lemma "(Sp_valid \<and> Dstar_valid) \<longrightarrow> limitedness" 
+ unfolding ddecond_def ddediomond_def ddeimp_def ddeneg_def ddeand_def ddevalid_def ddeopt_def
+ sledgehammer by auto (*Splitting the conjunction, limitednedd is easy for the ATPs*)
+ 
+lemma "(Sp_valid \<and> Dstar_valid) \<longrightarrow> transitivity"
+ unfolding ddecond_def ddediomond_def ddeimp_def ddeneg_def ddeand_def ddevalid_def oops
+ (*Splitting the conjunction, transitivity is too hard for the ATPs*)
+ (*This direction unfortunately not yet, but we also do not get a countermodel*)
+end
+
