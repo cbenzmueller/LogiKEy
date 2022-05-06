@@ -181,6 +181,18 @@ lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\
 
 text \<open>Transitivity and totalness corresponds to the Spohn axiom (Sp)\<close>
 
+lemma assumes "transitivity" 
+  shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  sledgehammer (* timed out *)
+  nitpick (* counterexample*)
+  oops
+
+lemma assumes "totalness" 
+  shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  sledgehammer (* timed out*)
+  nitpick (* counterexample*)
+  oops
+
 lemma assumes "transitivity" "totalness"
   shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   sledgehammer (* proof found *)
@@ -239,7 +251,6 @@ lemma assumes CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|
   nitpick (* counterexample found *)
   oops 
 
-text \<open>interval order (totalness plus Ferrers) corresponds to DR\<close>
 
 lemma assumes "totalness"   
      (* assumes "Ferrers"*)
@@ -260,6 +271,26 @@ lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<r
   nitpick (* counterexample found *)
   oops 
 
+(*transitivity*)
+
+lemma assumes "transitivity"    
+  shows  Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
+  sledgehammer (* proof found *)
+  nitpick (* no counterexample found *)
+  oops 
+
+lemma assumes "transitivity"    
+  shows  Trans: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<xi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<xi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
+  sledgehammer (* proof found *)
+  nitpick (* no counterexample found *)
+  oops 
+
+lemma assumes Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"
+      assumes Trans: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<xi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<xi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"
+      shows "transitivity"    
+  sledgehammer (* timed out*)
+  nitpick (* counterexample found *)
+  oops 
 
 
 subsection \<open>Closure maximality and Lewis rule\<close>
