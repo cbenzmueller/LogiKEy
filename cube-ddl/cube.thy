@@ -97,16 +97,24 @@ subsection \<open>Properties\<close>
 text \<open>We have the following constraints on the betterness relation\<close>
 
 (*The standard properties*)
-
 abbreviation reflexivity  where "reflexivity  \<equiv> (\<forall>x. x r x)"
-abbreviation mlimitedness  where "mlimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. max<\<phi>>x))"
-abbreviation msmoothness  where 
-              "msmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow> (max<\<phi>>x \<or> (\<exists>y. (y r x \<and> \<not>(x r y) \<and> max<\<phi>>y)))))"
-abbreviation transitivity where "transitivity \<equiv> (\<forall>x y z. (x r y \<and> y r z) \<longrightarrow> x r z)"
-abbreviation totalness where "totalness \<equiv> (\<forall>x y. (x r y \<or> y r x))"
+abbreviation transitivity 
+  where "transitivity \<equiv> (\<forall>x y z. (x r y \<and> y r z) \<longrightarrow> x r z)"
+abbreviation totalness 
+  where "totalness \<equiv> (\<forall>x y. (x r y \<or> y r x))"
 
-(*The combination of Ferrers and totalness is known as the interval order condition*)
-abbreviation Ferrers where "Ferrers \<equiv> (\<forall>x y z u. ((x r u) \<and> (y r z)) \<longrightarrow> (x r z) \<or> (y r u))"
+(*4 versions of Lewis's limit assumption*)
+abbreviation mlimitedness  
+  where "mlimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. max<\<phi>>x))"
+abbreviation msmoothness  
+  where "msmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow>
+                     (max<\<phi>>x \<or> (\<exists>y. (y r x \<and> \<not>(x r y) \<and> max<\<phi>>y)))))"
+abbreviation olimitedness  
+  where "olimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. opt<\<phi>>x))"
+abbreviation osmoothness  where 
+   "osmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow> 
+                      (opt<\<phi>>x \<or> (\<exists>y. (y r x \<and> \<not>(x r y) \<and> opt<\<phi>>y)))))"
+
 
 definition transitive :: "\<alpha>\<Rightarrow>bool" where "transitive R \<equiv> \<forall>x y z. R x y \<and>  R y z \<longrightarrow> R x z"
 definition sub_rel :: "\<alpha>\<Rightarrow>\<alpha>\<Rightarrow>bool" where "sub_rel R Q \<equiv> \<forall>u v. R u v \<longrightarrow> Q u v"
@@ -122,6 +130,11 @@ abbreviation Suzumura
 (* this is a second form of a-cyclicity. Cycles of non-strict betterness are ruled out*)
 abbreviation loopfree
   where "loopfree R \<equiv> \<forall>x y. (tc (assfactor R) x y \<longrightarrow> ( R y x \<longrightarrow> R x y))"
+
+
+(*Interval order condition is totalness plus Ferrers*)
+abbreviation Ferrers 
+  where "Ferrers \<equiv> (\<forall>x y z u. ((x r u) \<and> (y r z)) \<longrightarrow> (x r z) \<or> (y r u))"
 
 lemma assumes Ferrers reflexivity  (*fact overlooked in the literature*)
   shows totalness
@@ -219,8 +232,6 @@ text \<open>We move to the opt rule, and associate with it two news modal operat
 
 text \<open>Here we redefine Lewis's limit assumption accordingly\<close>
 
-abbreviation olimitedness  where "olimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. opt<\<phi>>x))"
-abbreviation osmoothness  where "osmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow> (opt<\<phi>>x \<or> (\<exists>y. (y r x \<and> \<not>(x r y) \<and> opt<\<phi>>y)))))"
 
 text \<open>Correspondance\<close>
 
