@@ -332,15 +332,13 @@ lemma assumes "mlimitedness"
   assumes "transitivity" 
   assumes "totalness"
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<odot><\<psi>|\<phi>>\<rfloor>"
-      sledgehammer oops
-      nitpick [show_all] oops
+      sledgehammer oops (*proof found*) 
 
 lemma assumes "mlimitedness"
   assumes "transitivity" 
   assumes "totalness"
  shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>"
-      sledgehammer 
-      nitpick [show_all]
+      sledgehammer (*proof found*) 
 
 
 
