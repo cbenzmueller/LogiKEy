@@ -1,6 +1,5 @@
-section \<open>Base system E\<close>
-(*<*)
-theory cube
+
+theory cubevariant
 imports Main
 
 begin
@@ -11,29 +10,9 @@ subsection \<open>Introduction\<close>
 
 
 
-subsection \<open>Base System E\<close>
-
-text \<open>We present an approach to meta-reasoning about dyadic deontic logics, and
-apply it to verify the relative strengths of logics in the deontic cube. This one is still
-under construction, and closer to a line at the moment. We introduce the
-properties of the betterness relation, and their syntactical counterparts. We ask Isabelle/HOL to
-
-(1) confirm known correspondance (established by pen and paper) under
-different evaluation rules for the conditional obligation operator: max rule, opt rule, closure 
-maximality, and  Lewis rule.
-(2) verify the asbsence of syntactical counterpart of some properties
-(3) answer open problems regarding correspondance problems  (open in the sense of unsettled by
- pen and paper). \<close>
 
 
 
-(*which is illustrated in Figure 1. In particular, proofs are
-given for the equivalences of different axiomatizations and the 
-inclusion relations shown in the cube.*)
-
-section \<open>Framework\<close>
-
-text \<open>This is Aqvis's system E from the 2019 IfColog paper.\<close>
 
 typedecl i (*Possible worlds.*)
 type_synonym \<sigma> = "(i\<Rightarrow>bool)"
@@ -79,21 +58,17 @@ abbreviation euncobl :: "\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<circle><_>")
 abbreviation ddeperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("P<_|_>") 
   where "P<\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circle><\<^bold>\<not>\<psi>|\<phi>>"
 
-lemma "\<odot><\<psi>|\<phi>> \<equiv> \<circle><\<psi>|\<phi>>" nitpick [show_all] (*countermodel found*) oops
-
-(*David Lewis's evaluation rule for the conditional *)
-
-abbreviation lewcond :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("\<circ><_|_>")
-  where "\<circ><\<psi>|\<phi>> \<equiv> \<lambda>v. (\<not>(\<exists>x. (\<phi>)(x))\<or>  
-        (\<exists>x. ((\<phi>)(x)\<and>(\<psi>)(x) \<and> (\<forall>y. ((y r x) \<longrightarrow> (\<phi>)(y)\<longrightarrow>(\<psi>)(y))))))"
-
-abbreviation lewperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<integral><_|_>") 
-  where "\<integral><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circ><\<^bold>\<not>\<psi>|\<phi>>"
 
 lemma True nitpick [satisfy,user_axioms,expect=genuine] oops
 
+lemma "\<odot><\<psi>|\<phi>> \<equiv> \<circle><\<psi>|\<phi>>" nitpick [show_all] (*countermodel found*)
 
 
+abbreviation lewcond  :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<otimes><_|_>")  (*David Lewis's evaluation rule for the conditional*)
+  where "\<otimes><\<psi>|\<phi>> \<equiv> (\<lambda>v. (\<not>(\<exists>x. (\<phi>)(x))\<or>  
+                      (\<exists>x. ((\<phi>)(x)\<and>(\<psi>)(x) \<and> (\<forall>y. ((y r x) \<longrightarrow> (\<phi>)(y)\<longrightarrow>(\<psi>)(y)))))))"
+definition lewperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<pi><_|_>") 
+  where "\<pi><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<otimes><\<^bold>\<not>\<psi>|\<phi>>"
 
 
 subsection \<open>Properties\<close>
@@ -146,9 +121,7 @@ lemma assumes Ferrers reflexivity  (*fact overlooked in the literature*)
 
 (* Some useful relations for constraining the betterness relations*)
 
-  section \<open>Max rule\<close>
-
- subsection \<open>Correspondence\<close>
+subsection \<open>Correspondance under the max rule\<close>
 
 text \<open>We go through the known correspondances, and verify them \<close>
 
@@ -156,7 +129,7 @@ text \<open>We go through the known correspondances, and verify them \<close>
 lemma assumes "mlimitedness"
   shows  D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>" sledgehammer oops (*proof found*)
 
-lemma assumes D: "\<forall>\<phi> \<psi>. \<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"
+lemma assumes D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"
   shows "mlimitedness"   
   sledgehammer (*all timed out*)
   nitpick (* counterexample found *)
@@ -166,7 +139,7 @@ lemma assumes D: "\<forall>\<phi> \<psi>. \<lfloor>\<diamond>\<phi> \<^bold>\<ri
 lemma assumes "msmoothness"    
   shows  CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" sledgehammer  oops (*proof found*)
 
-lemma assumes CM: "\<forall>\<phi> \<psi> \<chi>. \<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
+lemma assumes CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
   shows  "msmoothness" 
   sledgehammer (* timed out*)
   nitpick [show_all] (* counterexample found *)
@@ -181,7 +154,7 @@ lemma assumes "reflexivity"
   oops 
 
 lemma assumes "reflexivity" "Ferrers"
-  shows  DR: "\<forall>\<phi> \<psi> \<chi>.\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>" 
+  shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>" 
   sledgehammer (* proof found *)
   nitpick (* no counterexample found *)
   oops 
@@ -189,7 +162,7 @@ lemma assumes "reflexivity" "Ferrers"
 lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<chi>|\<phi>>\<^bold>\<or>\<circle><\<chi>|\<psi>>)\<rfloor>" 
    shows "reflexivity" 
    sledgehammer (* timed out*)
-   nitpick [show_all] (* counterexample found *)
+   nitpick (* counterexample found *)
    oops 
 
 lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<chi>|\<phi>>\<^bold>\<or>\<circle><\<chi>|\<psi>>)\<rfloor>" 
@@ -230,10 +203,7 @@ lemma assumes  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>
   nitpick (* counterexample found *)
   oops 
 
- 
-
-
-subsection \<open>Correspondance under the opt rule\<close>
+  subsection \<open>Correspondance under the opt rule\<close>
 
 text \<open>We move to the opt rule, and associate with it two news modal operators\<close>
 
@@ -315,41 +285,19 @@ lemma assumes Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>
 
 subsection \<open>Closure maximality and Lewis rule\<close>
 
-
+(*ToDO*)
 
  text \<open>Under the Lewis rule, totalness corresponds to D \<close>
 
-
-(*deontic explosion-max rule*)
-lemma DEX: "\<lfloor>(\<circle><\<phi>|\<psi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<phi>|\<psi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<psi>>\<rfloor>" sledgehammer oops
-(*proof found*) 
-
-(*no-deontic explosion-lewis rule*)
-lemma DEX: "\<lfloor>(\<circ><\<phi>|\<psi>>\<^bold>\<and>\<circ><\<^bold>\<not>\<phi>|\<psi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<psi>>\<rfloor>"
-  sledgehammer (*timed out*) 
-  nitpick (*counter-model found*) oops
-
-
-
-lemma assumes "mlimitedness"
-      assumes "transitivity" 
-      shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>"
-      sledgehammer oops
-      nitpick [show_all]
-
-
-
-
-
 lemma
  assumes "totalness"
- shows D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow>\<p><\<psi>|\<phi>>)\<rfloor>"   
+ shows D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<otimes><\<psi>|\<phi>> \<^bold>\<rightarrow>\<pi><\<psi>|\<phi>>)\<rfloor>"   
   sledgehammer (* proof found *)
   nitpick (* no counterexample found *)
   oops 
 
 lemma
-  assumes  D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow>\<p><\<psi>|\<phi>>)\<rfloor>"
+  assumes  D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<otimes><\<psi>|\<phi>> \<^bold>\<rightarrow>\<pi><\<psi>|\<phi>>)\<rfloor>"
   shows "totalness"   
   sledgehammer (* timed out*)
   nitpick (* counterexample found *)
