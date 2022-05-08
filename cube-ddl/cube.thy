@@ -86,7 +86,6 @@ lemma "\<odot><\<psi>|\<phi>> \<equiv> \<circle><\<psi>|\<phi>>" nitpick [show_a
 abbreviation lewcond :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("\<circ><_|_>")
   where "\<circ><\<psi>|\<phi>> \<equiv> \<lambda>v. (\<not>(\<exists>x. (\<phi>)(x))\<or>  
         (\<exists>x. ((\<phi>)(x)\<and>(\<psi>)(x) \<and> (\<forall>y. ((y r x) \<longrightarrow> (\<phi>)(y)\<longrightarrow>(\<psi>)(y))))))"
-
 abbreviation lewperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<integral><_|_>") 
   where "\<integral><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circ><\<^bold>\<not>\<psi>|\<phi>>"
 
@@ -329,13 +328,18 @@ lemma DEX: "\<lfloor>(\<circ><\<phi>|\<psi>>\<^bold>\<and>\<circ><\<^bold>\<not>
   sledgehammer (*timed out*) 
   nitpick (*counter-model found*) oops
 
-
+lemma assumes "mlimitedness"
+  assumes "transitivity" 
+  assumes "totalness"
+  shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<odot><\<psi>|\<phi>>\<rfloor>"
+      sledgehammer oops (*proof found*) 
 
 lemma assumes "mlimitedness"
-      assumes "transitivity" 
-      shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>"
-      sledgehammer oops
-      nitpick [show_all]
+  assumes "transitivity" 
+  assumes "totalness"
+ shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>"
+      sledgehammer (*proof found*) 
+
 
 
 
