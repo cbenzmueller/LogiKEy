@@ -246,8 +246,8 @@ text \<open>opt-Limitedness corresponds to D\<close>
 
 lemma assumes "olimitedness"    
   shows  D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"   
-  sledgehammer (* timed out*)
-  nitpick (* counterexample found *)
+  sledgehammer (* proof found*)
+  nitpick (* no counterexample found *)
   oops 
 lemma assumes D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"         
   shows "olimitedness"     
@@ -257,14 +257,14 @@ lemma assumes D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>
 
 text \<open>Smoothness corresponds to CM\<close>
 
-lemma assumes "msmoothness"    
+lemma assumes "osmoothness"    
   shows  CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"   
-  sledgehammer (* timed out*)
+  sledgehammer (* proof found*)
   nitpick (* counterexample found *)
   oops  
 
 lemma assumes CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  shows  "msmoothness"   
+  shows  "osmoothness"   
   sledgehammer (* timed out*)
   nitpick (* counterexample found *)
   oops 
