@@ -1,6 +1,6 @@
 section \<open>Base system E\<close>
 (*<*)
-theory cube
+theory cube_old
 imports Main
 
 begin
@@ -92,9 +92,6 @@ abbreviation lewperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\
 lemma True nitpick [satisfy,user_axioms,expect=genuine] oops
 
 
-
-
-
 subsection \<open>Properties\<close>
 
 text \<open>We have the following constraints on the betterness relation\<close>
@@ -149,13 +146,14 @@ lemma assumes Ferrers reflexivity  (*fact overlooked in the literature*)
 
  subsection \<open>Correspondence\<close>
 
-text \<open>We go through the known correspondances, and verify them \<close>
+text \<open>We go through the known correspondences, and verify them \<close>
 
 (*max-Limitedness corresponds to D*)
 lemma assumes "mlimitedness"
-  shows  D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  sledgehammer (*proof found*)
+  shows  D*: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
+  sledgehammer (*proof found*)
 
-lemma assumes D: "\<forall>\<phi> \<psi>. \<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"
+lemma assumes D*: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"
   shows "mlimitedness"   
   sledgehammer (*all timed out*)
   nitpick (* counterexample found *)
@@ -163,7 +161,8 @@ lemma assumes D: "\<forall>\<phi> \<psi>. \<lfloor>\<diamond>\<phi> \<^bold>\<ri
 
 (*smoothness corresponds to cautious monotony *)
 lemma assumes "msmoothness"    
-  shows  CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" sledgehammer  oops (*proof found*)
+  shows  CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
+  sledgehammer  oops (*proof found*)
 
 lemma assumes CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
   shows  "msmoothness" 
@@ -243,16 +242,16 @@ text \<open>Here we redefine Lewis's limit assumption accordingly\<close>
 
 text \<open>Correspondance\<close>
 
-text \<open>max-Limitedness corresponds to D\<close>
+text \<open>opt-Limitedness corresponds to D\<close>
 
-lemma assumes "mlimitedness"    
+lemma assumes "olimitedness"    
   shows  D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"   
   sledgehammer (* timed out*)
   nitpick (* counterexample found *)
   oops 
 lemma assumes D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"         
-  shows "mlimitedness"     
-  sledgehammer (* timed out*)
+  shows "olimitedness"     
+  sledgehammer (* timed out*)oops
   nitpick (* counterexample found *)
   oops 
 
@@ -320,11 +319,11 @@ subsection \<open>Closure maximality and Lewis rule\<close>
 
 
 (*deontic explosion-max rule*)
-lemma DEX: "\<lfloor>(\<circle><\<phi>|\<psi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<phi>|\<psi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<psi>>\<rfloor>" 
+lemma DEX: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>>\<rfloor>" oops
 (*proof found*) 
 
 (*no-deontic explosion-lewis rule*)
-lemma DEX: "\<lfloor>(\<circ><\<phi>|\<psi>>\<^bold>\<and>\<circ><\<^bold>\<not>\<phi>|\<psi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<psi>>\<rfloor>"
+lemma DEX: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>>\<rfloor>"
   sledgehammer (*timed out*) 
   nitpick (*counter-model found for card i = 3*) oops
 
