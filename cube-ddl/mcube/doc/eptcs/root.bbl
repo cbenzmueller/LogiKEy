@@ -1,0 +1,255 @@
+\begin{thebibliography}{10}
+\providecommand{\bibitemdeclare}[2]{}
+\providecommand{\surnamestart}{}
+\providecommand{\surnameend}{}
+\providecommand{\urlprefix}{Available at }
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{\texttt{#2}}
+\providecommand{\urlalt}[2]{\href{#1}{#2}}
+\providecommand{\doi}[1]{doi:\urlalt{http://dx.doi.org/#1}{#1}}
+\providecommand{\bibinfo}[2]{#2}
+
+\bibitemdeclare{incollection}{Satallax}
+\bibitem{Satallax}
+\bibinfo{author}{J.~\surnamestart Backes\surnameend} \& \bibinfo{author}{C.E.
+  \surnamestart Brown\surnameend} (\bibinfo{year}{2010}):
+  \emph{\bibinfo{title}{Analytic Tableaux for Higher-Order Logic with Choice}}.
+\newblock In \bibinfo{editor}{J.~\surnamestart Giesl\surnameend} \&
+  \bibinfo{editor}{R.~\surnamestart H{\"a}hnle\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{Automated Reasoning}}, {\sl \bibinfo{series}{Lecture
+  Notes in Computer Science}} \bibinfo{volume}{6173},
+  \bibinfo{publisher}{Springer Berlin Heidelberg}, pp. \bibinfo{pages}{76--90},
+  \doi{10.1007/978-3-642-14203-1\_7}.
+
+\bibitemdeclare{incollection}{CVC4}
+\bibitem{CVC4}
+\bibinfo{author}{C.~\surnamestart Barrett\surnameend}, \bibinfo{author}{C.L.
+  \surnamestart Conway\surnameend}, \bibinfo{author}{M.~\surnamestart
+  Deters\surnameend}, \bibinfo{author}{L.~\surnamestart Hadarean\surnameend},
+  \bibinfo{author}{D.~\surnamestart Jovanovic\surnameend},
+  \bibinfo{author}{T.~\surnamestart King\surnameend},
+  \bibinfo{author}{A.~\surnamestart Reynolds\surnameend} \&
+  \bibinfo{author}{C.~\surnamestart Tinelli\surnameend} (\bibinfo{year}{2011}):
+  \emph{\bibinfo{title}{CVC4}}.
+\newblock In \bibinfo{editor}{Ganesh \surnamestart Gopalakrishnan\surnameend}
+  \& \bibinfo{editor}{Shaz \surnamestart Qadeer\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{Computer Aided Verification}}, {\sl
+  \bibinfo{series}{LNCS}} \bibinfo{volume}{6806}, \bibinfo{publisher}{Springer
+  Berlin Heidelberg}, pp. \bibinfo{pages}{171--177},
+  \doi{10.1007/978-3-642-22110-1\_14}.
+
+\bibitemdeclare{incollection}{B12}
+\bibitem{B12}
+\bibinfo{author}{C.~\surnamestart Benzm\"uller\surnameend}
+  (\bibinfo{year}{2010}): \emph{\bibinfo{title}{Verifying the Modal Logic Cube
+  is an Easy Task (for Higher-Order Automated Reasoners)}}.
+\newblock In \bibinfo{editor}{S.~\surnamestart Siegler\surnameend} \&
+  \bibinfo{editor}{N.~\surnamestart Wasser\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{Verification, Induction, Termination Analysis -
+  Festschrift for Christoph Walther on the Occasion of His 60th Birthday}},
+  {\sl \bibinfo{series}{LNCS}} \bibinfo{volume}{6463},
+  \bibinfo{publisher}{Springer}, pp. \bibinfo{pages}{117--128},
+  \doi{10.1007/978-3-642-17172-7\_7}.
+
+\bibitemdeclare{inproceedings}{IJCAI}
+\bibitem{IJCAI}
+\bibinfo{author}{C.~\surnamestart Benzm{\"u}ller\surnameend}
+  (\bibinfo{year}{2013}): \emph{\bibinfo{title}{Automating Quantified
+  Conditional Logics in {HOL}}}.
+\newblock In \bibinfo{editor}{F.~\surnamestart Rossi\surnameend}, editor: {\sl
+  \bibinfo{booktitle}{23rd International Joint Conference on Artificial
+  Intelligence (IJCAI-13)}}, \bibinfo{address}{Beijing, China}, pp.
+  \bibinfo{pages}{746--753}.
+\newblock \urlprefix\url{http://ijcai.org/papers13/Papers/IJCAI13-117.pdf}.
+
+\bibitemdeclare{article}{GoedelGod-AFP}
+\bibitem{GoedelGod-AFP}
+\bibinfo{author}{C.~\surnamestart Benzm\"uller\surnameend} \&
+  \bibinfo{author}{B.~Woltzenlogel \surnamestart Paleo\surnameend}
+  (\bibinfo{year}{2013}): \emph{\bibinfo{title}{G\"odel's God in
+  Isabelle/HOL}}.
+\newblock {\sl \bibinfo{journal}{Archive of Formal Proofs}}.
+\newblock \bibinfo{note}{\url{http://afp.sf.net/entries/GoedelGod.shtml},
+  Formal proof development}.
+
+\bibitemdeclare{inproceedings}{ECAI}
+\bibitem{ECAI}
+\bibinfo{author}{C.~\surnamestart Benzm{\"u}ller\surnameend} \&
+  \bibinfo{author}{B.~Woltzenlogel \surnamestart Paleo\surnameend}
+  (\bibinfo{year}{2014}): \emph{\bibinfo{title}{Automating {G\"{o}del's}
+  Ontological Proof of {God}'s Existence with Higher-order Automated Theorem
+  Provers}}.
+\newblock In \bibinfo{editor}{T.~\surnamestart Schaub\surnameend},
+  \bibinfo{editor}{G.~\surnamestart Friedrich\surnameend} \&
+  \bibinfo{editor}{B.~\surnamestart O'Sullivan\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{ECAI 2014}}, {\sl \bibinfo{series}{Frontiers in
+  Artificial Intelligence and Applications}} \bibinfo{volume}{263},
+  \bibinfo{publisher}{IOS Press}, pp. \bibinfo{pages}{93 -- 98},
+  \doi{10.3233/978-1-61499-419-0-93}.
+
+\bibitemdeclare{article}{J23}
+\bibitem{J23}
+\bibinfo{author}{C.~\surnamestart Benzm{\"u}ller\surnameend} \&
+  \bibinfo{author}{L.C. \surnamestart Paulson\surnameend}
+  (\bibinfo{year}{2013}): \emph{\bibinfo{title}{Quantified Multimodal Logics in
+  Simple Type Theory}}.
+\newblock {\sl \bibinfo{journal}{Logica Universalis (Special Issue on
+  Multimodal Logics)}} \bibinfo{volume}{7}(\bibinfo{number}{1}), pp.
+  \bibinfo{pages}{7--20}, \doi{10.1007/s11787-012-0052-y}.
+
+\bibitemdeclare{inproceedings}{C25}
+\bibitem{C25}
+\bibinfo{author}{C.~\surnamestart Benzm{\"u}ller\surnameend},
+  \bibinfo{author}{F.~\surnamestart Rabe\surnameend} \&
+  \bibinfo{author}{G.~\surnamestart Sutcliffe\surnameend}
+  (\bibinfo{year}{2008}): \emph{\bibinfo{title}{{THF0} -- The Core of the
+  {TPTP} Language for Classical Higher-Order Logic}}.
+\newblock In \bibinfo{editor}{A.~\surnamestart Armando\surnameend},
+  \bibinfo{editor}{P.~\surnamestart Baumgartner\surnameend} \&
+  \bibinfo{editor}{G.~\surnamestart Dowek\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{Automated Reasoning, 4th International Joint Conference,
+  IJCAR 2008, Sydney, Australia, August 12-15, 2008, Proceedings}}, {\sl
+  \bibinfo{series}{LNCS}} \bibinfo{volume}{5195},
+  \bibinfo{publisher}{Springer}, pp. \bibinfo{pages}{491--506},
+  \doi{10.1007/978-3-540-71070-7\_41}.
+
+\bibitemdeclare{inproceedings}{C26}
+\bibitem{C26}
+\bibinfo{author}{C.~\surnamestart Benzm{\"u}ller\surnameend},
+  \bibinfo{author}{F.~\surnamestart Theiss\surnameend}, \bibinfo{author}{L.C.
+  \surnamestart Paulson\surnameend} \& \bibinfo{author}{A.~\surnamestart
+  Fietzke\surnameend} (\bibinfo{year}{2008}): \emph{\bibinfo{title}{{LEO-II} -
+  A Cooperative Automatic Theorem Prover for Higher-Order Logic (System
+  Description)}}.
+\newblock In \bibinfo{editor}{A.~\surnamestart Armando\surnameend},
+  \bibinfo{editor}{P.~\surnamestart Baumgartner\surnameend} \&
+  \bibinfo{editor}{G.~\surnamestart Dowek\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{Automated Reasoning, 4th International Joint Conference,
+  IJCAR 2008, Sydney, Australia, August 12-15, 2008, Proceedings}}, {\sl
+  \bibinfo{series}{LNCS}} \bibinfo{volume}{5195},
+  \bibinfo{publisher}{Springer}, pp. \bibinfo{pages}{162--170},
+  \doi{10.1007/978-3-540-71070-7\_14}.
+
+\bibitemdeclare{inproceedings}{BlanchetteN-ITP10}
+\bibitem{BlanchetteN-ITP10}
+\bibinfo{author}{J.C. \surnamestart Blanchette\surnameend} \&
+  \bibinfo{author}{T.~\surnamestart Nipkow\surnameend} (\bibinfo{year}{2010}):
+  \emph{\bibinfo{title}{Nitpick: A counterexample generator for higher-order
+  logic based on a relational model finder}}.
+\newblock In \bibinfo{editor}{M.~\surnamestart Kaufmann\surnameend} \&
+  \bibinfo{editor}{L.~\surnamestart Paulson\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{Interactive Theorem Proving (ITP 2010)}},
+  \bibinfo{volume}{6172}, pp. \bibinfo{pages}{131--146}.
+
+\bibitemdeclare{inproceedings}{hurd2003d}
+\bibitem{hurd2003d}
+\bibinfo{author}{J.~\surnamestart Hurd\surnameend} (\bibinfo{year}{2003}):
+  \emph{\bibinfo{title}{First-Order Proof Tactics in Higher-Order Logic Theorem
+  Provers}}.
+\newblock In \bibinfo{editor}{M.~\surnamestart Archer\surnameend},
+  \bibinfo{editor}{B.~Di \surnamestart Vito\surnameend} \&
+  \bibinfo{editor}{C.~\surnamestart Mu{\~{n}}oz\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{Design and Application of Strategies/Tactics in Higher
+  Order Logics (STRATA 2003)}}, \bibinfo{series}{{NASA} Technical Reports}, pp.
+  \bibinfo{pages}{56--68}.
+\newblock \urlprefix\url{http://www.gilith.com/research/papers}.
+
+\bibitemdeclare{inproceedings}{Vampire}
+\bibitem{Vampire}
+\bibinfo{author}{L.~\surnamestart Kov{\'{a}}cs\surnameend} \&
+  \bibinfo{author}{A.~\surnamestart Voronkov\surnameend}
+  (\bibinfo{year}{2013}): \emph{\bibinfo{title}{First-Order Theorem Proving and
+  Vampire}}.
+\newblock In \bibinfo{editor}{N.~\surnamestart Sharygina\surnameend} \&
+  \bibinfo{editor}{H.~\surnamestart Veith\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{Computer Aided Verification - 25th International
+  Conference, {CAV} 2013, Saint Petersburg, Russia, July 13-19, 2013.
+  Proceedings}}, {\sl \bibinfo{series}{LNCS}} \bibinfo{volume}{8044},
+  \bibinfo{publisher}{Springer}, pp. \bibinfo{pages}{1--35},
+  \doi{10.1007/978-3-642-39799-8\_1}.
+
+\bibitemdeclare{inproceedings}{Z3}
+\bibitem{Z3}
+\bibinfo{author}{L.M. \surnamestart de~Moura\surnameend} \&
+  \bibinfo{author}{N.~\surnamestart Bj{\o}rner\surnameend}
+  (\bibinfo{year}{2008}): \emph{\bibinfo{title}{{Z3:} An Efficient {SMT}
+  Solver}}.
+\newblock In \bibinfo{editor}{C.R. \surnamestart Ramakrishnan\surnameend} \&
+  \bibinfo{editor}{J.~\surnamestart Rehof\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{Tools and Algorithms for the Construction and Analysis of
+  Systems, 14th International Conference, {TACAS} 2008, Budapest, Hungary,
+  March 29-April 6, 2008. Proceedings}}, {\sl \bibinfo{series}{LNCS}}
+  \bibinfo{volume}{4963}, \bibinfo{publisher}{Springer}, pp.
+  \bibinfo{pages}{337--340}, \doi{10.1007/978-3-540-78800-3\_24}.
+
+\bibitemdeclare{book}{Nipkow-Paulson-Wenzel:2002}
+\bibitem{Nipkow-Paulson-Wenzel:2002}
+\bibinfo{author}{T.~\surnamestart Nipkow\surnameend}, \bibinfo{author}{L.C.
+  \surnamestart Paulson\surnameend} \& \bibinfo{author}{M.~\surnamestart
+  Wenzel\surnameend} (\bibinfo{year}{2002}): \emph{\bibinfo{title}{Isabelle/HOL
+  --- A Proof Assistant for Higher-Order Logic}}.
+\newblock {\sl \bibinfo{series}{LNCS}} \bibinfo{volume}{2283},
+  \bibinfo{publisher}{Springer}.
+
+\bibitemdeclare{inproceedings}{EasyChair:128}
+\bibitem{EasyChair:128}
+\bibinfo{author}{L.C. \surnamestart Paulson\surnameend} \&
+  \bibinfo{author}{J.C. \surnamestart Blanchette\surnameend}
+  (\bibinfo{year}{2012}): \emph{\bibinfo{title}{Three years of experience with
+  Sledgehammer, a Practical Link Between Automatic and Interactive Theorem
+  Provers}}.
+\newblock In \bibinfo{editor}{G.~\surnamestart Sutcliffe\surnameend},
+  \bibinfo{editor}{S.~\surnamestart Schulz\surnameend} \&
+  \bibinfo{editor}{E.~\surnamestart Ternovska\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{IWIL 2010}}, {\sl \bibinfo{series}{EPiC
+  Series}}~\bibinfo{volume}{2}, \bibinfo{publisher}{EasyChair}, pp.
+  \bibinfo{pages}{1--11}.
+
+\bibitemdeclare{article}{Rabe}
+\bibitem{Rabe}
+\bibinfo{author}{F.~\surnamestart Rabe\surnameend},
+  \bibinfo{author}{P.~\surnamestart Pudlak\surnameend},
+  \bibinfo{author}{G.~\surnamestart Sutcliffe\surnameend} \&
+  \bibinfo{author}{W.~\surnamestart Shen\surnameend} (\bibinfo{year}{2009}):
+  \emph{\bibinfo{title}{Solving the \$ 100 modal logic challenge}}.
+\newblock {\sl \bibinfo{journal}{Journal of Applied Logic}}
+  \bibinfo{volume}{7}, pp. \bibinfo{pages}{113--130}.
+
+\bibitemdeclare{inproceedings}{E}
+\bibitem{E}
+\bibinfo{author}{S.~\surnamestart Schulz\surnameend} (\bibinfo{year}{2013}):
+  \emph{\bibinfo{title}{System Description: {E} 1.8}}.
+\newblock In \bibinfo{editor}{K.L. \surnamestart McMillan\surnameend},
+  \bibinfo{editor}{A.~\surnamestart Middeldorp\surnameend} \&
+  \bibinfo{editor}{A.~\surnamestart Voronkov\surnameend}, editors: {\sl
+  \bibinfo{booktitle}{Logic for Programming, Artificial Intelligence, and
+  Reasoning - 19th International Conference, LPAR-19, Stellenbosch, South
+  Africa, December 14-19, 2013. Proceedings}}, {\sl \bibinfo{series}{LNCS}}
+  \bibinfo{volume}{8312}, \bibinfo{publisher}{Springer}, pp.
+  \bibinfo{pages}{735--743}, \doi{10.1007/978-3-642-45221-5\_49}.
+
+\bibitemdeclare{phdthesis}{sultana14:_higher}
+\bibitem{sultana14:_higher}
+\bibinfo{author}{N.~\surnamestart Sultana\surnameend} (\bibinfo{year}{2015}):
+  \emph{\bibinfo{title}{{Higher-order proof translation}}}.
+\newblock Ph.D. thesis, \bibinfo{school}{Computer Laboratory, University of
+  Cambridge}.
+\newblock \bibinfo{note}{Available as Tech Report UCAM-CL-TR-867}.
+
+\bibitemdeclare{inproceedings}{SPASS}
+\bibitem{SPASS}
+\bibinfo{author}{C.~\surnamestart Weidenbach\surnameend},
+  \bibinfo{author}{D.~\surnamestart Dimova\surnameend},
+  \bibinfo{author}{A.~\surnamestart Fietzke\surnameend},
+  \bibinfo{author}{R.~\surnamestart Kumar\surnameend},
+  \bibinfo{author}{M.~\surnamestart Suda\surnameend} \&
+  \bibinfo{author}{P.~\surnamestart Wischnewski\surnameend}
+  (\bibinfo{year}{2009}): \emph{\bibinfo{title}{{SPASS} Version 3.5}}.
+\newblock In \bibinfo{editor}{R.A. \surnamestart Schmidt\surnameend}, editor:
+  {\sl \bibinfo{booktitle}{Automated Deduction - CADE-22, 22nd International
+  Conference on Automated Deduction, Montreal, Canada, August 2-7, 2009.
+  Proceedings}}, {\sl \bibinfo{series}{LNCS}} \bibinfo{volume}{5663},
+  \bibinfo{publisher}{Springer}, pp. \bibinfo{pages}{140--145},
+  \doi{10.1007/978-3-642-02959-2\_10}.
+
+\end{thebibliography}

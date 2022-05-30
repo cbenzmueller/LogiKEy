@@ -1,0 +1,53 @@
+This is BibTeX, Version 0.99d (TeX Live 2014)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: root.aux
+The style file: eptcs.bst
+Database file #1: root.bib
+Warning--string name "springer" is undefined
+--line 82 of file root.bib
+Warning--string name "lncs" is undefined
+--line 83 of file root.bib
+Warning--I'm ignoring E's extra "title" field
+--line 227 of file root.bib
+You've used 19 entries,
+            2701 wiz_defined-function locations,
+            753 strings with 9796 characters,
+and the built_in function-call counts, 13158 in all, are:
+= -- 883
+> -- 393
+< -- 28
++ -- 149
+- -- 130
+* -- 1727
+:= -- 1513
+add.period$ -- 47
+call.type$ -- 19
+change.case$ -- 117
+chr.to.int$ -- 0
+cite$ -- 38
+duplicate$ -- 1077
+empty$ -- 1047
+format.name$ -- 156
+if$ -- 2617
+int.to.chr$ -- 0
+int.to.str$ -- 19
+missing$ -- 287
+newline$ -- 116
+num.names$ -- 66
+pop$ -- 177
+preamble$ -- 1
+purify$ -- 87
+quote$ -- 0
+skip$ -- 313
+stack$ -- 0
+substring$ -- 512
+swap$ -- 1135
+text.length$ -- 28
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 93
+warning$ -- 0
+while$ -- 89
+width$ -- 21
+write$ -- 273
+(There were 3 warnings)
