@@ -1,0 +1,9 @@
+session "mcube" = "HOL" +
+  options [document = pdf, document_output = doc] 
+  theories
+	ModalCube
+  document_files
+    "eptcs.cls"
+    "eptcs.bst"
+	"root.tex"
+	"root.bib"
