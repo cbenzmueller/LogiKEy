@@ -260,7 +260,7 @@ text \<open>Smoothness corresponds to CM\<close>
 lemma assumes "osmoothness"    
   shows  CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"   
   sledgehammer (* proof found*)
-  nitpick (* counterexample found *)
+  nitpick (* run out of time *)
   oops  
 
 lemma assumes CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
