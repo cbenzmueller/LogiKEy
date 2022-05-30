@@ -33,7 +33,7 @@ begin
  abbreviation SDLexistsB (binder"\<^bold>\<exists>"[8]9) where "\<^bold>\<exists>x. \<phi>(x) \<equiv> \<^bold>\<exists>\<phi>" 
 
  axiomatization where D: "\<lfloor>\<^bold>\<not> ((OB \<phi>) \<^bold>\<and> (OB (\<^bold>\<not> \<phi>)))\<rfloor>" (*Axiom D: seriality of r.*)
-lemma seriality: "(\<forall>w. \<exists>v. w R v)" sledgehammer
+ lemma seriality: "(\<forall>w. \<exists>v. w R v)" using D by blast
 
  abbreviation SDLobl::\<gamma> ("\<^bold>\<circle><_>") where "\<^bold>\<circle><\<phi>> \<equiv>  OB \<phi>"  (*New syntax: A is obligatory.*)
 
