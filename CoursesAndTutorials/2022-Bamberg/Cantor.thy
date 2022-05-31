@@ -40,9 +40,16 @@ proof
 qed
 
 
-lemma "(\<forall>x. p x) \<longrightarrow> (\<exists>x. p x)" sledgehammer nitpick[show_all]  oops
+lemma "(\<forall>x. p x) \<longrightarrow> (\<exists>y. p y)" sledgehammer nitpick[show_all]  oops
 
-lemma "(\<exists>x. p x) \<longrightarrow> (\<forall>x. p x)" sledgehammer nitpick[show_all,card=2] oops
+lemma "(\<forall>x. p x) \<longrightarrow> (\<exists>y. p y)" proof
+   assume 1: "(\<forall>x. p x)"
+   fix a::i 
+    have 2: "p a" by (simp add: "1")
+    have 3: "\<exists>y. p y" using "2" by auto
+  show ?thesis sledgehammer
+
+lemma "(\<exists>y. p y) \<longrightarrow> (\<forall>x. p x)" sledgehammer nitpick[show_all,card=2] oops
 
 
 (* Simple Example (Exercise 2)*)
