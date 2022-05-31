@@ -1,13 +1,13 @@
 theory LiarsStreet  (*Christoph Benzmüller, 2020*)
   imports Main  
 
-
+(*
 abbrevs   
  Nilda="\<^bold>N\<^bold>i\<^bold>l\<^bold>d\<^bold>a" and Nilda="\<^bold>C\<^bold>a\<^bold>r\<^bold>l\<^bold>a" and And="( \<^bold>a\<^bold>n\<^bold>d )" and Or="( \<^bold>o\<^bold>r )" and Not="(\<^bold>n\<^bold>o\<^bold>t )" and If_then="(\<^bold>I\<^bold>f \<^bold>t\<^bold>h\<^bold>e\<^bold>n )"
  and LiarsStreet="\<^bold>L\<^bold>i\<^bold>a\<^bold>r\<^bold>s\<^bold>S\<^bold>t\<^bold>r\<^bold>e\<^bold>e\<^bold>t" and TruthtellersRoad="\<^bold>T\<^bold>r\<^bold>u\<^bold>t\<^bold>h\<^bold>t\<^bold>e\<^bold>l\<^bold>l\<^bold>e\<^bold>r\<^bold>s\<^bold>R\<^bold>o\<^bold>a\<^bold>d" and Lies="\<^bold>(l\<^bold>i\<^bold>e\<^bold>s )"
  and Says_the_truth="(\<^bold>s\<^bold>a\<^bold>y\<^bold>s\<^bold>-\<^bold>t\<^bold>h\<^bold>e\<^bold>-\<^bold>t\<^bold>r\<^bold>u\<^bold>t\<^bold>h )" and Lives_not_in="( \<^bold>l\<^bold>i\<^bold>v\<^bold>e\<^bold>s\<^bold>-\<^bold>n\<^bold>o\<^bold>t\<^bold>-\<^bold>i\<^bold>n )" 
- and Neither_nor_live_in="( \<^bold>n\<^bold>e\<^bold>i\<^bold>t\<^bold>h\<^bold>e\<^bold>r  \<^bold>n\<^bold>o\<^bold>r  \<^bold>l\<^bold>i\<^bold>v\<^bold>e\<^bold>-\<^bold>i\<^bold>n )" and Both_live_in="( \<^bold>b\<^bold>o\<^bold>t\<^bold>h  \<^bold>a\<^bold>n\<^bold>d  \<^bold>l\<^bold>i\<^bold>v\<^bold>e\<^bold>-\<^bold>i\<^bold>n )" 
-
+ and Neither_nor_live_in="( \<^bold>n\<^bold>e\<^bold>i\<^bold>t\<^bold>h\<^bold>e\<^bold>r  \<^bold>n\<^bold>o\<^bold>r  \<^bold>l\<^bold>i\<^bold>v\<^bold>e\<^bold>-\<^bold>i\<^bold>n )" and Both_live_in="( \<^bold>\<^bold>b\<^bold>o\<^bold>t\<^bold>h  \<^bold>a\<^bold>n\<^bold>d  \<^bold>l\<^bold>i\<^bold>v\<^bold>e\<^bold>-\<^bold>i\<^bold>n )" 
+*)
 
 begin          
 (*unimportant*) nitpick_params [user_axioms,format=2,show_all]
@@ -18,6 +18,7 @@ begin
  ***********************************************************************************)
 (* There are some kids, could be many more *)
 datatype Entity = Nilda ("\<^bold>N\<^bold>i\<^bold>l\<^bold>d\<^bold>a") | Carla  ("\<^bold>C\<^bold>a\<^bold>r\<^bold>l\<^bold>a")
+print_theorems
 
 lemma "\<not>(\<^bold>N\<^bold>i\<^bold>l\<^bold>d\<^bold>a = \<^bold>C\<^bold>a\<^bold>r\<^bold>l\<^bold>a)" sledgehammer by simp
 

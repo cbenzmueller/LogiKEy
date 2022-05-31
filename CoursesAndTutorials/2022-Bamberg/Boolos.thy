@@ -18,7 +18,7 @@ axiomatization where
 
 
 lemma "D (F (s (s (s (s e)))) (s (s (s (s e)))))"
-  using A1 A2 A3 A4 A5 sledgehammer[remote_vampire remote_leo2 remote_leo3, overlord]()
+  using A1 A2 A3 A4 A5 sledgehammer[vampire remote_leo2 remote_leo3, overlord]()
   oops
 
 definition induct where "induct X \<equiv> (X e) \<and> (\<forall>x. X x \<longrightarrow> X (s x))"  (*X is is higher-order*)
