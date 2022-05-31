@@ -42,12 +42,20 @@ qed
 
 lemma "(\<forall>x. p x) \<longrightarrow> (\<exists>y. p y)" sledgehammer nitpick[show_all]  oops
 
-lemma "(\<forall>x. p x) \<longrightarrow> (\<exists>y. p y)" proof
-   assume 1: "(\<forall>x. p x)"
-   fix a::i 
-    have 2: "p a" by (simp add: "1")
-    have 3: "\<exists>y. p y" using "2" by auto
-  show ?thesis sledgehammer
+lemma "(\<forall>x. p x) \<longrightarrow> (\<exists>y. p y)" 
+proof
+ assume "(\<forall>x. p x)"
+ fix a::i 
+ have "p a" by (simp add: \<open>\<forall>x. p x\<close>)
+ show "\<exists>y. p y" using \<open>p a\<close> by auto
+qed
+
+lemma "(\<forall>x. p x) \<longrightarrow> (\<exists>y. p y)" 
+  sledgehammer
+  unfolding All_def Ex_def 
+  sledgehammer
+  oops
+
 
 lemma "(\<exists>y. p y) \<longrightarrow> (\<forall>x. p x)" sledgehammer nitpick[show_all,card=2] oops
 
@@ -100,53 +108,51 @@ theorem Test2: "(\<forall>x::i. \<exists>y::i. x = y) \<longrightarrow> (\<exist
 theorem Test3: "\<exists>g::i\<Rightarrow>bool. \<forall>x::i. g(x)" 
   nitpick
   sledgehammer
-  sledgehammer [remote_leo2 remote_satallax remote_vampire]
+  sledgehammer[remote_leo2]
   by auto
 
+
+
+
 (* The surjective Cantor theorem *)  
-theorem Cantor: "\<not>(\<exists>f::i\<Rightarrow>(i\<Rightarrow>bool). \<forall>g::i\<Rightarrow>bool. \<exists>x::i. f x = g)" 
+
+
+theorem Cantor: "\<not>(\<exists>f::i\<Rightarrow>(i\<Rightarrow>bool). \<forall>g::i\<Rightarrow>bool. \<exists>x::i. f x = g)"
   nitpick
   sledgehammer
-  sledgehammer [remote_leo2 remote_satallax]  
+  sledgehammer[remote_leo2 remote_leo3, overlord]  
   oops  
 
-
-(* Adapted from Makarius Wenzel *)
+(* The Traditonal Proof *)
 lemma CantorSurjective: "\<not>(\<exists>f::i\<Rightarrow>i\<Rightarrow>bool.\<forall>p.\<exists>x. f x = p)" 
-proof 
-  assume "\<exists>f::i\<Rightarrow>i\<Rightarrow>bool.\<forall>p.\<exists>x. f x = p"
-  then obtain f :: "i\<Rightarrow>i\<Rightarrow>bool" 
-    where 1: "\<forall>p.\<exists>x. f x = p" by blast
-  let ?D = "\<lambda>x. \<not> f x x"
-  have "\<exists>x. ?D = f x" by (metis "1")
+proof
+  assume "\<exists>f::i\<Rightarrow>i\<Rightarrow>bool.\<forall>p.\<exists>x. f x = p" 
+  then obtain f :: "i\<Rightarrow>i\<Rightarrow>bool"
+    where 1: "\<forall>p.\<exists>x. f x = p" by blast 
+  let ?P = "\<lambda>x.\<not>f x x"
+  have "\<exists>x. ?P = f x" using 1 by metis 
   then obtain a::i 
-    where "?D = f a" by blast
-  then have "?D a \<longleftrightarrow> f a a" by metis
-  then have "\<not> f a a \<longleftrightarrow> f a a" by blast
+    where "?P = f a" by blast 
+  then have "?P a \<longleftrightarrow> f a a"  by metis 
+  then have "\<not>f a a \<longleftrightarrow> f a a" by blast 
   then show False by blast
 qed
 
 
-(* By David Fuenmayor and Christoph Benzmüller 2020: avoids refutation  argument *)
-lemma CantorSurjectiveTraditional: "\<not>(\<exists>f::i\<Rightarrow>i\<Rightarrow>bool.\<forall>p.\<exists>x. f x = p)"    
+(* Proof D. Fuenmayor and C. Benzmüller: avoids refutation  argument *)
+
+lemma CantorSurjective': "\<not>(\<exists>f::i\<Rightarrow>i\<Rightarrow>bool.\<forall>p.\<exists>x. f x = p)"
 proof -
- { fix F::"i\<Rightarrow>i\<Rightarrow>bool"
-    have "\<forall>w. \<exists>v. (F v v) \<longleftrightarrow> (F w v)" proof - (*also automatically:  by auto*)
-    { fix w::i
-      let ?v=w
-      have "(F w w) \<longleftrightarrow> (F w w)" by simp    (*tautology*)
-      hence "(F ?v ?v) \<longleftrightarrow> (F w ?v)" by simp    (*(partial) var substitution*)
-      hence "\<exists>v. (F v v) \<longleftrightarrow> (F w v)" by blast (*Ex-I*)
-    } thus ?thesis by simp qed
-    hence "\<forall>w. \<exists>v. \<not>(F v v) \<longleftrightarrow> \<not>(F w v)" by simp (*replacement*)
-    hence "let P=(\<lambda>x. \<not>F x x) in \<forall>w. \<exists>v. (P v) \<longleftrightarrow> \<not>(F w v)" by simp (*beta-exp + replacement*)
-    hence "\<exists>p. \<forall>w. \<exists>v::i. (p v) \<longleftrightarrow> \<not>(F w v)" by auto (*Ex-I*) 
-    hence "\<exists>p. \<forall>w. \<not>(\<forall>v::i. (p v) \<longleftrightarrow> (F w v))" by simp
-    hence "\<exists>p. \<forall>w. \<not>(p = F w)" by metis
-    hence "\<exists>p. \<forall>w. \<not>(F w = p)" by metis
-    hence "\<exists>p. \<not>(\<exists>w. F w = p)" by simp
-    hence "\<not>(\<forall>p. \<exists>w. F w = p)" by simp
-  } thus ?thesis  by simp
+  {fix F :: "i\<Rightarrow>i\<Rightarrow>bool"
+    have "\<forall>w. \<exists>v. \<not>(F w v) \<longleftrightarrow> \<not>(F v v)" by auto  (*choose v=w*)
+    hence "\<forall>w.\<exists>v.\<not>(F w v) \<longleftrightarrow> ((\<lambda>x. \<not>(F x x)) v)" by simp (* lambda-conversion and replacement *)
+    hence "\<exists> p. \<forall> w. \<exists> v. \<not>(F w v) \<longleftrightarrow> (p v)" by auto (* exists-introduction *)
+    hence "\<exists> p. \<forall> w. \<not>(\<forall> v. (F w v) \<longleftrightarrow> (p v))" by auto (* pull negation outwards *) 
+    hence "\<exists>p. \<forall>w. \<not>(F w = p)" by metis (* Boolean and functional extensionality *)
+  }
+  hence "\<forall> f ::i\<Rightarrow>i\<Rightarrow>bool. \<exists> p. \<forall> w. \<not>(f w = p)" by simp (* F was chosen arbitrary *)
+  hence "\<not>(\<exists>f::i\<Rightarrow>i\<Rightarrow>bool.\<forall>p.\<exists>x. f x = p)" by simp (* pull negation outwards *) 
+  thus ?thesis . (* we are done *)
 qed
-       
+
 end
