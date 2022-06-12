@@ -87,7 +87,7 @@ theorem Test3: "\<exists>g::i\<Rightarrow>bool. \<forall>x::i. g(x)"
 theorem Cantor: "\<not>(\<exists>f::i\<Rightarrow>(i\<Rightarrow>bool). \<forall>g::i\<Rightarrow>bool. \<exists>x::i. f x = g)" 
   nitpick
   sledgehammer
-  sledgehammer [remote_leo2 remote_leo3]() 
+  sledgehammer [remote_leo2 remote_leo3] 
   oops  
 
 
@@ -101,13 +101,13 @@ proof
   have "\<exists>x. ?D = f x" by (metis "1")
   then obtain a::i 
     where "?D = f a" by blast
-  then have "?D a \<longleftrightarrow> f a a" by metis
-  then have "\<not> f a a \<longleftrightarrow> f a a" by blast
+  hence "?D a \<longleftrightarrow> f a a" by metis
+  hence "\<not> f a a \<longleftrightarrow> f a a" by blast
   then show False by blast
 qed
 
 
-(* By David Fuenmayor and Christoph Benzmüller 2020: avoids refutation  argument *)
+(* By David Fuenmayor and Christoph Benzmüller 2020: avoids refutation argument *)
 lemma CantorSurjectiveTraditional: "\<not>(\<exists>f::i\<Rightarrow>i\<Rightarrow>bool.\<forall>p.\<exists>x. f x = p)"    
 proof -
  { fix F::"i\<Rightarrow>i\<Rightarrow>bool"

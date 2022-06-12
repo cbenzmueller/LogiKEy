@@ -70,7 +70,7 @@ lemma COK:"\<lfloor>\<circle><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2
 
 (*disjunctive rationlity*)
 
-lemma "\<lfloor>\<circle><\<psi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<psi>|\<phi>>\<^bold>\<or>\<circle><\<psi>|\<chi>>)\<rfloor>" nitpick 
+lemma "\<lfloor>\<circle><\<psi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<psi>|\<phi>>\<^bold>\<or>\<circle><\<psi>|\<chi>>)\<rfloor>" nitpick oops
 
 lemma "\<lfloor>( \<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<chi>>\<rfloor>" nitpick oops
  

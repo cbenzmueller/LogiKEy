@@ -1,0 +1,89 @@
+%\documentclass[11pt,a4paper]{article}
+\documentclass{eptcs}
+\usepackage{isabelle,isabellesym,amsmath,amssymb,a4wide,wrapfig}
+\usepackage{environ} % fuer neues 'isbfig'-environment
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usetikzlibrary{arrows}
+\usetikzlibrary{automata,positioning}
+
+\newcommand{\imp}{\rightarrow}
+\newcommand{\biimp}{\leftrightarrow}
+\newcommand{\all}{\forall}
+\newcommand{\ex}{\exists}
+\newcommand{\seq}{\vdash}
+\newcommand{\nec}{\Box} % necessarily
+\newcommand{\pos}{\Diamond} % possibly
+\newcommand{\ess}[2]{#1 \ \mathit{ess.} \ #2}
+\newcommand{\NE}{\mathit{NE}}
+
+\newsavebox{\rofl}
+\newlength\foo
+
+\NewEnviron{isbfig}[1]{
+\hfill
+\begin{minipage}[c][#1]{0.25\textwidth}
+    %\framebox{
+    \raggedleft
+    \BODY
+    %}
+\end{minipage}
+\vskip-#1
+}
+
+%
+% (conflicts with eptcs style)
+%
+%% this should be the last package used
+%\usepackage{pdfsetup}
+%
+
+% urls in roman style, theory text in math-similar italics
+\urlstyle{rm}
+\isabellestyle{it}
+
+
+\begin{document}
+
+\title{Systematic Verification of the Modal Logic Cube \\ in Isabelle/HOL\thanks{This work has been supported by the German Research Foundation DFG under grants BE2501/9-2 \&
+    BE2501/11-1.}}
+%\author{Christoph Benzm\"uller and Maximilian Claus \\[1em] Dep. of
+%  Mathematics and Computer Science, Freie Universit\"at Berlin, Germany}
+\author{Christoph Benzm\"uller \qquad \qquad Maximilian Claus 
+\institute{Dep. of Mathematics and Computer Science, Freie
+  Universit\"at Berlin, Germany}
+\email{c.benzmueller|m.claus@fu-berlin.de}
+\and
+Nik Sultana
+\institute{Computer Lab, Cambridge University, UK}
+\email{nik.sultana@cl.cam.ac.uk}
+}
+\def\titlerunning{Systematic Verification of the Modal Logic Cube in Isabelle/HOL}
+\def\authorrunning{Christoph Benzm\"uller, Maximilian Claus and Nik Sultana}
+
+\maketitle
+
+%\tableofcontents
+
+
+
+% sane default for proof documents
+\parindent 0pt\parskip 0.5ex
+
+% generated text of all theories
+\input{session}
+
+%\subsection*{Acknowledgements} 
+% optional bibliography
+%\bibliographystyle{plain}
+\bibliographystyle{eptcs}
+\bibliography{root}
+
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
