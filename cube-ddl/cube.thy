@@ -93,10 +93,7 @@ abbreviation lewperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\
   where "\<integral><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circ><\<^bold>\<not>\<psi>|\<phi>>"
 
 lemma True nitpick [satisfy,user_axioms,expect=genuine] oops
-
-
 subsection \<open>Properties\<close>
-
 text \<open>We have the following constraints on the betterness relation\<close>
 
 (*The standard properties*)
@@ -201,7 +198,8 @@ lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\
 
 text \<open>Transitivity and totalness corresponds to the Spohn axiom (Sp)\<close>
 
-lemma assumes "transitivity" 
+
+lemma assumes "transitivity"
   shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   sledgehammer (* timed out *)
   nitpick (* counterexample for card i=5*)
@@ -273,25 +271,6 @@ lemma assumes CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|
   oops 
 
 
-lemma assumes "totalness"   
-     (* assumes "Ferrers"*)
-  shows  DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>"   
-  sledgehammer (* timed out*)
-  nitpick (* counterexample found *)
-  oops 
-  
- lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>" 
-   shows "totalness"   
-   sledgehammer (* timed out*)
-   nitpick (* counterexample found *)
-   oops 
-
-lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>" 
-  shows "Ferrers"   
-  sledgehammer (* timed out*)
-  nitpick (* counterexample found *)
-  oops 
-
 (*transitivity*)
 
 lemma assumes "transitivity"    
@@ -313,12 +292,30 @@ lemma assumes Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>
   nitpick (* counterexample found for card i =3*)
   oops 
 
+lemma assumes "totalness"
+     (* assumes "Ferrers"*)
+  shows  DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>"   
+  sledgehammer (* timed out*)
+  nitpick (* counterexample found *)
+  oops 
+  
+ lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>" 
+   shows "totalness"   
+   sledgehammer (* timed out*)
+   nitpick (* counterexample found *)
+   oops 
+
+lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>" 
+  shows "Ferrers"   
+  sledgehammer (* timed out*)
+  nitpick (* counterexample found *)
+  oops 
+
 
 subsection \<open>Closure maximality and Lewis rule\<close>
 
 
-
- text \<open>Under the Lewis rule, totalness corresponds to D \<close>
+text \<open>Under the Lewis rule, totalness corresponds to D \<close>
 
 
 (*deontic explosion-max rule*)
@@ -329,6 +326,7 @@ lemma DEX: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<
 lemma DEX: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>>\<rfloor>"
   sledgehammer (*timed out*) 
   nitpick (*counter-model found for card i = 3*) oops
+
 
 lemma assumes "mlimitedness"
   assumes "transitivity" 
