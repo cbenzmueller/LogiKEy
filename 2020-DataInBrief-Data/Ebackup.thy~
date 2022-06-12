@@ -1,4 +1,4 @@
-theory Ebackup imports Main       (* Aqvist's System E: C. Benzmüller & X. Parent, 2019 *)
+theory E imports Main       (* Aqvist's System E: C. Benzmüller & X. Parent, 2019 *)
 begin      nitpick_params [sat_solver = MiniSat_JNI]
 typedecl i (*Possible worlds.*) type_synonym \<sigma> = "(i\<Rightarrow>bool)" 
 consts aw::i (*Actual world.*)  
@@ -36,8 +36,13 @@ lemma True nitpick [satisfy,user_axioms,expect=genuine] oops (*Consistency conf.
 
 (*Correspondence theory.*)
 lemma assumes "\<forall>x y z. x R y \<and> y R z \<longrightarrow> x R z" 
+<<<<<<< HEAD
       shows "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
   sledgehammer oops
+=======
+  shows "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
+  sledgehammer oops 
+>>>>>>> ddfa9f7d1c936dd8adf5329bc84627cbb9f279b0
 
 lemma assumes "\<lfloor>((\<circle><\<psi>|\<phi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<xi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>\<^bold>\<and>\<xi>>\<rfloor>" 
       shows "\<forall>x y z. x R y \<and> y R z \<longrightarrow> x R z" 

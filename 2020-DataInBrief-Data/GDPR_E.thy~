@@ -1,4 +1,4 @@
-theory GDPR_E imports Ebackup       (*GDPR CTD Example. C. Benzmüller & X. Parent, 2019*)
+theory GDPR_E imports E       (*GDPR CTD Example. C. Benzmüller & X. Parent, 2019*)
 begin
 (*Unimportant.*) sledgehammer_params [max_facts=20,timeout=20] 
 (*Unimportant.*) nitpick_params [user_axioms,expect=genuine,show_all,dont_box]
