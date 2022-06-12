@@ -74,8 +74,8 @@ subsection \<open>Some properties of MDL\<close>
 text \<open>We can easily verify the basic properties of MDL:\<close>
 
 lemma (in MDL) D:
-  "\<lfloor>\<^bold>\<not> ((\<^bold>\<circle>\<phi>) \<^bold>\<and> (\<^bold>\<circle>(\<^bold>\<not>\<phi>)))\<rfloor>" sledgehammer oops
-lemma (in MDL) K: "\<lfloor>((\<^bold>\<circle>\<phi>) \<^bold>\<and> (\<^bold>\<circle>(\<phi> \<^bold>\<rightarrow> \<psi>)) \<^bold>\<rightarrow> (\<^bold>\<circle>\<psi>))\<rfloor>" sledgehammer   
+  "\<lfloor>\<^bold>\<not> ((\<^bold>\<circle>\<phi>) \<^bold>\<and> (\<^bold>\<circle>(\<^bold>\<not>\<phi>)))\<rfloor>" using seriality by smt 
+lemma (in MDL) K: "\<lfloor>((\<^bold>\<circle>\<phi>) \<^bold>\<and> (\<^bold>\<circle>(\<phi> \<^bold>\<rightarrow> \<psi>)) \<^bold>\<rightarrow> (\<^bold>\<circle>\<psi>))\<rfloor>" by simp   
 lemma (in MDL) NEC: "\<lfloor>\<phi>\<rfloor> \<Longrightarrow> \<lfloor>\<^bold>\<circle>\<phi>\<rfloor>" by simp \<comment> \<open>@{text "\<Longrightarrow>"} is meta-level implication\<close>
 lemma (in MDL) RM: "\<lfloor>\<phi> \<^bold>\<rightarrow> \<psi>\<rfloor> \<Longrightarrow> \<lfloor>(\<^bold>\<circle>\<phi>) \<^bold>\<rightarrow> (\<^bold>\<circle>\<psi>)\<rfloor>" by simp
 
@@ -83,7 +83,7 @@ text \<open>We can also reason about MDL in this setting, e.g.
       for verifying that the axiom D corresponds to 
       serial frames:\<close>
 lemma (in MDL) D_equivalent_to_seriality:
-  "\<lfloor>\<^bold>\<not> ((\<^bold>\<circle>\<phi>) \<^bold>\<and> (\<^bold>\<circle>(\<^bold>\<not>\<phi>)))\<rfloor> \<equiv> (\<forall>w. \<exists>v. w r v)" sledgehammer
+  "\<lfloor>\<^bold>\<not> ((\<^bold>\<circle>\<phi>) \<^bold>\<and> (\<^bold>\<circle>(\<^bold>\<not>\<phi>)))\<rfloor> \<equiv> (\<forall>w. \<exists>v. w r v)" by smt
 
 text \<open>We can check for consistency of our theory at any time:\<close>
 lemma (in MDL) True nitpick [satisfy,user_axioms,expect=genuine] oops  
