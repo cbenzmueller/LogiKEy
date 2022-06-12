@@ -79,6 +79,9 @@ abbreviation euncobl :: "\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<circle><_>")
 abbreviation ddeperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("P<_|_>") 
   where "P<\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circle><\<^bold>\<not>\<psi>|\<phi>>"
 
+
+lemma True nitpick[satisfy,user_axioms,expect=genuine] oops
+
 lemma "\<odot><\<psi>|\<phi>> \<equiv> \<circle><\<psi>|\<phi>>" nitpick [show_all] (*countermodel found*) oops
 
 (*David Lewis's evaluation rule for the conditional *)
