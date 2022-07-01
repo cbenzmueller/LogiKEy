@@ -60,6 +60,7 @@ lemma
 assumes "limitedness"
   assumes "transitivity" 
   shows "\<lfloor>\<circle>o<\<psi>|\<phi>>\<^bold>\<rightarrow>\<circle><\<psi>|\<phi>>\<rfloor>"
+  sledgehammer
   by (smt assms(1) assms(2))
 
 (*axioms of E holding irrespective of the properties of r*)
