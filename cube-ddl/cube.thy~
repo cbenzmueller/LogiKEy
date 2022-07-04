@@ -149,7 +149,7 @@ lemma "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarro
 (*max-Limitedness corresponds to D*)
 
 lemma assumes "mlimitedness"
-  shows  D*: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
+  shows  D*: "\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
   sledgehammer (*proof found*)
 
 lemma assumes D*: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>"
@@ -318,12 +318,13 @@ text \<open>Under the Lewis rule, totalness corresponds to D \<close>
 
 
 (*deontic explosion-max rule*)
-lemma DEX: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>>\<rfloor>" oops
-(*proof found*) 
+lemma DEX: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>>\<rfloor>" 
+  sledgehammer oops
+(*proof found*)
 
 (*no-deontic explosion-lewis rule*)
 lemma DEX: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>>\<rfloor>"
-  sledgehammer (*timed out*) 
+  sledgehammer (*timed out*) oops
   nitpick (*counter-model found for card i = 3*) oops
 
 
@@ -331,34 +332,67 @@ lemma assumes "mlimitedness"
   assumes "transitivity" 
   assumes "totalness"
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<odot><\<psi>|\<phi>>\<rfloor>"
-      sledgehammer [isar_proofs, timeout = 120] oops (*proof found*) 
+      sledgehammer  oops (*proof found*) 
 
 lemma assumes "mlimitedness"
   assumes "transitivity" 
   assumes "totalness"
  shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>"
-      sledgehammer (*proof found*) 
+      sledgehammer (*proof found*) oops
 
-
-
-
-
-
-lemma
- assumes "totalness"
+(*lemma assumes "totalness"
  shows D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow>\<p><\<psi>|\<phi>>)\<rfloor>"   
   sledgehammer (* proof found *)
   nitpick (* no counterexample found *)
-  oops 
+  oops *)
 
-lemma
-  assumes  D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow>\<p><\<psi>|\<phi>>)\<rfloor>"
+(*lemma assumes  D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<rightarrow>\<p><\<psi>|\<phi>>)\<rfloor>"
   shows "totalness"   
   sledgehammer (* timed out*)
   nitpick (* counterexample found *)
-  oops 
+  oops*) 
 
+(*axioms of E holding if r transitive and totale*)
 
+lemma COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
+  sledgehammer oops
+  nitpick  (*countermodel*)
+
+lemma 
+  assumes "transitivity" 
+  shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" nitpick oops  (*countermodel*) 
+
+  lemma 
+  assumes "totalness"
+  shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" nitpick oops (*countermodel*)
+  
+lemma 
+  assumes "transitivity" 
+  assumes "totalness"
+  shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" sledgehammer
+  
+lemma D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>"  nitpick oops (*countermodel*)
+
+lemma
+ assumes "totalness"
+  shows D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" sledgehammer (*proof found*)oops
+
+lemma  Sp: "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" nitpick oops (*countermodel*)
+
+lemma
+ assumes "transitivity"
+ shows Sp: "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   sledgehammer (*proof found*)oops
+
+lemma CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" nitpick oops (*countermodel*)
+
+lemma
+  assumes "transitivity"
+  shows CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" nitpick oops (*countermodel*)
+
+lemma
+  assumes "transitivity"
+  assumes "totalness"
+  shows CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" by (metis assms(1) assms(2)) 
 
 section \<open>Negative results\<close>
 
