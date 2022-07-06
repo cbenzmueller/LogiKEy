@@ -27,9 +27,9 @@ maximality, and  Lewis rule.
 
 
 
-(*which is illustrated in Figure 1. In particular, proofs are
-given for the equivalences of different axiomatizations and the 
-inclusion relations shown in the cube.*)
+
+
+
 
 section \<open>Framework\<close>
 
@@ -291,7 +291,7 @@ lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<r
   nitpick (* counterexample found *) oops 
 
 
-subsection \<open>Closure maximality and Lewis rule\<close>
+subsection \<open>Lewis rule\<close>
 
 
 text \<open>Under the Lewis rule, totalness corresponds to D \<close>
