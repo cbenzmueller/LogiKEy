@@ -27,9 +27,9 @@ maximality, and  Lewis rule.
 
 
 
-(*which is illustrated in Figure 1. In particular, proofs are
-given for the equivalences of different axiomatizations and the 
-inclusion relations shown in the cube.*)
+
+
+
 
 section \<open>Framework\<close>
 
@@ -251,7 +251,7 @@ lemma assumes "osmoothness"
 
 lemma assumes CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
   shows  "osmoothness"   
-  sledgehammer (* timed out*)
+  sledgehammer (* timed out*)oops
   nitpick (* counterexample found *) oops
   
 
@@ -259,7 +259,7 @@ lemma assumes CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|
 
 lemma assumes "transitivity"    
   shows  Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
-  sledgehammer (* proof found *) 
+  sledgehammer (* proof found *) oops
   nitpick (* no counterexample found *) oops
  
 
@@ -291,10 +291,31 @@ lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<r
   nitpick (* counterexample found *) oops 
 
 
-subsection \<open>Closure maximality and Lewis rule\<close>
+subsection \<open>Lewis rule\<close>
 
 
 text \<open>Under the Lewis rule, totalness corresponds to D \<close>
+
+
+(*
+&&&&
+&&&&
+&&&
+&&&&
+
+&&&&
+&&&&
+&&&
+&&&
+&&&
+&&&
+&&&
+&&&
+&&&
+
+&&&
+*)
+
 
 
 (*deontic explosion-max rule*)
@@ -317,7 +338,7 @@ lemma assumes "mlimitedness"
   assumes "transitivity" 
   assumes "totalness"
  shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>"
-      sledgehammer (*proof found*) oops
+  sledgehammer (*proof found*) oops
 
 (*lemma assumes "totalness"
  shows D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow>\<p><\<psi>|\<phi>>)\<rfloor>"   
