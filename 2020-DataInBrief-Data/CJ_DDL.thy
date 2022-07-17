@@ -50,7 +50,7 @@ begin (* DDL: Dyadic Deontic Logic by Carmo and Jones *)
  abbreviation ddlobl::\<gamma> ("\<^bold>\<circle><_>") where "\<^bold>\<circle><A> \<equiv>  \<^bold>O\<^bold>\<langle>A\<^bold>|\<^bold>\<top>\<^bold>\<rangle>"  (*New syntax: A is obligatory.*)
 
 (* Consistency *) 
- lemma True nitpick [satisfy,user_axioms,show_all] oops 
+lemma True nitpick [satisfy,user_axioms,show_all,format=3] oops 
 end
 
 

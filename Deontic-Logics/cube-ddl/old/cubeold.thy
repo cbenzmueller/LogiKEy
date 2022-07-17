@@ -81,7 +81,7 @@ abbreviation ddeperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("P
 
 
 lemma True nitpick[satisfy,user_axioms,expect=genuine] oops
- 
+
 lemma "\<odot><\<psi>|\<phi>> \<equiv> \<circle><\<psi>|\<phi>>" nitpick [show_all] (*countermodel found*) oops
 
 (*David Lewis's evaluation rule for the conditional *)
@@ -92,9 +92,9 @@ abbreviation lewcond :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("
 abbreviation lewperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<integral><_|_>") 
   where "\<integral><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circ><\<^bold>\<not>\<psi>|\<phi>>"
 
-lemma True nitpick [satisfy,user_axioms,expect=genuine] 
-  oops
-
+lemma True nitpick [satisfy,user_axioms,expect=genuine] oops
+subsection \<open>Properties\<close>
+text \<open>We have the following constraints on the betterness relation\<close>
 
 (*The standard properties*)
 abbreviation reflexivity  where "reflexivity  \<equiv> (\<forall>x. x r x)"
@@ -106,8 +106,9 @@ abbreviation totalness
 (*4 versions of Lewis's limit assumption*)
 abbreviation mlimitedness  
   where "mlimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. max<\<phi>>x))"
-abbreviation msmoothness  
-  where "msmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow>
+
+abbreviation msmoothness 
+ where "msmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow>
                      (max<\<phi>>x \<or> (\<exists>y. (y r x \<and> \<not>(x r y) \<and> max<\<phi>>y)))))"
 abbreviation olimitedness  
   where "olimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. opt<\<phi>>x))"
@@ -125,19 +126,19 @@ abbreviation Suzumura
 (* this is a second form of a-cyclicity. Cycles of non-strict betterness are ruled out*)
 abbreviation loopfree
   where "loopfree R \<equiv> \<forall>x y. (tc (assfactor R) x y \<longrightarrow> ( R y x \<longrightarrow> R x y))"
-
-
 (*Interval order condition is totalness plus Ferrers*)
 abbreviation Ferrers 
   where "Ferrers \<equiv> (\<forall>x y z u. ((x r u) \<and> (y r z)) \<longrightarrow> (x r z) \<or> (y r u))"
 lemma assumes Ferrers reflexivity  (*fact overlooked in the literature*)
   shows totalness
-  sledgehammer  (*proof found*) 
-  oops
+  sledgehammer  (*proof found*) oops
+(* Some useful relations for constraining the betterness relations*)
 
-
-
+section \<open>Max rule\<close>
+subsection \<open>Correspondence\<close>
+text \<open>We go through the known correspondences, and verify them \<close>
 (*max-Limitedness corresponds to D*)
+
 lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>)\<rfloor>" 
   nitpick [show_all]  (* counterexample found *) 
   oops 
@@ -147,60 +148,59 @@ lemma "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)
   oops 
 
 lemma "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>"
-  nitpick (* counterexample found *) 
-  oops 
+  nitpick (* counterexample found *) oops 
 
 (*max-Limitedness corresponds to D*)
 
 lemma assumes "mlimitedness"
   shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
-  sledgehammer 
-  oops (*proof found*) 
+  sledgehammer oops (*proof found*) 
 
 lemma assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>"
   shows "mlimitedness"   
   sledgehammer (*all timed out*)
-  nitpick [show_all] (* counterexample found *) 
-  oops 
+  nitpick [show_all] (* counterexample found *) oops 
+
+lemma assumes "nmlimitedness"
+  shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
+  sledgehammer oops (*proof found*) 
+  nitpick
+
+
+
+
 
 (*smoothness corresponds to cautious monotony *)
 lemma assumes "msmoothness"    
   shows  CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  sledgehammer (*proof found*)
-  oops 
+  sledgehammer oops (*proof found*)
 
 lemma assumes CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
   shows  "msmoothness" 
   sledgehammer (* timed out*)
-  nitpick [show_all] (* counterexample found *) 
-  oops  
+  nitpick [show_all] (* counterexample found *) oops  
 
 (*interval order (reflexivity plus Ferrers) corresponds to disjunctive rationality*)
-
-lemma assumes "reflexivity"
+lemma assumes "reflexivity"   
      (* assumes "Ferrers"*)
   shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>" 
   sledgehammer (* timed out*) 
-  nitpick (* counterexample found *) 
-  oops 
+  nitpick (* counterexample found *) oops 
 
 lemma assumes "reflexivity" "Ferrers"
   shows  DR: "\<forall>\<phi> \<psi> \<chi>.\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>" 
   sledgehammer (* proof found *)
-  nitpick (* no counterexample found *) 
-  oops 
+  nitpick (* no counterexample found *) oops 
   
 lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<chi>|\<phi>>\<^bold>\<or>\<circle><\<chi>|\<psi>>)\<rfloor>" 
   shows "reflexivity" 
   sledgehammer (* timed out*)
-  nitpick [show_all] (* counterexample found *) 
-  oops 
+  nitpick [show_all] (* counterexample found *) oops 
 
 lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<chi>|\<phi>>\<^bold>\<or>\<circle><\<chi>|\<psi>>)\<rfloor>" 
   shows "Ferrers"    
   sledgehammer (* timed out*)
-  nitpick (* counterexample found *) 
-  oops 
+  nitpick (* counterexample found *) oops 
 
 text \<open>Transitivity and totalness corresponds to the Spohn axiom (Sp)\<close>
 
@@ -208,38 +208,36 @@ text \<open>Transitivity and totalness corresponds to the Spohn axiom (Sp)\<clos
 lemma assumes "transitivity"
   shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   sledgehammer (* timed out *)
-  nitpick (* counterexample for card i=5*) 
-  oops
+  nitpick (* counterexample for card i=5*) oops
 
 lemma assumes "totalness" 
   shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   sledgehammer (* timed out*)
-  nitpick (* counterexample for card i=4*) 
-  oops
+  nitpick (* counterexample for card i=4*) oops
 
 lemma assumes "transitivity" "totalness"
   shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   sledgehammer (* proof found *)
-  nitpick (* no counterexample found *) 
-  oops
+  nitpick (* no counterexample found *) oops
                                                           
 lemma assumes  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   shows "totalness"   
   sledgehammer (* timed out*)
-  nitpick (* counterexample found for card i=1*) 
-  oops 
+  nitpick (* counterexample found for card i=1*) oops 
 
 lemma assumes  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   shows "transitivity" 
   sledgehammer (* timed out*)
-  nitpick (* counterexample found for card =4*) 
-  oops 
+  nitpick (* counterexample found for card =4*) oops 
+
+ 
 
 subsection \<open>Correspondance under the opt rule\<close>
 
 text \<open>We move to the opt rule, and associate with it two news modal operators\<close>
 
 text \<open>Here we redefine Lewis's limit assumption accordingly\<close>
+
 
 text \<open>Correspondance\<close>
 
@@ -248,192 +246,197 @@ text \<open>opt-Limitedness corresponds to D\<close>
 lemma assumes "olimitedness"    
   shows  D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"   
   sledgehammer (* proof found*)
-  nitpick (* no counterexample found *) 
-  oops 
+  nitpick (* no counterexample found *) oops 
 
 lemma assumes D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"         
   shows "olimitedness"     
   sledgehammer (* timed out*)
-  nitpick (* counterexample found *) 
-  oops 
+  nitpick (* counterexample found *) oops 
 
 text \<open>Smoothness corresponds to CM\<close>
 
 lemma assumes "osmoothness"    
   shows  CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"   
   sledgehammer (* proof found*)
-  nitpick (* run out of time *) 
-  oops  
+  nitpick (* run out of time *) oops  
 
 lemma assumes CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
   shows  "osmoothness"   
-  sledgehammer (* timed out*)
-  nitpick (* counterexample found *) 
-  oops
+  sledgehammer (* timed out*)oops
+  nitpick (* counterexample found *) oops
   
-
-
 
 (*transitivity*)
 
 lemma assumes "transitivity"    
   shows  Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
-  sledgehammer (* proof found *) 
-  nitpick (* no counterexample found *) 
-  oops
+  sledgehammer (* proof found *) oops
+  nitpick (* no counterexample found *) oops
  
+
 lemma assumes "transitivity"    
   shows  Trans: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
   sledgehammer (* proof found *)
-  nitpick [show_all] (* no counterexample found *) 
-  oops 
+  nitpick [show_all] (* no counterexample found *) oops 
 
 lemma assumes Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"
       assumes Trans: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"
       shows "transitivity"    
   sledgehammer (* timed out*)
-  nitpick (* counterexample found for card i =3*) 
-  oops 
+  nitpick (* counterexample found for card i =3*) oops 
 
 lemma assumes "totalness"
      (* assumes "Ferrers"*)
   shows  DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>"   
   sledgehammer (* timed out*)
-  nitpick (* counterexample found *) 
-  oops 
+  nitpick (* counterexample found *) oops 
   
  lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>" 
    shows "totalness"   
    sledgehammer (* timed out*)
-   nitpick (* counterexample found *) 
-   oops 
+   nitpick (* counterexample found *) oops 
 
 lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>" 
   shows "Ferrers"   
   sledgehammer (* timed out*)
-  nitpick (* counterexample found *) 
-  oops 
+  nitpick (* counterexample found *) oops 
 
 
 subsection \<open>Lewis rule\<close>
+
+
 text \<open>Under the Lewis rule, totalness corresponds to D \<close>
 
+
+(*
+&&&&
+&&&&
+&&&
+&&&&
+
+&&&&
+&&&&
+&&&
+&&&
+&&&
+&&&
+&&&
+&&&
+&&&
+
+&&&
+*)
+
+
+
 (*deontic explosion-max rule*)
-lemma DEX: "\<lfloor>(\<diamond>\<phi>\<^bold>\<and>\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>>\<rfloor>" 
-  sledgehammer (*proof found*) 
-  oops
+lemma DEX: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>>\<rfloor>" 
+  sledgehammer (*proof found*) oops
 
 (*no-deontic explosion-lewis rule*)
-lemma DEX: "\<lfloor>(\<diamond>\<phi>\<^bold>\<and>\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>>\<rfloor>"
+lemma DEX: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>>\<rfloor>"
   sledgehammer (*timed out*) 
-  nitpick (*counter-model found for card i = 3*) 
-  oops
+  nitpick (*counter-model found for card i = 3*) oops
+
 
 lemma assumes "mlimitedness"
   assumes "transitivity" 
   assumes "totalness"
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<odot><\<psi>|\<phi>>\<rfloor>"
-  sledgehammer (*proof found*)
-  oops
+  sledgehammer (*proof found*) oops
 
 lemma assumes "mlimitedness"
   assumes "transitivity" 
   assumes "totalness"
  shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>"
-  sledgehammer (*proof found*) 
-  oops
+  sledgehammer (*proof found*) oops
+
+(*lemma assumes "totalness"
+ shows D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow>\<p><\<psi>|\<phi>>)\<rfloor>"   
+  sledgehammer (* proof found *)
+  nitpick (* no counterexample found *)
+  oops *)
+
+(*lemma assumes  D : "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<rightarrow>\<p><\<psi>|\<phi>>)\<rfloor>"
+  shows "totalness"   
+  sledgehammer (* timed out*)
+  nitpick (* counterexample found *)
+  oops*) 
 
 (*axioms of E holding if r transitive and totale*)
 
 
 lemma D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>"  
-  nitpick (*countermodel*) 
-  oops
+  nitpick (*countermodel*) oops
 
 lemma
  assumes "totalness"
  shows D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" 
-  sledgehammer (*proof found*) 
-  oops
+  sledgehammer (*proof found*) oops
 
 lemma  Sp: "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
-  nitpick (*countermodel*) 
-  oops 
+  nitpick (*countermodel*) oops 
 
 lemma
  assumes "transitivity"
  shows Sp: "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
-  sledgehammer (*proof found*) 
-  oops  
+  sledgehammer (*proof found*) oops  
 
 lemma 
   COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
-  nitpick (*countermodel*) 
-  oops 
+  nitpick (*countermodel*) oops 
 
 lemma
   assumes "transitivity" 
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
-  nitpick (*countermodel*) 
-  oops  
+  nitpick (*countermodel*) oops  
 
   lemma 
   assumes "totalness"
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
-  nitpick (*countermodel*) 
-  oops 
+  nitpick (*countermodel*) oops 
   
 lemma 
   assumes "transitivity" 
   assumes "totalness"
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
-  sledgehammer (*proof found*) 
-  oops 
+  sledgehammer (*proof found*) oops 
 
 lemma CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  nitpick (*countermodel*)
-  oops  
+  nitpick (*countermodel*) oops  
 
 lemma
   assumes "transitivity"
   shows CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  nitpick (*countermodel*) 
-  oops 
+  nitpick (*countermodel*) oops 
 
 lemma
   assumes "totalness"
   shows CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  nitpick (*countermodel*) 
-  oops 
+  nitpick (*countermodel*) oops 
 
 lemma
   assumes "transitivity"
   assumes "totalness"
   shows CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  sledgehammer (*proof found*) 
-  oops
+  sledgehammer (*proof found*) oops
 
 (*axioms of E holding irrespective of the properties of r*)
 
 lemma Abs:"\<lfloor>\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circ><\<psi>|\<phi>>\<rfloor>"  
-  sledgehammer (*proof found*) 
-  oops
+  sledgehammer (*proof found*) oops
 
 lemma Nec:"\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circ><\<psi>|\<phi>>\<rfloor>"
-  sledgehammer (*proof found*) 
-  oops
+  sledgehammer (*proof found*) oops
 
 lemma Ext:"\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circ><\<psi>|\<phi>\<^sub>2>)\<rfloor>"
-  sledgehammer (*proof found*) 
-  oops
+  sledgehammer (*proof found*) oops
 
 lemma Id:"\<lfloor>\<circ><\<phi>|\<phi>>\<rfloor>"
-  sledgehammer (*proof found*) 
-  oops
+  sledgehammer (*proof found*) oops
 
 lemma Sh:"\<lfloor>\<circ><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circ><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>"
-  sledgehammer (*proof found*) 
-  oops
+  sledgehammer (*proof found*) oops
 
 
   
