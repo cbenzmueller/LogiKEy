@@ -106,8 +106,9 @@ abbreviation totalness
 (*4 versions of Lewis's limit assumption*)
 abbreviation mlimitedness  
   where "mlimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. max<\<phi>>x))"
-abbreviation msmoothness  
-  where "msmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow>
+
+abbreviation msmoothness 
+ where "msmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow>
                      (max<\<phi>>x \<or> (\<exists>y. (y r x \<and> \<not>(x r y) \<and> max<\<phi>>y)))))"
 abbreviation olimitedness  
   where "olimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. opt<\<phi>>x))"
@@ -134,16 +135,17 @@ lemma assumes Ferrers reflexivity  (*fact overlooked in the literature*)
 (* Some useful relations for constraining the betterness relations*)
 
 section \<open>Max rule\<close>
-
 subsection \<open>Correspondence\<close>
 text \<open>We go through the known correspondences, and verify them \<close>
 (*max-Limitedness corresponds to D*)
 
 lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>)\<rfloor>" 
-  nitpick [show_all]  (* counterexample found *) oops 
+  nitpick [show_all]  (* counterexample found *) 
+  oops 
 
 lemma "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
-  nitpick [show_all] (* counterexample found *) oops 
+  nitpick [show_all] (* counterexample found *) 
+  oops 
 
 lemma "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>"
   nitpick (* counterexample found *) oops 
@@ -158,6 +160,15 @@ lemma assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<n
   shows "mlimitedness"   
   sledgehammer (*all timed out*)
   nitpick [show_all] (* counterexample found *) oops 
+
+lemma assumes "nmlimitedness"
+  shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
+  sledgehammer oops (*proof found*) 
+  nitpick
+
+
+
+
 
 (*smoothness corresponds to cautious monotony *)
 lemma assumes "msmoothness"    
@@ -295,27 +306,6 @@ subsection \<open>Lewis rule\<close>
 
 
 text \<open>Under the Lewis rule, totalness corresponds to D \<close>
-
-
-(*
-&&&&
-&&&&
-&&&
-&&&&
-
-&&&&
-&&&&
-&&&
-&&&
-&&&
-&&&
-&&&
-&&&
-&&&
-
-&&&
-*)
-
 
 
 (*deontic explosion-max rule*)
