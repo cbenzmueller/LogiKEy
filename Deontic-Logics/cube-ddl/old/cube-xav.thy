@@ -106,8 +106,12 @@ abbreviation totalness
 (*4 versions of Lewis's limit assumption*)
 abbreviation mlimitedness  
   where "mlimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. max<\<phi>>x))"
-abbreviation msmoothness  
-  where "msmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow>
+
+abbreviation nmlimitedness  
+  where "nmlimitedness \<equiv> (\<exists>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> \<not>(\<exists>x. max<\<phi>>x))"
+
+abbreviation msmoothness 
+ where "msmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow>
                      (max<\<phi>>x \<or> (\<exists>y. (y r x \<and> \<not>(x r y) \<and> max<\<phi>>y)))))"
 abbreviation olimitedness  
   where "olimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. opt<\<phi>>x))"
@@ -158,6 +162,15 @@ lemma assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<n
   shows "mlimitedness"   
   sledgehammer (*all timed out*)
   nitpick [show_all] (* counterexample found *) oops 
+
+lemma assumes "nmlimitedness"
+  shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
+  sledgehammer oops (*proof found*) 
+  nitpick
+
+
+
+
 
 (*smoothness corresponds to cautious monotony *)
 lemma assumes "msmoothness"    
@@ -295,27 +308,6 @@ subsection \<open>Lewis rule\<close>
 
 
 text \<open>Under the Lewis rule, totalness corresponds to D \<close>
-
-
-(*
-&&&&
-&&&&
-&&&
-&&&&
-
-&&&&
-&&&&
-&&&
-&&&
-&&&
-&&&
-&&&
-&&&
-&&&
-
-&&&
-*)
-
 
 
 (*deontic explosion-max rule*)
