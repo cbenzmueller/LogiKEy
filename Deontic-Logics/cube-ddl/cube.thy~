@@ -295,8 +295,8 @@ lemma assumes Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>
   nitpick (* counterexample found for card i =3*) 
   oops 
 
-lemma assumes "reflexivity"
-     assumes "Ferrers"
+lemma assumes "totalness"
+     (* assumes "Ferrers"*)
   shows  DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>"   
   sledgehammer (* timed out*)
   nitpick (* counterexample found *) 
