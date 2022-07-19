@@ -1,6 +1,6 @@
 section \<open>Base system E\<close>
 (*<*)
-theory cube
+theory cubeoldrenamed
 imports Main
 
 begin
@@ -106,8 +106,9 @@ abbreviation totalness
 (*4 versions of Lewis's limit assumption*)
 abbreviation mlimitedness  
   where "mlimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. max<\<phi>>x))"
-abbreviation msmoothness  
-  where "msmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow>
+
+abbreviation msmoothness 
+ where "msmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow>
                      (max<\<phi>>x \<or> (\<exists>y. (y r x \<and> \<not>(x r y) \<and> max<\<phi>>y)))))"
 abbreviation olimitedness  
   where "olimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. opt<\<phi>>x))"
@@ -137,6 +138,11 @@ lemma assumes Ferrers reflexivity  (*fact overlooked in the literature*)
 
 
 
+=======
+section \<open>Max rule\<close>
+subsection \<open>Correspondence\<close>
+text \<open>We go through the known correspondences, and verify them \<close>
+
 (*max-Limitedness corresponds to D*)
 lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>)\<rfloor>" 
   nitpick [show_all]  (* counterexample found *) 
@@ -162,6 +168,15 @@ lemma assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<n
   sledgehammer (*all timed out*)
   nitpick [show_all] (* counterexample found *) 
   oops 
+
+lemma assumes "nmlimitedness"
+  shows  "nD*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
+  sledgehammer oops
+  nitpick
+
+
+
+
 
 (*smoothness corresponds to cautious monotony *)
 lemma assumes "msmoothness"    
@@ -295,8 +310,8 @@ lemma assumes Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>
   nitpick (* counterexample found for card i =3*) 
   oops 
 
-lemma assumes "reflexivity"
-     assumes "Ferrers"
+lemma assumes "totalness"
+     (* assumes "Ferrers"*)
   shows  DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>"   
   sledgehammer (* timed out*)
   nitpick (* counterexample found *) 
@@ -318,6 +333,10 @@ lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<r
 subsection \<open>Lewis rule\<close>
 text \<open>Under the Lewis rule, totalness corresponds to D \<close>
 
+<<<<<<< HEAD:Deontic-Logics/cube-ddl/cube.thy
+=======
+
+>>>>>>> d525449de509a66502343688bd83123161185f5a:Deontic-Logics/cube-ddl/old/cube.thy
 (*deontic explosion-max rule*)
 lemma DEX: "\<lfloor>(\<diamond>\<phi>\<^bold>\<and>\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>>\<rfloor>" 
   sledgehammer (*proof found*) 
