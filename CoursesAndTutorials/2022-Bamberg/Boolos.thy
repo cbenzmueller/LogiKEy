@@ -3,10 +3,10 @@ begin
 
 typedecl i
 consts 
- e :: "i"           (* one *) 
- s :: "i \<Rightarrow> i"      (* successor *)
- F :: "i \<Rightarrow> i \<Rightarrow> i" (* binary function; axiomatised below as Ackermann function *)
- D :: "i \<Rightarrow> bool"   (* arbitrary unary predicate *)
+ e :: "i"  (*one*) 
+ s :: "i \<Rightarrow> i"  (*successor*)
+ F :: "i \<Rightarrow> i \<Rightarrow> i" (*binary function; will be axiomatised as Ackermann function*)
+ D :: "i \<Rightarrow> bool" (*arbitrary unary predicate*)
 
 axiomatization where 
   A1: "\<forall>n. F n e = s e" and 
@@ -15,16 +15,11 @@ axiomatization where
   A4: "D e" and 
   A5: "\<forall>x. D x \<longrightarrow> D (s x)"
 
-definition induct where "induct X \<equiv> (X e) \<and> (\<forall>x. X x \<longrightarrow> X (s x))"  (* X is inductive *)
-definition N where "N x \<equiv> (\<forall>X::i\<Rightarrow>bool. induct X \<longrightarrow> X x)"    (* N is smallest inductive set *)
-definition P1 where "P1 x y \<equiv> N (F x y)"  (* P1(x,y) iff F(x,y) \<in> N *)
+definition induct where "induct X \<equiv> (X e) \<and> (\<forall>x. X x \<longrightarrow> X (s x))"  (*X inductively def. Pred.*)
+definition N where "N x \<equiv> (\<forall>X::i\<Rightarrow>bool. induct X \<longrightarrow> X x)"    (*Higher-order quantifier*)
+definition P1 where "P1 x y \<equiv> N (F x y)"
+definition P2 where "P2 x \<equiv> (\<forall>z. N z \<longrightarrow> P1 x z)"
 
-lemma "D (F (s (s (s (s e)))) (s (s (s (s e)))))" (* one ATP can now proof this: using the Defs *)
-  sledgehammer
-  by (metis A1 A2 A3 A4 A5 N_def P1_def induct_def)  
-end 
-
-(*
 theorem Boolos: "D (F (s (s (s (s e)))) (s (s (s (s e)))))"
 proof- 
   have L1: "\<forall>X::i\<Rightarrow>bool. induct X \<longrightarrow> (\<forall>z. N z \<longrightarrow> X z)" using N_def by fastforce 
@@ -39,8 +34,7 @@ proof-
   have L10: "\<forall>x. P2 x \<longrightarrow> (\<forall>y. P1 (s x) y \<longrightarrow> P1 (s x) (s y))" by (metis A3 P1_def P2_def)
   have L11: "\<forall>x. P2 x \<longrightarrow> P2 (s x)" by (metis L1 L10 L8 P2_def induct_def)
   have L12: "induct P2" by (simp add: L11 L9 induct_def)
-  have L13: "\<forall>x y. N x \<and> N y \<longrightarrow> N (F x y)" by (metis L1 L12 P1_def P2_def)
-  thus ?thesis sledgehammer by (metis A1 L10 L11 L12 L3 L8 N_def P1_def) 
-*)
+  thus ?thesis using L3 L4 N_def P1_def P2_def by blast 
+qed
 
 end
