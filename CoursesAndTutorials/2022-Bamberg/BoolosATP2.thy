@@ -17,9 +17,9 @@ and A5: "\<forall>x. D x \<longrightarrow> D (s x)" (* if D holds for x it also 
 
 lemma "D (F (s (s (s (s e)))) (s (s (s (s e)))))" sledgehammer oops (* no proof; hopeless! *)
 
-definition isIndSet where (* X is inductive *)
-  "isIndSet \<equiv> \<lambda>X. (X e) \<and> (\<forall>x. X x \<longrightarrow> X (s x))"  (* X is inductive *)
-definition P where (* P(x,y) iff F(x,y) is in smallest inductive set *)
+definition isIndSet where (* X is inductive (over e and s) *)
+  "isIndSet \<equiv> \<lambda>X. (X e) \<and> (\<forall>x. X x \<longrightarrow> X (s x))"  
+definition P where (* P(x,y) iff F(x,y) is in smallest inductive set (over e and s) *)
   "P \<equiv> \<lambda>x y. (\<lambda>z. (\<forall>X::i\<Rightarrow>bool. isIndSet X \<longrightarrow> X z)) (F x y)" 
 
 lemma "D (F (s (s (s (s e)))) (s (s (s (s e)))))"  (* ATPs can now proof this: using the Defs *)
