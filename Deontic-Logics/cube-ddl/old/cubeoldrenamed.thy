@@ -1,6 +1,6 @@
 section \<open>Base system E\<close>
 (*<*)
-theory cube
+theory cubeoldrenamed
 imports Main
 
 begin
@@ -137,13 +137,12 @@ lemma assumes Ferrers reflexivity  (*fact overlooked in the literature*)
   oops
 
 
-<<<<<<< HEAD:Deontic-Logics/cube-ddl/cube.thy
 
 =======
 section \<open>Max rule\<close>
 subsection \<open>Correspondence\<close>
 text \<open>We go through the known correspondences, and verify them \<close>
->>>>>>> d525449de509a66502343688bd83123161185f5a:Deontic-Logics/cube-ddl/old/cube.thy
+
 (*max-Limitedness corresponds to D*)
 lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>)\<rfloor>" 
   nitpick [show_all]  (* counterexample found *) 
@@ -171,8 +170,8 @@ lemma assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<n
   oops 
 
 lemma assumes "nmlimitedness"
-  shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
-  sledgehammer oops (*proof found*) 
+  shows  "nD*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
+  sledgehammer oops
   nitpick
 
 
