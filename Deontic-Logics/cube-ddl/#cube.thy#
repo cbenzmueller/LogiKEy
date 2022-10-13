@@ -95,7 +95,7 @@ abbreviation lewperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\
 (*Kratzer evaluation rule for the conditional *)
 
 abbreviation kratcond :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("\<ominus><_|_>")
-  where "\<ominus><\<psi>|\<phi>> \<equiv> \<lambda>v. (\<forall>x. ((\<phi>)(x)\<longrightarrow> (\<exists>y. ((\<phi>)(y)\<and>(y r x) \<and>( (\<forall>z. ((z r y) \<longrightarrow> (\<phi>)(z)\<longrightarrow>(\<psi>)(z))))))"
+  where "\<ominus><\<psi>|\<phi>> \<equiv> \<lambda>v. ((\<forall>x. ((\<phi>)(x)\<longrightarrow> (\<exists>y. ((\<phi>)(y)\<and>(y r x) \<and>( (\<forall>z. ((z r y) \<longrightarrow> (\<phi>)(z)\<longrightarrow>(\<psi>)(z)))))))))"
 abbreviation kratperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<times><_|_>") 
   where "\<times><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<ominus><\<^bold>\<not>\<psi>|\<phi>>"
 
@@ -146,7 +146,20 @@ lemma assumes Ferrers reflexivity  (*fact overlooked in the literature*)
   sledgehammer  (*proof found*) 
   oops
 
+lemma assumes "transitivity" 
+  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+  nitpick [show_all] 
+  sledgehammer oops
 
+lemma assumes "totalness" 
+  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+  nitpick [show_all] 
+  sledgehammer oops
+
+lemma assumes "transitivity" "totalness"
+  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+  nitpick [show_all] oops
+  sledgehammer 
 
 (*max-Limitedness corresponds to D*)
 lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>)\<rfloor>" 

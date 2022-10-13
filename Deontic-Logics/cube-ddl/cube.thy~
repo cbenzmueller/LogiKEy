@@ -92,17 +92,6 @@ abbreviation lewcond :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("
 abbreviation lewperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<integral><_|_>") 
   where "\<integral><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circ><\<^bold>\<not>\<psi>|\<phi>>"
 
-(*Kratzer evaluation rule for the conditional *)
-
-abbreviation kratcond :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("\<ominus><_|_>")
-  where "\<ominus><\<psi>|\<phi>> \<equiv> \<lambda>v. (\<forall>x. ((\<phi>)(x)\<longrightarrow> (\<exists>y. ((\<phi>)(y)\<and>(y r x) \<and>( (\<forall>z. ((z r y) \<longrightarrow> (\<phi>)(z)\<longrightarrow>(\<psi>)(z))))))"
-abbreviation kratperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<times><_|_>") 
-  where "\<times><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<ominus><\<^bold>\<not>\<psi>|\<phi>>"
-
-
-
-
-
 lemma True nitpick [satisfy,user_axioms,expect=genuine] 
   oops
 
