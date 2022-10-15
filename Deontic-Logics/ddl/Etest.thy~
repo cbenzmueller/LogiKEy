@@ -34,9 +34,10 @@ abbreviation ecjactual :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>\<^su
 
 lemma True nitpick [satisfy,user_axioms,expect=genuine] oops (*Consistency conf.*)
 
-lemma assumes "\<lfloor>((\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<chi>|\<psi>>\<rfloor>"
-      shows "\<lfloor>((\<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<psi>\<^bold>\<or>\<chi>>)) \<^bold>\<rightarrow> \<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"  
-      nitpick [show_all] 
+lemma assumes "\<forall>\<phi> \<psi> \<chi>. \<lfloor>((\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<chi>|\<psi>>\<rfloor>"
+      shows " \<forall>\<phi> \<psi> \<chi>. \<lfloor>((\<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<psi>\<^bold>\<or>\<chi>>)) \<^bold>\<rightarrow> \<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"  
+  nitpick [show_all,format=5,timeout=1000] 
+  sledgehammer oops
 
 
 
