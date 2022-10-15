@@ -32,11 +32,42 @@ abbreviation evalid :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>"[8]109)
 abbreviation ecjactual :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>\<^sub>l"[7]105) (*Local validity — in world aw.*)  
   where "\<lfloor>p\<rfloor>\<^sub>l \<equiv> p(aw)"
 
+(*The standard properties*)
+abbreviation reflexivity  where "reflexivity  \<equiv> (\<forall>x. x Rx)"
+abbreviation transitivity 
+  where "transitivity \<equiv> (\<forall>x y z. (x R y \<and> y R z) \<longrightarrow> x R z)"
+abbreviation totalness 
+  where "totalness \<equiv> (\<forall>x y. (x R y \<or> y R x))"
+
+(*4 versions of Lewis's limit assumption*)
+
+abbreviation olimitedness  
+  where "olimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. opt<\<phi>>x))"
+abbreviation osmoothness  where 
+   "osmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow> 
+                      (opt<\<phi>>x \<or> (\<exists>y. (y r x \<and> \<not>(x r y) \<and> opt<\<phi>>y)))))"
+
+
 lemma True nitpick [satisfy,user_axioms,expect=genuine] oops (*Consistency conf.*)
 
-lemma assumes "\<forall>\<phi> \<psi> \<chi>. \<lfloor>((\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<chi>|\<psi>>\<rfloor>"
+lemma assumes "transitivity"
       shows " \<forall>\<phi> \<psi> \<chi>. \<lfloor>((\<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<psi>\<^bold>\<or>\<chi>>)) \<^bold>\<rightarrow> \<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"  
-  nitpick [show_all,format=5,timeout=1000] 
+  nitpick [show_all,format=5,timeout=10] 
+  sledgehammer oops
+
+
+
+lemma assumes Abs:"\<forall>\<phi> \<psi>. \<lfloor>\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circle><\<psi>|\<phi>>\<rfloor>"
+      assumes Nec:"\<forall>\<phi> \<psi>. \<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>>\<rfloor>" 
+      assumes Ext:"\<forall>\<phi>\<^sub>1 \<phi>\<^sub>1 \<psi>. \<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circle><\<psi>|\<phi>\<^sub>2>)\<rfloor>"
+      assumes Id:"\<forall>\<phi>. \<lfloor>\<circle><\<phi>|\<phi>>\<rfloor>" 
+      assumes Sh:"\<forall>\<phi>\<^sub>1 \<phi>\<^sub>1 \<psi>. \<lfloor>\<circle><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circle><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" 
+      assumes MP:"\<forall>\<phi> \<psi>. (\<lfloor>\<phi>\<rfloor>\<and>\<lfloor>\<phi>\<^bold>\<rightarrow>\<psi>\<rfloor>)\<Longrightarrow>\<lfloor>\<psi>\<rfloor>"
+      assumes N:"\<forall>\<phi>. \<lfloor>\<phi>\<rfloor>\<Longrightarrow>\<lfloor>\<box>\<phi>\<rfloor>"
+      assumes COK:"\<forall>\<phi>\<^sub>1 \<phi>\<^sub>1 \<psi>. \<lfloor>\<circle><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circle><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circle><\<psi>\<^sub>2|\<phi>>)\<rfloor>"
+      assumes "\<lfloor>((\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<chi>|\<psi>>\<rfloor>"
+      shows " \<forall>\<phi> \<psi> \<chi>. \<lfloor>((\<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<psi>\<^bold>\<or>\<chi>>)) \<^bold>\<rightarrow> \<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"  
+  nitpick [show_all,timeout=1000] 
   sledgehammer oops
 
 
