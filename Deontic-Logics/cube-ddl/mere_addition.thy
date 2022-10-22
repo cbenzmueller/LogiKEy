@@ -1,0 +1,89 @@
+theory mere_addition  (* Christoph Benzmüller, Xavier Parent, 2022  *)
+
+imports Main
+
+
+
+
+begin
+
+(*Unimportant.*) sledgehammer_params [max_facts=20,timeout=20] 
+(*Unimportant.*) nitpick_params [user_axioms,expect=genuine,show_all]
+
+typedecl i (*Possible worlds.*)
+type_synonym \<sigma> = "(i\<Rightarrow>bool)"
+type_synonym \<alpha> = "i\<Rightarrow>\<sigma>" (*Type of betterness relation between worlds.*)
+type_synonym \<tau> = "\<sigma>\<Rightarrow>\<sigma>"
+
+
+consts aw::i (*Actual world.*)  
+abbreviation etrue  :: "\<sigma>" ("\<^bold>\<top>") where "\<^bold>\<top> \<equiv> \<lambda>w. True" 
+abbreviation efalse :: "\<sigma>" ("\<^bold>\<bottom>")  where "\<^bold>\<bottom> \<equiv> \<lambda>w. False"   
+abbreviation enot :: "\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<not>_"[52]53)  where "\<^bold>\<not>\<phi> \<equiv> \<lambda>w. \<not>\<phi>(w)" 
+abbreviation eand :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr"\<^bold>\<and>"51) where "\<phi>\<^bold>\<and>\<psi> \<equiv> \<lambda>w. \<phi>(w)\<and>\<psi>(w)"   
+abbreviation eor  :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr"\<^bold>\<or>"50) where "\<phi>\<^bold>\<or>\<psi> \<equiv> \<lambda>w. \<phi>(w)\<or>\<psi>(w)"   
+abbreviation eimp :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr"\<^bold>\<rightarrow>"49) where "\<phi>\<^bold>\<rightarrow>\<psi> \<equiv> \<lambda>w. \<phi>(w)\<longrightarrow>\<psi>(w)"  
+abbreviation eequ :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr"\<^bold>\<leftrightarrow>"48) where "\<phi>\<^bold>\<leftrightarrow>\<psi> \<equiv> \<lambda>w. \<phi>(w)\<longleftrightarrow>\<psi>(w)" 
+
+abbreviation ebox :: "\<sigma>\<Rightarrow>\<sigma>" ("\<box>") where "\<box> \<equiv> \<lambda>\<phi> w.  \<forall>v. \<phi>(v)"  
+definition ddediomond  :: "\<sigma>\<Rightarrow>\<sigma>" ("\<diamond>") where "\<diamond>\<phi> \<equiv> \<lambda>w. \<exists>v. \<phi>(v)"
+
+abbreviation evalid :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>"[8]109)  (*Global validity.*)
+  where "\<lfloor>p\<rfloor> \<equiv> \<forall>w. p w"
+abbreviation ecjactual :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>\<^sub>l"[7]105) (*Local validity — in world aw.*)  
+  where "\<lfloor>p\<rfloor>\<^sub>l \<equiv> p(aw)"
+
+consts r :: "\<alpha>" (infixr "r" 70) (*Betterness relation*)
+
+abbreviation esubset :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>bool" (infix "\<^bold>\<subseteq>" 53)
+  where "\<phi> \<^bold>\<subseteq> \<psi> \<equiv> \<forall>x. \<phi> x \<longrightarrow> \<psi> x"
+
+abbreviation eopt  :: "\<sigma>\<Rightarrow>\<sigma>" ("opt<_>")  (* opt rule*)
+  where "opt<\<phi>> \<equiv> (\<lambda>v. ( (\<phi>)(v) \<and> (\<forall>x. ((\<phi>)(x) \<longrightarrow> v r x) )) )" 
+abbreviation econdopt :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<odot><_|_>")
+  where "\<odot><\<psi>|\<phi>> \<equiv>  \<lambda>w. opt<\<phi>> \<^bold>\<subseteq> \<psi>"
+abbreviation eperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<P><_|_>") 
+  where "\<P><\<psi>|\<phi>> \<equiv> \<^bold>\<not>\<odot><\<^bold>\<not>\<psi>|\<phi>>"
+
+abbreviation transitivity 
+  where "transitivity \<equiv> (\<forall>x y z. (x r y \<and> y r z) \<longrightarrow> x r z)"
+
+lemma assumes "transitivity"    
+  shows  Transit: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
+  sledgehammer oops
+  
+
+
+(*the scenario*)
+
+axiomatization where
+(* A is striclty better than B*)
+ A0: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<chi>> \<^bold>\<and> \<^bold>\<not>\<P><\<chi>|\<phi>\<^bold>\<or>\<chi>>)\<rfloor>" and
+(* Aplus is at least as good as A*)
+ A1: "\<lfloor>\<P><\<psi>|\<phi>\<^bold>\<or>\<psi>>\<rfloor>" and
+(* B is strictly better than Aplus*)
+ A2: "\<lfloor>(\<P><\<chi>|\<psi>\<^bold>\<or>\<chi>> \<^bold>\<and> \<^bold>\<not>\<P><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<rfloor>"
+
+(* Consistency *) 
+lemma True nitpick [satisfy] 
+
+(*Inconsistency-check: given transitivity is the set inconsistent? Yes.*)
+lemma assumes "transitivity" shows False sledgehammer oops 
+
+ends  
+
+
+
+
+lemma
+  assumes "transitivity"
+  and "\<lfloor>(\<phi>\<ge>\<chi>) \<and> \<not>(\<chi>\<ge>\<phi>)\<rfloor>"
+  and  "\<lfloor>(\<psi>\<ge>\<phi>)\<rfloor>"
+  and "\<lfloor>(\<chi>\<ge>\<psi>) \<and> \<not>(\<psi>\<ge>\<chi>)\<rfloor>"
+  shows False
+  sledgehammer [user_axioms] oops
+  nitpick
+
+
+
+  
