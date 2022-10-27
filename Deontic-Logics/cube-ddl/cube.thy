@@ -464,28 +464,10 @@ text \<open>We verify the mere addition paradox\<close>
   
 
 
-abbreviation epref  :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("_\<ge>_") (* weak preference over formulas*)
-  where "\<phi>\<ge>\<psi> \<equiv> \<P><\<phi>|\<phi>\<or>\<psi>>"
 
 nitpick_params [user_axioms,show_all,format=2] (*Settings for model finder.*)
 
-(*consts A::\<sigma> Aplus::\<sigma> B::\<sigma>*)
 
-
-(*A is strictly better than B.*)
-  definition  "P1 \<equiv>  ((\<phi>\<ge>\<chi>) \<and> \<not>(\<chi>\<ge>\<phi>))"  
-(*Aplus at least as good as A.*)
-  definition  "P2 \<equiv> \<psi> \<ge> \<phi>"  
-(*B strictly better than Aplus.*)
-  definition  "P3 \<equiv> ((\<chi>\<ge>\<psi>) \<and> \<not>(\<psi>\<ge>\<chi>))" 
-
-lemma "\<lfloor>(P1 \<^bold>\<and> P2 \<^bold>\<and> P3)\<rfloor>" nitpick [satisfy]  (*Consistent? Yes*)
-
-lemma
-  assumes "transitivity"
-  and "\<lfloor>(P1 \<^bold>\<and> P2 \<^bold>\<and> P3)\<rfloor>"
-    shows False
-  sledgehammer
 
 
   
@@ -551,3 +533,4 @@ any formula\<close>
 (*to do*)
 
 text \<open>Under the opt rule transitivity alone is equivalent to Sp and Trans\<close>
+end
