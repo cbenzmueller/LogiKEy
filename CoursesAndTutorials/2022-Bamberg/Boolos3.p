@@ -9,8 +9,8 @@ thf(p_decl, type,
     p : $i > $i > $o).
 thf(e_decl, type,
     e : $i).
-thf(isIndSet_decl, type,
-    isIndSet : ($i > $o) > $o).
+thf(Ind_decl, type,
+    Ind : ($i > $o) > $o).
 thf(s_decl, type,
     s : $i > $i).
 
@@ -26,13 +26,12 @@ thf(a4, axiom,
 thf(a5, axiom,
     ((![X : $i]: ((d @ X) => (d @ (s @ X)))))). 
 
-
+thf(Ind_def, definition,
+    (![X3 : $i > $o]: ((Ind @ X3) = ( (((X3 @ e)) & ((![X2 : $i]: (((X3 @ X2)) => ((X3 @ (s @ X2))))))))))). 
 thf(n_def, definition,
-    (![X2 : $i]: ((n @ X2) = (![X3 : $i > $o]: (((isIndSet @ X3)) => ((X3 @ X2))))))). 
+    (![X2 : $i]: ((n @ X2) = (![X3 : $i > $o]: (((Ind @ X3)) => ((X3 @ X2))))))). 
 thf(p_def, definition,
     (![X2 : $i]: (![Y2 : $i]: ((p @ X2 @ Y2) = (n @ (f @ X2 @ Y2)))))). 
-thf(isIndSet_def, definition,
-    (![X3 : $i > $o]: ((isIndSet @ X3) = ( (((X3 @ e)) & ((![X2 : $i]: (((X3 @ X2)) => ((X3 @ (s @ X2))))))))))). 
 
 % Conjectures (1)
 thf(conj_0, conjecture,

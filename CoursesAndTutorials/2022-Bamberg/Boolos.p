@@ -5,7 +5,7 @@
  thf(d_decl, type, d : $i > $o).  % unary predicate
  thf(f_decl, type, f : $i > $i > $i).  % binary function; axiomatised as Ackermann function below
 % Auxiliary definitions 
- thf(isIndSet_decl, type, isIndSet : ($i > $o) > $o).  % second-order unary predicate
+ thf(Ind_decl, type, Ind : ($i > $o) > $o).  % second-order unary predicate
  thf(p_decl, type, p : $i > $i > $o).
  
 % Axioms
@@ -22,9 +22,9 @@
 
 % Definitions
 % X is inductive (over e and s)    
- thf(isIndSet_def, axiom, (isIndSet = (^[Q : $i > $o]: (((Q @ e)) & ((![X : $i]: (((Q @ X)) => ((Q @ (s @ X)))))))))).
+ thf(Ind_def, axiom, (Ind = (^[Q : $i > $o]: (((Q @ e)) & ((![X : $i]: (((Q @ X)) => ((Q @ (s @ X)))))))))).
 % P(x,y) iff F(x,y) is in smallest inductive set (over e and s)    
- thf(p_def, axiom, (p = (^[X: $i]: (^[Y : $i]: ((^[X2 : $i]: (![X3 : $i > $o]: (((isIndSet @ X3)) => ((X3 @ X2))))) @ (f @ X @ Y)))))).
+ thf(p_def, axiom, (p = (^[X: $i]: (^[Y : $i]: ((^[X2 : $i]: (![X3 : $i > $o]: (((Ind @ X3)) => ((X3 @ X2))))) @ (f @ X @ Y)))))).
 
    
 % Conjecture 

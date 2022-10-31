@@ -33,12 +33,12 @@ Implication and negation. The others can be defined in terms of these two.
 consts PLimpl :: "\<sigma> \<Rightarrow> \<sigma> \<Rightarrow> \<sigma>" (infixr "\<^bold>\<rightarrow>" 49) 
        PLnot :: "\<sigma> \<Rightarrow> \<sigma>" ("\<^bold>\<not>_" [52]53)
 
-consts PLatomicProp :: "\<sigma>" 
+consts PLatomicProp :: "\<sigma>" ("p")
       
 definition PLdisj :: "\<sigma> \<Rightarrow> \<sigma> \<Rightarrow> \<sigma>" (infixr "\<^bold>\<or>" 50) where "a \<^bold>\<or> b \<equiv> \<^bold>\<not>a \<^bold>\<rightarrow> b"
 definition PLconj :: "\<sigma> \<Rightarrow> \<sigma> \<Rightarrow> \<sigma>" (infixr "\<^bold>\<and>" 51) where "a \<^bold>\<and> b \<equiv> \<^bold>\<not>(\<^bold>\<not>a \<^bold>\<or> \<^bold>\<not>b)"
 definition PLequi :: "\<sigma> \<Rightarrow> \<sigma> \<Rightarrow> \<sigma>" (infix "\<^bold>\<leftrightarrow>" 48) where "a \<^bold>\<leftrightarrow> b \<equiv> (a \<^bold>\<rightarrow> b) \<^bold>\<and> (b \<^bold>\<rightarrow> a)"
-definition PLtop :: "\<sigma>" ("\<^bold>\<top>") where "\<^bold>\<top> \<equiv> PLatomicProp \<^bold>\<or> \<^bold>\<not>PLatomicProp" 
+definition PLtop :: "\<sigma>" ("\<^bold>\<top>") where "\<^bold>\<top> \<equiv> p \<^bold>\<or> \<^bold>\<not>p" 
 definition PLbot :: "\<sigma>" ("\<^bold>\<bottom>") where "\<^bold>\<bottom> \<equiv> \<^bold>\<not>\<^bold>\<top>"
 
 text \<open>Next we define the notion of syntactical derivability and consequence: \<close>
@@ -137,7 +137,7 @@ axiomatization where
 
 subsection \<open>MDL Proof Examples\<close>
 
-lemma "\<turnstile> \<^bold>\<circle>(p \<^bold>\<and> q) \<^bold>\<rightarrow> \<^bold>\<circle>p"
+lemma "\<turnstile> \<^bold>\<circle>(p \<^bold>\<and> q) \<^bold>\<rightarrow> \<^bold>\<circle>p" 
 proof -
   have 1: "\<turnstile> (p \<^bold>\<and> q) \<^bold>\<rightarrow> p" by (metis A2 A3 A4 MP PL3 PLconj_def PLdisj_def) (* by (PL add: PLconj_def PLdisj_def) *)
   from 1 have 2: "\<turnstile> \<^bold>\<circle>((p \<^bold>\<and> q) \<^bold>\<rightarrow> p)" by (rule NEC)
