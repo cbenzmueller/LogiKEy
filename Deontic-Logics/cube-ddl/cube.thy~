@@ -1,38 +1,16 @@
-section \<open>Base system E\<close>
-
-theory cube
-imports Main
+theory cube imports Main
 
 begin
 
-subsection \<open>Introduction\<close>
+(*** We introduce Aqvist's system E from the 2019 IfColog paper ***)
 
-subsection \<open>Base System E\<close>
-
-text \<open>We present an approach to meta-reasoning about dyadic deontic logics, and
-apply it to verify the relative strengths of logics in the deontic cube. This one is still
-under construction, and closer to a line at the moment. We introduce the
-properties of the betterness relation, and their syntactical counterparts. We ask Isabelle/HOL to
-
-(1) confirm known correspondance (established by pen and paper) under
-different evaluation rules for the conditional obligation operator: max rule, opt rule, closure 
-maximality, and  Lewis rule.
-(2) verify the asbsence of syntactical counterpart of some properties
-(3) answer open problems regarding correspondance problems  (open in the sense of unsettled by
- pen and paper). \<close>
-
-
-section \<open>Framework\<close>
-
-text \<open>This is Aqvis's system E from the 2019 IfColog paper.\<close>
-
-typedecl i  (* Possible worlds *)
+typedecl i (* Possible worlds *)
 type_synonym \<sigma> = "(i\<Rightarrow>bool)"
 type_synonym \<alpha> = "i\<Rightarrow>\<sigma>" (* Type of betterness relation between worlds *)
 type_synonym \<tau> = "\<sigma>\<Rightarrow>\<sigma>"
 
 
-consts aw::i (*Actual world.*)  
+consts aw::i (* Actual world *)  
 abbreviation etrue  :: "\<sigma>" ("\<^bold>\<top>") where "\<^bold>\<top> \<equiv> \<lambda>w. True" 
 abbreviation efalse :: "\<sigma>" ("\<^bold>\<bottom>")  where "\<^bold>\<bottom> \<equiv> \<lambda>w. False"   
 abbreviation enot :: "\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<not>_"[52]53)  where "\<^bold>\<not>\<phi> \<equiv> \<lambda>w. \<not>\<phi>(w)" 
@@ -49,20 +27,20 @@ abbreviation evalid :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>"[8]109)
 abbreviation ecjactual :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>\<^sub>l"[7]105) (* Local validity — in world aw *)  
   where "\<lfloor>p\<rfloor>\<^sub>l \<equiv> p(aw)"
 
-consts r :: "\<alpha>" (infixr "r" 70) (* Betterness relation *)
+consts r :: "\<alpha>" (infixr "\<^bold>r" 70) (* Betterness relation *)
 
 abbreviation esubset :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>bool" (infix "\<^bold>\<subseteq>" 53)
   where "\<phi> \<^bold>\<subseteq> \<psi> \<equiv> \<forall>x. \<phi> x \<longrightarrow> \<psi> x"
 
 abbreviation eopt  :: "\<sigma>\<Rightarrow>\<sigma>" ("opt<_>")  (* opt rule*)
-  where "opt<\<phi>> \<equiv> (\<lambda>v. ( (\<phi>)(v) \<and> (\<forall>x. ((\<phi>)(x) \<longrightarrow> v r x) )) )" 
+  where "opt<\<phi>> \<equiv> (\<lambda>v. ( (\<phi>)(v) \<and> (\<forall>x. ((\<phi>)(x) \<longrightarrow> v \<^bold>r x) )) )" 
 abbreviation econdopt :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<odot><_|_>")
   where "\<odot><\<psi>|\<phi>> \<equiv>  \<lambda>w. opt<\<phi>> \<^bold>\<subseteq> \<psi>"
 abbreviation eperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<P><_|_>") 
   where "\<P><\<psi>|\<phi>> \<equiv> \<^bold>\<not>\<odot><\<^bold>\<not>\<psi>|\<phi>>"
 
 abbreviation emax  :: "\<sigma>\<Rightarrow>\<sigma>" ("max<_>")      (* Max rule *)
-  where "max<\<phi>> \<equiv> (\<lambda>v. ( (\<phi>)(v) \<and> (\<forall>x. ((\<phi>)(x) \<longrightarrow> (x r v \<longrightarrow>  v r x)) )) )" 
+  where "max<\<phi>> \<equiv> (\<lambda>v. ( (\<phi>)(v) \<and> (\<forall>x. ((\<phi>)(x) \<longrightarrow> (x \<^bold>r v \<longrightarrow>  v \<^bold>r x)) )) )" 
 abbreviation econd  :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<circle><_|_>")
   where "\<circle><\<psi>|\<phi>> \<equiv>  \<lambda>w. max<\<phi>> \<^bold>\<subseteq> \<psi>"
 abbreviation euncobl :: "\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<circle><_>")   
@@ -71,78 +49,93 @@ abbreviation ddeperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("P
   where "P<\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circle><\<^bold>\<not>\<psi>|\<phi>>"
 
 
-nitpick_params [user_axioms,show_all,format=2,expect=genuine] (* Settings for model finder *)
+(* Settings for model finder Nitpick *)
+
+nitpick_params [user_axioms,show_all,expect=genuine] 
 
 
-lemma True (* Consistency check *)
+(*** First consistency check ***)
+
+lemma True 
   nitpick [satisfy] (* model found *)
   oops
- 
+
+(*** The max-rule and opt-rule don't coincide ***)
+
 lemma "\<odot><\<psi>|\<phi>> \<equiv> \<circle><\<psi>|\<phi>>" 
-  nitpick [card i=1] (* counterexample found for card i=1*) 
+  nitpick [card i=1] (* counterexample found for card i=1 *) 
   oops
 
-text \<open>David Lewis's evaluation rule for the conditional\<close>
+(* David Lewis's evaluation rule for the conditional *)
 
 abbreviation lewcond :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("\<circ><_|_>")
   where "\<circ><\<psi>|\<phi>> \<equiv> \<lambda>v. (\<not>(\<exists>x. (\<phi>)(x))\<or>  
-        (\<exists>x. ((\<phi>)(x)\<and>(\<psi>)(x) \<and> (\<forall>y. ((y r x) \<longrightarrow> (\<phi>)(y)\<longrightarrow>(\<psi>)(y))))))"
+        (\<exists>x. ((\<phi>)(x)\<and>(\<psi>)(x) \<and> (\<forall>y. ((y \<^bold>r x) \<longrightarrow> (\<phi>)(y)\<longrightarrow>(\<psi>)(y))))))"
 abbreviation lewperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<integral><_|_>") 
   where "\<integral><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circ><\<^bold>\<not>\<psi>|\<phi>>"
 
-text \<open>Kratzer evaluation rule for the conditional\<close>
+(* Kratzer evaluation rule for the conditional *)
 
 abbreviation kratcond :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>"  ("\<ominus><_|_>")
-  where "\<ominus><\<psi>|\<phi>> \<equiv> \<lambda>v. ((\<forall>x. ((\<phi>)(x)\<longrightarrow> (\<exists>y. ((\<phi>)(y)\<and>(y r x) \<and>( (\<forall>z. ((z r y) \<longrightarrow> (\<phi>)(z)\<longrightarrow>(\<psi>)(z)))))))))"
+  where "\<ominus><\<psi>|\<phi>> \<equiv> \<lambda>v. ((\<forall>x. ((\<phi>)(x) \<longrightarrow> 
+     (\<exists>y. ((\<phi>)(y)\<and>(y \<^bold>r x) \<and> ((\<forall>z. ((z \<^bold>r y) \<longrightarrow> (\<phi>)(z) \<longrightarrow> (\<psi>)(z)))))))))"
 abbreviation kratperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<times><_|_>") 
   where "\<times><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<ominus><\<^bold>\<not>\<psi>|\<phi>>"
 
 
-lemma True (* Consistency check *)
-  nitpick [satisfy,user_axioms,expect=genuine] (* model found *)
-  oops
+(* The standard properties *)
 
-text \<open>The standard properties\<close>
-
-abbreviation reflexivity  where "reflexivity  \<equiv> (\<forall>x. x r x)"
+abbreviation reflexivity  where "reflexivity  \<equiv> (\<forall>x. x \<^bold>r x)"
 abbreviation transitivity 
-  where "transitivity \<equiv> (\<forall>x y z. (x r y \<and> y r z) \<longrightarrow> x r z)"
+  where "transitivity \<equiv> (\<forall>x y z. (x \<^bold>r y \<and> y \<^bold>r z) \<longrightarrow> x \<^bold>r z)"
 abbreviation totalness 
-  where "totalness \<equiv> (\<forall>x y. (x r y \<or> y r x))"
+  where "totalness \<equiv> (\<forall>x y. (x \<^bold>r y \<or> y \<^bold>r x))"
 
-text \<open>4 versions of Lewis's limit assumption\<close>
+(* 4 versions of Lewis's limit assumption *)
 
 abbreviation mlimitedness  
   where "mlimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. max<\<phi>>x))"
 abbreviation msmoothness  
   where "msmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow>
-                     (max<\<phi>>x \<or> (\<exists>y. (y r x \<and> \<not>(x r y) \<and> max<\<phi>>y)))))"
+                     (max<\<phi>>x \<or> (\<exists>y. (y \<^bold>r x \<and> \<not>(x \<^bold>r y) \<and> max<\<phi>>y)))))"
 abbreviation olimitedness  
   where "olimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. opt<\<phi>>x))"
 abbreviation osmoothness  where 
    "osmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow> 
-                      (opt<\<phi>>x \<or> (\<exists>y. (y r x \<and> \<not>(x r y) \<and> opt<\<phi>>y)))))"
-definition transitive :: "\<alpha>\<Rightarrow>bool" where "transitive R \<equiv> \<forall>x y z. R x y \<and>  R y z \<longrightarrow> R x z"
-definition sub_rel :: "\<alpha>\<Rightarrow>\<alpha>\<Rightarrow>bool" where "sub_rel R Q \<equiv> \<forall>u v. R u v \<longrightarrow> Q u v"
-definition assfactor::"\<alpha>\<Rightarrow>\<alpha>" where "assfactor R \<equiv> \<lambda>u v. R u v \<and> \<not> R v u "
-(*In HOL the transitive closure of a relation can be defined in a single line.*)
-definition tc :: "\<alpha>\<Rightarrow>\<alpha>" where "tc R \<equiv> \<lambda>x y.\<forall>Q. transitive Q \<longrightarrow> (sub_rel R Q \<longrightarrow> Q x y)"
-(* this is a first form of a-cyclicity. Cycles with one non-strict betterness are ruled out*)
+                      (opt<\<phi>>x \<or> (\<exists>y. (y \<^bold>r x \<and> \<not>(x \<^bold>r y) \<and> opt<\<phi>>y)))))"
+definition transitive :: "\<alpha>\<Rightarrow>bool" 
+  where "transitive Rel \<equiv> \<forall>x y z. Rel x y \<and>  Rel y z \<longrightarrow> Rel x z"
+definition sub_rel :: "\<alpha>\<Rightarrow>\<alpha>\<Rightarrow>bool" 
+  where "sub_rel Rel1 Rel2 \<equiv> \<forall>u v. Rel1 u v \<longrightarrow> Rel2 u v"
+definition assfactor::"\<alpha>\<Rightarrow>\<alpha>" 
+  where "assfactor Rel \<equiv> \<lambda>u v. Rel u v \<and> \<not>Rel v u "
+
+(* In HOL the transitive closure of a relation can be defined in a single line; here 
+   we apply the construction to betterness relation \<^bold>r and for its strict 
+   variant (\<lambda>u v. u \<^bold>r v \<and> \<not>v \<^bold>r u) *)
+definition tcr  
+  where "tcr \<equiv> \<lambda>x y. \<forall>Q. transitive Q \<longrightarrow> (sub_rel r Q \<longrightarrow> Q x y)"
+
+definition tcr_strict
+  where "tcr_strict \<equiv> \<lambda>x y. \<forall>Q. transitive Q \<longrightarrow> (sub_rel (\<lambda>u v. u \<^bold>r v \<and> \<not>v \<^bold>r u) Q \<longrightarrow> Q x y)"
+
+(* This is a first form of a-cyclicity. Cycles with one non-strict betterness are ruled out*)
 abbreviation Suzumura 
-  where "Suzumura R \<equiv> \<forall>x y. (tc R x y \<longrightarrow> ( R y x \<longrightarrow> R x y))"
-(* this is a second form of a-cyclicity. Cycles of non-strict betterness are ruled out*)
+  where "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> (y \<^bold>r x \<longrightarrow> x \<^bold>r y)"
+
+lemma "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> \<not> (y \<^bold>r x \<and> \<not>x \<^bold>r y)" by simp
+
+(* This is a second form of a-cyclicity. Cycles of non-strict betterness are ruled out*)
 abbreviation loopfree
-  where "loopfree R \<equiv> \<forall>x y. (tc (assfactor R) x y \<longrightarrow> ( R y x \<longrightarrow> R x y))"
+  where "loopfree \<equiv> \<forall>x y. tcr_strict x y \<longrightarrow> (y \<^bold>r x \<longrightarrow> x \<^bold>r y)"
 
-
-text \<open>Interval order condition is totalness plus Ferrers\<close>
+(* Interval order condition is totalness plus Ferrers *)
 
 abbreviation Ferrers
-  where "Ferrers \<equiv> (\<forall>x y z u. ((x r u) \<and> (y r z)) \<longrightarrow> (x r z) \<or> (y r u))"
+  where "Ferrers \<equiv> (\<forall>x y z u. (x \<^bold>r u \<and> y \<^bold>r z) \<longrightarrow> (x \<^bold>r z \<or> y \<^bold>r u))"
 lemma assumes Ferrers reflexivity  (*fact overlooked in the literature*)
   shows totalness
-  sledgehammer (* proof found *) 
-  by (simp add: assms(1) assms(2))  
+  by (simp add: assms(1) assms(2))  (* proof found *)
 
 lemma assumes "transitivity" 
   shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
@@ -157,10 +150,10 @@ lemma assumes "totalness"
 lemma assumes "transitivity" "totalness"
   shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
   sledgehammer (* proof found *)
-  (* by (metis assms(1) assms(2)) *)
+  (* by (metis assms(1) assms(2)) — Isabelle is still too weak here *)
   oops
 
-text \<open>Max-Limitedness corresponds to D\<close>
+(* Max-Limitedness corresponds to D *)
 
 lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>)\<rfloor>" 
   nitpick [card i=3]  (* counterexample found for card i=3 *) 
@@ -179,12 +172,12 @@ lemma assumes "mlimitedness"
   sledgehammer (* proof found *) 
   by (metis assms ddediomond_def) 
 
-lemma assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>"
+lemma assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>"
   shows "mlimitedness"   
   nitpick [card i=3]  (* counterexample found for card i=3 *)
   oops 
 
-text \<open>Smoothness corresponds to cautious monotony\<close>
+(* Smoothness corresponds to cautious monotony *)
 
 lemma assumes "msmoothness"    
   shows CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
@@ -343,7 +336,7 @@ lemma assumes "mlimitedness"
   (* by (metis assms(1) assms(2) assms(3)) *) 
   oops
 
-(* axioms of E holding if r transitive and total *)
+(* axioms of E holding if \<^bold>r transitive and total *)
 lemma D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>"  
   nitpick [card i=2] (* counterexample found for card i=2 *) 
   oops
