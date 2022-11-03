@@ -174,8 +174,6 @@ lemma assumes "reflexivity" and "Ferrers" shows "Quasitransit"
   by (metis assfactor_def assms(1) assms(2))
 
 
-
-
 (****************
 Correspondance under the max rule 
 ******************)
@@ -206,10 +204,10 @@ lemma assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<n
 (* Smoothness corresponds to cautious monotony *)
 
 lemma assumes "msmoothness"    
-  shows CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
+  shows CM: "\<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
   using assms by force 
 
-lemma assumes CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
+lemma assumes CM: "\<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
   shows  "msmoothness" 
   nitpick [card i=3]  (* counterexample found *)
   oops  
@@ -217,20 +215,20 @@ lemma assumes CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<c
 (*Interval order corresponds to disjunctive rationality*)
 
 lemma assumes "reflexivity"
-  shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>" 
+  shows  DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
   nitpick [card i=3]  (* counterexample found *)
   oops 
 
 lemma assumes "reflexivity" "Ferrers"
-  shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>" 
+  shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarrow> (\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
   by (metis assms(1) assms(2)) 
   
-lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<chi>|\<phi>>\<^bold>\<or>\<circle><\<chi>|\<psi>>)\<rfloor>" 
+lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
   shows "reflexivity" 
   nitpick [card i=1]  (* counterexample found *) 
   oops 
 
-lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<chi>|\<phi>>\<^bold>\<or>\<circle><\<chi>|\<psi>>)\<rfloor>" 
+lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
   shows "Ferrers"    
   nitpick [card i=2]  (* counterexample found *)
   oops 
@@ -273,19 +271,19 @@ lemma assumes "olimitedness"
 
 lemma assumes D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"         
   shows "olimitedness"     
-  nitpick [card i=1] (* counterexample found for card i=1 *)  
+  nitpick [card i=1] (* counterexample found *)  
   oops 
 
 (*Smoothness corresponds to cautious monotony*)
 
 lemma assumes "osmoothness"    
-  shows CM': "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"   
+  shows CM': "\<lfloor>( \<odot><\<psi>|\<phi>> \<^bold>\<and> \<odot><\<chi>|\<phi>> ) \<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"   
   using assms by force 
 
 
-lemma assumes CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
+lemma assumes CM: "\<lfloor>( \<odot><\<psi>|\<phi>> \<^bold>\<and> \<odot><\<chi>|\<phi>> ) \<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
   shows  "osmoothness"   
-  nitpick [card i=1] (* counterexample found for card i=1 *)  
+  nitpick [card i=1] (* counterexample found  *)  
   oops
  
 
@@ -293,16 +291,14 @@ lemma assumes CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|
 
 lemma assumes "transitivity"    
   shows  Sp': "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
-  sledgehammer (* proof found *) 
   by (metis assms) 
 
 lemma assumes "transitivity"    
-  shows  Trans: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
-  sledgehammer (* proof found *)
+  shows  Trans: "\<lfloor>( \<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>> )\<^bold>\<rightarrow> \<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
   by (metis assms) 
 
-lemma assumes Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"
-  assumes Trans: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"
+lemma assumes Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>> ) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"
+  assumes Trans: "\<lfloor>( \<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>> ) \<^bold>\<rightarrow> \<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"
   shows "transitivity"    
   nitpick [card i=2] (* counterexample found  *)  
   oops 
@@ -311,21 +307,21 @@ lemma assumes Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>
 
 lemma assumes "reflexivity"
      (* assumes "Ferrers"*)
-  shows  DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>"   
+  shows  DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<odot><\<chi>|\<phi>> \<^bold>\<or> \<odot><\<chi>|\<psi>>)\<rfloor>"   
   nitpick [card i=3] (* counterexample found *)   
   oops 
 
 lemma assumes "reflexivity"
       assumes "Ferrers"
-  shows  DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>"   
+  shows  DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<odot><\<chi>|\<phi>> \<^bold>\<or> \<odot><\<chi>|\<psi>>)\<rfloor>"   
   by (metis assms(2))
  
- lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>" 
+ lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<odot><\<chi>|\<phi>> \<^bold>\<or> \<odot><\<chi>|\<psi>>)\<rfloor>" 
   shows "reflexivity"   
   nitpick [card i=1] (* counterexample found *)  
   oops 
 
-lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>" 
+lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<odot><\<chi>|\<phi>> \<^bold>\<or> \<odot><\<chi>|\<psi>>)\<rfloor>" 
   shows "Ferrers"   
   nitpick [card i=2] (* counterexample found  *)  
   oops 
@@ -335,41 +331,29 @@ Relationship Lewis rule and max/opt rule
 *****************)
 
 (* deontic explosion-max rule *)
-lemma DEX: "\<lfloor>(\<diamond>\<phi>\<^bold>\<and>\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>>\<rfloor>" 
-  sledgehammer (*proof found*)
+lemma DEX: "\<lfloor>(\<diamond>\<phi> \<^bold>\<and> \<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<^bold>\<not>\<psi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>>\<rfloor>" 
   by blast  
 
 (* no-deontic explosion-lewis rule *)
-lemma DEX: "\<lfloor>(\<diamond>\<phi>\<^bold>\<and>\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>>\<rfloor>"
-  nitpick [card i=2] (* counterehammer (*proof found*)
-  by blast  
-
-(* no-deontic explosion-lewis rule *)
-lemma DEX: "\<lfloor>(\<diamond>\<phi>\<^bold>\<and>\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<^bold>\<not>\<psi>|\<phi>>)example found for card i=2 *)  
-  oops
-
+lemma DEX: "\<lfloor>(\<diamond>\<phi> \<^bold>\<and> \<circ><\<psi>|\<phi>> \<^bold>\<and> \<circ><\<^bold>\<not>\<psi>|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|\<phi>>\<rfloor>"
+  nitpick [card i=2] (* counterexample  found*)
+  
 lemma assumes "mlimitedness"
-  assumes "transitivity" 
-  assumes "totalness"
-  shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<odot><\<psi>|\<phi>>\<rfloor>"
-  sledgehammer (assms) (*proof found*)
-  (* by (metis assms(1) assms(2) assms(3)) *) 
-  oops
+      assumes "transitivity" 
+      assumes "totalness"
+      shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<odot><\<psi>|\<phi>>\<rfloor>"
+      by (metis assms(1) assms(2) assms(3)) 
+      
 
 lemma assumes "mlimitedness"
   assumes "transitivity" 
   assumes "totalness"
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>"
-  sledgehammer (assms) (* proof found *) 
-  (* by (smt (verit) assms(1) assms(2) assms(3)) *)
-  (* by (metis assms(1) assms(2) assms(3)) *) 
-  oops
+  by (smt (verit) assms(1) assms(2) assms(3)) 
 
 (****************
 Correspondance Lewis evaluation rule for the conditional
 *****************)
-
-
 
 (* axioms of E holding if \<^bold>r transitive and total *)
 lemma D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>"  
@@ -378,7 +362,6 @@ lemma D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>
 
 lemma assumes "totalness"
   shows D': "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" 
-  sledgehammer (* proof found *)
   by (metis assms ddediomond_def)  
 
 lemma Sp: "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
@@ -386,8 +369,7 @@ lemma Sp: "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\
   oops 
 
 lemma assumes "transitivity"
-  shows Sp'': "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
-  sledgehammer (* proof found *) 
+  shows Sp'': "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"    
   using assms by blast 
    
 
@@ -411,7 +393,6 @@ lemma
   assumes "transitivity" 
   assumes "totalness"
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
-  sledgehammer (* proof found *) 
   by (smt (verit, ccfv_SIG) assms(1) assms(2)) 
 
 
@@ -435,7 +416,6 @@ lemma
   assumes "transitivity"
   assumes "totalness"
   shows CM'': "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  sledgehammer (assms) (* proof found *)
   by (metis assms(1) assms(2))  
 
 lemma assumes "transitivity" 
@@ -456,23 +436,18 @@ lemma assumes "transitivity" "totalness"
 (*axioms of E holding irrespective of the properties of r*)
 
 lemma Abs:"\<lfloor>\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circ><\<psi>|\<phi>>\<rfloor>"  
-  sledgehammer (* proof found *)
   by blast  
 
-lemma Nec:"\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circ><\<psi>|\<phi>>\<rfloor>"
-  sledgehammer (* proof found *) 
+lemma Nec:"\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circ><\<psi>|\<phi>>\<rfloor>" 
   by blast 
 
 lemma Ext:"\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circ><\<psi>|\<phi>\<^sub>2>)\<rfloor>"
-  sledgehammer (* proof found *)
   by simp  
 
 lemma Id:"\<lfloor>\<circ><\<phi>|\<phi>>\<rfloor>"
-  sledgehammer (* proof found *) 
   by auto 
 
 lemma Sh:"\<lfloor>\<circ><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circ><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>"
-  sledgehammer (* proof found *) 
   by blast 
 
 
