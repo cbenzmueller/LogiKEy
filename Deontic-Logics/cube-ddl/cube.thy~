@@ -83,7 +83,11 @@ abbreviation kratperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("
   where "\<times><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<ominus><\<^bold>\<not>\<psi>|\<phi>>"
 
 
-(* The standard properties *)
+(****************
+Properties
+******************)
+
+(* The standard properties of the betterness relation *)
 
 abbreviation reflexivity  where "reflexivity  \<equiv> (\<forall>x. x \<^bold>r x)"
 abbreviation transitivity 
@@ -103,7 +107,11 @@ abbreviation olimitedness
 abbreviation osmoothness  where 
    "osmoothness \<equiv> (\<forall>\<phi> x. ((\<phi>)x \<longrightarrow> 
                       (opt<\<phi>>x \<or> (\<exists>y. (y \<^bold>r x \<and> \<not>(x \<^bold>r y) \<and> opt<\<phi>>y)))))"
-definition transitive :: "\<alpha>\<Rightarrow>bool" 
+
+(* Weaker forms of transitivity--they require the notion of
+transitive closure*)
+
+definition transitive :: "\<alpha>\<Rightarrow>bool"
   where "transitive Rel \<equiv> \<forall>x y z. Rel x y \<and>  Rel y z \<longrightarrow> Rel x z"
 definition sub_rel :: "\<alpha>\<Rightarrow>\<alpha>\<Rightarrow>bool" 
   where "sub_rel Rel1 Rel2 \<equiv> \<forall>u v. Rel1 u v \<longrightarrow> Rel2 u v"
@@ -119,17 +127,27 @@ definition tcr
 definition tcr_strict
   where "tcr_strict \<equiv> \<lambda>x y. \<forall>Q. transitive Q \<longrightarrow> (sub_rel (\<lambda>u v. u \<^bold>r v \<and> \<not>v \<^bold>r u) Q \<longrightarrow> Q x y)"
 
-(* This is a first form of a-cyclicity. Cycles with one non-strict betterness are ruled out*)
+
+(* First weakening is quasi-transitivity: the strict betterness
+relation is transitive*)
+abbreviation Quasitransit 
+  where "Quasitransit  \<equiv> \<forall>x y z. (assfactor r x y \<and>  
+                    assfactor r y z) \<longrightarrow> assfactor r x z"
+
+(* Second weakening is called Suzumura consistency: cycles with one 
+non-strict betterness are ruled out*)
 abbreviation Suzumura 
   where "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> (y \<^bold>r x \<longrightarrow> x \<^bold>r y)"
 
 lemma "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> \<not> (y \<^bold>r x \<and> \<not>x \<^bold>r y)" by simp
 
-(* This is a second form of a-cyclicity. Cycles of non-strict betterness are ruled out*)
+(* Second weakening is called a-cyclicity: cycles of non-strict 
+betterness are ruled out*)
+
 abbreviation loopfree
   where "loopfree \<equiv> \<forall>x y. tcr_strict x y \<longrightarrow> (y \<^bold>r x \<longrightarrow> x \<^bold>r y)"
 
-(* Interval order condition is totalness plus Ferrers *)
+(* 3nd weakening: Interval order (reflexivity + Ferrers) *)
 
 abbreviation Ferrers
   where "Ferrers \<equiv> (\<forall>x y z u. (x \<^bold>r u \<and> y \<^bold>r z) \<longrightarrow> (x \<^bold>r z \<or> y \<^bold>r u))"
@@ -137,21 +155,30 @@ lemma assumes Ferrers reflexivity  (*fact overlooked in the literature*)
   shows totalness
   by (simp add: assms(1) assms(2))  (* proof found *)
 
-lemma assumes "transitivity" 
-  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  nitpick [card i=1] (* counterexample found for card i=1 *)
-  oops
 
-lemma assumes "totalness" 
-  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  nitpick [card i=3] (* counterexample found for card i=3 *)
-  oops
+(*their relationships*)
 
-lemma assumes "transitivity" "totalness"
-  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  sledgehammer (* proof found *)
-  (* by (metis assms(1) assms(2)) — Isabelle is still too weak here *)
-  oops
+lemma assumes "transitivity" shows "Suzumura" 
+  by (metis assms sub_rel_def tcr_def transitive_def)
+
+lemma assumes "transitivity" shows "Quasitransit"
+  by (metis assfactor_def assms)
+
+lemma assumes "Suzumura" shows "loopfree" 
+  by (metis (no_types, lifting) assms sub_rel_def tcr_def tcr_strict_def)
+
+lemma assumes "Quasitransit" shows "loopfree" 
+  by (smt (verit, best) assfactor_def assms sub_rel_def tcr_strict_def transitive_def)
+  
+lemma assumes "reflexivity" and "Ferrers" shows "Quasitransit" 
+  by (metis assfactor_def assms(1) assms(2))
+
+
+
+
+(****************
+Correspondance under the max rule 
+******************)
 
 (* Max-Limitedness corresponds to D *)
 
@@ -160,96 +187,88 @@ lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>>
   oops 
 
 lemma "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
-  nitpick [card i=3]  (* counterexample found for card i=3 *)
+  nitpick [card i=3]  (* counterexample found *)
   oops 
 
 lemma "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>"
-  nitpick [card i=3]  (* counterexample found for card i=3 *)
+  nitpick [card i=3]  (* counterexample found *)
   oops 
 
 lemma assumes "mlimitedness"
   shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
-  sledgehammer (* proof found *) 
   by (metis assms ddediomond_def) 
 
 lemma assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>"
   shows "mlimitedness"   
-  nitpick [card i=3]  (* counterexample found for card i=3 *)
+  nitpick [card i=3]  (* counterexample found *)
   oops 
 
 (* Smoothness corresponds to cautious monotony *)
 
 lemma assumes "msmoothness"    
   shows CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  sledgehammer (* proof found *)
   using assms by force 
 
 lemma assumes CM: "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
   shows  "msmoothness" 
-  nitpick [card i=3]  (* counterexample found for card i=3 *)
+  nitpick [card i=3]  (* counterexample found *)
   oops  
 
-text \<open>Interval order (reflexivity plus Ferrers) corresponds to disjunctive rationality\<close>
+(*Interval order corresponds to disjunctive rationality*)
 
 lemma assumes "reflexivity"
-    (* assumes "Ferrers"*)
   shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>" 
-  nitpick [card i=3]  (* counterexample found for card i=3 *)
+  nitpick [card i=3]  (* counterexample found *)
   oops 
 
 lemma assumes "reflexivity" "Ferrers"
-  shows  DR: "\<forall>\<phi> \<psi> \<chi>.\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>" 
-  sledgehammer (* proof found *)
+  shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>" 
   by (metis assms(1) assms(2)) 
   
 lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<chi>|\<phi>>\<^bold>\<or>\<circle><\<chi>|\<psi>>)\<rfloor>" 
   shows "reflexivity" 
-  nitpick [card i=1]  (* counterexample found for card i=1 *) 
+  nitpick [card i=1]  (* counterexample found *) 
   oops 
 
 lemma assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<chi>|\<phi>>\<^bold>\<or>\<circle><\<chi>|\<psi>>)\<rfloor>" 
   shows "Ferrers"    
-  nitpick [card i=2]  (* counterexample found for card i=2 *)
+  nitpick [card i=2]  (* counterexample found *)
   oops 
 
-text \<open>Transitivity and totalness corresponds to the Spohn axiom (Sp)\<close>
+(*Transitivity and totalness corresponds to the Spohn axiom (Sp)*)
 
 lemma assumes "transitivity"
   shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
-  nitpick [card i=3] (* counterexample found for card i=3 *) 
+  nitpick [card i=3] (* counterexample found *) 
   oops
 
 lemma assumes "totalness" 
   shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
-  nitpick [card i=3] (* counterexample for card i=3 *) 
+  nitpick [card i=3] (* counterexample *) 
   oops
 
 lemma assumes "transitivity" "totalness"
   shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
-  sledgehammer (* proof found *)
   by (metis assms(1) assms(2)) 
                                                           
 lemma assumes  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   shows "totalness"   
-  nitpick [card i=1] (* counterexample found for card i=1 *) 
+  nitpick [card i=1] (* counterexample found *) 
   oops 
 
 lemma assumes  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   shows "transitivity" 
-  nitpick [card i=2] (* counterexample found for card i=2 *) 
+  nitpick [card i=2] (* counterexample found *) 
   oops 
 
-subsection \<open>Correspondance under the opt rule\<close>
+(****************
+Correspondance under the opt rule
+******************)
 
-text \<open>We move to the opt rule, and associate with it two news modal operators\<close>
-text \<open>Here we redefine Lewis's limit assumption accordingly\<close>
-text \<open>Correspondance\<close>
-
-text \<open>opt-Limitedness corresponds to D\<close>
+(*opt-Limitedness corresponds to D*)
 
 lemma assumes "olimitedness"    
   shows  D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"   
-  sledgehammer (* proof found *)
   by (simp add: assms ddediomond_def) 
 
 lemma assumes D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"         
@@ -257,11 +276,10 @@ lemma assumes D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>
   nitpick [card i=1] (* counterexample found for card i=1 *)  
   oops 
 
-text \<open>Smoothness corresponds to CM\<close>
+(*Smoothness corresponds to cautious monotony*)
 
 lemma assumes "osmoothness"    
   shows CM': "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"   
-  sledgehammer (* proof found*)
   using assms by force 
 
 
@@ -271,7 +289,7 @@ lemma assumes CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|
   oops
  
 
-text \<open>Transitivity\<close>
+(*transitivity*)
 
 lemma assumes "transitivity"    
   shows  Sp': "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
@@ -286,28 +304,35 @@ lemma assumes "transitivity"
 lemma assumes Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"
   assumes Trans: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"
   shows "transitivity"    
-  nitpick [card i=2] (* counterexample found for card i=2 *)  
+  nitpick [card i=2] (* counterexample found  *)  
   oops 
 
-lemma assumes "totalness"
+(*interval order corresponds to disjunctive rationality*)
+
+lemma assumes "reflexivity"
      (* assumes "Ferrers"*)
   shows  DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>"   
-  nitpick [card i=3] (* counterexample found for card i=3 *)   
+  nitpick [card i=3] (* counterexample found *)   
   oops 
-  
+
+lemma assumes "reflexivity"
+      assumes "Ferrers"
+  shows  DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>"   
+  by (metis assms(2))
+ 
  lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>" 
-  shows "totalness"   
-  nitpick [card i=1] (* counterexample found for card i=1 *)  
+  shows "reflexivity"   
+  nitpick [card i=1] (* counterexample found *)  
   oops 
 
 lemma assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<odot><\<chi>|\<phi>>\<^bold>\<or>\<odot><\<chi>|\<psi>>)\<rfloor>" 
   shows "Ferrers"   
-  nitpick [card i=2] (* counterexample found for card i=2 *)  
+  nitpick [card i=2] (* counterexample found  *)  
   oops 
 
-
-subsection \<open>Lewis rule\<close>
-text \<open>Under the Lewis rule, totalness corresponds to D \<close>
+(****************
+Relationship Lewis rule and max/opt rule 
+*****************)
 
 (* deontic explosion-max rule *)
 lemma DEX: "\<lfloor>(\<diamond>\<phi>\<^bold>\<and>\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>>\<rfloor>" 
@@ -316,7 +341,11 @@ lemma DEX: "\<lfloor>(\<diamond>\<phi>\<^bold>\<and>\<circle><\<psi>|\<phi>>\<^b
 
 (* no-deontic explosion-lewis rule *)
 lemma DEX: "\<lfloor>(\<diamond>\<phi>\<^bold>\<and>\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<^bold>\<not>\<psi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>>\<rfloor>"
-  nitpick [card i=2] (* counterexample found for card i=2 *)  
+  nitpick [card i=2] (* counterehammer (*proof found*)
+  by blast  
+
+(* no-deontic explosion-lewis rule *)
+lemma DEX: "\<lfloor>(\<diamond>\<phi>\<^bold>\<and>\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<^bold>\<not>\<psi>|\<phi>>)example found for card i=2 *)  
   oops
 
 lemma assumes "mlimitedness"
@@ -425,6 +454,25 @@ lemma Id:"\<lfloor>\<circ><\<phi>|\<phi>>\<rfloor>"
 lemma Sh:"\<lfloor>\<circ><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circ><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>"
   sledgehammer (* proof found *) 
   by blast 
+
+
+lemma assumes "transitivity" 
+  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+  nitpick [card i=1] (* counterexample found for card i=1 *)
+  oops
+
+lemma assumes "totalness" 
+  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+  nitpick [card i=3] (* counterexample found for card i=3 *)
+  oops
+
+lemma assumes "transitivity" "totalness"
+  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+  by (metis assms(1) assms(2)
+  oops
+
+
+
 
 
 section \<open>Repugnant conclusion\<close>

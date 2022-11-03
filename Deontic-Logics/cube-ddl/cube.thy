@@ -365,9 +365,15 @@ lemma assumes "mlimitedness"
   (* by (metis assms(1) assms(2) assms(3)) *) 
   oops
 
+(****************
+Correspondance Lewis evaluation rule for the conditional
+*****************)
+
+
+
 (* axioms of E holding if \<^bold>r transitive and total *)
 lemma D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>"  
-  nitpick [card i=2] (* counterexample found for card i=2 *) 
+  nitpick [card i=2] (* counterexample found *) 
   oops
 
 lemma assumes "totalness"
@@ -376,7 +382,7 @@ lemma assumes "totalness"
   by (metis assms ddediomond_def)  
 
 lemma Sp: "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
-  nitpick [card i=3] (* counterexample found for card i=3 *) 
+  nitpick [card i=3] (* counterexample found *) 
   oops 
 
 lemma assumes "transitivity"
@@ -386,19 +392,19 @@ lemma assumes "transitivity"
    
 
 lemma COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
-  nitpick [card i=2] (* counterexample found for card i=2 *) 
+  nitpick [card i=2] (* counterexample found *) 
   oops 
 
 lemma
   assumes "transitivity" 
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
-  nitpick [card i=2] (* counterexample found for card i=2 *) 
+  nitpick [card i=2] (* counterexample found *) 
   oops  
 
   lemma 
   assumes "totalness"
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
-  nitpick [card i=3] (* counterexample found for card i=3 *) 
+  nitpick [card i=3] (* counterexample found *) 
   oops 
   
 lemma 
@@ -410,19 +416,19 @@ lemma
 
 
 lemma CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  nitpick [card i=2] (* counterexample found for card i=2 *) 
+  nitpick [card i=2] (* counterexample found *) 
   oops 
 
 lemma
   assumes "transitivity"
   shows CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  nitpick [card i=2] (* counterexample found for card i=2 *) 
+  nitpick [card i=2] (* counterexample found *) 
   oops 
 
 lemma
   assumes "totalness"
   shows CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  nitpick [card i=3] (* counterexample found for card i=3 *) 
+  nitpick [card i=3] (* counterexample found *) 
   oops 
 
 lemma
@@ -432,6 +438,20 @@ lemma
   sledgehammer (assms) (* proof found *)
   by (metis assms(1) assms(2))  
 
+lemma assumes "transitivity" 
+  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+  nitpick [card i=1] (* counterexample found *)
+  oops
+
+lemma assumes "totalness" 
+  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+  nitpick [card i=3] (* counterexample found *)
+  oops
+
+lemma assumes "transitivity" "totalness"
+  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+  by (metis assms(1) assms(2)
+  oops
 
 (*axioms of E holding irrespective of the properties of r*)
 
@@ -456,39 +476,12 @@ lemma Sh:"\<lfloor>\<circ><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<
   by blast 
 
 
-lemma assumes "transitivity" 
-  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  nitpick [card i=1] (* counterexample found for card i=1 *)
-  oops
-
-lemma assumes "totalness" 
-  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  nitpick [card i=3] (* counterexample found for card i=3 *)
-  oops
-
-lemma assumes "transitivity" "totalness"
-  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  by (metis assms(1) assms(2)
-  oops
-
-
-
-
-
-section \<open>Repugnant conclusion\<close>
-
-text \<open>We verify the mere addition paradox\<close>
-  
 
 
 
 
 
 
-
-  
-  
-  
 section \<open>Negative results\<close>
 
 text \<open>Under the max and opt rules there is no formula corresponding to reflexivity\<close>
