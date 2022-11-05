@@ -153,25 +153,25 @@ abbreviation Ferrers
   where "Ferrers \<equiv> (\<forall>x y z u. (x \<^bold>r u \<and> y \<^bold>r z) \<longrightarrow> (x \<^bold>r z \<or> y \<^bold>r u))"
 lemma assumes Ferrers reflexivity  (*fact overlooked in the literature*)
   shows totalness
-  by (simp add: assms(1) assms(2))  (* proof found *)
+  by (simp add: assms(1) assms(2))  (* proof found *) oops
 
 
 (*their relationships*)
 
 lemma assumes "transitivity" shows "Suzumura" 
-  by (metis assms sub_rel_def tcr_def transitive_def)
+  by (metis assms sub_rel_def tcr_def transitive_def) oops
 
 lemma assumes "transitivity" shows "Quasitransit"
-  by (metis assfactor_def assms)
+  by (metis assfactor_def assms) oops
 
 lemma assumes "Suzumura" shows "loopfree" 
-  by (metis (no_types, lifting) assms sub_rel_def tcr_def tcr_strict_def)
+  by (metis (no_types, lifting) assms sub_rel_def tcr_def tcr_strict_def) oops
 
 lemma assumes "Quasitransit" shows "loopfree" 
-  by (smt (verit, best) assfactor_def assms sub_rel_def tcr_strict_def transitive_def)
+  by (smt (verit, best) assfactor_def assms sub_rel_def tcr_strict_def transitive_def) oops
   
 lemma assumes "reflexivity" and "Ferrers" shows "Quasitransit" 
-  by (metis assfactor_def assms(1) assms(2))
+  by (metis assfactor_def assms(1) assms(2)) oops
 
 
 (****************
@@ -184,11 +184,11 @@ lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>>
   nitpick [card i=3]  (* counterexample found for card i=3 *) 
   oops 
 
-lemma "\<lfloor>(\<circle><\<psi>|\<phi>>\<^bold>\<and>\<circle><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
+lemma "\<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
   nitpick [card i=3]  (* counterexample found *)
   oops 
 
-lemma "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<rightarrow>((\<circle><\<chi>|\<phi>>)\<^bold>\<or>(\<circle><\<chi>|\<psi>>))\<rfloor>"
+lemma "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarrow> ((\<circle><\<chi>|\<phi>>) \<^bold>\<or> (\<circle><\<chi>|\<psi>>))\<rfloor>"
   nitpick [card i=3]  (* counterexample found *)
   oops 
 
@@ -247,7 +247,11 @@ lemma assumes "totalness"
 
 lemma assumes "transitivity" "totalness"
   shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
-  by (metis assms(1) assms(2)) 
+  by (metis assms(1) assms(2))
+
+lemma assumes "transitivity" "totalness"
+  shows  transit: "\<lfloor>( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>) \<^bold>\<rightarrow> P<\<phi>|(\<phi>\<^bold>\<or>\<chi>)>\<rfloor>" 
+ sledgehammer [isar_proof]
                                                           
 lemma assumes  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   shows "totalness"   
@@ -393,7 +397,7 @@ lemma
   assumes "transitivity" 
   assumes "totalness"
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
-  by (smt (verit, ccfv_SIG) assms(1) assms(2)) 
+  sledgehammer [isar_proofs]
 
 
 lemma CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
@@ -429,9 +433,9 @@ lemma assumes "totalness"
   oops
 
 lemma assumes "transitivity" "totalness"
-  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  by (metis assms(1) assms(2)
-  oops
+  shows  transit: "\<lfloor>(\<times><\<phi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<and>\<times><\<psi>|(\<psi>\<^bold>\<or>\<chi>)>)\<^bold>\<rightarrow> \<times><\<phi>|(\<phi>\<^bold>\<or>\<chi>)>\<rfloor>" 
+ sledgehammer [isar_proof]
+ 
 
 (*axioms of E holding irrespective of the properties of r*)
 
