@@ -16,9 +16,9 @@ axiomatization where
 (* B is strictly better than Aplus*)
  P2: "\<lfloor>(\<^bold>\<not>\<odot><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<odot><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
 
-lemma assumes "transitivity" 
+theorem TransIncons:
+  assumes transitivity
   shows False 
-  sledgehammer (* proof found *)
   by (metis P0 P1 P2 assms) 
 (* Sledgehammer finds P1-P3 inconsistent given transitivity of the
  betterness relation in the models*)
