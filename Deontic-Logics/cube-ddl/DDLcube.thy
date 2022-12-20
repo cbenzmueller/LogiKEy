@@ -1,4 +1,4 @@
-theory cube imports Main
+theory DDLcube imports Main
 
 begin
 
