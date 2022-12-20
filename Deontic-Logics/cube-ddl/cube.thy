@@ -256,7 +256,8 @@ lemma assumes "olimitedness"
 lemma assumes D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"         
   shows "olimitedness"     
   sledgehammer (* timed out*)
-  nitpick (* counterexample found *) oops 
+  nitpick (* counterexample found *)
+  oops 
 
 text \<open>Smoothness corresponds to CM\<close>
 
@@ -272,7 +273,6 @@ lemma assumes CM: "\<lfloor>(\<odot><\<psi>|\<phi>>\<^bold>\<and>\<odot><\<chi>|
   nitpick (* counterexample found *) 
   oops
   
-
 
 (*transitivity*)
 
