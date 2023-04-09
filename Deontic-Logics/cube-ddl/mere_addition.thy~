@@ -19,16 +19,30 @@ axiomatization where
 theorem TransIncons:
   assumes transitivity
   shows False 
-  by (metis P0 P1 P2 assms) 
+  sledgehammer
+  by (metis P0 P1 P2 assms)
 (* Sledgehammer finds P1-P3 inconsistent given transitivity of the
  betterness relation in the models*)
 
 lemma True nitpick [satisfy, card i=3] oops (* Nitpick shows 
 consistency in the absence of transitivity*)
 
-
-
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 the following is some trash--I could not make it work with permission and > on formulas
 lemma Transit: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"
