@@ -1,6 +1,6 @@
 theory mere_addition  (* Christoph Benzmüller, Xavier Parent, 2022  *)
 
-imports cube
+imports DDLcube
 
 begin
 
@@ -19,34 +19,39 @@ axiomatization where
 theorem TransIncons:
   assumes transitivity
   shows False 
-  sledgehammer
-  by (metis P0 P1 P2 assms) oops
+  sledgehammer oops
+  by (metis P0 P1 P2 assms) 
 (* Sledgehammer finds P0-P2 inconsistent given transitivity of the
  betterness relation in the models*)
 
-lemma True nitpick [satisfy, card i=3] oops 
+lemma true nitpick [satisfy, card i=3]  oops
 
 (* Nitpick shows consistency in the absence of transitivity*)
 
 theorem Quasicons:
   assumes Quasitransit
-  shows False
-  nitpick [card=4] oops
+  shows true
+  nitpick [card=4] 
 
 (* Nitpick shows consistency if transitivity is weakened into 
-quasi-transitivity*)
+acyclicity*)
 
 theorem Acyclcons:
   assumes loopfree
   shows true
+  nitpick [satisfy,card=3] oops
+
+
+
+
+
+(* Sledgehammer shows inconsistency if transitivity is weakened into 
+quasi-tran*)
+
+theorem Suzucons:
+  assumes Suzumura
+  shows false
   sledgehammer oops
-  nitpick [satisfy,card=3] 
-
-(* Nitpick shows consistency if transitivity is weakened into 
-quasi-transitivity*)
-
-
-
 
 
 

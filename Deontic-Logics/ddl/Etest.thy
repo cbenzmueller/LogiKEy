@@ -55,6 +55,17 @@ lemma assumes "transitivity"
   nitpick [show_all,format=5,timeout=10] 
   sledgehammer oops
 
+lemma Abs:"\<forall>\<phi> \<psi>. \<lfloor>\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circle><\<psi>|\<phi>>\<rfloor>" 
+  sledgehammer oops
+
+lemma Sh: "\<forall>\<phi>\<^sub>1 \<phi>\<^sub>2 \<psi>. \<lfloor>\<circle><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circle><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>"  
+  sledgehammer oops
+
+lemma FD: "\<forall>\<phi> \<psi>. \<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<phi>) \<^bold>\<rightarrow> \<circle><\<psi>>\<rfloor>" 
+    sledgehammer oops
+    nitpick
+
+
 
 
 lemma assumes Abs:"\<forall>\<phi> \<psi>. \<lfloor>\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circle><\<psi>|\<phi>>\<rfloor>"
@@ -66,7 +77,7 @@ lemma assumes Abs:"\<forall>\<phi> \<psi>. \<lfloor>\<circle><\<psi>|\<phi>> \<^
       assumes N:"\<forall>\<phi>. \<lfloor>\<phi>\<rfloor>\<Longrightarrow>\<lfloor>\<box>\<phi>\<rfloor>"
       assumes COK:"\<forall>\<phi>\<^sub>1 \<phi>\<^sub>1 \<psi>. \<lfloor>\<circle><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circle><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circle><\<psi>\<^sub>2|\<phi>>)\<rfloor>"
       assumes "\<lfloor>((\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<phi>>)) \<^bold>\<rightarrow> \<circle><\<chi>|\<psi>>\<rfloor>"
-      shows " \<forall>\<phi> \<psi> \<chi>. \<lfloor>((\<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<psi>\<^bold>\<or>\<chi>>)) \<^bold>\<rightarrow> \<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"  
+     shows " \<forall>\<phi> \<psi> \<chi>. \<lfloor>((\<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<psi>\<^bold>\<or>\<chi>>)) \<^bold>\<rightarrow> \<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"  
   nitpick [show_all,timeout=1000] 
   sledgehammer oops
 
