@@ -136,7 +136,7 @@ abbreviation Suzumura
 
 theorem T1: "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> \<not> (y \<^bold>r x \<and> \<not>x \<^bold>r y)" by simp
 
-(* Second weakening is called a-cyclicity: cycles of non-strict 
+(* Second weakening is called a-cyclicity: cycles of strict 
 betterness are ruled out*)
 
 abbreviation loopfree

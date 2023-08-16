@@ -157,7 +157,7 @@ theorem T2:
 
 theorem T3: 
   assumes transitivity 
-  shows "Suzumura" 
+  shows "Suzumura"
   by (metis assms sub_rel_def tcr_def transitive_def) 
 
 theorem T4: 
@@ -173,6 +173,7 @@ theorem T5:
 theorem T6: 
   assumes Quasitransit 
   shows loopfree
+  sledgehammer
   by (smt (verit) assfactor_def assms sub_rel_def tcr_strict_def transitive_def) 
   
 theorem T7: 
