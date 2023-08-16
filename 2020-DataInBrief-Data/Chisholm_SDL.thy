@@ -40,7 +40,7 @@ begin     (*Unimportant*) nitpick_params [user_axioms,show_all,format=2]
  lemma "\<lfloor>(D1  \<^bold>\<and> D3n \<^bold>\<and> D4) \<^bold>\<rightarrow> D2w\<rfloor>"  nitpick oops (*countermodel*)
  lemma "\<lfloor>(D2w \<^bold>\<and> D3n \<^bold>\<and> D4) \<^bold>\<rightarrow> D1\<rfloor>"   nitpick oops (*countermodel*)
  (* Consistency *)
- lemma "\<lfloor>(D1 \<^bold>\<and> D2w \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" nitpick [satisfy] oops (*Consistent? No*) 
+ lemma "\<lfloor>(D1 \<^bold>\<and> D2w \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" nitpick [satisfy]  (*Consistent? No HERE*) 
  (* Queries *)
  lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2w \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><\<^bold>\<not>tell>\<rfloor>\<^sub>l" using D assms by smt (*Shld J. not tell? Yes*) 
  lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2w \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><tell>\<rfloor>\<^sub>l"  using assms by blast (*Should J. tell? Yes*)

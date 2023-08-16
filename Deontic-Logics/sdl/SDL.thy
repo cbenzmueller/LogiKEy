@@ -38,7 +38,16 @@ lemma seriality: "(\<forall>w. \<exists>v. w R v)" sledgehammer
  abbreviation SDLobl::\<gamma> ("\<^bold>\<circle><_>") where "\<^bold>\<circle><\<phi>> \<equiv>  OB \<phi>"  (*New syntax: A is obligatory.*)
 
 (*Consistency confirmed by model finder Nitpick.*) 
- lemma True nitpick[satisfy,user_axioms,expect=genuine] oops
+lemma True nitpick[satisfy,user_axioms,expect=genuine] oops
+
+
+assumes seriality
+shows D
+  sledgehammer oops
+
+lemma "\<lfloor>(OB \<phi>) \<^bold>\<rightarrow> (OB (OB \<phi>))\<rfloor>"
+  nitpick[falsify,user_axioms,expect=genuine] 
+
  
 (*Barcan formulas.*) 
  lemma Barcan:         "\<lfloor>(\<^bold>\<forall>d. \<^bold>\<circle><\<phi>(d)>) \<^bold>\<rightarrow> (\<^bold>\<circle><\<^bold>\<forall>d. \<phi>(d)>)\<rfloor>" by simp  
