@@ -34,7 +34,7 @@ theorem Quasicons2:
   nitpick [card=3] 
   oops
 
-(* Sledgehammer confirms inconsistency in the presence of Ferrers*)
+(* Sledgehammer confirms inconsistency in the presence of the interval order condition*)
 
 theorem Quasicons:
   assumes reflexivity Ferrers
@@ -43,8 +43,7 @@ theorem Quasicons:
   oops
 
 
-(* Nitpick shows consistency if transitivity is weakened into 
-acyclicity*)
+(* Nitpick shows consistency if transitivity is weakened into acyclicity*)
 
 theorem Acyclcons:
   assumes loopfree
