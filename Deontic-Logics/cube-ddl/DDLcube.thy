@@ -553,9 +553,18 @@ any formula\<close>
 
   text \<open>Under the opt rule transitivity alone is equivalent to Sp and Trans\<close>
 
+
+
+
+theorem transit'
+  sledgehammer oops
+  nitpick [card i=2,show_all]
+
+
+
 lemma 
-  assumes tr: "\<lfloor>\<forall>\<phi>\<psi>\<chi>. ( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
-  shows Sp2: "\<lfloor> ( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  assumes tr: "\<lfloor>\<forall>\<phi>\<psi>\<chi>. ( P<\<phi>|\<phi>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<or>\<chi>>\<rfloor>"
+  shows Sp2: "\<lfloor> ( P<\<psi>|\<phi>> \<and> \<circle><(\<psi>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<and>\<psi>)>\<rfloor>" 
   nitpick [card i=3]
   
 
