@@ -557,8 +557,8 @@ any formula\<close>
 
 
 
-(*attempt 1: the counter-model to Sp2 is correct. tr holds for the values chosen for phi, psi and xi in the
-counter-example, but can be falsified if we change them*)
+(*attempt 1: the counter-model to rm is correct. tr holds for the values chosen for phi, psi and xi in the
+counter-example, but can be falsified if we change them--see explanatory note*)
 
 
 lemma 
@@ -566,8 +566,7 @@ lemma
   shows rm: "\<lfloor> ( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   nitpick [card i=3]
   
-(*attempt 2: universal quantification on the propositions the counter-model to Sp2 is correct. tr holds for the values chosen for phi, psi and xi in the
-counter-example, but can be falsified if we change them*)
+(*attempt 2: universal quantification on the propositions*)
 
 lemma 
   assumes tr: "\<lfloor>\<forall>\<phi> \<psi> \<chi>. ( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
