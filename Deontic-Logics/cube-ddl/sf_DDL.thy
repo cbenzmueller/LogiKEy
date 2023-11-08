@@ -13,8 +13,8 @@ axiomatization where (*X and Y are sets of possible worlds: why do I get some pi
  ax_0: "\<forall>Y Z. (\<forall>w. (Y(w) \<longleftrightarrow> Z(w))) \<longrightarrow> (ob(Y) \<longleftrightarrow> ob(Z))"  and(*extrnsionality*)*)
   ax_1: "\<forall>Y Z.  ob((\<lambda>w. Y(w) \<and> Z(w))\<subseteq> ob(X)\<inter>Y" and (*Chernoff*)
   ax_2: "\<forall>X.  ob(X) \<subseteq> X"  (*Inclusion*) and
-  ax_3: "\<forall>X Y.  (ob(X)\<subseteq> ob( X \<union> Y)) \<or>  (ob(Y)\<subseteq> ob( X \<union> Y))"   (*s-drat*)
-
+  ax_3: "\<forall>X Y Z.   ((ob(X\<union>Y)\<inter>X \<noteq>(\<lambda>x. False) )\<and>((ob(Y\<union>Z)\<inter>Y \<noteq>(\<lambda>x. False)   \<longrightarrow> ((ob(X\<union>Z)\<inter>X \<noteq>(\<lambda>x. False))"
+                                                      (*tr*)
 (*consistency verified *)
 
 lemma True nitpick [satisfy,user_axioms,show_all] oops
