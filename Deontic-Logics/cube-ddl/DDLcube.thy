@@ -564,13 +564,14 @@ counter-example, but can be falsified if we change them--see explanatory note*)
 lemma 
   assumes tr: "\<lfloor>( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
   shows rm: "\<lfloor> ( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
-  nitpick [card i=3]
+  nitpick [card i=3] oops
   
 (*attempt 2: universal quantification on the propositions*)
 
 lemma 
   assumes tr: "\<forall>\<phi> \<psi> \<chi>.\<lfloor> ( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
   shows rm: " \<forall>\<phi> \<psi> \<chi>. \<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  sledgehammer (*time out*) oops
   nitpick [card i=3] (* no proof state*)
 
 end
