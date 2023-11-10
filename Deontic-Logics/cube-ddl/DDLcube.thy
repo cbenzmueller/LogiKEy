@@ -566,7 +566,7 @@ lemma
   shows rm: "\<lfloor> ( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   nitpick [card i=3] oops
   
-(*attempt 2: universal quantification on the propositions*)
+(*attempt 2: universal quantification on the formulas*)
 
 lemma 
   assumes tr: "\<forall>\<phi> \<psi> \<chi>.\<lfloor> ( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
