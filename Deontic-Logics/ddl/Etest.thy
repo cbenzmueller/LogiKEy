@@ -53,7 +53,7 @@ lemma True nitpick [satisfy,user_axioms,expect=genuine] oops (*Consistency conf.
 lemma assumes "transitivity"
       shows " \<forall>\<phi> \<psi> \<chi>. \<lfloor>((\<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<psi>>) \<^bold>\<and> \<^bold>\<not>(\<circle><\<^bold>\<not>\<psi>|\<psi>\<^bold>\<or>\<chi>>)) \<^bold>\<rightarrow> \<^bold>\<not>\<circle><\<^bold>\<not>\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"  
   nitpick [show_all,format=5,timeout=10] 
-  sledgehammer oops
+  sledgehammer 
 
 lemma Abs:"\<forall>\<phi> \<psi>. \<lfloor>\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circle><\<psi>|\<phi>>\<rfloor>" 
   sledgehammer oops

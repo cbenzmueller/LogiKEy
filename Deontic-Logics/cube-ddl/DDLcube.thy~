@@ -435,7 +435,7 @@ lemma
 theorem T22:
   assumes transitivity and totalness
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
- by (smt (z3) assms) 
+  sledgehammer 
 
 
 lemma CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
@@ -556,19 +556,22 @@ any formula\<close>
 
 
 
-theorem transit'
-  sledgehammer oops
-  nitpick [card i=2,show_all]
 
+(*attempt 1: the counter-model to rm is correct. tr holds for the values chosen for phi, psi and xi in the
+counter-example, but can be falsified if we change them--see explanatory note*)
 
 
 lemma 
-  assumes tr: "\<lfloor>\<forall>\<phi>\<psi>\<chi>. ( P<\<phi>|\<phi>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<or>\<chi>>\<rfloor>"
-  shows Sp2: "\<lfloor> ( P<\<psi>|\<phi>> \<and> \<circle><(\<psi>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<and>\<psi>)>\<rfloor>" 
-  nitpick [card i=3]
+  assumes tr: "\<lfloor>( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
+  shows rm: "\<lfloor> ( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  nitpick [card i=3] oops
   
+(*attempt 2: universal quantification on the formulas*)
 
-
-
+lemma 
+  assumes tr: "\<forall>\<phi> \<psi> \<chi>.\<lfloor> ( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
+  shows rm: " \<forall>\<phi> \<psi> \<chi>. \<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  sledgehammer (*time out*) oops
+  nitpick [card i=3] (* no proof state*)
 
 end
