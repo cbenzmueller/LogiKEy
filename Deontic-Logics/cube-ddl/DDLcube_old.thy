@@ -154,7 +154,7 @@ theorem T2:
 
 (*their relationships*)
 
-theorem T3: 
+theorem T3: '
   assumes transitivity 
   shows "Suzumura"
   by (metis assms sub_rel_def tcr_def transitive_def) 
@@ -435,7 +435,7 @@ lemma
 theorem T22:
   assumes transitivity and totalness
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
-  by (smt (verit, ccfv_SIG) assms(1) assms(2)) 
+  sledgehammer 
 
 
 lemma CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
@@ -530,7 +530,7 @@ text \<open>Under the opt rule transitivity alone is equivalent to Sp and Trans\
 
 theorem T25:
   assumes transitivity 
-  shows Sp''': "\<lfloor>(\<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
+  shows Sp''': "\<lfloor>\<forall>\<phi> \<psi> \<chi>. ( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
   by (metis assms) 
 
 lemma 
@@ -563,34 +563,15 @@ counter-example, but can be falsified if we change them--see explanatory note*)
 
 lemma 
   assumes tr: "\<lfloor>( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
-  shows rm: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
-  nitpick [satisfy,card i=3]
-  nitpick [card i=3] 
-  oops
-
-
+  shows rm: "\<lfloor> ( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  nitpick [card i=3] oops
+  
 (*attempt 2: universal quantification on the formulas*)
 
 lemma 
   assumes tr: "\<forall>\<phi> \<psi> \<chi>.\<lfloor> ( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
   shows rm: " \<forall>\<phi> \<psi> \<chi>. \<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
-
-  sledgehammer (*time out*) 
-  nitpick 
-
-  apply simp
-  nitpick [card i=3] (* Nitpick found no counterexample *) 
-  nitpick [card i=4] (* Nitpick found no counterexample *)  
-  nitpick [card i=5] (* Nitpick found no counterexample *)  
-
-  nitpick [satisfy,card i=1] (* model found *) 
-  nitpick [satisfy,card i=2] (* model found *) 
-  nitpick [satisfy,card i=3] (* model found *) 
-  nitpick [satisfy,card i=4] (* model found *) 
-  nitpick [satisfy,card i=5] (* model found *) 
-  nitpick [satisfy,card i=6] (* model found *) 
-  oops
-
-
+  sledgehammer (*time out*) oops
+  nitpick [card i=3] (* no proof state*)
 
 end
