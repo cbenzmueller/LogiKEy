@@ -575,9 +575,9 @@ lemma
   assumes tr: "\<forall>\<phi> \<psi> \<chi>.\<lfloor> ( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
   shows rm: " \<forall>\<phi> \<psi> \<chi>. \<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
 
-  sledgehammer (*time out*) 
-  nitpick    
-  
+  sledgehammer (*time out*) oops
+  nitpick oops
+
   apply simp
   nitpick [card i=3] (* Nitpick found no counterexample *) 
   nitpick [card i=4] (* Nitpick found no counterexample *)  
@@ -590,6 +590,8 @@ lemma
   nitpick [satisfy,card i=5] (* model found *) 
   nitpick [satisfy,card i=6] (* model found *) 
   
+
+
 
 
 
