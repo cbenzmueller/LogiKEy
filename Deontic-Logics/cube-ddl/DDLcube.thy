@@ -59,9 +59,6 @@ abbreviation ddeperm2 :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("
   where "\<bbbP><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<O><\<^bold>\<not>\<psi>|\<phi>>"
 
 
-
-
-
 (* Settings for model finder Nitpick *)
 
 nitpick_params [user_axioms,show_all,expect=genuine] 
@@ -152,6 +149,15 @@ theorem T1: "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> \<not> (y
 
 abbreviation loopfree
   where "loopfree \<equiv> \<forall>x y. tcr_strict x y \<longrightarrow> (y \<^bold>r x \<longrightarrow> x \<^bold>r y)"
+
+abbreviation irrefl
+  where "irrefl \<equiv> \<forall>x. \<not>(x \<^bold>r x)"
+
+theorem 
+  assumes loopfree 
+  shows irrefl
+  nitpick (*counterexample found--this is not correct*)
+
 
 (* Interval order (reflexivity + Ferrers) *)
  
