@@ -141,14 +141,6 @@ theorem T1: "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> \<not> (y
 abbreviation loopfree
   where "loopfree \<equiv> \<forall>x y. tcr_strict x y \<longrightarrow> (y \<^bold>r x \<longrightarrow> x \<^bold>r y)"
 
-abbreviation irrefl
-  where "irrefl \<equiv> \<forall>x. \<not>(x \<^bold>r x)"
-
-theorem 
-  assumes loopfree 
-  shows irrefl
-  nitpick (*counterexample found--this is not correct*)
-
 
 (* Interval order (reflexivity + Ferrers) *)
  
