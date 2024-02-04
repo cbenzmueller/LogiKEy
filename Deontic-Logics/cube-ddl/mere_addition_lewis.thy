@@ -10,6 +10,7 @@ consts a::\<sigma> aplus::\<sigma> b::\<sigma>
 
 (*** With optimality  ***)
 
+
 axiomatization where
 (* A is striclty better than B*)
  P0: "\<lfloor>(\<^bold>\<not>\<odot><\<^bold>\<not>a|a\<^bold>\<or>b>\<^bold>\<and>\<odot><\<^bold>\<not>b|a\<^bold>\<or>b>)\<rfloor>" and
@@ -24,13 +25,13 @@ transitivity of the betterness relation in the models*)
 theorem TransInconsOpt:
   assumes transitivity
   shows False 
+  using P0 P1 P2 assms
   sledgehammer
   by (metis P0 P1 P2 assms)
-  
-  
+  (*(P0 P1 P2 assms)*)
 (* Nitpick shows consistency in the absence of transitivity*)
 
-lemma true
+lemma True
   nitpick [satisfy, card i=3]   (*model found*)
   oops
 
@@ -38,7 +39,7 @@ lemma true
 
 theorem ioOpt:
   assumes reflexivity Ferrers
-  shows false
+  shows False
   sledgehammer 
   by (metis P0 P1 P2 assms(2))
   
@@ -46,27 +47,27 @@ theorem ioOpt:
 
 theorem AcyclconsOpt:
   assumes loopfree
-  shows true
+  shows True
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
 theorem QuasiconsOpt:
   assumes Quasitransit
-  shows true
+  shows True
   nitpick [show_all,satisfy,card=4] 
   oops
 
 theorem SuzuConsOpt:
   assumes Suzumura
-  shows true
+  shows True
   nitpick [show_all,satisfy,card=4]
   oops  (*time out*)
 
 theorem SuzuInconsOpt:
   assumes Suzumura
-  shows false
+  shows False
   sledgehammer
-  oops
+  oops (*no proof found*)
 
 (*** With Maximality  ***)
 
@@ -84,12 +85,13 @@ transitivity of the betterness relation in the models*)
 theorem TransInconsMax:
   assumes transitivity
   shows False 
-  sledgehammer
+  using PP0 PP1 PP2 assms
+  sledgehammer ()
   oops
   
 (* Nitpick shows consistency in the absence of transitivity*)
 
-lemma true
+lemma True
   nitpick [satisfy, card i=3]   (*model found*)
   oops
 
@@ -97,7 +99,7 @@ lemma true
 
 theorem ioInconsMax:
   assumes reflexivity Ferrers
-  shows false
+  shows False
   sledgehammer 
   by (metis P0 P1 P2 assms(2))
   
@@ -105,19 +107,19 @@ theorem ioInconsMax:
 
 theorem AcyclconsMax:
   assumes loopfree
-  shows true
+  shows True
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
 theorem QuasiconsMax:
   assumes Quasitransit
-  shows true
+  shows True
   nitpick [show_all,satisfy] 
   oops
 
 theorem QuasiInconsMax:
   assumes Quasitransit
-  shows false
+  shows False
   sledgehammer
   oops
 
@@ -126,13 +128,13 @@ quasi-tran*)
 
 theorem SuzuConsMax:
   assumes Suzumura
-  shows true
+  shows True
   nitpick [show_all,satisfy,card=4]
   oops
 
 theorem SuzuInconsMax:
   assumes Suzumura
-  shows false
+  shows False
   sledgehammer
   oops
 
@@ -157,7 +159,7 @@ theorem TransInconsLewis:
   
 (* Nitpick shows consistency in the absence of transitivity*)
 
-lemma true
+lemma True
   nitpick [satisfy, card i=3]   (*model found*)
   oops
 
@@ -165,7 +167,7 @@ lemma true
 
 theorem ioInconsLewis:
   assumes reflexivity Ferrers
-  shows false
+  shows False
   sledgehammer 
   by (metis P0 P1 P2 assms(2))
   
@@ -173,19 +175,19 @@ theorem ioInconsLewis:
 
 theorem AcyclconsLewis:
   assumes loopfree
-  shows true
+  shows True
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
 theorem QuasiconsLewis:
   assumes Quasitransit
-  shows true
+  shows True
   nitpick [show_all,satisfy] 
   oops
 
 theorem QuasiInconsLewis':
   assumes Quasitransit
-  shows false
+  shows False
   sledgehammer
   oops
 
@@ -195,13 +197,13 @@ quasi-tran*)
 
 theorem SuzuConsLewis:
   assumes Suzumura
-  shows true
+  shows True
   nitpick [show_all,satisfy,card=4]
   oops
 
 theorem SuzuInConsLewis:
   assumes Suzumura
-  shows false
+  shows False
   sledgehammer
   oops
 
@@ -234,7 +236,7 @@ lemma true
 
 theorem ioInconsK:
   assumes reflexivity Ferrers
-  shows false
+  shows False
   sledgehammer 
   by (metis P0 P1 P2 assms(2))
   
@@ -242,19 +244,19 @@ theorem ioInconsK:
 
 theorem AcyclconsK:
   assumes loopfree
-  shows true
+  shows True
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
 theorem QuasiconsK:
   assumes Quasitransit
-  shows true
+  shows True
   nitpick [show_all,satisfy] 
   oops
 
 theorem QuasiInconsK':
   assumes Quasitransit
-  shows false
+  shows False
   sledgehammer
   oops
 
@@ -264,13 +266,13 @@ quasi-tran*)
 
 theorem SuzuConsK:
   assumes Suzumura
-  shows true
+  shows True
   nitpick [show_all,satisfy,card=4]
   oops
 
 theorem SuzuInConsK:
   assumes Suzumura
-  shows false
+  shows False
   sledgehammer
   oops
 

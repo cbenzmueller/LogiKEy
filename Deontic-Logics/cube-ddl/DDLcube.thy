@@ -2,6 +2,10 @@ theory DDLcube imports Main
 
 begin
 
+(* Settings for model finder Nitpick *)
+
+nitpick_params [user_axioms,show_all,expect=genuine,format=2] 
+
 (*** We introduce Aqvist's system E from the 2019 IfColog paper ***)
 
 typedecl i (* Possible worlds *)
@@ -20,7 +24,7 @@ abbreviation eimpf :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infi
 abbreviation eimpb :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr"\<^bold>\<leftarrow>"49) where "\<phi>\<^bold>\<leftarrow>\<psi> \<equiv> \<lambda>w. \<psi>(w)\<longrightarrow>\<phi>(w)"  
 abbreviation eequ :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr"\<^bold>\<leftrightarrow>"48) where "\<phi>\<^bold>\<leftrightarrow>\<psi> \<equiv> \<lambda>w. \<phi>(w)\<longleftrightarrow>\<psi>(w)" 
 
-abbreviation ebox :: "\<sigma>\<Rightarrow>\<sigma>" ("\<box>") where "\<box> \<equiv> \<lambda>\<phi> w.  \<forall>v. \<phi>(v)"  
+abbreviation ebox :: "\<sigma>\<Rightarrow>\<sigma>" ("\<box>") where "\<box>\<phi> \<equiv> \<lambda>w. \<forall>v. \<phi>(v)"  
 abbreviation ddediomond  :: "\<sigma>\<Rightarrow>\<sigma>" ("\<diamond>") where "\<diamond>\<phi> \<equiv> \<lambda>w. \<exists>v. \<phi>(v)"
 
 abbreviation evalid :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>"[8]109)  (* Global validity *)
@@ -50,9 +54,6 @@ abbreviation ddeperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("P
   where "P<\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circle><\<^bold>\<not>\<psi>|\<phi>>"
 
 
-(* Settings for model finder Nitpick *)
-
-nitpick_params [user_axioms,show_all,expect=genuine] 
 
 
 (*** First consistency check ***)
@@ -158,24 +159,28 @@ theorem T2:
 theorem T3: 
   assumes transitivity 
   shows "Suzumura"
-  by (metis assms sub_rel_def tcr_def transitive_def) 
+  (* sledgehammer *)
+  by (metis assms sub_rel_def tcr_def transitive_def)
+ 
 
 theorem T4: 
   assumes transitivity 
   shows Quasitransit
+  (* sledgehammer *)
   by (metis assfactor_def assms) 
 
 theorem T5: 
   assumes Suzumura
   shows loopfree
-  by (metis (no_types, lifting) assms sub_rel_def tcr_def tcr_strict_def) 
+  (* sledgehammer *)
+  by (metis (no_types, lifting) assms sub_rel_def tcr_def tcr_strict_def)
 
 theorem T6: 
   assumes Quasitransit 
   shows loopfree
-  sledgehammer
-  by (smt (verit) assfactor_def assms sub_rel_def tcr_strict_def transitive_def) 
-  
+  (* sledgehammer *)
+  by (smt (verit) assfactor_def assms sub_rel_def tcr_strict_def transitive_def)
+ 
 theorem T7: 
   assumes reflexivity and Ferrers 
   shows Quasitransit
@@ -203,11 +208,11 @@ lemma "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarr
 theorem T8: 
   assumes mlimitedness
   shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
-  sledgehammer
+  (* sledgehammer *)
   using assms 
   oops
 
-theorem T8': 
+(*theorem T8': 
   assumes loopfree
   shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<O><\<psi>|\<phi>> \<^bold>\<rightarrow> \<bbbP><\<psi>|\<phi>>\<rfloor>"  
     nitpick [show_all]
@@ -217,9 +222,9 @@ theorem T8':
 theorem T8'': 
   assumes  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<O><\<psi>|\<phi>> \<^bold>\<rightarrow> \<bbbP><\<psi>|\<phi>>\<rfloor>" 
   shows  loopfree
-  sledgehammer
+  (* sledgehammer *)
 
-
+*)
 
 lemma 
   assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>"
@@ -232,7 +237,7 @@ lemma
 theorem T9: 
   assumes msmoothness    
   shows CM: "\<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-sledgehammer
+(* sledgehammer *)
   using assms by force 
 
 lemma 
@@ -252,7 +257,7 @@ lemma
 theorem T10: 
   assumes reflexivity and Ferrers
   shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarrow> (\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
-  sledgehammer
+  (* sledgehammer *)
   by (metis assms) 
   
 lemma 
@@ -396,13 +401,13 @@ lemma DEX: "\<lfloor>(\<diamond>\<phi> \<^bold>\<and> \<circ><\<psi>|\<phi>> \<^
 theorem T18:
   assumes mlimitedness and transitivity and totality
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<odot><\<psi>|\<phi>>\<rfloor>"   
-  sledgehammer
+  (* sledgehammer *)
   by (smt (z3) assms)
 
 theorem T19: 
   assumes mlimitedness and transitivity and totality
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>" 
-  sledgehammer
+  (* sledgehammer *)
   by (smt (z3) assms) 
 
 
@@ -474,23 +479,13 @@ theorem T23:
   shows CM'': "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
   by (metis assms)  
 
-lemma 
-  assumes transitivity
-  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  nitpick [card i=1] (* counterexample found *)
-  oops
-
-lemma 
-  assumes totality
-  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  nitpick [card i=3] (* counterexample found *)
-  oops
-
 theorem T24:
-  assumes transitivity and totality
-  shows  transit': "\<lfloor>(\<times><\<phi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<and>\<times><\<psi>|(\<psi>\<^bold>\<or>\<chi>)>)\<^bold>\<rightarrow> \<times><\<phi>|(\<phi>\<^bold>\<or>\<chi>)>\<rfloor>" 
- by (smt (z3) assms) 
- 
+  assumes transitivity
+  shows  "\<lfloor>(\<integral><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<integral><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<integral><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+ (* sledgehammer*)
+  using assms by blast
+  
+
 
 (*axioms of E holding irrespective of the properties of r*)
 
@@ -510,47 +505,16 @@ theorem  Sh: "\<lfloor>\<circ><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2
   by blast 
 
 
-
-section \<open>Negative results\<close>
-
-text \<open>Under the max and opt rules there is no formula corresponding to reflexivity\<close>
-
-(*ToDO not sure how to do it--something like there is no A such that "reflexivity <\<Rightarrow> A"*)
-
-text \<open>Under the max and opt rules there is no formula corresponding to totalness\<close>
-
-(*ToDO*)
-
-
-text \<open>Under the max rule there is no formula corresponding to transitivity\<close>
-
-(*ToDO*)
-
-
-text \<open>Under the max rule there is no formula corresponding to a-cyclicity\<close>
-
-(*ToDO*)
-
-
-text \<open>Under the max rule there is no formula corresponding to Suzumura consistency\<close>
-
-(*ToDO*)
-
-text \<open>Under the Lewis rule there is no formula corresponding to limitedness/smoothness\<close>
-
-
-section \<open>Some open problems\<close>
-
-text \<open>Under the opt rule transitivity alone is equivalent to Sp and Trans\<close>
+(*Under the opt rule transitivity alone is equivalent to Sp and Trans*)
 
 theorem T25:
   assumes transitivity 
-  shows Sp''': "\<lfloor>(\<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
+  shows "\<lfloor>(\<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
   by (metis assms) 
 
 lemma 
   assumes "transitivity"    
-  shows  Trans: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<xi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<xi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
+  shows  "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<xi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<xi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
   nitpick [card i=2] (* counterexample found for card i=2 *) 
   oops 
 
@@ -561,26 +525,15 @@ lemma
   nitpick [card i=2] (* counterexample found for card i=2 *) 
   oops 
 
-  text \<open>Under the opt rule quasi-transitivity, a-cyclicity and Suzumura consistent do not correspond to 
-any formula\<close>
-
-(*to do*)
-
-  text \<open>Under the opt rule transitivity alone is equivalent to Sp and Trans\<close>
-
-
-
-
 
 (*attempt 1: the counter-model to rm is correct. tr holds for the values chosen for phi, psi and xi in the
 counter-example, but can be falsified if we change them--see explanatory note*)
 
-
+(*
 lemma 
   assumes tr: "\<lfloor>( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
   shows rm: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   nitpick [satisfy,card i=3]
-  nitpick [card i=3] 
   oops
 
 
@@ -590,8 +543,8 @@ lemma
   assumes tr: "\<forall>\<phi> \<psi> \<chi>.\<lfloor> ( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
   shows rm: " \<forall>\<phi> \<psi> \<chi>. \<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
 
-  sledgehammer (*time out*) oops
-  nitpick oops
+  sledgehammer (*time out*) 
+  nitpick
   nitpick [card i=3] (* Nitpick found no counterexample *) 
   nitpick [card i=4] (* Nitpick found no counterexample *)  
   nitpick [card i=5] (* Nitpick found no counterexample *)  
@@ -603,7 +556,7 @@ lemma
   nitpick [satisfy,card i=5] (* model found *) 
   nitpick [satisfy,card i=6] (* model found *) 
   
-
+*)
 
 
 

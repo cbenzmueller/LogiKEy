@@ -40,7 +40,6 @@ lemma True
 theorem ioOpt:
   assumes reflexivity Ferrers
   shows False
-  using P0 P1 P2 assms
   sledgehammer 
   by (metis P0 P1 P2 assms(2))
   
@@ -49,30 +48,26 @@ theorem ioOpt:
 theorem AcyclconsOpt:
   assumes loopfree
   shows True
-  using P0 P1 P2 assms
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
 theorem QuasiconsOpt:
   assumes Quasitransit
   shows True
-  using P0 P1 P2 assms
   nitpick [show_all,satisfy,card=4] 
   oops
 
 theorem SuzuConsOpt:
   assumes Suzumura
   shows True
-  using P0 P1 P2 assms
   nitpick [show_all,satisfy,card=4]
   oops  (*time out*)
 
 theorem SuzuInconsOpt:
   assumes Suzumura
   shows False
-  using P0 P1 P2 assms 
   sledgehammer
-  oops
+  oops (*no proof found*)
 
 (*** With Maximality  ***)
 
@@ -90,7 +85,8 @@ transitivity of the betterness relation in the models*)
 theorem TransInconsMax:
   assumes transitivity
   shows False 
-  sledgehammer
+  using PP0 PP1 PP2 assms
+  sledgehammer ()
   oops
   
 (* Nitpick shows consistency in the absence of transitivity*)
