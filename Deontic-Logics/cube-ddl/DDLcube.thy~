@@ -24,7 +24,7 @@ abbreviation eimpf :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infi
 abbreviation eimpb :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr"\<^bold>\<leftarrow>"49) where "\<phi>\<^bold>\<leftarrow>\<psi> \<equiv> \<lambda>w. \<psi>(w)\<longrightarrow>\<phi>(w)"  
 abbreviation eequ :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr"\<^bold>\<leftrightarrow>"48) where "\<phi>\<^bold>\<leftrightarrow>\<psi> \<equiv> \<lambda>w. \<phi>(w)\<longleftrightarrow>\<psi>(w)" 
 
-abbreviation ebox :: "\<sigma>\<Rightarrow>\<sigma>" ("\<box>") where "\<box> \<equiv> \<lambda>\<phi> w.  \<forall>v. \<phi>(v)"  
+abbreviation ebox :: "\<sigma>\<Rightarrow>\<sigma>" ("\<box>") where "\<box>\<phi> \<equiv> \<lambda>w. \<forall>v. \<phi>(v)"  
 abbreviation ddediomond  :: "\<sigma>\<Rightarrow>\<sigma>" ("\<diamond>") where "\<diamond>\<phi> \<equiv> \<lambda>w. \<exists>v. \<phi>(v)"
 
 abbreviation evalid :: "\<sigma>\<Rightarrow>bool" ("\<lfloor>_\<rfloor>"[8]109)  (* Global validity *)
@@ -479,23 +479,13 @@ theorem T23:
   shows CM'': "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
   by (metis assms)  
 
-lemma 
-  assumes transitivity
-  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  nitpick [card i=1] (* counterexample found *)
-  oops
-
-lemma 
-  assumes totality
-  shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  nitpick [card i=3] (* counterexample found *)
-  oops
-
 theorem T24:
-  assumes transitivity and totality
-  shows  transit': "\<lfloor>(\<times><\<phi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<and>\<times><\<psi>|(\<psi>\<^bold>\<or>\<chi>)>)\<^bold>\<rightarrow> \<times><\<phi>|(\<phi>\<^bold>\<or>\<chi>)>\<rfloor>" 
-  sledgehammer 
- 
+  assumes transitivity
+  shows  "\<lfloor>(\<integral><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<integral><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<integral><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+ (* sledgehammer*)
+  using assms by blast
+  
+
 
 (*axioms of E holding irrespective of the properties of r*)
 
@@ -519,12 +509,12 @@ theorem  Sh: "\<lfloor>\<circ><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2
 
 theorem T25:
   assumes transitivity 
-  shows Sp''': "\<lfloor>(\<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
+  shows "\<lfloor>(\<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
   by (metis assms) 
 
 lemma 
   assumes "transitivity"    
-  shows  Trans: "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<xi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<xi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
+  shows  "\<lfloor>(\<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<xi>|\<psi>\<^bold>\<or>\<xi>>)\<^bold>\<rightarrow>\<P><\<xi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
   nitpick [card i=2] (* counterexample found for card i=2 *) 
   oops 
 
@@ -539,7 +529,7 @@ lemma
 (*attempt 1: the counter-model to rm is correct. tr holds for the values chosen for phi, psi and xi in the
 counter-example, but can be falsified if we change them--see explanatory note*)
 
-
+(*
 lemma 
   assumes tr: "\<lfloor>( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
   shows rm: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
@@ -553,8 +543,8 @@ lemma
   assumes tr: "\<forall>\<phi> \<psi> \<chi>.\<lfloor> ( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
   shows rm: " \<forall>\<phi> \<psi> \<chi>. \<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
 
-  sledgehammer (*time out*) oops
-  nitpick oops
+  sledgehammer (*time out*) 
+  nitpick
   nitpick [card i=3] (* Nitpick found no counterexample *) 
   nitpick [card i=4] (* Nitpick found no counterexample *)  
   nitpick [card i=5] (* Nitpick found no counterexample *)  
@@ -566,7 +556,7 @@ lemma
   nitpick [satisfy,card i=5] (* model found *) 
   nitpick [satisfy,card i=6] (* model found *) 
   
-
+*)
 
 
 
