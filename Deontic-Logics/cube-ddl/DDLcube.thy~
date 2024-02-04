@@ -49,6 +49,15 @@ abbreviation euncobl :: "\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<circle><_>")
 abbreviation ddeperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("P<_|_>") 
   where "P<\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circle><\<^bold>\<not>\<psi>|\<phi>>"
 
+abbreviation emax2  :: "\<sigma>\<Rightarrow>\<sigma>" ("max2<_>")      (* Max rule 2 *)
+  where "max2<\<phi>> \<equiv> (\<lambda>v. ( (\<phi>)(v) \<and> (\<forall>x. ((\<phi>)(x) \<longrightarrow> \<not> (x \<^bold>r v)) )) )" 
+abbreviation econd2  :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<O><_|_>")
+  where "\<O><\<psi>|\<phi>> \<equiv>  \<lambda>w. max2<\<phi>> \<^bold>\<subseteq> \<psi>"
+abbreviation euncobl2 :: "\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<O><_>")   
+  where "\<^bold>\<O><\<phi>> \<equiv> \<O><\<phi>|\<^bold>\<top>>" 
+abbreviation ddeperm2 :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<bbbP><_|_>") 
+  where "\<bbbP><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<O><\<^bold>\<not>\<psi>|\<phi>>"
+
 
 (* Settings for model finder Nitpick *)
 
@@ -92,7 +101,7 @@ Properties
 
 abbreviation "reflexivity  \<equiv> (\<forall>x. x \<^bold>r x)"
 abbreviation "transitivity \<equiv> (\<forall>x y z. (x \<^bold>r y \<and> y \<^bold>r z) \<longrightarrow> x \<^bold>r z)"
-abbreviation "totalness \<equiv> (\<forall>x y. (x \<^bold>r y \<or> y \<^bold>r x))"
+abbreviation "totality \<equiv> (\<forall>x y. (x \<^bold>r y \<or> y \<^bold>r x))"
 
 (* 4 versions of Lewis's limit assumption *)
 
@@ -141,6 +150,15 @@ theorem T1: "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> \<not> (y
 abbreviation loopfree
   where "loopfree \<equiv> \<forall>x y. tcr_strict x y \<longrightarrow> (y \<^bold>r x \<longrightarrow> x \<^bold>r y)"
 
+abbreviation irrefl
+  where "irrefl \<equiv> \<forall>x. \<not>(x \<^bold>r x)"
+
+theorem 
+  assumes loopfree 
+  shows irrefl
+  nitpick (*counterexample found--this is not correct*)
+
+
 (* Interval order (reflexivity + Ferrers) *)
  
 abbreviation Ferrers
@@ -148,7 +166,7 @@ abbreviation Ferrers
 
 theorem T2:
   assumes Ferrers and reflexivity  (*fact overlooked in the literature*)
-  shows totalness
+  shows totality
   by (simp add: assms(1) assms(2))  (* proof found *)
 
 
@@ -206,6 +224,20 @@ theorem T8:
   using assms 
   oops
 
+theorem T8': 
+  assumes loopfree
+  shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<O><\<psi>|\<phi>> \<^bold>\<rightarrow> \<bbbP><\<psi>|\<phi>>\<rfloor>"  
+    nitpick [show_all]
+   oops
+ (* counterexample found, but the model is cyclic ....  *)
+
+theorem T8'': 
+  assumes  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<O><\<psi>|\<phi>> \<^bold>\<rightarrow> \<bbbP><\<psi>|\<phi>>\<rfloor>" 
+  shows  loopfree
+  sledgehammer
+
+
+
 lemma 
   assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>"
   shows mlimitedness 
@@ -261,24 +293,24 @@ lemma
   oops
 
 lemma 
-  assumes totalness 
+  assumes totality
   shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   nitpick [card i=3] (* counterexample *) 
   oops
 
 theorem T11: 
-  assumes transitivity and totalness
+  assumes transitivity and totality
   shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   by (metis assms)
 
 theorem T12: 
-  assumes transitivity and totalness
+  assumes transitivity and totality
   shows  transit: "\<lfloor>( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>) \<^bold>\<rightarrow> P<\<phi>|(\<phi>\<^bold>\<or>\<chi>)>\<rfloor>" 
   by (metis assms(1) assms(2))
                                                           
 lemma 
   assumes  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
-  shows totalness   
+  shows totality   
   nitpick [card i=1] (* counterexample found *) 
   oops
 
@@ -379,13 +411,13 @@ lemma DEX: "\<lfloor>(\<diamond>\<phi> \<^bold>\<and> \<circ><\<psi>|\<phi>> \<^
   oops
 
 theorem T18:
-  assumes mlimitedness and transitivity and totalness
+  assumes mlimitedness and transitivity and totality
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<odot><\<psi>|\<phi>>\<rfloor>"   
   sledgehammer
   by (smt (z3) assms)
 
 theorem T19: 
-  assumes mlimitedness and transitivity and totalness
+  assumes mlimitedness and transitivity and totality
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>" 
   sledgehammer
   by (smt (z3) assms) 
@@ -402,7 +434,7 @@ lemma D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>
   oops
 
 theorem T20:
-  assumes totalness
+  assumes totality
   shows D': "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" 
   by (metis assms)  
 
@@ -427,13 +459,13 @@ lemma
   oops  
 
 lemma 
-  assumes totalness
+  assumes totality
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
   nitpick [card i=3] (* counterexample found *) 
   oops 
   
 theorem T22:
-  assumes transitivity and totalness
+  assumes transitivity and totality
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
   by (smt (verit, ccfv_SIG) assms(1) assms(2)) 
 
@@ -449,13 +481,13 @@ lemma
   oops 
 
 lemma
-  assumes totalness
+  assumes totality
   shows CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
   nitpick [card i=3] (* counterexample found *) 
   oops 
 
 theorem T23:
-  assumes transitivity and totalness
+  assumes transitivity and totality
   shows CM'': "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
   by (metis assms)  
 
@@ -466,13 +498,13 @@ lemma
   oops
 
 lemma 
-  assumes totalness
+  assumes totality
   shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
   nitpick [card i=3] (* counterexample found *)
   oops
 
 theorem T24:
-  assumes transitivity and totalness
+  assumes transitivity and totality
   shows  transit': "\<lfloor>(\<times><\<phi>|(\<phi>\<^bold>\<or>\<psi>)>\<^bold>\<and>\<times><\<psi>|(\<psi>\<^bold>\<or>\<chi>)>)\<^bold>\<rightarrow> \<times><\<phi>|(\<phi>\<^bold>\<or>\<chi>)>\<rfloor>" 
  by (smt (z3) assms) 
  
@@ -577,8 +609,6 @@ lemma
 
   sledgehammer (*time out*) oops
   nitpick oops
-
-  apply simp
   nitpick [card i=3] (* Nitpick found no counterexample *) 
   nitpick [card i=4] (* Nitpick found no counterexample *)  
   nitpick [card i=5] (* Nitpick found no counterexample *)  

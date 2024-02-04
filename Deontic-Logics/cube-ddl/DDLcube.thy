@@ -49,15 +49,6 @@ abbreviation euncobl :: "\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<circle><_>")
 abbreviation ddeperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("P<_|_>") 
   where "P<\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<circle><\<^bold>\<not>\<psi>|\<phi>>"
 
-abbreviation emax2  :: "\<sigma>\<Rightarrow>\<sigma>" ("max2<_>")      (* Max rule 2 *)
-  where "max2<\<phi>> \<equiv> (\<lambda>v. ( (\<phi>)(v) \<and> (\<forall>x. ((\<phi>)(x) \<longrightarrow> \<not> (x \<^bold>r v)) )) )" 
-abbreviation econd2  :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<O><_|_>")
-  where "\<O><\<psi>|\<phi>> \<equiv>  \<lambda>w. max2<\<phi>> \<^bold>\<subseteq> \<psi>"
-abbreviation euncobl2 :: "\<sigma>\<Rightarrow>\<sigma>" ("\<^bold>\<O><_>")   
-  where "\<^bold>\<O><\<phi>> \<equiv> \<O><\<phi>|\<^bold>\<top>>" 
-abbreviation ddeperm2 :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("\<bbbP><_|_>") 
-  where "\<bbbP><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<O><\<^bold>\<not>\<psi>|\<phi>>"
-
 
 (* Settings for model finder Nitpick *)
 
