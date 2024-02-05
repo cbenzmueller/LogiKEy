@@ -24,7 +24,6 @@ theorem TransInconsMax:
   assumes transitivity
   shows False 
   sledgehammer oops 
-  nitpick
   oops
   
 (* Nitpick shows consistency in the absence of transitivity*)
