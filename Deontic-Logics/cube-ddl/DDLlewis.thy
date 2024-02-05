@@ -191,12 +191,22 @@ theorem T30:
   sledgehammer oops
   
 lemma
-assumes transitivity
+assumes transitivity and reflexivity
   shows AND:"\<lfloor>( \<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<and> \<circ><\<psi>\<^sub>2|\<phi>> ) \<^bold>\<rightarrow> \<circ><(\<psi>\<^sub>1\<^bold>\<and>\<psi>\<^sub>2)|\<phi>>\<rfloor>"
   nitpick [card i=2] (* counterexample found *) 
   oops
 
+theorem
+  assumes transitivity and reflexivity
+  shows "\<lfloor> (\<integral><\<phi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<and> \<integral><\<phi>|(\<phi>\<^bold>\<or>\<chi>)>) \<^bold>\<rightarrow>\<integral><\<phi>|(\<phi>\<^bold>\<or>\<psi>\<^bold>\<or>\<chi>)> \<rfloor>"
+  sledgehammer  (* proof found *)
+  oops
 
+ theorem
+  assumes transitivity and reflexivity
+  shows "\<lfloor> (\<circ><\<psi>|\<phi>> \<^bold>\<and> \<circ><\<psi>|\<chi>>) \<^bold>\<rightarrow> \<circ><\<psi>|(\<phi>\<^bold>\<or>\<chi>)> \<rfloor>"
+   nitpick  (* countermodel found *)
+  oops
 
 lemma COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
   nitpick [card i=2] (* counterexample found *) 
