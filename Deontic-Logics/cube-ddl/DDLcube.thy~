@@ -159,26 +159,26 @@ theorem T2:
 theorem T3: 
   assumes transitivity 
   shows "Suzumura"
-  (* sledgehammer *)
+  sledgehammer
   by (metis assms sub_rel_def tcr_def transitive_def)
  
 
 theorem T4: 
   assumes transitivity 
   shows Quasitransit
-  (* sledgehammer *)
+  sledgehammer
   by (metis assfactor_def assms) 
 
 theorem T5: 
   assumes Suzumura
   shows loopfree
-  (* sledgehammer *)
+  sledgehammer
   by (metis (no_types, lifting) assms sub_rel_def tcr_def tcr_strict_def)
 
 theorem T6: 
   assumes Quasitransit 
   shows loopfree
-  (* sledgehammer *)
+  sledgehammer
   by (smt (verit) assfactor_def assms sub_rel_def tcr_strict_def transitive_def)
  
 theorem T7: 
@@ -208,7 +208,7 @@ lemma "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarr
 theorem T8: 
   assumes mlimitedness
   shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
-  (* sledgehammer *)
+  sledgehammer
   using assms 
   oops
 
@@ -237,7 +237,7 @@ lemma
 theorem T9: 
   assumes msmoothness    
   shows CM: "\<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-(* sledgehammer *)
+  sledgehammer
   using assms by force 
 
 lemma 
@@ -257,7 +257,7 @@ lemma
 theorem T10: 
   assumes reflexivity and Ferrers
   shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarrow> (\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
-  (* sledgehammer *)
+  sledgehammer
   by (metis assms) 
   
 lemma 
@@ -401,13 +401,13 @@ lemma DEX: "\<lfloor>(\<diamond>\<phi> \<^bold>\<and> \<circ><\<psi>|\<phi>> \<^
 theorem T18:
   assumes mlimitedness and transitivity and totality
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<odot><\<psi>|\<phi>>\<rfloor>"   
-  (* sledgehammer *)
+  sledgehammer
   by (smt (z3) assms)
 
 theorem T19: 
   assumes mlimitedness and transitivity and totality
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>" 
-  (* sledgehammer *)
+  sledgehammer
   by (smt (z3) assms) 
 
 
@@ -482,7 +482,7 @@ theorem T23:
 theorem T24:
   assumes transitivity
   shows  "\<lfloor>(\<integral><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<integral><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<integral><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
- (* sledgehammer*)
+  sledgehammer
   using assms by blast
   
 
