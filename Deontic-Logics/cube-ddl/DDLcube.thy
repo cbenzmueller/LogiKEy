@@ -179,8 +179,8 @@ theorem T6:
   assumes Quasitransit 
   shows loopfree
   sledgehammer
-  by (smt (verit) assfactor_def assms sub_rel_def tcr_strict_def transitive_def)
- 
+  by (smt (verit, best) assfactor_def assms sub_rel_def tcr_strict_def transitive_def)
+
 theorem T7: 
   assumes reflexivity and Ferrers 
   shows Quasitransit
@@ -209,6 +209,7 @@ theorem T8:
   assumes mlimitedness
   shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
   sledgehammer
+<<<<<<< HEAD
   by (metis assms)
 
 (*theorem T8': 
@@ -225,6 +226,10 @@ theorem T8'':
 
 *)
 
+=======
+  by (metis assms) 
+  
+>>>>>>> deb0d62ba60065659b5133ee33ad576686e8cee8
 lemma 
   assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>"
   shows mlimitedness 
@@ -257,7 +262,7 @@ theorem T10:
   assumes reflexivity and Ferrers
   shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarrow> (\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
   sledgehammer
-  by (metis assms) 
+  by (metis assms(1) assms(2))
   
 lemma 
   assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 

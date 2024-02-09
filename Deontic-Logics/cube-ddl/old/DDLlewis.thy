@@ -131,34 +131,270 @@ theorem T2:
 theorem T3: 
   assumes transitivity 
   shows "Suzumura"
+<<<<<<< HEAD:Deontic-Logics/cube-ddl/DDLcube.thy~
+  sledgehammer
+  by (metis assms sub_rel_def tcr_def transitive_def)
+ 
+=======
   by (metis assms sub_rel_def tcr_def transitive_def) 
+>>>>>>> deb0d62ba60065659b5133ee33ad576686e8cee8:Deontic-Logics/cube-ddl/old/DDLlewis.thy
 
 theorem T4: 
   assumes transitivity 
   shows Quasitransit
+<<<<<<< HEAD:Deontic-Logics/cube-ddl/DDLcube.thy~
+  sledgehammer
+=======
+>>>>>>> deb0d62ba60065659b5133ee33ad576686e8cee8:Deontic-Logics/cube-ddl/old/DDLlewis.thy
   by (metis assfactor_def assms) 
 
 theorem T5: 
   assumes Suzumura
   shows loopfree
+<<<<<<< HEAD:Deontic-Logics/cube-ddl/DDLcube.thy~
+  sledgehammer
+  by (metis (no_types, lifting) assms sub_rel_def tcr_def tcr_strict_def)
+=======
   by (metis (no_types, lifting) assms sub_rel_def tcr_def tcr_strict_def) 
+>>>>>>> deb0d62ba60065659b5133ee33ad576686e8cee8:Deontic-Logics/cube-ddl/old/DDLlewis.thy
 
 theorem T6: 
   assumes Quasitransit 
   shows loopfree
   sledgehammer
+<<<<<<< HEAD:Deontic-Logics/cube-ddl/DDLcube.thy~
+  by (smt (verit) assfactor_def assms sub_rel_def tcr_strict_def transitive_def)
+ 
+=======
   by (smt (verit) assfactor_def assms sub_rel_def tcr_strict_def transitive_def) 
   
+>>>>>>> deb0d62ba60065659b5133ee33ad576686e8cee8:Deontic-Logics/cube-ddl/old/DDLlewis.thy
 theorem T7: 
   assumes reflexivity and Ferrers 
   shows Quasitransit
   by (metis assfactor_def assms) 
 
 
+<<<<<<< HEAD:Deontic-Logics/cube-ddl/DDLcube.thy~
+(****************
+Correspondance under the max rule 
+******************)
+
+(* Max-Limitedness corresponds to D *)
+
+lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>)\<rfloor>" 
+  nitpick [card i=3]  (* counterexample found for card i=3 *) 
+  oops 
+
+lemma "\<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
+  nitpick [card i=3]  (* counterexample found *)
+  oops 
+
+lemma "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarrow> ((\<circle><\<chi>|\<phi>>) \<^bold>\<or> (\<circle><\<chi>|\<psi>>))\<rfloor>"
+  nitpick [card i=3]  (* counterexample found *)
+  oops 
+
+theorem T8: 
+  assumes mlimitedness
+  shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
+  sledgehammer
+  by (metis assms)
+
+(*theorem T8': 
+  assumes loopfree
+  shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<O><\<psi>|\<phi>> \<^bold>\<rightarrow> \<bbbP><\<psi>|\<phi>>\<rfloor>"  
+    nitpick [show_all]
+   oops
+ (* counterexample found, but the model is cyclic ....  *)
+
+theorem T8'': 
+  assumes  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<O><\<psi>|\<phi>> \<^bold>\<rightarrow> \<bbbP><\<psi>|\<phi>>\<rfloor>" 
+  shows  loopfree
+  (* sledgehammer *)
+
+*)
+
+lemma 
+  assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>"
+  shows mlimitedness 
+  nitpick [card i=3]  (* counterexample found *)
+  oops
+
+(* Smoothness corresponds to cautious monotony *)
+
+theorem T9: 
+  assumes msmoothness    
+  shows CM: "\<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
+  sledgehammer
+  using assms by force 
+
+lemma 
+  assumes CM: "\<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
+  shows  msmoothness
+  nitpick [card i=3]  (* counterexample found *)
+  oops  
+
+(*Interval order corresponds to disjunctive rationality*)
+
+lemma 
+  assumes reflexivity
+  shows  DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
+  nitpick [card i=3]  (* counterexample found *)
+  oops 
+
+theorem T10: 
+  assumes reflexivity and Ferrers
+  shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarrow> (\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
+  sledgehammer
+  by (metis assms) 
+  
+lemma 
+  assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
+  shows reflexivity 
+  nitpick [card i=1]  (* counterexample found *) 
+  oops 
+
+lemma 
+  assumes DR: "\<lfloor>\<circle><\<chi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<rightarrow>(\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
+  shows Ferrers  
+  nitpick [card i=2]  (* counterexample found *)
+  oops 
+
+(*Transitivity and totalness corresponds to the Spohn axiom (Sp)*)
+
+lemma 
+  assumes transitivity
+  shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  nitpick [card i=3] (* counterexample found *) 
+  oops
+
+lemma 
+  assumes totality
+  shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  nitpick [card i=3] (* counterexample *) 
+  oops
+
+theorem T11: 
+  assumes transitivity and totality
+  shows  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  by (metis assms)
+
+theorem T12: 
+  assumes transitivity and totality
+  shows  transit: "\<lfloor>( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>) \<^bold>\<rightarrow> P<\<phi>|(\<phi>\<^bold>\<or>\<chi>)>\<rfloor>" 
+  by (metis assms(1) assms(2))
+                                                          
+lemma 
+  assumes  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  shows totality   
+  nitpick [card i=1] (* counterexample found *) 
+  oops
+
+lemma 
+  assumes  Sp: "\<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
+  shows transitivity 
+  nitpick [card i=2] (* counterexample found *) 
+  oops 
+
+(****************
+Correspondance under the opt rule
+******************)
+
+(*opt-Limitedness corresponds to D*)
+
+theorem T13: 
+  assumes olimitedness   
+  shows  D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"   
+  by (simp add: assms) 
+
+lemma 
+  assumes D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<odot><\<psi>|\<phi>> \<^bold>\<rightarrow> \<P><\<psi>|\<phi>>\<rfloor>"         
+  shows olimitedness   
+  nitpick [card i=1] (* counterexample found *)  
+  oops 
+
+(*Smoothness corresponds to cautious monotony*)
+
+theorem T14: 
+  assumes osmoothness   
+  shows CM': "\<lfloor>( \<odot><\<psi>|\<phi>> \<^bold>\<and> \<odot><\<chi>|\<phi>> ) \<^bold>\<rightarrow> \<odot><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"   
+  using assms by force 
+=======
+>>>>>>> deb0d62ba60065659b5133ee33ad576686e8cee8:Deontic-Logics/cube-ddl/old/DDLlewis.thy
 
 
 
 
+<<<<<<< HEAD:Deontic-Logics/cube-ddl/DDLcube.thy~
+theorem T15: 
+  assumes transitivity   
+  shows  Sp': "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
+  by (metis assms) 
+
+theorem T16: 
+  assumes transitivity    
+  shows  Trans: "\<lfloor>( \<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>> )\<^bold>\<rightarrow> \<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
+  by (metis assms) 
+
+lemma 
+  assumes Sp: "\<lfloor>( \<P><\<psi>|\<phi>> \<^bold>\<and> \<odot><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>> ) \<^bold>\<rightarrow> \<odot><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"
+  assumes Trans: "\<lfloor>( \<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>> ) \<^bold>\<rightarrow> \<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"
+  shows transitivity    
+  nitpick [card i=2] (* counterexample found  *)  
+  oops 
+
+(*interval order corresponds to disjunctive rationality*)
+
+lemma 
+  assumes reflexivity
+     (* assumes "Ferrers"*)
+  shows  DR': "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<odot><\<chi>|\<phi>> \<^bold>\<or> \<odot><\<chi>|\<psi>>)\<rfloor>"   
+  nitpick [card i=3] (* counterexample found *)   
+  oops 
+
+theorem T17: 
+  assumes reflexivity and Ferrers
+  shows  DR': "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<odot><\<chi>|\<phi>> \<^bold>\<or> \<odot><\<chi>|\<psi>>)\<rfloor>"   
+  by (metis assms(2))
+ 
+lemma 
+  assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<odot><\<chi>|\<phi>> \<^bold>\<or> \<odot><\<chi>|\<psi>>)\<rfloor>" 
+  shows reflexivity   
+  nitpick [card i=1] (* counterexample found *)  
+  oops 
+
+lemma 
+  assumes DR: "\<lfloor>\<odot><\<chi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<rightarrow> (\<odot><\<chi>|\<phi>> \<^bold>\<or> \<odot><\<chi>|\<psi>>)\<rfloor>" 
+  shows Ferrers  
+  nitpick [card i=2] (* counterexample found  *)  
+  oops 
+
+(****************
+Relationship Lewis rule and max/opt rule 
+*****************)
+
+(* deontic explosion-max rule *)
+theorem DEX: "\<lfloor>(\<diamond>\<phi> \<^bold>\<and> \<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<^bold>\<not>\<psi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>>\<rfloor>" 
+  by blast  
+
+(* no-deontic explosion-lewis rule *)
+lemma DEX: "\<lfloor>(\<diamond>\<phi> \<^bold>\<and> \<circ><\<psi>|\<phi>> \<^bold>\<and> \<circ><\<^bold>\<not>\<psi>|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|\<phi>>\<rfloor>"
+  nitpick [card i=2] (* counterexample  found*)
+  oops
+
+theorem T18:
+  assumes mlimitedness and transitivity and totality
+  shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<odot><\<psi>|\<phi>>\<rfloor>"   
+  sledgehammer
+  by (smt (z3) assms)
+
+theorem T19: 
+  assumes mlimitedness and transitivity and totality
+  shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>" 
+  sledgehammer
+  by (smt (z3) assms) 
+=======
+>>>>>>> deb0d62ba60065659b5133ee33ad576686e8cee8:Deontic-Logics/cube-ddl/old/DDLlewis.thy
 
 
 
@@ -191,12 +427,22 @@ theorem T30:
   sledgehammer oops
   
 lemma
-assumes transitivity
+assumes transitivity and reflexivity
   shows AND:"\<lfloor>( \<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<and> \<circ><\<psi>\<^sub>2|\<phi>> ) \<^bold>\<rightarrow> \<circ><(\<psi>\<^sub>1\<^bold>\<and>\<psi>\<^sub>2)|\<phi>>\<rfloor>"
   nitpick [card i=2] (* counterexample found *) 
   oops
 
+theorem
+  assumes transitivity and reflexivity
+  shows "\<lfloor> (\<integral><\<phi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<and> \<integral><\<phi>|(\<phi>\<^bold>\<or>\<chi>)>) \<^bold>\<rightarrow>\<integral><\<phi>|(\<phi>\<^bold>\<or>\<psi>\<^bold>\<or>\<chi>)> \<rfloor>"
+  sledgehammer  (* proof found *)
+  oops
 
+ theorem
+  assumes transitivity and reflexivity
+  shows "\<lfloor> (\<circ><\<psi>|\<phi>> \<^bold>\<and> \<circ><\<psi>|\<chi>>) \<^bold>\<rightarrow> \<circ><\<psi>|(\<phi>\<^bold>\<or>\<chi>)> \<rfloor>"
+   nitpick  (* countermodel found *)
+  oops
 
 lemma COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
   nitpick [card i=2] (* counterexample found *) 
@@ -243,9 +489,16 @@ theorem T23:
 
 lemma 
   assumes transitivity
+<<<<<<< HEAD:Deontic-Logics/cube-ddl/DDLcube.thy~
+  shows  "\<lfloor>(\<integral><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<integral><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<integral><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+  sledgehammer
+  using assms by blast
+  
+=======
   shows  transit: "\<lfloor>(\<times><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<times><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<times><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
   nitpick [card i=1] (* counterexample found *)
   oops
+>>>>>>> deb0d62ba60065659b5133ee33ad576686e8cee8:Deontic-Logics/cube-ddl/old/DDLlewis.thy
 
 lemma 
   assumes totalness
