@@ -22,11 +22,17 @@ transitivity of the betterness relation in the models*)
 
 theorem T0:
   assumes transitivity
+<<<<<<< HEAD
   shows False
   sledgehammer  (*no proof found*)
   nitpick  (*time out*) 
   oops  
 
+=======
+  shows False 
+  sledgehammer oops 
+  oops
+>>>>>>> deb0d62ba60065659b5133ee33ad576686e8cee8
   
 (* Nitpick shows consistency in the absence of transitivity*)
 
