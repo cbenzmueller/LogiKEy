@@ -17,19 +17,19 @@ axiomatization where
 (* B is strictly better than Aplus*)
  PPPP2: "\<lfloor>(\<^bold>\<not>\<ominus><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<ominus><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
 
-(* Sledgehammer finds PP0-PP2 inconsistent given 
+(* Sledgehammer finds PPPP0-2 inconsistent given 
 transitivity of the betterness relation in the models*)
 
-theorem TransInconsK:
+theorem 
   assumes transitivity
   shows False 
   sledgehammer
   oops
 
-theorem TransconsK:
+theorem
   assumes transitivity
   shows True
-  nitpick
+  nitpick [satisfy]
   oops
   
 
@@ -44,8 +44,8 @@ lemma true
 theorem ioInconsK:
   assumes reflexivity Ferrers
   shows False
-  sledgehammer 
-  by (metis P0 P1 P2 assms(2))
+  sledgehammer oops
+  nitpick [satisfy]
   
 (* Nitpick shows consistency if transitivity is weakened into acyclicity or quasi-transitivity*)
 
@@ -61,11 +61,6 @@ theorem QuasiconsK:
   nitpick [show_all,satisfy] 
   oops
 
-theorem QuasiInconsK':
-  assumes Quasitransit
-  shows False
-  sledgehammer
-  oops
 
 
 (* Sledgehammer shows consistency if transitivity is weakened into 

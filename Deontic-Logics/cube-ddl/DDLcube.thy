@@ -135,7 +135,7 @@ non-strict betterness are ruled out*)
 abbreviation Suzumura  
   where "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> (y \<^bold>r x \<longrightarrow> x \<^bold>r y)"
 
-theorem T1: "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> \<not> (y \<^bold>r x \<and> \<not>x \<^bold>r y)" by simp
+theorem T1: "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> \<not> (y \<^bold>r x \<and> \<not> (x \<^bold>r y))" by simp
 
 (* A-cyclicity: cycles of strict betterness are ruled out*)
 
@@ -209,7 +209,6 @@ theorem T8:
   assumes mlimitedness
   shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
   sledgehammer
-<<<<<<< HEAD
   by (metis assms)
 
 (*theorem T8': 
@@ -226,10 +225,7 @@ theorem T8'':
 
 *)
 
-=======
-  by (metis assms) 
-  
->>>>>>> deb0d62ba60065659b5133ee33ad576686e8cee8
+
 lemma 
   assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>"
   shows mlimitedness 
@@ -353,7 +349,7 @@ theorem T15:
 
 theorem T16: 
   assumes transitivity    
-  shows  Trans: "\<lfloor>( \<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>> )\<^bold>\<rightarrow> \<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
+  shows  Trans': "\<lfloor>( \<P><\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> \<P><\<psi>|\<psi>\<^bold>\<or>\<xi>> )\<^bold>\<rightarrow> \<P><\<phi>|\<phi>\<^bold>\<or>\<xi>>\<rfloor>"   
   by (metis assms) 
 
 lemma 

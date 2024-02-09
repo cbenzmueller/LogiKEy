@@ -29,6 +29,7 @@ theorem T0:
   sledgehammer
   by (metis P0 P1 P2 assms)
 
+
 (* Nitpick shows consistency in the absence of transitivity*)
 
 theorem T1:
