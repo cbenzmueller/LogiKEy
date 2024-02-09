@@ -1,4 +1,4 @@
-theory mere_addition_opt  (* Christoph Benzmüller, Xavier Parent, 2022  *)
+theory mere_addition_kratzer  (* Christoph Benzmüller, Xavier Parent, 2024  *)
 
 imports DDLcube
 
@@ -7,94 +7,78 @@ begin
 consts a::\<sigma> aplus::\<sigma> b::\<sigma>
 
 (*the mere addition scenario*)
-
-(*** With optimality  ***)
-
+(*** With the KRATZER rule  ***)
 
 axiomatization where
 (* A is striclty better than B*)
- P0: "\<lfloor>(\<^bold>\<not>\<odot><\<^bold>\<not>a|a\<^bold>\<or>b>\<^bold>\<and>\<odot><\<^bold>\<not>b|a\<^bold>\<or>b>)\<rfloor>" and
+ PPPP0: "\<lfloor>(\<^bold>\<not>\<ominus><\<^bold>\<not>a|a\<^bold>\<or>b>\<^bold>\<and>\<ominus><\<^bold>\<not>b|a\<^bold>\<or>b>)\<rfloor>" and
 (* Aplus is at least as good as A*)
- P1: "\<lfloor>\<^bold>\<not>\<odot><\<^bold>\<not>aplus|a\<^bold>\<or>aplus>\<rfloor>" and
+ PPPP1: "\<lfloor>\<^bold>\<not>\<ominus><\<^bold>\<not>aplus|a\<^bold>\<or>aplus>\<rfloor>" and
 (* B is strictly better than Aplus*)
- P2: "\<lfloor>(\<^bold>\<not>\<odot><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<odot><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
+ PPPP2: "\<lfloor>(\<^bold>\<not>\<ominus><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<ominus><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
 
-(* Sledgehammer finds P0-P2 inconsistent given 
+(* Sledgehammer finds PPPP0-2 inconsistent given 
 transitivity of the betterness relation in the models*)
 
-theorem TransInconsOpt:
+theorem 
   assumes transitivity
   shows False 
-  using P0 P1 P2 assms
   sledgehammer
-  by (metis P0 P1 P2 assms)
-  (*(P0 P1 P2 assms)*)
+  oops
+
+theorem
+  assumes transitivity
+  shows True
+  nitpick [satisfy]
+  oops
+  
+
 (* Nitpick shows consistency in the absence of transitivity*)
 
-lemma True
+lemma true
   nitpick [satisfy, card i=3]   (*model found*)
   oops
 
 (* Sledgehammer confirms inconsistency in the presence of the interval order condition*)
 
-theorem ioOpt:
+theorem ioInconsK:
   assumes reflexivity Ferrers
   shows False
-  sledgehammer 
-  by (metis P0 P1 P2 assms(2))
+  sledgehammer oops
+  nitpick [satisfy]
   
 (* Nitpick shows consistency if transitivity is weakened into acyclicity or quasi-transitivity*)
 
-theorem AcyclconsOpt:
+theorem AcyclconsK:
   assumes loopfree
   shows True
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
-theorem QuasiconsOpt:
+theorem QuasiconsK:
   assumes Quasitransit
   shows True
-  nitpick [show_all,satisfy,card=4] 
+  nitpick [show_all,satisfy] 
   oops
 
-theorem SuzuConsOpt:
+
+
+(* Sledgehammer shows consistency if transitivity is weakened into 
+quasi-tran*)
+
+theorem SuzuConsK:
   assumes Suzumura
   shows True
   nitpick [show_all,satisfy,card=4]
-  oops  (*time out*)
+  oops
 
-theorem SuzuInconsOpt:
+theorem SuzuInConsK:
   assumes Suzumura
   shows False
   sledgehammer
-  oops (*no proof found*)
+  oops
 
 
 
 
 
-
-
-
-
-end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  

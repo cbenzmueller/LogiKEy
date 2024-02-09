@@ -9,6 +9,8 @@ consts a::\<sigma> aplus::\<sigma> b::\<sigma>
 (*the mere addition scenario*)
 (*** With the KRATZER rule  ***)
 
+(*** With the Kratzer rule  ***)
+
 axiomatization where
 (* A is striclty better than B*)
  PPPP0: "\<lfloor>(\<^bold>\<not>\<ominus><\<^bold>\<not>a|a\<^bold>\<or>b>\<^bold>\<and>\<ominus><\<^bold>\<not>b|a\<^bold>\<or>b>)\<rfloor>" and

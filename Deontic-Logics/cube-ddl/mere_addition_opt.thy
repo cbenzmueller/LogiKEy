@@ -1,4 +1,4 @@
-theory mere_addition_opt  (* Christoph Benzmüller, Xavier Parent, 2022  *)
+theory mere_addition_opt  (* Christoph Benzmüller, Xavier Parent, 2024  *)
 
 imports DDLcube
 
@@ -22,22 +22,23 @@ axiomatization where
 (* Sledgehammer finds P0-P2 inconsistent given 
 transitivity of the betterness relation in the models*)
 
-theorem TransInconsOpt:
+theorem T0:
   assumes transitivity
   shows False 
   using P0 P1 P2 assms
   sledgehammer
   by (metis P0 P1 P2 assms)
-  (*(P0 P1 P2 assms)*)
+
 (* Nitpick shows consistency in the absence of transitivity*)
 
-lemma True
+theorem T1:
+  True
   nitpick [satisfy, card i=3]   (*model found*)
   oops
 
 (* Sledgehammer confirms inconsistency in the presence of the interval order condition*)
 
-theorem ioOpt:
+theorem T2:
   assumes reflexivity Ferrers
   shows False
   sledgehammer 
@@ -45,30 +46,17 @@ theorem ioOpt:
   
 (* Nitpick shows consistency if transitivity is weakened into acyclicity or quasi-transitivity*)
 
-theorem AcyclconsOpt:
+theorem T3:
   assumes loopfree
   shows True
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
-theorem QuasiconsOpt:
+theorem T4:
   assumes Quasitransit
   shows True
   nitpick [show_all,satisfy,card=4] 
   oops
-
-theorem SuzuConsOpt:
-  assumes Suzumura
-  shows True
-  nitpick [show_all,satisfy,card=4]
-  oops  (*time out*)
-
-theorem SuzuInconsOpt:
-  assumes Suzumura
-  shows False
-  sledgehammer
-  oops (*no proof found*)
-
 
 
 
