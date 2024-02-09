@@ -30,7 +30,7 @@ theorem T0:
 
 lemma T1:
   True
-  nitpick [satisfy, card i=3]   (*model found*)
+  nitpick [satisfy, card i=3,show_all]   (*model found*)
   oops
 
 (* Sledgehammer confirms inconsistency in the presence of the interval order condition*)

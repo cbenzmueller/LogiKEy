@@ -22,23 +22,16 @@ transitivity of the betterness relation in the models*)
 
 theorem T0:
   assumes transitivity
-<<<<<<< HEAD
   shows False
   sledgehammer  (*no proof found*)
   nitpick  (*time out*) 
   oops  
 
-=======
-  shows False 
-  sledgehammer oops 
-  oops
->>>>>>> deb0d62ba60065659b5133ee33ad576686e8cee8
-  
 (* Nitpick shows consistency in the absence of transitivity*)
 
 theorem T1:
   shows True
-  nitpick [satisfy, card i=3]   (*model found*)
+  nitpick [satisfy, card i=3,show_all]   (*model found*)
   oops
 
 (* Sledgehammer confirms inconsistency in the presence of the interval order condition*)
@@ -57,9 +50,14 @@ theorem T3:
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
+
+abbreviation two 
+  where "two \<equiv> \<exists>x y. (x \<^bold>r y) \<and> \<not>(y \<^bold>r x)"
+
 theorem T4:
-  assumes Quasitransit
+  assumes Quasitransit 
   shows True
+  using two
   nitpick [show_all,satisfy,card=3] 
   oops
 
