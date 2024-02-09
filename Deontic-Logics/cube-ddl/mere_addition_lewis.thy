@@ -1,4 +1,4 @@
-theory mere_addition  (* Christoph Benzmüller, Xavier Parent, 2022  *)
+theory mere_addition_lewis  (* Christoph Benzmüller, Xavier Parent, 2024  *)
 
 imports DDLcube
 
@@ -7,137 +7,6 @@ begin
 consts a::\<sigma> aplus::\<sigma> b::\<sigma>
 
 (*the mere addition scenario*)
-
-(*** With optimality  ***)
-
-
-axiomatization where
-(* A is striclty better than B*)
- P0: "\<lfloor>(\<^bold>\<not>\<odot><\<^bold>\<not>a|a\<^bold>\<or>b>\<^bold>\<and>\<odot><\<^bold>\<not>b|a\<^bold>\<or>b>)\<rfloor>" and
-(* Aplus is at least as good as A*)
- P1: "\<lfloor>\<^bold>\<not>\<odot><\<^bold>\<not>aplus|a\<^bold>\<or>aplus>\<rfloor>" and
-(* B is strictly better than Aplus*)
- P2: "\<lfloor>(\<^bold>\<not>\<odot><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<odot><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
-
-(* Sledgehammer finds P0-P2 inconsistent given 
-transitivity of the betterness relation in the models*)
-
-theorem TransInconsOpt:
-  assumes transitivity
-  shows False 
-  using P0 P1 P2 assms
-  sledgehammer
-  by (metis P0 P1 P2 assms)
-  (*(P0 P1 P2 assms)*)
-(* Nitpick shows consistency in the absence of transitivity*)
-
-lemma True
-  nitpick [satisfy, card i=3]   (*model found*)
-  oops
-
-(* Sledgehammer confirms inconsistency in the presence of the interval order condition*)
-
-theorem ioOpt:
-  assumes reflexivity Ferrers
-  shows False
-  sledgehammer 
-  by (metis P0 P1 P2 assms(2))
-  
-(* Nitpick shows consistency if transitivity is weakened into acyclicity or quasi-transitivity*)
-
-theorem AcyclconsOpt:
-  assumes loopfree
-  shows True
-  nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
-  oops
-
-theorem QuasiconsOpt:
-  assumes Quasitransit
-  shows True
-  nitpick [show_all,satisfy,card=4] 
-  oops
-
-theorem SuzuConsOpt:
-  assumes Suzumura
-  shows True
-  nitpick [show_all,satisfy,card=4]
-  oops  (*time out*)
-
-theorem SuzuInconsOpt:
-  assumes Suzumura
-  shows False
-  sledgehammer
-  oops (*no proof found*)
-
-(*** With Maximality  ***)
-
-axiomatization where
-(* A is striclty better than B*)
- PP0: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>a|a\<^bold>\<or>b>\<^bold>\<and>\<circle><\<^bold>\<not>b|a\<^bold>\<or>b>)\<rfloor>" and
-(* Aplus is at least as good as A*)
- PP1: "\<lfloor>\<^bold>\<not>\<circle><\<^bold>\<not>aplus|a\<^bold>\<or>aplus>\<rfloor>" and
-(* B is strictly better than Aplus*)
- PP2: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<circle><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
-
-(* Sledgehammer finds PP0-PP2 inconsistent given 
-transitivity of the betterness relation in the models*)
-
-theorem TransInconsMax:
-  assumes transitivity
-  shows False 
-  using PP0 PP1 PP2 assms
-  sledgehammer ()
-  oops
-  
-(* Nitpick shows consistency in the absence of transitivity*)
-
-lemma True
-  nitpick [satisfy, card i=3]   (*model found*)
-  oops
-
-(* Sledgehammer confirms inconsistency in the presence of the interval order condition*)
-
-theorem ioInconsMax:
-  assumes reflexivity Ferrers
-  shows False
-  sledgehammer 
-  by (metis P0 P1 P2 assms(2))
-  
-(* Nitpick shows consistency if transitivity is weakened into acyclicity or quasi-transitivity*)
-
-theorem AcyclconsMax:
-  assumes loopfree
-  shows True
-  nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
-  oops
-
-theorem QuasiconsMax:
-  assumes Quasitransit
-  shows True
-  nitpick [show_all,satisfy] 
-  oops
-
-theorem QuasiInconsMax:
-  assumes Quasitransit
-  shows False
-  sledgehammer
-  oops
-
-(* Sledgehammer shows consistency if transitivity is weakened into 
-quasi-tran*)
-
-theorem SuzuConsMax:
-  assumes Suzumura
-  shows True
-  nitpick [show_all,satisfy,card=4]
-  oops
-
-theorem SuzuInconsMax:
-  assumes Suzumura
-  shows False
-  sledgehammer
-  oops
-
 (*** With the Lewis rule  ***)
 
 axiomatization where
@@ -148,10 +17,10 @@ axiomatization where
 (* B is strictly better than Aplus*)
  PPP2: "\<lfloor>(\<^bold>\<not>\<circ><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<circ><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
 
-(* Sledgehammer finds PP0-PP2 inconsistent given 
+(* Sledgehammer finds PPP0-PPP2 inconsistent given 
 transitivity of the betterness relation in the models*)
 
-theorem TransInconsLewis:
+theorem T0:
   assumes transitivity
   shows False 
   sledgehammer
@@ -159,131 +28,32 @@ theorem TransInconsLewis:
   
 (* Nitpick shows consistency in the absence of transitivity*)
 
-lemma True
+lemma T1:
+  True
   nitpick [satisfy, card i=3]   (*model found*)
   oops
 
 (* Sledgehammer confirms inconsistency in the presence of the interval order condition*)
 
-theorem ioInconsLewis:
+theorem T2:
   assumes reflexivity Ferrers
   shows False
   sledgehammer 
-  by (metis P0 P1 P2 assms(2))
   
-(* Nitpick shows consistency if transitivity is weakened into acyclicity or quasi-transitivity*)
+(* Nitpick shows consistency if transitivity is weakened into acyclicity
+ or quasi-transitivity*)
 
-theorem AcyclconsLewis:
+theorem T3:
   assumes loopfree
   shows True
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
-theorem QuasiconsLewis:
+theorem T4:
   assumes Quasitransit
   shows True
   nitpick [show_all,satisfy] 
   oops
-
-theorem QuasiInconsLewis':
-  assumes Quasitransit
-  shows False
-  sledgehammer
-  oops
-
-
-(* Sledgehammer shows consistency if transitivity is weakened into 
-quasi-tran*)
-
-theorem SuzuConsLewis:
-  assumes Suzumura
-  shows True
-  nitpick [show_all,satisfy,card=4]
-  oops
-
-theorem SuzuInConsLewis:
-  assumes Suzumura
-  shows False
-  sledgehammer
-  oops
-
-(*** With the Kratzer rule  ***)
-
-axiomatization where
-(* A is striclty better than B*)
- PPPP0: "\<lfloor>(\<^bold>\<not>\<ominus><\<^bold>\<not>a|a\<^bold>\<or>b>\<^bold>\<and>\<ominus><\<^bold>\<not>b|a\<^bold>\<or>b>)\<rfloor>" and
-(* Aplus is at least as good as A*)
- PPPP1: "\<lfloor>\<^bold>\<not>\<ominus><\<^bold>\<not>aplus|a\<^bold>\<or>aplus>\<rfloor>" and
-(* B is strictly better than Aplus*)
- PPPP2: "\<lfloor>(\<^bold>\<not>\<ominus><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<ominus><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
-
-(* Sledgehammer finds PP0-PP2 inconsistent given 
-transitivity of the betterness relation in the models*)
-
-theorem TransInconsK:
-  assumes transitivity
-  shows False 
-  sledgehammer
-  oops
-  
-(* Nitpick shows consistency in the absence of transitivity*)
-
-lemma true
-  nitpick [satisfy, card i=3]   (*model found*)
-  oops
-
-(* Sledgehammer confirms inconsistency in the presence of the interval order condition*)
-
-theorem ioInconsK:
-  assumes reflexivity Ferrers
-  shows False
-  sledgehammer 
-  by (metis P0 P1 P2 assms(2))
-  
-(* Nitpick shows consistency if transitivity is weakened into acyclicity or quasi-transitivity*)
-
-theorem AcyclconsK:
-  assumes loopfree
-  shows True
-  nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
-  oops
-
-theorem QuasiconsK:
-  assumes Quasitransit
-  shows True
-  nitpick [show_all,satisfy] 
-  oops
-
-theorem QuasiInconsK':
-  assumes Quasitransit
-  shows False
-  sledgehammer
-  oops
-
-
-(* Sledgehammer shows consistency if transitivity is weakened into 
-quasi-tran*)
-
-theorem SuzuConsK:
-  assumes Suzumura
-  shows True
-  nitpick [show_all,satisfy,card=4]
-  oops
-
-theorem SuzuInConsK:
-  assumes Suzumura
-  shows False
-  sledgehammer
-  oops
-
-
-
-
-
-
-
-
-
 
 end
 

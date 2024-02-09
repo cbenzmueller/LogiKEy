@@ -17,71 +17,51 @@ axiomatization where
 (* B is strictly better than Aplus*)
  PP2: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<circle><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
 
-(* Sledgehammer finds PP0-PP2 inconsistent given 
+(* Sledgehammer finds PP0-PP2 XYZ  given 
 transitivity of the betterness relation in the models*)
 
-theorem TransInconsMax:
+theorem T0:
   assumes transitivity
-  shows False 
-  sledgehammer oops 
-  nitpick
-  oops
+  shows False
+  sledgehammer  (*no proof found*)
+  nitpick  (*time out*) 
+  oops  
+
   
 (* Nitpick shows consistency in the absence of transitivity*)
 
-lemma True
+theorem T1:
+  shows True
   nitpick [satisfy, card i=3]   (*model found*)
   oops
 
 (* Sledgehammer confirms inconsistency in the presence of the interval order condition*)
 
-theorem ioInconsMax:
-  assumes reflexivity Ferrers
+theorem T2:
+  assumes reflexivity and Ferrers
   shows False
   sledgehammer 
 
   
 (* Nitpick shows consistency if transitivity is weakened into acyclicity or quasi-transitivity*)
 
-theorem AcyclconsMax:
+theorem T3:
   assumes loopfree
   shows True
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
-theorem QuasiconsMax:
+theorem T4:
   assumes Quasitransit
   shows True
-  nitpick [show_all,satisfy] 
+  nitpick [show_all,satisfy,card=3] 
   oops
 
-theorem QuasiInconsMax:
+theorem T5:
   assumes Quasitransit
   shows False
   sledgehammer
   oops
-
-(* Sledgehammer shows consistency if transitivity is weakened into 
-quasi-tran*)
-
-theorem SuzuConsMax:
-  assumes Suzumura
-  shows True
-  nitpick [show_all,satisfy,card=4]
-  oops
-
-theorem SuzuInconsMax:
-  assumes Suzumura
-  shows False
-  sledgehammer
-  oops
-
-
-
-
-
-
-
 
 end
 

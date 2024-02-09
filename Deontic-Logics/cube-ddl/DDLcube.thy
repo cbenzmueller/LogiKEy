@@ -209,8 +209,7 @@ theorem T8:
   assumes mlimitedness
   shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
   sledgehammer
-  using assms 
-  oops
+  by (metis assms)
 
 (*theorem T8': 
   assumes loopfree
