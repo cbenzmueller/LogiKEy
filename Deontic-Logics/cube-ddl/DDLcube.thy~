@@ -79,11 +79,6 @@ abbreviation kratperm :: "\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" ("
   where "\<times><\<psi>|\<phi>> \<equiv>\<^bold>\<not>\<ominus><\<^bold>\<not>\<psi>|\<phi>>"
 
 
-
-
-
-
-
 (****************
 Properties
 ******************)
@@ -113,15 +108,15 @@ definition sub_rel :: "\<alpha>\<Rightarrow>\<alpha>\<Rightarrow>bool"
 definition assfactor::"\<alpha>\<Rightarrow>\<alpha>" 
   where "assfactor Rel \<equiv> \<lambda>u v. Rel u v \<and> \<not>Rel v u "
 
-(* In HOL the transitive closure of a relation can be defined in a single line; 
-here we apply the construction to betterness relation \<^bold>r and for its strict 
+(* In HOL the transitive closure of a relation can be defined in a single line; here 
+   we apply the construction to betterness relation \<^bold>r and for its strict 
    variant (\<lambda>u v. u \<^bold>r v \<and> \<not>v \<^bold>r u) *)
 definition tcr  
   where "tcr \<equiv> \<lambda>x y. \<forall>Q. transitive Q \<longrightarrow> (sub_rel r Q \<longrightarrow> Q x y)"
 
 definition tcr_strict
-  where "tcr_strict \<equiv> \<lambda>x y. \<forall>Q. transitive Q 
-                               \<longrightarrow> (sub_rel (\<lambda>u v. u \<^bold>r v \<and> \<not>v \<^bold>r u) Q \<longrightarrow> Q x y)"
+  where "tcr_strict \<equiv> \<lambda>x y. \<forall>Q. transitive Q \<longrightarrow> (sub_rel (\<lambda>u v. u \<^bold>r v \<and> \<not>v \<^bold>r u) Q \<longrightarrow> Q x y)"
+
 
 (* Quasi-transitivity: the strict betterness
 relation is transitive*)
@@ -140,6 +135,7 @@ theorem T1: "Suzumura \<equiv> \<forall>x y. tcr x y \<longrightarrow> \<not> (y
 
 abbreviation loopfree
   where "loopfree \<equiv> \<forall>x y. tcr_strict x y \<longrightarrow> (y \<^bold>r x \<longrightarrow> x \<^bold>r y)"
+
 
 (* Interval order (reflexivity + Ferrers) *)
  
@@ -186,28 +182,9 @@ theorem T7:
 
 
 (****************
-Tests max rule 
+Correspondance under the max rule 
 ******************)
 
-(*inference rules*)
-
-lemma MP: "\<lbrakk>\<lfloor>\<phi>\<rfloor>; \<lfloor>\<phi> \<^bold>\<rightarrow> \<psi>\<rfloor>\<rbrakk> \<Longrightarrow> \<lfloor>\<psi>\<rfloor>" by simp
-lemma Nec: "\<lfloor>\<phi>\<rfloor> \<Longrightarrow> \<lfloor>\<box>\<phi>\<rfloor>" by simp
-
-(* "\<^bold>\<box>" is an S5 modality *)
-lemma C_1_refl: "\<lfloor>\<box>\<phi> \<^bold>\<rightarrow> \<phi>\<rfloor>" by simp
-lemma C_1_trans: "\<lfloor>\<box>\<phi> \<^bold>\<rightarrow> (\<box>(\<box>\<phi>))\<rfloor>"  by simp
-lemma C_1_sym: "\<lfloor>\<phi> \<^bold>\<rightarrow> (\<box>(\<diamond>\<phi>))\<rfloor>"  by simp
-
-(* Axioms of E holds *)
-
-lemma Abs: "\<lfloor>\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circle><\<psi>|\<phi>>\<rfloor>" sledgehammer oops
-lemma Nec: "\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>>\<rfloor>"  sledgehammer oops
-lemma Ext: "\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circle><\<psi>|\<phi>\<^sub>2>)\<rfloor>"  sledgehammer oops
-lemma Id: "\<lfloor>\<circle><\<phi>|\<phi>>\<rfloor>"  sledgehammer  oops
-lemma Sh: "\<lfloor>\<circle><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circle><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" sledgehammer oops
-lemma COK:"\<lfloor>\<circle><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circle><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circle><\<psi>\<^sub>2|\<phi>>)\<rfloor>" sledgehammer oops
-   
 (* Max-Limitedness corresponds to D *)
 
 lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>)\<rfloor>" 
@@ -221,11 +198,27 @@ lemma "\<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>
 lemma "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarrow> ((\<circle><\<chi>|\<phi>>) \<^bold>\<or> (\<circle><\<chi>|\<psi>>))\<rfloor>"
   nitpick [card i=3]  (* counterexample found *)
   oops 
+
 theorem T8: 
   assumes mlimitedness
   shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
   sledgehammer
   by (metis assms)
+
+(*theorem T8': 
+  assumes loopfree
+  shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<O><\<psi>|\<phi>> \<^bold>\<rightarrow> \<bbbP><\<psi>|\<phi>>\<rfloor>"  
+    nitpick [show_all]
+   oops
+ (* counterexample found, but the model is cyclic ....  *)
+
+theorem T8'': 
+  assumes  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<O><\<psi>|\<phi>> \<^bold>\<rightarrow> \<bbbP><\<psi>|\<phi>>\<rfloor>" 
+  shows  loopfree
+  (* sledgehammer *)
+
+*)
+
 
 lemma 
   assumes "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<not>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<^bold>\<not>\<psi>|\<phi>>)\<rfloor>"
@@ -412,58 +405,33 @@ theorem T19:
   by (smt (z3) assms) 
 
 
-(***
-axioms of E holding irrespective of the properties of r
-****)
-
-theorem Abs: "\<lfloor>\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circ><\<psi>|\<phi>>\<rfloor>"   sledgehammer oops 
-theorem Nec: "\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circ><\<psi>|\<phi>>\<rfloor>"  sledgehammer oops
-theorem Ext: "\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circ><\<psi>|\<phi>\<^sub>2>)\<rfloor>"  slegehammer oops
-theorem Id: "\<lfloor>\<circ><\<phi>|\<phi>>\<rfloor>" sledgehammer oops
-theorem  Sh: "\<lfloor>\<circ><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circ><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" sledgehammer oops
 
 (****************
-Axioms of E, F, F+CM, G that are invalid in the absence of any properties of r 
+Correspondance Lewis evaluation rule for the conditional
 *****************)
 
-lemma D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>"
+(* axioms of E holding if \<^bold>r transitive and total *)
+lemma D: "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>"  
   nitpick [card i=2] (* counterexample found *) 
   oops
+
+theorem T20:
+  assumes totality
+  shows D': "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" 
+  by (metis assms)  
 
 lemma Sp: "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
   nitpick [card i=3] (* counterexample found *) 
   oops 
 
-lemma COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
-  nitpick [card i=2] (* counterexample found *) 
-  oops 
-
-lemma CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  nitpick [card i=2] (* counterexample found *) 
-  oops 
-
-(****************
-Correspondance Lewis 
-*****************)
-
-(* axioms of E holding if \<^bold>r total *)
-
-theorem T20:
-  assumes totality
-  shows "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" 
-  by (metis assms)  
-
-(* axioms of G holding if \<^bold>r transitive *)
-
 theorem T21:
   assumes transitivity
   shows Sp'': "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"    
   using assms by blast 
+   
 
-theorem T21:
-  assumes totality
-  shows Sp'': "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"    
-  nitpick [card i=3] (* counterexample found *) 
+lemma COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
+  nitpick [card i=2] (* counterexample found *) 
   oops 
 
 lemma
@@ -477,19 +445,16 @@ lemma
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
   nitpick [card i=3] (* counterexample found *) 
   oops 
-
-(* axioms of G holding if \<^bold>r both transitive and total *)
-
-
+  
 theorem T22:
   assumes transitivity and totality
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
   by (smt (verit, ccfv_SIG) assms(1) assms(2)) 
 
-theorem T23:
-  assumes transitivity and totality
-  shows CM'': "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  by (metis assms)
+
+lemma CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
+  nitpick [card i=2] (* counterexample found *) 
+  oops 
 
 lemma
   assumes transitivity
@@ -503,12 +468,37 @@ lemma
   nitpick [card i=3] (* counterexample found *) 
   oops 
 
+theorem T23:
+  assumes transitivity and totality
+  shows CM'': "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
+  by (metis assms)  
+
 theorem T24:
   assumes transitivity
   shows  "\<lfloor>(\<integral><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<integral><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<integral><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
   sledgehammer
   using assms by blast
   
+
+
+(*axioms of E holding irrespective of the properties of r*)
+
+theorem Abs: "\<lfloor>\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circ><\<psi>|\<phi>>\<rfloor>"  
+  by blast  
+
+theorem Nec: "\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circ><\<psi>|\<phi>>\<rfloor>" 
+  by blast 
+
+theorem Ext: "\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circ><\<psi>|\<phi>\<^sub>2>)\<rfloor>"
+  by simp  
+
+theorem Id: "\<lfloor>\<circ><\<phi>|\<phi>>\<rfloor>"
+  by auto 
+
+theorem  Sh: "\<lfloor>\<circ><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circ><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>"
+  by blast 
+
+
 (*Under the opt rule transitivity alone is equivalent to Sp and Trans*)
 
 theorem T25:
