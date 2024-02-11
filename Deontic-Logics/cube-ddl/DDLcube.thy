@@ -159,26 +159,26 @@ theorem T2:
 theorem T3: 
   assumes transitivity 
   shows "Suzumura"
-  sledgehammer
+  (*sledgehammer*)
   by (metis assms sub_rel_def tcr_def transitive_def)
  
 
 theorem T4:
   assumes transitivity 
   shows Quasitransit
-  sledgehammer
+  (*sledgehammer*)
   by (metis assfactor_def assms) 
 
 theorem T5: 
   assumes Suzumura
   shows loopfree
-  sledgehammer
+  (*sledgehammer*)
   by (metis (no_types, lifting) assms sub_rel_def tcr_def tcr_strict_def)
 
 theorem T6: 
   assumes Quasitransit 
   shows loopfree
-  sledgehammer
+  (*sledgehammer*)
   by (smt (verit, best) assfactor_def assms sub_rel_def tcr_strict_def transitive_def)
 
 theorem T7: 
@@ -203,12 +203,12 @@ lemma C_1_sym: "\<lfloor>\<phi> \<^bold>\<rightarrow> (\<box>(\<diamond>\<phi>))
 
 (* Axioms of E holds *)
 
-lemma Abs: "\<lfloor>\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circle><\<psi>|\<phi>>\<rfloor>" sledgehammer oops
-lemma Nec: "\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>>\<rfloor>"  sledgehammer oops
-lemma Ext: "\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circle><\<psi>|\<phi>\<^sub>2>)\<rfloor>"  sledgehammer oops
-lemma Id: "\<lfloor>\<circle><\<phi>|\<phi>>\<rfloor>"  sledgehammer  oops
-lemma Sh: "\<lfloor>\<circle><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circle><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" sledgehammer oops
-lemma COK:"\<lfloor>\<circle><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circle><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circle><\<psi>\<^sub>2|\<phi>>)\<rfloor>" sledgehammer oops
+lemma Abs: "\<lfloor>\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circle><\<psi>|\<phi>>\<rfloor>" (*sledgehammer*) oops
+lemma Nec: "\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>>\<rfloor>"  (*sledgehammer*) oops
+lemma Ext: "\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circle><\<psi>|\<phi>\<^sub>2>)\<rfloor>"  (*sledgehammer*) oops
+lemma Id: "\<lfloor>\<circle><\<phi>|\<phi>>\<rfloor>"  (*sledgehammer*)  oops
+lemma Sh: "\<lfloor>\<circle><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circle><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" (*sledgehammer*) oops
+lemma COK:"\<lfloor>\<circle><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circle><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circle><\<psi>\<^sub>2|\<phi>>)\<rfloor>" (*sledgehammer*) oops
    
 (* Max-Limitedness corresponds to D *)
 
@@ -226,7 +226,7 @@ lemma "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarr
 theorem T8: 
   assumes mlimitedness
   shows  "D*": "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>\<rfloor>"  
-  sledgehammer
+  (*sledgehammer*)
   by (metis assms)
 
 lemma 
@@ -240,7 +240,7 @@ lemma
 theorem T9: 
   assumes msmoothness    
   shows CM: "\<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  sledgehammer
+  (*sledgehammer*)
   using assms by force 
 
 lemma 
@@ -260,7 +260,7 @@ lemma
 theorem T10: 
   assumes reflexivity and Ferrers
   shows  DR: "\<lfloor>\<circle><\<chi>|(\<phi>\<^bold>\<or>\<psi>)> \<^bold>\<rightarrow> (\<circle><\<chi>|\<phi>> \<^bold>\<or> \<circle><\<chi>|\<psi>>)\<rfloor>" 
-  sledgehammer
+  (*sledgehammer*)
   by (metis assms(1) assms(2))
   
 lemma 
@@ -404,13 +404,13 @@ lemma DEX: "\<lfloor>(\<diamond>\<phi> \<^bold>\<and> \<circ><\<psi>|\<phi>> \<^
 theorem T18:
   assumes mlimitedness and transitivity and totality
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<odot><\<psi>|\<phi>>\<rfloor>"   
-  sledgehammer
+  (*sledgehammer*)
   by (smt (z3) assms)
 
 theorem T19: 
   assumes mlimitedness and transitivity and totality
   shows "\<lfloor>\<circ><\<psi>|\<phi>>\<^bold>\<leftrightarrow>\<circle><\<psi>|\<phi>>\<rfloor>" 
-  sledgehammer
+  (*sledgehammer*)
   by (smt (z3) assms) 
 
 
@@ -418,11 +418,11 @@ theorem T19:
 axioms of E holding irrespective of the properties of r
 ****)
 
-theorem Abs: "\<lfloor>\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circ><\<psi>|\<phi>>\<rfloor>"   sledgehammer oops 
-theorem Nec: "\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circ><\<psi>|\<phi>>\<rfloor>"  sledgehammer oops
+theorem Abs: "\<lfloor>\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circ><\<psi>|\<phi>>\<rfloor>"   (*sledgehammer*) oops 
+theorem Nec: "\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circ><\<psi>|\<phi>>\<rfloor>"  (*sledgehammer*) oops
 theorem Ext: "\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circ><\<psi>|\<phi>\<^sub>2>)\<rfloor>"  slegehammer oops
-theorem Id: "\<lfloor>\<circ><\<phi>|\<phi>>\<rfloor>" sledgehammer oops
-theorem  Sh: "\<lfloor>\<circ><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circ><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" sledgehammer oops
+theorem Id: "\<lfloor>\<circ><\<phi>|\<phi>>\<rfloor>" (*sledgehammer*) oops
+theorem  Sh: "\<lfloor>\<circ><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circ><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" (*sledgehammer*) oops
 
 (****************
 Axioms of E, F, F+CM, G that are invalid in the absence of any properties of r 
@@ -453,26 +453,28 @@ Correspondance Lewis
 theorem T20:
   assumes totality
   shows "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" 
-  by (metis assms)  
+ (*sledgehammer*)
+  
 
-
+(*
 lemma
   assumes  "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" 
   shows totality
-  sledgehammer oops 
+  (*sledgehammer*) oops 
   nitpick
-
+*)
 (* axiom or law of G holding if \<^bold>r transitive *)
 
 theorem T21:
   assumes transitivity
-  shows Sp'': "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"    
+  shows Sp'': "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"   
+ (*sledgehammer*)
   using assms by blast 
 
 theorem T22:
   assumes transitivity
   shows  Tr'': "\<lfloor>(\<integral><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<integral><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<integral><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  sledgehammer
+  (*sledgehammer*)
   using assms by blast
 
 lemma
@@ -510,19 +512,6 @@ theorem T24:
   assumes transitivity and totality
   shows CM'': "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
   by (metis assms)
-
-lemma
-  assumes  CM'' 
-  shows transitivity
-  sledgehammer (* no proof *) oops
-  nitpick oops 
-
-lemma
-  assumes  CM'' 
-  shows totality
-  sledgehammer (* no proof *) 
-  oops 
-
 
 (*Under the opt rule transitivity alone is equivalent to Sp and Trans*)
 
@@ -562,7 +551,7 @@ lemma
   assumes tr: "\<forall>\<phi> \<psi> \<chi>.\<lfloor> ( P<\<phi>|\<phi>\<^bold>\<or>\<psi>> \<^bold>\<and> P<\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> P<\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>"
   shows rm: " \<forall>\<phi> \<psi> \<chi>. \<lfloor>( P<\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>" 
 
-  sledgehammer (*time out*) 
+  (*sledgehammer*) (*time out*) 
   nitpick
   nitpick [card i=3] (* Nitpick found no counterexample *) 
   nitpick [card i=4] (* Nitpick found no counterexample *)  
