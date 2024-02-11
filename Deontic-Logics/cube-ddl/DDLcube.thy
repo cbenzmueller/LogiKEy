@@ -152,6 +152,8 @@ theorem T2:
   by (simp add: assms(1) assms(2))  (* proof found *)
 
 
+
+
 (*their relationships*)
 
 theorem T3: 
@@ -161,7 +163,7 @@ theorem T3:
   by (metis assms sub_rel_def tcr_def transitive_def)
  
 
-theorem T4: 
+theorem T4:
   assumes transitivity 
   shows Quasitransit
   sledgehammer
@@ -310,7 +312,7 @@ lemma
   oops 
 
 (****************
-Correspondance under the opt rule
+Correspondence under the opt rule
 ******************)
 
 (*opt-Limitedness corresponds to D*)
@@ -453,18 +455,37 @@ theorem T20:
   shows "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" 
   by (metis assms)  
 
-(* axioms of G holding if \<^bold>r transitive *)
+
+lemma
+  assumes  "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" 
+  shows totality
+  sledgehammer oops 
+  nitpick
+
+(* axiom or law of G holding if \<^bold>r transitive *)
 
 theorem T21:
   assumes transitivity
   shows Sp'': "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"    
   using assms by blast 
 
-theorem T21:
-  assumes totality
-  shows Sp'': "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"    
-  nitpick [card i=3] (* counterexample found *) 
-  oops 
+theorem T22:
+  assumes transitivity
+  shows  Tr'': "\<lfloor>(\<integral><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<integral><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<integral><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
+  sledgehammer
+  using assms by blast
+
+lemma
+  assumes Sp''
+  shows transitivity
+  nitpick  (* counterexample found *) 
+  oops
+
+lemma
+  assumes Tr''
+  shows transitivity
+  nitpick  (* counterexample found *) 
+  oops
 
 lemma
   assumes transitivity
@@ -480,35 +501,29 @@ lemma
 
 (* axioms of G holding if \<^bold>r both transitive and total *)
 
-
-theorem T22:
+theorem T23:
   assumes transitivity and totality
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
   by (smt (verit, ccfv_SIG) assms(1) assms(2)) 
 
-theorem T23:
+theorem T24:
   assumes transitivity and totality
   shows CM'': "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
   by (metis assms)
 
 lemma
-  assumes transitivity
-  shows CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  nitpick [card i=2] (* counterexample found *) 
-  oops 
+  assumes  CM'' 
+  shows transitivity
+  sledgehammer (* no proof *) oops
+  nitpick oops 
 
 lemma
-  assumes totality
-  shows CM: "\<lfloor>(\<circ><\<psi>|\<phi>>\<^bold>\<and>\<circ><\<chi>|\<phi>>)\<^bold>\<rightarrow> \<circ><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>" 
-  nitpick [card i=3] (* counterexample found *) 
+  assumes  CM'' 
+  shows totality
+  sledgehammer (* no proof *) 
   oops 
 
-theorem T24:
-  assumes transitivity
-  shows  "\<lfloor>(\<integral><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<integral><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<integral><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
-  sledgehammer
-  using assms by blast
-  
+
 (*Under the opt rule transitivity alone is equivalent to Sp and Trans*)
 
 theorem T25:
