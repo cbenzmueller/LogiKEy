@@ -15,12 +15,15 @@ axiomatization where
 (* Aplus is at least as good as A*)
  PP1: "\<lfloor>\<^bold>\<not>\<circle><\<^bold>\<not>aplus|a\<^bold>\<or>aplus>\<rfloor>" and
 (* B is strictly better than Aplus*)
- PP2: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<circle><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"and
+ PP2: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<circle><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
 (* Sledgehammer finds PP0-PP2 XYZ  given 
 transitivity of the betterness relation in the models*)
 
+abbreviation twoworlds
+  where "twoworlds   \<equiv> \<exists>w v. r w v \<and> \<not> (r v w)"
+
 theorem T0:
-  assumes transitivity
+  assumes transitivity and twoworlds
   shows True
   nitpick  [show_all,satisfy,card=3](*time out*) 
   oops  
