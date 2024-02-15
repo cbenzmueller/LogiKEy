@@ -15,19 +15,17 @@ axiomatization where
 (* Aplus is at least as good as A*)
  PP1: "\<lfloor>\<^bold>\<not>\<circle><\<^bold>\<not>aplus|a\<^bold>\<or>aplus>\<rfloor>" and
 (* B is strictly better than Aplus*)
- PP2: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<circle><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
+ PP2: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<circle><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>" 
 
 
 (* Sledgehammer unable to show consistency 
 transitivity of the betterness relation in the models*)
 
-abbreviation twoworlds
-  where "twoworlds   \<equiv> \<exists>w v. r w v \<and> \<not> (r v w)"
-
 theorem T0:
-  assumes transitivity and twoworlds
+  assumes transitivity  
   shows True
-  nitpick  [show_all,satisfy,card=3](*time out*) 
+  nitpick [satisfy,card i=3,show_all]   
+(*  nitpick  [show_all,satisfy,card i=3](*time out*) *)
   oops  
 
 (* Nitpick shows consistency in the absence of transitivity*)
