@@ -15,16 +15,17 @@ axiomatization where
 (* Aplus is at least as good as A*)
  PP1: "\<lfloor>\<^bold>\<not>\<circle><\<^bold>\<not>aplus|a\<^bold>\<or>aplus>\<rfloor>" and
 (* B is strictly better than Aplus*)
- PP2: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<circle><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
+ PP2: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<circle><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>" 
 
-(* Sledgehammer finds PP0-PP2 XYZ  given 
+
+(* Sledgehammer unable to show consistency 
 transitivity of the betterness relation in the models*)
 
 theorem T0:
-  assumes transitivity
-  shows False
-  sledgehammer  (*no proof found*)
-  nitpick  (*time out*) 
+  assumes transitivity  
+  shows True
+  nitpick [satisfy,card i=3,show_all]   
+(*  nitpick  [show_all,satisfy,card i=3](*time out*) *)
   oops  
 
 (* Nitpick shows consistency in the absence of transitivity*)
@@ -39,10 +40,10 @@ theorem T1:
 theorem T2:
   assumes reflexivity and Ferrers
   shows False
-  sledgehammer 
+  sledgehammer oops
 
   
-(* Nitpick shows consistency if transitivity is weakened into acyclicity or quasi-transitivity*)
+(* Nitpick shows consistency if transitivity is weakened into acyclicity*)
 
 theorem T3:
   assumes loopfree
@@ -50,24 +51,16 @@ theorem T3:
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
-
-abbreviation two 
-  where "two \<equiv> \<exists>x y. (x \<^bold>r y) \<and> \<not>(y \<^bold>r x)"
+(* Nitpick should be able to show consistency if transitivity is weakened into quasi-transitivity*)
 
 theorem T4:
   assumes Quasitransit 
   shows True
-  using two
   nitpick [show_all,satisfy,card=3] 
   oops
 
-theorem T5:
-  assumes Quasitransit
-  shows False
-  sledgehammer
-  oops
-
 end
+
 
 
 

@@ -4,7 +4,7 @@ imports DDLcube
 
 begin
 
-consts a::\<sigma> aplus::\<sigma> b::\<sigma>
+consts a::\<sigma> aplus::\<sigma> b::\<sigma>  i1::i i2::i i3::i i4::i i5::i i6::i i7::i 
 
 (*the mere addition scenario*)
 (*** With Maximality  ***)
@@ -51,13 +51,32 @@ theorem T3:
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
-(* Nitpick should be able to show consistency if transitivity is weakened into quasi-transitivity*)
+(* Transitivity or quasi-transitivity: Nitpick shows inconsistency given finiteness of the model*)
 
 theorem T4:
-  assumes Quasitransit 
-  shows True
-  nitpick [show_all,satisfy,card=3] 
-  oops
+    assumes
+      transitivity and
+      OnlyOnes: "\<forall>y. y=i1 \<or> y=i2 \<or> y=i3 \<or> i=i4 \<or> y= i5 \<or> y= i6 \<or> y=i7 \<or> y=i8"
+    shows False
+    sledgehammer oops
+
+theorem T5:
+    assumes
+      Quasitransit and
+      OnlyOnes: "\<forall>y. y=i1 \<or> y=i2 \<or> y=i3 \<or> i=i4 \<or> y= i5 \<or> y= i6 \<or> y=i7 \<or> y=i8"
+    shows False
+    sledgehammer
+    
+
+(* Nitpick falsifies infinity--there is a surjective mapping G from domain i to 
+a proper subset M of domain i*)
+
+theorem "\<exists>M.
+       (\<exists>z::i. \<not>(M z))
+      \<and> (\<exists>G. (\<forall>y::i. (\<exists>x. (M x)\<and> (G x) = y)))"
+  nitpick[show_all] oops
+
+
 
 end
 
