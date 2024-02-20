@@ -4,7 +4,7 @@ imports DDLcube
 
 begin
 
-consts a::\<sigma> aplus::\<sigma> b::\<sigma>  i1::i i2::i i3::i i4::i i5::i i6::i i7::i 
+consts a::\<sigma> aplus::\<sigma> b::\<sigma>  i1::i i2::i i3::i i4::i i5::i i6::i i7::i i8::i 
 
 (*the mere addition scenario*)
 (*** With Maximality  ***)
@@ -18,8 +18,8 @@ axiomatization where
  PP2: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<circle><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>" 
 
 
-(* Sledgehammer unable to show consistency 
-transitivity of the betterness relation in the models*)
+(* Sledgehammer unable to show consistency transitivity of the betterness 
+   relation in the models*)
 
 theorem T0:
   assumes transitivity  
@@ -51,52 +51,52 @@ theorem T3:
   nitpick [show_all,satisfy,card=3] (* model found for card i=3 *) 
   oops
 
-(* Transitivity or quasi-transitivity: Nitpick shows inconsistency given finiteness of the model*)
+(* Transitivity or quasi-transitivity: Nitpick shows inconsistency assuming a finite model
+   of cardinality (up to) seven (if we provide the exact dependencies); for higher cardinalities 
+   it returns a time out (depending on computing it may prove falsity also for cardinality eight, 
+   etc. *)
 
 theorem T4:
     assumes
       transitivity and
-      OnlyOnes: "\<forall>y. y=i1 \<or> y=i2 \<or> y=i3 \<or> i=i4 \<or> y= i5 \<or> y= i6 \<or> y=i7 \<or> y=i8"
+      OnlyOnes: "\<forall>y. y=i1 \<or> y=i2 \<or> y=i3 \<or> y=i4 \<or> y= i5 \<or> y= i6 \<or> y= i7"
     shows False
-    sledgehammer oops
+  sledgehammer(PP0 PP1 PP2 assms assfactor_def)  
+  oops
 
 theorem T5:
     assumes
       Quasitransit and
-      OnlyOnes: "\<forall>y. y=i1 \<or> y=i2 \<or> y=i3 \<or> i=i4 \<or> y= i5 \<or> y= i6 \<or> y=i7 \<or> y=i8"
+      OnlyOnes: "\<forall>y. y=i1 \<or> y=i2 \<or> y=i3 \<or> y=i4 \<or> y= i5 \<or> y= i6 \<or> y=i7"
     shows False
-    sledgehammer
-    
+  sledgehammer(PP0 PP1 PP2 assms assfactor_def)  
+  oops
 
-(* Nitpick falsifies infinity--there is a surjective mapping G from domain i to 
-a proper subset M of domain i*)
+(* Testing whether infinity holds — infinity is defined as: there is a surjective mapping G from 
+   domain i to a proper subset M of domain i*)
 
-theorem "\<exists>M.
-       (\<exists>z::i. \<not>(M z))
-      \<and> (\<exists>G. (\<forall>y::i. (\<exists>x. (M x)\<and> (G x) = y)))"
-  nitpick[show_all] oops
+abbreviation "infinity \<equiv> \<exists>M. (\<exists>z::i. \<not>(M z) \<and> (\<exists>G. (\<forall>y::i. (\<exists>x. (M x) \<and> (G x) = y))))"
 
+lemma "infinity" nitpick[show_all] oops (* countermodel found *)
+
+
+(* No we study infinity under the assumption of (quasi-)transitivity: we do not get any finite
+   countermodels reported anymore *)
+
+lemma 
+  assumes transitivity
+  shows   infinity
+  nitpick[show_all]  (* no countermodel found anymore; nitpicks runs out of time *)
+  sledgehammer       (* but the provers are still too weak to prove it automatically *)
+  oops
+
+
+lemma 
+  assumes Quasitransit 
+  shows   infinity
+  nitpick[show_all]  (* no countermodel found anymore; nitpicks runs out of time *)
+  sledgehammer       (* but the provers are still too weak to prove it automatically *)
+  oops
 
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
