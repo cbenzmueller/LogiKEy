@@ -151,25 +151,20 @@ theorem T2:
   shows totality
   by (simp add: assms(1) assms(2))  (* proof found *)
 
-
-
-
 (*their relationships*)
-
 theorem T3: 
   assumes transitivity 
   shows "Suzumura"
   (*sledgehammer*)
   by (metis assms sub_rel_def tcr_def transitive_def)
  
-
 theorem T4:
   assumes transitivity 
   shows Quasitransit
   (*sledgehammer*)
   by (metis assfactor_def assms) 
 
-theorem T5: 
+theorem T5:
   assumes Suzumura
   shows loopfree
   (*sledgehammer*)
@@ -185,8 +180,6 @@ theorem T7:
   assumes reflexivity and Ferrers 
   shows Quasitransit
   by (metis assfactor_def assms) 
-
-
 (****************
 Tests max rule 
 ******************)
@@ -210,6 +203,11 @@ lemma Id: "\<lfloor>\<circle><\<phi>|\<phi>>\<rfloor>"  (*sledgehammer*)  oops
 lemma Sh: "\<lfloor>\<circle><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circle><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" (*sledgehammer*) oops
 lemma COK:"\<lfloor>\<circle><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circle><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circle><\<psi>\<^sub>2|\<phi>>)\<rfloor>" (*sledgehammer*) oops
    
+
+
+
+
+
 (* Max-Limitedness corresponds to D *)
 
 lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>)\<rfloor>" 
@@ -453,16 +451,15 @@ Correspondance Lewis
 theorem T20:
   assumes totality
   shows "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" 
- (*sledgehammer*)
+  using assms by blast
   
 
-(*
-lemma
-  assumes  "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<integral><\<psi>|\<phi>>)\<rfloor>" 
-  shows totality
-  (*sledgehammer*) oops 
-  nitpick
-*)
+
+
+
+
+
+
 (* axiom or law of G holding if \<^bold>r transitive *)
 
 theorem T21:
@@ -500,7 +497,6 @@ lemma
   shows COK:"\<lfloor>\<circ><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circ><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circ><\<psi>\<^sub>2|\<phi>>)\<rfloor>" 
   nitpick [card i=3] (* counterexample found *) 
   oops 
-
 (* axioms of G holding if \<^bold>r both transitive and total *)
 
 theorem T23:

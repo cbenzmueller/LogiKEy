@@ -61,7 +61,7 @@ theorem T4:
       transitivity and
       OnlyOnes: "\<forall>y. y=i1 \<or> y=i2 \<or> y=i3 \<or> y=i4 \<or> y= i5 \<or> y= i6 \<or> y= i7"
     shows False
-  sledgehammer(PP0 PP1 PP2 assms assfactor_def)  
+  sledgehammer(PP0 PP1 PP2 assms assfactor_def)  (*proof found*)
   oops
 
 theorem T5:
@@ -69,7 +69,7 @@ theorem T5:
       Quasitransit and
       OnlyOnes: "\<forall>y. y=i1 \<or> y=i2 \<or> y=i3 \<or> y=i4 \<or> y= i5 \<or> y= i6 \<or> y=i7"
     shows False
-  sledgehammer(PP0 PP1 PP2 assms assfactor_def)  
+  sledgehammer(PP0 PP1 PP2 assms assfactor_def)  (*proof found*)
   oops
 
 (* Testing whether infinity holds — infinity is defined as: there is a surjective mapping G from 
@@ -80,7 +80,7 @@ abbreviation "infinity \<equiv> \<exists>M. (\<exists>z::i. \<not>(M z) \<and> (
 lemma "infinity" nitpick[show_all] oops (* countermodel found *)
 
 
-(* Now we study infinity under the assumption of (quasi-)transitivity: we do not get any finite
+(* No we study infinity under the assumption of (quasi-)transitivity: we do not get any finite
    countermodels reported anymore *)
 
 lemma 
@@ -90,7 +90,7 @@ lemma
   sledgehammer       (* but the provers are still too weak to prove it automatically *)
   oops
 
- 
+
 lemma 
   assumes Quasitransit 
   shows   infinity

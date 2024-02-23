@@ -63,6 +63,6 @@ abbreviation subs   (infix "\<^bold>\<sqsubseteq>" 70)  where "A\<^bold>\<sqsubs
 abbreviation union  (infixr "\<^bold>\<squnion>" 70) where "A\<^bold>\<squnion>B \<equiv> \<lambda>x. A x \<or> B x"
 abbreviation inters (infixr "\<^bold>\<sqinter>" 70) where "A\<^bold>\<sqinter>B \<equiv> \<lambda>x. A x \<and> B x"
  (*consistency confirmed (trivial: only abbreviations introduced)*)
-lemma True nitpick[satisfy,user_axioms] oops (*satisfying model*)
+lemma True nitpick[satisfy,user_axioms,show_all] oops (*satisfying model*)
 end
 

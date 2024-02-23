@@ -4,7 +4,7 @@ imports DDLcube
 
 begin
 
-consts A::\<sigma> Aplus::\<sigma> B::\<sigma>
+consts a::\<sigma> aplus::\<sigma> b::\<sigma>
 
 (*the mere addition scenario*)
 
@@ -13,11 +13,11 @@ consts A::\<sigma> Aplus::\<sigma> B::\<sigma>
 
 axiomatization where
 (* A is striclty better than B*)
- P0: "\<lfloor>(\<^bold>\<not>\<odot><\<^bold>\<not>A|A\<^bold>\<or>B>\<^bold>\<and>\<odot><\<^bold>\<not>B|A\<^bold>\<or>B>)\<rfloor>" and
+ P0: "\<lfloor>(\<^bold>\<not>\<odot><\<^bold>\<not>a|a\<^bold>\<or>b>\<^bold>\<and>\<odot><\<^bold>\<not>b|a\<^bold>\<or>b>)\<rfloor>" and
 (* Aplus is at least as good as A*)
- P1: "\<lfloor>\<^bold>\<not>\<odot><\<^bold>\<not>Aplus|A\<^bold>\<or>Aplus>\<rfloor>" and
+ P1: "\<lfloor>\<^bold>\<not>\<odot><\<^bold>\<not>aplus|a\<^bold>\<or>aplus>\<rfloor>" and
 (* B is strictly better than Aplus*)
- P2: "\<lfloor>(\<^bold>\<not>\<odot><\<^bold>\<not>B|Aplus\<^bold>\<or>B> \<^bold>\<and> \<odot><\<^bold>\<not>Aplus|Aplus\<^bold>\<or>B>)\<rfloor>"
+ P2: "\<lfloor>(\<^bold>\<not>\<odot><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<odot><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>"
 
 (* Sledgehammer finds P0-P2 inconsistent given 
 transitivity of the betterness relation in the models*)
@@ -56,7 +56,7 @@ theorem T3:
 theorem T4:
   assumes Quasitransit
   shows True
-  nitpick [show_all,satisfy,card=4] (* model found for card i=4 *)
+  nitpick [show_all,satisfy,card=4] 
   oops
 
 
