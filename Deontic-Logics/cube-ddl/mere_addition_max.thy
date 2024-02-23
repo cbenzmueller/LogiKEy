@@ -4,18 +4,18 @@ imports DDLcube
 
 begin
 
-consts a::\<sigma> aplus::\<sigma> b::\<sigma>  i1::i i2::i i3::i i4::i i5::i i6::i i7::i i8::i 
+consts A::\<sigma> Aplus::\<sigma> B::\<sigma>  i1::i i2::i i3::i i4::i i5::i i6::i i7::i i8::i 
 
 (*the mere addition scenario*)
 (*** With Maximality  ***)
 
 axiomatization where
 (* A is striclty better than B*)
- PP0: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>a|a\<^bold>\<or>b>\<^bold>\<and>\<circle><\<^bold>\<not>b|a\<^bold>\<or>b>)\<rfloor>" and
+ PP0: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>A|A\<^bold>\<or>B>\<^bold>\<and>\<circle><\<^bold>\<not>B|A\<^bold>\<or>B>)\<rfloor>" and
 (* Aplus is at least as good as A*)
- PP1: "\<lfloor>\<^bold>\<not>\<circle><\<^bold>\<not>aplus|a\<^bold>\<or>aplus>\<rfloor>" and
+ PP1: "\<lfloor>\<^bold>\<not>\<circle><\<^bold>\<not>Aplus|A\<^bold>\<or>Aplus>\<rfloor>" and
 (* B is strictly better than Aplus*)
- PP2: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>b|aplus\<^bold>\<or>b> \<^bold>\<and> \<circle><\<^bold>\<not>aplus|aplus\<^bold>\<or>b>)\<rfloor>" 
+ PP2: "\<lfloor>(\<^bold>\<not>\<circle><\<^bold>\<not>B|Aplus\<^bold>\<or>B> \<^bold>\<and> \<circle><\<^bold>\<not>Aplus|Aplus\<^bold>\<or>B>)\<rfloor>" 
 
 
 (* Sledgehammer unable to show consistency transitivity of the betterness 
@@ -24,7 +24,7 @@ axiomatization where
 theorem T0:
   assumes transitivity  
   shows True
-  nitpick [satisfy,card i=3,show_all]   
+  nitpick [satisfy,card i=3,show_all]  
 (*  nitpick  [show_all,satisfy,card i=3](*time out*) *)
   oops  
 
@@ -79,18 +79,15 @@ abbreviation "infinity \<equiv> \<exists>M. (\<exists>z::i. \<not>(M z) \<and> (
 
 lemma "infinity" nitpick[show_all] oops (* countermodel found *)
 
-
-(* No we study infinity under the assumption of (quasi-)transitivity: we do not get any finite
+(* Now we study infinity under the assumption of (quasi-)transitivity: we do not get any finite
    countermodels reported anymore *)
 
 lemma 
   assumes transitivity
   shows   infinity
-  nitpick[show_all]  (* no countermodel found anymore; nitpicks runs out of time *)
-  sledgehammer       (* but the provers are still too weak to prove it automatically *)
-  oops
-
-
+  nitpick[show_all]  oops (* no countermodel found anymore; nitpicks runs out of time *)
+  sledgehammer      oops (* but the provers are still too weak to prove it automatically *)
+  
 lemma 
   assumes Quasitransit 
   shows   infinity
