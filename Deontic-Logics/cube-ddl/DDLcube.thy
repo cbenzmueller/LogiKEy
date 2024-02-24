@@ -2,7 +2,7 @@ theory DDLcube imports Main  (*** Benzmueller/Parent 2024 ***)
 
 begin  (* Settings for model finder Nitpick *)
 
-nitpick_params [user_axioms,show_all,expect=genuine,format=2]
+nitpick_params [user_axioms,show_all,format=2]
 
 (*** We introduce Aqvist's system E from the 2019 IfColog paper ***)
 
