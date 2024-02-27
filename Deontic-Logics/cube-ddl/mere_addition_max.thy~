@@ -79,20 +79,21 @@ abbreviation "infinity \<equiv> \<exists>M. (\<exists>z::i. \<not>(M z) \<and> (
 
 lemma "infinity" nitpick[show_all] oops (* countermodel found *)
 
-(* Now we study infinity under the assumption of (quasi-)transitivity: we do not get any finite
-   countermodels reported anymore *)
+(* Now we study infinity under the assumption of (quasi-)transitivity: we do 
+not get any finite countermodels reported anymore *)
 
 lemma 
   assumes transitivity
   shows   infinity
   nitpick[show_all]  oops (* no countermodel found anymore; nitpicks runs out of time *)
-  sledgehammer      oops (* but the provers are still too weak to prove it automatically *)
+  sledgehammer     (* but the provers are still too weak to prove it automatically *)
   
 lemma 
   assumes Quasitransit 
   shows   infinity
-  nitpick[show_all]  (* no countermodel found anymore; nitpicks runs out of time *)
-  sledgehammer       (* but the provers are still too weak to prove it automatically *)
+  nitpick[show_all] (* no countermodel found anymore; nitpicks runs out of time *)
+  sledgehammer   [max_proofs=1,isar_proofs=false] (* but the provers are still too 
+                                                  weak to prove it automatically *)
   oops
 
 
