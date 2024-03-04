@@ -65,4 +65,3 @@ abbreviation inters (infixr "\<^bold>\<sqinter>" 70) where "A\<^bold>\<sqinter>B
  (*consistency confirmed (trivial: only abbreviations introduced)*)
 lemma True nitpick[satisfy,user_axioms,show_all] oops (*satisfying model*)
 end
-
