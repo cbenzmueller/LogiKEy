@@ -32,10 +32,10 @@ begin
  abbreviation SDLexists ("\<^bold>\<exists>") where "\<^bold>\<exists>\<Phi> \<equiv> \<lambda>w.\<exists>x. (\<Phi> x w)"   
  abbreviation SDLexistsB (binder"\<^bold>\<exists>"[8]9) where "\<^bold>\<exists>x. \<phi>(x) \<equiv> \<^bold>\<exists>\<phi>" 
 
- axiomatization where D: "\<lfloor>\<^bold>\<not> ((OB \<phi>) \<^bold>\<and> (OB (\<^bold>\<not> \<phi>)))\<rfloor>" (*Axiom D: seriality of r.*)
+axiomatization where D: "\<lfloor>\<^bold>\<not> ((OB \<phi>) \<^bold>\<and> (OB (\<^bold>\<not> \<phi>)))\<rfloor>" (*Axiom D: seriality of r.*)
 lemma seriality: "(\<forall>w. \<exists>v. w R v)" sledgehammer
 
- abbreviation SDLobl::\<gamma> ("\<^bold>\<circle><_>") where "\<^bold>\<circle><\<phi>> \<equiv>  OB \<phi>"  (*New syntax: A is obligatory.*)
+abbreviation SDLobl::\<gamma> ("\<^bold>\<circle><_>") where "\<^bold>\<circle><\<phi>> \<equiv>  OB \<phi>"  (*New syntax: A is obligatory.*)
 
 (*Consistency confirmed by model finder Nitpick.*) 
 lemma True nitpick[satisfy,user_axioms,expect=genuine] oops

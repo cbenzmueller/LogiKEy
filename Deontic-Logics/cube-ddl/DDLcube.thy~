@@ -418,7 +418,7 @@ axioms of E holding irrespective of the properties of r
 
 theorem Abs: "\<lfloor>\<circ><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circ><\<psi>|\<phi>>\<rfloor>"   (*sledgehammer*) oops 
 theorem Nec: "\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circ><\<psi>|\<phi>>\<rfloor>"  (*sledgehammer*) oops
-theorem Ext: "\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circ><\<psi>|\<phi>\<^sub>2>)\<rfloor>"  slegehammer oops
+theorem Ext: "\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circ><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circ><\<psi>|\<phi>\<^sub>2>)\<rfloor>"  sledgehammer oops
 theorem Id: "\<lfloor>\<circ><\<phi>|\<phi>>\<rfloor>" (*sledgehammer*) oops
 theorem  Sh: "\<lfloor>\<circ><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circ><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" (*sledgehammer*) oops
 
@@ -475,13 +475,13 @@ theorem T22:
   using assms by blast
 
 lemma
-  assumes Sp''
+  assumes Sp'': "\<lfloor>( \<integral><\<psi>|\<phi>> \<^bold>\<and> \<circ><(\<psi>\<^bold>\<rightarrow>\<chi>)|\<phi>>) \<^bold>\<rightarrow> \<circ><\<chi>|(\<phi>\<^bold>\<and>\<psi>)>\<rfloor>"  
   shows transitivity
   nitpick  (* counterexample found *) 
   oops
 
 lemma
-  assumes Tr''
+  assumes  Tr'': "\<lfloor>(\<integral><\<phi>|\<phi>\<^bold>\<or>\<psi>>\<^bold>\<and>\<integral><\<psi>|\<psi>\<^bold>\<or>\<chi>>)\<^bold>\<rightarrow> \<integral><\<phi>|\<phi>\<^bold>\<or>\<chi>>\<rfloor>" 
   shows transitivity
   nitpick  (* counterexample found *) 
   oops
