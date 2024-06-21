@@ -1,4 +1,4 @@
-theory DDLcube imports Main  (*** Benzmueller/Parent 2024 ***)
+theory DDLcube imports Main  (*** Benzmueller/Parent 2024 *** DO NOT MODIFY THIS FILE***)
 
 begin  (* Settings for model finder Nitpick *)
 
@@ -180,6 +180,7 @@ theorem T7:
   assumes reflexivity and Ferrers 
   shows Quasitransit
   by (metis assfactor_def assms) 
+
 (****************
 Tests max rule 
 ******************)
@@ -203,7 +204,6 @@ lemma Id: "\<lfloor>\<circle><\<phi>|\<phi>>\<rfloor>"  (*sledgehammer*)  oops
 lemma Sh: "\<lfloor>\<circle><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circle><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" (*sledgehammer*) oops
 lemma COK:"\<lfloor>\<circle><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circle><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circle><\<psi>\<^sub>2|\<phi>>)\<rfloor>" (*sledgehammer*) oops
    
-
 
 
 
