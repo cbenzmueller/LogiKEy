@@ -1,4 +1,4 @@
-theory "26_DDLonly"
+theory "24_DDLonly"
   imports 
   types
   DDL
