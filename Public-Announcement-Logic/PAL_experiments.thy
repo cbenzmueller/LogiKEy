@@ -74,7 +74,7 @@ begin
  (* Necessitation rules: implied by the semantical embedding *)
  lemma announcement_nec: assumes "\<^bold>\<lfloor>\<phi>\<^bold>\<rfloor>" shows "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<psi>\<^bold>]\<phi>\<^bold>\<rfloor>" by (simp add: assms)
  lemma rkc_necessitation: assumes "\<^bold>\<lfloor>\<phi>\<^bold>\<rfloor>" shows "\<^bold>\<lfloor>(\<^bold>C\<^sub>A\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>)\<^bold>\<rfloor>"
-   by (smt assms intersection_rel_def sub_rel_def tc_def transitive_def)
+   by (metis assms intersection_rel_def sub_rel_def tc_def transitive_def)
 
  (* Checking for consistency (again) *)
  lemma True nitpick[satisfy,user_axioms] oops (* model found *)
