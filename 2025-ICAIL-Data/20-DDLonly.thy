@@ -1,4 +1,4 @@
-theory "16_DDLonly"
+theory "20-DDLonly"
   imports
   DDL
 begin
@@ -28,23 +28,9 @@ lemma True nitpick [satisfy, user_axioms, show_all] oops(*Consistency-check: Nit
 
 lemma "\<lfloor>\<^bold>\<circle><(inform_com_auth l)>\<rfloor>\<^sub>l" using A0 A2 Situation by auto
 lemma "\<lfloor>\<^bold>\<circle><\<^bold>\<not>(inform_com_auth l)>\<rfloor>\<^sub>l" nitpick [user_axioms] oops (*counterexample found*)
-lemma "\<lfloor>\<^bold>\<circle><(kill_everyone l)>\<rfloor>\<^sub>l" try oops
+lemma "\<lfloor>\<^bold>\<circle><(kill_everyone l)>\<rfloor>\<^sub>l" nitpick [user_axioms] oops (*counterexample found*) oops
 
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

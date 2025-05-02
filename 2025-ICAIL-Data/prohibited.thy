@@ -1,6 +1,6 @@
 theory prohibited
   imports 
-   DDL
+    DDL
    types
 begin
 
@@ -40,51 +40,3 @@ theorem Result1b: "H1 \<and> H2 \<and> A1 \<and> B1 \<and> C1 \<longrightarrow> 
   nitpick [user_axioms] oops (*counterexample found*)
 
 lemma True nitpick [satisfy, user_axioms, show_all] oops
-
-consts
-  real_time_bioid::"aiSys\<Rightarrow>\<sigma>" (*system is a real time bio identification system*)
-  use_public_spaces::"aiSys\<Rightarrow>\<sigma>" (*system is planned to be used in public spaces*)
-  use_law_enforcement::"aiSys\<Rightarrow>\<sigma>" (*system is used for law enforcement*)
-  strictly_necessary_for::"aiSys\<Rightarrow>purpose\<Rightarrow>\<sigma>" (*use of system is strictly necessary for a purpose*)
-  consider_consequence::"aiSys\<Rightarrow>consequence\<Rightarrow>\<sigma>" (*consider specific consequence of the use of a system*)
-  consider_consequence_no_use::"aiSys\<Rightarrow>consequence\<Rightarrow>\<sigma>" (*consider specific consequence of not using the system*)
-  consider_context::"aiSys\<Rightarrow>\<sigma>" (*consider the context in which the system is used*)
-  complies_with_bioid_rules::"aiSys\<Rightarrow>\<sigma>" (*does system comply or not?*)
-
-abbreviation "D1 \<equiv> \<lfloor>\<^bold>\<forall>x::aiSys. real_time_bioid x \<^bold>\<and> use_public_spaces x \<^bold>\<and> use_law_enforcement x \<^bold>\<and> 
-(((has_purpose x targeted_search) \<^bold>\<and> (\<^bold>\<not>(strictly_necessary_for x targeted_search))) \<^bold>\<or>
-((has_purpose x detection) \<^bold>\<and> (\<^bold>\<not>(strictly_necessary_for x detection))) \<^bold>\<or> ((has_purpose x prevention) \<^bold>\<and> 
-(\<^bold>\<not>(strictly_necessary_for x prevention)))) \<^bold>\<rightarrow> \<^bold>\<circle><prohibited x>\<rfloor>"
-(*implicit: not prohibited*)
-abbreviation "D1b \<equiv> \<lfloor>\<^bold>\<forall>x::aiSys. real_time_bioid x \<^bold>\<and> use_public_spaces x \<^bold>\<and> use_law_enforcement x \<^bold>\<and> 
-(((has_purpose x targeted_search) \<^bold>\<and> (strictly_necessary_for x targeted_search)) \<^bold>\<or>
-((has_purpose x detection) \<^bold>\<and> (strictly_necessary_for x detection)) \<^bold>\<or> ((has_purpose x prevention) \<^bold>\<and> 
-(strictly_necessary_for x prevention))) \<^bold>\<rightarrow> (\<^bold>\<not>(\<^bold>\<circle><prohibited x>) \<^bold>\<and> (\<^bold>\<circle><high_risk x>))\<rfloor>"
-abbreviation "A2a \<equiv> \<lfloor>\<^bold>\<forall>x::aiSys. real_time_bioid x \<^bold>\<and> use_public_spaces x \<^bold>\<and> use_law_enforcement x \<^bold>\<and> 
-  (\<^bold>\<circle><high_risk x>) \<^bold>\<rightarrow> \<^bold>\<circle><consider_consequence_no_use x harm_psychological> \<^bold>\<and>
-  \<^bold>\<circle><consider_consequence_no_use x harm_physical>\<rfloor>"
-abbreviation "A2b \<equiv> \<lfloor>\<^bold>\<forall>x::aiSys. real_time_bioid x \<^bold>\<and> use_public_spaces x \<^bold>\<and> use_law_enforcement x \<^bold>\<and> 
-  (\<^bold>\<circle><high_risk x>) \<^bold>\<rightarrow> \<^bold>\<circle><consider_consequence x affect_personal_rights> \<^bold>\<and> \<^bold>\<circle><consider_consequence x affect_personal_freedom>\<rfloor>" 
-abbreviation "A2c \<equiv> \<lfloor>\<^bold>\<forall>x::aiSys. real_time_bioid x \<^bold>\<and> use_public_spaces x \<^bold>\<and> use_law_enforcement x \<^bold>\<and> 
-  (\<^bold>\<circle><high_risk x>) \<^bold>\<rightarrow> \<^bold>\<circle><complies_with_bioid_rules x>\<rfloor>"
-
-consts
-  z::aiSys 
-
-abbreviation "F4 w \<equiv> (real_time_bioid z) w"
-abbreviation "F5 w \<equiv> (use_public_spaces z) w"
-abbreviation "F6 w \<equiv> (use_law_enforcement z) w"
-abbreviation "F7 w \<equiv> (has_purpose z targeted_search) w" 
-abbreviation "F8 w \<equiv> \<not>(strictly_necessary_for z targeted_search) w"
-abbreviation "F9 w \<equiv> (strictly_necessary_for z targeted_search) w" 
-
-theorem Result2a: "D1 \<and> D1b \<and> A2a \<and> A2b \<and> A2c \<longrightarrow> \<lfloor>F4 \<^bold>\<and> F5 \<^bold>\<and> F6 \<^bold>\<and> F7 \<^bold>\<and> F8 \<^bold>\<rightarrow> (\<^bold>\<circle><prohibited z>)\<rfloor>"
-  by meson
-
-theorem Result2b: "D1 \<and> D1b \<and> A2a \<and> A2b \<and> A2c \<longrightarrow> \<lfloor>F4 \<^bold>\<and> F5 \<^bold>\<and> F6 \<^bold>\<and> F7 \<^bold>\<and> F9 \<^bold>\<rightarrow> (\<^bold>\<circle><prohibited z>)\<rfloor>"
-  nitpick [user_axioms, card i = 2] oops (*found counterexample*) 
-
-lemma True nitpick [satisfy, user_axioms, show_all] oops
-
-end
-
