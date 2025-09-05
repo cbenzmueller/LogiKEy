@@ -33,7 +33,7 @@ begin
  abbreviation SDLexistsB (binder"\<^bold>\<exists>"[8]9) where "\<^bold>\<exists>x. \<phi>(x) \<equiv> \<^bold>\<exists>\<phi>" 
 
 axiomatization where D: "\<lfloor>\<^bold>\<not> ((OB \<phi>) \<^bold>\<and> (OB (\<^bold>\<not> \<phi>)))\<rfloor>" (*Axiom D: seriality of r.*)
-lemma seriality: "(\<forall>w. \<exists>v. w R v)" sledgehammer
+lemma seriality: "(\<forall>w. \<exists>v. w R v)" sledgehammer by (meson D)
 
 abbreviation SDLobl::\<gamma> ("\<^bold>\<circle><_>") where "\<^bold>\<circle><\<phi>> \<equiv>  OB \<phi>"  (*New syntax: A is obligatory.*)
 
@@ -41,14 +41,10 @@ abbreviation SDLobl::\<gamma> ("\<^bold>\<circle><_>") where "\<^bold>\<circle><
 lemma True nitpick[satisfy,user_axioms,expect=genuine] oops
 
 
-assumes seriality
-shows D
-  sledgehammer oops
+lemma "(\<forall>w. \<exists>v. w R v) \<longrightarrow> \<lfloor>\<^bold>\<not> ((OB \<phi>) \<^bold>\<and> (OB (\<^bold>\<not> \<phi>)))\<rfloor>"  sledgehammer by blast 
 
-lemma "\<lfloor>(OB \<phi>) \<^bold>\<rightarrow> (OB (OB \<phi>))\<rfloor>"
-  nitpick[falsify,user_axioms,expect=genuine] 
+lemma "\<lfloor>(OB \<phi>) \<^bold>\<rightarrow> (OB (OB \<phi>))\<rfloor>" nitpick[falsify,user_axioms,expect=genuine] oops
 
- 
 (*Barcan formulas.*) 
  lemma Barcan:         "\<lfloor>(\<^bold>\<forall>d. \<^bold>\<circle><\<phi>(d)>) \<^bold>\<rightarrow> (\<^bold>\<circle><\<^bold>\<forall>d. \<phi>(d)>)\<rfloor>" by simp  
  lemma ConverseBarcan: "\<lfloor>(\<^bold>\<circle><\<^bold>\<forall>d. \<phi>(d)>) \<^bold>\<rightarrow> (\<^bold>\<forall>d. \<^bold>\<circle><\<phi>(d)>)\<rfloor>" by simp 
