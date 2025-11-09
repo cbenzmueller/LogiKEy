@@ -1,0 +1,288 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{mere{\isacharunderscore}{\kern0pt}addition{\isacharunderscore}{\kern0pt}opt}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{Study Mere Addition Paradox: opt rule%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\begin{isamarkuptext}%
+This section studies the mere addition scenario \cite{Parfit1984-PARRAP,ddl:T87} when assuming the opt rule.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ mere{\isacharunderscore}{\kern0pt}addition{\isacharunderscore}{\kern0pt}opt\ \ \isanewline
+\isakeyword{imports}\ DDLcube\isanewline
+\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+\isanewline
+\isanewline
+\isacommand{consts}\isamarkupfalse%
+\ A{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymsigma}\ Aplus{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymsigma}\ B{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymsigma}\isanewline
+\isanewline
+\isacommand{axiomatization}\isamarkupfalse%
+\ \isakeyword{where}\isanewline
+\ %
+\isamarkupcmt{A is striclty better than B%
+}\isanewline
+\ P{\isadigit{0}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlfloor}{\isacharparenleft}{\kern0pt}\isactrlbold {\isasymnot}{\isasymodot}{\isacharless}{\kern0pt}\isactrlbold {\isasymnot}A{\isacharbar}{\kern0pt}A\isactrlbold {\isasymor}B{\isachargreater}{\kern0pt}\isactrlbold {\isasymand}{\isasymodot}{\isacharless}{\kern0pt}\isactrlbold {\isasymnot}B{\isacharbar}{\kern0pt}A\isactrlbold {\isasymor}B{\isachargreater}{\kern0pt}{\isacharparenright}{\kern0pt}{\isasymrfloor}{\isachardoublequoteclose}\ \isakeyword{and}\isanewline
+\ %
+\isamarkupcmt{Aplus is at least as good as A%
+}\isanewline
+\ P{\isadigit{1}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlfloor}\isactrlbold {\isasymnot}{\isasymodot}{\isacharless}{\kern0pt}\isactrlbold {\isasymnot}Aplus{\isacharbar}{\kern0pt}A\isactrlbold {\isasymor}Aplus{\isachargreater}{\kern0pt}{\isasymrfloor}{\isachardoublequoteclose}\ \isakeyword{and}\isanewline
+\ %
+\isamarkupcmt{B is strictly better than Aplus%
+}\isanewline
+\ P{\isadigit{2}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlfloor}{\isacharparenleft}{\kern0pt}\isactrlbold {\isasymnot}{\isasymodot}{\isacharless}{\kern0pt}\isactrlbold {\isasymnot}B{\isacharbar}{\kern0pt}Aplus\isactrlbold {\isasymor}B{\isachargreater}{\kern0pt}\ \isactrlbold {\isasymand}\ {\isasymodot}{\isacharless}{\kern0pt}\isactrlbold {\isasymnot}Aplus{\isacharbar}{\kern0pt}Aplus\isactrlbold {\isasymor}B{\isachargreater}{\kern0pt}{\isacharparenright}{\kern0pt}{\isasymrfloor}{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+Sledgehammer finds P0-P2 inconsistent given transitivity of the betterness relation in the models.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{0}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeyword{assumes}\ transitivity\isanewline
+\ \ \isakeyword{shows}\ False\ \isanewline
+\ \ %
+\isamarkupcmt{sledgehammer%
+}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ P{\isadigit{0}}\ P{\isadigit{1}}\ P{\isadigit{2}}\ assms{\isacharparenright}{\kern0pt}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Nitpick shows consistency in the absence of transitivity.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{1}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ True\isanewline
+\ \ \isacommand{nitpick}\isamarkupfalse%
+\ {\isacharbrackleft}{\kern0pt}satisfy{\isacharcomma}{\kern0pt}expect{\isacharequal}{\kern0pt}genuine{\isacharcomma}{\kern0pt}card\ i{\isacharequal}{\kern0pt}{\isadigit{3}}{\isacharbrackright}{\kern0pt}\ \ %
+\isamarkupcmt{model found%
+}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{oops}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Sledgehammer confirms inconsistency in the presence of the interval order condition.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{2}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeyword{assumes}\ reflexivity\ Ferrers\isanewline
+\ \ \isakeyword{shows}\ False\isanewline
+\ \ %
+\isamarkupcmt{sledgehammer%
+}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ P{\isadigit{0}}\ P{\isadigit{1}}\ P{\isadigit{2}}\ assms{\isacharparenleft}{\kern0pt}{\isadigit{2}}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Nitpick shows consistency if transitivity is weakened into acyclicity or quasi-transitivity.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{3}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeyword{assumes}\ loopfree\isanewline
+\ \ \isakeyword{shows}\ True\isanewline
+\ \ \isacommand{nitpick}\isamarkupfalse%
+\ {\isacharbrackleft}{\kern0pt}satisfy{\isacharcomma}{\kern0pt}expect{\isacharequal}{\kern0pt}genuine{\isacharcomma}{\kern0pt}card{\isacharequal}{\kern0pt}{\isadigit{3}}{\isacharbrackright}{\kern0pt}\ \ %
+\isamarkupcmt{model found%
+}\ \isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{oops}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{4}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeyword{assumes}\ Quasitransit\isanewline
+\ \ \isakeyword{shows}\ True\isanewline
+\ \ \isacommand{nitpick}\isamarkupfalse%
+\ {\isacharbrackleft}{\kern0pt}satisfy{\isacharcomma}{\kern0pt}expect{\isacharequal}{\kern0pt}genuine{\isacharcomma}{\kern0pt}card{\isacharequal}{\kern0pt}{\isadigit{4}}{\isacharbrackright}{\kern0pt}\ \ %
+\isamarkupcmt{model found%
+}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{oops}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/GITHUBS/LogiKEy/Deontic-Logics/cube-ddl-afp/mere_addition_opt.thy%:%
+%:%11=1%:%
+%:%23=3%:%
+%:%31=5%:%
+%:%32=5%:%
+%:%33=6%:%
+%:%34=7%:%
+%:%35=8%:%
+%:%42=8%:%
+%:%43=9%:%
+%:%44=10%:%
+%:%45=10%:%
+%:%46=11%:%
+%:%47=12%:%
+%:%48=12%:%
+%:%49=13%:%
+%:%50=13%:%
+%:%51=13%:%
+%:%52=14%:%
+%:%53=15%:%
+%:%54=15%:%
+%:%55=15%:%
+%:%56=16%:%
+%:%57=17%:%
+%:%58=17%:%
+%:%59=17%:%
+%:%60=18%:%
+%:%62=20%:%
+%:%64=22%:%
+%:%65=22%:%
+%:%66=23%:%
+%:%67=24%:%
+%:%68=25%:%
+%:%69=25%:%
+%:%70=25%:%
+%:%73=26%:%
+%:%77=26%:%
+%:%78=26%:%
+%:%87=28%:%
+%:%89=30%:%
+%:%90=30%:%
+%:%91=31%:%
+%:%92=32%:%
+%:%93=32%:%
+%:%94=32%:%
+%:%95=32%:%
+%:%98=33%:%
+%:%102=33%:%
+%:%112=35%:%
+%:%114=37%:%
+%:%115=37%:%
+%:%116=38%:%
+%:%117=39%:%
+%:%118=40%:%
+%:%119=40%:%
+%:%120=40%:%
+%:%123=41%:%
+%:%127=41%:%
+%:%128=41%:%
+%:%137=43%:%
+%:%139=45%:%
+%:%140=45%:%
+%:%141=46%:%
+%:%142=47%:%
+%:%143=48%:%
+%:%144=48%:%
+%:%145=48%:%
+%:%146=48%:%
+%:%149=49%:%
+%:%153=49%:%
+%:%159=49%:%
+%:%162=50%:%
+%:%163=51%:%
+%:%164=51%:%
+%:%165=52%:%
+%:%166=53%:%
+%:%167=54%:%
+%:%168=54%:%
+%:%169=54%:%
+%:%170=54%:%
+%:%173=55%:%
+%:%177=55%:%
+%:%183=55%:%
+%:%188=56%:%
+%:%193=57%:%

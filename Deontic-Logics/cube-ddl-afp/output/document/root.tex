@@ -1,0 +1,93 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{isabelle,isabellesym}
+
+% further packages required for unusual symbols (see also
+% isabellesym.sty), use only when needed
+
+\usepackage{amssymb}
+  %for \<leadsto>, \<box>, \<diamond>, \<sqsupset>, \<mho>, \<Join>,
+  %\<lhd>, \<lesssim>, \<greatersim>, \<lessapprox>, \<greaterapprox>,
+  %\<triangleq>, \<yen>, \<lozenge>
+
+\usepackage{latexsym}
+\usepackage{wasysym}
+
+%\usepackage{eurosym}
+  %for \<euro>
+
+\usepackage[only,bigsqcap,bigparallel,fatsemi,interleave,sslash]{stmaryrd}
+  %for \<Sqinter>, \<Parallel>, \<Zsemi>, \<Parallel>, \<sslash>
+
+%\usepackage{eufrak}
+  %for \<AA> ... \<ZZ>, \<aa> ... \<zz> (also included in amssymb)
+
+%\usepackage{textcomp}
+  %for \<onequarter>, \<onehalf>, \<threequarters>, \<degree>, \<cent>,
+  %\<currency>
+
+% this should be the last package used
+\usepackage{pdfsetup}
+
+% urls in roman style, theory text in math-similar italics
+\urlstyle{rm}
+\isabellestyle{it}
+
+% for uniform font size
+%\renewcommand{\isastyle}{\isastyleminor}
+
+
+\begin{document}
+
+\title{Conditional normative reasoning as a fragment of HOL
+  (Isabelle/HOL dataset)}
+\author{Xavier Parent and Christoph Benzm{\"u}ller}
+\maketitle
+
+\begin{abstract}
+ We present a mechanisation of (preference-based) conditional
+ normative reasoning. Our focus is on \AA qvist's system {\bf E} for
+ conditional obligation and its extensions. We present both a
+ correspondence-theory-focused metalogical study and a use-case
+ application where we study Parfit's repugnant conclusion.
+
+Our contribution is explained in detail in \cite{J68}.  This document presents the corresponding Isabelle/HOL dataset.
+\end{abstract}
+
+\tableofcontents
+
+% sane default for proof documents
+\parindent 0pt\parskip 0.5ex
+
+
+\section{Introduction}
+In this document we present the Isabelle/HOL dataset related to
+\cite{J68}, in which \textit{``We report on the mechanization of (preference-based) conditional
+normative reasoning. Our focus is on \AA qvist's system {\bf E} for
+conditional obligation, and its extensions. Our mechanization is
+achieved via a shallow semantical embedding in Isabelle/HOL.  We
+consider two possible uses of the framework. The first one is as a
+tool for meta-reasoning about the considered logic. We employ it for
+the automated verification of deontic correspondences  (broadly
+conceived) and related matters, analogous to what has been previously
+achieved for the modal logic cube.  The equivalence is automatically
+verified in one direction, leading from the property to the axiom. The
+second use is as a tool for assessing ethical arguments. We provide a
+computer encoding of a well-known paradox (or impossibility theorem)
+in population ethics, Parfit's repugnant conclusion.''} 
+
+% generated text of all theories
+\input{session}
+
+% optional bibliography
+\bibliographystyle{abbrv}
+\bibliography{root}
+
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
+\endinput
+%:%file=~/GITHUBS/LogiKEy/Deontic-Logics/cube-ddl-afp/document/root.tex%:%

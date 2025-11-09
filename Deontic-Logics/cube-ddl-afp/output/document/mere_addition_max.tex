@@ -1,0 +1,530 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{mere{\isacharunderscore}{\kern0pt}addition{\isacharunderscore}{\kern0pt}max}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{Study Mere Addition Paradox: max rule%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\begin{isamarkuptext}%
+This section studies the mere addition scenario \cite{Parfit1984-PARRAP,ddl:T87} when assuming the max rule.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{theory}\isamarkupfalse%
+\ mere{\isacharunderscore}{\kern0pt}addition{\isacharunderscore}{\kern0pt}max\ \ \isanewline
+\isakeyword{imports}\ DDLcube\isanewline
+\isanewline
+\isakeyword{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+\isanewline
+\isanewline
+\isacommand{consts}\isamarkupfalse%
+\ A{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymsigma}\ Aplus{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymsigma}\ B{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymsigma}\ \ i{\isadigit{1}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}i\ i{\isadigit{2}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}i\ i{\isadigit{3}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}i\ i{\isadigit{4}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}i\ i{\isadigit{5}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}i\ i{\isadigit{6}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}i\ i{\isadigit{7}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}i\ i{\isadigit{8}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}i\ \isanewline
+\isanewline
+\isacommand{axiomatization}\isamarkupfalse%
+\ \isakeyword{where}\isanewline
+\ %
+\isamarkupcmt{A is striclty better than B%
+}\isanewline
+\ PP{\isadigit{0}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlfloor}{\isacharparenleft}{\kern0pt}\isactrlbold {\isasymnot}{\isasymcircle}{\isacharless}{\kern0pt}\isactrlbold {\isasymnot}A{\isacharbar}{\kern0pt}A\isactrlbold {\isasymor}B{\isachargreater}{\kern0pt}\isactrlbold {\isasymand}{\isasymcircle}{\isacharless}{\kern0pt}\isactrlbold {\isasymnot}B{\isacharbar}{\kern0pt}A\isactrlbold {\isasymor}B{\isachargreater}{\kern0pt}{\isacharparenright}{\kern0pt}{\isasymrfloor}{\isachardoublequoteclose}\ \isakeyword{and}\isanewline
+\ %
+\isamarkupcmt{Aplus is at least as good as A%
+}\isanewline
+\ PP{\isadigit{1}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlfloor}\isactrlbold {\isasymnot}{\isasymcircle}{\isacharless}{\kern0pt}\isactrlbold {\isasymnot}Aplus{\isacharbar}{\kern0pt}A\isactrlbold {\isasymor}Aplus{\isachargreater}{\kern0pt}{\isasymrfloor}{\isachardoublequoteclose}\ \isakeyword{and}\isanewline
+\ %
+\isamarkupcmt{B is strictly better than Aplus%
+}\isanewline
+\ PP{\isadigit{2}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlfloor}{\isacharparenleft}{\kern0pt}\isactrlbold {\isasymnot}{\isasymcircle}{\isacharless}{\kern0pt}\isactrlbold {\isasymnot}B{\isacharbar}{\kern0pt}Aplus\isactrlbold {\isasymor}B{\isachargreater}{\kern0pt}\ \isactrlbold {\isasymand}\ {\isasymcircle}{\isacharless}{\kern0pt}\isactrlbold {\isasymnot}Aplus{\isacharbar}{\kern0pt}Aplus\isactrlbold {\isasymor}B{\isachargreater}{\kern0pt}{\isacharparenright}{\kern0pt}{\isasymrfloor}{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+Nitpick finds no finite model for the betterness 
+   relation.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{0}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeyword{assumes}\ transitivity\ \ \isanewline
+\ \ \isakeyword{shows}\ True\isanewline
+\ \ \isacommand{nitpick}\isamarkupfalse%
+\ {\isacharbrackleft}{\kern0pt}satisfy{\isacharbrackright}{\kern0pt}\ %
+\isamarkupcmt{no model found%
+}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{oops}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Nitpick shows consistency in the absence of transitivity.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{1}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeyword{shows}\ True\isanewline
+\ \ \isacommand{nitpick}\isamarkupfalse%
+\ {\isacharbrackleft}{\kern0pt}satisfy{\isacharcomma}{\kern0pt}expect{\isacharequal}{\kern0pt}genuine{\isacharcomma}{\kern0pt}card\ i{\isacharequal}{\kern0pt}{\isadigit{3}}{\isacharbrackright}{\kern0pt}\ \ %
+\isamarkupcmt{model found%
+}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{oops}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Sledgehammer confirms inconsistency in the presence of the interval order condition.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{2}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeyword{assumes}\ reflexivity\ \isakeyword{and}\ Ferrers\isanewline
+\ \ \isakeyword{shows}\ False\isanewline
+\ \ %
+\isamarkupcmt{sledgehammer%
+}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ PP{\isadigit{0}}\ PP{\isadigit{1}}\ PP{\isadigit{2}}\ assms{\isacharparenleft}{\kern0pt}{\isadigit{1}}{\isacharparenright}{\kern0pt}\ assms{\isacharparenleft}{\kern0pt}{\isadigit{2}}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Nitpick shows consistency if transitivity is weakened into acyclicity.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{3}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeyword{assumes}\ loopfree\isanewline
+\ \ \isakeyword{shows}\ True\isanewline
+\ \ \isacommand{nitpick}\isamarkupfalse%
+\ {\isacharbrackleft}{\kern0pt}satisfy{\isacharcomma}{\kern0pt}expect{\isacharequal}{\kern0pt}genuine{\isacharcomma}{\kern0pt}card{\isacharequal}{\kern0pt}{\isadigit{3}}{\isacharbrackright}{\kern0pt}\ %
+\isamarkupcmt{model found%
+}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{oops}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Transitivity or quasi-transitivity: Nitpick shows inconsistency assuming a finite model
+   of cardinality (up to) seven (if we provide the exact dependencies); for higher cardinalities 
+   it returns a time out (depending on computing it may prove falsity also for cardinality eight, 
+   etc.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{4}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \ \ \isakeyword{assumes}\isanewline
+\ \ \ \ \ \ transitivity\ \isakeyword{and}\isanewline
+\ \ \ \ \ \ OnlyOnes{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymforall}y{\isachardot}{\kern0pt}\ y{\isacharequal}{\kern0pt}i{\isadigit{1}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}i{\isadigit{2}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}i{\isadigit{3}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}i{\isadigit{4}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}\ i{\isadigit{5}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}\ i{\isadigit{6}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}\ i{\isadigit{7}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeyword{shows}\ False\isanewline
+%
+\isadelimproof
+\ \ \ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ assfactor{\isacharunderscore}{\kern0pt}def\ PP{\isadigit{0}}\ PP{\isadigit{1}}\ PP{\isadigit{2}}\ assms\ \isanewline
+\ \ %
+\isamarkupcmt{sledgehammer()%
+}\ \isanewline
+\ \ %
+\isamarkupcmt{proof found by Sledgehammer, but reconstruction fails%
+}\isanewline
+\ \ \isacommand{oops}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{5}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \ \ \isakeyword{assumes}\isanewline
+\ \ \ \ \ \ Quasitransit\ \isakeyword{and}\isanewline
+\ \ \ \ \ \ OnlyOnes{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymforall}y{\isachardot}{\kern0pt}\ y{\isacharequal}{\kern0pt}i{\isadigit{1}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}i{\isadigit{2}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}i{\isadigit{3}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}i{\isadigit{4}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}\ i{\isadigit{5}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}\ i{\isadigit{6}}\ {\isasymor}\ y{\isacharequal}{\kern0pt}i{\isadigit{7}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeyword{shows}\ False\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{using}\isamarkupfalse%
+\ assfactor{\isacharunderscore}{\kern0pt}def\ PP{\isadigit{0}}\ PP{\isadigit{1}}\ PP{\isadigit{2}}\ assms\isanewline
+\ \ %
+\isamarkupcmt{sledgehammer()%
+}\isanewline
+\ \ %
+\isamarkupcmt{proof found by Sledgehammer, but reconstruction fails%
+}\isanewline
+\ \ \isacommand{oops}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Testing whether infinity holds — infinity is defined as: there is a surjective mapping G from 
+   domain i to a proper subset M of domain i.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{abbreviation}\isamarkupfalse%
+\ {\isachardoublequoteopen}infinity\ {\isasymequiv}\ {\isasymexists}M{\isachardot}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isasymexists}z{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}i{\isachardot}{\kern0pt}\ {\isasymnot}{\isacharparenleft}{\kern0pt}M\ z{\isacharparenright}{\kern0pt}\ {\isasymand}\ {\isacharparenleft}{\kern0pt}{\isasymexists}G{\isachardot}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isasymforall}y{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}i{\isachardot}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isasymexists}x{\isachardot}{\kern0pt}\ {\isacharparenleft}{\kern0pt}M\ x{\isacharparenright}{\kern0pt}\ {\isasymand}\ {\isacharparenleft}{\kern0pt}G\ x{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ y{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ {\isachardoublequoteopen}infinity{\isachardoublequoteclose}\ \isacommand{nitpick}\isamarkupfalse%
+{\isacharbrackleft}{\kern0pt}expect{\isacharequal}{\kern0pt}genuine{\isacharbrackright}{\kern0pt}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{oops}\isamarkupfalse%
+\ %
+\isamarkupcmt{countermodel found%
+}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Now we study infinity under the assumption of (quasi-)transitivity: we do 
+not get any finite countermodels reported anymore.%
+\end{isamarkuptext}\isamarkuptrue%
+\isacommand{lemma}\isamarkupfalse%
+\ \isanewline
+\ \ \isakeyword{assumes}\ transitivity\isanewline
+\ \ \isakeyword{shows}\ \ \ infinity\isanewline
+\ \ %
+\isamarkupcmt{nitpick%
+}\ \ \ %
+\isamarkupcmt{no countermodel found anymore; nitpicks runs out of time%
+}\isanewline
+\ \ %
+\isamarkupcmt{sledgehammer%
+}\ \ %
+\isamarkupcmt{but the provers are still too weak to prove it automatically%
+}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{oops}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{lemma}\isamarkupfalse%
+\ \isanewline
+\ \ \isakeyword{assumes}\ Quasitransit\ \isanewline
+\ \ \isakeyword{shows}\ \ \ infinity\isanewline
+\ \ %
+\isamarkupcmt{nitpick%
+}\ \ \ %
+\isamarkupcmt{no countermodel found anymore; nitpicks runs out of time%
+}\isanewline
+\ \ %
+\isamarkupcmt{sledgehammer%
+}\ \ %
+\isamarkupcmt{but the provers are still too weak to prove it automatically%
+}\isanewline
+%
+\isadelimproof
+\ \ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{oops}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isacommand{theorem}\isamarkupfalse%
+\ T{\isadigit{0}}{\isacharprime}{\kern0pt}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeyword{assumes}\ transitivity\ \isakeyword{and}\ totality\ \ \isanewline
+\ \ \isakeyword{shows}\ False\isanewline
+\ \ %
+\isamarkupcmt{sledgehammer%
+}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isacommand{by}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}metis\ PP{\isadigit{0}}\ PP{\isadigit{1}}\ PP{\isadigit{2}}\ assms{\isacharparenleft}{\kern0pt}{\isadigit{1}}{\isacharparenright}{\kern0pt}\ assms{\isacharparenleft}{\kern0pt}{\isadigit{2}}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\ \isanewline
+%
+\endisadelimproof
+%
+\isadelimtheory
+\ \ \isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isacommand{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/GITHUBS/LogiKEy/Deontic-Logics/cube-ddl-afp/mere_addition_max.thy%:%
+%:%11=1%:%
+%:%23=3%:%
+%:%31=5%:%
+%:%32=5%:%
+%:%33=6%:%
+%:%34=7%:%
+%:%35=8%:%
+%:%42=8%:%
+%:%43=9%:%
+%:%44=10%:%
+%:%45=10%:%
+%:%46=11%:%
+%:%47=12%:%
+%:%48=12%:%
+%:%49=13%:%
+%:%50=13%:%
+%:%51=13%:%
+%:%52=14%:%
+%:%53=15%:%
+%:%54=15%:%
+%:%55=15%:%
+%:%56=16%:%
+%:%57=17%:%
+%:%58=17%:%
+%:%59=17%:%
+%:%60=18%:%
+%:%62=21%:%
+%:%63=22%:%
+%:%65=24%:%
+%:%66=24%:%
+%:%67=25%:%
+%:%68=26%:%
+%:%69=27%:%
+%:%70=27%:%
+%:%71=27%:%
+%:%72=27%:%
+%:%75=28%:%
+%:%79=28%:%
+%:%89=30%:%
+%:%91=32%:%
+%:%92=32%:%
+%:%93=33%:%
+%:%94=34%:%
+%:%95=34%:%
+%:%96=34%:%
+%:%97=34%:%
+%:%100=35%:%
+%:%104=35%:%
+%:%114=37%:%
+%:%116=39%:%
+%:%117=39%:%
+%:%118=40%:%
+%:%119=41%:%
+%:%120=42%:%
+%:%121=42%:%
+%:%122=42%:%
+%:%125=43%:%
+%:%129=43%:%
+%:%130=43%:%
+%:%139=45%:%
+%:%141=47%:%
+%:%142=47%:%
+%:%143=48%:%
+%:%144=49%:%
+%:%145=50%:%
+%:%146=50%:%
+%:%147=50%:%
+%:%148=50%:%
+%:%151=51%:%
+%:%155=51%:%
+%:%165=53%:%
+%:%166=54%:%
+%:%167=55%:%
+%:%168=56%:%
+%:%170=58%:%
+%:%171=58%:%
+%:%172=59%:%
+%:%173=60%:%
+%:%174=61%:%
+%:%175=62%:%
+%:%178=63%:%
+%:%182=63%:%
+%:%183=63%:%
+%:%184=64%:%
+%:%185=64%:%
+%:%186=64%:%
+%:%187=65%:%
+%:%188=65%:%
+%:%189=65%:%
+%:%190=66%:%
+%:%196=66%:%
+%:%199=67%:%
+%:%200=68%:%
+%:%201=68%:%
+%:%202=69%:%
+%:%203=70%:%
+%:%204=71%:%
+%:%205=72%:%
+%:%208=73%:%
+%:%212=73%:%
+%:%213=73%:%
+%:%214=74%:%
+%:%215=74%:%
+%:%216=74%:%
+%:%217=75%:%
+%:%218=75%:%
+%:%219=75%:%
+%:%220=76%:%
+%:%230=78%:%
+%:%231=79%:%
+%:%233=81%:%
+%:%234=81%:%
+%:%235=82%:%
+%:%236=83%:%
+%:%237=83%:%
+%:%238=83%:%
+%:%240=83%:%
+%:%244=83%:%
+%:%245=83%:%
+%:%246=83%:%
+%:%256=85%:%
+%:%257=86%:%
+%:%259=88%:%
+%:%260=88%:%
+%:%261=89%:%
+%:%262=90%:%
+%:%263=91%:%
+%:%264=91%:%
+%:%265=91%:%
+%:%266=91%:%
+%:%267=91%:%
+%:%268=92%:%
+%:%269=92%:%
+%:%270=92%:%
+%:%271=92%:%
+%:%272=92%:%
+%:%275=93%:%
+%:%279=93%:%
+%:%285=93%:%
+%:%288=94%:%
+%:%289=95%:%
+%:%290=95%:%
+%:%291=96%:%
+%:%292=97%:%
+%:%293=98%:%
+%:%294=98%:%
+%:%295=98%:%
+%:%296=98%:%
+%:%297=98%:%
+%:%298=99%:%
+%:%299=99%:%
+%:%300=99%:%
+%:%301=99%:%
+%:%302=99%:%
+%:%305=100%:%
+%:%309=100%:%
+%:%315=100%:%
+%:%318=101%:%
+%:%319=102%:%
+%:%320=102%:%
+%:%321=103%:%
+%:%322=104%:%
+%:%323=105%:%
+%:%324=105%:%
+%:%325=105%:%
+%:%328=106%:%
+%:%332=106%:%
+%:%333=106%:%
+%:%338=106%:%
+%:%343=107%:%
+%:%348=108%:%
