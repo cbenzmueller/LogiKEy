@@ -201,7 +201,7 @@ lemma Abs: "\<lfloor>\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> \<box>\<circ
 lemma Nec: "\<lfloor>\<box>\<psi> \<^bold>\<rightarrow> \<circle><\<psi>|\<phi>>\<rfloor>"  (*sledgehammer*) oops
 lemma Ext: "\<lfloor>\<box>(\<phi>\<^sub>1\<^bold>\<leftrightarrow>\<phi>\<^sub>2) \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>\<^sub>1> \<^bold>\<leftrightarrow> \<circle><\<psi>|\<phi>\<^sub>2>)\<rfloor>"  (*sledgehammer*) oops
 lemma Id: "\<lfloor>\<circle><\<phi>|\<phi>>\<rfloor>"  (*sledgehammer*)  oops
-lemma Sh: "\<lfloor>\<circle><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circle><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" (*sledgehammer*) oops
+lemma Sh: "\<lfloor>\<circle><\<psi>|\<phi>\<^sub>1\<^bold>\<and>\<phi>\<^sub>2> \<^bold>\<rightarrow> \<circle><(\<phi>\<^sub>2\<^bold>\<rightarrow>\<psi>)|\<phi>\<^sub>1>\<rfloor>" (*sledgehammer*) 
 lemma COK:"\<lfloor>\<circle><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2)|\<phi>> \<^bold>\<rightarrow> (\<circle><\<psi>\<^sub>1|\<phi>> \<^bold>\<rightarrow> \<circle><\<psi>\<^sub>2|\<phi>>)\<rfloor>" (*sledgehammer*) oops
    
 
@@ -212,7 +212,7 @@ lemma COK:"\<lfloor>\<circle><(\<psi>\<^sub>1\<^bold>\<rightarrow>\<psi>\<^sub>2
 
 lemma "\<lfloor>\<diamond>\<phi> \<^bold>\<rightarrow> (\<circle><\<psi>|\<phi>> \<^bold>\<rightarrow> P<\<psi>|\<phi>>)\<rfloor>" 
   nitpick [card i=3]  (* counterexample found for card i=3 *) 
-  oops 
+  oops
 
 lemma "\<lfloor>(\<circle><\<psi>|\<phi>> \<^bold>\<and> \<circle><\<chi>|\<phi>>) \<^bold>\<rightarrow> \<circle><\<chi>|\<phi>\<^bold>\<and>\<psi>>\<rfloor>"
   nitpick [card i=3]  (* counterexample found *)

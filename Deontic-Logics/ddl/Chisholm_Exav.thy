@@ -1,0 +1,79 @@
+theory Chisholm_Exav imports E   (*Christoph Benzmüller & Xavier Parent, 2019*)
+
+begin (* Chisholm Example *)
+consts go::\<sigma> tell::\<sigma> kill::\<sigma>
+
+nitpick_params [user_axioms,expect=genuine,show_all,format=2]
+                            (*settings for the model finder*)
+
+(*It ought to be that Jones goes to assist his neighbors.*)
+  abbreviation  "D1 \<equiv> \<^bold>\<circle><go>"  
+(*It ought to be that if Jones goes, then he tells them he is coming.*)
+  abbreviation  "D2 \<equiv> \<circle><tell|go>"  
+(*If Jones doesn't go, then he ought not tell them he is coming.*)
+  abbreviation  "D3 \<equiv> \<circle><\<^bold>\<not>tell|\<^bold>\<not>go>" 
+(*Jones doesn't go. (This is encoded as a locally valid statement.)*)
+  abbreviation  "D4 \<equiv> \<^bold>\<not>go" 
+
+abbreviation "olimitedness \<equiv> (\<forall>\<phi>. (\<exists>x. (\<phi>)x) \<longrightarrow> (\<exists>x. opt<\<phi>>x))"
+abbreviation "reflexivity  \<equiv> (\<forall>x. x R x)"
+abbreviation "transitivity \<equiv> (\<forall>x y z. (x R y \<and> y R z) \<longrightarrow> x R z)"
+abbreviation "totality \<equiv> (\<forall>x y. (x R y \<or> y  R x))"
+
+ (* Consistency *)
+lemma assumes "reflexivity" and "olimitedness" 
+         and "transitivity" and "totality"
+    shows  "\<lfloor>(D1 \<^bold>\<and> D2 \<^bold>\<and> D3)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" 
+    nitpick [satisfy,card=3] (*Consistent? Yes*) 
+
+(*** Chisholm_B ***)
+ (* All-narrow scoping is leading to a dependent set of the axioms.*)
+ lemma "\<lfloor>(D1  \<^bold>\<and> D2n \<^bold>\<and> D3n) \<^bold>\<rightarrow> D4\<rfloor>"   nitpick oops (*countermodel*)
+ lemma "\<lfloor>(D1  \<^bold>\<and> D2n \<^bold>\<and> D4)  \<^bold>\<rightarrow> D3n\<rfloor>"  nitpick oops  (*countermodel*)
+ lemma "\<lfloor>(D1  \<^bold>\<and> D3n \<^bold>\<and> D4)  \<^bold>\<rightarrow> D2n\<rfloor>"  by blast  (*proof*)
+ lemma "\<lfloor>(D2n \<^bold>\<and> D3n \<^bold>\<and> D4)  \<^bold>\<rightarrow> D1\<rfloor>"   nitpick oops (*countermodel*)
+ (* Chisholm_B is thus an inadequate modeling. *)
+
+ (* Consistency *)
+ lemma "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" nitpick [satisfy] oops (*Consistent? Yes*) 
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows False nitpick oops (*Inconsistent? No*)
+ (* Queries *)
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><\<^bold>\<not>tell>\<rfloor>\<^sub>l" using assms by auto (*Should James not tell? Yes*) 
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><tell>\<rfloor>\<^sub>l"  using assms by auto (*Should James tell? Yes*)
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><kill>\<rfloor>\<^sub>l"  using assms by smt (*Should James kill? Yes*)
+
+
+(*** Chisholm_C ***)
+ (* Wide-narrow scoping is leading to independence of the axioms.*)
+ lemma "\<lfloor>(D1  \<^bold>\<and> D2w \<^bold>\<and> D3n) \<^bold>\<rightarrow> D4\<rfloor>"   nitpick oops (*countermodel*)
+ lemma "\<lfloor>(D1  \<^bold>\<and> D2w \<^bold>\<and> D4)  \<^bold>\<rightarrow> D3n\<rfloor>"  nitpick oops (*countermodel*)
+ lemma "\<lfloor>(D1  \<^bold>\<and> D3n \<^bold>\<and> D4)  \<^bold>\<rightarrow> D2w\<rfloor>"  nitpick oops (*countermodel*)
+ lemma "\<lfloor>(D2w \<^bold>\<and> D3n \<^bold>\<and> D4)  \<^bold>\<rightarrow> D1\<rfloor>"   nitpick oops (*countermodel*)
+ (* Chisholm_C is thus fine from this perspective. *)
+
+ (* Consistency *)
+ lemma "\<lfloor>(D1 \<^bold>\<and> D2w \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" nitpick [satisfy] oops (*Consistent? Yes*) 
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2w \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows False nitpick oops (*Inconsistent? No*)
+ (* Queries *)
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2w \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><\<^bold>\<not>tell>\<rfloor>\<^sub>l" using assms by auto (*Should James not tell? Yes*) 
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2w \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><tell>\<rfloor>\<^sub>l"  using assms by blast (*Should James tell? Yes*)
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2w \<^bold>\<and> D3n)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><kill>\<rfloor>\<^sub>l"  using assms by blast (*Should James kill? Yes*)
+
+
+(*** Chisholm_D ***)
+ (* Narrow-wide scoping is leading to a dependent set of the axioms.*)
+ lemma "\<lfloor>(D1  \<^bold>\<and> D2n \<^bold>\<and> D3w) \<^bold>\<rightarrow> D4\<rfloor>"   nitpick oops (*countermodel*)
+ lemma "\<lfloor>(D1  \<^bold>\<and> D2n \<^bold>\<and> D4)  \<^bold>\<rightarrow> D3w\<rfloor>"  by blast  (*proof*)
+ lemma "\<lfloor>(D1  \<^bold>\<and> D3w \<^bold>\<and> D4)  \<^bold>\<rightarrow> D2n\<rfloor>"  by blast  (*proof*)
+ lemma "\<lfloor>(D2n \<^bold>\<and> D3w \<^bold>\<and> D4)  \<^bold>\<rightarrow> D1\<rfloor>"   nitpick oops (*countermodel*)
+ (* Chisholm_D is thus an inadequate modeling. *)
+
+ (* Consistency *)
+ lemma "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3w)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" nitpick [satisfy] oops (*Consistent? Yes*) 
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3w)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows False nitpick oops (*Inconsistent? No*)
+ (* Queries *)
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3w)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><\<^bold>\<not>tell>\<rfloor>\<^sub>l" nitpick oops (*Should James not tell? No*) 
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3w)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><tell>\<rfloor>\<^sub>l"  using assms by blast (*Should James tell? Yes*)
+ lemma assumes "\<lfloor>(D1 \<^bold>\<and> D2n \<^bold>\<and> D3w)\<rfloor> \<and> \<lfloor>D4\<rfloor>\<^sub>l" shows "\<lfloor>\<^bold>\<circle><kill>\<rfloor>\<^sub>l"  nitpick oops (*Should James kill? No*)
+end 
+
