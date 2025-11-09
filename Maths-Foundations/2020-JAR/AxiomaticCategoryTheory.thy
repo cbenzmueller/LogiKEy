@@ -440,9 +440,9 @@ end
 context Axioms_Set_VI_reduced_a
 begin
   lemma S1FromVI: "E(dom x) \<^bold>\<rightarrow> E x" 
-    using A1' A3a A4a by smt
+    using A1' A3a A4a by (smt (verit))
   lemma S2FromVI: "E(cod y) \<^bold>\<rightarrow> E y" 
-    by (smt A1' A3b A4b)
+    by (smt (verit) A1' A3b A4b)
   lemma S3FromVI: "E(x\<cdot>y) \<^bold>\<leftrightarrow> dom x \<simeq> cod y" 
     by (metis A1')
   lemma S4FromVI: "x\<cdot>(y\<cdot>z) \<cong> (x\<cdot>y)\<cdot>z" 

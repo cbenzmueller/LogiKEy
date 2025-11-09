@@ -18,7 +18,7 @@ abbreviation "dF4 w \<equiv> Pursue p \<alpha> w"
 abbreviation "dF5 w \<equiv> Capture d \<alpha> w"
 abbreviation "d_facts \<equiv> dF1 \<^bold>\<and> dF2 \<^bold>\<and> dF3 \<^bold>\<and> dF4 \<^bold>\<and> dF5"
  (*decision for defendant (Pierson) can be proven automatically*)
-theorem Pierson: "d_theory \<longrightarrow> \<lfloor>d_facts \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<prec>For d\<rfloor>" 
+theorem Pierson: "d_theory \<longrightarrow> \<lfloor>d_facts \<^bold>\<rightarrow> \<^bold>\<box>\<^sup>\<prec>For d\<rfloor>"
   by (smt F1 F3 ForAx R2 W5 W7 other.simps tSBR)
  (*we reconstruct the reasoning process leading to the decision for the defendant*)
 theorem Pierson': assumes d_theory and "d_facts w" shows "\<^bold>\<box>\<^sup>\<prec>For d w"

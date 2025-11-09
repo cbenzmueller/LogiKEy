@@ -1,0 +1,17 @@
+session "cube-ddl-afp" = HOL +
+  options [document = pdf, document_output = "output"]
+    (* when running ".../bin/isabelle -D ." the pdf output is
+       written into directory "output" *)
+     
+  theories
+    (* here you need to list the theory files in the intended order *)
+    DDLcube
+    mere_addition_opt
+    mere_addition_max
+    mere_addition_lewis
+    
+  document_files
+    (* the following document files are provided and maintained
+       in directory "documents" *)
+    "root.bib"
+    "root.tex"
