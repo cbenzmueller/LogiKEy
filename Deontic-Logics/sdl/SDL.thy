@@ -40,15 +40,22 @@ abbreviation SDLobl::\<gamma> ("\<^bold>\<circle><_>") where "\<^bold>\<circle><
 (*Consistency confirmed by model finder Nitpick.*) 
 lemma True nitpick[satisfy,user_axioms,expect=genuine] oops
 
-
-assumes seriality
-shows D
+theorem T1:
+  assumes  "(\<forall>w. \<exists>v. w R v)"
+  shows D:  "\<lfloor>\<^bold>\<not> ((OB \<phi>) \<^bold>\<and> (OB (\<^bold>\<not> \<phi>)))\<rfloor>"
   sledgehammer oops
 
 lemma "\<lfloor>(OB \<phi>) \<^bold>\<rightarrow> (OB (OB \<phi>))\<rfloor>"
-  nitpick[falsify,user_axioms,expect=genuine] 
+  nitpick[falsify,user_axioms,expect=genuine] oops
 
- 
+theorem T2:
+  assumes seriality
+  shows "\<lfloor>(OB \<phi>) \<^bold>\<rightarrow> (OB (OB \<phi>))\<rfloor>"
+  nitpick[show_all,falsify,user_axioms,expect=genuine] 
+
+
+
+
 (*Barcan formulas.*) 
  lemma Barcan:         "\<lfloor>(\<^bold>\<forall>d. \<^bold>\<circle><\<phi>(d)>) \<^bold>\<rightarrow> (\<^bold>\<circle><\<^bold>\<forall>d. \<phi>(d)>)\<rfloor>" by simp  
  lemma ConverseBarcan: "\<lfloor>(\<^bold>\<circle><\<^bold>\<forall>d. \<phi>(d)>) \<^bold>\<rightarrow> (\<^bold>\<forall>d. \<^bold>\<circle><\<phi>(d)>)\<rfloor>" by simp 
