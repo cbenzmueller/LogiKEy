@@ -30,11 +30,13 @@ theorem T1:
   shows  "\<lfloor>RC\<rfloor>"
   nitpick [falsify,show_all,card i=3]oops (* countermodel found for card=3*)
 
-abbreviation "SC \<equiv> (\<^bold>\<not>\<circ><\<^bold>\<not>B|Aplus\<^bold>\<or>B>\<^bold>\<and>\<^bold>\<not>\<circ><\<^bold>\<not>Aplus|Aplus\<^bold>\<or>A>\<^bold>\<and>\<^bold>\<not>\<circ><\<^bold>\<not>A|A\<^bold>\<or>B>)\<^bold>\<rightarrow>\<^bold>\<not>\<circ><\<^bold>\<not>B|A\<^bold>\<or>B>" 
+(* abbreviation "SC \<equiv> (\<^bold>\<not>\<circ><\<^bold>\<not>B|Aplus\<^bold>\<or>B>\<^bold>\<and>\<^bold>\<not>\<circ><\<^bold>\<not>Aplus|Aplus\<^bold>\<or>A>\<^bold>\<and>\<^bold>\<not>\<circ><\<^bold>\<not>A|A\<^bold>\<or>B>)\<^bold>\<rightarrow>\<^bold>\<not>\<circ><\<^bold>\<not>B|A\<^bold>\<or>B>" *)
+(* Suzumura consistency for Betterness on formulas  *)
+abbreviation "SC a b aplus \<equiv> (\<^bold>\<not>\<circ><\<^bold>\<not>b|aplus\<^bold>\<or>b>\<^bold>\<and>\<^bold>\<not>\<circ><\<^bold>\<not>aplus|aplus\<^bold>\<or>a>\<^bold>\<and>\<^bold>\<not>\<circ><\<^bold>\<not>a|a\<^bold>\<or>b>)\<^bold>\<rightarrow>\<^bold>\<not>\<circ><\<^bold>\<not>b|a\<^bold>\<or>b>" 
 (* Suzumura consistency for Betterness on formulas  *)
 
 theorem T2a:
-  assumes "\<lfloor>SC\<rfloor>" 
+  assumes "\<lfloor>SC A B Aplus\<rfloor>" 
   shows "\<lfloor>RC\<rfloor>"
   nitpick [falsify,show_all,card i=3] oops (* countermodel found for card=3*)
 
@@ -45,13 +47,13 @@ axiomatization where
 (* L strictly better than A*)
  P4: "\<lfloor>\<^bold>\<not>\<circ><\<^bold>\<not>L|A\<^bold>\<or>L> \<^bold>\<and> \<circ><\<^bold>\<not>A|A\<^bold>\<or>L>\<rfloor>"
 
-abbreviation "SC_2 \<equiv> (\<^bold>\<not>\<circ><\<^bold>\<not>M|L\<^bold>\<or>M>\<^bold>\<and>\<^bold>\<not>\<circ><\<^bold>\<not>L|A\<^bold>\<or>L>\<^bold>\<and>\<^bold>\<not>\<circ><\<^bold>\<not>A|A\<^bold>\<or>M>)\<^bold>\<rightarrow>\<^bold>\<not>\<circ><\<^bold>\<not>M|A\<^bold>\<or>M>" 
+(* abbreviation "SC_2 \<equiv> (\<^bold>\<not>\<circ><\<^bold>\<not>M|L\<^bold>\<or>M>\<^bold>\<and>\<^bold>\<not>\<circ><\<^bold>\<not>L|A\<^bold>\<or>L>\<^bold>\<and>\<^bold>\<not>\<circ><\<^bold>\<not>A|A\<^bold>\<or>M>)\<^bold>\<rightarrow>\<^bold>\<not>\<circ><\<^bold>\<not>M|A\<^bold>\<or>M>" *)
 (* Suzumura consistency for Betterness on formulas  *)
 
 abbreviation "INC_2 \<equiv> (\<circ><\<^bold>\<not>M|A\<^bold>\<or>M>\<^bold>\<and>\<circ><\<^bold>\<not>A|A\<^bold>\<or>M>)" (* A and M are incomparable *)
 
 theorem T2b:
-  assumes "\<lfloor>SC_2\<rfloor>" and "\<lfloor>\<circ><\<^bold>\<not>M|A\<^bold>\<or>M>\<rfloor>"  (* no transitivity*)
+  assumes "\<lfloor>SC A M L\<rfloor>" and "\<lfloor>\<circ><\<^bold>\<not>M|A\<^bold>\<or>M>\<rfloor>"  (* no transitivity*)
   shows "\<lfloor>INC_2\<rfloor>"
   sledgehammer 
   by (smt (verit) P3 P4 assms(1,2)) 
