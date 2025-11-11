@@ -143,7 +143,6 @@ lemma Question8:
   sledgehammer [verbose,overlord]
   nitpick[show_all,format=2] oops
 
-end
 
 lemma Question9:
   assumes
@@ -189,21 +188,28 @@ lemma Question5:
    "\<lfloor>Nilda says (Nilda says (Nilda lives-not-in LiarsStreet))\<rfloor>\<^sub>c\<^sub>w" 
  shows
    "\<lfloor>(Nilda lives-in S1)\<rfloor>\<^sub>c\<^sub>w"    
-  nitpick[satisfy] oops
+   nitpick[satisfy] oops
 
 lemma Question6:
   assumes
    "\<lfloor>Nilda says (Nilda says ((Nilda lives-in LiarsStreet) and (Nilda lives-in TruthtellersRoad)))\<rfloor>" 
  shows
    "\<lfloor>(Nilda lives-in S1)\<rfloor>\<^sub>c\<^sub>w"    
-  nitpick[satisfy] oops
+  nitpick nitpick[satisfy] oops
+
+lemma Question6again:
+  assumes
+   "\<lfloor>Nilda says (Nilda says ((Nilda lives-in LiarsStreet) and (Nilda lives-in TruthtellersRoad)))\<rfloor>" 
+ shows
+   "\<exists>S1. \<lfloor>(Nilda lives-in S1)\<rfloor>\<^sub>c\<^sub>w"    
+  (* sledgehammer *)
+  oops
 
 lemma Question7:
   assumes
    "\<lfloor>Nilda says (Carla says ((Nilda lives-in LiarsStreet) and (Nilda lives-in TruthtellersRoad)))\<rfloor>\<^sub>c\<^sub>w" 
  shows
    "\<lfloor>((Nilda lives-in S1) and (Carla lives-in S2))\<rfloor>\<^sub>c\<^sub>w"    
-  nitpick[satisfy] oops
-
+   nitpick nitpick[satisfy] oops
 
 end
