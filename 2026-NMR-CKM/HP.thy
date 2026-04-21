@@ -184,50 +184,36 @@ lemma cv_reachable_endo [simp]:
   assumes rG: "reachable G" and Vv: "V v"
   shows "cv G v = G v (cv G)"
 proof -
-  from ord_complete Vv have vmem: "v ∈ set ord" by auto
-  then obtain prefix suffix where dec: "ord = prefix @ v # suffix"
-    using split_list by metis
+  from ord_complete Vv obtain prefix suffix where dec: "ord = prefix @ v # suffix"
+    using split_list by (metis mem_Collect_eq)
   let ?cpre = "foldl (step_ctx G) tx prefix"
   have dist: "distinct (prefix @ v # suffix)" using ord_distinct dec by simp
   have vnot: "v ∉ set suffix" using dist by auto
   have cvv: "cv G v = G v ?cpre"
-    using foldl_step_notin[OF vnot]
-    by (simp add: cv_def dec step_ctx_def)
+    using foldl_step_notin[OF vnot] by (simp add: cv_def dec step_ctx_def)
   have agree: "∀x. directly_depends v (G v) x ⟶ ?cpre x = cv G x"
   proof (intro allI impI)
-    fix x
-    assume dx: "directly_depends v (G v) x"
+    fix x assume dx: "directly_depends v (G v) x"
     have topo: "U x ∨ find_index ord x < find_index ord v"
       using reachable_topo_index[OF rG] dx unfolding directly_causes_def by blast
     show "?cpre x = cv G x"
     proof (cases "U x")
-      case True
-      have xnotpref: "x ∉ set prefix"
-        using True ord_complete disjoint_variables dec
-        by (metis append_eq_conv_conj in_set_takeD mem_Collect_eq)
-      then show ?thesis
-        by (simp add: foldl_step_notin True)
+      case True then show ?thesis
+        by (metis cv_exo foldl_step_notin append_eq_conv_conj in_set_takeD
+                  mem_Collect_eq ord_complete dec disjoint_variables)
     next
       case False
-      then have Vx: "V x" using disjoint_variables by blast
-      have xmem: "x ∈ set ord" using ord_complete Vx by auto
-      have idx: "find_index ord x < find_index ord v" using topo False by simp
-      have idxv: "find_index ord v = length prefix"
-        unfolding dec by (rule index_at_split[OF dist])
-      have idx_lt_pref: "find_index ord x < length prefix" using idx idxv by simp
+      have idx_lt_pref: "find_index ord x < length prefix"
+        using topo False dec dist by (metis index_at_split)
       have xpref: "x ∈ set prefix"
-        using find_index_nth_if_mem[OF xmem] idx_lt_pref
-        by (metis nth_mem nth_append_left dec)
-      have xnot: "x ∉ set (v # suffix)" using xpref dist by auto
-      have "cv G x = foldl (step_ctx G) (step_ctx G ?cpre v) suffix x"
-        unfolding cv_def dec by simp
-      also have "... = ?cpre x"
-        using foldl_step_notin xnot by (simp add: step_ctx_def)
-      finally show ?thesis by simp
+        using idx_lt_pref by (metis find_index_nth_if_mem nth_mem nth_append_left
+              dec disjoint_variables False mem_Collect_eq ord_complete)
+      show ?thesis
+        using foldl_step_notin[of x "v # suffix" G "step_ctx G ?cpre v"] xpref dist 
+        by (metis IntI cv_def dec distinct_append empty_iff foldl_append foldl_step_notin)
     qed
   qed
-  show ?thesis
-    using cvv reachable_locality[OF rG] agree by (metis (lifting) ext)
+  show ?thesis using cvv reachable_locality[OF rG] agree by (metis (lifting) ext)
 qed
 
 lemma cv_reachable_fix [simp]:
@@ -235,33 +221,18 @@ lemma cv_reachable_fix [simp]:
   shows "Fix G (cv G)"
   using Fix_iff_solution cv_exo cv_reachable_endo assms by blast
 
+
 lemma fix_agree_endo [simp]:
   assumes rG: "reachable G" and fix1: "Fix G c1" and fix2: "Fix G c2" and Vv: "V v"
   shows "c1 v = c2 v"
   using Vv
 proof (induction v rule: measure_induct_rule[of "λv. find_index ord v"])
   case (less v)
-  have c1v: "c1 v = G v c1" using fix1 less.prems unfolding Fix_iff_solution by blast
-  have c2v: "c2 v = G v c2" using fix2 less.prems unfolding Fix_iff_solution by blast
   have agree: "∀x. directly_depends v (G v) x ⟶ c1 x = c2 x"
-  proof (intro allI impI)
-    fix x
-    assume dx: "directly_depends v (G v) x"
-    have topo: "U x ∨ find_index ord x < find_index ord v"
-      using reachable_topo_index[OF rG] dx unfolding directly_causes_def by blast
-    show "c1 x = c2 x"
-    proof (cases "U x")
-      case True
-      then show ?thesis
-        using fix1 fix2 unfolding Fix_iff_solution by simp
-    next
-      case False
-      then show ?thesis
-        using less.IH[of x] topo disjoint_variables by blast
-    qed
-  qed
+    by (metis less.IH fix1 fix2 reachable_topo_index[OF rG] directly_causes_def disjoint_variables Fix_iff_solution)
   show ?case
-    using c1v c2v reachable_locality[OF rG] agree by (smt (verit, best))
+    using less.prems fix1 fix2 agree reachable_locality[OF rG]
+    unfolding Fix_iff_solution by (smt (verit, best))
 qed
 
 lemma fix_unique [simp]:
