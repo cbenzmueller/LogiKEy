@@ -61,7 +61,10 @@ consts posProp::"\<gamma>\<Rightarrow>\<sigma>" ("\<P>")
 
 (*Definition of God-like: x is God-like if, and only if, it 
   possesses all positive properties*)
-definition G ("\<G>") where "\<G>(x) \<equiv> \<^bold>\<forall>\<Phi>.(\<P>(\<Phi>) \<^bold>\<rightarrow> \<Phi>(x))"
+
+(* definition G ("\<G>") where "\<G>(x) \<equiv> \<^bold>\<forall>\<Phi>.(\<P>(\<Phi>) \<^bold>\<rightarrow> \<Phi>(x))" *)
+
+definition G ("\<G>") where "\<G>(x) \<equiv> \<^bold>\<exists>\<Phi>.(\<P>(\<Phi>) \<^bold>\<and> \<Phi>(x))"
 
 (*Definition of Essence: Property \<Phi> is an essence of x if, and only if, 
  \<Phi> holds for x and \<Phi> necessarily entails every property Z of x*)
@@ -77,7 +80,7 @@ axiomatization where
  (*one of a property or its complement∁is positive*)
  AXIOM1: "\<lfloor>\<^bold>\<forall>\<Phi>. \<P>(\<^bold>\<not>\<Phi>) \<^bold>\<leftrightarrow> \<^bold>\<not>\<P>(\<Phi>)\<rfloor>" and
  (*a property necessarily entailed by a positive property is positive*)
- AXIOM2: "\<lfloor>\<^bold>\<forall>\<Phi> \<Psi>.  \<^bold>\<box>(\<^bold>\<forall>x. \<Phi>(x) \<^bold>\<rightarrow> \<Psi>(x)) \<^bold>\<rightarrow> \<P>(\<Psi>)\<rfloor>" and
+ AXIOM2: "\<lfloor>\<^bold>\<forall>\<Phi> \<Psi>. \<P>(\<Phi>) \<^bold>\<and> \<^bold>\<box>(\<^bold>\<forall>x. \<Phi>(x) \<^bold>\<rightarrow> \<Psi>(x)) \<^bold>\<rightarrow> \<P>(\<Psi>)\<rfloor>" and
  (*\<P> is a logical property and \<G> is is definitely logical as an intersection 
    of positive properties; any such property ought to be positive*)
  AXIOM3: "\<lfloor>\<P>(\<G>)\<rfloor>" and
@@ -87,7 +90,7 @@ axiomatization where
  AXIOM5: "\<lfloor>\<P>(\<N>\<E>)\<rfloor>" 
 
 (*Consistency*) 
-lemma True nitpick[satisfy,show_all,format=2,card=2] oops (*Model found*)
+lemma True nitpick[satisfy,show_all,format=2,card=1] oops (*Model found*)
 lemma False sledgehammer[verbose,overlord] nitpick oops
 
 
@@ -108,21 +111,53 @@ theorem THEOREM1: "\<lfloor>\<^bold>\<forall>\<Phi>. \<P>(\<Phi>) \<^bold>\<righ
  (*possibly there exists a Godlike entity*) 
 theorem CORO: "\<lfloor>\<^bold>\<diamond>(\<^bold>\<exists>x. \<G>(x))\<rfloor>" using THEOREM1 AXIOM3 by simp
  (*being Godlike is an essential property of any Godlike entity*)
-theorem THEOREM2: "\<lfloor>\<^bold>\<forall>x. \<G>(x) \<^bold>\<rightarrow> \<G> Ess. x\<rfloor>" sledgehammer
+theorem THEOREM2: "\<lfloor>\<^bold>\<forall>x. \<G>(x) \<^bold>\<rightarrow> \<G> Ess. x\<rfloor>" 
   by (smt (verit) AXIOM1 AXIOM4 Ess_def G_def)
  (*necessarily there exists a Godlike entity*)
-theorem THEOREM3: "\<lfloor>\<^bold>\<box>(\<^bold>\<exists>x. \<G>(x))\<rfloor>" 
+
+axiomatization where T2: "\<lfloor>\<^bold>\<forall>x. \<G>(x) \<^bold>\<leftrightarrow> \<G> Ess. x\<rfloor>"
+
+lemma True nitpick[satisfy,show_all,format=2,card=1] oops (*Model found*)
+
+theorem THEOREM3: "\<lfloor>\<^bold>\<box>(\<^bold>\<exists>x. \<G>(x))\<rfloor>" nitpick sledgehammer
   by (metis AXIOM5 B' CORO G_def NE_def THEOREM2)
  (*there exists a Godlike entity*)
 theorem THEOREM4: "\<lfloor>\<^bold>\<exists>x. \<G>(x)\<rfloor>" using B' CORO THEOREM3 by blast
 
+
+lemma C0: "\<lfloor>\<P>(\<lambda>x. x\<^bold>=x)\<rfloor>" using AXIOM1 AXIOM2 by blast
  (*self-difference is not a positive property*)
 lemma C1: "\<lfloor>\<^bold>\<not>\<P>(\<lambda>x. x\<^bold>\<noteq>x)\<rfloor>" using AXIOM1 AXIOM2 by blast
  (*absurdum/falsum is not a positive property*)
 lemma C1': "\<lfloor>\<^bold>\<not>\<P>(\<lambda>x. \<^bold>\<bottom>)\<rfloor>" using AXIOM1 AXIOM2 by blast
  (*a property necessarily entailed by a positive property is positive*)
 lemma C2: "\<lfloor>\<^bold>\<forall>\<Phi> \<Psi>. \<P>(\<Phi>) \<^bold>\<and> (\<^bold>\<forall>x. \<Phi>(x) \<^bold>\<rightarrow> \<Psi>(x)) \<^bold>\<rightarrow> \<P>(\<Psi>)\<rfloor>" 
-   by (metis AXIOM1 G_def THEOREM4)
+  by (metis AXIOM1 G_def THEOREM4)
+
+consts red::\<gamma> blue::\<gamma>
+lemma  "\<lfloor>\<P>(red)\<rfloor>" nitpick oops (*Countermodel*)
+lemma  "\<lfloor>\<^bold>\<not>\<P>(red)\<rfloor>" nitpick oops (*Countermodel*)
+
+lemma "\<lfloor>\<P>(red) \<^bold>\<rightarrow> \<P>(\<lambda>x.(red(x)) \<^bold>\<or> (blue(x)))\<rfloor>"
+  by (metis (no_types, lifting) C2) (*Proof found*)
+
+
+lemma assumes 1: "\<lfloor>\<P>(red)\<rfloor>" shows "\<lfloor>\<P>(\<lambda>x. x\<^bold>=x \<^bold>\<and> red x)\<rfloor>" by (simp add: 1) 
+lemma assumes 1: "\<lfloor>\<P>(red)\<rfloor>" shows "\<lfloor>(\<^bold>\<exists>x. x\<^bold>=x \<^bold>\<and> red x)\<rfloor>" by (meson AXIOM1 1 C2)
+
+lemma assumes 1: "\<lfloor>\<P>(red)\<rfloor>" and 2: "\<lfloor>\<^bold>\<not>\<P>(blue)\<rfloor>" shows "\<lfloor>\<P>(\<lambda>x.(red(x)) \<^bold>\<or> (blue(x)))\<rfloor>" 
+  by (metis (no_types, lifting) 1 C2)
+
+lemma assumes 1: "\<lfloor>\<P>(\<lambda>x.(red(x)) \<^bold>\<or> (blue(x)))\<rfloor>" shows  "\<lfloor>\<P>(red) \<^bold>\<or> \<P>(blue)\<rfloor>" 
+  by (metis (no_types, lifting) 1 AXIOM1 AXIOM3 C2 G_def)
+
+
+lemma "\<lfloor>\<^bold>\<forall>\<Phi>. \<P>(\<Phi>) \<^bold>\<rightarrow> (\<^bold>\<exists>x. \<Phi>(x))\<rfloor>" sledgehammer
+  by (metis B' G_def THEOREM1 THEOREM3)
+
+
+lemma "\<lfloor>\<^bold>\<forall>\<Phi>. \<P>(\<Phi>) \<^bold>\<rightarrow> (\<^bold>\<exists>x. \<Phi>(x))\<rfloor>" sledgehammer
+  by (metis B' G_def THEOREM1 THEOREM3)
 
 (*Consistency*) 
 lemma True nitpick[satisfy,show_all,format=2] oops (*Model found*)
@@ -144,6 +179,14 @@ proof - {fix w fix Q
          using 1 by force
  have 3: "(Q \<^bold>\<rightarrow> \<^bold>\<box>Q)(w)" using B' THEOREM3 2 by blast} 
  thus ?thesis by auto qed
+
+
+lemma "\<lfloor>\<^bold>\<forall>\<Phi>. \<^bold>\<box>\<Phi>\<rfloor>" nitpick oops (*countermodel*)
+
+
+definition G' ("\<G>*") where "\<G>*(x) \<equiv> \<^bold>\<exists>\<Phi>.(\<P>(\<Phi>) \<^bold>\<rightarrow> \<Phi>(x))"
+
+lemma "\<lfloor>\<^bold>\<box>(\<^bold>\<exists>x. \<G>*(x))\<rfloor>" by (meson AXIOM1 G'_def)
 
 
 end

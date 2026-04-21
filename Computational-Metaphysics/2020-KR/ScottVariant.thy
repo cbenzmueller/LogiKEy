@@ -20,8 +20,8 @@ proof -
  have T3: "\<lfloor>\<^bold>\<diamond>(\<^bold>\<exists>\<^sup>E \<G>)\<rfloor>" using T1 T2 by simp
  have T4: "\<lfloor>\<^bold>\<forall>\<^sup>Ex.((\<G> x)\<^bold>\<rightarrow>(\<E> \<G> x))\<rfloor>" 
           by (metis A1 A4 G_def E_def)
- have T5: "\<lfloor>(\<^bold>\<diamond>(\<^bold>\<exists>\<^sup>E\<G>))\<^bold>\<rightarrow> \<^bold>\<box>(\<^bold>\<exists>\<^sup>E\<G>)\<rfloor>" 
-          by (smt A5 G_def B' NE_def T4)
+ have T5: "\<lfloor>(\<^bold>\<diamond>(\<^bold>\<exists>\<^sup>E\<G>))\<^bold>\<rightarrow> \<^bold>\<box>(\<^bold>\<exists>\<^sup>E\<G>)\<rfloor>" sledgehammer
+   by (smt (verit, del_insts) A5 B' G_def NE_def T4)
  thus ?thesis using T3 by blast qed
 
 (*Existence of a Godlike entity*)
