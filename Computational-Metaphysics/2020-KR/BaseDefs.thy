@@ -8,7 +8,7 @@ abbreviation a ("_\<^bold>\<sqsubseteq>_") where "X\<^bold>\<sqsubseteq>Y \<equi
 abbreviation b ("_\<Rrightarrow>_") where "X\<Rrightarrow>Y \<equiv> \<^bold>\<box>(X\<^bold>\<sqsubseteq>Y)"
 abbreviation c ("\<P>\<o>\<s>") where "\<P>\<o>\<s> Z \<equiv> \<^bold>\<forall>X.((Z X) \<^bold>\<rightarrow> (\<P> X))"
 abbreviation d ("_\<Sqinter>_") 
-   where "X\<Sqinter>\<Z> \<equiv> \<^bold>\<box>(\<^bold>\<forall>\<^sup>Eu.((X u) \<^bold>\<leftrightarrow> (\<^bold>\<forall>Y.((\<Z> Y) \<^bold>\<rightarrow> (Y u)))))"
+  where "X\<Sqinter>\<Z> \<equiv> \<^bold>\<box>(\<^bold>\<forall>\<^sup>Eu.((X u) \<^bold>\<leftrightarrow> (\<^bold>\<forall>Y.((\<Z> Y) \<^bold>\<rightarrow> (Y u)))))"
 
 (*Definition of Godlike*)
 definition G ("\<G>") 
