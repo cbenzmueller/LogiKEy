@@ -1,3 +1,8 @@
+(* 
+Luca Pasetto, Christoph Benzmüller, and Réka Markovich. 2026.
+Formalizing Mental Privacy in LogiKEy.
+*)
+
 section \<open>Right to Mental Privacy in HOL: Case Study\<close>
 
 theory LMP_case_study
