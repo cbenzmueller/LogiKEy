@@ -1,3 +1,8 @@
+(* 
+Luca Pasetto, Christoph Benzmüller, and Réka Markovich. 2026.
+Formalizing Mental Privacy in LogiKEy.
+*)
+
 section ‹Propositional Multi-Modal Logic in HOL›
 text ‹›
 
