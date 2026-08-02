@@ -22,8 +22,8 @@ text\<open>Two reconstruction decisions, both recorded explicitly. (1) Following
 Isabelle sources accompanying \<^cite>\<open>"PasettoBenzmueller2024"\<close>, the justify locution
 is sign-parametric: \<open>justify[i,\<Phi>\<turnstile>\<^sup>\<ominus>\<phi>]\<close> discharges a negative obligation, as incurred
 by a challenge. (2) The pre-condition of question is generalised so that the
-requested justification matches the SIGN of the addressed speaker's obligation.
-In the original formulation, question requires a POSITIVE obligation and requests
+requested justification matches the \<^emph>\<open>sign\<close> of the addressed speaker's obligation.
+In the original formulation, question requires a \<^emph>\<open>positive\<close> obligation and requests
 a positive justification, which makes it inapplicable to a speaker whose
 obligation arises from a challenge; the corresponding six-locution dialogue in the
 example file of those sources is left open there. The generalisation adopted here

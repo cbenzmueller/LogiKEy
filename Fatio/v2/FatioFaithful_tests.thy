@@ -13,7 +13,7 @@ text\<open>The six-locution Brigade Restaurant dialogue. It appears in the examp
 of the Isabelle sources accompanying \<^cite>\<open>"PasettoBenzmueller2024"\<close>, attributed
 there to the original Fatio paper \<^cite>\<open>"McBurneyParsons2005"\<close>: a asserts that the
 restaurant is good (r); b challenges; a justifies from the newspaper review (n);
-c questions b, whose obligation is NEGATIVE, having arisen from the challenge; b
+c questions b, whose obligation is \<^emph>\<open>negative\<close>, having arisen from the challenge; b
 justifies negatively from the chef change and the quality drop (\<open>m \<and>\<^sup>c s\<close>); finally a
 retracts. In the original sources the corresponding lemma is stated with empty
 world knowledge and left open (with a counterexample noted); here the initial
@@ -43,7 +43,7 @@ steps select the sign of the addressed obligation. The dialogues themselves are
 then assembled from the step lemmas without search.
 This division of labour is deliberate: \<open>sledgehammer\<close> \<^cite>\<open>"Sledgehammer2011"\<close>
 finds no proof for these steps even with generous time limits and the relevant
-facts supplied, because what they require is the choice of a WITNESS over a
+facts supplied, because what they require is the choice of a \<^emph>\<open>witness\<close> over a
 finite datatype (which speaker questioned or challenged, which sign the
 obligation carries) rather than a derivation; automated provers are strong at
 the latter and weak at the former. Supplying the witness explicitly and
@@ -91,7 +91,7 @@ theorem BrigadeDialogue: "FatioCheckRec Brigade [] \<Gamma>\<^sub>B"
 subsection\<open>A further example, constructed here: role reversal with a negative retraction\<close>
 
 text\<open>Seven locutions over two topics: after the exchange on p is settled by b
-RETRACTING ITS NEGATIVE obligation (exercising the \<open>\<ominus>\<close>-clause of retract), the
+retracting its \<^emph>\<open>negative\<close> obligation (exercising the \<open>\<ominus>\<close>-clause of retract), the
 roles reverse and b becomes the asserter of q, questioned by a.\<close>
 
 definition \<Gamma>\<^sub>C :: "BDF\<Rightarrow>bool" where "\<Gamma>\<^sub>C \<equiv> \<lambda>x.
@@ -231,7 +231,7 @@ subsection\<open>A pre-condition that does not follow by membership\<close>
 
 text\<open>In the dialogues above every pre-condition is met because the world knowledge
 literally contains the required formula. Here the required desire is instead
-DERIVED, by the K principle transferred from the shallow embedding (see
+\<^emph>\<open>derived\<close>, by the K principle transferred from the shallow embedding (see
 \<open>ConsK\<D>\<B>\<close> and \<open>DeepK\<B>\<close>): the agent's knowledge contains an implication and its
 antecedent, not the conclusion.\<close>
 

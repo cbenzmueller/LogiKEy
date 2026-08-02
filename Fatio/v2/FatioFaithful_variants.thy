@@ -14,8 +14,8 @@ the difference is visible and checkable rather than merely asserted.\<close>
 subsection\<open>Variant: the original, sign-blind question pre-condition\<close>
 
 text\<open>For comparison, the pre-condition of question exactly as in the sources
-accompanying \<^cite>\<open>"PasettoBenzmueller2024"\<close>: it requires a POSITIVE obligation of
-the addressed speaker and requests a POSITIVE justification. All other clauses
+accompanying \<^cite>\<open>"PasettoBenzmueller2024"\<close>: it requires a \<^emph>\<open>positive\<close> obligation of
+the addressed speaker and requests a \<^emph>\<open>positive\<close> justification. All other clauses
 are unchanged, so the two protocols differ only in this one respect.\<close>
 
 fun PreCondO :: "DOS\<Rightarrow>(BDF\<Rightarrow>bool)\<Rightarrow>FatioL\<Rightarrow>bool" where

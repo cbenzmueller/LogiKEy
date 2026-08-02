@@ -102,12 +102,12 @@ proof -
   qed
 qed
 
-text\<open>The converse fails, and we refute it AT THE LEVEL OF THE CONSEQUENCE RELATION
+text\<open>The converse fails, and we refute it at the level of the \<^emph>\<open>consequence relation\<close>
 used by the protocol, not merely pointwise in one model. The refuting situation
 needs two distinct worlds; since \<open>\<w>\<close> is only assumed non-empty, this is stated as an
 explicit hypothesis. The model was found with \<open>nitpick\<close> \<^cite>\<open>"Nitpick2010"\<close> and is
 verified here, so that the entry does not depend on the model finder at build
-time: both worlds carry a justification, but for DIFFERENT supports, so no single
+time: both worlds carry a justification, but for \<^emph>\<open>different\<close> supports, so no single
 \<open>\<Delta>\<close> works globally.\<close>
 
 lemma ScopeConverse_fails:
@@ -179,7 +179,7 @@ next
 qed
 
 text\<open>Separation of the two shallow backends. Note first a metatheoretical point:
-an UNCONDITIONAL refutation of "minimal validity implies deep validity" is not
+an \<^emph>\<open>unconditional\<close> refutation of "minimal validity implies deep validity" is not
 available, because minimal validity is decided by the uninterpreted constants
 \<open>B\<^sub>0,D\<^sub>0,V\<^sub>0,U\<^sub>0,E\<^sub>0\<close>, about which nothing is provable. The separation is therefore
 stated conditionally, and this conditionality is itself informative: it says that
@@ -209,11 +209,11 @@ qed
 subsection\<open>Modal principles proved shallowly, used deeply\<close>
 
 text\<open>The faithfulness theorems are not decoration: modal principles needed by the
-protocol are proved on the (maximal) SHALLOW side, where the connectives are plain
+protocol are proved on the (maximal) \<^emph>\<open>shallow\<close> side, where the connectives are plain
 HOL definitions and the proofs are immediate, and then transferred to the deep
 syntax over which the protocol is defined. The K principle for beliefs and desires
 is obtained this way and is used in the tests theory to discharge a pre-condition
-that does NOT follow by membership in the world knowledge.\<close>
+that does \<^emph>\<open>not\<close> follow by membership in the world knowledge.\<close>
 
 lemma ShallowK\<B>: "\<Turnstile>\<^sup>s (\<B>\<^sup>s i (\<phi> \<supset>\<^sup>s \<psi>) \<supset>\<^sup>s (\<B>\<^sup>s i \<phi> \<supset>\<^sup>s \<B>\<^sup>s i \<psi>))"
   unfolding ValS_def by auto
@@ -233,7 +233,7 @@ world argument instead of seven parameters - and matches the original
 HOMML/FATIO development; but its faithfulness (Faithful2) is relative to the one
 fixed full-domain model, so dialogue checking on this backend is checking IN a
 situation rather than a logically necessary entailment. Since the protocol layer
-is defined over the DEEP syntax, both backends serve it soundly; this entry uses
+is defined over the \<^emph>\<open>deep\<close> syntax, both backends serve it soundly; this entry uses
 the maximal one for the protocol's consequence relation and provides the minimal
 one, with the bridging theorems above, for lightweight automation and for
 continuity with the original sources.\<close>

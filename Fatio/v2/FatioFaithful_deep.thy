@@ -6,12 +6,12 @@ begin
 
 subsection\<open>Content logic (deeply embedded, propositional)\<close>
 
-text\<open>SCOPE NOTE. The content logic is embedded deeply with a semantics of its own
+text\<open>\<^emph>\<open>Scope note.\<close> The content logic is embedded deeply with a semantics of its own
 (see below), and shallowly in the shallow theory; the two are related by
 \<open>Faithful0a\<close>/\<open>Faithful0b\<close> in the faithfulness theory. Its meaning is moreover tied
 to the BD logic by the injection \<open>{_}\<^sup>d\<close>, which is truth-preserving
 (\<open>MapC_faithful\<close>). The deep/shallow/faithfulness triangle of this entry therefore
-covers BOTH object logics. What the content layer deliberately does not carry is
+covers \<^emph>\<open>both\<close> object logics. What the content layer deliberately does not carry is
 a notion of argumentative support: the entailment atoms of the BD logic are
 interpreted freely, and the optional bridge in the variants theory shows what
 constraining them by content-logic entailment would cost.\<close>
