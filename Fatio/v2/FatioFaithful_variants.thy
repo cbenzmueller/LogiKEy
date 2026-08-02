@@ -53,9 +53,9 @@ every pre-condition.\<close>
 lemma ClashTrivialises:
   assumes "\<Gamma> \<psi>" and "\<Gamma> (\<not>\<^sup>d\<psi>)"
   shows "\<Gamma> \<Turnstile> \<phi>"
-proof (unfold ConsD_def, intro allI impI)
+proof (rule ConsD_I)
   fix W B D V U E w
-  assume sat: "\<forall>\<gamma>. \<Gamma> \<gamma> \<longrightarrow> (\<forall>w:W. \<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<gamma>)" and wW: "W w"
+  assume sat: "\<forall>\<gamma>. \<Gamma> \<gamma> \<longrightarrow> (\<forall>v:W. \<langle>W,B,D,V,U,E\<rangle>,v \<Turnstile>\<^sup>d \<gamma>)" and wW: "W w"
   have "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<psi>" using sat assms(1) wW by blast
   moreover have "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<not>\<^sup>d\<psi>" using sat assms(2) wW by blast
   ultimately show "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<phi>" by simp

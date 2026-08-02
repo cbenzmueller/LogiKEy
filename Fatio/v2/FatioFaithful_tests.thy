@@ -193,19 +193,10 @@ theorem \<Gamma>\<^sub>B_satisfiable:
         \<langle>(\<lambda>w::\<w>. True),(\<lambda>i w v. False),(\<lambda>i w v. False),V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<gamma>)"
   by (auto simp: \<Gamma>\<^sub>B_def)
 
-theorem \<Gamma>\<^sub>B_nonvacuous: "\<not> (\<Gamma>\<^sub>B \<Turnstile> q\<^sup>a)"
+theorem \<Gamma>\<^sub>B_nonvacuous: "\<not> (\<Gamma>\<^sub>B \<Turnstile> q\<^sup>d)"
 proof
-  assume A: "\<Gamma>\<^sub>B \<Turnstile> q\<^sup>a"
-  let ?W = "\<lambda>w::\<w>. True" and ?R = "\<lambda>i w v. False" and ?V = "\<lambda>x w. False"
-  have sat: "\<forall>\<gamma>. \<Gamma>\<^sub>B \<gamma> \<longrightarrow> (\<forall>w:?W. \<langle>?W,?R,?R,?V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<gamma>)"
-    by (auto simp: \<Gamma>\<^sub>B_def)
-  have inst: "(\<forall>\<gamma>. \<Gamma>\<^sub>B \<gamma> \<longrightarrow> (\<forall>w:?W. \<langle>?W,?R,?R,?V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<gamma>))
-              \<longrightarrow> (\<forall>w:?W. \<langle>?W,?R,?R,?V,U,E\<rangle>,w \<Turnstile>\<^sup>d q\<^sup>a)"
-    using A[unfolded ConsD_def,
-            THEN spec[where x="?W"], THEN spec[where x="?R"], THEN spec[where x="?R"],
-            THEN spec[where x="?V"], THEN spec[where x=U], THEN spec[where x=E]] by blast
-  have "\<forall>w:?W. \<langle>?W,?R,?R,?V,U,E\<rangle>,w \<Turnstile>\<^sup>d q\<^sup>a" using inst sat by (rule mp)
-  thus False by simp
+  assume "\<Gamma>\<^sub>B \<Turnstile> q\<^sup>d"
+  from ConsD_E[OF this \<Gamma>\<^sub>B_satisfiable] show False by simp
 qed
 
 subsection\<open>Negative tests: the checker discriminates\<close>

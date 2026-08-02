@@ -53,7 +53,7 @@ the sign-parametric justify locution of the LogiKEy sources \<^cite>\<open>"Logi
 sign of the requested justification.\<close>
 
 datatype BDF =
-    AtmD \<S>            ("_\<^sup>a" [1000] 999)
+    AtmD \<S>            ("_\<^sup>d" [1000] 999)
   | DoneD FatioL       ("Done\<^sup>d")
   | EntD Formula Sign Formula
   | ExJD Speaker Sign Formula
@@ -65,7 +65,7 @@ datatype BDF =
 
 \<comment>\<open>Homomorphic injection of content formulas into the BD language\<close>
 primrec MapC :: "Formula\<Rightarrow>BDF" ("{_}\<^sup>d") where
-  "{\<phi>\<^sup>c}\<^sup>d = \<phi>\<^sup>a" | "{\<not>\<^sup>c\<phi>}\<^sup>d = \<not>\<^sup>d{\<phi>}\<^sup>d" | "{\<phi> \<supset>\<^sup>c \<psi>}\<^sup>d = {\<phi>}\<^sup>d \<supset>\<^sup>d {\<psi>}\<^sup>d"
+  "{\<phi>\<^sup>c}\<^sup>d = \<phi>\<^sup>d" | "{\<not>\<^sup>c\<phi>}\<^sup>d = \<not>\<^sup>d{\<phi>}\<^sup>d" | "{\<phi> \<supset>\<^sup>c \<psi>}\<^sup>d = {\<phi>}\<^sup>d \<supset>\<^sup>d {\<psi>}\<^sup>d"
 
 subsection\<open>Kripke semantics over models \<open>\<langle>W,B,D,V,U,E\<rangle>\<close>\<close>
 
@@ -73,7 +73,7 @@ type_synonym \<U> = "FatioL\<Rightarrow>\<w>\<Rightarrow>bool"              \<co
 type_synonym \<E> = "Formula\<Rightarrow>Sign\<Rightarrow>Formula\<Rightarrow>\<w>\<Rightarrow>bool" \<comment>\<open>entailment-valuations\<close>
 
 primrec RelTD :: "\<W>\<Rightarrow>\<R>\<Rightarrow>\<R>\<Rightarrow>\<V>\<Rightarrow>\<U>\<Rightarrow>\<E>\<Rightarrow>\<w>\<Rightarrow>BDF\<Rightarrow>bool" ("\<langle>_,_,_,_,_,_\<rangle>,_ \<Turnstile>\<^sup>d _") where
-    "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d x\<^sup>a = V x w"
+    "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d x\<^sup>d = V x w"
   | "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d Done\<^sup>d l = U l w"
   | "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d EntD \<Phi> sg \<phi> = E \<Phi> sg \<phi> w"
   | "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d ExJD i sg \<phi> = (\<exists>\<Delta>. U (Justify i \<Delta> sg \<phi>) w)"
@@ -88,6 +88,23 @@ definition ValD ("\<Turnstile>\<^sup>d _") where "\<Turnstile>\<^sup>d \<phi> \<
 definition ConsD :: "(BDF\<Rightarrow>bool)\<Rightarrow>BDF\<Rightarrow>bool" (infix "\<Turnstile>" 25) where
   "\<Gamma> \<Turnstile> \<phi> \<equiv> \<forall>W B D V U E. (\<forall>\<gamma>. \<Gamma> \<gamma> \<longrightarrow> (\<forall>w:W. \<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<gamma>))
                             \<longrightarrow> (\<forall>w:W. \<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<phi>)"
+
+\<comment>\<open>Introduction and elimination rules for validity and consequence. They replace
+   the explicit instantiation chains that would otherwise be needed whenever a
+   validity or a consequence is applied to a concrete model, and they keep the
+   definitions out of the simplifier (unfolding them is expensive).\<close>
+lemma ValD_I: "(\<And>W B D V U E w. W w \<Longrightarrow> \<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<phi>) \<Longrightarrow> \<Turnstile>\<^sup>d \<phi>"
+  unfolding ValD_def by blast
+lemma ValD_E: "\<lbrakk>\<Turnstile>\<^sup>d \<phi>; W w\<rbrakk> \<Longrightarrow> \<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<phi>"
+  unfolding ValD_def by blast
+lemma ConsD_I:
+  "(\<And>W B D V U E w. \<lbrakk>\<forall>\<gamma>. \<Gamma> \<gamma> \<longrightarrow> (\<forall>v:W. \<langle>W,B,D,V,U,E\<rangle>,v \<Turnstile>\<^sup>d \<gamma>); W w\<rbrakk>
+      \<Longrightarrow> \<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<phi>) \<Longrightarrow> \<Gamma> \<Turnstile> \<phi>"
+  unfolding ConsD_def by blast
+lemma ConsD_E:
+  "\<lbrakk>\<Gamma> \<Turnstile> \<phi>; \<forall>\<gamma>. \<Gamma> \<gamma> \<longrightarrow> (\<forall>v:W. \<langle>W,B,D,V,U,E\<rangle>,v \<Turnstile>\<^sup>d \<gamma>); W w\<rbrakk>
+   \<Longrightarrow> \<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<phi>"
+  unfolding ConsD_def by blast
 
 named_theorems DefD
 declare ValC_def[DefD] AndC_def[DefD,simp] OrC_def[DefD,simp] TopC_def[DefD,simp] BotC_def[DefD,simp]

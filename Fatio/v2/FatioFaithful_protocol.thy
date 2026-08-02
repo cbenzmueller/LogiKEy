@@ -81,7 +81,7 @@ definition GammaKeep :: "FatioL\<Rightarrow>(BDF\<Rightarrow>bool)" where
 
 \<comment>\<open>A formula can only be filtered out if it is a negation; all other shapes
    survive every update, which discharges the side conditions automatically.\<close>
-lemma GammaKeep_AtmD[simp]: "GammaKeep l (x\<^sup>a)" unfolding GammaKeep_def by simp
+lemma GammaKeep_AtmD[simp]: "GammaKeep l (x\<^sup>d)" unfolding GammaKeep_def by simp
 lemma GammaKeep_DoneD[simp]: "GammaKeep l (Done\<^sup>d l')" unfolding GammaKeep_def by simp
 lemma GammaKeep_EntD[simp]: "GammaKeep l (EntD \<Phi> sg \<phi>)" unfolding GammaKeep_def by simp
 lemma GammaKeep_ExJD[simp]: "GammaKeep l (ExJD i sg \<phi>)" unfolding GammaKeep_def by simp
@@ -140,9 +140,9 @@ contain it literally. This is used in the tests theory.\<close>
 lemma ConsK:
   assumes X: "\<Gamma> (\<D>\<^sup>d i (\<B>\<^sup>d j X))" and XY: "\<Gamma> (\<D>\<^sup>d i (\<B>\<^sup>d j (X \<supset>\<^sup>d Y)))"
   shows "\<Gamma> \<Turnstile> \<D>\<^sup>d i (\<B>\<^sup>d j Y)"
-proof (unfold ConsD_def, intro allI impI)
+proof (rule ConsD_I)
   fix W B D V U E w
-  assume sat: "\<forall>\<gamma>. \<Gamma> \<gamma> \<longrightarrow> (\<forall>w:W. \<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<gamma>)" and wW: "W w"
+  assume sat: "\<forall>\<gamma>. \<Gamma> \<gamma> \<longrightarrow> (\<forall>v:W. \<langle>W,B,D,V,U,E\<rangle>,v \<Turnstile>\<^sup>d \<gamma>)" and wW: "W w"
   have h1: "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<D>\<^sup>d i (\<B>\<^sup>d j X)" using sat X wW by blast
   have h2: "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<D>\<^sup>d i (\<B>\<^sup>d j (X \<supset>\<^sup>d Y))" using sat XY wW by blast
   show "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d \<D>\<^sup>d i (\<B>\<^sup>d j Y)" using h1 h2 by auto
