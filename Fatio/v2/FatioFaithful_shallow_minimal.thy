@@ -1,4 +1,4 @@
-section\<open>Shallow embedding of the BD logic (minimal)\<close>
+section\<open>Shallow embedding (minimal) of the BD logic\<close>
 
 theory FatioFaithful_shallow_minimal
   imports FatioFaithful_deep
@@ -9,7 +9,7 @@ accessibility relations and valuations are uninterpreted HOL constants, formulas
 are plain truth sets over worlds, and the world domain is implicitly the full type
 \<open>\<w>\<close>. This is the classical SSE style of LogiKEy \<^cite>\<open>"LogiKEy2020"\<close> and the style of the
 original HOMML/FATIO development; the price, made explicit by the faithfulness
-theorems below, is that faithfulness holds relative to full-domain models only.\<close>
+theorems in the faithfulness theory, is that faithfulness holds relative to full-domain models only.\<close>
 
 consts B\<^sub>0::\<R> D\<^sub>0::\<R> V\<^sub>0::\<V> U\<^sub>0::\<U> E\<^sub>0::\<E>
 

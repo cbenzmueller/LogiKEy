@@ -36,8 +36,11 @@ abbreviation "Brigade \<equiv>
 
 text\<open>Automation. Every step obligation is discharged by a single automated call
 (\<open>auto\<close> with the two protocol definitions and \<open>MemberEntails\<close> as an introduction
-rule). The justify steps additionally exhibit their Done-witness in two lines
-beforehand, and the question steps select the sign of the addressed obligation.
+rule; the side conditions created by the state filter are closed by the
+\<open>GammaKeep\<close> simplification rules of the protocol theory). The justify steps
+additionally exhibit their Done-witness in two lines beforehand, and the question
+steps select the sign of the addressed obligation. The dialogues themselves are
+then assembled from the step lemmas without search.
 This division of labour is deliberate: \<open>sledgehammer\<close> \<^cite>\<open>"Sledgehammer2011"\<close>
 finds no proof for these steps even with generous time limits and the relevant
 facts supplied, because what they require is the choice of a WITNESS over a

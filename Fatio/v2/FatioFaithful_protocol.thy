@@ -64,14 +64,13 @@ fun GammaAdd :: "FatioL\<Rightarrow>(BDF\<Rightarrow>bool)" where
        (case sg of \<oplus> \<Rightarrow> (\<lambda>x. \<exists>k j. k\<noteq>i \<and> j\<noteq>i \<and> x = \<B>\<^sup>d k (\<D>\<^sup>d i (\<B>\<^sup>d j (\<not>\<^sup>d(\<B>\<^sup>d i {\<phi>}\<^sup>d)))))
                   | \<ominus> \<Rightarrow> (\<lambda>x. \<exists>k j. k\<noteq>i \<and> j\<noteq>i \<and> x = \<B>\<^sup>d k (\<D>\<^sup>d i (\<B>\<^sup>d j (\<not>\<^sup>d\<not>\<^sup>d(\<B>\<^sup>d i {\<phi>}\<^sup>d))))))"
 
-text\<open>DEVIATION, recorded explicitly: the original implementation keeps only those
-previously held formulas that are consistent with the newly imposed ones, whereas
-the update below is the plain monotone union. The reconstruction thus does not
-model belief revision; after a retraction the world knowledge may contain both the
-formula imposed by the earlier assertion and the one imposed by the retraction.
-These are jointly satisfiable (they concern different agents' modalities), and the
-satisfiability of the world knowledge used in the tests theory is verified there,
-which is what rules out a vacuous consequence relation.\<close>
+text\<open>The state update filters: a previously held formula survives unless the
+locution asserts its negation. The earlier implementation contained such a filter
+but left it deactivated, updating by plain union; that variant, and a theorem
+exhibiting a state on which the two differ, are recorded in the variants theory.
+Filtering matters because an inconsistent state trivialises every pre-condition
+(see \<open>ClashTrivialises\<close> there); independently of it, the satisfiability of the
+world knowledge used in the tests theory is verified there.\<close>
 
 \<comment>\<open>Keep an old formula unless it is the negation of what the locution asserts.
    The earlier formalisation contained this filter but left it deactivated; since

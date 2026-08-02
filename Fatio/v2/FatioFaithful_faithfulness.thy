@@ -29,12 +29,13 @@ theorem Faithful1a:
 theorem Faithful1b: "\<Turnstile>\<^sup>d \<phi> \<longleftrightarrow> \<Turnstile>\<^sup>s \<lparr>\<phi>\<rparr>"
   using Faithful1a unfolding ValD_def ValS_def by auto
 
-subsection\<open>The content layer: faithfulness of its injection\<close>
+subsection\<open>The content layer: faithfulness of its injection into the BD logic\<close>
 
-text\<open>The content logic is not embedded twice over: it is injected into the BD
-language by \<open>MapC\<close>, and that injection is truth-preserving. Hence the content layer
-inherits both shallow embeddings of the BD logic through \<open>MapC\<close>, and its own
-validity notion coincides with BD validity of its image.\<close>
+text\<open>Besides its own deep and shallow embeddings above, the content layer is
+injected into the BD language by \<open>MapC\<close>, and that injection is truth-preserving.
+Hence the content layer additionally inherits both shallow embeddings of the BD
+logic through \<open>MapC\<close>, and its own validity notion coincides with BD validity of
+its image.\<close>
 
 theorem MapC_faithful:
   "\<langle>W,B,D,V,U,E\<rangle>,w \<Turnstile>\<^sup>d {\<phi>}\<^sup>d \<longleftrightarrow> V,w \<Turnstile>\<^sup>c \<phi>"
@@ -61,7 +62,7 @@ lemma SemanticsIdentifies:
   "\<Turnstile>\<^sup>d ({p\<^sup>c \<supset>\<^sup>c p\<^sup>c}\<^sup>d \<supset>\<^sup>d {\<not>\<^sup>c\<bottom>\<^sup>c}\<^sup>d) \<and> \<Turnstile>\<^sup>d ({\<not>\<^sup>c\<bottom>\<^sup>c}\<^sup>d \<supset>\<^sup>d {p\<^sup>c \<supset>\<^sup>c p\<^sup>c}\<^sup>d)"
   unfolding ValD_def by simp
 
-subsection\<open>Working on the shallow side: a transfer principle\<close>
+subsection\<open>Working on the shallow side: the transfer principle\<close>
 
 text\<open>The maximal shallow embedding is not decoration: consequence in the deep
 logic can be established entirely by shallow reasoning and transferred back. The
@@ -205,7 +206,7 @@ next
   qed
 qed
 
-subsection\<open>Working on the shallow side, transferring to the deep side\<close>
+subsection\<open>Modal principles proved shallowly, used deeply\<close>
 
 text\<open>The faithfulness theorems are not decoration: modal principles needed by the
 protocol are proved on the (maximal) SHALLOW side, where the connectives are plain
@@ -237,7 +238,7 @@ the maximal one for the protocol's consequence relation and provides the minimal
 one, with the bridging theorems above, for lightweight automation and for
 continuity with the original sources.\<close>
 
-subsection\<open>Working on the shallow side, transferring by faithfulness\<close>
+subsection\<open>A worked illustration of the transfer\<close>
 
 text\<open>An illustration that the shallow backend is usable, not merely present: the
 K principle for the belief operator is proved with the shallow definitions (one

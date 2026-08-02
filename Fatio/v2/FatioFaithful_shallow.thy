@@ -1,4 +1,4 @@
-section\<open>Shallow embedding of the BD logic (maximal)\<close>
+section\<open>Shallow embedding (maximal) of the content and BD logics\<close>
 
 theory FatioFaithful_shallow
   imports FatioFaithful_deep

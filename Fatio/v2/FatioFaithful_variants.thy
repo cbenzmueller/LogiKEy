@@ -87,7 +87,7 @@ lemma FilteredDropsClash:
   using assms unfolding GammaUpdate_def GammaKeep_def by auto
 
 
-section\<open>Optional bridge: entailment atoms with content\<close>
+subsection\<open>Optional bridge: entailment atoms with content\<close>
 
 
 text\<open>In both the sources and the reconstruction the entailment atoms are
