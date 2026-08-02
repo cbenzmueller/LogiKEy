@@ -81,13 +81,16 @@
 \endisadelimdocument
 %
 \begin{isamarkuptext}%
-Two reconstruction decisions are made explicit here. (1) Following the sources of
-\cite{PasettoBenzmueller2024}, justify is sign-parametric: \isa{justify{\isacharbrackleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymPhi}{\isasymturnstile}\isactrlsup {\isasymominus}{\isasymphi}{\isacharbrackright}{\kern0pt}} discharges a negative
-obligation incurred by a challenge. (2) The pre-condition of question is
-generalised so that the requested justification matches the SIGN of the questioned
-speaker's actual obligation; the Brigade Restaurant dialogue (where c
-questions the challenger b, whose obligation is negative) requires exactly this
-generalisation, which remains tacit in the original sources.%
+Two reconstruction decisions, both recorded explicitly. (1) Following the
+Isabelle sources accompanying \cite{PasettoBenzmueller2024}, the justify locution
+is sign-parametric: \isa{justify{\isacharbrackleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymPhi}{\isasymturnstile}\isactrlsup {\isasymominus}{\isasymphi}{\isacharbrackright}{\kern0pt}} discharges a negative obligation, as incurred
+by a challenge. (2) The pre-condition of question is generalised so that the
+requested justification matches the SIGN of the addressed speaker's obligation.
+In the original formulation, question requires a POSITIVE obligation and requests
+a positive justification, which makes it inapplicable to a speaker whose
+obligation arises from a challenge; the corresponding six-locution dialogue in the
+example file of those sources is left open there. The generalisation adopted here
+makes that dialogue checkable (see the tests theory).%
 \end{isamarkuptext}\isamarkuptrue%
 \isakeywordONE{fun}\isamarkupfalse%
 \ PreCond\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}DOS{\isasymRightarrow}{\isacharparenleft}{\kern0pt}BDF{\isasymRightarrow}bool{\isacharparenright}{\kern0pt}{\isasymRightarrow}FatioL{\isasymRightarrow}bool{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
@@ -128,23 +131,272 @@ generalisation, which remains tacit in the original sources.%
 \ GammaAdd\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}FatioL{\isasymRightarrow}{\isacharparenleft}{\kern0pt}BDF{\isasymRightarrow}bool{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
 \ \ \ \ {\isachardoublequoteopen}GammaAdd\ assert{\isacharbrackleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\isanewline
 \ \ \ \ \ \ \ {\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isachardot}{\kern0pt}\ {\isasymexists}k\ j{\isachardot}{\kern0pt}\ k{\isasymnoteq}i\ {\isasymand}\ j{\isasymnoteq}i\ {\isasymand}\ x\ {\isacharequal}{\kern0pt}\ {\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ i\ {\isacharbraceleft}{\kern0pt}{\isasymphi}{\isacharbraceright}{\kern0pt}\isactrlsup d{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
-\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}GammaAdd\ question{\isacharbrackleft}{\kern0pt}j{\isacharcomma}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isachardot}{\kern0pt}\ False{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
-\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}GammaAdd\ challenge{\isacharbrackleft}{\kern0pt}j{\isacharcomma}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isachardot}{\kern0pt}\ False{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}GammaAdd\ question{\isacharbrackleft}{\kern0pt}j{\isacharcomma}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\isanewline
+\ \ \ \ \ \ \ {\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isachardot}{\kern0pt}\ {\isasymexists}k\ sg{\isachardot}{\kern0pt}\ k{\isasymnoteq}j\ {\isasymand}\ x\ {\isacharequal}{\kern0pt}\ {\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}ExJD\ i\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}GammaAdd\ challenge{\isacharbrackleft}{\kern0pt}j{\isacharcomma}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\isanewline
+\ \ \ \ \ \ \ {\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isachardot}{\kern0pt}\ {\isasymexists}k{\isachardot}{\kern0pt}\ k{\isasymnoteq}j\ {\isasymand}\ {\isacharparenleft}{\kern0pt}x\ {\isacharequal}{\kern0pt}\ {\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}ExJD\ i\ {\isasymoplus}\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isasymor}\ x\ {\isacharequal}{\kern0pt}\ {\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymnot}\isactrlsup d{\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ {\isacharbraceleft}{\kern0pt}{\isasymphi}{\isacharbraceright}{\kern0pt}\isactrlsup d{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
 \ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}GammaAdd\ {\isacharparenleft}{\kern0pt}Justify\ i\ {\isasymPhi}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}\ {\isacharequal}{\kern0pt}\isanewline
 \ \ \ \ \ \ \ {\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isachardot}{\kern0pt}\ {\isasymexists}k\ j{\isachardot}{\kern0pt}\ k{\isasymnoteq}i\ {\isasymand}\ j{\isasymnoteq}i\ {\isasymand}\ x\ {\isacharequal}{\kern0pt}\ {\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}EntD\ {\isasymPhi}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
 \ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}GammaAdd\ retract{\isacharbrackleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharcomma}{\kern0pt}sg{\isacharbrackright}{\kern0pt}\ {\isacharequal}{\kern0pt}\isanewline
 \ \ \ \ \ \ \ {\isacharparenleft}{\kern0pt}case\ sg\ of\ {\isasymoplus}\ {\isasymRightarrow}\ {\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isachardot}{\kern0pt}\ {\isasymexists}k\ j{\isachardot}{\kern0pt}\ k{\isasymnoteq}i\ {\isasymand}\ j{\isasymnoteq}i\ {\isasymand}\ x\ {\isacharequal}{\kern0pt}\ {\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymnot}\isactrlsup d{\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ i\ {\isacharbraceleft}{\kern0pt}{\isasymphi}{\isacharbraceright}{\kern0pt}\isactrlsup d{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}\isanewline
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbar}{\kern0pt}\ {\isasymominus}\ {\isasymRightarrow}\ {\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isachardot}{\kern0pt}\ {\isasymexists}k\ j{\isachardot}{\kern0pt}\ k{\isasymnoteq}i\ {\isasymand}\ j{\isasymnoteq}i\ {\isasymand}\ x\ {\isacharequal}{\kern0pt}\ {\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymnot}\isactrlsup d{\isasymnot}\isactrlsup d{\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ i\ {\isacharbraceleft}{\kern0pt}{\isasymphi}{\isacharbraceright}{\kern0pt}\isactrlsup d{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbar}{\kern0pt}\ {\isasymominus}\ {\isasymRightarrow}\ {\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isachardot}{\kern0pt}\ {\isasymexists}k\ j{\isachardot}{\kern0pt}\ k{\isasymnoteq}i\ {\isasymand}\ j{\isasymnoteq}i\ {\isasymand}\ x\ {\isacharequal}{\kern0pt}\ {\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymnot}\isactrlsup d{\isasymnot}\isactrlsup d{\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ i\ {\isacharbraceleft}{\kern0pt}{\isasymphi}{\isacharbraceright}{\kern0pt}\isactrlsup d{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+DEVIATION, recorded explicitly: the original implementation keeps only those
+previously held formulas that are consistent with the newly imposed ones, whereas
+the update below is the plain monotone union. The reconstruction thus does not
+model belief revision; after a retraction the world knowledge may contain both the
+formula imposed by the earlier assertion and the one imposed by the retraction.
+These are jointly satisfiable (they concern different agents' modalities), and the
+satisfiability of the world knowledge used in the tests theory is verified there,
+which is what rules out a vacuous consequence relation.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{definition}\isamarkupfalse%
+\ GammaKeep\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}FatioL{\isasymRightarrow}{\isacharparenleft}{\kern0pt}BDF{\isasymRightarrow}bool{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
+\ \ {\isachardoublequoteopen}GammaKeep\ l\ {\isasymequiv}\ {\isasymlambda}x{\isachardot}{\kern0pt}\ {\isasymnot}{\isacharparenleft}{\kern0pt}{\isasymexists}y{\isachardot}{\kern0pt}\ {\isacharparenleft}{\kern0pt}GammaAdd\ l\ y\ {\isasymor}\ y\ {\isacharequal}{\kern0pt}\ Done\isactrlsup d\ l{\isacharparenright}{\kern0pt}\ {\isasymand}\ x\ {\isacharequal}{\kern0pt}\ {\isasymnot}\isactrlsup dy{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+%
+\isamarkupcmt{A formula can only be filtered out if it is a negation; all other shapes
+   survive every update, which discharges the side conditions automatically.%
+}\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}AtmD{\isacharbrackleft}{\kern0pt}simp{\isacharbrackright}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}GammaKeep\ l\ {\isacharparenleft}{\kern0pt}x\isactrlsup a{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{unfolding}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}DoneD{\isacharbrackleft}{\kern0pt}simp{\isacharbrackright}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}GammaKeep\ l\ {\isacharparenleft}{\kern0pt}Done\isactrlsup d\ l{\isacharprime}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{unfolding}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}EntD{\isacharbrackleft}{\kern0pt}simp{\isacharbrackright}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}GammaKeep\ l\ {\isacharparenleft}{\kern0pt}EntD\ {\isasymPhi}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{unfolding}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}ExJD{\isacharbrackleft}{\kern0pt}simp{\isacharbrackright}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}GammaKeep\ l\ {\isacharparenleft}{\kern0pt}ExJD\ i\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{unfolding}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}ImpD{\isacharbrackleft}{\kern0pt}simp{\isacharbrackright}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}GammaKeep\ l\ {\isacharparenleft}{\kern0pt}{\isasymphi}\ {\isasymsupset}\isactrlsup d\ {\isasympsi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{unfolding}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}BelD{\isacharbrackleft}{\kern0pt}simp{\isacharbrackright}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}GammaKeep\ l\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ i\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{unfolding}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}DesD{\isacharbrackleft}{\kern0pt}simp{\isacharbrackright}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}GammaKeep\ l\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ i\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{unfolding}\isamarkupfalse%
+\ GammaKeep{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
 \isanewline
 \isakeywordONE{definition}\isamarkupfalse%
 \ GammaUpdate\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}FatioL{\isasymRightarrow}{\isacharparenleft}{\kern0pt}BDF{\isasymRightarrow}bool{\isacharparenright}{\kern0pt}{\isasymRightarrow}{\isacharparenleft}{\kern0pt}BDF{\isasymRightarrow}bool{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
-\ \ {\isachardoublequoteopen}GammaUpdate\ l\ {\isasymGamma}\ {\isasymequiv}\ {\isasymlambda}x{\isachardot}{\kern0pt}\ GammaAdd\ l\ x\ {\isasymor}\ {\isasymGamma}\ x\ {\isasymor}\ x\ {\isacharequal}{\kern0pt}\ Done\isactrlsup d\ l{\isachardoublequoteclose}\isanewline
+\ \ {\isachardoublequoteopen}GammaUpdate\ l\ {\isasymGamma}\ {\isasymequiv}\ {\isasymlambda}x{\isachardot}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isasymGamma}\ x\ {\isasymand}\ GammaKeep\ l\ x{\isacharparenright}{\kern0pt}\ {\isasymor}\ GammaAdd\ l\ x\ {\isasymor}\ x\ {\isacharequal}{\kern0pt}\ Done\isactrlsup d\ l{\isachardoublequoteclose}\isanewline
 \isanewline
+%
+\isamarkupcmt{Checking a dialogue: each locution must meet its pre-condition in the state
+   reached so far, and updates store and world knowledge for the rest.%
+}\isanewline
 \isakeywordONE{fun}\isamarkupfalse%
 \ FatioCheckRec\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}FatioL\ list{\isasymRightarrow}DOS{\isasymRightarrow}{\isacharparenleft}{\kern0pt}BDF{\isasymRightarrow}bool{\isacharparenright}{\kern0pt}{\isasymRightarrow}bool{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
 \ \ \ \ {\isachardoublequoteopen}FatioCheckRec\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ dos\ {\isasymGamma}\ {\isacharequal}{\kern0pt}\ True{\isachardoublequoteclose}\isanewline
 \ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}FatioCheckRec\ {\isacharparenleft}{\kern0pt}l{\isacharhash}{\kern0pt}ls{\isacharparenright}{\kern0pt}\ dos\ {\isasymGamma}\ {\isacharequal}{\kern0pt}\isanewline
 \ \ \ \ \ \ \ {\isacharparenleft}{\kern0pt}PreCond\ dos\ {\isasymGamma}\ l\ {\isasymand}\ FatioCheckRec\ ls\ {\isacharparenleft}{\kern0pt}DOSUpdate\ l\ dos{\isacharparenright}{\kern0pt}\ {\isacharparenleft}{\kern0pt}GammaUpdate\ l\ {\isasymGamma}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{Outstanding requests (Fatio's obligation to respond)%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\begin{isamarkuptext}%
+A question or a challenge obliges the addressee to respond, by justifying or
+by retracting. The earlier formalisation left this to informal combination rules;
+here it is made checkable: \isa{Pending} collects the requests that are still open
+after a sequence of locutions, and a dialogue is \isa{Answered} when none remain.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{fun}\isamarkupfalse%
+\ Pending\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}FatioL\ list{\isasymRightarrow}{\isacharparenleft}{\kern0pt}Speaker\ {\isasymtimes}\ Formula{\isacharparenright}{\kern0pt}\ set{\isasymRightarrow}{\isacharparenleft}{\kern0pt}Speaker\ {\isasymtimes}\ Formula{\isacharparenright}{\kern0pt}\ set{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
+\ \ \ \ {\isachardoublequoteopen}Pending\ {\isacharbrackleft}{\kern0pt}{\isacharbrackright}{\kern0pt}\ P\ {\isacharequal}{\kern0pt}\ P{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}Pending\ {\isacharparenleft}{\kern0pt}assert{\isacharbrackleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}\ {\isacharhash}{\kern0pt}\ ls{\isacharparenright}{\kern0pt}\ P\ {\isacharequal}{\kern0pt}\ Pending\ ls\ P{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}Pending\ {\isacharparenleft}{\kern0pt}question{\isacharbrackleft}{\kern0pt}j{\isacharcomma}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}\ {\isacharhash}{\kern0pt}\ ls{\isacharparenright}{\kern0pt}\ P\ {\isacharequal}{\kern0pt}\ Pending\ ls\ {\isacharparenleft}{\kern0pt}insert\ {\isacharparenleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharparenright}{\kern0pt}\ P{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}Pending\ {\isacharparenleft}{\kern0pt}challenge{\isacharbrackleft}{\kern0pt}j{\isacharcomma}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}\ {\isacharhash}{\kern0pt}\ ls{\isacharparenright}{\kern0pt}\ P\ {\isacharequal}{\kern0pt}\ Pending\ ls\ {\isacharparenleft}{\kern0pt}insert\ {\isacharparenleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharparenright}{\kern0pt}\ P{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}Pending\ {\isacharparenleft}{\kern0pt}Justify\ i\ {\isasymPhi}\ sg\ {\isasymphi}\ {\isacharhash}{\kern0pt}\ ls{\isacharparenright}{\kern0pt}\ P\ {\isacharequal}{\kern0pt}\ Pending\ ls\ {\isacharparenleft}{\kern0pt}P\ {\isacharminus}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isacharparenleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharparenright}{\kern0pt}{\isacharbraceright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}Pending\ {\isacharparenleft}{\kern0pt}retract{\isacharbrackleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharcomma}{\kern0pt}sg{\isacharbrackright}{\kern0pt}\ {\isacharhash}{\kern0pt}\ ls{\isacharparenright}{\kern0pt}\ P\ {\isacharequal}{\kern0pt}\ Pending\ ls\ {\isacharparenleft}{\kern0pt}P\ {\isacharminus}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isacharparenleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharparenright}{\kern0pt}{\isacharbraceright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ Answered\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}FatioL\ list{\isasymRightarrow}bool{\isachardoublequoteclose}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}Answered\ ls\ {\isasymequiv}\ Pending\ ls\ {\isacharbraceleft}{\kern0pt}{\isacharbraceright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isacharbraceright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ PendingRequest{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}Pending\ {\isacharbrackleft}{\kern0pt}question{\isacharbrackleft}{\kern0pt}j{\isacharcomma}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}{\isacharbrackright}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isacharbraceright}{\kern0pt}\ {\isacharequal}{\kern0pt}\ {\isacharbraceleft}{\kern0pt}{\isacharparenleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharparenright}{\kern0pt}{\isacharbraceright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ JustifyAnswers{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}Answered\ {\isacharbrackleft}{\kern0pt}question{\isacharbrackleft}{\kern0pt}j{\isacharcomma}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}{\isacharcomma}{\kern0pt}\ Justify\ i\ {\isasymPhi}\ sg\ {\isasymphi}{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{unfolding}\isamarkupfalse%
+\ Answered{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isakeywordONE{lemma}\isamarkupfalse%
+\ RetractAnswers{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}Answered\ {\isacharbrackleft}{\kern0pt}challenge{\isacharbrackleft}{\kern0pt}j{\isacharcomma}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}{\isacharcomma}{\kern0pt}\ retract{\isacharbrackleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharcomma}{\kern0pt}sg{\isacharbrackright}{\kern0pt}{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{unfolding}\isamarkupfalse%
+\ Answered{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isakeywordONE{lemma}\isamarkupfalse%
+\ UnansweredChallenge{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymnot}\ Answered\ {\isacharbrackleft}{\kern0pt}assert{\isacharbrackleft}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}{\isacharcomma}{\kern0pt}\ challenge{\isacharbrackleft}{\kern0pt}j{\isacharcomma}{\kern0pt}i{\isacharcomma}{\kern0pt}{\isasymphi}{\isacharbrackright}{\kern0pt}{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{unfolding}\isamarkupfalse%
+\ Answered{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
 \isadelimdocument
 %
 \endisadelimdocument
@@ -162,6 +414,28 @@ generalisation, which remains tacit in the original sources.%
 %
 \endisadelimdocument
 \isakeywordONE{lemma}\isamarkupfalse%
+\ ConsK{\isasymD}{\isasymB}{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeywordTWO{assumes}\ {\isachardoublequoteopen}{\isasymGamma}\ {\isasymTurnstile}\ {\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymphi}\ {\isasymsupset}\isactrlsup d\ {\isasympsi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordTWO{and}\ {\isachardoublequoteopen}{\isasymGamma}\ {\isasymTurnstile}\ {\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordTWO{shows}\ {\isachardoublequoteopen}{\isasymGamma}\ {\isasymTurnstile}\ {\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ {\isasympsi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{using}\isamarkupfalse%
+\ assms\ \isakeywordONE{unfolding}\isamarkupfalse%
+\ ConsD{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
 \ MemberEntails{\isacharbrackleft}{\kern0pt}intro{\isacharbrackright}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymGamma}\ {\isasymphi}\ {\isasymLongrightarrow}\ {\isasymGamma}\ {\isasymTurnstile}\ {\isasymphi}{\isachardoublequoteclose}%
 \isadelimproof
 \ %
@@ -170,7 +444,12 @@ generalisation, which remains tacit in the original sources.%
 \isatagproof
 \isakeywordONE{unfolding}\isamarkupfalse%
 \ ConsD{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
-\ blast%
+\ blast\isanewline
+%
+\isamarkupcmt{Consequence is more than membership: the modal K principle for the desire and
+belief operators lets a pre-condition follow from world knowledge that does not
+contain it literally. This is used in the tests theory.%
+}%
 \endisatagproof
 {\isafoldproof}%
 %
@@ -179,9 +458,52 @@ generalisation, which remains tacit in the original sources.%
 \endisadelimproof
 \isanewline
 \isakeywordONE{lemma}\isamarkupfalse%
-\ GammaMono{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymGamma}\ x\ {\isasymLongrightarrow}\ GammaUpdate\ l\ {\isasymGamma}\ x{\isachardoublequoteclose}%
+\ ConsK{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeywordTWO{assumes}\ X{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymGamma}\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ X{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordTWO{and}\ XY{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymGamma}\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}X\ {\isasymsupset}\isactrlsup d\ Y{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordTWO{shows}\ {\isachardoublequoteopen}{\isasymGamma}\ {\isasymTurnstile}\ {\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ Y{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
 \isadelimproof
-\ %
+%
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}unfold\ ConsD{\isacharunderscore}{\kern0pt}def{\isacharcomma}{\kern0pt}\ intro\ allI\ impI{\isacharparenright}{\kern0pt}\isanewline
+\ \ \isakeywordTHREE{fix}\isamarkupfalse%
+\ W\ B\ D\ V\ U\ E\ w\isanewline
+\ \ \isakeywordTHREE{assume}\isamarkupfalse%
+\ sat{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymforall}{\isasymgamma}{\isachardot}{\kern0pt}\ {\isasymGamma}\ {\isasymgamma}\ {\isasymlongrightarrow}\ {\isacharparenleft}{\kern0pt}{\isasymforall}w{\isacharcolon}{\kern0pt}W{\isachardot}{\kern0pt}\ {\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ {\isasymgamma}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordTWO{and}\ wW{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}W\ w{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordONE{have}\isamarkupfalse%
+\ h{\isadigit{1}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ {\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ X{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordONE{using}\isamarkupfalse%
+\ sat\ X\ wW\ \isakeywordONE{by}\isamarkupfalse%
+\ blast\isanewline
+\ \ \isakeywordONE{have}\isamarkupfalse%
+\ h{\isadigit{2}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ {\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}X\ {\isasymsupset}\isactrlsup d\ Y{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordONE{using}\isamarkupfalse%
+\ sat\ XY\ wW\ \isakeywordONE{by}\isamarkupfalse%
+\ blast\isanewline
+\ \ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ {\isasymD}\isactrlsup d\ i\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ j\ Y{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordONE{using}\isamarkupfalse%
+\ h{\isadigit{1}}\ h{\isadigit{2}}\ \isakeywordONE{by}\isamarkupfalse%
+\ auto\isanewline
+\isakeywordONE{qed}\isamarkupfalse%
+\isanewline
+\isanewline
+%
+\isamarkupcmt{With the filter active, monotonicity is conditional: a formula survives an
+   update unless the locution asserts its negation.%
+}%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isakeywordONE{lemma}\isamarkupfalse%
+\ GammaMono{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlbrakk}{\isasymGamma}\ x{\isacharsemicolon}{\kern0pt}\ GammaKeep\ l\ x{\isasymrbrakk}\ {\isasymLongrightarrow}\ GammaUpdate\ l\ {\isasymGamma}\ x{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
 \endisadelimproof
 %
 \isatagproof
@@ -191,9 +513,9 @@ generalisation, which remains tacit in the original sources.%
 {\isafoldproof}%
 %
 \isadelimproof
+\isanewline
 %
 \endisadelimproof
-\isanewline
 \isakeywordONE{lemma}\isamarkupfalse%
 \ DoneRecorded{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}GammaUpdate\ l\ {\isasymGamma}\ {\isacharparenleft}{\kern0pt}Done\isactrlsup d\ l{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}%
 \isadelimproof
@@ -287,68 +609,224 @@ generalisation, which remains tacit in the original sources.%
 %:%88=25%:%
 %:%89=26%:%
 %:%90=27%:%
+%:%91=28%:%
 %:%92=29%:%
-%:%93=29%:%
-%:%94=30%:%
-%:%95=31%:%
+%:%93=30%:%
+%:%95=32%:%
 %:%96=32%:%
+%:%97=33%:%
 %:%98=34%:%
 %:%99=35%:%
+%:%101=37%:%
 %:%102=38%:%
-%:%103=39%:%
+%:%105=41%:%
 %:%106=42%:%
-%:%107=43%:%
-%:%117=48%:%
-%:%127=50%:%
-%:%128=50%:%
-%:%129=51%:%
-%:%130=52%:%
+%:%109=45%:%
+%:%110=46%:%
+%:%120=51%:%
+%:%130=53%:%
 %:%131=53%:%
 %:%132=54%:%
 %:%133=55%:%
 %:%134=56%:%
 %:%135=57%:%
-%:%137=59%:%
+%:%136=58%:%
 %:%138=60%:%
 %:%139=61%:%
-%:%140=61%:%
-%:%141=62%:%
-%:%142=63%:%
-%:%143=64%:%
-%:%144=64%:%
-%:%145=65%:%
-%:%146=66%:%
-%:%154=69%:%
-%:%164=71%:%
-%:%165=71%:%
-%:%167=71%:%
-%:%171=71%:%
-%:%172=71%:%
-%:%173=71%:%
-%:%180=71%:%
-%:%181=72%:%
-%:%182=72%:%
-%:%184=72%:%
-%:%188=72%:%
-%:%189=72%:%
-%:%196=72%:%
-%:%197=73%:%
-%:%198=73%:%
-%:%200=73%:%
-%:%204=73%:%
-%:%205=73%:%
-%:%212=73%:%
-%:%213=74%:%
-%:%214=74%:%
-%:%216=74%:%
-%:%220=74%:%
-%:%221=74%:%
-%:%228=74%:%
-%:%229=75%:%
-%:%230=75%:%
-%:%232=75%:%
-%:%236=75%:%
-%:%237=75%:%
-%:%244=75%:%
-%:%247=76%:%
-%:%252=77%:%
+%:%140=62%:%
+%:%141=63%:%
+%:%145=67%:%
+%:%146=68%:%
+%:%147=69%:%
+%:%148=70%:%
+%:%149=71%:%
+%:%150=72%:%
+%:%151=73%:%
+%:%152=74%:%
+%:%154=80%:%
+%:%155=80%:%
+%:%156=81%:%
+%:%157=82%:%
+%:%159=83%:%
+%:%160=84%:%
+%:%161=84%:%
+%:%162=85%:%
+%:%163=85%:%
+%:%165=85%:%
+%:%169=85%:%
+%:%170=85%:%
+%:%171=85%:%
+%:%178=85%:%
+%:%179=86%:%
+%:%180=86%:%
+%:%182=86%:%
+%:%186=86%:%
+%:%187=86%:%
+%:%188=86%:%
+%:%195=86%:%
+%:%196=87%:%
+%:%197=87%:%
+%:%199=87%:%
+%:%203=87%:%
+%:%204=87%:%
+%:%205=87%:%
+%:%212=87%:%
+%:%213=88%:%
+%:%214=88%:%
+%:%216=88%:%
+%:%220=88%:%
+%:%221=88%:%
+%:%222=88%:%
+%:%229=88%:%
+%:%230=89%:%
+%:%231=89%:%
+%:%233=89%:%
+%:%237=89%:%
+%:%238=89%:%
+%:%239=89%:%
+%:%246=89%:%
+%:%247=90%:%
+%:%248=90%:%
+%:%250=90%:%
+%:%254=90%:%
+%:%255=90%:%
+%:%256=90%:%
+%:%263=90%:%
+%:%264=91%:%
+%:%265=91%:%
+%:%267=91%:%
+%:%271=91%:%
+%:%272=91%:%
+%:%273=91%:%
+%:%280=91%:%
+%:%281=92%:%
+%:%282=93%:%
+%:%283=93%:%
+%:%284=94%:%
+%:%285=95%:%
+%:%287=96%:%
+%:%288=97%:%
+%:%289=97%:%
+%:%290=98%:%
+%:%291=98%:%
+%:%292=99%:%
+%:%293=100%:%
+%:%301=103%:%
+%:%313=105%:%
+%:%314=106%:%
+%:%315=107%:%
+%:%316=108%:%
+%:%318=110%:%
+%:%319=110%:%
+%:%320=111%:%
+%:%321=112%:%
+%:%322=113%:%
+%:%323=114%:%
+%:%324=115%:%
+%:%325=116%:%
+%:%326=117%:%
+%:%327=118%:%
+%:%328=118%:%
+%:%329=119%:%
+%:%330=120%:%
+%:%331=120%:%
+%:%333=120%:%
+%:%337=120%:%
+%:%338=120%:%
+%:%345=120%:%
+%:%346=121%:%
+%:%347=121%:%
+%:%350=122%:%
+%:%354=122%:%
+%:%355=122%:%
+%:%356=122%:%
+%:%361=122%:%
+%:%364=123%:%
+%:%365=123%:%
+%:%368=124%:%
+%:%372=124%:%
+%:%373=124%:%
+%:%374=124%:%
+%:%379=124%:%
+%:%382=125%:%
+%:%383=125%:%
+%:%386=126%:%
+%:%390=126%:%
+%:%391=126%:%
+%:%392=126%:%
+%:%406=128%:%
+%:%416=132%:%
+%:%417=132%:%
+%:%418=133%:%
+%:%419=134%:%
+%:%422=135%:%
+%:%426=135%:%
+%:%427=135%:%
+%:%428=135%:%
+%:%429=135%:%
+%:%434=135%:%
+%:%437=136%:%
+%:%438=137%:%
+%:%439=137%:%
+%:%441=137%:%
+%:%445=137%:%
+%:%446=137%:%
+%:%447=137%:%
+%:%449=138%:%
+%:%450=139%:%
+%:%451=140%:%
+%:%459=140%:%
+%:%460=141%:%
+%:%461=141%:%
+%:%462=142%:%
+%:%463=143%:%
+%:%470=144%:%
+%:%471=144%:%
+%:%472=145%:%
+%:%473=145%:%
+%:%474=146%:%
+%:%475=146%:%
+%:%476=147%:%
+%:%477=147%:%
+%:%478=147%:%
+%:%479=147%:%
+%:%480=148%:%
+%:%481=148%:%
+%:%482=148%:%
+%:%483=148%:%
+%:%484=149%:%
+%:%485=149%:%
+%:%486=149%:%
+%:%487=149%:%
+%:%488=150%:%
+%:%489=150%:%
+%:%490=151%:%
+%:%492=152%:%
+%:%493=153%:%
+%:%499=153%:%
+%:%502=154%:%
+%:%503=154%:%
+%:%506=155%:%
+%:%510=155%:%
+%:%511=155%:%
+%:%516=155%:%
+%:%519=156%:%
+%:%520=156%:%
+%:%522=156%:%
+%:%526=156%:%
+%:%527=156%:%
+%:%534=156%:%
+%:%535=157%:%
+%:%536=157%:%
+%:%538=157%:%
+%:%542=157%:%
+%:%543=157%:%
+%:%550=157%:%
+%:%551=158%:%
+%:%552=158%:%
+%:%554=158%:%
+%:%558=158%:%
+%:%559=158%:%
+%:%566=158%:%
+%:%569=159%:%
+%:%574=160%:%

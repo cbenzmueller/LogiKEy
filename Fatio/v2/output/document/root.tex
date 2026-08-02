@@ -15,25 +15,34 @@ Multi-Agent Argumentation Protocol}
 \maketitle
 
 \begin{abstract}
-We present a rational reconstruction of the LogiKEy implementation of the Fatio
-dialogue protocol for multi-agent dialectical argumentation (Pasetto and
-Benzm\"uller, ARQNL 2024), rebuilt following the methodology of ``Faithful Logic
-Embeddings in HOL --- Deep and Shallow'' (Benzm\"uller 2025; AFP entry
-FaithfulPMLinHOL). The object logic of Fatio's axiomatic semantics --- a
-multi-agent belief/desire logic over a propositional content logic, enriched with
-Done-, entailment- and existential-justification atoms --- is developed both as a
-deep embedding (datatype syntax with a primitive-recursive Kripke semantics over
-models with explicit world domains) and as two shallow embeddings --- a
-\emph{maximal} one (model-parametric truth-set functions) and a \emph{minimal}
-one in the classical LogiKEy style (fixed meta-level constants, truth sets over
-worlds) --- all connected by machine-checked faithfulness theorems, including a
-soundness characterisation relating the two shallow backends and a documented
-comparison of their respective merits. The protocol layer (dialectical obligation stores, pre- and
-post-conditions, recursive dialogue checking) is defined over the deep syntax, so
-that syntactically distinct but semantically equivalent contents are discriminated
-exactly where the protocol requires it; the discrimination and identification
-facts, as well as the quantifier-scope question raised in the ARQNL paper, become
-theorems of the reconstruction.
+We present a rational reconstruction of the LogiKEy implementation
+\cite{PasettoBenzmueller2024} of the Fatio dialogue protocol for multi-agent
+dialectical argumentation \cite{McBurneyParsons2005}, rebuilt following the deep
+and shallow embedding methodology of \cite{Benzmueller2025Faithful} and its formal
+development \cite{FaithfulPMLinHOL-AFP}. Both object logics involved --- the
+propositional content logic and the multi-agent belief/desire logic over it,
+enriched with Done-, entailment- and existential-justification atoms --- are
+developed as deep embeddings (datatype syntax with primitive-recursive semantics
+over models with explicit world domains) and as shallow ones, in a maximal
+(model-parametric) and a minimal (LogiKEy-style) variant \cite{LogiKEy2020}, all
+connected by machine-checked faithfulness theorems.
+
+Because the embeddings are faithful, the protocol layer can be defined over the
+deep syntax while semantic work is done on either shallow backend. This lifts
+three simplifications of the earlier formalisation, each documented and each
+compared with its predecessor by a theorem: the pre-condition of question is
+sign-sensitive, so that a challenger can be questioned; the state update filters
+formulas that clash with what a locution asserts, which matters because an
+inconsistent state trivialises every pre-condition; and question and challenge
+carry the post-conditions the axiomatic semantics prescribes. Fatio's obligation
+to respond becomes checkable, and both dialogues are shown to leave no request
+open. The entry also records what it does not establish: the converse of the
+quantifier-scope implication is refuted at the level of the consequence relation
+by a verified two-world model (found with \emph{nitpick} \cite{Nitpick2010}), the
+world knowledge of both dialogues is shown satisfiable and non-trivial so that no
+check succeeds vacuously, ill-formed dialogues are rejected, and an optional
+bridge relating entailment atoms to the content logic makes precise why
+argumentative support must remain defeasible.
 \end{abstract}
 
 \tableofcontents

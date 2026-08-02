@@ -27,7 +27,11 @@
 \isakeywordONE{theory}\isamarkupfalse%
 \ FatioFaithful{\isacharunderscore}{\kern0pt}shallow\isanewline
 \ \ \isakeywordTWO{imports}\ FatioFaithful{\isacharunderscore}{\kern0pt}deep\isanewline
-\isakeywordTWO{begin}%
+\isakeywordTWO{begin}\isanewline
+\isanewline
+%
+\isamarkupcmt{Shallow embedding of the content logic: truth sets parametric in the valuation%
+}%
 \endisatagtheory
 {\isafoldtheory}%
 %
@@ -35,6 +39,18 @@
 \isanewline
 %
 \endisadelimtheory
+\isakeywordONE{type{\isacharunderscore}{\kern0pt}synonym}\isamarkupfalse%
+\ {\isasymsigma}\isactrlsub c\ {\isacharequal}{\kern0pt}\ {\isachardoublequoteopen}{\isasymV}{\isasymRightarrow}{\isasymw}{\isasymRightarrow}bool{\isachardoublequoteclose}\isanewline
+\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ AtmCS{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isasymS}{\isasymRightarrow}{\isasymsigma}\isactrlsub c{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isacharunderscore}{\kern0pt}\isactrlsup c\isactrlsup s{\isachardoublequoteclose}\ {\isacharbrackleft}{\kern0pt}{\isadigit{1}}{\isadigit{0}}{\isadigit{0}}{\isadigit{0}}{\isacharbrackright}{\kern0pt}\ {\isadigit{9}}{\isadigit{9}}{\isadigit{9}}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}x\isactrlsup c\isactrlsup s\ {\isasymequiv}\ {\isasymlambda}V\ w{\isachardot}{\kern0pt}\ V\ x\ w{\isachardoublequoteclose}\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ NegCS{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isasymsigma}\isactrlsub c{\isasymRightarrow}{\isasymsigma}\isactrlsub c{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymnot}\isactrlsup c\isactrlsup s{\isacharunderscore}{\kern0pt}{\isachardoublequoteclose}\ {\isacharbrackleft}{\kern0pt}{\isadigit{9}}{\isadigit{6}}{\isacharbrackright}{\kern0pt}\ {\isadigit{9}}{\isadigit{6}}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymnot}\isactrlsup c\isactrlsup s{\isasymphi}\ {\isasymequiv}\ {\isasymlambda}V\ w{\isachardot}{\kern0pt}\ {\isasymnot}\ {\isasymphi}\ V\ w{\isachardoublequoteclose}\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ ImpCS{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isasymsigma}\isactrlsub c{\isasymRightarrow}{\isasymsigma}\isactrlsub c{\isasymRightarrow}{\isasymsigma}\isactrlsub c{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}\isakeywordTWO{infixr}\ {\isachardoublequoteopen}{\isasymsupset}\isactrlsup c\isactrlsup s{\isachardoublequoteclose}\ {\isadigit{9}}{\isadigit{3}}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\isanewline
+\ \ {\isachardoublequoteopen}{\isasymphi}\ {\isasymsupset}\isactrlsup c\isactrlsup s\ {\isasympsi}\ {\isasymequiv}\ {\isasymlambda}V\ w{\isachardot}{\kern0pt}\ {\isasymphi}\ V\ w\ {\isasymlongrightarrow}\ {\isasympsi}\ V\ w{\isachardoublequoteclose}\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ ValCS\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup c\isactrlsup s\ {\isacharunderscore}{\kern0pt}{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup c\isactrlsup s\ {\isasymphi}\ {\isasymequiv}\ {\isasymforall}V\ w{\isachardot}{\kern0pt}\ {\isasymphi}\ V\ w{\isachardoublequoteclose}\isanewline
 \isanewline
 \isakeywordONE{type{\isacharunderscore}{\kern0pt}synonym}\isamarkupfalse%
 \ {\isasymsigma}\ {\isacharequal}{\kern0pt}\ {\isachardoublequoteopen}{\isasymW}{\isasymRightarrow}{\isasymR}{\isasymRightarrow}{\isasymR}{\isasymRightarrow}{\isasymV}{\isasymRightarrow}{\isasymU}{\isasymRightarrow}{\isasymE}{\isasymRightarrow}{\isasymw}{\isasymRightarrow}bool{\isachardoublequoteclose}\isanewline
@@ -71,7 +87,8 @@
 \isakeywordONE{declare}\isamarkupfalse%
 \ AtmS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ DoneS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ EntS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ ExJS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\isanewline
 \ \ NegS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ ImpS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ BelS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ DesS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\isanewline
-\ \ RelTS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ ValS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharbrackright}{\kern0pt}\isanewline
+\ \ RelTS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ ValS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharbrackright}{\kern0pt}\ AtmCS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ NegCS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\isanewline
+\ \ ImpCS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ ValCS{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefS{\isacharbrackright}{\kern0pt}\isanewline
 %
 \isadelimtheory
 \isanewline
@@ -96,43 +113,58 @@
 %:%28=3%:%
 %:%29=4%:%
 %:%30=5%:%
-%:%35=5%:%
-%:%38=6%:%
+%:%31=6%:%
+%:%33=7%:%
 %:%39=7%:%
-%:%40=7%:%
-%:%41=8%:%
-%:%42=9%:%
-%:%43=9%:%
-%:%44=10%:%
+%:%42=8%:%
+%:%43=8%:%
+%:%44=9%:%
 %:%45=10%:%
-%:%46=11%:%
+%:%46=10%:%
 %:%47=11%:%
-%:%48=12%:%
+%:%48=11%:%
 %:%49=12%:%
-%:%50=13%:%
-%:%51=14%:%
+%:%50=12%:%
+%:%51=13%:%
 %:%52=14%:%
-%:%53=15%:%
+%:%53=14%:%
 %:%54=15%:%
 %:%55=16%:%
-%:%56=17%:%
+%:%56=16%:%
 %:%57=17%:%
 %:%58=18%:%
-%:%59=19%:%
+%:%59=18%:%
 %:%60=19%:%
-%:%61=20%:%
-%:%62=21%:%
-%:%63=22%:%
-%:%64=22%:%
-%:%65=23%:%
-%:%66=24%:%
-%:%67=24%:%
-%:%68=25%:%
-%:%69=26%:%
-%:%70=26%:%
-%:%71=27%:%
-%:%72=27%:%
-%:%73=28%:%
-%:%74=29%:%
-%:%77=30%:%
-%:%82=31%:%
+%:%61=19%:%
+%:%62=20%:%
+%:%63=20%:%
+%:%64=21%:%
+%:%65=21%:%
+%:%66=22%:%
+%:%67=23%:%
+%:%68=23%:%
+%:%69=24%:%
+%:%70=24%:%
+%:%71=25%:%
+%:%72=26%:%
+%:%73=26%:%
+%:%74=27%:%
+%:%75=28%:%
+%:%76=28%:%
+%:%77=29%:%
+%:%78=30%:%
+%:%79=31%:%
+%:%80=31%:%
+%:%81=32%:%
+%:%82=33%:%
+%:%83=33%:%
+%:%84=34%:%
+%:%85=35%:%
+%:%86=35%:%
+%:%87=36%:%
+%:%88=36%:%
+%:%89=37%:%
+%:%90=38%:%
+%:%91=39%:%
+%:%94=40%:%
+%:%99=41%:%

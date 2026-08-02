@@ -51,6 +51,15 @@
 \isadelimdocument
 %
 \endisadelimdocument
+%
+\begin{isamarkuptext}%
+SCOPE NOTE. The content logic is embedded deeply as SYNTAX only: it has no
+semantics of its own here. Its meaning is fixed exclusively by the injection
+\isa{{\isacharbraceleft}{\kern0pt}{\isacharunderscore}{\kern0pt}{\isacharbraceright}{\kern0pt}\isactrlsup d} into the BD logic below, whose semantics is given in full. Consequently the
+deep/shallow/faithfulness triangle of this entry concerns the BD logic; for the
+content layer only the syntactic discrimination results are claimed (see the
+faithfulness theory).%
+\end{isamarkuptext}\isamarkuptrue%
 \isakeywordONE{datatype}\isamarkupfalse%
 \ Formula\ {\isacharequal}{\kern0pt}\ AtmC\ {\isasymS}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isacharunderscore}{\kern0pt}\isactrlsup c{\isachardoublequoteclose}\ {\isacharbrackleft}{\kern0pt}{\isadigit{1}}{\isadigit{0}}{\isadigit{0}}{\isadigit{0}}{\isacharbrackright}{\kern0pt}\ {\isadigit{9}}{\isadigit{9}}{\isadigit{9}}{\isacharparenright}{\kern0pt}\ {\isacharbar}{\kern0pt}\ NegC\ Formula\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymnot}\isactrlsup c{\isacharunderscore}{\kern0pt}{\isachardoublequoteclose}\ {\isacharbrackleft}{\kern0pt}{\isadigit{9}}{\isadigit{6}}{\isacharbrackright}{\kern0pt}\ {\isadigit{9}}{\isadigit{6}}{\isacharparenright}{\kern0pt}\isanewline
 \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\isacharbar}{\kern0pt}\ ImpC\ Formula\ Formula\ {\isacharparenleft}{\kern0pt}\isakeywordTWO{infixr}\ {\isachardoublequoteopen}{\isasymsupset}\isactrlsup c{\isachardoublequoteclose}\ {\isadigit{9}}{\isadigit{3}}{\isacharparenright}{\kern0pt}\isanewline
@@ -59,9 +68,21 @@
 \isakeywordONE{definition}\isamarkupfalse%
 \ OrC\ \ {\isacharparenleft}{\kern0pt}\isakeywordTWO{infixr}\ {\isachardoublequoteopen}{\isasymor}\isactrlsup c{\isachardoublequoteclose}\ {\isadigit{9}}{\isadigit{2}}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymphi}\ {\isasymor}\isactrlsup c\ {\isasympsi}\ {\isasymequiv}\ {\isasymnot}\isactrlsup c{\isasymphi}\ {\isasymsupset}\isactrlsup c\ {\isasympsi}{\isachardoublequoteclose}\isanewline
 \isakeywordONE{definition}\isamarkupfalse%
-\ TopC\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymtop}\isactrlsup c{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymtop}\isactrlsup c\ {\isasymequiv}\ p\isactrlsup c\ {\isasymsupset}\isactrlsup c\ p\isactrlsup c{\isachardoublequoteclose}\isanewline
+\ TopC\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymtop}\isactrlsup c{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymtop}\isactrlsup c\ {\isasymequiv}\ {\isacharparenleft}{\kern0pt}SOME\ x{\isachardot}{\kern0pt}\ True{\isacharparenright}{\kern0pt}\isactrlsup c\ {\isasymsupset}\isactrlsup c\ {\isacharparenleft}{\kern0pt}SOME\ x{\isachardot}{\kern0pt}\ True{\isacharparenright}{\kern0pt}\isactrlsup c{\isachardoublequoteclose}\isanewline
 \isakeywordONE{definition}\isamarkupfalse%
-\ BotC\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymbottom}\isactrlsup c{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymbottom}\isactrlsup c\ {\isasymequiv}\ {\isasymnot}\isactrlsup c{\isasymtop}\isactrlsup c{\isachardoublequoteclose}%
+\ BotC\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymbottom}\isactrlsup c{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymbottom}\isactrlsup c\ {\isasymequiv}\ {\isasymnot}\isactrlsup c{\isasymtop}\isactrlsup c{\isachardoublequoteclose}\isanewline
+\isanewline
+%
+\isamarkupcmt{Kripke-style (here: valuation-based) semantics of the content logic%
+}\isanewline
+\isakeywordONE{primrec}\isamarkupfalse%
+\ RelTC\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymV}{\isasymRightarrow}{\isasymw}{\isasymRightarrow}Formula{\isasymRightarrow}bool{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isacharunderscore}{\kern0pt}{\isacharcomma}{\kern0pt}{\isacharunderscore}{\kern0pt}\ {\isasymTurnstile}\isactrlsup c\ {\isacharunderscore}{\kern0pt}{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\isanewline
+\ \ \ \ {\isachardoublequoteopen}V{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup c\ x\isactrlsup c\ {\isacharequal}{\kern0pt}\ V\ x\ w{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}V{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup c\ {\isasymnot}\isactrlsup c{\isasymphi}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isasymnot}\ V{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup c\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}V{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup c\ {\isasymphi}\ {\isasymsupset}\isactrlsup c\ {\isasympsi}\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}V{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup c\ {\isasymphi}\ {\isasymlongrightarrow}\ V{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup c\ {\isasympsi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ ValC\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup c\ {\isacharunderscore}{\kern0pt}{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup c\ {\isasymphi}\ {\isasymequiv}\ {\isasymforall}V\ w{\isachardot}{\kern0pt}\ V{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup c\ {\isasymphi}{\isachardoublequoteclose}%
 \isadelimdocument
 %
 \endisadelimdocument
@@ -125,10 +146,6 @@ sign of the requested justification.%
 \ \ {\isacharbar}{\kern0pt}\ BelD\ Speaker\ BDF\ \ \ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymB}\isactrlsup d{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\isanewline
 \ \ {\isacharbar}{\kern0pt}\ DesD\ Speaker\ BDF\ \ \ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymD}\isactrlsup d{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\isanewline
 \isanewline
-\isakeywordONE{definition}\isamarkupfalse%
-\ AndD\ {\isacharparenleft}{\kern0pt}\isakeywordTWO{infixr}\ {\isachardoublequoteopen}{\isasymand}\isactrlsup d{\isachardoublequoteclose}\ {\isadigit{9}}{\isadigit{5}}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymphi}\ {\isasymand}\isactrlsup d\ {\isasympsi}\ {\isasymequiv}\ {\isasymnot}\isactrlsup d{\isacharparenleft}{\kern0pt}{\isasymphi}\ {\isasymsupset}\isactrlsup d\ {\isasymnot}\isactrlsup d{\isasympsi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
-\isakeywordONE{definition}\isamarkupfalse%
-\ OrD\ \ {\isacharparenleft}{\kern0pt}\isakeywordTWO{infixr}\ {\isachardoublequoteopen}{\isasymor}\isactrlsup d{\isachardoublequoteclose}\ {\isadigit{9}}{\isadigit{2}}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymphi}\ {\isasymor}\isactrlsup d\ {\isasympsi}\ {\isasymequiv}\ {\isasymnot}\isactrlsup d{\isasymphi}\ {\isasymsupset}\isactrlsup d\ {\isasympsi}{\isachardoublequoteclose}\isanewline
 \isanewline
 %
 \isamarkupcmt{Homomorphic injection of content formulas into the BD language%
@@ -186,8 +203,8 @@ sign of the requested justification.%
 \isakeywordONE{named{\isacharunderscore}{\kern0pt}theorems}\isamarkupfalse%
 \ DefD\isanewline
 \isakeywordONE{declare}\isamarkupfalse%
-\ AndC{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ OrC{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ TopC{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ BotC{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\isanewline
-\ \ AndD{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ OrD{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ ValD{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharbrackright}{\kern0pt}\ ConsD{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharbrackright}{\kern0pt}\isanewline
+\ ValC{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharbrackright}{\kern0pt}\ AndC{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ OrC{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ TopC{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ BotC{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\isanewline
+\ \ ValD{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharbrackright}{\kern0pt}\ ConsD{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharbrackright}{\kern0pt}\ ValC{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefD{\isacharbrackright}{\kern0pt}\isanewline
 %
 \isadelimtheory
 \isanewline
@@ -213,82 +230,79 @@ sign of the requested justification.%
 %:%29=4%:%
 %:%30=5%:%
 %:%44=7%:%
-%:%54=9%:%
-%:%55=9%:%
-%:%56=10%:%
-%:%57=11%:%
+%:%56=9%:%
+%:%57=10%:%
 %:%58=11%:%
 %:%59=12%:%
-%:%60=12%:%
-%:%61=13%:%
-%:%62=13%:%
-%:%63=14%:%
-%:%64=14%:%
-%:%71=16%:%
-%:%81=18%:%
-%:%82=18%:%
-%:%83=19%:%
-%:%84=19%:%
-%:%85=20%:%
-%:%86=21%:%
-%:%87=22%:%
-%:%88=23%:%
-%:%89=24%:%
-%:%96=26%:%
-%:%108=28%:%
-%:%109=29%:%
-%:%110=30%:%
-%:%111=31%:%
-%:%112=32%:%
-%:%113=33%:%
-%:%114=34%:%
-%:%115=35%:%
-%:%117=37%:%
-%:%118=37%:%
-%:%119=38%:%
-%:%120=39%:%
-%:%121=40%:%
-%:%122=41%:%
-%:%123=42%:%
-%:%124=43%:%
-%:%125=44%:%
-%:%126=45%:%
-%:%127=46%:%
-%:%128=47%:%
-%:%129=47%:%
-%:%130=48%:%
-%:%131=48%:%
-%:%132=49%:%
-%:%134=50%:%
-%:%135=50%:%
-%:%136=51%:%
-%:%137=51%:%
+%:%60=13%:%
+%:%61=14%:%
+%:%63=16%:%
+%:%64=16%:%
+%:%65=17%:%
+%:%66=18%:%
+%:%67=18%:%
+%:%68=19%:%
+%:%69=19%:%
+%:%70=20%:%
+%:%71=20%:%
+%:%72=21%:%
+%:%73=21%:%
+%:%74=22%:%
+%:%76=23%:%
+%:%77=23%:%
+%:%78=24%:%
+%:%79=24%:%
+%:%80=25%:%
+%:%81=26%:%
+%:%82=27%:%
+%:%83=28%:%
+%:%84=29%:%
+%:%85=29%:%
+%:%92=31%:%
+%:%102=33%:%
+%:%103=33%:%
+%:%104=34%:%
+%:%105=34%:%
+%:%106=35%:%
+%:%107=36%:%
+%:%108=37%:%
+%:%109=38%:%
+%:%110=39%:%
+%:%117=41%:%
+%:%129=43%:%
+%:%130=44%:%
+%:%131=45%:%
+%:%132=46%:%
+%:%133=47%:%
+%:%134=48%:%
+%:%135=49%:%
+%:%136=50%:%
 %:%138=52%:%
-%:%145=54%:%
-%:%155=56%:%
-%:%156=56%:%
-%:%157=56%:%
-%:%158=56%:%
-%:%159=57%:%
-%:%160=57%:%
-%:%161=57%:%
-%:%162=57%:%
-%:%163=58%:%
-%:%164=59%:%
-%:%165=59%:%
-%:%166=60%:%
-%:%167=61%:%
-%:%168=62%:%
-%:%169=63%:%
-%:%170=64%:%
-%:%171=65%:%
-%:%172=66%:%
-%:%173=67%:%
-%:%174=68%:%
+%:%139=52%:%
+%:%140=53%:%
+%:%141=54%:%
+%:%142=55%:%
+%:%143=56%:%
+%:%144=57%:%
+%:%145=58%:%
+%:%146=59%:%
+%:%147=60%:%
+%:%148=61%:%
+%:%149=62%:%
+%:%151=63%:%
+%:%152=63%:%
+%:%153=64%:%
+%:%154=64%:%
+%:%155=65%:%
+%:%162=67%:%
+%:%172=69%:%
+%:%173=69%:%
+%:%174=69%:%
 %:%175=69%:%
-%:%176=69%:%
+%:%176=70%:%
 %:%177=70%:%
-%:%179=71%:%
+%:%178=70%:%
+%:%179=70%:%
 %:%180=71%:%
 %:%181=72%:%
 %:%182=72%:%
@@ -296,9 +310,25 @@ sign of the requested justification.%
 %:%184=74%:%
 %:%185=75%:%
 %:%186=76%:%
-%:%187=76%:%
-%:%188=77%:%
-%:%189=77%:%
-%:%190=78%:%
-%:%193=79%:%
-%:%198=80%:%
+%:%187=77%:%
+%:%188=78%:%
+%:%189=79%:%
+%:%190=80%:%
+%:%191=81%:%
+%:%192=82%:%
+%:%193=82%:%
+%:%194=83%:%
+%:%196=84%:%
+%:%197=84%:%
+%:%198=85%:%
+%:%199=85%:%
+%:%200=86%:%
+%:%201=87%:%
+%:%202=88%:%
+%:%203=89%:%
+%:%204=89%:%
+%:%205=90%:%
+%:%206=90%:%
+%:%207=91%:%
+%:%210=92%:%
+%:%215=93%:%
