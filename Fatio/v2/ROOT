@@ -1,0 +1,16 @@
+chapter AFP
+
+session FatioFaithful = HOL +
+  options [timeout = 600]
+  theories
+    FatioFaithful_preliminaries
+    FatioFaithful_deep
+    FatioFaithful_shallow
+    FatioFaithful_shallow_minimal
+    FatioFaithful_faithfulness
+    FatioFaithful_protocol
+    FatioFaithful_variants
+    FatioFaithful_tests
+  document_files
+    "root.tex"
+    "root.bib"

@@ -1,0 +1,155 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{FatioFaithful{\isacharunderscore}{\kern0pt}shallow{\isacharunderscore}{\kern0pt}minimal}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{Shallow embedding of the BD logic (minimal)%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isakeywordONE{theory}\isamarkupfalse%
+\ FatioFaithful{\isacharunderscore}{\kern0pt}shallow{\isacharunderscore}{\kern0pt}minimal\isanewline
+\ \ \isakeywordTWO{imports}\ FatioFaithful{\isacharunderscore}{\kern0pt}deep\isanewline
+\isakeywordTWO{begin}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\begin{isamarkuptext}%
+The minimal shallow embedding fixes one model at the meta level: the
+accessibility relations and valuations are uninterpreted HOL constants, formulas
+are plain truth sets over worlds, and the world domain is implicitly the full type
+\isa{{\isasymw}}. This is the classical SSE style of LogiKEy \cite{LogiKEy2020} and the style of the
+original HOMML/FATIO development; the price, made explicit by the faithfulness
+theorems below, is that faithfulness holds relative to full-domain models only.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{consts}\isamarkupfalse%
+\ B\isactrlsub {\isadigit{0}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymR}\ D\isactrlsub {\isadigit{0}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymR}\ V\isactrlsub {\isadigit{0}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymV}\ U\isactrlsub {\isadigit{0}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymU}\ E\isactrlsub {\isadigit{0}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymE}\isanewline
+\isakeywordONE{consts}\isamarkupfalse%
+\ V\isactrlsub {\isadigit{1}}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymV}\ \ %
+\isamarkupcmt{a second valuation, used for a countermodel below%
+}\isanewline
+\isanewline
+\isakeywordONE{type{\isacharunderscore}{\kern0pt}synonym}\isamarkupfalse%
+\ {\isasymsigma}\isactrlsub m\ {\isacharequal}{\kern0pt}\ {\isachardoublequoteopen}{\isasymw}{\isasymRightarrow}bool{\isachardoublequoteclose}\isanewline
+\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ AtmM{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isasymS}{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isacharunderscore}{\kern0pt}\isactrlsup m{\isachardoublequoteclose}\ {\isacharbrackleft}{\kern0pt}{\isadigit{1}}{\isadigit{0}}{\isadigit{0}}{\isadigit{0}}{\isacharbrackright}{\kern0pt}\ {\isadigit{9}}{\isadigit{9}}{\isadigit{9}}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}x\isactrlsup m\ {\isasymequiv}\ {\isasymlambda}w{\isachardot}{\kern0pt}\ V\isactrlsub {\isadigit{0}}\ x\ w{\isachardoublequoteclose}\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ DoneM{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}FatioL{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}Done\isactrlsup m{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}Done\isactrlsup m\ l\ {\isasymequiv}\ {\isasymlambda}w{\isachardot}{\kern0pt}\ U\isactrlsub {\isadigit{0}}\ l\ w{\isachardoublequoteclose}\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ EntM{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}Formula{\isasymRightarrow}Sign{\isasymRightarrow}Formula{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isachardoublequoteclose}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}EntM\ {\isasymPhi}\ sg\ {\isasymphi}\ {\isasymequiv}\ {\isasymlambda}w{\isachardot}{\kern0pt}\ E\isactrlsub {\isadigit{0}}\ {\isasymPhi}\ sg\ {\isasymphi}\ w{\isachardoublequoteclose}\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ ExJM{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}Speaker{\isasymRightarrow}Sign{\isasymRightarrow}Formula{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isachardoublequoteclose}\ \isakeywordTWO{where}\isanewline
+\ \ {\isachardoublequoteopen}ExJM\ i\ sg\ {\isasymphi}\ {\isasymequiv}\ {\isasymlambda}w{\isachardot}{\kern0pt}\ {\isasymexists}{\isasymDelta}{\isachardot}{\kern0pt}\ U\isactrlsub {\isadigit{0}}\ {\isacharparenleft}{\kern0pt}Justify\ i\ {\isasymDelta}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}\ w{\isachardoublequoteclose}\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ NegM{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isasymsigma}\isactrlsub m{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymnot}\isactrlsup m{\isacharunderscore}{\kern0pt}{\isachardoublequoteclose}\ {\isacharbrackleft}{\kern0pt}{\isadigit{9}}{\isadigit{6}}{\isacharbrackright}{\kern0pt}\ {\isadigit{9}}{\isadigit{6}}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymnot}\isactrlsup m{\isasymphi}\ {\isasymequiv}\ {\isasymlambda}w{\isachardot}{\kern0pt}\ {\isasymnot}\ {\isasymphi}\ w{\isachardoublequoteclose}\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ ImpM{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isasymsigma}\isactrlsub m{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}\isakeywordTWO{infixr}\ {\isachardoublequoteopen}{\isasymsupset}\isactrlsup m{\isachardoublequoteclose}\ {\isadigit{9}}{\isadigit{3}}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymphi}\ {\isasymsupset}\isactrlsup m\ {\isasympsi}\ {\isasymequiv}\ {\isasymlambda}w{\isachardot}{\kern0pt}\ {\isasymphi}\ w\ {\isasymlongrightarrow}\ {\isasympsi}\ w{\isachardoublequoteclose}\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ BelM{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}Speaker{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymB}\isactrlsup m{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymB}\isactrlsup m\ i\ {\isasymphi}\ {\isasymequiv}\ {\isasymlambda}w{\isachardot}{\kern0pt}\ {\isasymforall}v{\isachardot}{\kern0pt}\ B\isactrlsub {\isadigit{0}}\ i\ w\ v\ {\isasymlongrightarrow}\ {\isasymphi}\ v{\isachardoublequoteclose}\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ DesM{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}Speaker{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymD}\isactrlsup m{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymD}\isactrlsup m\ i\ {\isasymphi}\ {\isasymequiv}\ {\isasymlambda}w{\isachardot}{\kern0pt}\ {\isasymforall}v{\isachardot}{\kern0pt}\ D\isactrlsub {\isadigit{0}}\ i\ w\ v\ {\isasymlongrightarrow}\ {\isasymphi}\ v{\isachardoublequoteclose}\isanewline
+\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ RelTM{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isachardoublequoteopen}{\isasymw}{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isasymRightarrow}bool{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isacharunderscore}{\kern0pt}\ {\isasymTurnstile}\isactrlsup m\ {\isacharunderscore}{\kern0pt}{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}w\ {\isasymTurnstile}\isactrlsup m\ {\isasymphi}\ {\isasymequiv}\ {\isasymphi}\ w{\isachardoublequoteclose}\isanewline
+\isakeywordONE{definition}\isamarkupfalse%
+\ ValM\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup m\ {\isacharunderscore}{\kern0pt}{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup m\ {\isasymphi}\ {\isasymequiv}\ {\isasymforall}w{\isachardot}{\kern0pt}\ {\isasymphi}\ w{\isachardoublequoteclose}\isanewline
+\isanewline
+\isakeywordONE{named{\isacharunderscore}{\kern0pt}theorems}\isamarkupfalse%
+\ DefM\isanewline
+\isakeywordONE{declare}\isamarkupfalse%
+\ AtmM{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefM{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ DoneM{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefM{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ EntM{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefM{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ ExJM{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefM{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\isanewline
+\ \ NegM{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefM{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ ImpM{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefM{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ BelM{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefM{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ DesM{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefM{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\isanewline
+\ \ RelTM{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefM{\isacharcomma}{\kern0pt}simp{\isacharbrackright}{\kern0pt}\ ValM{\isacharunderscore}{\kern0pt}def{\isacharbrackleft}{\kern0pt}DefM{\isacharbrackright}{\kern0pt}\isanewline
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isakeywordTWO{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/GITHUBS/LogiKEy/Fatio/v2/FatioFaithful_shallow_minimal.thy%:%
+%:%11=1%:%
+%:%27=3%:%
+%:%28=3%:%
+%:%29=4%:%
+%:%30=5%:%
+%:%39=7%:%
+%:%40=8%:%
+%:%41=9%:%
+%:%42=10%:%
+%:%43=11%:%
+%:%44=12%:%
+%:%46=14%:%
+%:%47=14%:%
+%:%48=15%:%
+%:%49=15%:%
+%:%50=15%:%
+%:%51=15%:%
+%:%52=16%:%
+%:%53=17%:%
+%:%54=17%:%
+%:%55=18%:%
+%:%56=19%:%
+%:%57=19%:%
+%:%58=20%:%
+%:%59=20%:%
+%:%60=21%:%
+%:%61=21%:%
+%:%62=22%:%
+%:%63=22%:%
+%:%64=23%:%
+%:%65=24%:%
+%:%66=24%:%
+%:%67=25%:%
+%:%68=25%:%
+%:%69=26%:%
+%:%70=26%:%
+%:%71=27%:%
+%:%72=27%:%
+%:%73=28%:%
+%:%74=29%:%
+%:%75=29%:%
+%:%76=30%:%
+%:%77=30%:%
+%:%78=31%:%
+%:%79=32%:%
+%:%80=32%:%
+%:%81=33%:%
+%:%82=33%:%
+%:%83=34%:%
+%:%84=35%:%
+%:%87=36%:%
+%:%92=37%:%

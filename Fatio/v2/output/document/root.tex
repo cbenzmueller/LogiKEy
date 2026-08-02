@@ -1,0 +1,48 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{isabelle,isabellesym}
+\usepackage{amssymb}
+\usepackage{pdfsetup}
+\usepackage{cite}
+\urlstyle{rm}
+\isabellestyle{it}
+
+\begin{document}
+
+\title{Fatio, Rationally Reconstructed:\\A Faithful Deep and Shallow Embedding of a
+Multi-Agent Argumentation Protocol}
+\author{Christoph Benzm\"uller \and Luca Pasetto}
+\maketitle
+
+\begin{abstract}
+We present a rational reconstruction of the LogiKEy implementation of the Fatio
+dialogue protocol for multi-agent dialectical argumentation (Pasetto and
+Benzm\"uller, ARQNL 2024), rebuilt following the methodology of ``Faithful Logic
+Embeddings in HOL --- Deep and Shallow'' (Benzm\"uller 2025; AFP entry
+FaithfulPMLinHOL). The object logic of Fatio's axiomatic semantics --- a
+multi-agent belief/desire logic over a propositional content logic, enriched with
+Done-, entailment- and existential-justification atoms --- is developed both as a
+deep embedding (datatype syntax with a primitive-recursive Kripke semantics over
+models with explicit world domains) and as two shallow embeddings --- a
+\emph{maximal} one (model-parametric truth-set functions) and a \emph{minimal}
+one in the classical LogiKEy style (fixed meta-level constants, truth sets over
+worlds) --- all connected by machine-checked faithfulness theorems, including a
+soundness characterisation relating the two shallow backends and a documented
+comparison of their respective merits. The protocol layer (dialectical obligation stores, pre- and
+post-conditions, recursive dialogue checking) is defined over the deep syntax, so
+that syntactically distinct but semantically equivalent contents are discriminated
+exactly where the protocol requires it; the discrimination and identification
+facts, as well as the quantifier-scope question raised in the ARQNL paper, become
+theorems of the reconstruction.
+\end{abstract}
+
+\tableofcontents
+
+\input{session}
+
+\bibliographystyle{abbrv}
+\bibliography{root}
+
+\end{document}
+\endinput
+%:%file=~/GITHUBS/LogiKEy/Fatio/v2/document/root.tex%:%

@@ -1,0 +1,788 @@
+%
+\begin{isabellebody}%
+\setisabellecontext{FatioFaithful{\isacharunderscore}{\kern0pt}faithfulness}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsection{Faithfulness%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isakeywordONE{theory}\isamarkupfalse%
+\ FatioFaithful{\isacharunderscore}{\kern0pt}faithfulness\isanewline
+\ \ \isakeywordTWO{imports}\ FatioFaithful{\isacharunderscore}{\kern0pt}shallow\ FatioFaithful{\isacharunderscore}{\kern0pt}shallow{\isacharunderscore}{\kern0pt}minimal\isanewline
+\isakeywordTWO{begin}\isanewline
+\isanewline
+%
+\isamarkupcmt{Mapping: deep to (maximal) shallow%
+}%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+\isanewline
+%
+\endisadelimtheory
+\isakeywordONE{primrec}\isamarkupfalse%
+\ DpToSh\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}BDF{\isasymRightarrow}{\isasymsigma}{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymlparr}{\isacharunderscore}{\kern0pt}{\isasymrparr}{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\isanewline
+\ \ \ \ {\isachardoublequoteopen}{\isasymlparr}x\isactrlsup a{\isasymrparr}\ {\isacharequal}{\kern0pt}\ x\isactrlsup s{\isachardoublequoteclose}\ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlparr}Done\isactrlsup d\ l{\isasymrparr}\ {\isacharequal}{\kern0pt}\ Done\isactrlsup s\ l{\isachardoublequoteclose}\ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlparr}EntD\ {\isasymPhi}\ sg\ {\isasymphi}{\isasymrparr}\ {\isacharequal}{\kern0pt}\ EntS\ {\isasymPhi}\ sg\ {\isasymphi}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlparr}ExJD\ i\ sg\ {\isasymphi}{\isasymrparr}\ {\isacharequal}{\kern0pt}\ ExJS\ i\ sg\ {\isasymphi}{\isachardoublequoteclose}\ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlparr}{\isasymnot}\isactrlsup d{\isasymphi}{\isasymrparr}\ {\isacharequal}{\kern0pt}\ {\isasymnot}\isactrlsup s{\isasymlparr}{\isasymphi}{\isasymrparr}{\isachardoublequoteclose}\ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlparr}{\isasymphi}\ {\isasymsupset}\isactrlsup d\ {\isasympsi}{\isasymrparr}\ {\isacharequal}{\kern0pt}\ {\isasymlparr}{\isasymphi}{\isasymrparr}\ {\isasymsupset}\isactrlsup s\ {\isasymlparr}{\isasympsi}{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlparr}{\isasymB}\isactrlsup d\ i\ {\isasymphi}{\isasymrparr}\ {\isacharequal}{\kern0pt}\ {\isasymB}\isactrlsup s\ i\ {\isasymlparr}{\isasymphi}{\isasymrparr}{\isachardoublequoteclose}\ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlparr}{\isasymD}\isactrlsup d\ i\ {\isasymphi}{\isasymrparr}\ {\isacharequal}{\kern0pt}\ {\isasymD}\isactrlsup s\ i\ {\isasymlparr}{\isasymphi}{\isasymrparr}{\isachardoublequoteclose}\isanewline
+\isanewline
+%
+\isamarkupcmt{Automated faithfulness proofs, as in \cite{Benzmueller2025Faithful,FaithfulPMLinHOL-AFP}%
+}\isanewline
+\isakeywordONE{theorem}\isamarkupfalse%
+\ Faithful{\isadigit{1}}a{\isacharcolon}{\kern0pt}\isanewline
+\ \ {\isachardoublequoteopen}{\isasymforall}W\ B\ D\ V\ U\ E{\isachardot}{\kern0pt}\ {\isasymforall}w{\isacharcolon}{\kern0pt}W{\isachardot}{\kern0pt}\ {\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ {\isasymphi}\ {\isasymlongleftrightarrow}\ {\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup s\ {\isasymlparr}{\isasymphi}{\isasymrparr}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{apply}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}induct\ {\isasymphi}{\isacharparenright}{\kern0pt}\ \isakeywordONE{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{theorem}\isamarkupfalse%
+\ Faithful{\isadigit{1}}b{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup d\ {\isasymphi}\ {\isasymlongleftrightarrow}\ {\isasymTurnstile}\isactrlsup s\ {\isasymlparr}{\isasymphi}{\isasymrparr}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{using}\isamarkupfalse%
+\ Faithful{\isadigit{1}}a\ \isakeywordONE{unfolding}\isamarkupfalse%
+\ ValD{\isacharunderscore}{\kern0pt}def\ ValS{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{Discrimination vs. identification: the Done-problem, resolved%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\begin{isamarkuptext}%
+Syntactically, \isa{p\ {\isasymsupset}\isactrlsup c\ p} and \isa{{\isasymnot}\isactrlsup c{\isasymbottom}\isactrlsup c} are different contents; hence locutions and
+Done-atoms over them are different objects. Semantically, their injections into the
+BD logic are equivalent. All four facts are theorems of the reconstruction.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ ContentDiscriminated{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}p\isactrlsup c\ {\isasymsupset}\isactrlsup c\ p\isactrlsup c{\isacharparenright}{\kern0pt}\ {\isasymnoteq}\ {\isasymnot}\isactrlsup c{\isasymbottom}\isactrlsup c{\isachardoublequoteclose}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ LocutionDiscriminated{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}assert{\isacharbrackleft}{\kern0pt}a{\isacharcomma}{\kern0pt}\ p\isactrlsup c\ {\isasymsupset}\isactrlsup c\ p\isactrlsup c{\isacharbrackright}{\kern0pt}\ {\isasymnoteq}\ assert{\isacharbrackleft}{\kern0pt}a{\isacharcomma}{\kern0pt}\ {\isasymnot}\isactrlsup c{\isasymbottom}\isactrlsup c{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ DoneDiscriminated{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}Done\isactrlsup d\ assert{\isacharbrackleft}{\kern0pt}a{\isacharcomma}{\kern0pt}\ p\isactrlsup c\ {\isasymsupset}\isactrlsup c\ p\isactrlsup c{\isacharbrackright}{\kern0pt}\ {\isasymnoteq}\ Done\isactrlsup d\ assert{\isacharbrackleft}{\kern0pt}a{\isacharcomma}{\kern0pt}\ {\isasymnot}\isactrlsup c{\isasymbottom}\isactrlsup c{\isacharbrackright}{\kern0pt}{\isachardoublequoteclose}%
+\isadelimproof
+\ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{lemma}\isamarkupfalse%
+\ SemanticsIdentifies{\isacharcolon}{\kern0pt}\isanewline
+\ \ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup d\ {\isacharparenleft}{\kern0pt}{\isacharbraceleft}{\kern0pt}p\isactrlsup c\ {\isasymsupset}\isactrlsup c\ p\isactrlsup c{\isacharbraceright}{\kern0pt}\isactrlsup d\ {\isasymsupset}\isactrlsup d\ {\isacharbraceleft}{\kern0pt}{\isasymnot}\isactrlsup c{\isasymbottom}\isactrlsup c{\isacharbraceright}{\kern0pt}\isactrlsup d{\isacharparenright}{\kern0pt}\ {\isasymand}\ {\isasymTurnstile}\isactrlsup d\ {\isacharparenleft}{\kern0pt}{\isacharbraceleft}{\kern0pt}{\isasymnot}\isactrlsup c{\isasymbottom}\isactrlsup c{\isacharbraceright}{\kern0pt}\isactrlsup d\ {\isasymsupset}\isactrlsup d\ {\isacharbraceleft}{\kern0pt}p\isactrlsup c\ {\isasymsupset}\isactrlsup c\ p\isactrlsup c{\isacharbraceright}{\kern0pt}\isactrlsup d{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{unfolding}\isamarkupfalse%
+\ ValD{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{The quantifier-scope question, settled%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\begin{isamarkuptext}%
+The wide-scope (meta-level) existential of the pre-conditions of question and
+challenge implies the narrow-scope (object-level, via \isa{ExJD}) reading.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ ScopeImp{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeywordTWO{assumes}\ {\isachardoublequoteopen}{\isasymexists}{\isasymDelta}{\isachardot}{\kern0pt}\ {\isasymGamma}\ {\isasymTurnstile}\ {\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}Done\isactrlsup d\ {\isacharparenleft}{\kern0pt}Justify\ i\ {\isasymDelta}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordTWO{shows}\ {\isachardoublequoteopen}{\isasymGamma}\ {\isasymTurnstile}\ {\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}ExJD\ i\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharminus}{\kern0pt}\isanewline
+\ \ \isakeywordTHREE{obtain}\isamarkupfalse%
+\ {\isasymDelta}\ \isakeywordTWO{where}\ H{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymGamma}\ {\isasymTurnstile}\ {\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}Done\isactrlsup d\ {\isacharparenleft}{\kern0pt}Justify\ i\ {\isasymDelta}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordONE{using}\isamarkupfalse%
+\ assms\ \isakeywordONE{by}\isamarkupfalse%
+\ blast\isanewline
+\ \ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isacharquery}{\kern0pt}thesis\ \isakeywordONE{unfolding}\isamarkupfalse%
+\ ConsD{\isacharunderscore}{\kern0pt}def\isanewline
+\ \ \isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}intro\ allI\ impI{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordTHREE{fix}\isamarkupfalse%
+\ W\ B\ D\ V\ U\ E\ w\isanewline
+\ \ \ \ \isakeywordTHREE{assume}\isamarkupfalse%
+\ sat{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymforall}{\isasymgamma}{\isachardot}{\kern0pt}\ {\isasymGamma}\ {\isasymgamma}\ {\isasymlongrightarrow}\ {\isacharparenleft}{\kern0pt}{\isasymforall}w{\isacharcolon}{\kern0pt}W{\isachardot}{\kern0pt}\ {\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ {\isasymgamma}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordTWO{and}\ wW{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}W\ w{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ {\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}Done\isactrlsup d\ {\isacharparenleft}{\kern0pt}Justify\ i\ {\isasymDelta}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordONE{using}\isamarkupfalse%
+\ H{\isacharbrackleft}{\kern0pt}unfolded\ ConsD{\isacharunderscore}{\kern0pt}def{\isacharbrackright}{\kern0pt}\ sat\ wW\ \isakeywordONE{by}\isamarkupfalse%
+\ blast\isanewline
+\ \ \ \ \isakeywordTHREE{thus}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ {\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup d\ k\ {\isacharparenleft}{\kern0pt}{\isasymD}\isactrlsup d\ j\ {\isacharparenleft}{\kern0pt}ExJD\ i\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordONE{by}\isamarkupfalse%
+\ simp\ blast\isanewline
+\ \ \isakeywordONE{qed}\isamarkupfalse%
+\isanewline
+\isakeywordONE{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+The converse fails: the narrow-scope reading does NOT imply the wide-scope
+one. This is where a model finder earns its keep - the statement is a non-theorem,
+and \isa{nitpick} \cite{Nitpick2010} refutes it in seconds, from which the
+countermodel below was read off. Two worlds suffice: at each of them a
+justification is uttered, but for DIFFERENT supports, so no single \isa{{\isasymDelta}} works
+globally. We verify the countermodel explicitly, so that the entry stays
+independent of the model finder at build time.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ ScopeConverse{\isacharunderscore}{\kern0pt}countermodel{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeywordTWO{fixes}\ {\isasymphi}\isactrlsub {\isadigit{1}}\ {\isasymphi}\isactrlsub {\isadigit{2}}\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ Formula\ \isakeywordTWO{and}\ w\isactrlsub {\isadigit{1}}\ w\isactrlsub {\isadigit{2}}\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isasymw}\ \isakeywordTWO{and}\ i{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}Speaker\ \isakeywordTWO{and}\ sg{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}Sign\ \isakeywordTWO{and}\ {\isasymphi}{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}Formula\isanewline
+\ \ \isakeywordTWO{assumes}\ distinct{\isasymDelta}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymphi}\isactrlsub {\isadigit{1}}\ {\isasymnoteq}\ {\isasymphi}\isactrlsub {\isadigit{2}}{\isachardoublequoteclose}\ \isakeywordTWO{and}\ distinctw{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}w\isactrlsub {\isadigit{1}}\ {\isasymnoteq}\ w\isactrlsub {\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordTWO{and}\ W{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}W\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isasymlambda}w{\isachardot}{\kern0pt}\ w\ {\isacharequal}{\kern0pt}\ w\isactrlsub {\isadigit{1}}\ {\isasymor}\ w\ {\isacharequal}{\kern0pt}\ w\isactrlsub {\isadigit{2}}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordTWO{and}\ U{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}U\ {\isacharequal}{\kern0pt}\ {\isacharparenleft}{\kern0pt}{\isasymlambda}l\ w{\isachardot}{\kern0pt}\ l\ {\isacharequal}{\kern0pt}\ Justify\ i\ {\isacharparenleft}{\kern0pt}if\ w\ {\isacharequal}{\kern0pt}\ w\isactrlsub {\isadigit{1}}\ then\ {\isasymphi}\isactrlsub {\isadigit{1}}\ else\ {\isasymphi}\isactrlsub {\isadigit{2}}{\isacharparenright}{\kern0pt}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordTWO{shows}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}{\isasymforall}w{\isacharcolon}{\kern0pt}W{\isachardot}{\kern0pt}\ {\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ ExJD\ i\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \ \ \ {\isasymand}\ {\isasymnot}{\isacharparenleft}{\kern0pt}{\isasymexists}{\isasymDelta}{\isachardot}{\kern0pt}\ {\isasymforall}w{\isacharcolon}{\kern0pt}W{\isachardot}{\kern0pt}\ {\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ Done\isactrlsup d\ {\isacharparenleft}{\kern0pt}Justify\ i\ {\isasymDelta}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{proof}\isamarkupfalse%
+\isanewline
+\ \ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}w{\isacharcolon}{\kern0pt}W{\isachardot}{\kern0pt}\ {\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ ExJD\ i\ sg\ {\isasymphi}{\isachardoublequoteclose}\ \isakeywordONE{using}\isamarkupfalse%
+\ U\ \isakeywordONE{by}\isamarkupfalse%
+\ auto\isanewline
+\isakeywordONE{next}\isamarkupfalse%
+\isanewline
+\ \ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymnot}{\isacharparenleft}{\kern0pt}{\isasymexists}{\isasymDelta}{\isachardot}{\kern0pt}\ {\isasymforall}w{\isacharcolon}{\kern0pt}W{\isachardot}{\kern0pt}\ {\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ Done\isactrlsup d\ {\isacharparenleft}{\kern0pt}Justify\ i\ {\isasymDelta}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordONE{proof}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isakeywordTHREE{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymexists}{\isasymDelta}{\isachardot}{\kern0pt}\ {\isasymforall}w{\isacharcolon}{\kern0pt}W{\isachardot}{\kern0pt}\ {\isasymlangle}W{\isacharcomma}{\kern0pt}B{\isacharcomma}{\kern0pt}D{\isacharcomma}{\kern0pt}V{\isacharcomma}{\kern0pt}U{\isacharcomma}{\kern0pt}E{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ Done\isactrlsup d\ {\isacharparenleft}{\kern0pt}Justify\ i\ {\isasymDelta}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{then}\isamarkupfalse%
+\ \isakeywordTHREE{obtain}\isamarkupfalse%
+\ {\isasymDelta}\ \isakeywordTWO{where}\ {\isachardoublequoteopen}U\ {\isacharparenleft}{\kern0pt}Justify\ i\ {\isasymDelta}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}\ w\isactrlsub {\isadigit{1}}{\isachardoublequoteclose}\ \isakeywordTWO{and}\ {\isachardoublequoteopen}U\ {\isacharparenleft}{\kern0pt}Justify\ i\ {\isasymDelta}\ sg\ {\isasymphi}{\isacharparenright}{\kern0pt}\ w\isactrlsub {\isadigit{2}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordONE{using}\isamarkupfalse%
+\ W\ \isakeywordONE{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isakeywordONE{hence}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymDelta}\ {\isacharequal}{\kern0pt}\ {\isasymphi}\isactrlsub {\isadigit{1}}{\isachardoublequoteclose}\ \isakeywordTWO{and}\ {\isachardoublequoteopen}{\isasymDelta}\ {\isacharequal}{\kern0pt}\ {\isasymphi}\isactrlsub {\isadigit{2}}{\isachardoublequoteclose}\ \isakeywordONE{using}\isamarkupfalse%
+\ U\ distinctw\ \isakeywordONE{by}\isamarkupfalse%
+\ auto\isanewline
+\ \ \ \ \isakeywordTHREE{thus}\isamarkupfalse%
+\ False\ \isakeywordONE{using}\isamarkupfalse%
+\ distinct{\isasymDelta}\ \isakeywordONE{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \isakeywordONE{qed}\isamarkupfalse%
+\isanewline
+\isakeywordONE{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isadelimdocument
+%
+\endisadelimdocument
+%
+\isatagdocument
+%
+\isamarkupsubsection{Faithfulness for the minimal embedding, and the comparison%
+}
+\isamarkuptrue%
+%
+\endisatagdocument
+{\isafolddocument}%
+%
+\isadelimdocument
+%
+\endisadelimdocument
+\isakeywordONE{primrec}\isamarkupfalse%
+\ DpToShMin\ {\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}BDF{\isasymRightarrow}{\isasymsigma}\isactrlsub m{\isachardoublequoteclose}\ {\isacharparenleft}{\kern0pt}{\isachardoublequoteopen}{\isasymlceil}{\isacharunderscore}{\kern0pt}{\isasymrceil}{\isachardoublequoteclose}{\isacharparenright}{\kern0pt}\ \isakeywordTWO{where}\isanewline
+\ \ \ \ {\isachardoublequoteopen}{\isasymlceil}x\isactrlsup a{\isasymrceil}\ {\isacharequal}{\kern0pt}\ x\isactrlsup m{\isachardoublequoteclose}\ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlceil}Done\isactrlsup d\ l{\isasymrceil}\ {\isacharequal}{\kern0pt}\ Done\isactrlsup m\ l{\isachardoublequoteclose}\ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlceil}EntD\ {\isasymPhi}\ sg\ {\isasymphi}{\isasymrceil}\ {\isacharequal}{\kern0pt}\ EntM\ {\isasymPhi}\ sg\ {\isasymphi}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlceil}ExJD\ i\ sg\ {\isasymphi}{\isasymrceil}\ {\isacharequal}{\kern0pt}\ ExJM\ i\ sg\ {\isasymphi}{\isachardoublequoteclose}\ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlceil}{\isasymnot}\isactrlsup d{\isasymphi}{\isasymrceil}\ {\isacharequal}{\kern0pt}\ {\isasymnot}\isactrlsup m{\isasymlceil}{\isasymphi}{\isasymrceil}{\isachardoublequoteclose}\ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlceil}{\isasymphi}\ {\isasymsupset}\isactrlsup d\ {\isasympsi}{\isasymrceil}\ {\isacharequal}{\kern0pt}\ {\isasymlceil}{\isasymphi}{\isasymrceil}\ {\isasymsupset}\isactrlsup m\ {\isasymlceil}{\isasympsi}{\isasymrceil}{\isachardoublequoteclose}\isanewline
+\ \ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlceil}{\isasymB}\isactrlsup d\ i\ {\isasymphi}{\isasymrceil}\ {\isacharequal}{\kern0pt}\ {\isasymB}\isactrlsup m\ i\ {\isasymlceil}{\isasymphi}{\isasymrceil}{\isachardoublequoteclose}\ {\isacharbar}{\kern0pt}\ {\isachardoublequoteopen}{\isasymlceil}{\isasymD}\isactrlsup d\ i\ {\isasymphi}{\isasymrceil}\ {\isacharequal}{\kern0pt}\ {\isasymD}\isactrlsup m\ i\ {\isasymlceil}{\isasymphi}{\isasymrceil}{\isachardoublequoteclose}%
+\begin{isamarkuptext}%
+Faithfulness for the minimal embedding holds relative to the one fixed,
+full-domain model given by the meta-level constants.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{theorem}\isamarkupfalse%
+\ Faithful{\isadigit{2}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ {\isachardoublequoteopen}{\isasymforall}w{\isachardot}{\kern0pt}\ {\isasymlangle}{\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymw}{\isachardot}{\kern0pt}\ True{\isacharparenright}{\kern0pt}{\isacharcomma}{\kern0pt}B\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}D\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}V\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}U\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}E\isactrlsub {\isadigit{0}}{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ {\isasymphi}\ {\isasymlongleftrightarrow}\ w\ {\isasymTurnstile}\isactrlsup m\ {\isasymlceil}{\isasymphi}{\isasymrceil}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{apply}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}induct\ {\isasymphi}{\isacharparenright}{\kern0pt}\ \isakeywordONE{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+\isanewline
+%
+\endisadelimproof
+\isanewline
+\isakeywordONE{theorem}\isamarkupfalse%
+\ Faithful{\isadigit{3}}{\isacharcolon}{\kern0pt}\isanewline
+\ \ {\isachardoublequoteopen}{\isasymforall}w{\isachardot}{\kern0pt}\ {\isasymlangle}{\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymw}{\isachardot}{\kern0pt}\ True{\isacharparenright}{\kern0pt}{\isacharcomma}{\kern0pt}B\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}D\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}V\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}U\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}E\isactrlsub {\isadigit{0}}{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup s\ {\isasymlparr}{\isasymphi}{\isasymrparr}\ {\isasymlongleftrightarrow}\ w\ {\isasymTurnstile}\isactrlsup m\ {\isasymlceil}{\isasymphi}{\isasymrceil}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+\ \ %
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{using}\isamarkupfalse%
+\ Faithful{\isadigit{1}}a{\isacharbrackleft}{\kern0pt}of\ {\isasymphi}{\isacharbrackright}{\kern0pt}\ Faithful{\isadigit{2}}{\isacharbrackleft}{\kern0pt}of\ {\isasymphi}{\isacharbrackright}{\kern0pt}\ \isakeywordONE{by}\isamarkupfalse%
+\ auto%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Minimal validity is sound for deep validity in the following precise sense:
+the minimally valid truth sets are exactly the images of the deeply valid
+formulas. (This ports lemma Sound1 of FaithfulPMLinHOL, with a structured proof.)%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{theorem}\isamarkupfalse%
+\ SoundMin{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isacharparenleft}{\kern0pt}{\isasymTurnstile}\isactrlsup m\ {\isasympsi}{\isacharparenright}{\kern0pt}\ {\isasymlongleftrightarrow}\ {\isacharparenleft}{\kern0pt}{\isasymexists}{\isasymphi}{\isachardot}{\kern0pt}\ {\isasympsi}\ {\isacharequal}{\kern0pt}\ {\isasymlceil}{\isasymphi}{\isasymrceil}\ {\isasymand}\ {\isasymTurnstile}\isactrlsup d\ {\isasymphi}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{proof}\isamarkupfalse%
+\isanewline
+\ \ \isakeywordTHREE{assume}\isamarkupfalse%
+\ L{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup m\ {\isasympsi}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasympsi}\ {\isacharequal}{\kern0pt}\ {\isasymlceil}p\isactrlsup a\ {\isasymsupset}\isactrlsup d\ p\isactrlsup a{\isasymrceil}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharparenleft}{\kern0pt}rule\ ext{\isacharparenright}{\kern0pt}\isanewline
+\ \ \ \ \isakeywordTHREE{fix}\isamarkupfalse%
+\ w\ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasympsi}\ w\ {\isacharequal}{\kern0pt}\ {\isasymlceil}p\isactrlsup a\ {\isasymsupset}\isactrlsup d\ p\isactrlsup a{\isasymrceil}\ w{\isachardoublequoteclose}\ \isakeywordONE{using}\isamarkupfalse%
+\ L\ \isakeywordONE{unfolding}\isamarkupfalse%
+\ ValM{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \isakeywordONE{qed}\isamarkupfalse%
+\isanewline
+\ \ \isakeywordONE{moreover}\isamarkupfalse%
+\ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup d\ {\isacharparenleft}{\kern0pt}p\isactrlsup a\ {\isasymsupset}\isactrlsup d\ p\isactrlsup a{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\ \isakeywordONE{unfolding}\isamarkupfalse%
+\ ValD{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \isakeywordONE{ultimately}\isamarkupfalse%
+\ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymexists}{\isasymphi}{\isachardot}{\kern0pt}\ {\isasympsi}\ {\isacharequal}{\kern0pt}\ {\isasymlceil}{\isasymphi}{\isasymrceil}\ {\isasymand}\ {\isasymTurnstile}\isactrlsup d\ {\isasymphi}{\isachardoublequoteclose}\ \isakeywordONE{by}\isamarkupfalse%
+\ blast\isanewline
+\isakeywordONE{next}\isamarkupfalse%
+\isanewline
+\ \ \isakeywordTHREE{assume}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymexists}{\isasymphi}{\isachardot}{\kern0pt}\ {\isasympsi}\ {\isacharequal}{\kern0pt}\ {\isasymlceil}{\isasymphi}{\isasymrceil}\ {\isasymand}\ {\isasymTurnstile}\isactrlsup d\ {\isasymphi}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordONE{then}\isamarkupfalse%
+\ \isakeywordTHREE{obtain}\isamarkupfalse%
+\ {\isasymphi}\ \isakeywordTWO{where}\ {\isadigit{1}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasympsi}\ {\isacharequal}{\kern0pt}\ {\isasymlceil}{\isasymphi}{\isasymrceil}{\isachardoublequoteclose}\ \isakeywordTWO{and}\ {\isadigit{2}}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup d\ {\isasymphi}{\isachardoublequoteclose}\ \isakeywordONE{by}\isamarkupfalse%
+\ blast\isanewline
+\ \ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymforall}w{\isachardot}{\kern0pt}\ {\isasymlangle}{\isacharparenleft}{\kern0pt}{\isasymlambda}x{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymw}{\isachardot}{\kern0pt}\ True{\isacharparenright}{\kern0pt}{\isacharcomma}{\kern0pt}B\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}D\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}V\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}U\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}E\isactrlsub {\isadigit{0}}{\isasymrangle}{\isacharcomma}{\kern0pt}w\ {\isasymTurnstile}\isactrlsup d\ {\isasymphi}{\isachardoublequoteclose}\ \isakeywordONE{using}\isamarkupfalse%
+\ {\isadigit{2}}\ \isakeywordONE{unfolding}\isamarkupfalse%
+\ ValD{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \isakeywordTHREE{thus}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup m\ {\isasympsi}{\isachardoublequoteclose}\ \isakeywordONE{using}\isamarkupfalse%
+\ {\isadigit{1}}\ Faithful{\isadigit{2}}\ \isakeywordONE{unfolding}\isamarkupfalse%
+\ ValM{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp\isanewline
+\isakeywordONE{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+A second use of the model finder: the two shallow backends are NOT
+interchangeable. Minimal validity of \isa{{\isasymlceil}{\isasymphi}{\isasymrceil}} does not entail deep validity of \isa{{\isasymphi}},
+since the fixed constants may satisfy a formula that fails in some other model.
+\isa{nitpick} refutes the implication; the witness below makes the refutation
+permanent: an atom true throughout the fixed model but false somewhere else.%
+\end{isamarkuptext}\isamarkuptrue%
+\isakeywordONE{lemma}\isamarkupfalse%
+\ MinimalNotDeep{\isacharunderscore}{\kern0pt}countermodel{\isacharcolon}{\kern0pt}\isanewline
+\ \ \isakeywordTWO{assumes}\ minimally{\isacharunderscore}{\kern0pt}valid{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymforall}w{\isachardot}{\kern0pt}\ V\isactrlsub {\isadigit{0}}\ x\ w{\isachardoublequoteclose}\ \isakeywordTWO{and}\ elsewhere{\isacharunderscore}{\kern0pt}false{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymnot}\ V\isactrlsub {\isadigit{1}}\ x\ w\isactrlsub {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordTWO{shows}\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup m\ {\isasymlceil}x\isactrlsup a{\isasymrceil}{\isachardoublequoteclose}\ \isakeywordTWO{and}\ {\isachardoublequoteopen}{\isasymnot}\ {\isasymTurnstile}\isactrlsup d\ x\isactrlsup a{\isachardoublequoteclose}\isanewline
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\isatagproof
+\isakeywordONE{proof}\isamarkupfalse%
+\ {\isacharminus}{\kern0pt}\isanewline
+\ \ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup m\ {\isasymlceil}x\isactrlsup a{\isasymrceil}{\isachardoublequoteclose}\ \isakeywordONE{using}\isamarkupfalse%
+\ minimally{\isacharunderscore}{\kern0pt}valid\ \isakeywordONE{unfolding}\isamarkupfalse%
+\ ValM{\isacharunderscore}{\kern0pt}def\ \isakeywordONE{by}\isamarkupfalse%
+\ simp\isanewline
+\isakeywordONE{next}\isamarkupfalse%
+\isanewline
+\ \ \isakeywordTHREE{show}\isamarkupfalse%
+\ {\isachardoublequoteopen}{\isasymnot}\ {\isasymTurnstile}\isactrlsup d\ x\isactrlsup a{\isachardoublequoteclose}\isanewline
+\ \ \isakeywordONE{proof}\isamarkupfalse%
+\isanewline
+\ \ \ \ \isakeywordTHREE{assume}\isamarkupfalse%
+\ A{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup d\ x\isactrlsup a{\isachardoublequoteclose}\isanewline
+\ \ \ \ \isakeywordONE{have}\isamarkupfalse%
+\ {\isachardoublequoteopen}V\isactrlsub {\isadigit{1}}\ x\ w\isactrlsub {\isadigit{1}}{\isachardoublequoteclose}\isanewline
+\ \ \ \ \ \ \isakeywordONE{using}\isamarkupfalse%
+\ A{\isacharbrackleft}{\kern0pt}unfolded\ ValD{\isacharunderscore}{\kern0pt}def{\isacharcomma}{\kern0pt}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ THEN\ spec{\isacharbrackleft}{\kern0pt}\isakeywordTWO{where}\ x{\isacharequal}{\kern0pt}{\isachardoublequoteopen}{\isasymlambda}w{\isacharcolon}{\kern0pt}{\isacharcolon}{\kern0pt}{\isasymw}{\isachardot}{\kern0pt}\ True{\isachardoublequoteclose}{\isacharbrackright}{\kern0pt}{\isacharcomma}{\kern0pt}\ THEN\ spec{\isacharbrackleft}{\kern0pt}\isakeywordTWO{where}\ x{\isacharequal}{\kern0pt}B\isactrlsub {\isadigit{0}}{\isacharbrackright}{\kern0pt}{\isacharcomma}{\kern0pt}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ THEN\ spec{\isacharbrackleft}{\kern0pt}\isakeywordTWO{where}\ x{\isacharequal}{\kern0pt}D\isactrlsub {\isadigit{0}}{\isacharbrackright}{\kern0pt}{\isacharcomma}{\kern0pt}\ THEN\ spec{\isacharbrackleft}{\kern0pt}\isakeywordTWO{where}\ x{\isacharequal}{\kern0pt}V\isactrlsub {\isadigit{1}}{\isacharbrackright}{\kern0pt}{\isacharcomma}{\kern0pt}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ THEN\ spec{\isacharbrackleft}{\kern0pt}\isakeywordTWO{where}\ x{\isacharequal}{\kern0pt}U\isactrlsub {\isadigit{0}}{\isacharbrackright}{\kern0pt}{\isacharcomma}{\kern0pt}\ THEN\ spec{\isacharbrackleft}{\kern0pt}\isakeywordTWO{where}\ x{\isacharequal}{\kern0pt}E\isactrlsub {\isadigit{0}}{\isacharbrackright}{\kern0pt}{\isacharcomma}{\kern0pt}\isanewline
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ THEN\ spec{\isacharbrackleft}{\kern0pt}\isakeywordTWO{where}\ x{\isacharequal}{\kern0pt}w\isactrlsub {\isadigit{1}}{\isacharbrackright}{\kern0pt}{\isacharbrackright}{\kern0pt}\ \isakeywordONE{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \ \ \isakeywordTHREE{thus}\isamarkupfalse%
+\ False\ \isakeywordONE{using}\isamarkupfalse%
+\ elsewhere{\isacharunderscore}{\kern0pt}false\ \isakeywordONE{by}\isamarkupfalse%
+\ simp\isanewline
+\ \ \isakeywordONE{qed}\isamarkupfalse%
+\isanewline
+\isakeywordONE{qed}\isamarkupfalse%
+%
+\endisatagproof
+{\isafoldproof}%
+%
+\isadelimproof
+%
+\endisadelimproof
+%
+\begin{isamarkuptext}%
+Comparison. The maximal embedding threads the whole model through every
+formula: validity and the global consequence relation used by the protocol are
+genuinely model-quantified, faithfulness (Faithful1a/1b) is unrestricted, and
+bounded world domains remain expressible. The minimal embedding is leaner - one
+world argument instead of seven parameters - and matches the original
+HOMML/FATIO development; but its faithfulness (Faithful2) is relative to the one
+fixed full-domain model, so dialogue checking on this backend is checking IN a
+situation rather than a logically necessary entailment. Since the protocol layer
+is defined over the DEEP syntax, both backends serve it soundly; this entry uses
+the maximal one for the protocol's consequence relation and provides the minimal
+one, with the bridging theorems above, for lightweight automation and for
+continuity with the original sources.%
+\end{isamarkuptext}\isamarkuptrue%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\isatagtheory
+\isakeywordTWO{end}\isamarkupfalse%
+%
+\endisatagtheory
+{\isafoldtheory}%
+%
+\isadelimtheory
+%
+\endisadelimtheory
+%
+\end{isabellebody}%
+\endinput
+%:%file=~/GITHUBS/LogiKEy/Fatio/v2/FatioFaithful_faithfulness.thy%:%
+%:%11=1%:%
+%:%27=3%:%
+%:%28=3%:%
+%:%29=4%:%
+%:%30=5%:%
+%:%31=6%:%
+%:%33=7%:%
+%:%39=7%:%
+%:%42=8%:%
+%:%43=8%:%
+%:%44=9%:%
+%:%45=10%:%
+%:%46=11%:%
+%:%47=12%:%
+%:%49=13%:%
+%:%50=13%:%
+%:%51=14%:%
+%:%52=14%:%
+%:%53=15%:%
+%:%56=16%:%
+%:%60=16%:%
+%:%61=16%:%
+%:%62=16%:%
+%:%67=16%:%
+%:%70=17%:%
+%:%71=18%:%
+%:%72=18%:%
+%:%75=19%:%
+%:%79=19%:%
+%:%80=19%:%
+%:%81=19%:%
+%:%82=19%:%
+%:%96=21%:%
+%:%108=23%:%
+%:%109=24%:%
+%:%110=25%:%
+%:%112=27%:%
+%:%113=27%:%
+%:%115=27%:%
+%:%119=27%:%
+%:%120=27%:%
+%:%127=27%:%
+%:%128=28%:%
+%:%129=28%:%
+%:%131=28%:%
+%:%135=28%:%
+%:%136=28%:%
+%:%143=28%:%
+%:%144=29%:%
+%:%145=29%:%
+%:%147=29%:%
+%:%151=29%:%
+%:%152=29%:%
+%:%159=29%:%
+%:%160=30%:%
+%:%161=30%:%
+%:%162=31%:%
+%:%165=32%:%
+%:%169=32%:%
+%:%170=32%:%
+%:%171=32%:%
+%:%185=34%:%
+%:%197=36%:%
+%:%198=37%:%
+%:%200=39%:%
+%:%201=39%:%
+%:%202=40%:%
+%:%203=41%:%
+%:%210=42%:%
+%:%211=42%:%
+%:%212=43%:%
+%:%213=43%:%
+%:%214=43%:%
+%:%215=43%:%
+%:%216=44%:%
+%:%217=44%:%
+%:%218=44%:%
+%:%219=45%:%
+%:%220=45%:%
+%:%221=46%:%
+%:%222=46%:%
+%:%223=47%:%
+%:%224=47%:%
+%:%225=48%:%
+%:%226=48%:%
+%:%227=49%:%
+%:%228=49%:%
+%:%229=49%:%
+%:%230=50%:%
+%:%231=50%:%
+%:%232=50%:%
+%:%233=51%:%
+%:%234=51%:%
+%:%235=52%:%
+%:%245=54%:%
+%:%246=55%:%
+%:%247=56%:%
+%:%248=57%:%
+%:%249=58%:%
+%:%250=59%:%
+%:%251=60%:%
+%:%253=62%:%
+%:%254=62%:%
+%:%255=63%:%
+%:%256=64%:%
+%:%257=65%:%
+%:%258=66%:%
+%:%259=67%:%
+%:%260=68%:%
+%:%267=69%:%
+%:%268=69%:%
+%:%269=70%:%
+%:%270=70%:%
+%:%271=70%:%
+%:%272=70%:%
+%:%273=71%:%
+%:%274=71%:%
+%:%275=72%:%
+%:%276=72%:%
+%:%277=73%:%
+%:%278=73%:%
+%:%279=74%:%
+%:%280=74%:%
+%:%281=75%:%
+%:%282=75%:%
+%:%283=75%:%
+%:%284=76%:%
+%:%285=76%:%
+%:%286=76%:%
+%:%287=77%:%
+%:%288=77%:%
+%:%289=77%:%
+%:%290=77%:%
+%:%291=78%:%
+%:%292=78%:%
+%:%293=78%:%
+%:%294=78%:%
+%:%295=79%:%
+%:%296=79%:%
+%:%297=80%:%
+%:%312=82%:%
+%:%322=84%:%
+%:%323=84%:%
+%:%324=85%:%
+%:%325=86%:%
+%:%326=87%:%
+%:%328=89%:%
+%:%329=90%:%
+%:%331=92%:%
+%:%332=92%:%
+%:%333=93%:%
+%:%336=94%:%
+%:%340=94%:%
+%:%341=94%:%
+%:%342=94%:%
+%:%347=94%:%
+%:%350=95%:%
+%:%351=96%:%
+%:%352=96%:%
+%:%353=97%:%
+%:%356=98%:%
+%:%360=98%:%
+%:%361=98%:%
+%:%362=98%:%
+%:%371=100%:%
+%:%372=101%:%
+%:%373=102%:%
+%:%375=104%:%
+%:%376=104%:%
+%:%383=105%:%
+%:%384=105%:%
+%:%385=106%:%
+%:%386=106%:%
+%:%387=107%:%
+%:%388=107%:%
+%:%389=108%:%
+%:%390=108%:%
+%:%391=109%:%
+%:%392=109%:%
+%:%393=109%:%
+%:%394=109%:%
+%:%395=109%:%
+%:%396=109%:%
+%:%397=110%:%
+%:%398=110%:%
+%:%399=111%:%
+%:%400=111%:%
+%:%401=111%:%
+%:%402=111%:%
+%:%403=111%:%
+%:%404=112%:%
+%:%405=112%:%
+%:%406=112%:%
+%:%407=112%:%
+%:%408=113%:%
+%:%409=113%:%
+%:%410=114%:%
+%:%411=114%:%
+%:%412=115%:%
+%:%413=115%:%
+%:%414=115%:%
+%:%415=115%:%
+%:%416=116%:%
+%:%417=116%:%
+%:%418=116%:%
+%:%419=116%:%
+%:%420=116%:%
+%:%421=117%:%
+%:%422=117%:%
+%:%423=117%:%
+%:%424=117%:%
+%:%425=117%:%
+%:%426=118%:%
+%:%436=120%:%
+%:%437=121%:%
+%:%438=122%:%
+%:%439=123%:%
+%:%440=124%:%
+%:%442=126%:%
+%:%443=126%:%
+%:%444=127%:%
+%:%445=128%:%
+%:%452=129%:%
+%:%453=129%:%
+%:%454=130%:%
+%:%455=130%:%
+%:%456=130%:%
+%:%457=130%:%
+%:%458=130%:%
+%:%459=131%:%
+%:%460=131%:%
+%:%461=132%:%
+%:%462=132%:%
+%:%463=133%:%
+%:%464=133%:%
+%:%465=134%:%
+%:%466=134%:%
+%:%467=135%:%
+%:%468=135%:%
+%:%469=136%:%
+%:%470=136%:%
+%:%471=137%:%
+%:%472=138%:%
+%:%473=139%:%
+%:%474=140%:%
+%:%475=140%:%
+%:%476=141%:%
+%:%477=141%:%
+%:%478=141%:%
+%:%479=141%:%
+%:%480=142%:%
+%:%481=142%:%
+%:%482=143%:%
+%:%492=145%:%
+%:%493=146%:%
+%:%494=147%:%
+%:%495=148%:%
+%:%496=149%:%
+%:%497=150%:%
+%:%498=151%:%
+%:%499=152%:%
+%:%500=153%:%
+%:%501=154%:%
+%:%502=155%:%
+%:%503=156%:%
+%:%511=158%:%
