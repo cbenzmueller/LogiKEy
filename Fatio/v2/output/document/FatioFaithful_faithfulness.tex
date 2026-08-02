@@ -445,12 +445,12 @@ challenge implies the narrow-scope (object-level, via \isa{ExJD}) reading.%
 \endisadelimproof
 %
 \begin{isamarkuptext}%
-The converse fails, and we refute it AT THE LEVEL OF THE CONSEQUENCE RELATION
+The converse fails, and we refute it at the level of the \emph{consequence relation}
 used by the protocol, not merely pointwise in one model. The refuting situation
 needs two distinct worlds; since \isa{{\isasymw}} is only assumed non-empty, this is stated as an
 explicit hypothesis. The model was found with \isa{nitpick} \cite{Nitpick2010} and is
 verified here, so that the entry does not depend on the model finder at build
-time: both worlds carry a justification, but for DIFFERENT supports, so no single
+time: both worlds carry a justification, but for \emph{different} supports, so no single
 \isa{{\isasymDelta}} works globally.%
 \end{isamarkuptext}\isamarkuptrue%
 \isakeywordONE{lemma}\isamarkupfalse%
@@ -662,7 +662,7 @@ formulas. (This ports lemma Sound1 of FaithfulPMLinHOL, with a structured proof.
 %
 \begin{isamarkuptext}%
 Separation of the two shallow backends. Note first a metatheoretical point:
-an UNCONDITIONAL refutation of "minimal validity implies deep validity" is not
+an \emph{unconditional} refutation of "minimal validity implies deep validity" is not
 available, because minimal validity is decided by the uninterpreted constants
 \isa{B\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}D\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}V\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}U\isactrlsub {\isadigit{0}}{\isacharcomma}{\kern0pt}E\isactrlsub {\isadigit{0}}}, about which nothing is provable. The separation is therefore
 stated conditionally, and this conditionality is itself informative: it says that
@@ -738,11 +738,11 @@ might fail.%
 %
 \begin{isamarkuptext}%
 The faithfulness theorems are not decoration: modal principles needed by the
-protocol are proved on the (maximal) SHALLOW side, where the connectives are plain
+protocol are proved on the (maximal) \emph{shallow} side, where the connectives are plain
 HOL definitions and the proofs are immediate, and then transferred to the deep
 syntax over which the protocol is defined. The K principle for beliefs and desires
 is obtained this way and is used in the tests theory to discharge a pre-condition
-that does NOT follow by membership in the world knowledge.%
+that does \emph{not} follow by membership in the world knowledge.%
 \end{isamarkuptext}\isamarkuptrue%
 \isakeywordONE{lemma}\isamarkupfalse%
 \ ShallowK{\isasymB}{\isacharcolon}{\kern0pt}\ {\isachardoublequoteopen}{\isasymTurnstile}\isactrlsup s\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup s\ i\ {\isacharparenleft}{\kern0pt}{\isasymphi}\ {\isasymsupset}\isactrlsup s\ {\isasympsi}{\isacharparenright}{\kern0pt}\ {\isasymsupset}\isactrlsup s\ {\isacharparenleft}{\kern0pt}{\isasymB}\isactrlsup s\ i\ {\isasymphi}\ {\isasymsupset}\isactrlsup s\ {\isasymB}\isactrlsup s\ i\ {\isasympsi}{\isacharparenright}{\kern0pt}{\isacharparenright}{\kern0pt}{\isachardoublequoteclose}\isanewline
@@ -826,7 +826,7 @@ world argument instead of seven parameters - and matches the original
 HOMML/FATIO development; but its faithfulness (Faithful2) is relative to the one
 fixed full-domain model, so dialogue checking on this backend is checking IN a
 situation rather than a logically necessary entailment. Since the protocol layer
-is defined over the DEEP syntax, both backends serve it soundly; this entry uses
+is defined over the \emph{deep} syntax, both backends serve it soundly; this entry uses
 the maximal one for the protocol's consequence relation and provides the minimal
 one, with the bridging theorems above, for lightweight automation and for
 continuity with the original sources.%

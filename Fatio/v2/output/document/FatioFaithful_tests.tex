@@ -63,7 +63,7 @@ The six-locution Brigade Restaurant dialogue. It appears in the example file
 of the Isabelle sources accompanying \cite{PasettoBenzmueller2024}, attributed
 there to the original Fatio paper \cite{McBurneyParsons2005}: a asserts that the
 restaurant is good (r); b challenges; a justifies from the newspaper review (n);
-c questions b, whose obligation is NEGATIVE, having arisen from the challenge; b
+c questions b, whose obligation is \emph{negative}, having arisen from the challenge; b
 justifies negatively from the chef change and the quality drop (\isa{m\ {\isasymand}\isactrlsup c\ s}); finally a
 retracts. In the original sources the corresponding lemma is stated with empty
 world knowledge and left open (with a counterexample noted); here the initial
@@ -95,7 +95,7 @@ steps select the sign of the addressed obligation. The dialogues themselves are
 then assembled from the step lemmas without search.
 This division of labour is deliberate: \isa{sledgehammer} \cite{Sledgehammer2011}
 finds no proof for these steps even with generous time limits and the relevant
-facts supplied, because what they require is the choice of a WITNESS over a
+facts supplied, because what they require is the choice of a \emph{witness} over a
 finite datatype (which speaker questioned or challenged, which sign the
 obligation carries) rather than a derivation; automated provers are strong at
 the latter and weak at the former. Supplying the witness explicitly and
@@ -288,7 +288,7 @@ automating the rest is therefore not a workaround but the appropriate split.%
 %
 \begin{isamarkuptext}%
 Seven locutions over two topics: after the exchange on p is settled by b
-RETRACTING ITS NEGATIVE obligation (exercising the \isa{{\isasymominus}}-clause of retract), the
+retracting its \emph{negative} obligation (exercising the \isa{{\isasymominus}}-clause of retract), the
 roles reverse and b becomes the asserter of q, questioned by a.%
 \end{isamarkuptext}\isamarkuptrue%
 \isakeywordONE{definition}\isamarkupfalse%
@@ -832,7 +832,7 @@ assertion repeated while the obligation is still open are all rejected.%
 \begin{isamarkuptext}%
 In the dialogues above every pre-condition is met because the world knowledge
 literally contains the required formula. Here the required desire is instead
-DERIVED, by the K principle transferred from the shallow embedding (see
+\emph{derived}, by the K principle transferred from the shallow embedding (see
 \isa{ConsK{\isasymD}{\isasymB}} and \isa{DeepK{\isasymB}}): the agent's knowledge contains an implication and its
 antecedent, not the conclusion.%
 \end{isamarkuptext}\isamarkuptrue%
