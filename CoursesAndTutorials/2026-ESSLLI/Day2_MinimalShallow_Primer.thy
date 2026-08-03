@@ -54,6 +54,6 @@ text\<open>Note: T + D + 4 would NOT suffice — reflexive + serial + transitive
   T + B + 4, i.e. KT5 = KTB4:\<close>
 
 lemma S5': "((\<forall>\<phi>. \<lfloor>\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<phi>\<rfloor>) \<and> (\<forall>\<phi>. \<lfloor>\<^bold>\<diamond>\<phi> \<^bold>\<rightarrow> \<^bold>\<box>\<^bold>\<diamond>\<phi>\<rfloor>)) \<longleftrightarrow> ((\<forall>\<phi>. \<lfloor>\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<phi>\<rfloor>) \<and> (\<forall>\<phi>. \<lfloor>\<phi> \<^bold>\<rightarrow> \<^bold>\<box>\<^bold>\<diamond>\<phi>\<rfloor>) \<and> (\<forall>\<phi>. \<lfloor>\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<^bold>\<box>\<^bold>\<box>\<phi>\<rfloor>))"
-  by (metis corr_T corr_B corr_4 corr_5 S5)
+  using corr_5 corr_B corr_4 corr_T S5 by simp 
 
 end
