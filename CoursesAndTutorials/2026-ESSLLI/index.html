@@ -147,6 +147,19 @@
   .topics > li:first-child { border-top: none; }
   .topic-title { font-weight: 600; font-size: 0.95rem; }
   .topic-desc { font-size: 0.87rem; color: var(--ink-soft); margin-top: 0.1rem; }
+  .materials {
+    margin-top: 0.85rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--rule-soft);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+  }
+  .materials .mlabel { letter-spacing: 0.18em; text-transform: uppercase; margin-right: 0.7em; }
+  .materials a { color: var(--d2); text-decoration: none; border-bottom: 1px solid currentColor; margin-right: 1.1em; white-space: nowrap; }
+  .materials a::before { content: "↓ "; }
+  .materials .none { font-style: italic; color: #9aa1ad; }
   .tag {
     font-family: var(--mono);
     font-size: 0.62rem;
