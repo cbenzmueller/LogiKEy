@@ -1,4 +1,4 @@
-theory SurjectiveCantor  imports Main 
+theory Day1_SurjectiveCantor  imports Main 
 begin        
 \<comment>\<open>Surjective Cantor theorem: traditional interactive proof\<close>
 theorem SurjectiveCantor:  "\<not>(\<exists>G.\<forall>F::'a\<Rightarrow>bool.\<exists>X::'a. G X = F)" 
