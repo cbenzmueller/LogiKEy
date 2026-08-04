@@ -106,6 +106,9 @@
   .prose p + p { margin-top: 0.85em; }
   .prose b { font-weight: 700; }
   .prose a { color: var(--d2); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .soft { text-transform: none; letter-spacing: 0; color: var(--ink-soft); }
+  .people { font-size: 0.95rem; line-height: 1.9; max-width: 47em; }
+  .people i { font-style: normal; color: var(--ink-soft); font-size: 0.82em; }
 
   /* ---------- timeline ---------- */
   .timeline { max-width: 47em; }
@@ -289,7 +292,7 @@
       <div class="tl"><div class="yr">2009–13</div><div class="ev"><b>Consolidation.</b> Access-control, intuitionistic, quantified multimodal and quantified conditional logics are embedded in HOL; faithfulness and automation are studied systematically.</div></div>
       <div class="tl"><div class="yr">2014–16</div><div class="ev"><b>Computational metaphysics.</b> Higher-order provers verify — and expose a hidden inconsistency in — Kurt Gödel's modal ontological argument, a widely-noticed success story for AI in metaphysics.</div></div>
       <div class="tl"><div class="yr">2017–20</div><div class="ev"><b>The name and the framework.</b> Together with <b>Xavier Parent</b> and <b>Leendert van der Torre</b>, the approach is consolidated into the LogiKEy framework and methodology for normative and legal-ethical reasoning; the flagship account appears in <i>Artificial Intelligence</i> (2020).</div></div>
-      <div class="tl"><div class="yr">2021–</div><div class="ev"><b>Expansion.</b> Deontic, epistemic, dynamic and metaphysical logics; value-oriented legal reasoning; a "deep &amp; shallow" recipe with mechanised faithfulness proofs; and an explicit case for <i>logical pluralism</i>.</div></div>
+      <div class="tl"><div class="yr">2021–</div><div class="ev"><b>Expansion.</b> Deontic, epistemic, dynamic and metaphysical logics; value-oriented legal reasoning; a "deep &amp; shallow" recipe with mechanised faithfulness proofs; and an explicit case for <i>logical pluralism</i> — advanced with <b>David Fuenmayor</b>, <b>Daniel Kirchner</b>, <b>Luca Pasetto</b> and many collaborators.</div></div>
     </div>
   </section>
 
@@ -387,12 +390,22 @@
   </section>
 
   <section>
+    <div class="seclabel">Key Contributors, Users &amp; Friends <span class="soft">(incomplete)</span></div>
+    <div class="prose" style="font-size:0.96rem;">
+      <p>LogiKEy has been shaped — and is carried forward — by many hands across the world. Among its contributors, users and friends:</p>
+      <p class="people">Lawrence&nbsp;C.&nbsp;Paulson <i>(Cambridge)</i> · Leendert&nbsp;van&nbsp;der&nbsp;Torre <i>(Luxembourg)</i> · Xavier&nbsp;Parent <i>(Vienna)</i> · Dana&nbsp;S.&nbsp;Scott <i>(Berkeley)</i> · Edward&nbsp;N.&nbsp;Zalta <i>(Stanford)</i> · Beishui&nbsp;Liao <i>(Hangzhou, China)</i> · Sujalad&nbsp;Shetty <i>(Dubai, UAE)</i> · Alexander&nbsp;Steen <i>(Greifswald)</i> · Geoff&nbsp;Sutcliffe <i>(Miami)</i> · Chad&nbsp;E.&nbsp;Brown <i>(Prague)</i> · Michael&nbsp;Kohlhase <i>(Erlangen)</i> · David&nbsp;Fuenmayor · Daniel&nbsp;Kirchner · Luca&nbsp;Pasetto · Réka&nbsp;Markovich · Bruno&nbsp;Woltzenlogel&nbsp;Paleo · Max&nbsp;Wisniewski · Bertram&nbsp;Lomfeld · Ali&nbsp;Farjami · Sebastian&nbsp;Reiche · Paul&nbsp;Meder · Valeria&nbsp;Zahoransky · Lara&nbsp;Lawniczak · Xu&nbsp;Li · Naiba&nbsp;Sultana · …</p>
+      <p><b>LogiKEy in teaching.</b> An award-winning logic course at FU&nbsp;Berlin, co-taught with <b>Alexander Steen</b> and <b>Max Wisniewski</b>, pioneered the classroom use of interactive and automated theorem provers — with computational metaphysics as a case study <a href="#ref-32">[32]</a>; the LogiKEy teaching methodology is described by Benzmüller &amp; Fuenmayor <a href="#ref-31">[31]</a>. LogiKEy is now used in logic courses at several universities.</p>
+    </div>
+  </section>
+
+  <section>
     <div class="seclabel">Selected Talks</div>
     <ul class="talks">
       <li><span class="ty">2026</span><span class="tt"><b>Many Logics, One Methodology.</b> <span>Topos Institute, Berkeley, USA (invited).</span></span></li>
       <li><span class="ty">2026</span><span class="tt"><b>On the Logical Necessity of God and the Impossibility of the Devil in Gödel's Argument.</b> <span>Berlin-Brandenburg Academy of Sciences and Humanities.</span></span></li>
       <li><span class="ty">2026</span><span class="tt"><b>Experimenting with the LogiKEy Framework &amp; Methodology.</b> <span>ESSLLI 2026 course, Prague — <a href="CoursesAndTutorials/2026-ESSLLI/" style="color:var(--d2);text-decoration:none;border-bottom:1px solid currentColor;">course page</a>.</span></span></li>
       <li><span class="ty">2022</span><span class="tt"><b>Ethico-Legal Governance of AI Systems / Trusted AI through Ethico-Legal Governors.</b> <span>Invited presentations.</span></span></li>
+      <li><span class="ty">2019</span><span class="tt"><b>Der Beweis.</b> <span>71. Science Slam Berlin, SO36 Kreuzberg — invited featured scientist. <a href="https://youtu.be/rXvboBiz7co" style="color:var(--d2);text-decoration:none;border-bottom:1px solid currentColor;">▶ video</a>.</span></span></li>
       <li><span class="ty">2013</span><span class="tt"><b>Gödel's God on the Computer.</b> <span>Vienna Kurt Gödel Society (invited) — the talk that started the metaphysics thread.</span></span></li>
       <li><span class="ty">—</span><span class="tt"><span>Tutorials and seminars on LogiKEy and Computational Metaphysics have been given on five continents. Full list: </span><a href="http://christoph-benzmueller.de/talks.html" style="color:var(--d2);text-decoration:none;border-bottom:1px solid currentColor;">christoph-benzmueller.de/talks</a>.</span></li>
     </ul>
@@ -431,6 +444,8 @@
       <li id="ref-28">C.&nbsp;Benzmüller, D.&nbsp;Fuenmayor, A.&nbsp;Steen, G.&nbsp;Sutcliffe: <i>Who Finds the Short Proof? An Exploration of Variants of Boolos' Curious Inference using Higher-order Automated Theorem Provers.</i> Logic Journal of the IGPL 32(3) (2024), 442–459. <a href="https://doi.org/10.1093/jigpal/jzac082">doi.org/10.1093/jigpal/jzac082</a></li>
       <li id="ref-29">T.&nbsp;Nipkow, L.&nbsp;C.&nbsp;Paulson, M.&nbsp;Wenzel: <i>Isabelle/HOL — A Proof Assistant for Higher-Order Logic.</i> LNCS 2283, Springer, 2002. <a href="https://doi.org/10.1007/3-540-45949-9">doi.org/10.1007/3-540-45949-9</a></li>
       <li id="ref-30">A.&nbsp;Steen, C.&nbsp;Benzmüller: <i>Extensional Higher-Order Paramodulation in Leo-III.</i> Journal of Automated Reasoning 65(6) (2021), 775–807. <a href="https://doi.org/10.1007/s10817-021-09588-x">doi.org/10.1007/s10817-021-09588-x</a></li>
+      <li id="ref-31">C.&nbsp;Benzmüller, D.&nbsp;Fuenmayor: <i>Mathematical Proof Assistants for Teaching Logic: The LogiKEy Methodology.</i> Book of Abstracts — V Congress Tools for Teaching Logic, 2023. <a href="https://doi.org/10.13140/RG.2.2.24708.74888">doi.org/10.13140/RG.2.2.24708.74888</a></li>
+      <li id="ref-32">A.&nbsp;Steen, M.&nbsp;Wisniewski, C.&nbsp;Benzmüller: <i>Einsatz von Theorembeweisern in der Lehre.</i> Commentarii informaticae didacticae (CID) 10 (2016), 81–92, Universitätsverlag Potsdam. <a href="https://publishup.uni-potsdam.de/opus4-ubp/frontdoor/index/index/docId/9485">publishup.uni-potsdam.de/…/docId/9485</a></li>
     </ol>
     <div class="prose" style="margin-top:1rem;font-size:0.92rem;">
       <p>This is a curated selection. A complete, up-to-date publication list is maintained at <a href="http://christoph-benzmueller.de/publications.html">christoph-benzmueller.de/publications</a>, and all LogiKEy source theories and datasets live in this repository.</p>
@@ -474,7 +489,7 @@
     card.style.left = left + 'px';
   }
   function hide() { hideTimer = setTimeout(function () { card.classList.remove('show'); }, 80); }
-  document.querySelectorAll('.reading a[href^="#ref-"]').forEach(function (a) {
+  document.querySelectorAll('a[href^="#ref-"]').forEach(function (a) {
     a.addEventListener('mouseenter', function () { show(a); });
     a.addEventListener('mouseleave', hide);
     a.addEventListener('focus', function () { show(a); });
