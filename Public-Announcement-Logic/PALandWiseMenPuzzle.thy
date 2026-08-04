@@ -89,9 +89,84 @@ begin
  (* Axiom schemes for RCK: implied by the semantical embedding *)
  lemma \<C>_normality: "\<^bold>\<lfloor>\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rightarrow>\<psi>\<^bold>\<rparr> \<^bold>\<rightarrow>(\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> \<^bold>\<rightarrow> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<psi>\<^bold>\<rparr>)\<^bold>\<rfloor>" unfolding Defs by blast
  lemma mix_axiom1: "\<^bold>\<lfloor>\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> \<^bold>\<rightarrow> (\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> (\<phi> \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>)))\<^bold>\<rfloor>" unfolding Defs by metis
- lemma mix_axiom2: "\<^bold>\<lfloor>(\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> (\<phi> \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>))) \<^bold>\<rightarrow> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>\<^bold>\<rfloor>" unfolding Defs (* timeout *) sorry
+ (* The two RCK axioms below (mix_axiom2, induction_axiom) previously ended in "sorry":
+    the automated provers (Sledgehammer/SMT) took too long, so we replaced these calls by
+    interactive proofs.  They instantiate the transitive-closure quantifier (tc) with a
+    seed-aware transitive relation; the helper R_in_tc is used below. *)
+ lemma R_in_tc: "R x y \<Longrightarrow> tc R x y" by (simp add: tc_def sub_rel_def)
+ lemma mix_axiom2: "\<^bold>\<lfloor>(\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> (\<phi> \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>))) \<^bold>\<rightarrow> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>\<^bold>\<rfloor>"
+proof -
+  { fix W w
+    assume H: "(\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> (\<phi> \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>))) W w"
+    define R where "R \<equiv> intersection_rel EVR (\<lambda>u z. W z \<and> \<chi> W z)"
+    define C where "C \<equiv> \<lambda>x. \<forall>v. tc R x v \<longrightarrow> \<phi> W v"
+    have Cchar: "\<And>x. \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> W x = C x" unfolding C_def R_def by simp
+    have seed: "\<And>y. R w y \<Longrightarrow> \<phi> W y \<and> C y"
+      using H unfolding Cchar[symmetric] R_def intersection_rel_def by blast
+    have hered: "\<And>x y. C x \<Longrightarrow> R x y \<Longrightarrow> \<phi> W y \<and> C y"
+    proof -
+      fix x y assume Cx: "C x" and Rxy: "R x y"
+      have txy: "tc R x y" using Rxy by (rule R_in_tc)
+      have "\<phi> W y" using Cx txy unfolding C_def by blast
+      moreover have "C y" using Cx txy trans_tc unfolding C_def transitive_def by metis
+      ultimately show "\<phi> W y \<and> C y" ..
+    qed
+    define Q where "Q \<equiv> \<lambda>x y. (x = w \<longrightarrow> (\<phi> W y \<and> C y)) \<and> (C x \<longrightarrow> (\<phi> W y \<and> C y))"
+    have subQ: "sub_rel R Q" unfolding Q_def sub_rel_def using seed hered by metis
+    have transQ: "transitive Q" unfolding Q_def transitive_def by blast
+    have "\<forall>v. tc R w v \<longrightarrow> \<phi> W v"
+    proof (intro allI impI)
+      fix v assume "tc R w v"
+      hence "Q w v" using transQ subQ unfolding tc_def by blast
+      thus "\<phi> W v" unfolding Q_def by simp
+    qed
+    hence "\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> W w" unfolding Cchar C_def by blast
+  }
+  thus ?thesis by blast
+qed
  lemma induction_axiom: "\<^bold>\<lfloor>((\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> \<phi>)) \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi> \<^bold>\<rightarrow> (\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> \<phi>))\<^bold>\<rparr>) \<^bold>\<rightarrow> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr>\<^bold>\<rfloor>"
-   unfolding Defs (* timeout *) sorry
+ (* former "sorry" here (prover timeout) -> interactive proof below *)
+proof -
+  { fix W w
+    assume Hyp: "((\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> \<phi>)) \<^bold>\<and> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi> \<^bold>\<rightarrow> (\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> \<phi>))\<^bold>\<rparr>) W w"
+    define R where "R \<equiv> intersection_rel EVR (\<lambda>u z. W z \<and> \<chi> W z)"
+    define EE where "EE \<equiv> \<lambda>x. (\<^bold>E\<^sub>\<A> (\<chi> \<^bold>\<rightarrow> \<phi>)) W x"
+    define C where "C \<equiv> \<lambda>x. \<forall>v. tc R x v \<longrightarrow> \<phi> W v"
+    have Cchar: "\<And>x. \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> W x = C x" unfolding C_def R_def by simp
+    have A: "EE w" using Hyp unfolding EE_def by simp
+    have B: "\<And>v. tc R w v \<Longrightarrow> \<phi> W v \<Longrightarrow> EE v" using Hyp unfolding EE_def R_def by auto
+    have Ephi: "\<And>x y. EE x \<Longrightarrow> R x y \<Longrightarrow> \<phi> W y" unfolding EE_def R_def intersection_rel_def by auto
+    define G where "G \<equiv> \<lambda>x. tc R w x \<and> EE x"
+    have seed: "\<And>y. R w y \<Longrightarrow> \<phi> W y \<and> G y"
+    proof -
+      fix y assume Rwy: "R w y"
+      have p: "\<phi> W y" using A Rwy by (rule Ephi)
+      have t: "tc R w y" using Rwy by (rule R_in_tc)
+      have "EE y" using B t p by blast
+      thus "\<phi> W y \<and> G y" using p t unfolding G_def by simp
+    qed
+    have hered: "\<And>x y. G x \<Longrightarrow> R x y \<Longrightarrow> \<phi> W y \<and> G y"
+    proof -
+      fix x y assume Gx: "G x" and Rxy: "R x y"
+      have tx: "tc R w x" and ex: "EE x" using Gx unfolding G_def by auto
+      have p: "\<phi> W y" using ex Rxy by (rule Ephi)
+      have t: "tc R w y" using tx Rxy R_in_tc trans_tc unfolding transitive_def by metis
+      have "EE y" using B t p by blast
+      thus "\<phi> W y \<and> G y" using p t unfolding G_def by simp
+    qed
+    define Q where "Q \<equiv> \<lambda>x y. (x = w \<or> G x) \<longrightarrow> (\<phi> W y \<and> G y)"
+    have subQ: "sub_rel R Q" unfolding Q_def sub_rel_def using seed hered by metis
+    have transQ: "transitive Q" unfolding Q_def transitive_def by blast
+    have "\<forall>v. tc R w v \<longrightarrow> \<phi> W v"
+    proof (intro allI impI)
+      fix v assume "tc R w v"
+      hence "Q w v" using transQ subQ unfolding tc_def by blast
+      thus "\<phi> W v" unfolding Q_def by blast
+    qed
+    hence "\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> W w" unfolding Cchar C_def by blast
+  }
+  thus ?thesis by blast
+qed
  
  (* Necessitation rules: implied by the semantical embedding *)
  lemma announcement_nec: assumes 1: "\<^bold>\<lfloor>\<phi>\<^bold>\<rfloor>" shows "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<psi>\<^bold>]\<phi>\<^bold>\<rfloor>" using 1 by auto 
@@ -146,7 +221,7 @@ begin
  (* Automated solutions of the Wise Men Puzzle *)
  theorem whitespot_c: 
      "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>a (\<^sup>Aws a)) \<^bold>\<or> (\<^bold>K\<^sub>a (\<^bold>\<not>\<^sup>Aws a)))\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>((\<^bold>K\<^sub>b (\<^sup>Aws b)) \<^bold>\<or> (\<^bold>K\<^sub>b (\<^bold>\<not>\<^sup>Aws b)))\<^bold>](\<^bold>K\<^sub>c (\<^sup>Aws c)))\<^bold>\<rfloor>" 
-   using WM1 WM2ba WM2ca WM2cb group_S5 unfolding Defs by smt 
+   using WM1 WM2ba WM2ca WM2cb group_S5 unfolding Defs by (smt (verit, best))
 
  theorem "\<^bold>\<lfloor>\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>a(\<^sup>Aws a)\<^bold>](\<^bold>[\<^bold>!\<^bold>\<not>\<^bold>K\<^sub>b(\<^sup>Aws b)\<^bold>](\<^bold>K\<^sub>c (\<^sup>Aws c)))\<^bold>\<rfloor>" 
    using WM1 WM2ba WM2ca WM2cb group_S5 unfolding Defs 
