@@ -103,7 +103,7 @@ begin
  lemma "\<^bold>\<lfloor>(\<^bold>[\<^bold>!\<phi>\<^bold>](\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<psi>\<^bold>\<rparr>)) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<rightarrow> (\<^bold>C\<^bold>\<lparr>\<phi>\<^bold>\<and>(\<^bold>[\<^bold>!\<phi>\<^bold>]\<chi>)\<^bold>|\<^bold>[\<^bold>!\<phi>\<^bold>]\<psi>\<^bold>\<rparr>))\<^bold>\<rfloor>" 
    by (smt intersection_rel_def sub_rel_def tc_def transitive_def)
 
- declare [[smt_solver=cvc4,smt_oracle]]
+ declare [[smt_solver=z3,smt_oracle]]
 
  (* Axiom schemes for RCK: implied by the semantical embedding *)
  lemma \<C>_normality: "\<^bold>\<lfloor>\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rightarrow>\<psi>\<^bold>\<rparr> \<^bold>\<rightarrow>(\<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<phi>\<^bold>\<rparr> \<^bold>\<rightarrow> \<^bold>C\<^bold>\<lparr>\<chi>\<^bold>|\<psi>\<^bold>\<rparr>)\<^bold>\<rfloor>" unfolding Defs by blast
@@ -140,7 +140,7 @@ begin
  lemma "\<^bold>\<lfloor>(\<^bold>K\<^sub>a \<phi>) \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<phi>\<^bold>](\<phi> \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<phi>)\<^bold>\<rfloor>" nitpick oops (* countermodel found *)
 
  (*** Encoding of the wise men puzzle in PAL ***)
- (* Choose CVC4 as smt solver *)  declare [[smt_solver=cvc4,smt_oracle,smt_timeout=1200]]
+ (* Choose z3 as smt solver *)  declare [[smt_solver=z3,smt_oracle,smt_timeout=1200]]
  (* Common knowledge: At least one of a, b and c has a white spot *)
  consts ws::"\<alpha>\<Rightarrow>\<sigma>" 
  axiomatization where WM1: "\<^bold>\<lfloor>\<^bold>C\<^sub>\<A> (\<^sup>Aws a \<^bold>\<or> \<^sup>Aws b \<^bold>\<or> \<^sup>Aws c)\<^bold>\<rfloor>" 

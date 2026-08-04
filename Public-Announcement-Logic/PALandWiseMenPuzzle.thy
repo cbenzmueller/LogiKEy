@@ -121,7 +121,7 @@ begin
  lemma "\<^bold>\<lfloor>(\<^bold>K\<^sub>a \<phi>) \<^bold>\<rightarrow> \<^bold>\<not>\<^bold>[\<^bold>!\<phi>\<^bold>](\<phi> \<^bold>\<and> \<^bold>\<not>\<^bold>K\<^sub>a \<phi>)\<^bold>\<rfloor>" nitpick oops (* countermodel found *)
 
  (*** Encoding of the wise men puzzle in PAL ***)
- (* Choose CVC4 as smt solver *)  declare [[smt_solver=cvc4,smt_oracle,smt_timeout=60]]
+ (* Choose z3 as smt solver *)  declare [[smt_solver=z3,smt_oracle,smt_timeout=60]]
  (* Common knowledge: At least one of a, b and c has a white spot *)
  consts ws::"\<alpha>\<Rightarrow>\<sigma>" 
  axiomatization where WM1: "\<^bold>\<lfloor>\<^bold>C\<^sub>\<A> (\<^sup>Aws a \<^bold>\<or> \<^sup>Aws b \<^bold>\<or> \<^sup>Aws c)\<^bold>\<rfloor>" 

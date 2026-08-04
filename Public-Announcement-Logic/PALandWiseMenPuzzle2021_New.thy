@@ -82,7 +82,7 @@ begin
  lemma "\<^bold>\<lfloor>(\<^bold>[\<^bold>!\<phi>\<^bold>](\<^bold>C\<^sub>A\<^bold>\<lparr>\<chi>\<^bold>|\<psi>\<^bold>\<rparr>)) \<^bold>\<leftrightarrow> (\<phi> \<^bold>\<rightarrow> (\<^bold>C\<^sub>A\<^bold>\<lparr>\<phi>\<^bold>\<and>(\<^bold>[\<^bold>!\<phi>\<^bold>]\<chi>)\<^bold>|\<^bold>[\<^bold>!\<phi>\<^bold>]\<psi>\<^bold>\<rparr>))\<^bold>\<rfloor>" 
    by (smt intersection_rel_def sub_rel_def tc_def transitive_def)
 
- declare [[smt_solver=cvc4,smt_oracle]]
+ declare [[smt_solver=z3,smt_oracle]]
 
  abbreviation "S5Agent i \<equiv> reflexive i \<and> transitive i \<and> euclidean i"
  abbreviation "S5Agents A \<equiv> \<forall>i. (A i \<longrightarrow> S5Agent i)"

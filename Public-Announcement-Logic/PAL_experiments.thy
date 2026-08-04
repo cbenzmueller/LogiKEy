@@ -4,7 +4,7 @@ theory PAL_experiments imports PAL_definitions
 begin
  (* Parameter settings *)
  nitpick_params[user_axioms=true, format=4, show_all]
- declare [[smt_solver=cvc4,smt_oracle]]
+ declare [[smt_solver=z3,smt_oracle]]
 
  (*Some useful lemmata *) 
  lemma trans_tc: "transitive (tc R)" unfolding Defs by metis

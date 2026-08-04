@@ -87,7 +87,7 @@ begin
    (* sledgehammer finds proof, reconstruction fails *) oops
  
 
- declare [[smt_solver=cvc4,smt_oracle]]
+ declare [[smt_solver=z3,smt_oracle]]
 
  definition "S5Agent i \<equiv> reflexive i \<and> transitive i \<and> euclidean i"
  definition "S5Agents A \<equiv> \<forall>i. (A i \<longrightarrow> S5Agent i)"

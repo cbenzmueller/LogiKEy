@@ -52,7 +52,7 @@ lemma "\<lfloor>(\<^bold>\<forall>x.\<^bold>\<box>(\<phi> x)) \<^bold>\<rightarr
 lemma "\<lfloor>(\<^bold>\<box>(\<^bold>\<forall>x.(\<phi> x))) \<^bold>\<rightarrow> \<^bold>\<forall>x.\<^bold>\<box>(\<phi> x)\<rfloor>" by simp
 
 (*unimportant*) nitpick_params[user_axioms,show_all]
-(*unimportant*) declare [[smt_solver=cvc4,smt_oracle]]
+(*unimportant*) declare [[smt_solver=z3,smt_oracle]]
 end
 
 

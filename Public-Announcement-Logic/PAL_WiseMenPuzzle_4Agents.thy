@@ -3,7 +3,7 @@ theory PAL_WiseMenPuzzle_4Agents imports PAL_definitions
 
 begin
  (* Parameter settings *)
- declare [[smt_solver=cvc4,smt_oracle,smt_timeout=120]]
+ declare [[smt_solver=z3,smt_oracle,smt_timeout=120]]
 
  (*** Encoding of the wise men puzzle in PAL ***)
  consts a::"\<alpha>" b::"\<alpha>" c::"\<alpha>" d::"\<alpha>" (* Agents modeled as accessibility relations *)

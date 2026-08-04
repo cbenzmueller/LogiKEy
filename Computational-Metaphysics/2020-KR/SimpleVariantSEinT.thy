@@ -37,7 +37,7 @@ end
 
 (*Positive Properties as a Hauptfilter*)
 
-(*unimportant*) declare [[smt_solver = cvc4, smt_oracle]]
+(*unimportant*) declare [[smt_solver=z3, smt_oracle]]
 
 (*Let CP denote the conjunction of all positive properties*)
 consts CP::\<gamma>
