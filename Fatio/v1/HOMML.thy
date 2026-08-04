@@ -44,7 +44,7 @@ lemma "((\<lambda>x. False) \<Turnstile> \<phi>) \<longleftrightarrow> (\<lfloor
 definition L_global_consequence :: "(\<sigma> list) \<Rightarrow> \<sigma> \<Rightarrow> bool" ("_\<Turnstile>l_") where "\<Gamma> \<Turnstile>l \<phi> \<equiv> \<forall>w. ((\<forall>\<gamma>. (List.member \<Gamma> \<gamma>) \<longrightarrow> (\<gamma> w)) \<longrightarrow> \<phi> w)"
 
 lemma "([] \<Turnstile>l \<phi>) \<longleftrightarrow> (\<lfloor>\<phi>\<rfloor>)"
-  by (simp add: L_global_consequence_def global_valid_def member_rec(2))
+  by (simp add: L_global_consequence_def global_valid_def List.member_iff)
 
 (*Introducing "Defs" as the set of the above definitions; useful for convenient unfolding.*)
 named_theorems Defs 

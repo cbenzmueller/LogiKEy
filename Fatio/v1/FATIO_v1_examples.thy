@@ -27,8 +27,8 @@ lemma
     )
    ))"
   apply simp
-  using Speaker.exhaust global_consequence_def member_rec(2)
-  by (smt (verit) Speaker.exhaust global_consequence_def member_rec(2))
+  using Speaker.exhaust global_consequence_def List.member_iff
+  by (smt (verit) Speaker.exhaust global_consequence_def List.member_iff)
 
 
 
@@ -41,8 +41,8 @@ lemma
     )
    )"
   apply simp
-  using Speaker.exhaust global_consequence_def member_rec(2)
-  by (smt (verit) Speaker.exhaust global_consequence_def member_rec(2))
+  using Speaker.exhaust global_consequence_def List.member_iff
+  by (smt (verit) Speaker.exhaust global_consequence_def List.member_iff)
 
 
 (* apply one step *)
@@ -60,7 +60,7 @@ lemma
     \<lambda>x. (x = \<^bold>D\<^sub>a\<^bold>B\<^sub>b\<^bold>B\<^sub>a  {r\<^sup>a}) \<or> (x = \<^bold>D\<^sub>a\<^bold>B\<^sub>c\<^bold>B\<^sub>a  {r\<^sup>a}) \<or>
     (\<forall>k j. k \<noteq> a \<and> j \<noteq> a \<longrightarrow> x = \<^bold>B\<^sub>k \<^bold>D\<^sub>a \<^bold>B\<^sub>j \<^bold>B\<^sub>a mkHOMMLatom r) \<or> (x = MapDone assert[a,r\<^sup>a])
     ))"
-  apply (simp add: member_rec(2))
+  apply (simp add: List.member_iff)?
   by (smt (verit) Speaker.exhaust global_consequence_def)
 
 (*
@@ -103,7 +103,7 @@ lemma
     )
     ))"
   apply simp
-  apply (simp add: member_rec(1))
+  apply (simp add: List.member_iff)?
   (* Nitpick found a counterexample *)
   oops
 
@@ -122,7 +122,7 @@ lemma
     )
   ))"
   apply simp
-  apply (simp add: member_rec(1))
+  apply (simp add: List.member_iff)?
   by (smt (verit) Speaker.exhaust global_consequence_def)
 
 (* i can also prove it with fatiocheckrec *)
@@ -140,7 +140,7 @@ lemma
     )
   )"
   apply simp
-  apply (simp add: member_rec(1))
+  apply (simp add: List.member_iff)?
   by (smt (verit) Speaker.exhaust global_consequence_def)
 
 (* but then, those 2 formulas were different!?  *)
@@ -178,7 +178,7 @@ lemma "successfulResult (FatioCheck (
 ))
 ))"
   apply simp
-  apply (simp add: member_rec(1))
+  apply (simp add: List.member_iff)?
   by (smt (verit, del_insts) Speaker.exhaust global_consequence_def mand_def)
 
 

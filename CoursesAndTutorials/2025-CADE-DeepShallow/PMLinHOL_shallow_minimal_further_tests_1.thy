@@ -56,7 +56,7 @@ lemma K:     "                                  \<Turnstile>\<^sup>m F2"        
                                                                       apply simp nitpick sledgehammer oops    (*ctex*) (*no prf*)
 
 
-lemma S5:   "AxT \<and> AxB \<and> Ax4 \<longrightarrow> \<Turnstile>\<^sup>m F3"                      nitpick sledgehammer             (*none*) (*proof*))
+lemma S5:   "AxT \<and> AxB \<and> Ax4 \<longrightarrow> \<Turnstile>\<^sup>m F3"                      nitpick sledgehammer             (*none*) (*proof*)
                                                                       apply simp nitpick sledgehammer oops    (*none*) (*proof*)
 lemma S4:   "AxT \<and>           Ax4 \<longrightarrow> \<Turnstile>\<^sup>m F3"                      nitpick sledgehammer             (*ctex*) (*no prf*)
                                                                       apply simp nitpick sledgehammer oops    (*ctex*) (*no prf*)

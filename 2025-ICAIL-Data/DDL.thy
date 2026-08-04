@@ -48,7 +48,7 @@ begin
  abbreviation ddlobl::\<gamma> ("\<^bold>\<circle><_>") where "\<^bold>\<circle><A> \<equiv>  \<^bold>O\<^bold>\<langle>A\<^bold>|\<^bold>\<top>\<^bold>\<rangle>"  (*New syntax: A is obligatory.*)
 
 (* Consistency *) 
-lemma True nitpick [satisfy,user_axioms,show_all] 
+lemma True nitpick [satisfy,user_axioms,show_all] oops
 
 end
 

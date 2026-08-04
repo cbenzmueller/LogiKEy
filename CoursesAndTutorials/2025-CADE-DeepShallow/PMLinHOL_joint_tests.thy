@@ -155,7 +155,6 @@ lemma "KTBs \<longrightarrow> F2s"    apply simp nitpick sledgehammer oops  (* p
 lemma "KTBm \<longrightarrow> F2m" apply simp nitpick sledgehammer oops  (* proof found *)
 
 
-end
 
 lemma "K \<longrightarrow> F2d"   apply simp nitpick sledgehammer oops
 lemma "K \<longrightarrow> F2s"   apply simp nitpick sledgehammer oops
@@ -187,7 +186,6 @@ lemma "K4m \<longrightarrow> F2m"  nitpick sledgehammer oops
 
 
 
-end 
 lemma assumes KT    shows F2d   nitpick sledgehammer oops
 lemma assumes KT    shows F2s   nitpick sledgehammer oops
 lemma assumes KT    shows F2m  nitpick sledgehammer oops

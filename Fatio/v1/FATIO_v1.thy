@@ -81,7 +81,7 @@ lemma "(λx. x=(❙B⇩a φ)) ⊨ (❙B⇩a φ)"
 
 term "[❙B⇩a φ] ⊨l (❙B⇩a φ)"
 lemma "[❙B⇩a φ] ⊨l (❙B⇩a φ)"
-  by (metis L_global_consequence_def in_set_member list.set_intros(1))
+  by (metis L_global_consequence_def List.member_iff list.set_intros(1))
 
 (* testing beliefs *)
 term "⊨⇧B⇧D (❙B⇩a φ)"
@@ -336,7 +336,7 @@ primrec isIn :: "DOS ⇒ DOS list ⇒ bool" where
 *)
 value "List.member  [1, 2, 3, 4, 5] (3::int)"
 lemma "List.member  [1, 2, 3, 4, 5] (3::int)" (* use this to check that an element is ∈a list *)
-  by (simp add: member_rec(1))
+  by (simp add: List.member_iff)
 
 fun reverse_list :: "'a list ⇒ 'a list ⇒ 'a list" where
   "reverse_list [] acc = acc" |
@@ -559,8 +559,7 @@ lemma "GammaAdd assert[a,(p⇧a)] = (λx. (∀k j. k ≠ a ∧ j ≠ a ⟶ x = �
 
 term "L_GammaAdd assert[a,(p⇧a)]"
 lemma "¬(L_GammaAdd assert[a,(p⇧a)] [] = [])"
-  apply simp
-  by (simp add: member_rec(2))
+  by simp
 
 lemma "L_GammaAdd assert[a,(p⇧a)] [ ❙B⇩b ❙D⇩a ❙B⇩b ❙B⇩a mkHOMMLatom p] = [ ❙B⇩b ❙D⇩a ❙B⇩b ❙B⇩a mkHOMMLatom p]"
   apply simp
@@ -694,7 +693,7 @@ lemma "PreCond assert[a,(p⇧a → q⇧a)] [] (λx. x = ❙D⇩a❙B⇩b❙B⇩a
   apply simp
   unfolding global_consequence_def
   apply simp
-  by (metis Speaker.exhaust member_rec(2))
+  by (metis Speaker.exhaust List.member_iff)
 
 
 
@@ -827,7 +826,7 @@ lemma h1:
   shows "successfulResult (FatioCheck ( ([assert[a,r⇧a]]), [], Γ ))"
   apply simp
   (* Nitpick found a counterexample id there is consistency check on Gamma *)
-  (* by (metis Map1.simps(1) Speaker.exhaust a1 a2 member_rec(2)) *)
+  (* by (metis Map1.simps(1) Speaker.exhaust a1 a2 List.member_iff) *)
   oops
 
 lemma 
@@ -835,7 +834,7 @@ lemma
     a2: "Γ ⊨ ❙D⇩a❙B⇩c❙B⇩a {r⇧a}"
   shows  "PreCond assert[a,r⇧a] [] Γ"
   apply simp
-  by (metis Map1.simps(1) Speaker.exhaust a1 a2 member_rec(2))
+  by (metis Map1.simps(1) Speaker.exhaust a1 a2 List.member_iff)
 
 lemma h2:
   assumes a1: "PreCond assert[a,r⇧a] [] Γ"
@@ -845,7 +844,7 @@ lemma h2:
 
 lemma  "((Γ ⊨ ❙D⇩a❙B⇩b❙B⇩a {r⇧a}) ∧ (Γ ⊨ ❙D⇩a❙B⇩c❙B⇩a {r⇧a})) ⟷ PreCond assert[a,r⇧a] [] Γ"
   apply simp
-  by (metis Speaker.distinct(1) Speaker.distinct(3) Speaker.exhaust member_rec(2))
+  by (metis Speaker.distinct(1) Speaker.distinct(3) Speaker.exhaust List.member_iff)
 
 lemma 
   assumes a1: "PreCond assert[a,r⇧a] [] Γ"

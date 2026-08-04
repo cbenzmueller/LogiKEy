@@ -5,7 +5,6 @@ begin
 abbreviation(input) "AxT \<equiv> \<forall>\<phi>. \<Turnstile>\<^sup>d (\<box>\<^sup>d\<phi>) \<supset>\<^sup>d \<phi>"
 abbreviation(input) "AxB \<equiv> \<forall>\<phi>. \<Turnstile>\<^sup>d \<phi> \<supset>\<^sup>d \<box>\<^sup>d(\<diamond>\<^sup>d\<phi>)"
 abbreviation(input) "Ax4 \<equiv> \<forall>\<phi>. \<Turnstile>\<^sup>d (\<box>\<^sup>d\<phi>) \<supset>\<^sup>d \<box>\<^sup>d(\<box>\<^sup>d\<phi>)"
-end    
 consts \<phi>::PML \<psi>::PML
 abbreviation(input) "F1   \<equiv> (\<diamond>\<^sup>d(\<diamond>\<^sup>d\<phi>)) \<supset>\<^sup>d \<diamond>\<^sup>d\<phi>"                                             \<comment>\<open>holds in K4\<close>
 abbreviation(input) "F2   \<equiv> (\<diamond>\<^sup>d(\<box>\<^sup>d\<phi>)) \<supset>\<^sup>d \<box>\<^sup>d(\<diamond>\<^sup>d\<phi>)"                                      \<comment>\<open>holds in KB\<close>

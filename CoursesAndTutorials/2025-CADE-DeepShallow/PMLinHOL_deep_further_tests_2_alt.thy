@@ -5,7 +5,6 @@ begin
 abbreviation(input) refl ("\<r>") where "\<r> \<equiv> \<lambda>R. reflexive R"
 abbreviation(input) sym ("\<s>") where "\<s> \<equiv> \<lambda>R.  symmetric R"
 abbreviation(input) tra ("\<t>") where "\<t> \<equiv> \<lambda>R.  transitive R"
-end
 consts \<phi>::PML \<psi>::PML
 abbreviation(input) "F1   \<equiv> (\<diamond>\<^sup>d(\<diamond>\<^sup>d\<phi>)) \<supset>\<^sup>d \<diamond>\<^sup>d\<phi>"                                             \<comment>\<open>holds in K4\<close>
 abbreviation(input) "F2   \<equiv> (\<diamond>\<^sup>d(\<box>\<^sup>d\<phi>)) \<supset>\<^sup>d \<box>\<^sup>d(\<diamond>\<^sup>d\<phi>)"                                      \<comment>\<open>holds in KB\<close>
