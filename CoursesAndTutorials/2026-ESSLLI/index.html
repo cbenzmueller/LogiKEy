@@ -217,6 +217,32 @@
   .refs li:target { background: #fbf1dd; box-shadow: -0.5rem 0 0 #fbf1dd, 0.5rem 0 0 #fbf1dd; border-radius: 2px; }
   .refs a { font-family: var(--mono); font-size: 0.74rem; color: var(--d2); text-decoration: none; border-bottom: 1px solid currentColor; word-break: break-all; }
 
+  /* ---------- hover preview card for Further Reading links ---------- */
+  .refcard {
+    position: absolute;
+    z-index: 60;
+    max-width: 360px;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    box-shadow: 0 8px 26px rgba(30,36,48,0.16);
+    padding: 0.6rem 0.75rem;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    line-height: 1.42;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-3px);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+  }
+  .refcard.show { opacity: 1; transform: translateY(0); }
+  .refcard i { font-style: italic; }
+  .refcard a { color: var(--d2); font-family: var(--mono); font-size: 0.72rem; word-break: break-all; }
+  .refcard .rn { font-family: var(--mono); color: var(--accent); font-weight: 700; margin-right: 0.4em; }
+  @media (max-width: 620px) { .refcard { display: none; } }
+
   /* ---------- footer ---------- */
   footer {
     margin-top: 3rem;
@@ -330,8 +356,8 @@
             <div class="topic-desc">Quantified Boolean formulas and first-order multimodal logics via SSE; automation of faithfulness proofs; converting formulas across embeddings.</div>
           </li>
         </ul>
-        <div class="materials"><span class="mlabel">Materials</span><a href="Day2_DeepShallow_1.pdf">Deep &amp; Shallow, part 1 (PDF)</a><a href="Day2_MinimalShallow_Primer.thy">Minimal Shallow Embedding Primer (.thy)</a></div>
-        <div class="materials reading"><span class="mlabel">Further Reading</span><a href="#ref-6">[6]</a><a href="#ref-7">[7]</a><a href="#ref-8">[8]</a><a href="#ref-22">[22]</a><a href="#ref-23">[23]</a></div>
+        <div class="materials"><span class="mlabel">Materials</span><a href="Day2_DeepShallow_1_PMLandQBFinHOL.pdf">Deep &amp; Shallow, part 1: PML &amp; QBF (PDF)</a><a href="Day2_DeepShallow_2_FMLinHOL.pdf">Deep &amp; Shallow, part 2: FML (PDF)</a><a href="Day2_MinimalShallow_Primer.thy">Minimal Shallow Embedding Primer (.thy)</a></div>
+        <div class="materials reading"><span class="mlabel">Further Reading</span><a href="#ref-6">[6]</a><a href="#ref-7">[7]</a><a href="#ref-8">[8]</a><a href="#ref-22">[22]</a><a href="#ref-23">[23]</a><a href="#ref-24">[24]</a></div>
       </div>
     </div>
 
@@ -406,7 +432,7 @@
             <div class="topic-desc">Comments on open problems, unification, and future directions.</div>
           </li>
         </ul>
-        <div class="materials"><span class="mlabel">Materials</span><span class="none">to be added</span></div>
+        <div class="materials"><span class="mlabel">Materials</span><a href="Day5_GodelGodDevil.pdf">Gödel — God &amp; the Devil (PDF)</a></div>
         <div class="materials reading"><span class="mlabel">Further Reading</span><a href="#ref-16">[16]</a><a href="#ref-17">[17]</a><a href="#ref-18">[18]</a><a href="#ref-21">[21]</a></div>
       </div>
     </div>
@@ -445,6 +471,7 @@
       <li id="ref-21">C.&nbsp;Benzmüller, B.&nbsp;Woltzenlogel Paleo: <i>The Inconsistency in Gödel’s Ontological Argument: A Success Story for AI in Metaphysics.</i> IJCAI 2016, pp. 936–942. <a href="https://www.ijcai.org/Proceedings/16/Papers/137.pdf">ijcai.org/Proceedings/16/Papers/137.pdf</a></li>
       <li id="ref-22">C.&nbsp;Benzmüller, L.&nbsp;C.&nbsp;Paulson: <i>Multimodal and Intuitionistic Logics in Simple Type Theory.</i> Logic Journal of the IGPL 18(6): 881–892, 2010. <a href="https://doi.org/10.1093/jigpal/jzp080">doi.org/10.1093/jigpal/jzp080</a></li>
       <li id="ref-23">C.&nbsp;Benzmüller, L.&nbsp;C.&nbsp;Paulson: <i>Quantified Multimodal Logics in Simple Type Theory.</i> Logica Universalis 7(1): 7–20, 2013. <a href="https://doi.org/10.1007/s11787-012-0052-y">doi.org/10.1007/s11787-012-0052-y</a></li>
+      <li id="ref-24">C.&nbsp;Benzmüller: <i>Combining and Automating Classical and Non-classical Logics in Classical Higher-Order Logic.</i> Annals of Mathematics and Artificial Intelligence 62(1–2): 103–128, 2011. <a href="https://doi.org/10.1007/s10472-011-9249-7">doi.org/10.1007/s10472-011-9249-7</a></li>
     </ol>
   </section>
 
@@ -458,5 +485,41 @@
   </footer>
 
 </div>
+
+<script>
+(function () {
+  var card = document.createElement('div');
+  card.className = 'refcard';
+  document.body.appendChild(card);
+  var hideTimer;
+
+  function show(a) {
+    clearTimeout(hideTimer);
+    var id = (a.getAttribute('href') || '').slice(1);
+    var li = document.getElementById(id);
+    if (!li) return;
+    var num = (id.match(/\d+/) || [''])[0];
+    card.innerHTML = '<span class="rn">[' + num + ']</span>' + li.innerHTML;
+    card.classList.add('show');
+    var r = a.getBoundingClientRect();
+    card.style.top = (window.scrollY + r.bottom + 6) + 'px';
+    card.style.left = '0px';                         // measure width first
+    var cw = card.offsetWidth;
+    var left = window.scrollX + r.left;
+    var maxLeft = window.scrollX + document.documentElement.clientWidth - cw - 10;
+    if (left > maxLeft) left = maxLeft;
+    if (left < window.scrollX + 8) left = window.scrollX + 8;
+    card.style.left = left + 'px';
+  }
+  function hide() { hideTimer = setTimeout(function () { card.classList.remove('show'); }, 80); }
+
+  document.querySelectorAll('.materials.reading a[href^="#ref-"]').forEach(function (a) {
+    a.addEventListener('mouseenter', function () { show(a); });
+    a.addEventListener('mouseleave', hide);
+    a.addEventListener('focus', function () { show(a); });
+    a.addEventListener('blur', hide);
+  });
+})();
+</script>
 </body>
 </html>
