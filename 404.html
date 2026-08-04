@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LogiKEy — redirecting…</title>
+<script>
+/* This page is served by GitHub Pages for any path that is not a published page.
+   It preserves the historical logikey.org behaviour: every repository path
+   (e.g. /tree/master/2026-AAMAS-Data cited in publications) is forwarded to the
+   GitHub repository, so all links printed in papers keep working. */
+(function () {
+  var REPO = "https://github.com/cbenzmueller/LogiKEy";
+  var p = location.pathname || "/";
+  // On the project URL (cbenzmueller.github.io/LogiKEy/...) strip the repo prefix;
+  // under a custom domain (logikey.org) there is no such prefix.
+  p = p.replace(/^\/LogiKEy(?=\/|$)/, "");
+  p = p.replace(/^\/+/, "");                       // trim leading slashes
+  var target = p ? (REPO + "/" + p + location.search + location.hash) : REPO;
+  location.replace(target);
+})();
+</script>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+         background: #fdfdfb; color: #1e2430; max-width: 40rem; margin: 6rem auto; padding: 0 1.5rem; line-height: 1.6; }
+  a { color: #0e7c6b; }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; background: #edebe5; padding: 0.1em 0.35em; border-radius: 3px; }
+</style>
+</head>
+<body>
+  <p>Redirecting to the LogiKEy repository…</p>
+  <p>If you are not redirected automatically, continue to
+     <a id="lnk" href="https://github.com/cbenzmueller/LogiKEy">the LogiKEy repository on GitHub</a>,
+     or return to <a href="/">logikey.org</a>.</p>
+  <script>
+    try {
+      var REPO = "https://github.com/cbenzmueller/LogiKEy";
+      var p = (location.pathname || "/").replace(/^\/LogiKEy(?=\/|$)/, "").replace(/^\/+/, "");
+      document.getElementById("lnk").href = p ? (REPO + "/" + p) : REPO;
+    } catch (e) {}
+  </script>
+</body>
+</html>

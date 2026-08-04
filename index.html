@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LogiKEy — Logic-Pluralistic Knowledge Representation and Reasoning</title>
+<style>
+  :root {
+    --ink: #1e2430;
+    --ink-soft: #4b5563;
+    --paper: #fdfdfb;
+    --rule: #e2e0da;
+    --rule-soft: #edebe5;
+    --accent: #c2751a;
+    --d1: #b45309;  /* foundations   — amber  */
+    --d2: #0e7c6b;  /* embeddings    — teal   */
+    --d3: #9f1239;  /* normative     — maroon */
+    --d4: #5b4a9f;  /* metaphysics   — violet */
+    --d5: #2f6b3a;  /* epistemic     — green  */
+    --d6: #1f6091;  /* mathematics   — blue   */
+    --d7: #8a5a12;  /* ethics/args   — bronze */
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    padding: 3.5rem 1.5rem 4rem;
+  }
+  .page { max-width: 880px; margin: 0 auto; }
+
+  /* ---------- header ---------- */
+  .overline {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.1rem;
+  }
+  .overline a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  .uc {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px dashed var(--accent);
+    border-radius: 3px;
+    padding: 0.22em 0.6em;
+    margin-bottom: 1.5rem;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(2.4rem, 7vw, 4rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.7rem;
+  }
+  .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.9rem;
+    max-width: 48em;
+  }
+  .meta {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.85rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0;
+    align-items: baseline;
+  }
+  .meta b { font-weight: 700; }
+  .meta .dot { color: var(--accent); margin: 0 0.9em; }
+
+  /* ---------- sections ---------- */
+  section { margin-top: 2.6rem; }
+  .seclabel {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.04rem;
+    max-width: 47em;
+    color: var(--ink);
+  }
+  .prose p + p { margin-top: 0.85em; }
+  .prose b { font-weight: 700; }
+  .prose a { color: var(--d2); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+  /* ---------- timeline ---------- */
+  .timeline { max-width: 47em; }
+  .tl {
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    border-top: 1px dashed var(--rule-soft);
+    padding: 0.7rem 0;
+  }
+  .tl:first-child { border-top: none; }
+  .tl .yr { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); padding-top: 0.05rem; }
+  .tl .ev { font-size: 0.95rem; }
+  .tl .ev b { font-weight: 700; }
+
+  /* ---------- domain cards ---------- */
+  .domain {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    border-top: 1px solid var(--rule);
+    padding: 1.35rem 0 1.55rem;
+  }
+  .domain:last-of-type { border-bottom: 1px solid var(--rule); }
+  .dwhen {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    padding-top: 0.25rem;
+    text-transform: uppercase;
+  }
+  .slot { border-left: 3px solid var(--ink); padding: 0.1rem 0 0.1rem 1.25rem; }
+  .domain.d1 .slot { border-color: var(--d1); }  .domain.d1 .kicker { color: var(--d1); }
+  .domain.d2 .slot { border-color: var(--d2); }  .domain.d2 .kicker { color: var(--d2); }
+  .domain.d3 .slot { border-color: var(--d3); }  .domain.d3 .kicker { color: var(--d3); }
+  .domain.d4 .slot { border-color: var(--d4); }  .domain.d4 .kicker { color: var(--d4); }
+  .domain.d5 .slot { border-color: var(--d5); }  .domain.d5 .kicker { color: var(--d5); }
+  .domain.d6 .slot { border-color: var(--d6); }  .domain.d6 .kicker { color: var(--d6); }
+  .domain.d7 .slot { border-color: var(--d7); }  .domain.d7 .kicker { color: var(--d7); }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .slot h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.28rem;
+    line-height: 1.25;
+    margin-bottom: 0.5rem;
+  }
+  .slot p { font-size: 0.92rem; color: var(--ink-soft); max-width: 44em; }
+  .reading {
+    margin-top: 0.7rem;
+    padding-top: 0.55rem;
+    border-top: 1px dashed var(--rule-soft);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4em 0.7em;
+  }
+  .reading .mlabel { letter-spacing: 0.18em; text-transform: uppercase; }
+  .reading a { color: var(--d2); text-decoration: none; border-bottom: 1px solid currentColor; font-weight: 700; }
+
+  /* ---------- talks ---------- */
+  .talks { list-style: none; max-width: 47em; }
+  .talks li {
+    padding: 0.5rem 0;
+    border-top: 1px dashed var(--rule-soft);
+    font-size: 0.92rem;
+    display: grid;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 0.4em;
+  }
+  .talks li:first-child { border-top: none; }
+  .talks .ty { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); }
+  .talks .tt b { font-weight: 700; }
+  .talks .tt span { color: var(--ink-soft); }
+
+  /* ---------- references ---------- */
+  .refs { list-style: none; counter-reset: ref; max-width: 50em; }
+  .refs li {
+    counter-increment: ref;
+    position: relative;
+    padding: 0.5rem 0 0.5rem 2.6rem;
+    border-top: 1px dashed var(--rule-soft);
+    font-size: 0.86rem;
+    color: var(--ink);
+    scroll-margin-top: 14px;
+  }
+  .refs li:first-child { border-top: none; }
+  .refs li::before {
+    content: "[" counter(ref) "]";
+    position: absolute; left: 0; top: 0.62rem;
+    font-family: var(--mono); font-size: 0.75rem; color: var(--accent);
+  }
+  .refs li:target { background: #fbf1dd; box-shadow: -0.5rem 0 0 #fbf1dd, 0.5rem 0 0 #fbf1dd; border-radius: 2px; }
+  .refs i { font-style: italic; }
+  .refs a { font-family: var(--mono); font-size: 0.74rem; color: var(--d2); text-decoration: none; border-bottom: 1px solid currentColor; word-break: break-all; }
+
+  /* ---------- hover preview card ---------- */
+  .refcard {
+    position: absolute; z-index: 60; max-width: 380px;
+    background: var(--paper); color: var(--ink);
+    border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+    box-shadow: 0 8px 26px rgba(30,36,48,0.16);
+    padding: 0.6rem 0.75rem;
+    font-family: var(--sans); font-size: 0.8rem; line-height: 1.42;
+    border-radius: 3px; pointer-events: none;
+    opacity: 0; transform: translateY(-3px);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+  }
+  .refcard.show { opacity: 1; transform: translateY(0); }
+  .refcard i { font-style: italic; }
+  .refcard a { color: var(--d2); font-family: var(--mono); font-size: 0.72rem; word-break: break-all; }
+  .refcard .rn { font-family: var(--mono); color: var(--accent); font-weight: 700; margin-right: 0.4em; }
+  @media (max-width: 620px) { .refcard { display: none; } }
+
+  /* ---------- callout ---------- */
+  .callout {
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem;
+    max-width: 47em;
+    font-family: var(--serif);
+    font-size: 1rem;
+  }
+  .callout .big { font-size: 1.12rem; font-weight: 700; display: block; margin-bottom: 0.35rem; }
+
+  /* ---------- footer ---------- */
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 0.9rem;
+    display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem; align-items: center;
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.05em; color: var(--ink-soft);
+  }
+  footer .sw { display: inline-block; width: 0.65em; height: 0.65em; border-radius: 2px; margin-right: 0.45em; vertical-align: -0.05em; }
+  footer .note { margin-left: auto; }
+  footer a { color: var(--ink-soft); }
+
+  @media (max-width: 620px) {
+    .domain, .tl, .talks li { grid-template-columns: 1fr; gap: 0.35rem; }
+    .dwhen { letter-spacing: 0.08em; }
+    footer .note { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="overline"><a href="https://github.com/cbenzmueller/LogiKEy">github.com/cbenzmueller/LogiKEy</a> &nbsp;·&nbsp; Logic &amp; Knowledge Engineering</div>
+    <h1>LogiKEy</h1>
+    <p class="subtitle">A logic-pluralistic framework and methodology for knowledge representation and reasoning — built on shallow semantical embeddings of object logics in classical higher-order logic (HOL), so that automation and model finding transfer for free to the embedded logics.</p>
+    <span class="uc">Under construction — content is being expanded</span>
+    <div class="meta">
+      <span><b>Since 2007</b></span><span class="dot">•</span>
+      <span>Isabelle/HOL &amp; higher-order theorem provers</span><span class="dot">•</span>
+      <span>Ethical &amp; legal AI · computational metaphysics · and more</span>
+    </div>
+  </header>
+
+  <section>
+    <div class="seclabel">What is LogiKEy?</div>
+    <div class="prose">
+      <p><b>LogiKEy</b> (Logic and Knowledge Engineering) is a framework and methodology for the design, engineering and — importantly — <i>experimentation</i> with special-purpose reasoners, with a particular focus on legal-ethical reasoners, normative theories and non-classical logics. Its unifying idea is simple and powerful: instead of building a bespoke prover for every object logic, one <b>embeds</b> the object logic semantically into an expressive meta-logic, classical <b>higher-order logic (HOL)</b>, and then reasons through existing HOL provers and model finders.</p>
+      <p>These <i>shallow semantical embeddings</i> turn HOL into a universal meta-logical workbench. A domain is then modelled across several abstraction layers — the meta-logic, the object logic(s), a domain theory, and concrete examples — each of which can be freely swapped, compared and refined. Because everything lives inside one consistent HOL formalisation, predictions can be stated precisely, tested with rigorous proof and counter-model techniques, and audited. The reference implementation uses the <b>Isabelle/HOL</b> proof assistant together with automated higher-order and SMT provers.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel">Origins &amp; History</div>
+    <div class="timeline">
+      <div class="tl"><div class="yr">2007–08</div><div class="ev"><b>Roots.</b> Shallow embeddings of (multi)modal logics in Church's simple type theory, developed with <b>Lawrence C. Paulson</b> — the technical seed of the whole line of work.</div></div>
+      <div class="tl"><div class="yr">2009–13</div><div class="ev"><b>Consolidation.</b> Access-control, intuitionistic, quantified multimodal and quantified conditional logics are embedded in HOL; faithfulness and automation are studied systematically.</div></div>
+      <div class="tl"><div class="yr">2014–16</div><div class="ev"><b>Computational metaphysics.</b> Higher-order provers verify — and expose a hidden inconsistency in — Kurt Gödel's modal ontological argument, a widely-noticed success story for AI in metaphysics.</div></div>
+      <div class="tl"><div class="yr">2017–20</div><div class="ev"><b>The name and the framework.</b> Together with <b>Xavier Parent</b> and <b>Leendert van der Torre</b>, the approach is consolidated into the LogiKEy framework and methodology for normative and legal-ethical reasoning; the flagship account appears in <i>Artificial Intelligence</i> (2020).</div></div>
+      <div class="tl"><div class="yr">2021–</div><div class="ev"><b>Expansion.</b> Deontic, epistemic, dynamic and metaphysical logics; value-oriented legal reasoning; a "deep &amp; shallow" recipe with mechanised faithfulness proofs; and an explicit case for <i>logical pluralism</i>.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel">Core Publications</div>
+    <div class="reading" style="border-top:none;margin-top:0.2rem;font-size:0.72rem;">
+      <span class="mlabel">Read first</span>
+      <a href="#ref-1">[1]</a><a href="#ref-3">[3]</a><a href="#ref-5">[5]</a><a href="#ref-4">[4]</a><a href="#ref-2">[2]</a>
+    </div>
+    <div class="prose" style="margin-top:0.6rem;">
+      <p>The framework paper <a href="#ref-1">[1]</a> defines LogiKEy and its multi-layer methodology; the survey <a href="#ref-3">[3]</a> traces the broader programme of <i>universal (meta-)logical reasoning</i>; the recipe paper <a href="#ref-5">[5]</a> unifies deep and shallow embeddings with mechanised faithfulness proofs; the position paper <a href="#ref-4">[4]</a> argues the underlying vision of logical pluralism; and the <a href="#ref-2">[2]</a> Isabelle/HOL dataset makes the whole workbench reproducible.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel">Long-Term Vision</div>
+    <div class="callout">
+      <span class="big">Many logics, one methodology.</span>
+      LogiKEy pursues <b>logical pluralism</b> rather than logical imperialism: no single foundational logic is imposed a priori. Instead, object logics — classical or non-classical, modal, deontic, epistemic, free, paraconsistent — are made <i>flexible and negotiable</i> inside one HOL workbench, so that researchers and, ultimately, autonomous systems can select, combine and reflect on the logic a problem actually needs. The long-term goal is trustworthy, explainable reasoning for <b>responsible AI</b> — machine ethics, computational law and beyond — grounded in rigorous formal methods and reproducible experiments.
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel">Application Domains</div>
+
+    <div class="domain d3">
+      <div class="dwhen">Normative</div>
+      <div class="slot">
+        <div class="kicker">Deontic Logics &amp; Normative Reasoning</div>
+        <h3>Obligation, permission, and the logic of norms</h3>
+        <p>Standard, dyadic and preference-based deontic logics, Input/Output logic and conditional normative reasoning — embedded in HOL to handle contrary-to-duty scenarios, detachment, exceptions and non-monotonicity.</p>
+        <div class="reading"><span class="mlabel">References</span><a href="#ref-14">[14]</a><a href="#ref-15">[15]</a><a href="#ref-16">[16]</a></div>
+      </div>
+    </div>
+
+    <div class="domain d7">
+      <div class="dwhen">Law &amp; Ethics</div>
+      <div class="slot">
+        <div class="kicker">Value-Oriented Legal &amp; Ethical Reasoning</div>
+        <h3>AI &amp; Law and machine ethics</h3>
+        <p>Encoding ethico-legal value ontologies and complex ethical theories, so that normative decisions can be modelled, explained and contested — a foundation for ethical governors of intelligent systems.</p>
+        <div class="reading"><span class="mlabel">References</span><a href="#ref-17">[17]</a><a href="#ref-27">[27]</a></div>
+      </div>
+    </div>
+
+    <div class="domain d4">
+      <div class="dwhen">Metaphysics</div>
+      <div class="slot">
+        <div class="kicker">Computational Metaphysics</div>
+        <h3>Gödel's ontological argument &amp; beyond</h3>
+        <p>Formal reconstruction and automated analysis of modal ontological arguments in higher-order modal logic: verifying consistency, revealing hidden assumptions and modal collapse, and comparing Gödel's, Scott's and further variants.</p>
+        <div class="reading"><span class="mlabel">References</span><a href="#ref-18">[18]</a><a href="#ref-19">[19]</a><a href="#ref-20">[20]</a><a href="#ref-21">[21]</a><a href="#ref-22">[22]</a></div>
+      </div>
+    </div>
+
+    <div class="domain d5">
+      <div class="dwhen">Epistemic</div>
+      <div class="slot">
+        <div class="kicker">Epistemic &amp; Dynamic Logics</div>
+        <h3>Knowledge, announcements, and rights</h3>
+        <p>Public announcement logic with relativised common knowledge, and dynamic logics of epistemic rights and duties — including a formal logic of the <i>right to know</i> and reasoning about mental privacy.</p>
+        <div class="reading"><span class="mlabel">References</span><a href="#ref-23">[23]</a><a href="#ref-24">[24]</a></div>
+      </div>
+    </div>
+
+    <div class="domain d6">
+      <div class="dwhen">Mathematics</div>
+      <div class="slot">
+        <div class="kicker">Foundations of Mathematics</div>
+        <h3>Free logic, category theory &amp; abstract objects</h3>
+        <p>Automating free logic in HOL and using it to axiomatise category theory, and mechanising Zalta's abstract object theory (Principia Logico-Metaphysica) — LogiKEy as a tool for meta-logical and foundational investigation.</p>
+        <div class="reading"><span class="mlabel">References</span><a href="#ref-25">[25]</a><a href="#ref-26">[26]</a><a href="#ref-22">[22]</a></div>
+      </div>
+    </div>
+
+    <div class="domain d2">
+      <div class="dwhen">Method</div>
+      <div class="slot">
+        <div class="kicker">Meta-Logical Foundations &amp; the HOL Workbench</div>
+        <h3>Embeddings, faithfulness, and tools</h3>
+        <p>The methodological core: classical higher-order logic as meta-logic; deep vs. shallow embeddings; mechanised faithfulness proofs between them; and the automated-reasoning toolchain (Isabelle/HOL, Sledgehammer, Nitpick, Leo-III).</p>
+        <div class="reading"><span class="mlabel">References</span><a href="#ref-5">[5]</a><a href="#ref-6">[6]</a><a href="#ref-7">[7]</a><a href="#ref-8">[8]</a><a href="#ref-9">[9]</a><a href="#ref-10">[10]</a><a href="#ref-11">[11]</a><a href="#ref-12">[12]</a><a href="#ref-13">[13]</a><a href="#ref-29">[29]</a><a href="#ref-30">[30]</a></div>
+      </div>
+    </div>
+
+    <div class="domain d1">
+      <div class="dwhen">Logic</div>
+      <div class="slot">
+        <div class="kicker">Reasoning Curiosities &amp; Case Studies</div>
+        <h3>From Boolos' curious inference to ethical theories</h3>
+        <p>Sharp case studies that stress-test the methodology — such as the dramatic proof-length speed-up in Boolos' curious inference — alongside reconstructions of philosophical and legal arguments.</p>
+        <div class="reading"><span class="mlabel">References</span><a href="#ref-28">[28]</a><a href="#ref-27">[27]</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel">Selected Talks</div>
+    <ul class="talks">
+      <li><span class="ty">2026</span><span class="tt"><b>Many Logics, One Methodology.</b> <span>Topos Institute, Berkeley, USA (invited).</span></span></li>
+      <li><span class="ty">2026</span><span class="tt"><b>On the Logical Necessity of God and the Impossibility of the Devil in Gödel's Argument.</b> <span>Berlin-Brandenburg Academy of Sciences and Humanities.</span></span></li>
+      <li><span class="ty">2026</span><span class="tt"><b>Experimenting with the LogiKEy Framework &amp; Methodology.</b> <span>ESSLLI 2026 course, Prague — <a href="CoursesAndTutorials/2026-ESSLLI/" style="color:var(--d2);text-decoration:none;border-bottom:1px solid currentColor;">course page</a>.</span></span></li>
+      <li><span class="ty">2022</span><span class="tt"><b>Ethico-Legal Governance of AI Systems / Trusted AI through Ethico-Legal Governors.</b> <span>Invited presentations.</span></span></li>
+      <li><span class="ty">2013</span><span class="tt"><b>Gödel's God on the Computer.</b> <span>Vienna Kurt Gödel Society (invited) — the talk that started the metaphysics thread.</span></span></li>
+      <li><span class="ty">—</span><span class="tt"><span>Tutorials and seminars on LogiKEy and Computational Metaphysics have been given on five continents. Full list: </span><a href="http://christoph-benzmueller.de/talks.html" style="color:var(--d2);text-decoration:none;border-bottom:1px solid currentColor;">christoph-benzmueller.de/talks</a>.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="seclabel">References</div>
+    <ol class="refs">
+      <li id="ref-1">C.&nbsp;Benzmüller, X.&nbsp;Parent, L.&nbsp;van der Torre: <i>Designing Normative Theories for Ethical and Legal Reasoning: LogiKEy Framework, Methodology, and Tool Support.</i> Artificial Intelligence 287 (2020). <a href="https://doi.org/10.1016/j.artint.2020.103348">doi.org/10.1016/j.artint.2020.103348</a></li>
+      <li id="ref-2">C.&nbsp;Benzmüller, A.&nbsp;Farjami, D.&nbsp;Fuenmayor, P.&nbsp;Meder, X.&nbsp;Parent, A.&nbsp;Steen, L.&nbsp;van der Torre, V.&nbsp;Zahoransky: <i>LogiKEy Workbench: Deontic Logics, Logic Combinations and Expressive Ethical and Legal Reasoning (Isabelle/HOL dataset).</i> Data in Brief 33 (2020). <a href="https://doi.org/10.1016/j.dib.2020.106409">doi.org/10.1016/j.dib.2020.106409</a></li>
+      <li id="ref-3">C.&nbsp;Benzmüller: <i>Universal (Meta-)Logical Reasoning: Recent Successes.</i> Science of Computer Programming 172 (2019), 48–62. <a href="https://doi.org/10.1016/j.scico.2018.10.008">doi.org/10.1016/j.scico.2018.10.008</a></li>
+      <li id="ref-4">C.&nbsp;Benzmüller, D.&nbsp;Kirchner, L.&nbsp;Pasetto: <i>Many Logics, One Methodology: A Plea for Logical Pluralism in Formalised Reasoning.</i> Preprint, 2026. <a href="https://arxiv.org/abs/2605.27246">arxiv.org/abs/2605.27246</a></li>
+      <li id="ref-5">C.&nbsp;Benzmüller: <i>Faithful Logic Embeddings in HOL — Deep and Shallow.</i> In: CADE-30, LNCS 15943, 280–302, Springer, 2025. <a href="https://arxiv.org/abs/2502.19311">arxiv.org/abs/2502.19311</a></li>
+      <li id="ref-6">A.&nbsp;Church: <i>A Formulation of the Simple Theory of Types.</i> Journal of Symbolic Logic 5 (1940), 56–68. <a href="https://doi.org/10.2307/2266170">doi.org/10.2307/2266170</a></li>
+      <li id="ref-7">L.&nbsp;Henkin: <i>Completeness in the Theory of Types.</i> Journal of Symbolic Logic 15(2) (1950), 81–91. <a href="https://doi.org/10.2307/2266967">doi.org/10.2307/2266967</a></li>
+      <li id="ref-8">C.&nbsp;Benzmüller, C.&nbsp;Brown, M.&nbsp;Kohlhase: <i>Higher-Order Semantics and Extensionality.</i> Journal of Symbolic Logic 69(4) (2004), 1027–1088. <a href="https://doi.org/10.2178/jsl/1102022211">doi.org/10.2178/jsl/1102022211</a></li>
+      <li id="ref-9">C.&nbsp;Benzmüller, P.&nbsp;Andrews: <i>Church's Type Theory.</i> The Stanford Encyclopedia of Philosophy, Spring 2024 edition. <a href="https://plato.stanford.edu/archives/spr2024/entries/type-theory-church/">plato.stanford.edu/archives/spr2024/entries/type-theory-church/</a></li>
+      <li id="ref-10">C.&nbsp;Benzmüller, D.&nbsp;Miller: <i>Automation of Higher-Order Logic.</i> In: Handbook of the History of Logic, vol. 9 — Computational Logic, 215–254, Elsevier, 2014. <a href="https://doi.org/10.1016/B978-0-444-51624-4.50005-8">doi.org/10.1016/B978-0-444-51624-4.50005-8</a></li>
+      <li id="ref-11">C.&nbsp;Benzmüller, L.&nbsp;C.&nbsp;Paulson: <i>Multimodal and Intuitionistic Logics in Simple Type Theory.</i> Logic Journal of the IGPL 18(6) (2010), 881–892. <a href="https://doi.org/10.1093/jigpal/jzp080">doi.org/10.1093/jigpal/jzp080</a></li>
+      <li id="ref-12">C.&nbsp;Benzmüller: <i>Combining and Automating Classical and Non-classical Logics in Classical Higher-Order Logic.</i> Annals of Mathematics and Artificial Intelligence 62(1–2) (2011), 103–128. <a href="https://doi.org/10.1007/s10472-011-9249-7">doi.org/10.1007/s10472-011-9249-7</a></li>
+      <li id="ref-13">C.&nbsp;Benzmüller, L.&nbsp;C.&nbsp;Paulson: <i>Quantified Multimodal Logics in Simple Type Theory.</i> Logica Universalis 7(1) (2013), 7–20. <a href="https://doi.org/10.1007/s11787-012-0052-y">doi.org/10.1007/s11787-012-0052-y</a></li>
+      <li id="ref-14">C.&nbsp;Benzmüller, A.&nbsp;Farjami, X.&nbsp;Parent: <i>Åqvist's Dyadic Deontic Logic E in HOL.</i> Journal of Applied Logics — IfCoLoG Journal 6(5) (2019), 733–755. <a href="https://www.collegepublications.co.uk/ifcolog/?00034">collegepublications.co.uk/ifcolog/?00034</a></li>
+      <li id="ref-15">C.&nbsp;Benzmüller, A.&nbsp;Farjami, P.&nbsp;Meder, X.&nbsp;Parent: <i>I/O Logic in HOL.</i> Journal of Applied Logics — IfCoLoG Journal 6(5) (2019), 715–732. <a href="https://www.collegepublications.co.uk/ifcolog/?00034">collegepublications.co.uk/ifcolog/?00034</a></li>
+      <li id="ref-16">X.&nbsp;Parent, C.&nbsp;Benzmüller: <i>Conditional Normative Reasoning as a Fragment of HOL.</i> Journal of Applied Non-Classical Logics 34(4) (2024). <a href="https://doi.org/10.1080/11663081.2024.2386917">doi.org/10.1080/11663081.2024.2386917</a></li>
+      <li id="ref-17">C.&nbsp;Benzmüller, D.&nbsp;Fuenmayor, B.&nbsp;Lomfeld: <i>Modelling Value-oriented Legal Reasoning in LogiKEy.</i> Logics 2(1) (2024), 31–78. <a href="https://doi.org/10.3390/logics2010003">doi.org/10.3390/logics2010003</a></li>
+      <li id="ref-18">C.&nbsp;Benzmüller, B.&nbsp;Woltzenlogel Paleo: <i>Automating Gödel's Ontological Proof of God's Existence with Higher-order Automated Theorem Provers.</i> ECAI 2014, 93–98, IOS Press. <a href="https://doi.org/10.3233/978-1-61499-419-0-93">doi.org/10.3233/978-1-61499-419-0-93</a></li>
+      <li id="ref-19">C.&nbsp;Benzmüller, B.&nbsp;Woltzenlogel Paleo: <i>The Inconsistency in Gödel's Ontological Argument: A Success Story for AI in Metaphysics.</i> IJCAI 2016, 936–942. <a href="https://www.ijcai.org/Proceedings/16/Papers/137.pdf">ijcai.org/Proceedings/16/Papers/137.pdf</a></li>
+      <li id="ref-20">C.&nbsp;Benzmüller, D.&nbsp;Fuenmayor: <i>Computer-Supported Analysis of Positive Properties, Ultrafilters and Modal Collapse in Variants of Gödel's Ontological Argument.</i> Bulletin of the Section of Logic 49(2) (2020), 127–148. <a href="https://doi.org/10.18778/0138-0680.2020.08">doi.org/10.18778/0138-0680.2020.08</a></li>
+      <li id="ref-21">C.&nbsp;Benzmüller, D.&nbsp;Scott: <i>Notes on Gödel's and Scott's Variants of the Ontological Argument.</i> Monatshefte für Mathematik (2025). <a href="https://doi.org/10.1007/s00605-025-02078-x">doi.org/10.1007/s00605-025-02078-x</a></li>
+      <li id="ref-22">D.&nbsp;Kirchner, C.&nbsp;Benzmüller, E.&nbsp;N.&nbsp;Zalta: <i>Mechanizing Principia Logico-Metaphysica in Functional Type Theory.</i> Review of Symbolic Logic 13(1) (2020), 206–218. <a href="https://doi.org/10.1017/S1755020319000297">doi.org/10.1017/S1755020319000297</a></li>
+      <li id="ref-23">C.&nbsp;Benzmüller, S.&nbsp;Reiche: <i>Automating Public Announcement Logic with Relativized Common Knowledge as a Fragment of HOL in LogiKEy.</i> Journal of Logic and Computation 33(6) (2023), 1243–1269. <a href="https://doi.org/10.1093/logcom/exac029">doi.org/10.1093/logcom/exac029</a></li>
+      <li id="ref-24">L.&nbsp;Lawniczak, L.&nbsp;Pasetto, C.&nbsp;Benzmüller, X.&nbsp;Li, R.&nbsp;Markovich: <i>Reasoning with Epistemic Rights and Duties: Automating a Dynamic Logic of the Right to Know in LogiKEy.</i> ECAI 2025, 1623–1630, IOS Press. <a href="https://doi.org/10.3233/FAIA250988">doi.org/10.3233/FAIA250988</a></li>
+      <li id="ref-25">C.&nbsp;Benzmüller, D.&nbsp;Scott: <i>Automating Free Logic in HOL, with an Experimental Application in Category Theory.</i> Journal of Automated Reasoning 64(1) (2020), 53–72. <a href="https://doi.org/10.1007/s10817-018-09507-7">doi.org/10.1007/s10817-018-09507-7</a></li>
+      <li id="ref-26">J.&nbsp;Bayer, A.&nbsp;Gonus, C.&nbsp;Benzmüller, D.&nbsp;Scott: <i>Category Theory in Isabelle/HOL as a Basis for Meta-logical Investigation.</i> CICM 2023, LNCS 14101, 69–83, Springer. <a href="https://doi.org/10.1007/978-3-031-42753-4_5">doi.org/10.1007/978-3-031-42753-4_5</a></li>
+      <li id="ref-27">D.&nbsp;Fuenmayor, C.&nbsp;Benzmüller: <i>Harnessing Higher-Order (Meta-)Logic to Represent and Reason with Complex Ethical Theories.</i> PRICAI 2019, LNAI 11670, 418–432, Springer. <a href="https://doi.org/10.1007/978-3-030-29908-8_34">doi.org/10.1007/978-3-030-29908-8_34</a></li>
+      <li id="ref-28">C.&nbsp;Benzmüller, D.&nbsp;Fuenmayor, A.&nbsp;Steen, G.&nbsp;Sutcliffe: <i>Who Finds the Short Proof? An Exploration of Variants of Boolos' Curious Inference using Higher-order Automated Theorem Provers.</i> Logic Journal of the IGPL 32(3) (2024), 442–459. <a href="https://doi.org/10.1093/jigpal/jzac082">doi.org/10.1093/jigpal/jzac082</a></li>
+      <li id="ref-29">T.&nbsp;Nipkow, L.&nbsp;C.&nbsp;Paulson, M.&nbsp;Wenzel: <i>Isabelle/HOL — A Proof Assistant for Higher-Order Logic.</i> LNCS 2283, Springer, 2002. <a href="https://doi.org/10.1007/3-540-45949-9">doi.org/10.1007/3-540-45949-9</a></li>
+      <li id="ref-30">A.&nbsp;Steen, C.&nbsp;Benzmüller: <i>Extensional Higher-Order Paramodulation in Leo-III.</i> Journal of Automated Reasoning 65(6) (2021), 775–807. <a href="https://doi.org/10.1007/s10817-021-09588-x">doi.org/10.1007/s10817-021-09588-x</a></li>
+    </ol>
+    <div class="prose" style="margin-top:1rem;font-size:0.92rem;">
+      <p>This is a curated selection. A complete, up-to-date publication list is maintained at <a href="http://christoph-benzmueller.de/publications.html">christoph-benzmueller.de/publications</a>, and all LogiKEy source theories and datasets live in this repository.</p>
+    </div>
+  </section>
+
+  <footer>
+    <span><span class="sw" style="background:var(--d3)"></span>Normative</span>
+    <span><span class="sw" style="background:var(--d7)"></span>Law &amp; Ethics</span>
+    <span><span class="sw" style="background:var(--d4)"></span>Metaphysics</span>
+    <span><span class="sw" style="background:var(--d5)"></span>Epistemic</span>
+    <span><span class="sw" style="background:var(--d6)"></span>Mathematics</span>
+    <span><span class="sw" style="background:var(--d2)"></span>Method</span>
+    <span class="note"><a href="https://github.com/cbenzmueller/LogiKEy">source repository</a> · maintained by Christoph Benzmüller</span>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  var card = document.createElement('div');
+  card.className = 'refcard';
+  document.body.appendChild(card);
+  var hideTimer;
+  function show(a) {
+    clearTimeout(hideTimer);
+    var id = (a.getAttribute('href') || '').slice(1);
+    var li = document.getElementById(id);
+    if (!li) return;
+    var num = (id.match(/\d+/) || [''])[0];
+    card.innerHTML = '<span class="rn">[' + num + ']</span>' + li.innerHTML;
+    card.classList.add('show');
+    var r = a.getBoundingClientRect();
+    card.style.top = (window.scrollY + r.bottom + 6) + 'px';
+    card.style.left = '0px';
+    var cw = card.offsetWidth;
+    var left = window.scrollX + r.left;
+    var maxLeft = window.scrollX + document.documentElement.clientWidth - cw - 10;
+    if (left > maxLeft) left = maxLeft;
+    if (left < window.scrollX + 8) left = window.scrollX + 8;
+    card.style.left = left + 'px';
+  }
+  function hide() { hideTimer = setTimeout(function () { card.classList.remove('show'); }, 80); }
+  document.querySelectorAll('.reading a[href^="#ref-"]').forEach(function (a) {
+    a.addEventListener('mouseenter', function () { show(a); });
+    a.addEventListener('mouseleave', hide);
+    a.addEventListener('focus', function () { show(a); });
+    a.addEventListener('blur', hide);
+  });
+})();
+</script>
+</body>
+</html>
