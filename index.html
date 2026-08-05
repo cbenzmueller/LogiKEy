@@ -110,6 +110,27 @@
   .people { font-size: 0.95rem; line-height: 1.9; max-width: 47em; }
   .people i { font-style: normal; color: var(--ink-soft); font-size: 0.82em; }
 
+  /* ---------- interdisciplinary fields ---------- */
+  .fields { max-width: 47em; }
+  .field {
+    display: grid;
+    grid-template-columns: 11rem 1fr;
+    border-top: 1px dashed var(--rule-soft);
+    padding: 0.45rem 0;
+    align-items: baseline;
+  }
+  .field:first-child { border-top: none; }
+  .fname {
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .frefs { font-family: var(--mono); font-size: 0.78rem; display: flex; flex-wrap: wrap; gap: 0.3em 0.55em; }
+  .frefs a { color: var(--d2); text-decoration: none; border-bottom: 1px solid currentColor; font-weight: 700; }
+  @media (max-width: 620px) { .field { grid-template-columns: 1fr; gap: 0.15rem; } }
+
   /* ---------- timeline ---------- */
   .timeline { max-width: 47em; }
   .tl {
@@ -294,6 +315,17 @@
     </div>
     <div class="prose" style="margin-top:0.6rem;">
       <p>The framework paper <a href="#ref-1">[1]</a> defines LogiKEy and its multi-layer methodology; the survey <a href="#ref-3">[3]</a> traces the broader programme of <i>universal (meta-)logical reasoning</i>; the recipe paper <a href="#ref-5">[5]</a> unifies deep and shallow embeddings with mechanised faithfulness proofs; the position paper <a href="#ref-4">[4]</a> argues the underlying vision of logical pluralism; and the <a href="#ref-2">[2]</a> Isabelle/HOL dataset makes the whole workbench reproducible.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel">Interdisciplinary Use of LogiKEy</div>
+    <div class="fields">
+      <div class="field"><span class="fname">Computer Science</span><span class="frefs"><a href="#ref-3">[3]</a><a href="#ref-5">[5]</a><a href="#ref-30">[30]</a><a href="#ref-40">[40]</a></span></div>
+      <div class="field"><span class="fname">AI, Law &amp; Ethics</span><span class="frefs"><a href="#ref-1">[1]</a><a href="#ref-17">[17]</a><a href="#ref-24">[24]</a><a href="#ref-27">[27]</a><a href="#ref-35">[35]</a></span></div>
+      <div class="field"><span class="fname">Mathematics</span><span class="frefs"><a href="#ref-25">[25]</a><a href="#ref-26">[26]</a><a href="#ref-28">[28]</a></span></div>
+      <div class="field"><span class="fname">Philosophy</span><span class="frefs"><a href="#ref-4">[4]</a><a href="#ref-22">[22]</a><a href="#ref-39">[39]</a></span></div>
+      <div class="field"><span class="fname">Theology</span><span class="frefs"><a href="#ref-18">[18]</a><a href="#ref-19">[19]</a><a href="#ref-21">[21]</a><a href="#ref-34">[34]</a></span></div>
     </div>
   </section>
 
