@@ -63,20 +63,6 @@
     margin-bottom: 1.9rem;
     max-width: 48em;
   }
-  .meta {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.06em;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    padding: 0.85rem 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 0;
-    align-items: baseline;
-  }
-  .meta b { font-weight: 700; }
-  .meta .dot { color: var(--accent); margin: 0 0.9em; }
 
   /* ---------- sections ---------- */
   section { margin-top: 2.6rem; }
@@ -281,19 +267,13 @@
     <div class="overline"><a href="https://github.com/cbenzmueller/LogiKEy">github.com/cbenzmueller/LogiKEy</a> &nbsp;·&nbsp; <a href="CoursesAndTutorials/2026-ESSLLI/">ESSLLI 2026 LogiKEy course</a></div>
     <h1>LogiKEy</h1>
     <p class="subtitle">A logic-pluralistic framework and methodology for knowledge representation and reasoning — built on shallow semantical embeddings of object logics in classical higher-order logic (HOL), so that automation and model finding transfer for free to the embedded logics.</p>
-    <div class="meta">
-      <span><b>Since 2007</b></span><span class="dot">•</span>
-      <span>Expressive Classical and Non-Classical Reasoning</span><span class="dot">•</span>
-      <span>Higher-order interactive and automated theorem provers (LEO-II, Leo-III, Isabelle/HOL and others)</span><span class="dot">•</span>
-      <span>Normative reasoning · Ethical &amp; legal AI · Computational metaphysics · and more</span>
-    </div>
   </header>
 
   <section>
     <div class="seclabel">What is LogiKEy?</div>
     <div class="prose">
-      <p><b>LogiKEy</b> (Logic and Knowledge Engineering) is a framework and methodology for the design, engineering and — importantly — <i>experimentation</i> with special-purpose reasoners, with a particular focus on legal-ethical reasoners, normative theories and non-classical logics. Its unifying idea is simple and powerful: instead of building a bespoke prover for every object logic, one <b>embeds</b> the object logic semantically into an expressive meta-logic, classical <b>higher-order logic (HOL)</b>, and then reasons through existing HOL provers and model finders.</p>
-      <p>These <i>shallow semantical embeddings</i> turn HOL into a universal meta-logical workbench. A domain is then modelled across several abstraction layers — the meta-logic, the object logic(s), a domain theory, and concrete examples — each of which can be freely swapped, compared and refined. Because everything lives inside one consistent HOL formalisation, predictions can be stated precisely, tested with rigorous proof and counter-model techniques, and audited. The reference implementation uses the <b>Isabelle/HOL</b> proof assistant together with automated higher-order and SMT provers.</p>
+      <p><b>LogiKEy</b> (Logic and Knowledge Engineering) is a framework and methodology for the design, engineering and — importantly — <i>experimentation</i> with special-purpose reasoners, with a particular focus on legal-ethical reasoners, normative theories, and <b>expressive classical and non-classical logics</b> and their <b>combinations</b>. Pursued since 2007, the enterprise is deeply <b>interdisciplinary</b>, connecting computer science and AI with law, ethics, mathematics, philosophy and theology. Its unifying idea is simple and powerful: instead of building a bespoke prover for every object logic, one <b>embeds</b> the object logic semantically into an expressive meta-logic, classical <b>higher-order logic (HOL)</b>, and then reasons through existing HOL provers and model finders.</p>
+      <p>These <i>shallow semantical embeddings</i> turn HOL into a universal meta-logical workbench. A domain is then modelled across several abstraction layers — the meta-logic, the object logic(s), a domain theory, and concrete examples — each of which can be freely swapped, compared and refined. Because everything lives inside one consistent HOL formalisation, predictions can be stated precisely, tested with rigorous proof and counter-model techniques, and audited. The reference implementation combines <b>interactive and automated reasoning</b>: the <b>Isabelle/HOL</b> proof assistant working hand in hand with automated higher-order provers such as <b>LEO-II</b> and <b>Leo-III</b>, first-order and SMT provers, and (counter-)model finders.</p>
     </div>
   </section>
 
