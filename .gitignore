@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor backup / autosave files
+*~
+\#*\#
+.\#*
+*.swp
+*.swo
+
+# Isabelle
+.isabelle/
