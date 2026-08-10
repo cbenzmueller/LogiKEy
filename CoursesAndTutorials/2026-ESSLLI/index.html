@@ -247,6 +247,23 @@
   .refcard .rn { font-family: var(--mono); color: var(--accent); font-weight: 700; margin-right: 0.4em; }
   @media (max-width: 620px) { .refcard { display: none; } }
 
+  /* ---------- QR share ---------- */
+  .qrshare {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1.1rem;
+  }
+  .qrshare img { display: block; width: 150px; height: 150px; }
+  .qrcap {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+  }
+  .qrcap span { color: var(--ink-soft); opacity: 0.75; }
+
   /* ---------- footer ---------- */
   footer {
     margin-top: 3rem;
@@ -483,6 +500,13 @@
       <li id="ref-28">L.&nbsp;Pasetto, C.&nbsp;Benzmüller, R.&nbsp;Markovich: <i>Formalizing Mental Privacy in LogiKEy.</i> AAMAS 2026, pp. 3643–3645, IFAAMAS. <a href="https://doi.org/10.65109/PTSF2244">doi.org/10.65109/PTSF2244</a> · <a href="https://github.com/cbenzmueller/LogiKEy/tree/master/2026-AAMAS-Data">LogiKEy: 2026-AAMAS-Data</a></li>
       <li id="ref-29">C.&nbsp;Benzmüller, D.&nbsp;Kirchner: <i>A Deep Embedding of HOL in HOL: Soundness, Completeness, Consistency (Isabelle/HOL dataset).</i> Archive of Formal Proofs, 2026. <a href="https://isa-afp.org/entries/HOL_in_HOL_Deep.html">AFP: HOL_in_HOL_Deep</a></li>
     </ol>
+  </section>
+
+  <section class="qrshare">
+    <a href="https://logikey.org/CoursesAndTutorials/2026-ESSLLI/">
+      <img src="esslli-2026-qr.svg" alt="QR code linking to logikey.org/CoursesAndTutorials/2026-ESSLLI/" width="150" height="150">
+    </a>
+    <div class="qrcap">Scan to open this page<br><span>logikey.org/CoursesAndTutorials/2026-ESSLLI/</span></div>
   </section>
 
   <footer>
