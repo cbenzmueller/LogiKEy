@@ -1,81 +1,39 @@
 theory Day1_LiarsStreet
   imports Main
 
-  abbrevs "and" = "and"
-      and "or" = "or"
-      and "not" = "not"
-      and "If" = "If"
-      and "then" = "then"
-      and "says" = "says"
-      and "knows" = "knows"
-      and "believes" = "believes"
-      and "mustdo" = "must-do"
-      and "lies" = "lies"
-      and "saysthetruth" = "says-the-truth"
-      and "livesin" = "lives-in"
-      and "livesnotin" = "lives-not-in"
-      and "neither" = "neither"
-      and "nor" = "nor"
-      and "both" = "both"
-      and "livein" = "live-in"
-      and "Nilda" = "Nilda"
-      and "Carla" = "Carla"
-      and "LiarsStreet" = "LiarsStreet"
-      and "TruthtellersRoad" = "TruthtellersRoad"
 
 begin
 
 
-text\<open>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>
-   LIAR'S STREET — riddles the computer solves for you
-   \<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>\<Midarrow>
-
-   Somewhere there is a little town with exactly two streets:
-
-      LIARS STREET        — everyone who lives here ALWAYS lies;
-      TRUTHTELLERS ROAD   — everyone who lives here ALWAYS tells the truth.
-
-   Two kids, NILDA and CARLA, live in this town (in the spirit of Raymond
-   Smullyan's classic knights-and-knaves puzzles). We overhear what they say —
-   and from their words alone we work out where they live. Or rather: the
-   computer does. Each demo below states a riddle. To solve it, remove the
-   comment brackets around the  nitpick[satisfy]  line: Nitpick searches every
-   possible world and reports what it finds.
-
-   THE GAME: before you click, make your own prediction —
-   does the riddle have exactly ONE solution, MANY, or NONE at all?
-   (Spoilers at the very end of the file.)
-
-   TIP — typing the riddle language: all constructs of our little language are
-   registered as input abbreviations in the theory header above ("abbrevs").
-   Just type the plain word —  says, lies, livesin, neither, Nilda, Carla, ... —
-   and Isabelle/jEdit's completion popup offers the matching construct; confirm
-   with ENTER or TAB (dismiss with ESC). Copy-pasting from the demos below
-   works too, of course.\<close>
+text\<open>LIAR'S STREET — background theory\<close>
 
 nitpick_params [user_axioms, format = 2, show_all]
-declare [[show_abbrevs = false]]
+  declare [[show_abbrevs = false]]
 
 text\<open>The world: who is there, and the two places to live.\<close>
-datatype Entity = Nilda ("Nilda") | Carla ("Carla")
-lemma "\<not>(Nilda = Carla)" by simp
-datatype Street = LiarsStreet ("LiarsStreet") | TruthtellersRoad ("TruthtellersRoad")
+
+  datatype    Entity = Nilda  | Carla 
+
+  lemma   "\<not>(Nilda = Carla)" by simp
+
+  datatype Street = LiarsStreet | TruthtellersRoad 
 
 text\<open>The words: friendly names for ordinary logic, so the sentences read like English.\<close>
-definition And ("_ and _") where "X and Y \<equiv> X \<and> Y"
-abbreviation Or ("_ or _") where "X or Y \<equiv> X \<or> Y"
-definition Not ("not _") where "not X \<equiv> \<not>X"
-definition If_then ("If _ then _") where "If X then Y \<equiv> X \<longrightarrow> Y"
 
-consts Says::"Entity\<Rightarrow>bool\<Rightarrow>bool" ("_ says _")
-consts Knows::"Entity\<Rightarrow>bool\<Rightarrow>bool" ("_ knows _")
-consts Believes::"Entity\<Rightarrow>bool\<Rightarrow>bool" ("_ believes _")
-consts Obligation::"Entity\<Rightarrow>bool\<Rightarrow>bool" ("_ must-do _")
+  definition And ("_ and _")              where          "X and Y \<equiv> X \<and> Y"
+  abbreviation Or ("_ or _")              where            "X or Y \<equiv> X \<or> Y"
+  definition Not ("not _")                  where             "not X \<equiv> \<not>X"
+  definition If_then ("If _ then _")      where     "If X then Y \<equiv> X \<longrightarrow> Y"
 
-definition Lies ("lies _") where "lies X \<equiv> \<forall>Y. If (X says Y) then not Y"
-definition Says_the_truth ("says-the-truth _") where "says-the-truth X \<equiv> \<forall>Y. If (X says Y) then Y"
-named_theorems Defs
-declare Lies_def [Defs] Says_the_truth_def [Defs]
+  consts Says::"Entity\<Rightarrow>bool\<Rightarrow>bool" ("_ says _")
+  consts Knows::"Entity\<Rightarrow>bool\<Rightarrow>bool" ("_ knows _")
+  consts Believes::"Entity\<Rightarrow>bool\<Rightarrow>bool" ("_ believes _")
+  consts Obligation::"Entity\<Rightarrow>bool\<Rightarrow>bool" ("_ must-do _")
+
+  definition Lies ("_ lies")                                    where                     "X lies \<equiv> \<forall>Y. If (X says Y) then not Y"
+  definition Says_the_truth ("_ says-the-truth")   where     "X says-the-truth \<equiv> \<forall>Y. If (X says Y) then Y"
+  named_theorems Defs
+  declare Lies_def [Defs] Says_the_truth_def [Defs]
 
 consts Lives_in::"Entity\<Rightarrow>Street\<Rightarrow>bool" ("_ lives-in _")
 definition Lives_not_in ("_ lives-not-in _") where "X lives-not-in G \<equiv> not (X lives-in G)"
@@ -87,8 +45,8 @@ declare Lives_not_in_def [Defs] Neither_nor_live_in_def [Defs] Both_live_in_def 
 
 text\<open>The rules of the town (delete OneHome for the looser "open world" version).\<close>
 axiomatization where
-  A1: "\<forall>X. If (X lives-in LiarsStreet) then (lies X)"  and
-  A2: "\<forall>X. If (X lives-in TruthtellersRoad) then (says-the-truth X)"  and
+  A1: "\<forall>X. If (X lives-in LiarsStreet) then (X lies)"  and
+  A2: "\<forall>X. If (X lives-in TruthtellersRoad) then (X says-the-truth)"  and
   OneHome: "\<forall>X. ((X lives-in LiarsStreet) \<or> (X lives-in TruthtellersRoad))
                   \<and> \<not> ((X lives-in LiarsStreet) \<and> (X lives-in TruthtellersRoad))"
 
@@ -98,6 +56,7 @@ text\<open>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<m
      Carla:  "Neither of us lives on Liars Street."
    Who lives where?  Predict: ONE solution, MANY, or NONE?
    \<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<close>
+
 lemma DEMO_1:
   assumes
    "Nilda says (Carla lives-in LiarsStreet)"
@@ -157,7 +116,7 @@ text\<open>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<m
      uncomment it and it finds no world at all.
    \<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<close>
 lemma DEMO_5_the_impossible_sentence:
-  assumes "Nilda says (lies Nilda)"
+  assumes "Nilda says (Nilda lies)"
   shows False
   (* nitpick[satisfy] *)
   using assms A1 A2 OneHome unfolding Defs If_then_def Not_def by (smt (verit))
