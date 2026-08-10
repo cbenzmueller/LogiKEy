@@ -247,22 +247,36 @@
   .refcard .rn { font-family: var(--mono); color: var(--accent); font-weight: 700; margin-right: 0.4em; }
   @media (max-width: 620px) { .refcard { display: none; } }
 
-  /* ---------- QR share ---------- */
-  .qrshare {
-    margin-top: 3rem;
+  /* ---------- QR share (header) ---------- */
+  .header-top {
     display: flex;
-    align-items: center;
-    gap: 1.1rem;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: space-between;
   }
-  .qrshare img { display: block; width: 150px; height: 150px; }
+  .header-text { min-width: 0; }
+  .qrshare {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .qrshare img { display: block; width: 132px; height: 132px; }
   .qrcap {
     font-family: var(--mono);
-    font-size: 0.72rem;
-    line-height: 1.5;
-    letter-spacing: 0.05em;
+    font-size: 0.66rem;
+    line-height: 1.45;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
     color: var(--ink-soft);
   }
-  .qrcap span { color: var(--ink-soft); opacity: 0.75; }
+  @media (max-width: 620px) {
+    .header-top { flex-direction: column-reverse; align-items: flex-start; gap: 1.4rem; }
+    .qrshare { flex-direction: row; align-items: center; gap: 0.9rem; }
+    .qrcap { text-align: left; }
+  }
 
   /* ---------- footer ---------- */
   footer {
@@ -297,9 +311,19 @@
 <div class="page">
 
   <header>
-    <div class="overline"><a href="https://ufal.mff.cuni.cz/esslli-2026">ESSLLI 2026</a> &nbsp;·&nbsp; <a href="https://ufal.mff.cuni.cz/esslli-2026/schedule">Course Programme</a> &nbsp;·&nbsp; <a href="https://logikey.org">logikey.org</a></div>
-    <h1>Experimenting with the LogiKEy Framework &amp;&nbsp;Methodology</h1>
-    <p class="subtitle">Normative Reasoning, Computational Metaphysics, and More — an introductory course in the <b>Logic and Computation</b> track of the 37th European Summer School in Logic, Language and Information.</p>
+    <div class="header-top">
+      <div class="header-text">
+        <div class="overline"><a href="https://ufal.mff.cuni.cz/esslli-2026">ESSLLI 2026</a> &nbsp;·&nbsp; <a href="https://ufal.mff.cuni.cz/esslli-2026/schedule">Course Programme</a> &nbsp;·&nbsp; <a href="https://logikey.org">logikey.org</a></div>
+        <h1>Experimenting with the LogiKEy Framework &amp;&nbsp;Methodology</h1>
+        <p class="subtitle">Normative Reasoning, Computational Metaphysics, and More — an introductory course in the <b>Logic and Computation</b> track of the 37th European Summer School in Logic, Language and Information.</p>
+      </div>
+      <aside class="qrshare">
+        <a href="https://logikey.org/CoursesAndTutorials/2026-ESSLLI/">
+          <img src="esslli-2026-qr.svg" alt="QR code linking to logikey.org/CoursesAndTutorials/2026-ESSLLI/" width="132" height="132">
+        </a>
+        <div class="qrcap">Scan to open<br>this page</div>
+      </aside>
+    </div>
     <div class="meta">
       <span><b><a href="https://ufal.mff.cuni.cz/esslli-2026/schedule" style="color:inherit">Week 2: 10–14 August 2026</a></b></span><span class="dot">•</span>
       <span>Mon–Fri, 17:00–18:30</span><span class="dot">•</span>
@@ -500,13 +524,6 @@
       <li id="ref-28">L.&nbsp;Pasetto, C.&nbsp;Benzmüller, R.&nbsp;Markovich: <i>Formalizing Mental Privacy in LogiKEy.</i> AAMAS 2026, pp. 3643–3645, IFAAMAS. <a href="https://doi.org/10.65109/PTSF2244">doi.org/10.65109/PTSF2244</a> · <a href="https://github.com/cbenzmueller/LogiKEy/tree/master/2026-AAMAS-Data">LogiKEy: 2026-AAMAS-Data</a></li>
       <li id="ref-29">C.&nbsp;Benzmüller, D.&nbsp;Kirchner: <i>A Deep Embedding of HOL in HOL: Soundness, Completeness, Consistency (Isabelle/HOL dataset).</i> Archive of Formal Proofs, 2026. <a href="https://isa-afp.org/entries/HOL_in_HOL_Deep.html">AFP: HOL_in_HOL_Deep</a></li>
     </ol>
-  </section>
-
-  <section class="qrshare">
-    <a href="https://logikey.org/CoursesAndTutorials/2026-ESSLLI/">
-      <img src="esslli-2026-qr.svg" alt="QR code linking to logikey.org/CoursesAndTutorials/2026-ESSLLI/" width="150" height="150">
-    </a>
-    <div class="qrcap">Scan to open this page<br><span>logikey.org/CoursesAndTutorials/2026-ESSLLI/</span></div>
   </section>
 
   <footer>
