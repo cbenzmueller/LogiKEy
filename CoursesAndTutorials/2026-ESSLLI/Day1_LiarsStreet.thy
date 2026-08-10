@@ -3,52 +3,61 @@ theory Day1_LiarsStreet
 
 begin
 
-\<comment>\<open>LIAR'S STREET — background theory\<close>
-
+\<comment>\<open>some unimportant tool settings\<close>
   nitpick_params [user_axioms, format = 2, show_all, max_genuine = 4]
   declare [[show_abbrevs = false]]
 
-\<comment>\<open>The world: there are two persons and the two roads to live.\<close>
-
-  datatype    Entity = Nilda  | Carla 
-
-  lemma   "\<not>(Nilda = Carla)" by simp
-
-  datatype Street = LiarsStreet | TruthtellersRoad 
-
-\<comment>\<open>The words: friendly names for ordinary logic, so the sentences read like English.\<close>
+\<comment>\<open>The object logic: just some propositional logic connectives here\<close>
 
   definition And       ("_ and _")              where          "X and Y \<equiv> X \<and> Y"
   definition Or         ("_ or _")                 where            "X or Y \<equiv> X \<or> Y"
   definition Not        ("not _")                 where             "not X \<equiv> \<not>X"
   definition If_then   ("If _ then _")          where     "If X then Y \<equiv> X \<longrightarrow> Y"
 
-  named_theorems Logic 
-  declare And_def [Logic] Or_def [Logic] Not_def [Logic] If_then_def [Logic] 
+  named_theorems ObjectLogic 
+  declare And_def [ObjectLogic] Or_def [ObjectLogic] Not_def [ObjectLogic] If_then_def [ObjectLogic] 
 
-  consts Says::"Entity\<Rightarrow>bool\<Rightarrow>bool"            ("_ says _")
-  consts Knows::"Entity\<Rightarrow>bool\<Rightarrow>bool"         ("_ knows _")
-  consts Believes::"Entity\<Rightarrow>bool\<Rightarrow>bool"      ("_ believes _")
-  consts Obligation::"Entity\<Rightarrow>bool\<Rightarrow>bool"   ("_ must-do _")
-  consts Lives_in::"Entity\<Rightarrow>Street\<Rightarrow>bool"    ("_ lives-in _")
+\<comment>\<open>The  domain specific language.\<close>
 
-  definition Lies                  ("_ lies")                   where                    "X lies \<equiv> \<forall>Y. If (X says Y) then not Y"
-  definition Says_the_truth ("_ says-the-truth")   where    "X says-the-truth \<equiv> \<forall>Y. If (X says Y) then Y"
+\<comment>\<open>The world: there are exactly two persons and exactly the two roads to live in.\<close>
+
+
+  datatype    Entity =        Nilda  | Carla 
+  datatype   Street =           LiarsStreet | TruthtellersRoad 
+
+(*
+  typedecl Entity 
+  consts Nilda :: Entity consts Carla :: Entity
+  axiomatization where AxPersons: "(\<forall>x. x = Nilda \<or> x = Carla) \<and> (Nilda \<noteq> Carla)"
+  typedecl Street 
+  consts LiarsStreet :: Street 
+  consts TruthtellersRoad :: Street 
+  axiomatization where AxRoads: "(\<forall>x. x = LiarsStreet  \<or> x = TruthtellersRoad) \<and> (LiarsStreet \<noteq> TruthtellersRoad)"
+*)
+
+  consts Says :: "Entity\<Rightarrow>bool\<Rightarrow>bool"            ("_ says _")
+  consts Knows :: "Entity\<Rightarrow>bool\<Rightarrow>bool"         ("_ knows _")
+  consts Believes :: "Entity\<Rightarrow>bool\<Rightarrow>bool"      ("_ believes _")
+  consts Obligation :: "Entity\<Rightarrow>bool\<Rightarrow>bool"   ("_ must-do _")
+  consts Lives_in :: "Entity\<Rightarrow>Street\<Rightarrow>bool"    ("_ lives-in _")
+
+  definition Lies                  ("_ is-liar")                where                  "X is-liar \<equiv> \<forall>Y. If (X says Y) then not Y"
+  definition Says_the_truth ("_ is-truthteller")     where       "X is-truthteller \<equiv> \<forall>Y. If (X says Y) then Y"
   definition Lives_not_in     ("_ lives-not-in _")     where      "X lives-not-in G \<equiv> not (X lives-in G)"
-  definition Neither_nor_live_in ("neither _ nor _ live-in _")      
-                                                       where        "neither X nor Y live-in G \<equiv> (not (X lives-in G)) and (not (Y lives-in G))"
-  definition Both_live_in  ("both _ and _ live-in _")         
-                                                       where           "both X and Y live-in G \<equiv> (X lives-in G) and (Y lives-in G)"
+  definition Neither_nor_live_in ("neither _ nor _ live-in _")  where       
+                                                                                 "neither X nor Y live-in G \<equiv> (X lives-not-in G) and (Y lives-not-in G)"
+  definition Both_live_in  ("both _ and _ live-in _") where                          
+                                                                                     "both X and Y live-in G \<equiv> (X lives-in G) and (Y lives-in G)"
 
-  named_theorems Language
-  declare  Lies_def [Language] Says_the_truth_def [Language] Lives_not_in_def [Language] 
-    Neither_nor_live_in_def [Language] Both_live_in_def [Language]
+  named_theorems DSL
+  declare  Lies_def [DSL] Says_the_truth_def [DSL] Lives_not_in_def [DSL] 
+    Neither_nor_live_in_def [DSL] Both_live_in_def [DSL]
 
-\<comment>\<open>The rules of the town (delete A3 for the looser "open world" version).\<close>
+\<comment>\<open>The rules of the town.\<close>
 
   axiomatization where
-    A1: "\<forall>X. If (X lives-in LiarsStreet) then (X lies)"  and
-    A2: "\<forall>X. If (X lives-in TruthtellersRoad) then (X says-the-truth)"  and
+    A1: "\<forall>X. If (X lives-in LiarsStreet) then (X is-liar)"  and
+    A2: "\<forall>X. If (X lives-in TruthtellersRoad) then (X is-truthteller)"  and
     A3: "\<forall>X.       ((X lives-in LiarsStreet) \<or> (X lives-in TruthtellersRoad)) 
                  \<and> \<not> ((X lives-in LiarsStreet) \<and> (X lives-in TruthtellersRoad))"
 
@@ -66,7 +75,7 @@ begin
     shows
       "((Nilda lives-in S1) and (Carla lives-in S2))" 
 
-      using assms unfolding Language unfolding Logic
+      using assms unfolding DSL unfolding ObjectLogic
       nitpick[satisfy] 
       oops
 
@@ -84,7 +93,7 @@ begin
     shows
       "((Nilda lives-in S1) and (Carla lives-in S2))" 
 
-      using assms unfolding Language unfolding Logic
+      using assms unfolding DSL unfolding ObjectLogic
       nitpick[satisfy] 
       oops
 
@@ -102,23 +111,22 @@ begin
     shows
       "((Nilda lives-in S1) and (Carla lives-in S2))" 
 
-      using assms unfolding Language unfolding Logic
+      using assms unfolding DSL unfolding ObjectLogic
       nitpick[satisfy] 
       oops
 
 \<comment>\<open>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>
-   DEMO 4 — Your turn! Edit the two "says" lines below and invent your own riddle.
-     Can you build one with exactly one solution? One with none?
+   DEMO 4 — We can of course nest the statements
    \<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<close>
 
   lemma DEMO_4_make_your_own:
     assumes
-      "Nilda says (Carla lives-in TruthtellersRoad)"
-      "Carla says (Nilda lives-in LiarsStreet)"
+      "Nilda says (Carla says (Nilda lives-in TruthtellersRoad))"
+      "Carla says (Nilda says (Carla is-liar))"
     shows
       "((Nilda lives-in S1) and (Carla lives-in S2))" 
 
-    using assms unfolding Language unfolding Logic
+    using assms unfolding DSL unfolding ObjectLogic
     nitpick[satisfy] 
     oops
 
@@ -129,10 +137,10 @@ begin
    \<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<midarrow>\<close>
 
   lemma DEMO_5_the_impossible_sentence:
-    assumes "Nilda says (Nilda lies)"
+    assumes "Nilda says (Nilda is-liar)"
     shows False 
 
-    using assms unfolding Language unfolding Logic
+    using assms unfolding DSL unfolding ObjectLogic
     nitpick[satisfy] 
     nitpick
     sledgehammer
@@ -153,7 +161,7 @@ begin
     shows 
       "Carla says It_holds_that_Fermats_last_Theorem_is_True"
 
-    using assms unfolding Language unfolding Logic
+    using assms unfolding DSL unfolding ObjectLogic
     nitpick[satisfy] 
     nitpick 
     sledgehammer
@@ -167,7 +175,7 @@ begin
     shows 
       "Carla knows It_holds_that_Fermats_last_Theorem_is_True"
 
-      using assms unfolding Language unfolding Logic
+      using assms unfolding DSL unfolding ObjectLogic
       nitpick[satisfy] 
       nitpick
       sledgehammer
