@@ -27,7 +27,8 @@ begin
 
 (*
   typedecl Entity 
-  consts Nilda :: Entity consts Carla :: Entity
+  consts Nilda :: Entity  
+  consts Carla :: Entity
   axiomatization where AxPersons: "(\<forall>x. x = Nilda \<or> x = Carla) \<and> (Nilda \<noteq> Carla)"
   typedecl Street 
   consts LiarsStreet :: Street 
