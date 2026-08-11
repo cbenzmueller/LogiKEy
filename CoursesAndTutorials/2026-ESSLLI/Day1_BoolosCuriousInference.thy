@@ -1,6 +1,9 @@
 theory Day1_BoolosCuriousInference 
   imports Main
+
 begin   
+  declare [[syntax_ambiguity_warning = false]]
+
 
   typedecl i  \<comment>\<open>non-empty type of objects\<close>
 
