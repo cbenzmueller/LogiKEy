@@ -65,14 +65,15 @@ begin
    for \<diamond>\<box>\<phi> sees w back by symmetry, hence \<phi> holds at w. In basic K it fails:
    nitpick finds a dead-end witness world that makes \<box>\<phi> vacuously true.\<close>
 
-  lemma exKB: "(\<forall>x y. x\<^bold>ry \<longrightarrow> y\<^bold>rx) \<Longrightarrow> \<lfloor>\<^bold>\<diamond>\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<phi>\<rfloor>" unfolding D by blast
   lemma "\<lfloor>\<^bold>\<diamond>\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<phi>\<rfloor>" unfolding D nitpick[show_all,format=2,card=2] oops
+  lemma exKB: "(\<forall>x y. x\<^bold>ry \<longrightarrow> y\<^bold>rx) \<Longrightarrow> \<lfloor>\<^bold>\<diamond>\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<phi>\<rfloor>" unfolding D by blast
 
 \<comment>\<open>Second: \<diamond>\<box>\<phi> \<rightarrow> \<box>\<phi> needs S5 — it follows from the S5 frame conditions
    (euclideanness does the real work), but in KB it fails: nitpick finds a
    symmetric countermodel, a two-world cycle where only one world satisfies \<phi>.\<close>
 
-  lemma exS5: "\<lbrakk>\<forall>x. x\<^bold>rx; \<forall>x y z. x\<^bold>ry \<and> x\<^bold>rz \<longrightarrow> y\<^bold>rz\<rbrakk> \<Longrightarrow> \<lfloor>\<^bold>\<diamond>\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<^bold>\<box>\<phi>\<rfloor>" unfolding D by blast
+  lemma "\<lfloor>\<^bold>\<diamond>\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<^bold>\<box>\<phi>\<rfloor>" unfolding D nitpick[show_all,format=2,card=2] oops
   lemma "(\<forall>x y. x\<^bold>ry \<longrightarrow> y\<^bold>rx) \<Longrightarrow> \<lfloor>\<^bold>\<diamond>\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<^bold>\<box>\<phi>\<rfloor>" unfolding D nitpick[show_all,format=2,card=2] oops
+  lemma exS5: "\<lbrakk>\<forall>x. x\<^bold>rx; \<forall>x y z. x\<^bold>ry \<and> x\<^bold>rz \<longrightarrow> y\<^bold>rz\<rbrakk> \<Longrightarrow> \<lfloor>\<^bold>\<diamond>\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<^bold>\<box>\<phi>\<rfloor>" unfolding D by blast
 
 end
