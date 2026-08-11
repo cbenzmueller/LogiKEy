@@ -5,10 +5,10 @@ begin
   typedecl i  \<comment>\<open>non-empty type of objects\<close>
 
   consts  \<comment>\<open>The signature for BCP consists of four uninterpreted constant symbols.\<close>
-    e :: "i" ("\<^bold>e")              \<comment>\<open>one\<close>
-    s :: "i\<Rightarrow>i" ("\<^bold>s_")         \<comment>\<open>successor function\<close>
-    f :: "i\<Rightarrow>i\<Rightarrow>i" ("\<^bold>f__")    \<comment>\<open>binary function; axiomatised below as Ackermann function\<close>
-    d :: "i\<Rightarrow>bool" ("\<^bold>d_")   \<comment>\<open>arbitrary uninterpreted unary predicate\<close>
+    e :: "i"            ("\<^bold>e")               \<comment>\<open>one\<close>
+    s :: "i\<Rightarrow>i"        ("\<^bold>s_")              \<comment>\<open>successor function\<close>
+    f :: "i\<Rightarrow>i\<Rightarrow>i"    ("\<^bold>f__")             \<comment>\<open>binary function; axiomatised below as Ackermann function\<close>
+    d :: "i\<Rightarrow>bool" ("\<^bold>d_")              \<comment>\<open>arbitrary uninterpreted unary predicate\<close>
 
 \<comment>\<open>Axioms A1-A3 model the Ackermann function and Axioms A4 and A5  stipulate the properties of predicate d.\<close>
 
@@ -16,14 +16,14 @@ begin
     A1: "\<forall>n. \<^bold>fn\<^bold>e = \<^bold>s\<^bold>e"  and   
     A2: "\<forall>y. \<^bold>f\<^bold>e\<^bold>sy = \<^bold>s\<^bold>s\<^bold>f\<^bold>ey"  and   
     A3: "\<forall>x y. \<^bold>f\<^bold>sx\<^bold>sy = \<^bold>fx\<^bold>f(\<^bold>sx)y"  and   
-    A4: "\<^bold>d\<^bold>e"  and  \<comment>\<open>an arbitrary predicate d holds for one\<close>
-    A5: "\<forall>x. \<^bold>dx \<longrightarrow> \<^bold>d\<^bold>sx"  \<comment>\<open>if d holds for x it also holds for the successor of x\<close>
+    A4: "\<^bold>d\<^bold>e"  and                                    \<comment>\<open>an arbitrary predicate d holds for one\<close>
+    A5: "\<forall>x. \<^bold>dx \<longrightarrow> \<^bold>d\<^bold>sx"                          \<comment>\<open>if d holds for x it also holds for the successor of x\<close>
 
 \<comment>\<open>Trying to prove automatically with Sledgehammer that d holds for fssssesssse still fails at this point. 
     As Boolos' explains, a naive first-order proof would require more modus ponens steps (with A5 and A4) than 
     there are atoms in the universe.\<close>
 
-  lemma "\<^bold>d\<^bold>f\<^bold>s\<^bold>s\<^bold>s\<^bold>s\<^bold>e\<^bold>s\<^bold>s\<^bold>s\<^bold>s\<^bold>e"                    \<comment>\<open>Trying to prove automatically\<close> 
+  lemma "\<^bold>d\<^bold>f\<^bold>s\<^bold>s\<^bold>s\<^bold>s\<^bold>e\<^bold>s\<^bold>s\<^bold>s\<^bold>s\<^bold>e"                     \<comment>\<open>Trying to prove automatically\<close> 
     (* sledgehammer *) oops                   \<comment>\<open>no proof found; timeout\<close>
 
 
@@ -38,14 +38,15 @@ begin
 \<comment>\<open>Using these definitions, state-of-art higher-order ATPs integrated with Isabelle/HOL can now fully 
   automatically prove Boolos' Curious Problem:\<close>
 
-  theorem "\<^bold>d\<^bold>f\<^bold>s\<^bold>s\<^bold>s\<^bold>s\<^bold>e\<^bold>s\<^bold>s\<^bold>s\<^bold>s\<^bold>e"  \<comment>\<open>sledgehammer\<close> 
+
+  theorem "\<^bold>d\<^bold>f\<^bold>s\<^bold>s\<^bold>s\<^bold>s\<^bold>e\<^bold>s\<^bold>s\<^bold>s\<^bold>s\<^bold>e"   
 (*
     sledgehammer [z3]  (* z3 found a proof... *)
     sledgehammer [vampire]  (* vampire found a proof... *)
     sledgehammer [remote_leo2]  (* remote_leo2 found a proof... *)
     sledgehammer [e] (* e found a proof ... *)
-    sledgehammer [zipperposition]  (* zipperposition found a proof... *)
-    sledgehammer [cvc4]  (* No proof found *)
+    sledgehammer [cvc5] (* No proof found *)
+    sledgehammer [zipperposition]  (* No proof found *)
     sledgehammer [verit] (* No proof found *)
     sledgehammer [spass] (* No proof found *)
     sledgehammer [remote_leo3]  (* No proof found *)  
