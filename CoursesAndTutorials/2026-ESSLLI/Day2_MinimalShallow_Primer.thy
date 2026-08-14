@@ -12,19 +12,20 @@ begin
   consts R::"i\<Rightarrow>i\<Rightarrow>bool" (infix "\<^bold>r" 70)             \<comment>\<open>accessibility relation\<close>
 
   definition mnot::"\<sigma>\<Rightarrow>\<sigma>"       ("\<^bold>\<not>_"[52]53)    where       "\<^bold>\<not>\<phi> \<equiv> \<lambda>w. \<not>(\<phi> w)"
-  definition mand::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr "\<^bold>\<and>" 51)  where    "\<phi>\<^bold>\<and>\<psi> \<equiv> \<lambda>w. \<phi> w \<and> \<psi> w"
   definition mimp::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr "\<^bold>\<rightarrow>" 49) where   "\<phi>\<^bold>\<rightarrow>\<psi> \<equiv> \<lambda>w. \<phi> w \<longrightarrow> \<psi> w"
   definition mbox::"\<sigma>\<Rightarrow>\<sigma>"      ("\<^bold>\<box>_"[52]53)     where      "\<^bold>\<box>\<phi> \<equiv> \<lambda>w. \<forall>v. w\<^bold>rv \<longrightarrow> \<phi> v"
-  definition mdia::"\<sigma>\<Rightarrow>\<sigma>"       ("\<^bold>\<diamond>_"[52]53)     where    "  \<^bold>\<diamond>\<phi> \<equiv> \<lambda>w. \<exists>v. w\<^bold>rv \<and> \<phi> v"
   definition valid::"\<sigma>\<Rightarrow>bool"   ("\<lfloor>_\<rfloor>")               where      "\<lfloor>\<phi>\<rfloor> \<equiv> \<forall>w. \<phi> w"
+
+  definition mand::"\<sigma>\<Rightarrow>\<sigma>\<Rightarrow>\<sigma>" (infixr "\<^bold>\<and>" 51)  where    "\<phi>\<^bold>\<and>\<psi> \<equiv> \<lambda>w. \<phi> w \<and> \<psi> w"
+  definition mdia::"\<sigma>\<Rightarrow>\<sigma>"       ("\<^bold>\<diamond>_"[52]53)     where    "  \<^bold>\<diamond>\<phi> \<equiv> \<lambda>w. \<exists>v. w\<^bold>rv \<and> \<phi> v"
 
   named_theorems D
   declare mnot_def[D] mand_def[D] mimp_def[D] mbox_def[D] mdia_def[D] valid_def[D]
 
 \<comment>\<open>Warm-up: axiom K and the necessitation rule hold in every frame.\<close>
 
-  lemma K:      "\<lfloor>\<^bold>\<box>(\<phi>\<^bold>\<rightarrow>\<psi>) \<^bold>\<rightarrow> (\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<^bold>\<box>\<psi>)\<rfloor>"       unfolding D by auto
-  lemma NEC:  "\<lfloor>\<phi>\<rfloor> \<Longrightarrow> \<lfloor>\<^bold>\<box>\<phi>\<rfloor>"                          unfolding D by auto
+  lemma K:      "\<lfloor>\<^bold>\<box>(\<phi>\<^bold>\<rightarrow>\<psi>) \<^bold>\<rightarrow> (\<^bold>\<box>\<phi> \<^bold>\<rightarrow> \<^bold>\<box>\<psi>)\<rfloor>"          unfolding D by auto
+  lemma NEC:  assumes "\<lfloor>\<phi>\<rfloor>" shows "\<lfloor>\<^bold>\<box>\<phi>\<rfloor>"   using assms  unfolding D by auto
 
 \<comment>\<open>Sahlqvist correspondences: modal axiom schemes \<longleftrightarrow> frame conditions on R.\<close>
 

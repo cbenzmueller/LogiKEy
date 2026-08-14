@@ -27,7 +27,7 @@ begin
     there are atoms in the universe.\<close>
 
   lemma "\<^bold>d\<^bold>f\<^bold>s\<^bold>s\<^bold>s\<^bold>s\<^bold>e\<^bold>s\<^bold>s\<^bold>s\<^bold>s\<^bold>e"                     \<comment>\<open>Trying to prove automatically\<close> 
-    (* sledgehammer *) oops                   \<comment>\<open>no proof found; timeout\<close>
+    sledgehammer nitpick oops                   \<comment>\<open>no proof found; timeout\<close>
 
 
 \<comment>\<open>We interactively provide two shorthand notations ind and p. After their introduction a proof can be found fully 
