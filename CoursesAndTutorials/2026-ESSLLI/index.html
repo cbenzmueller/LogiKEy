@@ -278,6 +278,75 @@
     .qrcap { text-align: left; }
   }
 
+  /* ---------- group photo ---------- */
+  .photo { margin-top: 2.6rem; }
+  .photo figure { margin: 0; }
+  .photo a.shot {
+    display: block;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    overflow: hidden;
+    line-height: 0;
+    position: relative;
+    cursor: zoom-in;
+  }
+  .photo a.shot img { display: block; width: 100%; height: auto; }
+  .photo a.shot::after {
+    content: "⤢ Enlarge";
+    position: absolute;
+    right: 0.6rem;
+    bottom: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: rgba(30,36,48,0.62);
+    padding: 0.28em 0.6em;
+    border-radius: 3px;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+  .photo a.shot:hover::after, .photo a.shot:focus::after { opacity: 1; }
+  .photo figcaption {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    margin-top: 0.6rem;
+  }
+
+  /* ---------- lightbox (pure CSS, :target) ---------- */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: rgba(20,24,32,0.9);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.18s ease, visibility 0.18s ease;
+  }
+  .lightbox:target { opacity: 1; visibility: visible; }
+  .lightbox img { max-width: 100%; max-height: 92vh; width: auto; height: auto; border-radius: 3px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+  .lightbox .backdrop { position: absolute; inset: 0; cursor: zoom-out; }
+  .lightbox .close {
+    position: absolute;
+    top: 1rem;
+    right: 1.15rem;
+    font-family: var(--mono);
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--paper);
+    text-decoration: none;
+    background: rgba(0,0,0,0.35);
+    border-radius: 4px;
+    padding: 0.2em 0.45em;
+  }
+
   /* ---------- footer ---------- */
   footer {
     margin-top: 3rem;
@@ -345,6 +414,17 @@
       <div class="links"><a href="https://lucapasetto.github.io/">lucapasetto.github.io</a></div>
     </div>
   </div>
+
+  <section class="photo" id="photo">
+    <div class="seclabel">Course Photo</div>
+    <figure>
+      <a class="shot" href="#photo-full" aria-label="Enlarge the ESSLLI 2026 group photo">
+        <img src="esslli_group_photo.jpg" width="1760" height="739" loading="lazy" decoding="async"
+             alt="Group photo of the participants and lecturers of the ESSLLI 2026 LogiKEy course, Prague.">
+      </a>
+      <figcaption>Participants and lecturers — ESSLLI 2026, Prague. Click to enlarge.</figcaption>
+    </figure>
+  </section>
 
   <section>
     <div class="seclabel">Abstract</div>
@@ -535,6 +615,13 @@
     <span class="note"><a href="https://ufal.mff.cuni.cz/esslli-2026/schedule" style="color:inherit">ESSLLI 2026 schedule</a></span>
   </footer>
 
+</div>
+
+<div class="lightbox" id="photo-full">
+  <a class="backdrop" href="#photo" aria-label="Close enlarged photo"></a>
+  <a class="close" href="#photo" aria-label="Close">×</a>
+  <img src="esslli_group_photo_large.jpg" width="3200" height="1344"
+       alt="Enlarged group photo of the participants and lecturers of the ESSLLI 2026 LogiKEy course, Prague.">
 </div>
 
 <script>
