@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 958" font-family="Arial, Helvetica, sans-serif">
+<rect id="bg-white" x="0" y="0" width="900" height="958" fill="#ffffff"/>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#6f6f76"/></marker><marker id="arrG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2e7d32"/></marker><marker id="arrR" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a35b5b"/></marker></defs>
+<rect x="60" y="28" width="46" height="7" fill="#f2b705"/>
+<text x="60" y="64" font-size="26" font-weight="700" fill="#2b2b2f">One Workbench, Many Disciplines</text>
+<text x="60" y="89" font-size="14.5" fill="#5a5a60">LogiKEy: knowledge from very different disciplines is formalised in one shared logical base language –</text>
+<text x="60" y="108" font-size="14.5" fill="#5a5a60">and machine-verified by AI theorem provers across many applications.</text>
+<path d="M 359.8 197.1 A 222 222 0 0 1 540.2 197.1 L 495.5 297.7 A 112 112 0 0 0 404.5 297.7 Z" fill="#ffffff" fill-opacity="1" stroke="#c9c9cf" stroke-width="1.4"/>
+<text x="450" y="238" text-anchor="middle" font-size="15" font-weight="700" fill="#2b2b2f">Philosophy</text>
+<path d="M 552.4 203.0 A 222 222 0 0 1 664.8 344.0 L 558.4 371.8 A 112 112 0 0 0 501.7 300.6 Z" fill="#ffffff" fill-opacity="1" stroke="#c9c9cf" stroke-width="1.4"/>
+<text x="581" y="301" text-anchor="middle" font-size="15" font-weight="700" fill="#2b2b2f">Theology</text>
+<path d="M 667.8 357.2 A 222 222 0 0 1 627.7 533.0 L 539.7 467.1 A 112 112 0 0 0 559.9 378.4 Z" fill="#ffffff" fill-opacity="1" stroke="#c9c9cf" stroke-width="1.4"/>
+<text x="613" y="442" text-anchor="middle" font-size="15" font-weight="700" fill="#2b2b2f">Mathematics</text>
+<path d="M 619.3 543.7 A 222 222 0 0 1 456.8 621.9 L 453.4 511.9 A 112 112 0 0 0 535.4 472.5 Z" fill="#ffffff" fill-opacity="1" stroke="#c9c9cf" stroke-width="1.4"/>
+<text x="522" y="544" text-anchor="middle" font-size="15" font-weight="700" fill="#2b2b2f">Computer</text>
+<text x="522" y="563" text-anchor="middle" font-size="15" font-weight="700" fill="#2b2b2f">Science</text>
+<path d="M 443.2 621.9 A 222 222 0 0 1 280.7 543.7 L 364.6 472.5 A 112 112 0 0 0 446.6 511.9 Z" fill="#ffffff" fill-opacity="1" stroke="#c9c9cf" stroke-width="1.4"/>
+<text x="378" y="555" text-anchor="middle" font-size="15" font-weight="700" fill="#2b2b2f">Logic</text>
+<path d="M 272.3 533.0 A 222 222 0 0 1 232.2 357.2 L 340.1 378.4 A 112 112 0 0 0 360.3 467.1 Z" fill="#f2b705" fill-opacity="0.28" stroke="#e0a800" stroke-width="1.4"/>
+<text x="287" y="431" text-anchor="middle" font-size="15" font-weight="700" fill="#2b2b2f">AI, Law</text>
+<text x="287" y="450" text-anchor="middle" font-size="15" font-weight="700" fill="#2b2b2f">&amp; Ethics</text>
+<path d="M 235.2 344.0 A 222 222 0 0 1 347.6 203.0 L 398.3 300.6 A 112 112 0 0 0 341.6 371.8 Z" fill="#ffffff" fill-opacity="1" stroke="#c9c9cf" stroke-width="1.4"/>
+<text x="319" y="290" text-anchor="middle" font-size="15" font-weight="700" fill="#2b2b2f">AI &amp;</text>
+<text x="319" y="309" text-anchor="middle" font-size="15" font-weight="700" fill="#2b2b2f">Health</text>
+<line x1="450" y1="174" x2="450" y2="160" stroke="#b0b0b6" stroke-width="1.2"/>
+<text x="450" y="146" text-anchor="middle" font-size="12.5" fill="#5a5a60" font-weight="400">formal analysis of philosophical arguments and theories</text>
+<line x1="627" y1="259" x2="638" y2="250" stroke="#b0b0b6" stroke-width="1.2"/>
+<text x="700" y="258" text-anchor="start" font-size="12.5" fill="#5a5a60" font-weight="400">formal analysis of</text>
+<text x="700" y="274" text-anchor="start" font-size="12.5" fill="#5a5a60" font-weight="400">theistic theories</text>
+<line x1="670" y1="450" x2="684" y2="453" stroke="#b0b0b6" stroke-width="1.2"/>
+<text x="736" y="468" text-anchor="start" font-size="12.5" fill="#5a5a60" font-weight="400">logical foundations,</text>
+<text x="736" y="484" text-anchor="start" font-size="12.5" fill="#5a5a60" font-weight="400">category theory</text>
+<text x="736" y="500" text-anchor="start" font-size="12.5" fill="#5a5a60" font-weight="400">and free logic</text>
+<line x1="548" y1="604" x2="554" y2="616" stroke="#b0b0b6" stroke-width="1.2"/>
+<text x="588" y="652" text-anchor="start" font-size="12.5" fill="#5a5a60" font-weight="400">logical foundations,</text>
+<text x="588" y="668" text-anchor="start" font-size="12.5" fill="#5a5a60" font-weight="400">theorem provers</text>
+<text x="588" y="684" text-anchor="start" font-size="12.5" fill="#5a5a60" font-weight="400">LEO-II and Leo-III</text>
+<line x1="352" y1="604" x2="346" y2="616" stroke="#b0b0b6" stroke-width="1.2"/>
+<text x="312" y="652" text-anchor="end" font-size="12.5" fill="#5a5a60" font-weight="400">expressive modal,</text>
+<text x="312" y="668" text-anchor="end" font-size="12.5" fill="#5a5a60" font-weight="400">deontic and</text>
+<text x="312" y="684" text-anchor="end" font-size="12.5" fill="#5a5a60" font-weight="400">epistemic logics</text>
+<line x1="230" y1="450" x2="216" y2="453" stroke="#b0b0b6" stroke-width="1.2"/>
+<text x="164" y="460" text-anchor="end" font-size="12.5" fill="#8a6a00" font-weight="700">normative reasoning,</text>
+<text x="164" y="476" text-anchor="end" font-size="12.5" fill="#8a6a00" font-weight="700">machine ethics,</text>
+<text x="164" y="492" text-anchor="end" font-size="12.5" fill="#8a6a00" font-weight="700">EU AI Act</text>
+<line x1="273" y1="259" x2="262" y2="250" stroke="#b0b0b6" stroke-width="1.2"/>
+<text x="200" y="258" text-anchor="end" font-size="12.5" fill="#5a5a60" font-weight="400">controllable hybrid AI</text>
+<text x="200" y="274" text-anchor="end" font-size="12.5" fill="#5a5a60" font-weight="400">in medicine</text>
+<circle cx="450" cy="400" r="98" fill="#2b2b2f"/>
+<circle cx="450" cy="400" r="98" fill="none" stroke="#f2b705" stroke-width="3"/>
+<text x="450" y="376" text-anchor="middle" font-size="13.5" fill="#f2b705" font-weight="700" letter-spacing="0.02em">LogiKEy</text>
+<text x="450" y="403" text-anchor="middle" font-size="18" font-weight="700" fill="#ffffff">HOL Workbench</text>
+<text x="450" y="424" text-anchor="middle" font-size="11.5" fill="#c4c4ca">higher-order logic</text>
+<text x="450" y="440" text-anchor="middle" font-size="11.5" fill="#c4c4ca">as base language</text>
+<text x="450" y="458" text-anchor="middle" font-size="11.5" fill="#c4c4ca">Isabelle/HOL · Leo-III</text>
+<text x="60" y="744" font-size="11" font-weight="700" fill="#b58a00" letter-spacing="0.06em">APPLICATION: SYMBOLIC CONTROL FOR HYBRID AI</text>
+<rect x="60" y="758" width="200" height="84" rx="5" fill="#ffffff" stroke="#c9c9cf" stroke-width="1.4"/>
+<text x="160" y="783" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2b2b2f">Learning AI</text>
+<text x="160" y="804" text-anchor="middle" font-size="12" fill="#5a5a60">neural, e.g. a language model –</text>
+<text x="160" y="821" text-anchor="middle" font-size="12" fill="#5a5a60">powerful, but a black box</text>
+<line x1="266" y1="800" x2="322" y2="800" stroke="#6f6f76" stroke-width="2" marker-end="url(#arr)"/>
+<text x="294" y="790" text-anchor="middle" font-size="10.5" fill="#6f6f76">proposal</text>
+<rect x="330" y="758" width="230" height="84" rx="5" fill="#fdf3d0" stroke="#f2b705" stroke-width="1.8"/>
+<text x="445" y="783" text-anchor="middle" font-size="14.5" font-weight="700" fill="#2b2b2f">Symbolic Checker</text>
+<text x="445" y="804" text-anchor="middle" font-size="12" fill="#5a5a60">LogiKEy checks against explicit</text>
+<text x="445" y="821" text-anchor="middle" font-size="12" fill="#5a5a60">norms from law and ethics</text>
+<line x1="450" y1="502" x2="450" y2="754" stroke="#e0a800" stroke-width="2" stroke-dasharray="3 5"/>
+<line x1="566" y1="800" x2="628" y2="800" stroke="#2e7d32" stroke-width="2" marker-end="url(#arrG)"/>
+<text x="597" y="790" text-anchor="middle" font-size="10.5" fill="#2e7d32" font-weight="700">approved</text>
+<rect x="636" y="758" width="204" height="84" rx="5" fill="#2b2b2f"/>
+<text x="738" y="781" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Accountable</text>
+<text x="738" y="799" text-anchor="middle" font-size="14" font-weight="700" fill="#ffffff">Decision</text>
+<text x="738" y="821" text-anchor="middle" font-size="12" fill="#c4c4ca">always with a verifiable reason</text>
+<path d="M 450 842 L 450 864 L 160 864 L 160 848" fill="none" stroke="#a35b5b" stroke-width="2" marker-end="url(#arrR)"/>
+<text x="305" y="858" text-anchor="middle" font-size="10.5" fill="#a35b5b" font-weight="700">blocked – returned for revision</text>
+<rect x="60" y="886" width="780" height="46" rx="4" fill="#f7f5ef"/>
+<rect x="60" y="886" width="5" height="46" fill="#f2b705"/>
+<text x="82" y="904" font-size="12.5" fill="#3a3a3f"><tspan font-weight="700" font-size="13">Hybrid, neuro-symbolic AI:</tspan> coupling learning systems with symbolic logic makes AI controllable, explainable</text>
+<text x="82" y="922" font-size="12.5" fill="#3a3a3f">and legally compliant – the foundation for trustworthy AI systems, as also demanded by the EU AI Act.</text>
+<text x="840" y="950" text-anchor="end" font-size="10.5" fill="#9a9a9f">Chair of AI Systems Engineering (AISE) · logikey.org</text>
+</svg>
