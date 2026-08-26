@@ -64,6 +64,23 @@
     max-width: 62rem;
   }
 
+  /* ---------- hero illustration ---------- */
+  .hero-fig { margin: 0.4rem 0 0; max-width: 680px; }
+  .hero-fig img {
+    width: 100%; height: auto; display: block;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+  }
+  .hero-fig figcaption {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    margin-top: 0.6rem;
+  }
+  .hero-fig figcaption a { color: var(--d2); text-decoration: none; border-bottom: 1px solid currentColor; }
+
   /* ---------- sections ---------- */
   section { margin-top: 2.6rem; }
   .seclabel {
@@ -268,6 +285,11 @@
     <div class="overline"><a href="https://github.com/cbenzmueller/LogiKEy">github.com/cbenzmueller/LogiKEy</a> &nbsp;·&nbsp; <a href="CoursesAndTutorials/2026-ESSLLI/">ESSLLI 2026 LogiKEy course</a></div>
     <h1>LogiKEy</h1>
     <p class="subtitle">A logic-pluralistic framework and methodology for knowledge representation and reasoning — built on shallow and deep semantical embeddings of object logics in classical higher-order logic (HOL), so that automation and model finding transfer for free to the embedded logics.</p>
+    <figure class="hero-fig">
+      <img src="LogiKEy_Illustrations/LogiKEy_Illustration_eng.svg" width="900" height="958"
+           alt="One workbench, many disciplines: LogiKEy uses higher-order logic (HOL) in Isabelle/HOL and Leo-III as a shared base language into which knowledge from philosophy, theology, mathematics, computer science, logic, AI, law &amp; ethics, and AI &amp; health is formalised and machine-verified. A symbolic checker validates proposals from a learning AI against explicit norms from law and ethics before an accountable decision.">
+      <figcaption>One workbench, many disciplines — the LogiKEy HOL workbench across the fields that use it, and its role as a symbolic ethico-legal checker for hybrid AI.</figcaption>
+    </figure>
   </header>
 
   <section>
