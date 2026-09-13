@@ -1,6 +1,8 @@
+(*<*)
 theory ID_Inference
   imports ID_Frameworks
 begin
+(*>*)
 
 section \<open>Inference relations\<close>
 
@@ -61,4 +63,6 @@ lemma empty_framework_no_conclusion:
   by (metis no_argument_no_credulous shared_argument_imp_shared_conclusion
       shared_conclusion_imp_credulous)
 
+(*<*)
 end
+(*>*)

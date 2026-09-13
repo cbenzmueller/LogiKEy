@@ -1,6 +1,8 @@
+(*<*)
 theory ID_Frameworks
   imports "AA_Fixed.ext-properties"
 begin
+(*>*)
 
 section \<open>Frameworks, agents, and coalitions\<close>
 
@@ -342,4 +344,6 @@ next
 qed
 *)
 
+(*<*)
 end
+(*>*)

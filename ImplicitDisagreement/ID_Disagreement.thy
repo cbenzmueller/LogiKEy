@@ -1,6 +1,8 @@
+(*<*)
 theory ID_Disagreement
   imports ID_Explanations
 begin
+(*>*)
 
 section \<open>Disagreement, weak spots, and antagonists\<close>
 
@@ -111,4 +113,6 @@ lemma antagonists_are_not_weak_spots:
   shows "\<not> weak_spot U att Con p a"
   by (metis (lifting) agreement_hierarchy antagonist_def assms disagrees_that_def weak_spot_def)
 
+(*<*)
 end
+(*>*)

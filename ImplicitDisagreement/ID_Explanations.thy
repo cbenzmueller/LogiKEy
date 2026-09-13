@@ -1,6 +1,8 @@
+(*<*)
 theory ID_Explanations
   imports ID_Inference
 begin
+(*>*)
 
 section \<open>Explanations and shared-explanation inference\<close>
 
@@ -212,4 +214,6 @@ lemma shared_explanation_iff_idealset_nitpick:
   nitpick[card 'a = 1-4, card 'c = 1-3, timeout = 120, expect = none]
   oops
 
+(*<*)
 end
+(*>*)

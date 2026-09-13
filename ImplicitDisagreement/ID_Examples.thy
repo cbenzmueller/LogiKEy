@@ -1,6 +1,8 @@
+(*<*)
 theory ID_Examples
   imports ID_Disagreement
 begin
+(*>*)
 
 section \<open>Examples\<close>
 
@@ -591,4 +593,6 @@ proof -
   show ?thesis using co_agents_reject distal npot by blast
 qed
 
+(*<*)
 end
+(*>*)
