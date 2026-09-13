@@ -2,6 +2,8 @@ theory ID_Examples
   imports ID_Disagreement
 begin
 
+section \<open>Examples\<close>
+
 text \<open>A two-argument counterexample to the converse of Proposition 1.
 Both arguments conclude the same formula, but attack each other. This small
 example isolates the difference between shared conclusion and shared argument.\<close>

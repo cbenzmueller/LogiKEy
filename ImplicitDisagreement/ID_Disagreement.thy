@@ -2,6 +2,8 @@ theory ID_Disagreement
   imports ID_Explanations
 begin
 
+section \<open>Disagreement, weak spots, and antagonists\<close>
+
 text \<open>Disagreement predicates (paper Definition ``Disagreements, explicit and
 implicit''); the proximal/distal naming matches the paper. Each predicate is the
 characteristic predicate of the corresponding conclusion set (Dis, proximal,

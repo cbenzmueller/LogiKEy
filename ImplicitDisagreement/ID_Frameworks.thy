@@ -2,6 +2,8 @@ theory ID_Frameworks
   imports "AA_Fixed.ext-properties"
 begin
 
+section \<open>Frameworks, agents, and coalitions\<close>
+
 text \<open>The framework and extension-semantics definitions are given by the import:
 a framework is passed as an argument predicate U and an attack relation att. The development reuses
 \<^verbatim>\<open>defends_rel\<close>, \<^verbatim>\<open>completeExt\<close>, \<^verbatim>\<open>groundedExt\<close> and
@@ -158,7 +160,7 @@ qed
 lemma fresh_attacker_complete:
   assumes t: "\<not> U t" and a: "U a"
   shows "extensions.completeExt (U \<union> \<lbrace>t\<rbrace>) (fresh_attacker_att att U a t) E \<longleftrightarrow>
-         E t \<and> \<not> E a \<and> extensions.completeExt (remove_argument U a) att E"
+         E t \<and> \<not> E a \<and> extensions.completeExt (remove_argument U a) att E" sledgehammer
 proof
   assume L: "extensions.completeExt (U \<union> \<lbrace>t\<rbrace>) (fresh_attacker_att att U a t) E"
   have ta: "t \<noteq> a" using t a by auto

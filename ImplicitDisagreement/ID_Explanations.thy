@@ -2,6 +2,8 @@ theory ID_Explanations
   imports ID_Inference
 begin
 
+section \<open>Explanations and shared-explanation inference\<close>
+
 text \<open>Explanation definition, conditions 1 and 2, together with E contained in U.
 The paper does not impose conflict-freeness here, so neither do we. Defence and
 inclusion-minimality are reused from the imported argumentation development.\<close>

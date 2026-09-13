@@ -2,6 +2,8 @@ theory ID_Inference
   imports ID_Frameworks
 begin
 
+section \<open>Inference relations\<close>
+
 text \<open>Proximal explanation (paper's \<^emph>\<open>proximal explanation\<close>). It is a relation,
 since several arguments may explain the same conclusion, and does not require the
 argument to belong to an extension.\<close>
