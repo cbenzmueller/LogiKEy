@@ -1,0 +1,61 @@
+name: Build ImplicitDisagreement artifact
+
+# Cross-platform verification that the JURIX 2026 Implicit Disagreement artifact
+# builds via build.sh on Linux, macOS and Windows with Isabelle2025-2.
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'ImplicitDisagreement/**'
+      - '.github/workflows/build-implicit-disagreement.yml'
+
+jobs:
+  build:
+    name: build (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            url: https://isabelle.in.tum.de/website-Isabelle2025-2/dist/Isabelle2025-2_linux.tar.gz
+          - os: macos-latest
+            url: https://isabelle.in.tum.de/website-Isabelle2025-2/dist/Isabelle2025-2_macos.tar.gz
+          - os: windows-latest
+            url: https://isabelle.in.tum.de/website-Isabelle2025-2/dist/Isabelle2025-2.exe
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the artifact (Unix)
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$RUNNER_TEMP"
+          echo "Downloading ${{ matrix.url }}"
+          curl -fL -o isabelle.tar.gz "${{ matrix.url }}"
+          tar xzf isabelle.tar.gz
+          ISABELLE_BIN="$(ls -d "$RUNNER_TEMP"/Isabelle2025-2*/bin/isabelle "$RUNNER_TEMP"/Isabelle2025-2*.app/bin/isabelle 2>/dev/null | head -1)"
+          echo "Using isabelle at: $ISABELLE_BIN"
+          "$ISABELLE_BIN" version
+          cd "$GITHUB_WORKSPACE/ImplicitDisagreement"
+          ISABELLE="$ISABELLE_BIN" ./build.sh
+          test -f output/document.pdf && echo "OK: document.pdf produced"
+
+      - name: Build the artifact (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Set-Location $env:RUNNER_TEMP
+          Write-Host "Downloading ${{ matrix.url }}"
+          curl.exe -fL -o isabelle.exe "${{ matrix.url }}"
+          # The Windows distribution is a self-extracting 7-Zip archive.
+          7z x isabelle.exe -oIsabelleDist | Out-Null
+          $root = Join-Path $env:RUNNER_TEMP 'IsabelleDist\Isabelle2025-2'
+          $bash = Join-Path $root 'contrib\cygwin\bin\bash.exe'
+          if (-not (Test-Path $bash)) { throw "cygwin bash not found at $bash" }
+          # Run build.sh through Isabelle's bundled Cygwin bash; translate paths with cygpath.
+          & $bash -lc "cd `"`$(cygpath '$env:GITHUB_WORKSPACE')/ImplicitDisagreement`" && ISABELLE=`"`$(cygpath '$root')/bin/isabelle`" bash build.sh && test -f output/document.pdf && echo 'OK: document.pdf produced'"
+          if ($LASTEXITCODE -ne 0) { throw "build.sh failed with exit $LASTEXITCODE" }
