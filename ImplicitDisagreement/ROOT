@@ -1,0 +1,12 @@
+session Jurix_Implicit_Disagreement = AA_Fixed +
+  options [document = pdf, document_output = "output",
+    threads = 2, parallel_proofs = 0,
+    timeout = 300, quick_and_dirty = false]
+  theories
+    ID_Frameworks
+    ID_Inference
+    ID_Explanations
+    ID_Disagreement
+    ID_Examples
+  document_files
+    "root.tex"

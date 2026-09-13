@@ -1,0 +1,12 @@
+session AA_Fixed = HOL +
+  options [document = false, threads = 2, parallel_proofs = 0, timeout = 900, quick_and_dirty = false]
+  directories "simplified"
+  theories
+    misc base "Zorn-lemma" extensions labellings
+    "ext-properties" correspondence "lab-properties" adequacy
+    "ext-relationships" "lab-relationships"
+    "simplified/extensions-simpl" "simplified/labellings-simpl"
+    "simplified/ext-simpl-properties" "simplified/correspondence-simpl"
+    "simplified/lab-simpl-properties" "simplified/ext-simpl-relationships"
+    "simplified/lab-simpl-relationships" "simplified/model-generation"
+    "regression-checks"

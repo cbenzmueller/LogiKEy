@@ -1,0 +1,49 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{isabelle,isabellesym}
+
+% Symbols used in the theories (\<lbrace>, \<rbrace>, \<approx>, ...)
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+
+% this should be the last package used
+\usepackage{pdfsetup}
+
+% urls in roman style, theory text in math-similar italics
+\urlstyle{rm}
+\isabellestyle{it}
+
+\begin{document}
+
+\title{When We Disagree to Agree:\\
+  An Isabelle/HOL Formalization of Implicit Disagreement\\
+  in Abstract Argumentation}
+\author{Luca Pasetto \and Christoph Benzm\"uller}
+\maketitle
+
+\begin{abstract}
+  This document presents an Isabelle/HOL formalization of agreement,
+  explanation, and implicit disagreement in Dung-style abstract
+  argumentation, accompanying the paper \emph{When We Disagree to Agree: An
+  Abstract Argumentation Account of Implicit Disagreement in Legal
+  Reasoning} (JURIX 2026 submission). The development builds on a corrected
+  version of the higher-order-logic encoding of abstract argumentation by
+  Fuenmayor and Steen (session \texttt{AA\_Fixed}). It covers agents and
+  coalitions as induced subframeworks, three inference relations (credulous,
+  shared conclusion, shared argument), proximal and complete explanations,
+  shared-explanation inference, ordinary, proximal, and distal (implicit)
+  disagreement, weak spots, and antagonists. All definitions are stated for
+  arbitrary, possibly infinite frameworks. The example theories verify the
+  paper's running six-argument bioethics/constitutional-law example,
+  including its weak spots and antagonists, and the coalition-only distal
+  disagreement example.
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+% include generated text of all theories
+\input{session}
+
+\end{document}
