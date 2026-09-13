@@ -1,0 +1,3 @@
+# Keep shell scripts LF-only so `build.sh` runs after checkout on Windows too
+# (avoids CRLF being introduced by core.autocrlf=true, which breaks bash).
+*.sh text eol=lf

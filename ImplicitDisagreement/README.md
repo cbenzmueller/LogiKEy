@@ -2,6 +2,23 @@
 
 This is the Isabelle/HOL encoding of the paper *When We Disagree to Agree: An Abstract Argumentation Account of Implicit Disagreement in Legal Reasoning*.
 
+## Building
+
+The formalization was developed and checked with **Isabelle2025-2** (available from <https://isabelle.in.tum.de>); other releases are not guaranteed to work.
+
+From this directory, build the session and its document:
+
+- **macOS / Linux:** `./build.sh`
+- **Windows:** run it in the Isabelle-bundled shell, e.g. `isabelle env bash build.sh` (native `cmd`/PowerShell cannot run the script).
+
+If `isabelle` is not on your `PATH`, point the script at it explicitly:
+
+```
+ISABELLE=/path/to/isabelle ./build.sh
+```
+
+The first run also builds the parent session `AA_Fixed` (a few minutes). The generated document is written to `output/document.pdf`.
+
 ## Mapping to the paper
 
 | Paper | Isabelle representation | Location |
