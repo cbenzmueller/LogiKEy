@@ -48,8 +48,8 @@ lemma proximal_disagreement_is_not_ordinary_disagreement:
   "proximal_disagreement (\<lambda>_. True) mutual_attack (\<lambda>_. ()) () \<and>
     distal_disagreement (\<lambda>_. True) mutual_attack (\<lambda>_. ()) () \<and>
     \<not> disagrees_that (\<lambda>_. True) mutual_attack (\<lambda>_. ()) ()"
-  by (metis agreement_hierarchy distal_disagreement_def ordinary_and_distal_disjoint proximal_disagreement_def
-      shared_conclusion_without_shared_argument)
+  by (metis agreement_hierarchy distal_disagreement_def ordinary_and_distal_disjoint
+      proximal_disagreement_def shared_conclusion_without_shared_argument)
 
 text \<open>The Explanation definition really permits a conflicting explanation. With one
 self-attacking argument the singleton is a minimal self-defending support.

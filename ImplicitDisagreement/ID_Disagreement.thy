@@ -102,7 +102,8 @@ qed
 lemma removing_the_only_concluder_is_not_a_weak_spot:
   assumes "\<forall>b. U b \<longrightarrow> Con b = p \<longrightarrow> b = a"
   shows "\<not> weak_spot U att Con p a"
-  by (smt (verit, ccfv_threshold) assms no_argument_no_credulous weak_spot_retains_credulous_support)
+  by (smt (verit, ccfv_threshold) assms no_argument_no_credulous
+      weak_spot_retains_credulous_support)
 
 
 lemma antagonists_are_not_weak_spots:

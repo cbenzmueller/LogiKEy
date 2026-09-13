@@ -19,8 +19,9 @@ the ambient graph.\<close>
 definition is_agent :: "'a Set \<Rightarrow> 'a Rel \<Rightarrow> 'a Set \<Rightarrow> 'a Rel \<Rightarrow> bool" where
   "is_agent U att A r \<longleftrightarrow> A \<subseteq> U \<and> r = induced_att att A"
 
-text \<open>Coalition (paper's Coalition definition) reuses predicate union. Coalition attacks include all ambient
-edges between coalition members, including edges absent from both agents' graphs.\<close>
+text \<open>Coalition (paper's Coalition definition) reuses predicate union. Coalition
+attacks include all ambient edges between coalition members, including edges absent
+from both agents' graphs.\<close>
 abbreviation coalition :: "'a Set \<Rightarrow> 'a Set \<Rightarrow> 'a Set" where
   "coalition A B \<equiv> A \<union> B"
 
@@ -292,7 +293,8 @@ proof
     have X2props: "X2 t \<and> \<not> X2 a"
       using t a unfolding X2_def by auto
     have X2t: "extensions.completeExt (U \<union> \<lbrace>t\<rbrace>) (fresh_attacker_att att U a t) X2"
-      using fresh_attacker_complete[where att=att and U=U and a=a and t=t and E=X2] t a X2props X2c by blast
+      using fresh_attacker_complete[where att=att and U=U and a=a and t=t and E=X2]
+        t a X2props X2c by blast
     have sub: "\<forall>x. (U \<union> \<lbrace>t\<rbrace>) x \<longrightarrow> E x \<longrightarrow> X2 x"
       using X Et nEa t unfolding X2_def by auto
     have H: "\<forall>x. (U \<union> \<lbrace>t\<rbrace>) x \<longrightarrow> (X2 x \<longleftrightarrow> E x)"

@@ -71,8 +71,9 @@ lemma shared_explanation_induced [simp]:
 lemma shared_explanation_has_admissible_witness:
   assumes "shared_explanation U att Con p"
   shows "\<exists>E. explanation U att Con p E \<and> extensions.admissibleExt U att E"
-  by (smt (verit) admissibleExt_def agreement_hierarchy assms credulous_conclusion_def explanation_has_support
-      explanation_support_def preferredConflictfree shared_explanation_def)
+  by (smt (verit) admissibleExt_def agreement_hierarchy assms credulous_conclusion_def
+      explanation_has_support explanation_support_def preferredConflictfree
+      shared_explanation_def)
 
 text \<open>Correspondence with ideal semantics. For finite U, shared-explanation
 inference holds exactly when some ideal set contains an argument concluding p,

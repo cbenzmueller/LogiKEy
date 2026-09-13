@@ -10,8 +10,9 @@ argument to belong to an extension.\<close>
 definition proximal_explanation :: "'a Set \<Rightarrow> ('a \<Rightarrow> 'c) \<Rightarrow> 'c \<Rightarrow> 'a \<Rightarrow> bool" where
   "proximal_explanation U Con p a \<longleftrightarrow> U a \<and> Con a = p"
 
-text \<open>Inference relations (paper's Inference-relations definition). The U guard is essential: the imported relative semantics
-allow arbitrary predicate values outside the argument universe. The first two
+text \<open>Inference relations (paper's Inference-relations definition). The U guard is
+essential: the imported relative semantics allow arbitrary predicate values outside
+the argument universe. The first two
 relations quantify extension then argument; the third uses a single argument
 across all preferred extensions. No finite enumeration of extensions is assumed.\<close>
 definition credulous_conclusion :: "'a Set \<Rightarrow> 'a Rel \<Rightarrow> ('a \<Rightarrow> 'c) \<Rightarrow> 'c \<Rightarrow> bool" where
@@ -57,6 +58,7 @@ lemma empty_framework_no_conclusion:
   "\<not> credulous_conclusion (\<lambda>_. False) att Con p \<and>
    \<not> shared_conclusion (\<lambda>_. False) att Con p \<and>
    \<not> shared_argument (\<lambda>_. False) att Con p"
-  by (metis no_argument_no_credulous shared_argument_imp_shared_conclusion shared_conclusion_imp_credulous)
+  by (metis no_argument_no_credulous shared_argument_imp_shared_conclusion
+      shared_conclusion_imp_credulous)
 
 end
