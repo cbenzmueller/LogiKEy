@@ -56,7 +56,7 @@ lemma no_argument_no_credulous:
 lemma empty_framework_no_conclusion:
   "\<not> credulous_conclusion (\<lambda>_. False) att Con p \<and>
    \<not> shared_conclusion (\<lambda>_. False) att Con p \<and>
-   \<not> shared_argument (\<lambda>_. False) att Con p" 
+   \<not> shared_argument (\<lambda>_. False) att Con p"
   by (metis no_argument_no_credulous shared_argument_imp_shared_conclusion shared_conclusion_imp_credulous)
 
 end

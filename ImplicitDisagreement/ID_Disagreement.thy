@@ -89,7 +89,7 @@ lemma weak_spot_retains_credulous_support:
 
 lemma weak_spot_is_present:
   assumes "weak_spot U att Con p a"
-  shows "U a" 
+  shows "U a"
 proof (rule ccontr)
   assume absent: "\<not> U a"
   have unchanged: "remove_argument U a = U"
@@ -101,13 +101,13 @@ qed
 
 lemma removing_the_only_concluder_is_not_a_weak_spot:
   assumes "\<forall>b. U b \<longrightarrow> Con b = p \<longrightarrow> b = a"
-  shows "\<not> weak_spot U att Con p a" 
+  shows "\<not> weak_spot U att Con p a"
   by (smt (verit, ccfv_threshold) assms no_argument_no_credulous weak_spot_retains_credulous_support)
 
 
 lemma antagonists_are_not_weak_spots:
   assumes ant: "antagonist U att Con p a"
-  shows "\<not> weak_spot U att Con p a" 
+  shows "\<not> weak_spot U att Con p a"
   by (metis (lifting) agreement_hierarchy antagonist_def assms disagrees_that_def weak_spot_def)
 
 end

@@ -44,7 +44,7 @@ lemma explanation_has_conclusion:
 
 lemma shared_explanation_imp_shared_argument:
   assumes shared: "shared_explanation U att Con p"
-  shows "shared_argument U att Con p" 
+  shows "shared_argument U att Con p"
   using explanation_has_conclusion shared shared_argument_def shared_explanation_def by fastforce
 
 
@@ -52,7 +52,7 @@ text \<open>Proposition 2, and the positive part of Proposition 1.\<close>
 theorem agreement_hierarchy:
   assumes strong: "shared_explanation U att Con p"
   shows "shared_argument U att Con p \<and> shared_conclusion U att Con p \<and>
-    credulous_conclusion U att Con p" 
+    credulous_conclusion U att Con p"
   by (simp add: shared_argument_imp_shared_conclusion shared_conclusion_imp_credulous
       shared_explanation_imp_shared_argument strong)
 

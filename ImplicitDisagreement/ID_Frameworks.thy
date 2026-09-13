@@ -160,7 +160,7 @@ qed
 lemma fresh_attacker_complete:
   assumes t: "\<not> U t" and a: "U a"
   shows "extensions.completeExt (U \<union> \<lbrace>t\<rbrace>) (fresh_attacker_att att U a t) E \<longleftrightarrow>
-         E t \<and> \<not> E a \<and> extensions.completeExt (remove_argument U a) att E" sledgehammer
+         E t \<and> \<not> E a \<and> extensions.completeExt (remove_argument U a) att E"
 proof
   assume L: "extensions.completeExt (U \<union> \<lbrace>t\<rbrace>) (fresh_attacker_att att U a t) E"
   have ta: "t \<noteq> a" using t a by auto

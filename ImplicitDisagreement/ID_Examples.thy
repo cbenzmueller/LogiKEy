@@ -10,7 +10,7 @@ example isolates the difference between shared conclusion and shared argument.\<
 definition mutual_attack :: "bool Rel" where
   "mutual_attack a b \<longleftrightarrow> a \<noteq> b"
 
-lemma bool_all: "(\<forall>x::bool. P x) \<longleftrightarrow> P False \<and> P True" 
+lemma bool_all: "(\<forall>x::bool. P x) \<longleftrightarrow> P False \<and> P True"
   by metis
 
 lemma bool_ex: "(\<exists>x::bool. P x) \<longleftrightarrow> P False \<or> P True"
@@ -22,7 +22,7 @@ lemma bool_predicate_cases:
 
 lemma bool_predicate_all:
   "(\<forall>P::bool \<Rightarrow> bool. Q P) \<longleftrightarrow>
-    Q (\<lambda>_. False) \<and> Q id \<and> Q Not \<and> Q (\<lambda>_. True)" 
+    Q (\<lambda>_. False) \<and> Q id \<and> Q Not \<and> Q (\<lambda>_. True)"
   by (metis (lifting) ext bool_predicate_cases)
 
 lemma mutual_complete:
@@ -111,7 +111,7 @@ abbreviation bio_right_agent where "bio_right_agent \<equiv> bio_right \<union> 
 
 lemma bio_all:
   "(\<forall>x::bio_argument. P x) \<longleftrightarrow>
-    P A1 \<and> P A2 \<and> P A3 \<and> P A4 \<and> P A5 \<and> P A6" 
+    P A1 \<and> P A2 \<and> P A3 \<and> P A4 \<and> P A5 \<and> P A6"
   by (metis bio_argument.exhaust)
 
 lemma bio_ex:
@@ -129,7 +129,7 @@ lemma bio_coalition_all: "coalition bio_left_agent bio_right_agent = (\<lambda>_
 
 lemma bio_agents_share_conclusion:
   "shared_conclusion bio_left_agent bio_att bio_con True"
-  "shared_conclusion bio_right_agent bio_att bio_con True" 
+  "shared_conclusion bio_right_agent bio_att bio_con True"
 proof -
   have left: "E A1" if "extensions.preferredExt bio_left_agent bio_att E" for E
   proof -
