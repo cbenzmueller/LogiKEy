@@ -30,7 +30,7 @@ This repository is the **LogiKEy workbench**: the Isabelle/HOL theory files and 
 | [`Nitpick2TikZ/`](Nitpick2TikZ) | Visualizing Nitpick's Kripke models |
 | [`2025-ICAIL-Data/`](2025-ICAIL-Data) | Logical modalities in the European AI Act (ICAIL 2025) |
 | [`2026-AAMAS-Data/`](2026-AAMAS-Data) | Formalizing mental privacy (AAMAS 2026) |
-| [`CoursesAndTutorials/`](CoursesAndTutorials) | Teaching material, incl. the [ESSLLI 2026 LogiKEy course](https://logikey.org/CoursesAndTutorials/2026-ESSLLI/) |
+| [`CoursesAndTutorials/`](CoursesAndTutorials) | Teaching material, incl. the [ESSLLI 2026](https://logikey.org/CoursesAndTutorials/2026-ESSLLI/) and [ZJU 2026](https://logikey.org/CoursesAndTutorials/2026-ZhejiangUniversity/) LogiKEy courses |
 
 Related Isabelle/HOL datasets are also published in the Archive of Formal Proofs, e.g. [PAL](https://www.isa-afp.org/entries/PAL.html), [CondNormReasHOL](https://www.isa-afp.org/entries/CondNormReasHOL.html), [FaithfulPMLinHOL](https://www.isa-afp.org/entries/FaithfulPMLinHOL.html), [MSOinHOL](https://isa-afp.org/entries/MSOinHOL.html), [Notes_On_Goedels_Ontological_Argument](https://www.isa-afp.org/entries/Notes_On_Goedels_Ontological_Argument.html), [Boolos_Curious_Inference_Automated](https://www.isa-afp.org/entries/Boolos_Curious_Inference_Automated.html).
 
