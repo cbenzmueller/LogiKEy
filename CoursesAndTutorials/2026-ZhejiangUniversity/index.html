@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Lecture course 'Experimenting with the LogiKEy Framework & Methodology' at Zhejiang University, Hangzhou (10–20 November 2026) — normative reasoning, computational metaphysics, and semantical embeddings of object logics in HOL with Isabelle/HOL.">
+<link rel="canonical" href="https://logikey.org/CoursesAndTutorials/2026-ZhejiangUniversity/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23c2751a'/%3E%3Ctext x='32' y='45' font-size='38' font-family='Georgia,serif' font-weight='bold' text-anchor='middle' fill='%23fdfdfb'%3EL%3C/text%3E%3C/svg%3E">
+<title>Experimenting with the LogiKEy Framework &amp; Methodology — Zhejiang University 2026</title>
+<style>
+  :root {
+    --ink: #1e2430;
+    --ink-soft: #4b5563;
+    --paper: #fdfdfb;
+    --rule: #e2e0da;
+    --rule-soft: #edebe5;
+    --accent: #c2751a;        /* header amber */
+    --d1: #b45309;            /* Monday   — amber   */
+    --d2: #0e7c6b;            /* Tuesday  — teal    */
+    --d3: #9f1239;            /* Wednesday— maroon  */
+    --d4: #5b4a9f;            /* Thursday — violet  */
+    --d5: #2f6b3a;            /* Friday   — green   */
+    --d6: #1d5c8f;            /* Lecture 6 — blue   */
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    padding: 3.5rem 1.5rem 4rem;
+  }
+  .page { max-width: 880px; margin: 0 auto; }
+
+  /* ---------- header ---------- */
+  .overline {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.1rem;
+  }
+  .overline a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+  h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 4.6vw, 2.9rem);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.9rem;
+  }
+  .subtitle {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.12rem;
+    color: var(--ink-soft);
+    margin-bottom: 1.9rem;
+    max-width: 46em;
+  }
+  .meta {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.85rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 0;
+    align-items: baseline;
+  }
+  .meta b { font-weight: 700; }
+  .meta .dot { color: var(--accent); margin: 0 0.9em; }
+  .meta .venue { flex-basis: 100%; }
+
+  /* ---------- lecturers ---------- */
+  .lecturers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem 3rem;
+    padding: 1.6rem 0 1.8rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .lecturer .name { font-family: var(--serif); font-weight: 700; font-size: 1.08rem; }
+  .lecturer .aff { font-size: 0.88rem; color: var(--ink-soft); margin-top: 0.15rem; }
+  .lecturer .links { font-family: var(--mono); font-size: 0.74rem; margin-top: 0.45rem; }
+  .lecturer .links a { color: var(--d2); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+  /* ---------- generic sections ---------- */
+  section { margin-top: 2.6rem; }
+  .seclabel {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+  }
+  .prose {
+    font-family: var(--serif);
+    font-size: 1.02rem;
+    max-width: 46em;
+    color: var(--ink);
+  }
+  .prose p + p { margin-top: 0.8em; }
+
+  /* ---------- programme timeline ---------- */
+  .day {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    border-top: 1px solid var(--rule);
+    padding: 1.35rem 0 1.55rem;
+  }
+  .day:last-of-type { border-bottom: 1px solid var(--rule); }
+  .when {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    padding-top: 0.2rem;
+  }
+  .when small { display: block; color: var(--ink-soft); font-size: 0.72rem; margin-top: 0.25rem; }
+  .slot { border-left: 3px solid var(--ink); padding: 0.1rem 0 0.1rem 1.25rem; }
+  .day.d1 .slot { border-color: var(--d1); }  .day.d1 .kicker { color: var(--d1); }
+  .day.d2 .slot { border-color: var(--d2); }  .day.d2 .kicker { color: var(--d2); }
+  .day.d3 .slot { border-color: var(--d3); }  .day.d3 .kicker { color: var(--d3); }
+  .day.d4 .slot { border-color: var(--d4); }  .day.d4 .kicker { color: var(--d4); }
+  .day.d5 .slot { border-color: var(--d5); }  .day.d5 .kicker { color: var(--d5); }
+  .day.d6 .slot { border-color: var(--d6); }  .day.d6 .kicker { color: var(--d6); }
+  .kicker {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+  .slot h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+  }
+  .topics { list-style: none; }
+  .topics > li {
+    padding: 0.55rem 0;
+    border-top: 1px dashed var(--rule-soft);
+  }
+  .topics > li:first-child { border-top: none; }
+  .topic-title { font-weight: 600; font-size: 0.95rem; }
+  .topic-desc { font-size: 0.87rem; color: var(--ink-soft); margin-top: 0.1rem; }
+  .materials {
+    margin-top: 0.85rem;
+    padding-top: 0.6rem;
+    border-top: 1px dashed var(--rule-soft);
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4em 1.1em;
+  }
+  .materials .mlabel { letter-spacing: 0.18em; text-transform: uppercase; }
+  .materials a { color: var(--d2); text-decoration: none; border-bottom: 1px solid currentColor; }
+  .materials a::before { content: "↓ "; }
+  .materials a.ext::before { content: "↗ "; }
+  .materials .none { font-style: italic; color: #9aa1ad; }
+  .materials.further { margin-top: 0.15rem; padding-top: 0.3rem; border-top: none; }
+  .materials.reading { margin-top: 0.15rem; padding-top: 0.3rem; border-top: none; gap: 0.4em 0.7em; }
+  .materials.reading a::before { content: none; }
+  .materials.reading a { font-weight: 700; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--paper);
+    background: #9aa1ad;
+    border-radius: 2px;
+    padding: 0.1em 0.5em;
+    margin-left: 0.5em;
+    vertical-align: 0.12em;
+    white-space: nowrap;
+  }
+
+  /* ---------- preliminary-programme notice ---------- */
+  .notice {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    border: 1px dashed var(--rule);
+    border-left: 3px solid #9aa1ad;
+    padding: 0.7rem 1.1rem;
+    margin: -0.4rem 0 1.4rem;
+    max-width: 46em;
+  }
+  .notice b { color: var(--ink); }
+
+  /* ---------- prerequisites ---------- */
+  .prereq {
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem;
+    max-width: 46em;
+  }
+  .prereq p { font-family: var(--serif); font-size: 0.98rem; }
+
+  /* ---------- references ---------- */
+  .refs { list-style: none; counter-reset: ref; max-width: 50em; }
+  .refs li {
+    counter-increment: ref;
+    position: relative;
+    padding: 0.55rem 0 0.55rem 2.6rem;
+    border-top: 1px dashed var(--rule-soft);
+    font-size: 0.88rem;
+    color: var(--ink);
+  }
+  .refs li:first-child { border-top: none; }
+  .refs li::before {
+    content: "[" counter(ref) "]";
+    position: absolute;
+    left: 0;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    top: 0.72rem;
+  }
+  .refs i { font-style: italic; }
+  .refs li { scroll-margin-top: 14px; }
+  .refs li:target { background: #fbf1dd; box-shadow: -0.5rem 0 0 #fbf1dd, 0.5rem 0 0 #fbf1dd; border-radius: 2px; }
+  .refs a { font-family: var(--mono); font-size: 0.74rem; color: var(--d2); text-decoration: none; border-bottom: 1px solid currentColor; word-break: break-all; }
+
+  /* ---------- hover preview card for Further Reading links ---------- */
+  .refcard {
+    position: absolute;
+    z-index: 60;
+    max-width: 360px;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    box-shadow: 0 8px 26px rgba(30,36,48,0.16);
+    padding: 0.6rem 0.75rem;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    line-height: 1.42;
+    border-radius: 3px;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-3px);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+  }
+  .refcard.show { opacity: 1; transform: translateY(0); }
+  .refcard i { font-style: italic; }
+  .refcard a { color: var(--d2); font-family: var(--mono); font-size: 0.72rem; word-break: break-all; }
+  .refcard .rn { font-family: var(--mono); color: var(--accent); font-weight: 700; margin-right: 0.4em; }
+  @media (max-width: 620px) { .refcard { display: none; } }
+
+  /* ---------- QR share (header) ---------- */
+  .header-top {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .header-text { min-width: 0; }
+  .qrshare {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .qrshare img { display: block; width: 200px; height: 200px; }
+  .qrcap {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    line-height: 1.45;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--ink-soft);
+  }
+  @media (max-width: 620px) {
+    .header-top { flex-direction: column-reverse; align-items: flex-start; gap: 1.4rem; }
+    .qrshare { flex-direction: row; align-items: center; gap: 0.9rem; }
+    .qrcap { text-align: left; }
+  }
+
+
+  /* ---------- footer ---------- */
+  footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--rule);
+    padding-top: 0.9rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.4rem;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+  }
+  footer .sw { display: inline-block; width: 0.65em; height: 0.65em; border-radius: 2px; margin-right: 0.45em; vertical-align: -0.05em; }
+  footer .note { margin-left: auto; }
+
+  @media (max-width: 620px) {
+    .day { grid-template-columns: 1fr; gap: 0.6rem; }
+    .when { display: flex; gap: 0.8em; align-items: baseline; }
+    .when small { margin-top: 0; }
+    .when small br { display: none; }
+    .when small .t::before { content: " · "; }
+    footer .note { margin-left: 0; }
+  }
+  @media print {
+    body { padding: 0.5in; }
+    a { color: inherit !important; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="header-top">
+      <div class="header-text">
+        <div class="overline"><a href="https://www.zju.edu.cn/english/">Zhejiang University</a> &nbsp;·&nbsp; <a href="https://www.zlaire.net/">ZLAIRE</a> &nbsp;·&nbsp; <a href="https://logikey.org">logikey.org</a></div>
+        <h1>Experimenting with the LogiKEy Framework &amp;&nbsp;Methodology</h1>
+        <p class="subtitle">Normative Reasoning, Computational Metaphysics, and More — an introductory lecture course at <b>Zhejiang University</b>, Hangzhou, 10–20 November 2026.</p>
+      </div>
+      <aside class="qrshare">
+        <a href="https://logikey.org/CoursesAndTutorials/2026-ZhejiangUniversity/">
+          <img src="zju-2026-qr.svg" alt="QR code linking to logikey.org/CoursesAndTutorials/2026-ZhejiangUniversity/" width="200" height="200">
+        </a>
+        <div class="qrcap">Scan to open<br>this page</div>
+      </aside>
+    </div>
+    <div class="meta">
+      <span><b>10–20 November 2026</b></span><span class="dot">•</span>
+      <span>Six lectures (times below)</span>
+      <span class="venue">ZLAIRE lecture room, Floor 3, Information and Control Building, Zijingang Campus, Zhejiang University</span>
+    </div>
+  </header>
+
+  <div class="lecturers">
+    <div class="lecturer">
+      <div class="name">Christoph Benzmüller</div>
+      <div class="aff">University of Bamberg — Chair for AI Systems Engineering<br>
+      FU Berlin — Dep. of Mathematics and Computer Science</div>
+      <div class="links"><a href="https://christoph-benzmueller.de/">christoph-benzmueller.de</a></div>
+    </div>
+    <div class="lecturer">
+      <div class="name">Luca Pasetto</div>
+      <div class="aff">University of Luxembourg — Department of Computer Science, Computational Law and Machine Ethics group</div>
+      <div class="links"><a href="https://lucapasetto.github.io/">lucapasetto.github.io</a></div>
+    </div>
+  </div>
+
+
+  <section>
+    <div class="seclabel">Abstract</div>
+    <div class="prose">
+      <p>The course provides an introduction to the LogiKEy framework and methodology for Logic and Knowledge Engineering. LogiKEy’s unifying approach is based on semantical embeddings of object logics in expressive classical higher-order logic (HOL). We begin with the methodology, introduce HOL, and give a guided practical tour of the Isabelle/HOL proof assistant. Next, we explain the technique of semantical embeddings of object logics in the meta-logic HOL, which enables the automation and model finding available in HOL provers to reason with the embedded logics.</p>
+      <p>We then apply the framework in three steps. First, we encode abstract argumentation frameworks and their semantics in HOL, and we discuss deontic logics and corresponding ethical or legal theories to support computational tools for normative reasoning. Second, we build a LogiKEy domain theory on top of the argumentation library: a formal account of implicit disagreement, where agents share a conclusion but not the reasons for it, and its mechanization. We conclude with an application in machine ethics: the Jiminy moral advisor, which resolves moral dilemmas among stakeholders through norms and structured argumentation, verified in Isabelle/HOL.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel">Programme — Six Lectures</div>
+    <div class="notice">Lectures 1–3 follow our <a href="../2026-ESSLLI/">ESSLLI 2026 course</a> (Prague, August 2026); Lectures 4–6 are new and build on each other: an argumentation library in HOL, a domain theory on top of it, and a machine-ethics application.</div>
+
+    <div class="day d1">
+      <div class="when">Lecture 1<small>Tue 10 Nov<br><span class="t">14:00–16:00</span></small></div>
+      <div class="slot">
+        <div class="kicker">Foundations — LogiKEy &amp; HOL</div>
+        <h3>General Introduction to LogiKEy</h3>
+        <ul class="topics">
+          <li>
+            <div class="topic-title">The LogiKEy framework and methodology</div>
+            <div class="topic-desc">Overview of the course. History and interdisciplinary methodology; experimentation in formal studies: representing examples, domain theories, logics, and logic combinations within a computational system.</div>
+          </li>
+          <li>
+            <div class="topic-title">HOL and Church’s type theory</div>
+            <div class="topic-desc">Classical higher-order logic based on Church’s type theory as an expressive meta-logical language; higher-order interactive theorem proving.</div>
+          </li>
+        </ul>
+        <div class="materials"><span class="mlabel">Materials</span><a href="Day1_LogiKEy_Intro.pdf">LogiKEy Intro (PDF)</a><a href="Day1_HOL.pdf">HOL (PDF)</a></div>
+        <div class="materials further"><span class="mlabel">Further Links</span><a href="https://christoph-benzmueller.de/papers/2006-ESSLLI.pdf">HOL course notes, ESSLLI 2006 (PDF)</a></div>
+        <div class="materials reading"><span class="mlabel">Further Reading</span><a href="#ref-1">[1]</a><a href="#ref-2">[2]</a><a href="#ref-9">[9]</a><a href="#ref-3">[3]</a><a href="#ref-12">[12]</a></div>
+      </div>
+    </div>
+
+    <div class="day d2">
+      <div class="when">Lecture 2<small>Thu 12 Nov<br><span class="t">11:00–13:00</span></small></div>
+      <div class="slot">
+        <div class="kicker">Foundations — Isabelle/HOL</div>
+        <h3>Hands-on with the Isabelle/HOL Proof Assistant</h3>
+        <ul class="topics">
+          <li>
+            <div class="topic-title">The Isabelle/HOL proof assistant</div>
+            <div class="topic-desc">Guided tour: basic warm-up; proof automation with <i>Sledgehammer</i> and (counter-)model finding with <i>Nitpick</i>; Cantor theorem and Boolos’ curious inference.</div>
+          </li>
+        </ul>
+        <div class="materials"><span class="mlabel">Materials</span><a href="Day2_IsabelleHOL_WarmUp.pdf">Isabelle/HOL Warm-Up (PDF)</a><a href="Day2_LLM_demo.thy">LLM Demo (.thy)</a><a href="Day2_LiarsStreet.thy">Liars Street (.thy)</a><a href="Day2_SurjectiveCantor.thy">Surjective Cantor (.thy)</a><a href="Day2_BoolosCuriousInference.thy">Boolos’ Curious Inference (.thy)</a></div>
+        <div class="materials further"><span class="mlabel">Further Links</span><a class="ext" href="https://isabelle.in.tum.de/">Isabelle proof assistant (TUM)</a></div>
+        <div class="materials reading"><span class="mlabel">Further Reading</span><a href="#ref-4">[4]</a><a href="#ref-5">[5]</a></div>
+      </div>
+    </div>
+
+    <div class="day d3">
+      <div class="when">Lecture 3<small>Fri 13 Nov<br><span class="t">10:00–12:00</span></small></div>
+      <div class="slot">
+        <div class="kicker">Semantical Embeddings</div>
+        <h3>Shallow and Deep Embeddings in HOL</h3>
+        <ul class="topics">
+          <li>
+            <div class="topic-title">Deep vs. shallow embeddings of logics</div>
+            <div class="topic-desc">Shallow Semantical Embeddings (SSE) of object logics in the meta-logic HOL; propositional logic embedding demo.</div>
+          </li>
+          <li>
+            <div class="topic-title">Embedding of propositional modal logic</div>
+            <div class="topic-desc">The modal logic cube in Isabelle/HOL; frame conditions such as reflexivity and transitivity; testing axioms; propositional modal logics via SSE.</div>
+          </li>
+          <li>
+            <div class="topic-title">Embedding of QBF / first-order modal logic <span class="tag">tentative</span></div>
+            <div class="topic-desc">Quantified Boolean formulas and first-order multimodal logics via SSE; automation of faithfulness proofs; converting formulas across embeddings.</div>
+          </li>
+        </ul>
+        <div class="materials"><span class="mlabel">Materials</span><a href="Day3_DeepShallow_1_PMLandQBFinHOL.pdf">Deep &amp; Shallow, part 1: PML &amp; QBF (PDF)</a><a href="Day3_DeepShallow_2_FMLinHOL.pdf">Deep &amp; Shallow, part 2: FML (PDF)</a><a href="Day3_MinimalShallow_Primer.thy">Minimal Shallow Embedding Primer (.thy)</a><a href="Day3_DeepShallow_1_PMLinHOL.zip">PML sources (.zip)</a><a href="Day3_DeepShallow_2_QBFinHOL.zip">QBF sources (.zip)</a><a href="Day3_DeepShallow_2_FMLinHOL.zip">FML sources (.zip)</a></div>
+        <div class="materials reading"><span class="mlabel">Further Reading</span><a href="#ref-6">[6]</a><a href="#ref-7">[7]</a><a href="#ref-8">[8]</a><a href="#ref-13">[13]</a><a href="#ref-14">[14]</a><a href="#ref-15">[15]</a></div>
+      </div>
+    </div>
+
+    <div class="day d4">
+      <div class="when">Lecture 4<small>Tue 17 Nov<br><span class="t">14:00–16:00</span></small></div>
+      <div class="slot">
+        <div class="kicker">Argumentation</div>
+        <h3>Abstract Argumentation in HOL</h3>
+        <ul class="topics">
+          <li>
+            <div class="topic-title">Abstract argumentation in ten minutes</div>
+            <div class="topic-desc">Dung’s argumentation frameworks; extension semantics (conflict-free, admissible, complete, grounded, preferred, stable, semi-stable, stage, ideal) and their labelling counterparts; the landscape of semantics and three benchmark frameworks.</div>
+          </li>
+          <li>
+            <div class="topic-title">The encoding of Fuenmayor and Steen</div>
+            <div class="topic-desc">Sets as predicates, semantics as higher-order predicates; one generic notion of minimality and maximality with a projection; the characteristic function as <i>defends</i>; the simplified encoding and its relativisation to an explicit universe of arguments.</div>
+          </li>
+          <li>
+            <div class="topic-title">Reasoning <i>about</i> argumentation: the meta-theory</div>
+            <div class="topic-desc">Dung’s Fundamental Lemma, existence and uniqueness results, the inclusion landscape, and the correspondence between extensions and labellings — proved with <i>Sledgehammer</i>, non-theorems refuted with <i>Nitpick</i>; theory exploration as a conjecture–countermodel–repair loop.</div>
+          </li>
+          <li>
+            <div class="topic-title">Reasoning <i>with</i> argumentation: generating extensions and labellings</div>
+            <div class="topic-desc">Encoding a concrete framework; generating single and all extensions or labellings with the model finder under arbitrary higher-order constraints; proving instead of searching; positioning versus SAT/ASP solvers and outlook.</div>
+          </li>
+        </ul>
+        <div class="materials"><span class="mlabel">Materials</span><a href="Day4_AbstractArgumentation_in_HOL.pdf">Abstract Argumentation in HOL (PDF)</a><a href="Day4_AA_Fixed.zip">Isabelle session AA_Fixed (.zip)</a></div>
+        <div class="materials further"><span class="mlabel">Further Links</span><a class="ext" href="https://github.com/cbenzmueller/LogiKEy/tree/master/ImplicitDisagreement/AA_Fixed">LogiKEy: ImplicitDisagreement/AA_Fixed</a><a class="ext" href="https://github.com/aureleeNet/formalizations">Original library (aureleeNet/formalizations)</a></div>
+        <div class="materials reading"><span class="mlabel">Further Reading</span><a href="#ref-18">[18]</a><a href="#ref-19">[19]</a><a href="#ref-20">[20]</a><a href="#ref-21">[21]</a></div>
+      </div>
+    </div>
+
+    <div class="day d5">
+      <div class="when">Lecture 5<small>Thu 19 Nov<br><span class="t">14:00–16:00</span></small></div>
+      <div class="slot">
+        <div class="kicker">Argumentation — Domain Theory</div>
+        <h3>Implicit Disagreement in HOL</h3>
+        <ul class="topics">
+          <li>
+            <div class="topic-title">Agreeing for different reasons</div>
+            <div class="topic-desc">A legal case study: two agents reach the same conclusion from different reasons and form a coalition; agreement <i>that</i> versus agreement <i>because</i>; agents, coalitions, three inference relations over preferred extensions, explanations and shared explanations.</div>
+          </li>
+          <li>
+            <div class="topic-title">Implicit disagreement, and where it sits</div>
+            <div class="topic-desc">Proximal and distal implicit disagreement, potential versus actual; counterfactual deletion of arguments, weak spots, antagonists, and the locus of a disagreement.</div>
+          </li>
+          <li>
+            <div class="topic-title">The embedding as a LogiKEy domain theory</div>
+            <div class="topic-desc">From the object logic (the argumentation library of Lecture 4) to a domain theory on top of it: frameworks, agents, coalitions and deletions as values of one type; inference, explanations and disagreement as HOL predicates; the agreement hierarchy and the correspondence of shared explanations with ideal semantics, proved.</div>
+          </li>
+          <li>
+            <div class="topic-title">The case study, lemma by lemma</div>
+            <div class="topic-desc">The running example as an application-layer theory: preferred extensions computed by proof, the four questions answered as lemmas; what the mechanization caught, and lessons for one’s own LogiKEy development.</div>
+          </li>
+        </ul>
+        <div class="materials"><span class="mlabel">Materials</span><a href="Day5_ImplicitDisagreement_in_HOL.pdf">Implicit Disagreement in HOL (PDF)</a><a href="Day5_ImplicitDisagreement.zip">Isabelle session Implicit_Disagreement (.zip)</a></div>
+        <div class="materials further"><span class="mlabel">Further Links</span><a class="ext" href="https://github.com/cbenzmueller/LogiKEy/tree/master/ImplicitDisagreement">LogiKEy: ImplicitDisagreement</a></div>
+        <div class="materials reading"><span class="mlabel">Further Reading</span><a href="#ref-22">[22]</a><a href="#ref-23">[23]</a><a href="#ref-24">[24]</a><a href="#ref-25">[25]</a><a href="#ref-19">[19]</a></div>
+      </div>
+    </div>
+
+    <div class="day d6">
+      <div class="when">Lecture 6<small>Fri 20 Nov<br><span class="t">14:00–16:00</span></small></div>
+      <div class="slot">
+        <div class="kicker">Argumentation — Machine Ethics</div>
+        <h3>The Jiminy Moral Advisor in HOL</h3>
+        <ul class="topics">
+          <li>
+            <div class="topic-title">The Jiminy moral advisor</div>
+            <div class="topic-desc">An autonomous agent with a conscience: stakeholders and their normative systems; detachment and norm extensions; structured arguments, priority, attack and defeat; moral dilemmas between extensions and four levels of checking and resolving them, on the smart-speaker example.</div>
+          </li>
+          <li>
+            <div class="topic-title">Normative systems, arguments and defeat in HOL</div>
+            <div class="topic-desc">Literals and contrariness, norms and detachment, a datatype of structured arguments, priority as a parameter of defeat; plugging the resulting frameworks into the argumentation library of Lecture 4; levels 1–4 and the Jiminy’s own norms as HOL definitions.</div>
+          </li>
+          <li>
+            <div class="topic-title">Verifying the paper’s results</div>
+            <div class="topic-desc">Rationality postulates and correspondence propositions proved; propositions refuted by counterexample and repaired; directionality; the smart speaker verified level by level, and what the examples revealed.</div>
+          </li>
+          <li>
+            <div class="topic-title">Wrap-up and outlook</div>
+            <div class="topic-desc">Building and auditing a LogiKEy session; connections to ASPIC<sup>+</sup> and ABA embeddings on the same library; open questions and future directions of the course topics.</div>
+          </li>
+        </ul>
+        <div class="materials"><span class="mlabel">Materials</span><a href="Day6_Jiminy_in_HOL.pdf">The Jiminy Moral Advisor in HOL (PDF)</a><a href="Day6_Jiminy.zip">Isabelle session Jiminy (.zip)</a></div>
+        <div class="materials reading"><span class="mlabel">Further Reading</span><a href="#ref-26">[26]</a><a href="#ref-27">[27]</a><a href="#ref-19">[19]</a><a href="#ref-1">[1]</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel">Expected Level &amp; Prerequisites</div>
+    <div class="prereq">
+      <p>Introductory course. In order to benefit from this course, participants are expected to have a basic understanding of discrete mathematics, propositional logic, and modal logic. The course is highly interdisciplinary and will also appeal to students from machine ethics, legal theory, AI&nbsp;&amp;&nbsp;Law, and philosophy.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="seclabel">Selected References</div>
+    <ol class="refs">
+      <li id="ref-1">C.&nbsp;Benzmüller, X.&nbsp;Parent, L.&nbsp;van der Torre: <i>Designing Normative Theories for Ethical and Legal Reasoning: LogiKEy Framework, Methodology, and Tool Support.</i> Artificial Intelligence 287 (2020). <a href="https://doi.org/10.1016/j.artint.2020.103348">doi.org/10.1016/j.artint.2020.103348</a> · <a href="https://arxiv.org/abs/1903.10187">arXiv:1903.10187</a> · <a href="https://github.com/cbenzmueller/LogiKEy">LogiKEy sources</a></li>
+      <li id="ref-2">C.&nbsp;Benzmüller, A.&nbsp;Farjami, D.&nbsp;Fuenmayor, P.&nbsp;Meder, X.&nbsp;Parent, A.&nbsp;Steen, L.&nbsp;van der Torre, V.&nbsp;Zahoransky: <i>LogiKEy Workbench: Deontic Logics, Logic Combinations and Expressive Ethical and Legal Reasoning (Isabelle/HOL dataset).</i> Data in Brief 33 (2020). <a href="https://doi.org/10.1016/j.dib.2020.106409">doi.org/10.1016/j.dib.2020.106409</a> · <a href="https://github.com/cbenzmueller/LogiKEy/tree/master/2020-DataInBrief-Data">LogiKEy: 2020-DataInBrief-Data</a></li>
+      <li id="ref-3">C.&nbsp;Benzmüller, P.&nbsp;Andrews: <i>Church’s Type Theory.</i> In: The Stanford Encyclopedia of Philosophy, Spring 2024 edition. <a href="https://plato.stanford.edu/archives/spr2024/entries/type-theory-church/">plato.stanford.edu/archives/spr2024/entries/type-theory-church/</a></li>
+      <li id="ref-4">C.&nbsp;Benzmüller, D.&nbsp;Fuenmayor, A.&nbsp;Steen, G.&nbsp;Sutcliffe: <i>Who Finds the Short Proof? An Exploration of Variants of Boolos’ Curious Inference using Higher-order Automated Theorem Provers.</i> Logic Journal of the IGPL 32(3): 442–459, 2024. <a href="https://doi.org/10.1093/jigpal/jzac082">doi.org/10.1093/jigpal/jzac082</a> · <a href="https://arxiv.org/abs/2208.06879">arXiv:2208.06879</a> · <a href="https://www.isa-afp.org/entries/Boolos_Curious_Inference_Automated.html">AFP: Boolos_Curious_Inference_Automated</a></li>
+      <li id="ref-5">C.&nbsp;Benzmüller, D.&nbsp;Fuenmayor, A.&nbsp;Steen, G.&nbsp;Sutcliffe: <i>Automation of Boolos’ Curious Inference in Isabelle/HOL.</i> Archive of Formal Proofs, 2022. <a href="https://www.isa-afp.org/entries/Boolos_Curious_Inference_Automated.html">isa-afp.org/entries/Boolos_Curious_Inference_Automated.html</a></li>
+      <li id="ref-6">C.&nbsp;Benzmüller: <i>Faithful Logic Embeddings in HOL — Deep and Shallow.</i> In: CADE-30, LNCS 15943, pp. 280–302, Springer, 2025. <a href="https://doi.org/10.1007/978-3-031-99984-0_16">doi.org/10.1007/978-3-031-99984-0_16</a> · <a href="https://arxiv.org/abs/2502.19311">arXiv:2502.19311</a> · <a href="https://www.isa-afp.org/entries/FaithfulPMLinHOL.html">AFP: FaithfulPMLinHOL</a> · <a href="https://github.com/cbenzmueller/LogiKEy/tree/master/CoursesAndTutorials/2025-CADE-DeepShallow">LogiKEy: 2025-CADE-DeepShallow</a></li>
+      <li id="ref-7">C.&nbsp;Benzmüller: <i>Faithful Logic Embeddings in HOL — Deep and Shallow (Isabelle/HOL dataset).</i> Archive of Formal Proofs, 2025. <a href="https://www.isa-afp.org/entries/FaithfulPMLinHOL.html">isa-afp.org/entries/FaithfulPMLinHOL.html</a></li>
+      <li id="ref-8">C.&nbsp;Benzmüller, D.&nbsp;Kirchner: <i>First-Order Modal Logic in HOL: Deep and Shallow Embeddings with Automated Faithfulness.</i> ARQNL 2026. Extended preprint with source-code appendix: <a href="https://arxiv.org/abs/2607.10880">arXiv:2607.10880</a></li>
+      <li id="ref-9">C.&nbsp;Benzmüller, D.&nbsp;Kirchner, L.&nbsp;Pasetto: <i>Many Logics, One Methodology: A Plea for Logical Pluralism in Formalised Reasoning.</i> To appear. Preprint: <a href="https://arxiv.org/abs/2605.27246">arXiv:2605.27246</a></li>
+      <li id="ref-10">C.&nbsp;Benzmüller, M.&nbsp;Claus, N.&nbsp;Sultana: <i>Systematic Verification of the Modal Logic Cube in Isabelle/HOL.</i> PxTP 2015, EPTCS 186, pp. 27–41. <a href="https://doi.org/10.4204/EPTCS.186.5">doi.org/10.4204/EPTCS.186.5</a></li>
+      <li id="ref-11">C.&nbsp;Benzmüller, D.&nbsp;Fuenmayor, B.&nbsp;Lomfeld: <i>Modelling Value-oriented Legal Reasoning in LogiKEy.</i> Logics 2(1): 31–78, 2024. <a href="https://doi.org/10.3390/logics2010003">doi.org/10.3390/logics2010003</a> · <a href="https://arxiv.org/abs/2006.12789">arXiv:2006.12789</a> · <a href="https://github.com/cbenzmueller/LogiKEy/tree/master/Preference-Logics/EncodingLegalBalancing">LogiKEy: EncodingLegalBalancing</a></li>
+      <li id="ref-12">C.&nbsp;Benzmüller, C.&nbsp;Brown, M.&nbsp;Kohlhase: <i>Higher-Order Semantics and Extensionality.</i> Journal of Symbolic Logic 69(4): 1027–1088, 2004. <a href="https://doi.org/10.2178/jsl/1102022211">doi.org/10.2178/jsl/1102022211</a></li>
+      <li id="ref-13">C.&nbsp;Benzmüller, L.&nbsp;C.&nbsp;Paulson: <i>Multimodal and Intuitionistic Logics in Simple Type Theory.</i> Logic Journal of the IGPL 18(6): 881–892, 2010. <a href="https://doi.org/10.1093/jigpal/jzp080">doi.org/10.1093/jigpal/jzp080</a></li>
+      <li id="ref-14">C.&nbsp;Benzmüller, L.&nbsp;C.&nbsp;Paulson: <i>Quantified Multimodal Logics in Simple Type Theory.</i> Logica Universalis 7(1): 7–20, 2013. <a href="https://doi.org/10.1007/s11787-012-0052-y">doi.org/10.1007/s11787-012-0052-y</a></li>
+      <li id="ref-15">C.&nbsp;Benzmüller: <i>Combining and Automating Classical and Non-classical Logics in Classical Higher-Order Logic.</i> Annals of Mathematics and Artificial Intelligence 62(1–2): 103–128, 2011. <a href="https://doi.org/10.1007/s10472-011-9249-7">doi.org/10.1007/s10472-011-9249-7</a></li>
+      <li id="ref-16">C.&nbsp;Benzmüller, D.&nbsp;Kirchner: <i>Monadic Second-Order Logic in HOL: Deep and Shallow Embeddings with Automated Faithfulness (Isabelle/HOL dataset).</i> Archive of Formal Proofs, 2026. <a href="https://isa-afp.org/entries/MSOinHOL.html">AFP: MSOinHOL</a></li>
+      <li id="ref-17">C.&nbsp;Benzmüller, D.&nbsp;Kirchner: <i>A Deep Embedding of HOL in HOL: Soundness, Completeness, Consistency (Isabelle/HOL dataset).</i> Archive of Formal Proofs, 2026. <a href="https://isa-afp.org/entries/HOL_in_HOL_Deep.html">AFP: HOL_in_HOL_Deep</a></li>
+      <li id="ref-18">D.&nbsp;Fuenmayor, A.&nbsp;Steen: <i>A Flexible Approach to Argumentation Framework Analysis using Theorem Proving.</i> In: Logics for New-Generation AI (LNGAI 2021), pp. 18–32, College Publications, 2021. <a href="https://github.com/aureleeNet/formalizations">aureleeNet/formalizations</a></li>
+      <li id="ref-19">A.&nbsp;Steen, D.&nbsp;Fuenmayor: <i>A Formalization of Abstract Argumentation in Higher-Order Logic.</i> Journal of Logic and Computation 34(2), 2024. <a href="https://doi.org/10.1093/logcom/exac027">doi.org/10.1093/logcom/exac027</a> · <a href="https://arxiv.org/abs/2110.09174">arXiv:2110.09174</a></li>
+      <li id="ref-20">P.&nbsp;M.&nbsp;Dung: <i>On the Acceptability of Arguments and its Fundamental Role in Nonmonotonic Reasoning, Logic Programming and n-Person Games.</i> Artificial Intelligence 77(2): 321–358, 1995. <a href="https://doi.org/10.1016/0004-3702(94)00041-X">doi.org/10.1016/0004-3702(94)00041-X</a></li>
+      <li id="ref-21">P.&nbsp;Baroni, M.&nbsp;Caminada, M.&nbsp;Giacomin: <i>An Introduction to Argumentation Semantics.</i> The Knowledge Engineering Review 26(4): 365–410, 2011. <a href="https://doi.org/10.1017/S0269888911000166">doi.org/10.1017/S0269888911000166</a></li>
+      <li id="ref-22">L.&nbsp;Redondi, L.&nbsp;Pasetto, C.&nbsp;Benzmüller, R.&nbsp;Markovich: <i>Shared Conclusions without Shared Explanations: Mechanizing Implicit Disagreement in Abstract Argumentation with LogiKEy.</i> Submitted, 2026. <a href="https://github.com/cbenzmueller/LogiKEy/tree/master/ImplicitDisagreement">LogiKEy: ImplicitDisagreement</a></li>
+      <li id="ref-23">M.&nbsp;D.&nbsp;Baumtrog: <i>The Basic Components of Agreement.</i> Informal Logic 43(2): 257–279, 2023. <a href="https://doi.org/10.22329/il.v43i2.7249">doi.org/10.22329/il.v43i2.7249</a></li>
+      <li id="ref-24">A.&nbsp;Rotolo, G.&nbsp;Sartor: <i>Argumentation and Explanation in the Law.</i> Frontiers in Artificial Intelligence 6, 2023. <a href="https://doi.org/10.3389/frai.2023.1130559">doi.org/10.3389/frai.2023.1130559</a></li>
+      <li id="ref-25">P.&nbsp;M.&nbsp;Dung, P.&nbsp;Mancarella, F.&nbsp;Toni: <i>Computing Ideal Sceptical Argumentation.</i> Artificial Intelligence 171(10–15): 642–674, 2007. <a href="https://doi.org/10.1016/j.artint.2007.05.003">doi.org/10.1016/j.artint.2007.05.003</a></li>
+      <li id="ref-26">B.&nbsp;Liao, P.&nbsp;Pardo, M.&nbsp;Slavkovik, L.&nbsp;van der Torre: <i>The Jiminy Advisor: Moral Agreements among Stakeholders Based on Norms and Argumentation.</i> Journal of Artificial Intelligence Research 77: 737–792, 2023. <a href="https://doi.org/10.1613/jair.1.14368">doi.org/10.1613/jair.1.14368</a> · <a href="https://arxiv.org/abs/1812.04741">arXiv:1812.04741</a></li>
+      <li id="ref-27">G.&nbsp;Pigozzi, L.&nbsp;van der Torre: <i>Arguing about Constitutive and Regulative Norms.</i> Journal of Applied Non-Classical Logics 28(2–3): 189–217, 2018. <a href="https://doi.org/10.1080/11663081.2018.1487242">doi.org/10.1080/11663081.2018.1487242</a></li>
+    </ol>
+  </section>
+
+  <footer>
+    <span><span class="sw" style="background:var(--d1)"></span>LogiKEy &amp; HOL</span>
+    <span><span class="sw" style="background:var(--d2)"></span>Isabelle/HOL</span>
+    <span><span class="sw" style="background:var(--d3)"></span>Embeddings</span>
+    <span><span class="sw" style="background:var(--d4)"></span>Argumentation</span>
+    <span><span class="sw" style="background:var(--d5)"></span>Implicit Disagreement</span>
+    <span><span class="sw" style="background:var(--d6)"></span>Jiminy</span>
+    <span class="note">Based on the <a href="../2026-ESSLLI/" style="color:inherit">ESSLLI 2026 course</a></span>
+  </footer>
+
+</div>
+
+
+<script>
+(function () {
+  var card = document.createElement('div');
+  card.className = 'refcard';
+  document.body.appendChild(card);
+  var hideTimer;
+
+  function show(a) {
+    clearTimeout(hideTimer);
+    var id = (a.getAttribute('href') || '').slice(1);
+    var li = document.getElementById(id);
+    if (!li) return;
+    var num = (id.match(/\d+/) || [''])[0];
+    card.innerHTML = '<span class="rn">[' + num + ']</span>' + li.innerHTML;
+    card.classList.add('show');
+    var r = a.getBoundingClientRect();
+    card.style.top = (window.scrollY + r.bottom + 6) + 'px';
+    card.style.left = '0px';                         // measure width first
+    var cw = card.offsetWidth;
+    var left = window.scrollX + r.left;
+    var maxLeft = window.scrollX + document.documentElement.clientWidth - cw - 10;
+    if (left > maxLeft) left = maxLeft;
+    if (left < window.scrollX + 8) left = window.scrollX + 8;
+    card.style.left = left + 'px';
+  }
+  function hide() { hideTimer = setTimeout(function () { card.classList.remove('show'); }, 80); }
+
+  document.querySelectorAll('.materials.reading a[href^="#ref-"]').forEach(function (a) {
+    a.addEventListener('mouseenter', function () { show(a); });
+    a.addEventListener('mouseleave', hide);
+    a.addEventListener('focus', function () { show(a); });
+    a.addEventListener('blur', hide);
+  });
+})();
+</script>
+<!-- TODO: VG WORT Zaehlmarke (METIS) — order a NEW counting mark for this page; the ESSLLI mark must not be reused -->
+</body>
+</html>
